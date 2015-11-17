@@ -1,0 +1,82 @@
+.clearfix:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+.post-holder {
+	padding-bottom: 20px;
+    margin-bottom: 20px;
+    background: #F5F5F5;
+    padding: 20px;
+}
+
+.post-holder:hover {
+    box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.post-holder .post-header {position:relative;}
+
+.post-holder .post-header .post-info {padding: 0 0 10px 0;}
+.post-holder .post-header .post-info .item,
+.post-holder .post-header .post-info .dash {display: inline-block;}
+.post-holder .post-header .post-info .label {font-weight: 700;}
+.post-holder .post-header .post-info .value {font-style: italic;}
+
+
+.post-list {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	list-style: none;
+}
+
+.post-list .post-content .post-read-more{padding-top:10px; float:right;}
+
+.post-list .post-header .post-title {max-width:80%;}
+.post-list .post-header .post-title a {
+	text-decoration: none;
+	font-size: 22px;
+	color: #636363;
+}
+
+
+
+.post-list .post-header .post-title {
+	margin: 0px;
+	padding: 10px 0;
+	float:left;
+}
+
+.post-list .post-holder .post-header .addthis_toolbox {float: right; padding-top: 20px;}
+
+
+.post-view .post-holder .post-header .addthis_toolbox {float: right;}
+.post-view .post-bottom {margin-top:30px;}
+
+.post-view .block {margin-bottom: 30px;}
+
+.widget.block-recent-posts .block-content .item {
+	    padding: 8px 0 0px 0px;
+}
+
+.widget.block-categories ul {
+	list-style: initial;
+	padding-left:0px;
+}
+
+.widget.block-categories ul ul {
+	margin-left:20px;
+}
+
+.widget.block-categories ul,
+.widget.block-categories li {
+	margin: 5px 0 5px 9px;
+    padding: 0px;
+}
+
+
+.widget.blog-search {
+	width:100%;
+}

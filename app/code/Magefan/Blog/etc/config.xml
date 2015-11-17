@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mfblog>
+            <index_page>
+                <title>Blog</title>
+            </index_page>
+            <post_view>
+                <related_posts>
+                    <enabled>1</enabled>
+                    <number_of_posts>5</number_of_posts>
+                </related_posts>
+                <related_products>
+                    <enabled>1</enabled>
+                    <number_of_products>5</number_of_products>
+                </related_products>
+                <comments>
+                    <type>facebook</type>
+                    <number_of_comments>4</number_of_comments>
+                </comments>
+            </post_view>
+            <post_list>
+                <posts_per_page>10</posts_per_page>
+            </post_list>
+            <sidebar>
+                <search>
+                    <enabled>1</enabled>
+                    <sort_order>10</sort_order>
+                </search>
+                <categories>
+                    <enabled>1</enabled>
+                    <sort_order>20</sort_order>
+                </categories>
+                <recent_posts>
+                    <enabled>1</enabled>
+                    <posts_per_page>5</posts_per_page>
+                    <sort_order>30</sort_order>
+                </recent_posts>
+                <archive>
+                    <enabled>1</enabled>
+                    <sort_order>40</sort_order>
+                </archive>
+            </sidebar>
+            <rss_feed>
+                <title>Blog Rss</title>
+            </rss_feed>
+        </mfblog>
+    </default>
+</config>

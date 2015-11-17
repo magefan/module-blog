@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etclayout_generic.xsd">
+    <container name="root" label="Root">
+        <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\RelatedPosts" name="blog.post.edit.tab.relatedposts"/>
+        <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="relatedposts_grid_serializer">
+		    <arguments>
+		        <argument name="grid_block" xsi:type="string">blog.post.edit.tab.relatedposts</argument>
+		        <argument name="callback" xsi:type="string">getSelectedRelatedPosts</argument>
+		        <argument name="input_element_name" xsi:type="string">links[relatedposts]</argument>
+		        <argument name="reload_param_name" xsi:type="string">posts_related</argument>
+		    </arguments>
+		</block>
+    </container>
+</layout>

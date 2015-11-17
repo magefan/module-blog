@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+/**
+ * Blog post list template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList
+ */
+?>
+<?php
+$_postCollection = $block->getPostCollection();
+?>
+<?php if (!$_postCollection->count()): ?>
+    <div class="message info empty"><div><?php echo __('We can\'t find posts matching the selection.') ?></div></div>
+<?php else: ?>
+    <?php echo $block->getAdditionalHtml() ?>
+    <div class="post-list-wrapper">
+        <?php $iterator = 1; ?>
+        <ol class="post-list">
+            <?php foreach ($_postCollection as $_post): ?>
+                <?php echo $block->getPostHtml($_post) ?>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+
+    <?php echo $block->getToolbarHtml() ?>
+
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":false};</script>
+    <script type="text/javascript" async src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4def63cd3cf37569"></script>
+    <script type="text/javascript">
+        var addthis_config = {
+            ui_language: "en"
+        }
+    </script>
+<?php endif; ?>

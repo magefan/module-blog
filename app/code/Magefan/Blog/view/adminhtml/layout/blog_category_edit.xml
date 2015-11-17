@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etcpage_configuration.xsd">
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+    </head>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magefan\Blog\Block\Adminhtml\Category\Edit" name="blog.category.edit" />
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Magefan\Blog\Block\Adminhtml\Category\Edit\Tabs" name="blog.category.edit.tabs">
+                <block class="Magefan\Blog\Block\Adminhtml\Category\Edit\Tab\Main" name="blog.category.edit.tab.main"/>
+                <block class="Magefan\Blog\Block\Adminhtml\Category\Edit\Tab\Meta" name="blog.category.edit.tab.meta"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">blog.category.edit.tab.main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">meta_section</argument>
+                    <argument name="block" xsi:type="string">blog.category.edit.tab.meta</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

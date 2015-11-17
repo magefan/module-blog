@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post info template
+ *
+ * @var $block \Magefan\Blog\Block\Post\Info
+ */
+?>
+
+<?php $_post = $block->getPost() ?>
+
+<div class="post-info clear">
+    <div class="item post-posed-date">
+        <span class="label"><?php echo __('Posted:') ?></span>
+        <span class="value"><?php echo $block->getPostedOn('F d, Y') ?></span>
+    </div>
+    <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+    <div class="dash">|</div>
+    <div class="item post-categories">
+        <span class="label"><?php echo __('Categories:') ?></span>
+        <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
+            <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>"><?php echo $block->escapeHtml($ct->getTitle()) ?></a>
+            <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+        <?php } ?>
+    </div>
+    <?php } ?>
+</div>

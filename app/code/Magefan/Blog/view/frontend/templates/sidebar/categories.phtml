@@ -1,0 +1,59 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar categories template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Categories
+ */
+?>
+
+<?php $items = $this->getGroupedChilds(); ?>
+
+<?php if (count($items)) { ?>
+
+<div class="widget block block-categories" data-bind="scope: 'categories'">
+    <div class="block-title">
+        <strong><?php echo __('Categories') ?></strong>
+    </div>
+
+	<ul class="accordion"  id="accordion-2">
+	<?php
+		$level = 0;
+		$first = true;
+		foreach($items as $item) {
+			$newLevel = $item->getLevel();
+
+			if ($level == $newLevel && !$first) {
+				echo '</li>';
+			}
+
+			if ($level < $newLevel) {
+				echo '<ul>';
+			}
+
+			if ($level > $newLevel) {
+				for ($i = $level; $i > $newLevel; $i--){
+					echo '</ul></li>';
+				}
+			}
+
+			?>
+				<li>
+					<a href="<?php echo $item->getCategoryUrl() ?>">
+						<?php echo $block->escapeHtml($item->getTitle()) ?>
+					</a>
+			<?php
+			$level = $newLevel;
+			$first = false;
+		}
+	?>
+	</ul>
+</div>
+<?php } ?>

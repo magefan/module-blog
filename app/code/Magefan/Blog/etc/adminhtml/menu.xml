@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magefan_Blog::elements" title="Blogs" module="Magefan_Blog" parent="Magento_Backend::content" sortOrder="10"  resource="Magefan_Blog::elements"/>
+
+        <add id="Magefan_Blog::post" title="Posts" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="10" action="blog/post/" resource="Magefan_Blog::blog_post"/>
+
+        <add id="Magefan_Blog::category" title="Categories" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="20" action="blog/category/" resource="Magefan_Blog::blog_category"/>
+    </menu>
+</config>

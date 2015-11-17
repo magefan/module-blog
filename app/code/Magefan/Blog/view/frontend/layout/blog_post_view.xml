@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="blog_default"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magefan\Blog\Block\Post\View" name="blog.post" template="post/view.phtml">
+            	<block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
+                <action method="setPostInfoBlockName">
+                    <argument name="name" xsi:type="string">blog.post.info</argument>
+                </action>
+                <block class="\Magento\Framework\View\Element\Text\ListText" name="blog.post.bottom" template="sidebar.phtml">
+                    <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
+                    <block class="Magefan\Blog\Block\Post\View\Comments" name="blog.post.comments" template="post/view/comments.phtml" />
+                    <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />
+                    <block class="Magento\Framework\View\Element\Template" name="blog.post.js" as="js"  template="Magefan_Blog::post/view/js.phtml" />
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

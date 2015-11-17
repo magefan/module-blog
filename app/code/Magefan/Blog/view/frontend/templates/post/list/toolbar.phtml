@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list toolbar template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar
+ */
+?>
+<?php if ($block->getCollection()->getSize()): ?>
+    <div class="toolbar toolbar-blog-posts" data-mage-init='<?php echo $block->getWidgetOptionsJson(); ?>'>
+        <?php echo $block->getPagerHtml() ?>
+    </div>
+<?php endif ?>

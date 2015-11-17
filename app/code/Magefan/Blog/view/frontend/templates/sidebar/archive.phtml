@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar archive template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Archive
+ */
+?>
+
+<?php
+	$_months = $block->getMonths();
+?>
+<?php if (count($_months)) { ?>
+<div class="widget block block-archive" data-bind="scope: 'blog-archive'">
+    <div class="block-title">
+        <strong><?php echo __('Archive') ?></strong>
+    </div>
+    <div class="block-content">
+    	<?php foreach ($_months as $time) { ?>
+            <?php
+                $title = $block->getMonth($time).' '.$block->getYear($time);
+                $title = $block->escapeHtml($title, null, true);
+            ?>
+            <div class="item">
+                <a title="<?php echo __('Archive %s', $title) ?>" class="archive-item-link" href="<?php echo $block->getTimeUrl($time) ?>">
+                    <?php echo $title; ?>
+                </a>
+            </div>
+
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>
