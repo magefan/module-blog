@@ -4,11 +4,11 @@
 
 ## Features
   
-  * You can create unlimited blog posts and categories
-  * Multi Store Support
-  * SEO friendly permalink
+  * Unlimited blog posts and categories
+  * Multi Stores Support
+  * SEO friendly permalinks
   * Facebook and Disqus comments on post page
-  * Blog post Related Products and Related Post
+  * Related Products and Related Post
   * Available posts search
   * Recent Posts, Archive, Categories, Search From sidebar widgets
   * Sitemap XML
