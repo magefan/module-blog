@@ -31,12 +31,12 @@ The code is licensed under [Open Software License ("OSL") v. 3.0](http://opensou
 ## Installation
   * Download [ZIP Archive](https://github.com/IhorVansach/Blog-Extension-for-Magento-2/archive/master.zip)
   * Extract files
-  * Copy "app" folder to your magento 2 root directory
-  * In terminal change directory to your magento 2 root directory using command
+  * Copy "app" folder to your Magento 2 root directory
+  * In terminal change directory to your Magento 2 root directory using command
 ```
 cd /FULL_PATH_TO_YOUR_MAGENTO2
 ```
-  * Run magento2 upgrade command
+  * Run Magento 2 upgrade command
 ```
 php bin/magento setup:upgrade
 ```
