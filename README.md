@@ -40,3 +40,6 @@ There isn't a way for us to reply to reviews and the Q&A moderation is very slow
 
 ## License
 The code is licensed under [Open Software License ("OSL") v. 3.0](http://opensource.org/licenses/osl-3.0.php).
+
+
+![alt tag](http://drupal.in-cdn.net/cdn/article/public/%2Brecommended_blog_0.jpg)
