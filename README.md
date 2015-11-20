@@ -28,3 +28,12 @@ There isn't a way for us to reply to reviews and the Q&A moderation is very slow
 ## License
 The code is licensed under [Open Software License ("OSL") v. 3.0](http://opensource.org/licenses/osl-3.0.php).
 
+## Installation
+  * Download [ZIP Archive](https://github.com/IhorVansach/Blog-Extension-for-Magento-2/archive/master.zip)
+  * Extract files
+  * Copy "app" folder to your magento 2 root directory
+  * In terminal change directory to your magento 2 root directory using command
+      cd /FULL_PATH_TO_YOUR_MAGENTO2
+  * Run magento2 upgrade command
+      php bin/magento setup:upgrade
+
