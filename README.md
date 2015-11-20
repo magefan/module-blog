@@ -1,6 +1,6 @@
 # [Magefan](http://magefan.com/) Blog Extension for Magento 2
 
-[Magento 2](http://magento.com/) Blog extension allows you to create a full-fledged blog on your Magento 2 Store.
+Blog extension for allows you to create a full-fledged blog on your [Magento 2](http://magento.com/) Store.
 
 ## Features
   
