@@ -33,11 +33,11 @@ The code is licensed under [Open Software License ("OSL") v. 3.0](http://opensou
   * Extract files
   * Copy "app" folder to your magento 2 root directory
   * In terminal change directory to your magento 2 root directory using command
-  ```
-      cd /FULL_PATH_TO_YOUR_MAGENTO2
-  ```
+```
+cd /FULL_PATH_TO_YOUR_MAGENTO2
+```
   * Run magento2 upgrade command
-  ```
-      php bin/magento setup:upgrade
-  ```
+```
+php bin/magento setup:upgrade
+```
 
