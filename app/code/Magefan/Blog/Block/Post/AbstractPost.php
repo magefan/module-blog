@@ -160,12 +160,10 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
                 $block = $this->getLayout()->createBlock($this->_defaultPostInfoBlock, uniqid(microtime()));
             }
 
-            $block->setPost($this->getPost());
-
             $this->setData($k, $block);
         }
 
-        return $this->getData($k);
+        return $this->getData($k)->setPost($this->getPost());
     }
 
 }
