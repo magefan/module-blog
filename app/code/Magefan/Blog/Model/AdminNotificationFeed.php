@@ -126,13 +126,13 @@ class AdminNotificationFeed extends \Magento\AdminNotification\Model\Feed
         $session = $this->_backendAuthSession;
         $time = time();
         $frequency = $this->getFrequency();
-        if (($frequency + $session->getMfBlogNoticeLastUpdate() > $time)
+        if (($frequency + $session->getMfNoticeLastUpdate() > $time)
             || ($frequency + $this->getLastUpdate() > $time)
         ) {
             return $this;
         }
 
-        $session->setPANLastUpdate($time);
+        $session->setMfNoticeLastUpdate($time);
         return parent::checkUpdate();
     }
 
