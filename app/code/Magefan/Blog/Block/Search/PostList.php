@@ -56,7 +56,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return void
      */
-    protected function _addBreadcrumbs()
+    protected function _addBreadcrumbs($title)
     {
         if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
             && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
