@@ -212,8 +212,13 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getRelatedProducts()
     {
-        return $this->_productCollectionFactory->create()
-            ->addFieldToFilter('entity_id', array('in' => $this->getRelatedProductIds() ?: array(0)))
-            ->addStoreFilter($this->getStoreId()[0]);
+        $collection = $this->_productCollectionFactory->create()
+            ->addFieldToFilter('entity_id', array('in' => $this->getRelatedProductIds() ?: array(0)));
+
+        if ($storeIds = $this->getStoreId()) {
+            $collection->addStoreFilter($storeIds[0]);
+        }
+
+        return $collection;
     }
 }
