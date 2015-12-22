@@ -65,7 +65,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
      */
     protected function _prepareCollection()
     {
-        $post = $this->_coreRegistry->registry('current_blog_post');
+        $post = $this->getPost();
 
         $this->_itemCollection = $this->_productCollectionFactory->create()
             ->addAttributeToSelect('required_options')
@@ -115,6 +115,21 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
             $this->_prepareCollection();
         }
         return $this->_itemCollection;
+    }
+
+    /**
+     * Retrieve posts instance
+     *
+     * @return \Magefan\Blog\Model\Category
+     */
+    public function getPost()
+    {
+        if (!$this->hasData('post')) {
+            $this->setData('post',
+                $this->_coreRegistry->registry('current_blog_post')
+            );
+        }
+        return $this->getData('post');
     }
 
     /**
