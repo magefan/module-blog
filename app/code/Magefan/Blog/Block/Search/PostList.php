@@ -15,6 +15,15 @@ use Magento\Store\Model\ScopeInterface;
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList
 {
+	/**
+	 * Retrieve query
+	 * @return string
+	 */
+    public function getQuery()
+    {
+        return urldecode($this->getRequest()->getParam('q'));
+    }
+
     /**
      * Prepare posts collection
      *
@@ -24,7 +33,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     {
         parent::_preparePostCollection();
 
-        $q = $this->getRequest()->getParam('q');
+        $q = $this->getQuery();
         $this->_postCollection->addFieldToFilter(
             array('title', 'content_heading', 'content'),
             array(
@@ -87,10 +96,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     protected function _getTitle()
     {
-        return sprintf(
-            __('Search "%s"'),
-            $this->getRequest()->getParam('q')
-        );
+        return __('Search "%1"', $this->getQuery());
     }
 
 }

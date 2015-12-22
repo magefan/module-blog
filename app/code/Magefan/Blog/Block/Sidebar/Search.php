@@ -26,7 +26,7 @@ class Search extends  \Magento\Framework\View\Element\Template
 	 */
 	public function getQuery()
 	{
-		return $this->getRequest()->getParam('q', '');
+		return urldecode($this->getRequest()->getParam('q', ''));
 	}
 
 }

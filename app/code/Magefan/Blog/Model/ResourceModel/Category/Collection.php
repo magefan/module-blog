@@ -97,6 +97,21 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Get SQL for get record count
+     *
+     * Extra GROUP BY strip added.
+     *
+     * @return \Magento\Framework\DB\Select
+     */
+    public function getSelectCountSql()
+    {
+        $countSelect = parent::getSelectCountSql();
+        $countSelect->reset(\Magento\Framework\DB\Select::GROUP);
+
+        return $countSelect;
+    }
+
+    /**
      * Add enable filter to collection
      * @return $this
      */
@@ -155,9 +170,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ['store_table' => $this->getTable('magefan_blog_category_store')],
                 'main_table.category_id = store_table.category_id',
                 []
-            )/*->group(
+            )->group(
                 'main_table.category_id'
-            )*/;
+            );
         }
         parent::_renderFiltersBefore();
     }

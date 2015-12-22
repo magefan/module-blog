@@ -140,6 +140,21 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Get SQL for get record count
+     *
+     * Extra GROUP BY strip added.
+     *
+     * @return \Magento\Framework\DB\Select
+     */
+    public function getSelectCountSql()
+    {
+        $countSelect = parent::getSelectCountSql();
+        $countSelect->reset(\Magento\Framework\DB\Select::GROUP);
+
+        return $countSelect;
+    }
+
+    /**
      * Perform operations after collection load
      *
      * @return $this
@@ -210,9 +225,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],
                     'main_table.post_id = '.$key.'_table.post_id',
                     []
-                )/*->group(
+                )->group(
                     'main_table.post_id'
-                )*/;
+                );
             }
         }
         parent::_renderFiltersBefore();
