@@ -23,13 +23,6 @@ class Categories extends \Magento\Framework\View\Element\Template
     protected $_widgetKey = 'categories';
 
     /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
      * @var \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     protected $_categoryCollection;
@@ -37,18 +30,15 @@ class Categories extends \Magento\Framework\View\Element\Template
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magefan\Blog\Model\ResourceModel\Category\Collection $categoryCollection
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magefan\Blog\Model\ResourceModel\Category\Collection $categoryCollection,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_storeManager = $storeManager;
         $this->_categoryCollection = $categoryCollection;
     }
 

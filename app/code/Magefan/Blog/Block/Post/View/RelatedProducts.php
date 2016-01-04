@@ -40,22 +40,22 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $_moduleManager;
 
     /**
-     * @var \Magento\Framework\Registry
+     * Related products block construct
+     * @param \Magento\Catalog\Block\Product\Context $context
+     * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility
+     * @param \Magento\Framework\Module\Manager $moduleManager
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $data
      */
-    protected $_coreRegistry;
-
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\Framework\Module\Manager $moduleManager,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Magento\Framework\Registry $coreRegistry,
         array $data = []
     ) {
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_moduleManager = $moduleManager;
         $this->_productCollectionFactory = $productCollectionFactory;
-        $this->_coreRegistry = $coreRegistry;
         parent::__construct($context, $data );
     }
 

@@ -27,13 +27,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     protected $_post;
 
     /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
      * Page factory
      *
      * @var \Magefan\Blog\Model\PostFactory
@@ -62,7 +55,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * @param \Magento\Cms\Model\Page $post
      * @param \Magento\Framework\Registry $coreRegistry,
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Cms\Model\PageFactory $postFactory
      * @param array $data
      */
@@ -71,7 +63,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         \Magefan\Blog\Model\Post $post,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magefan\Blog\Model\PostFactory $postFactory,
         array $data = []
     ) {
@@ -79,7 +70,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         $this->_post = $post;
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
-        $this->_storeManager = $storeManager;
         $this->_postFactory = $postFactory;
     }
 

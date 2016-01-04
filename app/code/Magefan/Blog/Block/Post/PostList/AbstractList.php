@@ -26,18 +26,6 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
     protected $_post;
 
     /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
-     * @var \Magento\Framework\View\Page\Config
-     */
-    protected $postConfig;
-
-    /**
      * @var \Magento\Framework\Registry
      */
     protected $_coreRegistry;
@@ -58,26 +46,20 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\View\Element\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
-     * @param \Magento\Framework\View\Page\Config $postConfig
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
-        \Magento\Framework\View\Page\Config $postConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
-        $this->_storeManager = $storeManager;
         $this->_postCollectionFactory = $postCollectionFactory;
-        $this->pageConfig = $postConfig;
     }
 
     /**
