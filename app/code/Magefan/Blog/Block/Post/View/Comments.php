@@ -88,6 +88,17 @@ class Comments extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Retrieve disqus forum shortname
+     * @return string
+     */
+    public function getDisqusShortname()
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/post_view/comments/disqus_forum_shortname', ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * Retrieve locale code
      * @return string
      */
