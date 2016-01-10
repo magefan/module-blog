@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -15,6 +15,7 @@
                     <resource id="Magento_Backend::elements" title="Blog" sortOrder="10">
                         <resource id="Magefan_Blog::post" title="Posts" sortOrder="10" />
                         <resource id="Magefan_Blog::category" title="Category" sortOrder="20" />
+                        <resource id="Magefan_Blog::import" title="Import" sortOrder="30" />
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">

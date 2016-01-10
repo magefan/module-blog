@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Category;
 
 /**
- * Admin blog category 
+ * Admin blog category
  */
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {

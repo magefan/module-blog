@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog available for import template
+ *
+ * @var $block \Magento\Backend\Block\Template
+ */
+?>
+
+<table class="available-imports">
+	<tr>
+		<td>
+			<div class="itm-hld" onclick="window.location='<?php echo $block->getUrl('blog/import/wordpress') ?>'">
+				<img src="<?php echo $this->getViewFileUrl('Magefan_Blog::images/wordpress.png') ?>" />
+				<span class="lable">Import from WordPress (beta)</span>
+			</div>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	<tr>
+</table>

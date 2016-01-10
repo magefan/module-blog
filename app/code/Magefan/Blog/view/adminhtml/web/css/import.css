@@ -1,0 +1,6 @@
+table.available-imports {width:100%;}
+table.available-imports td {width:25%; text-align: center; margin:0px; padding:0px;}
+table.available-imports td .itm-hld  {margin: 10px; padding: 20px; background: #373330; cursor: pointer;}
+table.available-imports td .itm-hld:hover {background:#524D49; }
+table.available-imports td img {width:100%; margin:5px;}
+table.available-imports td .lable {font-weight: 700; font-size:16px; color: #F7F3EB;}

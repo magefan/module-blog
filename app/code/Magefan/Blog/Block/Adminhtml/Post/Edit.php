@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -9,9 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Post;
 
 /**
- * Admin CMS page
- *
- * @author     Magento Core Team <core@magentocommerce.com>
+ * Admin blog post
  */
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {
@@ -49,8 +47,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
 
         parent::_construct();
 
-        if ($this->_isAllowedAction('Magento_Cms::save')) {
-            //$this->buttonList->update('save', 'label', __('Save Size Chart'));
+        if ($this->_isAllowedAction('Magefan_Blog::post')) {
             $this->buttonList->add(
                 'saveandcontinue',
                 [
@@ -68,25 +65,8 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $this->buttonList->remove('save');
         }
 
-        if ($this->_isAllowedAction('Magento_Cms::delete')) {
-           // $this->buttonList->update('delete', 'label', __('Delete Size Chart'));
-        } else {
+        if (!$this->_isAllowedAction('Magefan_Blog::post')) {
             $this->buttonList->remove('delete');
-        }
-    }
-
-    /**
-     * Retrieve text for header element depending on loaded page
-     *
-     * @return \Magento\Framework\Phrase
-     */
-    public function getHeaderText()
-    {
-        $model = $this->_coreRegistry->registry('current_model');
-        if ($model->getId()) {
-            return __("Edit Size Chart '%1'", $this->escapeHtml($model->getTitle()));
-        } else {
-            return __('New Size Chart');
         }
     }
 
