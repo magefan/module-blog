@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -16,7 +16,7 @@
 
 <div class="widget block block-search blog-search" data-bind="scope: 'blog-search'">
 	<div class="block-content">
-		<form class="form minisearch" id="blog_search_mini_form" action="<?php echo $this->getUrl('blog/search/') ?>" method="get">
+		<form class="form minisearch" id="blog_search_mini_form" action="<?php echo $block->getFormUrl() ?>" method="get">
             <div class="field search">
                 <label class="label" for="search" data-role="minisearch-label">
                     <span><?php echo __('Search') ?></span>

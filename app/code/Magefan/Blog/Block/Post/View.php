@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -56,7 +56,7 @@ class View extends AbstractPost
                 [
                     'label' => __('Blog'),
                     'title' => __('Go to Blog Home Page'),
-                    'link' => $this->_storeManager->getStore()->getUrl('blog')
+                    'link' => $this->_url->getBaseUrl()
                 ]
             );
             $breadcrumbsBlock->addCrumb('blog_post', [

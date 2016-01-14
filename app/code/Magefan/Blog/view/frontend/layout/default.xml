@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -10,10 +10,9 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="footer_links">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="blog">
+            <block class="Magefan\Blog\Block\Link" name="footer_blog_link">
                 <arguments>
-                    <argument name="label" xsi:type="string">Blog</argument>
-                    <argument name="path" xsi:type="string">blog</argument>
+                    <argument name="label" xsi:type="string" translate="true">Blog</argument>
                 </arguments>
             </block>
         </referenceBlock>

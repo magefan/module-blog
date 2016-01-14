@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -86,7 +86,10 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTimeUrl($time)
     {
-        return $this->getUrl('blog/archive/'.date('Y-m', $time));
+        return $this->_url->getUrl(
+            date('Y-m', $time),
+            \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
+        );
     }
 
 	/**

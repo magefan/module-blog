@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -16,16 +16,16 @@ use Magento\Store\Model\ScopeInterface;
 class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 {
     /**
-     * Retrieve rss feed url 
+     * Retrieve rss feed url
      * @return string
      */
     public function getLink()
     {
-        return $this->getUrl('blog/rss/feed');
+        return $this->_url->getUrl('feed', 'rss');
     }
 
     /**
-     * Retrieve rss feed title 
+     * Retrieve rss feed title
      * @return string
      */
     public function getTitle()
@@ -34,7 +34,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * Retrieve rss feed description 
+     * Retrieve rss feed description
      * @return string
      */
     public function getDescription()

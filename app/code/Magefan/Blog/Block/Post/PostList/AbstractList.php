@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -41,12 +41,18 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
     protected $_postCollection;
 
     /**
+     * @var \Magefan\Blog\Model\Url
+     */
+    protected $_url;
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
+     * @param \Magefan\Blog\Model\Url $url
      * @param array $data
      */
     public function __construct(
@@ -54,12 +60,14 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
+        \Magefan\Blog\Model\Url $url,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
         $this->_postCollectionFactory = $postCollectionFactory;
+        $this->_url = $url;
     }
 
     /**

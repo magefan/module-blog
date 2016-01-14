@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Controller;
 
+use \Magefan\Blog\Model\Url;
 /**
  * Blog Controller Router
  */
@@ -56,7 +57,7 @@ class Router implements \Magento\Framework\App\RouterInterface
     /**
      * Url
      *
-     * @var \Magento\Framework\UrlInterface
+     * @var \Magefan\Blog\Model\Url
      */
     protected $_url;
 
@@ -68,18 +69,29 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_response;
 
     /**
+     * @var int
+     */
+    protected $_postId;
+
+    /**
+     * @var int
+     */
+    protected $_categoryId;
+
+    /**
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
+     * @param \Magefan\Blog\Model\Url $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\ResponseInterface $response
      */
     public function __construct(
         \Magento\Framework\App\ActionFactory $actionFactory,
         \Magento\Framework\Event\ManagerInterface $eventManager,
-        \Magento\Framework\UrlInterface $url,
+        Url $url,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -104,18 +116,46 @@ class Router implements \Magento\Framework\App\RouterInterface
     {
         $_identifier = trim($request->getPathInfo(), '/');
 
-        if (strpos($_identifier, 'blog') !== 0) {
+        $pathInfo = explode('/', $_identifier);
+        $blogRoute = $this->_url->getRoute();
+
+        if ($pathInfo[0] != $blogRoute) {
             return;
         }
+        unset($pathInfo[0]);
 
-        $identifier = str_replace(array('blog/', 'blog'), '', $_identifier);
+        switch ($this->_url->getPermalinkType()) {
+            case Url::PERMALINK_TYPE_DEFAULT:
+                foreach($pathInfo as $i => $route) {
+                    $pathInfo[$i] = $this->_url->getControllerName($route);
+                }
+                break;
+            case Url::PERMALINK_TYPE_SHORT:
+                if ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)) {
+                    $pathInfo[1] = Url::CONTROLLER_SEARCH;
+                } elseif (count($pathInfo) == 1) {
+                    if ($this->_isArchiveIdentifier($pathInfo[1])) {
+                        $pathInfo[2] = $pathInfo[1];
+                        $pathInfo[1] = Url::CONTROLLER_ARCHIVE;
+                    } elseif ($postId = $this->_getPostId($pathInfo[1])) {
+                        $pathInfo[2] = $pathInfo[1];
+                        $pathInfo[1] = Url::CONTROLLER_POST;
+                    } elseif ($categoryId = $this->_getCategoryId($pathInfo[1])) {
+                        $pathInfo[2] = $pathInfo[1];
+                        $pathInfo[1] = Url::CONTROLLER_CATEGORY;
+                    }
+                }
+                break;
+        }
+
+        $identifier = implode('/', $pathInfo);
 
         $condition = new \Magento\Framework\DataObject(['identifier' => $identifier, 'continue' => true]);
         $this->_eventManager->dispatch(
             'magefan_blog_controller_router_match_before',
             ['router' => $this, 'condition' => $condition]
         );
-        
+
         if ($condition->getRedirectUrl()) {
             $this->_response->setRedirect($condition->getRedirectUrl());
             $request->setDispatched(true);
@@ -138,14 +178,12 @@ class Router implements \Magento\Framework\App\RouterInterface
             $request->setModuleName('blog')->setControllerName('index')->setActionName('index');
             $success = true;
         } elseif (count($info) > 1) {
-            
+
             $store = $this->_storeManager->getStore()->getId();
 
             switch ($info[0]) {
                 case 'post' :
-                    $post = $this->_postFactory->create();
-                    $postId = $post->checkIdentifier($info[1], $this->_storeManager->getStore()->getId());
-                    if (!$postId) {
+                    if (!$postId = $this->_getPostId($info[1])) {
                         return null;
                     }
 
@@ -153,9 +191,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     $success = true;
                     break;
                 case 'category' :
-                    $category = $this->_categoryFactory->create();
-                    $categoryId = $category->checkIdentifier($info[1], $this->_storeManager->getStore()->getId());
-                    if (!$categoryId) {
+                    if (!$categoryId = $this->_getCategoryId($info[1])) {
                         return null;
                     }
 
@@ -175,6 +211,15 @@ class Router implements \Magento\Framework\App\RouterInterface
 
                     $success = true;
                     break;
+
+                case 'rss' :
+
+                    $request->setModuleName('blog')->setControllerName('rss')->setActionName(
+                        isset($info[1]) ? $info[1] : 'index'
+                    );
+
+                    $success = true;
+                    break;
             }
 
         }
@@ -189,6 +234,57 @@ class Router implements \Magento\Framework\App\RouterInterface
             'Magento\Framework\App\Action\Forward',
             ['request' => $request]
         );
+    }
+
+    /**
+     * Retrieve post id by identifier
+     * @param  string $identifier
+     * @return int
+     */
+    protected function _getPostId($identifier)
+    {
+        if (is_null($this->_postId)) {
+            $post = $this->_postFactory->create();
+            $this->_postId = $post->checkIdentifier(
+                $identifier,
+                $this->_storeManager->getStore()->getId()
+            );
+        }
+
+        return $this->_postId;
+    }
+
+    /**
+     * Retrieve category id by identifier
+     * @param  string $identifier
+     * @return int
+     */
+    protected function _getCategoryId($identifier)
+    {
+        if (is_null($this->_categoryId)) {
+            $category = $this->_categoryFactory->create();
+            $this->_categoryId = $category->checkIdentifier(
+                $identifier,
+                $this->_storeManager->getStore()->getId()
+            );
+        }
+
+        return $this->_categoryId;
+    }
+
+    /**
+     * Detect arcive identifier
+     * @param  string  $identifier
+     * @return boolean
+     */
+    protected function _isArchiveIdentifier($identifier)
+    {
+        $info = explode('-', $identifier);
+        return count($info) == 2
+            && strlen($info[0]) == 4
+            && strlen($info[1]) == 2
+            && is_numeric($info[0])
+            && is_numeric($info[1]);
     }
 
 }

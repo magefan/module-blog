@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -52,6 +52,14 @@
             <rss_feed>
                 <title>Blog Rss</title>
             </rss_feed>
+            <permalink>
+                <route>blog</route>
+                <type>default</type>
+                <post_route>post</post_route>
+                <category_route>category</category_route>
+                <archive_route>archive</archive_route>
+                <search_route>search</search_route>
+            </permalink>
         </mfblog>
     </default>
 </config>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -44,9 +44,9 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     protected $_defaultPostInfoBlock = 'Magefan\Blog\Block\Post\Info';
 
     /**
-     * @var string
+     * @var \Magefan\Blog\Model\Url
      */
-    //protected $_defaultPostCommentsBlock = 'Magefan\Blog\Block\Post\View\Comments';
+    protected $_url;
 
     /**
      * Construct
@@ -56,6 +56,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\Registry $coreRegistry,
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magento\Cms\Model\PageFactory $postFactory
+     * @param \Magefan\Blog\Model\Url $url
      * @param array $data
      */
     public function __construct(
@@ -64,6 +65,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\PostFactory $postFactory,
+        \Magefan\Blog\Model\Url $url,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -71,6 +73,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
         $this->_postFactory = $postFactory;
+        $this->_url = $url;
     }
 
     /**

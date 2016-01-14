@@ -1,12 +1,14 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
 
 namespace Magefan\Blog\Model;
+
+use Magefan\Blog\Model\Url;
 
 /**
  * Post model
@@ -53,7 +55,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_eventObject = 'blog_post';
 
     /**
-     * @var \Magento\Framework\UrlInterface
+     * @var \Magefan\Blog\Model\Url
      */
     protected $_url;
 
@@ -77,7 +79,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
-     * @param Magento\Framework\UrlInterface $url
+     * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
@@ -87,7 +89,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
-        \Magento\Framework\UrlInterface $url,
+        Url $url,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
@@ -158,7 +160,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getUrl()
     {
-        return 'blog/post/'.$this->getIdentifier();
+        return $this->_url->getUrlPath($this, URL::CONTROLLER_POST);
     }
 
     /**
@@ -167,7 +169,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getPostUrl()
     {
-        return $this->_url->getUrl($this->getUrl());
+        return $this->_url->getUrl($this, URL::CONTROLLER_POST);
     }
 
     /**

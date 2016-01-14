@@ -1,12 +1,14 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
 
 namespace Magefan\Blog\Model;
+
+use Magefan\Blog\Model\Url;
 
 /**
  * Category model
@@ -58,7 +60,7 @@ class Category extends \Magento\Framework\Model\AbstractModel
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\UrlInterface $url
+     * @param \Magefan\Blog\Model\Url $url
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
@@ -66,7 +68,7 @@ class Category extends \Magento\Framework\Model\AbstractModel
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
-        \Magento\Framework\UrlInterface $url,
+        Url $url,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
@@ -193,7 +195,7 @@ class Category extends \Magento\Framework\Model\AbstractModel
      */
     public function getUrl()
     {
-        return 'blog/category/'.$this->getIdentifier();
+        return $this->_url->getUrlPath($this, URL::CONTROLLER_CATEGORY);
     }
 
     /**
@@ -202,6 +204,6 @@ class Category extends \Magento\Framework\Model\AbstractModel
      */
     public function getCategoryUrl()
     {
-        return $this->_url->getUrl($this->getUrl());
+        return $this->_url->getUrl($this, URL::CONTROLLER_CATEGORY);
     }
 }

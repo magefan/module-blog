@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -171,6 +171,43 @@
                 </field>
                 <field id="description" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Feed Description</label>
+                </field>
+            </group>
+            <group id="permalink" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Permalink Settings</label>
+                <field id="route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Route</label>
+                    <comment>E.g.: "blog" will make the blog accessible from mystore.com/blog/</comment>
+                </field>
+                <field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Permalink Type</label>
+                     <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
+                </field>
+
+                <field id="post_route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Post Route</label>
+                    <depends>
+                        <field id="type">default</field>
+                    </depends>
+                    <comment>E.g.: "post" will make the blog post accessible from mystore.com/{blog_route}/post/post-title/</comment>
+                </field>
+                <field id="category_route" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Route</label>
+                    <depends>
+                        <field id="type">default</field>
+                    </depends>
+                    <comment>E.g.: "category" will make the blog category accessible from mystore.com/{blog_route}/category/category-title/</comment>
+                </field>
+                <field id="archive_route" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Archive Route</label>
+                    <depends>
+                        <field id="type">default</field>
+                    </depends>
+                    <comment>E.g.: "archive" will make the blog archive accessible from mystore.com/{blog_route}/archive/2016-02/</comment>
+                </field>
+                <field id="search_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Search Route</label>
+                    <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query/</comment>
                 </field>
             </group>
         </section>
