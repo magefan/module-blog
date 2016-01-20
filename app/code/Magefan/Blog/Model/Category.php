@@ -137,7 +137,7 @@ class Category extends \Magento\Framework\Model\AbstractModel
         $k = 'parent_ids';
         if (!$this->hasData($k)) {
             $this->setData($k,
-                $this->getPath() ? explode('/', $this->getPath()) : array()
+                $this->getPath() ? explode('/', $this->getPath()) : []
             );
         }
 
@@ -157,6 +157,40 @@ class Category extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve parent category
+     * @param  boolean $storeFilter
+     * @return self || false
+     */
+    public function getParentCategory($storeFilter = false)
+    {
+        $k = 'parent_category';
+        if (!$this->hasData($k)) {
+
+            if ($pId = $this->getParentId()) {
+                $category = clone $this;
+                $category->load($pId);
+
+                if ($category->getId()) {
+                    $this->setData($k, $category);
+                }
+            }
+        }
+
+        if (!$storeFilter) {
+            return $this->getData($k);
+        } elseif ($pCategory = $this->getData($k)) {
+            if (in_array(0, $this->getStoreId())
+                || in_array(0, $pCategory->getStoreId())
+                || array_intersect($this->getStoreId(), $pCategory->getStoreId())
+            ) {
+                return $pCategory;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Check if current category is parent category
      * @param  self  $category
      * @return boolean
@@ -168,6 +202,34 @@ class Category extends \Magento\Framework\Model\AbstractModel
         }
 
         return in_array($category, $this->getParentIds());
+    }
+
+    /**
+     * Retrieve children category ids
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        $k = 'children_ids';
+        if (!$this->hasData($k)) {
+
+            $categories = \Magento\Framework\App\ObjectManager::getInstance()
+                ->create($this->_collectionName);
+                //->addStoreFilter($this->getStoreId());
+
+            $ids = [];
+            foreach($categories as $category) {
+                if ($category->isParent($this)) {
+                    $ids[] = $category->getId();
+                }
+            }
+
+            $this->setData($k,
+                $ids
+            );
+        }
+
+        return $this->getData($k);
     }
 
     /**

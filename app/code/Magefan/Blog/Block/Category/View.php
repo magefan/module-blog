@@ -24,7 +24,9 @@ class View extends \Magefan\Blog\Block\Post\PostList
     {
         parent::_preparePostCollection();
         if ($category = $this->getCategory()) {
-            $this->_postCollection->addCategoryFilter($category);
+            $categories = $category->getChildrenIds();
+            $categories[] = $category->getId();
+            $this->_postCollection->addCategoryFilter($categories);
         }
     }
 
@@ -75,6 +77,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
                     'link' => $this->_storeManager->getStore()->getBaseUrl()
                 ]
             );
+
             $breadcrumbsBlock->addCrumb(
                 'blog',
                 [
@@ -83,6 +86,22 @@ class View extends \Magefan\Blog\Block\Post\PostList
                     'link' => $this->_url->getBaseUrl()
                 ]
             );
+
+            $_category = $category;
+            $parentCategories = [];
+            while ($parentCategory = $_category->getParentCategory(true)) {
+                $parentCategories[] = $_category = $parentCategory;
+            }
+
+            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                $_category = $parentCategories[$i];
+                $breadcrumbsBlock->addCrumb('blog_parent_category_'.$_category->getId(), [
+                    'label' => $_category->getTitle(),
+                    'title' => $_category->getTitle(),
+                    'link'  => $_category->getCategoryUrl()
+                ]);
+            }
+
             $breadcrumbsBlock->addCrumb('blog_category',[
                 'label' => $category->getTitle(),
                 'title' => $category->getTitle()
