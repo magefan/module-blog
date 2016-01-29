@@ -28,7 +28,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'priority' => '0.25',
                 'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
                         'Magefan\Blog\Model\Category'
-                    )->getCollection()
+                    )->getCollection($this->getStoreId())
                     ->addStoreFilter($this->getStoreId())
                     ->addActiveFilter(),
             ]
