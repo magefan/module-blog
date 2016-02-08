@@ -49,6 +49,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         );
         $form->setUseContainer(true);
 
+        $data = $this->_coreRegistry->registry('import_config')->getData();
 
         /*
          * Checking if user have permissions to save information
@@ -166,16 +167,15 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'hidden',
                 ['name' => 'store_id', 'value' => $this->_storeManager->getStore(true)->getId()]
             );
-            $model->setStoreId($this->_storeManager->getStore(true)->getId());
+
+            $data['store_id'] = $this->_storeManager->getStore(true)->getId();
         }
 
         $this->_eventManager->dispatch('magefan_blog_import_wordpress_prepare_form', ['form' => $form]);
 
-        $data = $this->_coreRegistry->registry('import_config')->getData();
-
-        if (empty($data['homepageurl'])) {
-            //$data['homepageurl'] = $this->getUrl('blog', ['_store' => 1]);
-        }
+        /*if (empty($data['homepageurl'])) {
+            $data['homepageurl'] = $this->getUrl('blog', ['_store' => 1]);
+        }*/
 
         if (empty($data['prefix'])) {
             $data['prefix'] = 'wp_';
