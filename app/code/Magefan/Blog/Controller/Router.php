@@ -131,18 +131,20 @@ class Router implements \Magento\Framework\App\RouterInterface
                 }
                 break;
             case Url::PERMALINK_TYPE_SHORT:
-                if ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)) {
-                    $pathInfo[1] = Url::CONTROLLER_SEARCH;
-                } elseif (count($pathInfo) == 1) {
-                    if ($this->_isArchiveIdentifier($pathInfo[1])) {
-                        $pathInfo[2] = $pathInfo[1];
-                        $pathInfo[1] = Url::CONTROLLER_ARCHIVE;
-                    } elseif ($postId = $this->_getPostId($pathInfo[1])) {
-                        $pathInfo[2] = $pathInfo[1];
-                        $pathInfo[1] = Url::CONTROLLER_POST;
-                    } elseif ($categoryId = $this->_getCategoryId($pathInfo[1])) {
-                        $pathInfo[2] = $pathInfo[1];
-                        $pathInfo[1] = Url::CONTROLLER_CATEGORY;
+                if (isset($pathInfo[1])) {
+                    if ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)) {
+                        $pathInfo[1] = Url::CONTROLLER_SEARCH;
+                    } elseif (count($pathInfo) == 1) {
+                        if ($this->_isArchiveIdentifier($pathInfo[1])) {
+                            $pathInfo[2] = $pathInfo[1];
+                            $pathInfo[1] = Url::CONTROLLER_ARCHIVE;
+                        } elseif ($postId = $this->_getPostId($pathInfo[1])) {
+                            $pathInfo[2] = $pathInfo[1];
+                            $pathInfo[1] = Url::CONTROLLER_POST;
+                        } elseif ($categoryId = $this->_getCategoryId($pathInfo[1])) {
+                            $pathInfo[2] = $pathInfo[1];
+                            $pathInfo[1] = Url::CONTROLLER_CATEGORY;
+                        }
                     }
                 }
                 break;
