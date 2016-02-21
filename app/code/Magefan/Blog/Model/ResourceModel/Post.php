@@ -89,6 +89,10 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $object->setData($field, $this->dateTime->formatDate($value));
         }
 
+        $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
+                ->create('Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator');
+        $identifierGenerator->generate($object);
+
         if (!$this->isValidPageIdentifier($object)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('The post URL key contains capital letters or disallowed symbols.')
@@ -134,6 +138,11 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
 
         $newIds = (array)$object->getCategories();
+        foreach($newIds as $key => $id) {
+            if (!$id) { // e.g.: zero
+                unset($newIds[$key]);
+            }
+        }
         if (is_array($newIds)) {
             $oldIds = $this->lookupCategoryIds($object->getId());
             $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_category', 'category_id');
@@ -152,7 +161,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $oldIds = $this->lookupRelatedProductIds($object->getId());
             $this->_updateLinks($object, array_keys($linksData), $oldIds, 'magefan_blog_post_relatedproduct', 'related_id', $linksData);
         }
-
 
         return parent::_afterSave($object);
     }
@@ -294,12 +302,15 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * return post id if post exists
      *
      * @param string $identifier
-     * @param int $storeId
+     * @param int|array $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId)
+    public function checkIdentifier($identifier, $stores)
     {
-        $stores = [\Magento\Store\Model\Store::DEFAULT_STORE_ID, $storeId];
+        if (!is_array($stores)) {
+            $stores = [$stores];
+        }
+        $stores[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $stores, 1);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.post_id')->order('cps.store_id DESC')->limit(1);
 

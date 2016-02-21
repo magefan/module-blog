@@ -50,6 +50,10 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
+        $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
+                ->create('Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator');
+        $identifierGenerator->generate($object);
+
         if (!$this->isValidPageIdentifier($object)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('The category URL key contains capital letters or disallowed symbols.')
@@ -193,12 +197,15 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * return page id if page exists
      *
      * @param string $identifier
-     * @param int $storeId
+     * @param int|array $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId)
+    public function checkIdentifier($identifier, $stores)
     {
-        $stores = [\Magento\Store\Model\Store::DEFAULT_STORE_ID, $storeId];
+        if (!is_array($stores)) {
+            $stores = [$stores];
+        }
+        $stores[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $stores, 1);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.category_id')->order('cps.store_id DESC')->limit(1);
 

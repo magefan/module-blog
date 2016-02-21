@@ -83,6 +83,19 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
         );
 
         $fieldset->addField(
+            'identifier',
+            'text',
+            [
+                'name' => 'identifier',
+                'label' => __('URL Key'),
+                'title' => __('URL Key'),
+                'class' => 'validate-identifier',
+                'note' => __('Relative to Web Site Base URL'),
+                'disabled' => $isElementDisabled
+            ]
+        );
+
+        $fieldset->addField(
             'is_active',
             'select',
             [
@@ -97,19 +110,6 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
         if (!$model->getId()) {
             $model->setData('is_active', $isElementDisabled ? '0' : '1');
         }
-
-        $fieldset->addField(
-            'identifier',
-            'text',
-            [
-                'name' => 'identifier',
-                'label' => __('URL Key'),
-                'title' => __('URL Key'),
-                'class' => 'validate-identifier',
-                'note' => __('Relative to Web Site Base URL'),
-                'disabled' => $isElementDisabled
-            ]
-        );
 
         /**
          * Check is single store mode

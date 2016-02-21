@@ -95,6 +95,22 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
             ]
         );
 
+        $fieldset->addField(
+            'is_active',
+            'select',
+            [
+                'label' => __('Status'),
+                'title' => __('Post Status'),
+                'name' => 'post[is_active]',
+                'required' => true,
+                'options' => $model->getAvailableStatuses(),
+                'disabled' => $isElementDisabled
+            ]
+        );
+        if (!$model->getId()) {
+            $model->setData('is_active', $isElementDisabled ? '0' : '1');
+        }
+
         /**
          * Check is single store mode
          */
@@ -148,22 +164,6 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'style' => 'width:100%',
             ]
         );
-
-        $fieldset->addField(
-            'is_active',
-            'select',
-            [
-                'label' => __('Status'),
-                'title' => __('Post Status'),
-                'name' => 'post[is_active]',
-                'required' => true,
-                'options' => $model->getAvailableStatuses(),
-                'disabled' => $isElementDisabled
-            ]
-        );
-        if (!$model->getId()) {
-            $model->setData('is_active', $isElementDisabled ? '0' : '1');
-        }
 
         $dateFormat = $this->_localeDate->getDateFormat(
             \IntlDateFormatter::SHORT
