@@ -260,6 +260,22 @@ class RelatedProducts extends Extended implements \Magento\Backend\Block\Widget\
             ]
         );
 
+        $this->addColumn(
+            'position',
+            [
+                'header' => __('Position'),
+                'name' => 'position',
+                'type' => 'number',
+                'validate_class' => 'validate-number',
+                'index' => 'position',
+                'editable' => true,
+                'edit_only' => false,
+                'sortable' => false,
+                'filter' => false,
+                'header_css_class' => 'col-position',
+                'column_css_class' => 'col-position'
+            ]
+        );
 
         return parent::_prepareColumns();
     }
@@ -303,8 +319,8 @@ class RelatedProducts extends Extended implements \Magento\Backend\Block\Widget\
     public function getSelectedRelatedProducts()
     {
         $products = [];
-        foreach ($this->_coreRegistry->registry('current_model')->getRelatedProducts() as $post) {
-            $products[$post->getId()] = ['position' => $post->getPosition()];
+        foreach ($this->_coreRegistry->registry('current_model')->getRelatedProducts() as $product) {
+            $products[$product->getId()] = ['position' => $product->getPosition()];
         }
         return $products;
     }

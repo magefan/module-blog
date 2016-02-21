@@ -19,19 +19,27 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected $_date;
 
     /**
+     * @var \Magento\Framework\Stdlib\DateTime
+     */
+    protected $dateTime;
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
+     * @param \Magento\Framework\Stdlib\DateTime $dateTime
      * @param string|null $resourcePrefix
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
+        \Magento\Framework\Stdlib\DateTime $dateTime,
         $resourcePrefix = null
     ) {
-        $this->_date = $date;
         parent::__construct($context, $resourcePrefix);
+        $this->_date = $date;
+        $this->dateTime = $dateTime;
     }
 
     /**
@@ -76,6 +84,11 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
+        foreach (['publish_time'] as $field) {
+            $value = !$object->getData($field) ? null : $object->getData($field);
+            $object->setData($field, $this->dateTime->formatDate($value));
+        }
+
         if (!$this->isValidPageIdentifier($object)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('The post URL key contains capital letters or disallowed symbols.')
@@ -127,17 +140,17 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
 
-        $newIds = $object->getRelatedPostIds();
-        if (is_array($newIds)) {
+        $linksData = $object->getData('relatedposts_links');
+        if (is_array($linksData)) {
             $oldIds = $this->lookupRelatedPostIds($object->getId());
-            $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_relatedpost', 'related_id');
+            $this->_updateLinks($object, array_keys($linksData), $oldIds, 'magefan_blog_post_relatedpost', 'related_id', $linksData);
         }
 
 
-        $newIds = $object->getRelatedProductIds();
-        if (is_array($newIds)) {
+        $linksData = $object->getData('relatedproducts_links');
+        if (is_array($linksData)) {
             $oldIds = $this->lookupRelatedProductIds($object->getId());
-            $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_relatedproduct', 'related_id');
+            $this->_updateLinks($object, array_keys($linksData), $oldIds, 'magefan_blog_post_relatedproduct', 'related_id', $linksData);
         }
 
 
@@ -151,6 +164,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param  Array $oldRelatedIds
      * @param  String $tableName
      * @param  String  $field
+     * @param  Array  $rowData
      * @return void
      */
     protected function _updateLinks(
@@ -158,12 +172,13 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         Array $newRelatedIds,
         Array $oldRelatedIds,
         $tableName,
-        $field
+        $field,
+        $rowData = []
     ) {
         $table = $this->getTable($tableName);
 
-        $insert = array_diff($newRelatedIds, $oldRelatedIds);
-        $delete = array_diff($oldRelatedIds, $newRelatedIds);
+        $insert = $newRelatedIds;
+        $delete = $oldRelatedIds;
 
         if ($delete) {
             $where = ['post_id = ?' => (int)$object->getId(), $field.' IN (?)' => $delete];
@@ -174,8 +189,11 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($insert) {
             $data = [];
 
-            foreach ($insert as $storeId) {
-                $data[] = ['post_id' => (int)$object->getId(), $field => (int)$storeId];
+            foreach ($insert as $id) {
+                $id = (int)$id;
+                $data[] = array_merge(['post_id' => (int)$object->getId(), $field => $id],
+                    (isset($rowData[$id]) && is_array($rowData[$id])) ? $rowData[$id] : []
+                );
             }
 
             $this->getConnection()->insertMultiple($table, $data);
@@ -213,13 +231,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             $categories = $this->lookupCategoryIds($object->getId());
             $object->setCategories($categories);
-
-            $relatedPosts = $this->lookupRelatedPostIds($object->getId());
-            $object->setRelatedPostIds($relatedPosts);
-
-            $relatedProducts = $this->lookupRelatedProductIds($object->getId());
-            $object->setRelatedProductIds($relatedProducts);
-
         }
 
         return parent::_afterLoad($object);

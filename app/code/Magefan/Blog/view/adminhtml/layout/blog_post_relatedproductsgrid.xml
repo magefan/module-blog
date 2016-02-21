@@ -7,7 +7,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etclayout_generic.xsd">
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
     <container name="root" label="Root">
         <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\RelatedProducts" name="blog.post.edit.tab.relatedproducts"/>
     </container>

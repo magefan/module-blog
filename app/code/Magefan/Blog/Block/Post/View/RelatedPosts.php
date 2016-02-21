@@ -32,16 +32,18 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     protected function _preparePostCollection()
     {
-        parent::_preparePostCollection();
-        $this->_postCollection
-            ->addFieldToFilter('post_id', array('in' => $this->getPost()->getRelatedPostIds() ?: array(0)))
-            ->addFieldToFilter('post_id', array('neq' => $this->getPost()->getId()))
+        $storeId = $this->_storeManager->getStore()->getId();
+
+        $this->_postCollection = $this->getPost()->getRelatedPosts($storeId)
+            ->addActiveFilter()
             ->setPageSize(
                 (int) $this->_scopeConfig->getValue(
                     'mfblog/post_view/related_posts/number_of_posts',
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE
                 )
             );
+
+        $this->_postCollection->getSelect()->order('rl.position', 'ASC');
     }
 
     /**

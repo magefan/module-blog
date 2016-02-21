@@ -98,6 +98,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $store = [$store];
             }
 
+            if (in_array(\Magento\Store\Model\Store::DEFAULT_STORE_ID, $store)) {
+                return $this;
+            }
+
             if ($withAdmin) {
                 $store[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
             }

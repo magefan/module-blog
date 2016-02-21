@@ -30,11 +30,6 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $_catalogProductVisibility;
 
     /**
-     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
-     */
-    protected $_productCollectionFactory;
-
-    /**
      * @var \Magento\Framework\Module\Manager
      */
     protected $_moduleManager;
@@ -55,7 +50,6 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     ) {
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_moduleManager = $moduleManager;
-        $this->_productCollectionFactory = $productCollectionFactory;
         parent::__construct($context, $data );
     }
 
@@ -66,11 +60,10 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     protected function _prepareCollection()
     {
         $post = $this->getPost();
+        $storeId = $this->_storeManager->getStore()->getId();
 
-        $this->_itemCollection = $this->_productCollectionFactory->create()
-            ->addAttributeToSelect('required_options')
-            ->addStoreFilter()
-            ->addAttributeToFilter('entity_id', array('in' => $post->getRelatedProductIds() ?: array(0) ));
+        $this->_itemCollection = $post->getRelatedProducts($storeId)
+            ->addAttributeToSelect('required_options');
 
         if ($this->_moduleManager->isEnabled('Magento_Checkout')) {
             $this->_addProductAttributesAndPrices($this->_itemCollection);
@@ -84,6 +77,8 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         );
+
+        $this->_itemCollection->getSelect()->order('rl.position', 'ASC');
 
         $this->_itemCollection->load();
 

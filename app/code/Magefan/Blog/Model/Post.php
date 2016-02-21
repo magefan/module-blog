@@ -75,6 +75,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_parentCategories;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post\Collection
+     */
+    protected $_relatedPostsCollection;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -96,11 +101,12 @@ class Post extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+
         $this->_url = $url;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
-
-        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+        $this->_relatedPostsCollection = clone($this->getCollection());
     }
 
     /**
@@ -199,28 +205,58 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve post related posts
+     * @param  int $storeId
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
-    public function getRelatedPosts()
+    public function getRelatedPosts($storeId = null)
     {
-        return $this->getCollection()
-            ->addFieldToFilter('post_id', array('in' => $this->getRelatedPostIds() ?: array(0)))
-            ->addStoreFilter($this->getStoreId());
+        if (!$this->hasData('related_posts')) {
+            $collection = $this->_relatedPostsCollection
+                ->addFieldToFilter('post_id', array('neq' => $this->getId()))
+                ->addStoreFilter( is_null($storeId) ? $this->getStoreId() : $storeId );
+            $collection->getSelect()->joinLeft(
+                ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedpost')],
+                'main_table.post_id = rl.related_id',
+                ['position']
+            )->where(
+                'rl.post_id = ?',
+                $this->getId()
+            );
+            $this->setData('related_posts', $collection);
+        }
+
+        return $this->getData('related_posts');
     }
 
     /**
      * Retrieve post related products
+     * @param  int $storeId
      * @return \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
-    public function getRelatedProducts()
+    public function getRelatedProducts($storeId = null)
     {
-        $collection = $this->_productCollectionFactory->create()
-            ->addFieldToFilter('entity_id', array('in' => $this->getRelatedProductIds() ?: array(0)));
+        if (!$this->hasData('related_products')) {
+            $collection = $this->_productCollectionFactory->create();
 
-        if ($storeIds = $this->getStoreId()) {
-            $collection->addStoreFilter($storeIds[0]);
+            if (!is_null($storeId)) {
+                $collection->addStoreFilter($storeId);
+            } elseif ($storeIds = $this->getStoreId()) {
+                $collection->addStoreFilter($storeIds[0]);
+            }
+
+            $collection->getSelect()->joinLeft(
+                ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedproduct')],
+                'e.entity_id = rl.related_id',
+                ['position']
+            )->where(
+                'rl.post_id = ?',
+                $this->getId()
+            );
+
+            $this->setData('related_products', $collection);
         }
 
-        return $collection;
+        return $this->getData('related_products');
     }
+
 }

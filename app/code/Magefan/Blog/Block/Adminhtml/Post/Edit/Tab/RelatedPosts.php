@@ -111,7 +111,8 @@ class RelatedPosts extends Extended implements \Magento\Backend\Block\Widget\Tab
     protected function _prepareCollection()
     {
         $post = $this->getPost();
-        $collection = $this->getPost()->getCollection();
+        $collection = $post->getCollection()
+        	->addFieldToFilter('post_id', array('neq' => $post->getId()));
 
 
         $this->setCollection($collection);
@@ -211,6 +212,23 @@ class RelatedPosts extends Extended implements \Magento\Backend\Block\Widget\Tab
                     $this->getLayout()->createBlock('Magefan\Blog\Block\Adminhtml\Grid\Column\Statuses'),
                     'decorateStatus'
                 ),
+            ]
+        );
+
+        $this->addColumn(
+            'position',
+            [
+                'header' => __('Position'),
+                'name' => 'position',
+                'type' => 'number',
+                'validate_class' => 'validate-number',
+                'index' => 'position',
+                'editable' => true,
+                'edit_only' => false,
+                'sortable' => false,
+                'filter' => false,
+                'header_css_class' => 'col-position',
+                'column_css_class' => 'col-position'
             ]
         );
 
