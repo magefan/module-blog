@@ -14,7 +14,7 @@
                 <resource id="Magento_Backend::content">
                     <resource id="Magefan_Blog::elements" title="Blog" sortOrder="10">
                         <resource id="Magefan_Blog::post" title="Posts" sortOrder="10" />
-                        <resource id="Magefan_Blog::category" title="Category" sortOrder="20" />
+                        <resource id="Magefan_Blog::category" title="Categories" sortOrder="20" />
                         <resource id="Magefan_Blog::import" title="Import" sortOrder="30" />
                     </resource>
                 </resource>

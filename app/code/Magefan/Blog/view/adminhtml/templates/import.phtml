@@ -16,14 +16,37 @@
 
 <table class="available-imports">
 	<tr>
-		<td>
-			<div class="itm-hld" onclick="window.location='<?php echo $block->getUrl('blog/import/wordpress') ?>'">
-				<img src="<?php echo $this->getViewFileUrl('Magefan_Blog::images/wordpress.png') ?>" />
-				<span class="lable">Import from WordPress (beta)</span>
-			</div>
+		<td class="item">
+			<table>
+				<tr>
+					<td>
+						<div class="itm-hld" onclick="window.location='<?php echo $block->getUrl('blog/import/wordpress') ?>'">
+							<img class="img" src="<?php echo $this->getViewFileUrl('Magefan_Blog::images/wordpress.png') ?>" />
+							<span class="lable">Import from WordPress (beta)</span>
+						</div>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				<tr>
+			</table>
 		</td>
-		<td></td>
-		<td></td>
-		<td></td>
-	<tr>
+		<td class="item">
+			<table>
+				<tr>
+					<td>
+						<div class="itm-hld" onclick="window.open('http://magefan.com/contact/')">
+							<h2 class="img more">Need More?<br/><br/>Other CMS or Extension</h2>
+							<span class="lable">Contact Magefan Team<br/><br/></span>
+						</div>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				<tr>
+			</table>
+		</td>
+		<td class="item"></td>
+		<td class="item"></td>
+	</tr>
 </table>

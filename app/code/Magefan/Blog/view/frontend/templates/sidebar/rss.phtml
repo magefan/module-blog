@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar archive template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Rss
+ */
+?>
+<div class="widget block block-rss" data-bind="scope: 'blog-rss'">
+    <div class="block-title">
+        <img class="rss-icon" src="<?php echo $block->getViewFileUrl('Magefan_Blog::images/rss-icon.png') ?>">
+        <strong><a target="_blan" href="<?php echo $this->getUrl('blog/rss/feed') ?>"><?php echo __('RSS Feed') ?></a></strong>
+    </div>
+</div>

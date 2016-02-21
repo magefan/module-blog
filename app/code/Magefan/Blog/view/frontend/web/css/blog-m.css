@@ -93,6 +93,8 @@
     padding: 0px;
 }
 
+.widget.block-rss .rss-icon {float: left; width: 23px; padding-right: 10px;}
+
 
 .widget.blog-search {
 	width:100%;

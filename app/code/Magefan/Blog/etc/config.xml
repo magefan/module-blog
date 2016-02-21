@@ -48,10 +48,11 @@
                     <enabled>1</enabled>
                     <sort_order>40</sort_order>
                 </archive>
+                <rss_feed>
+                    <title>Blog Rss</title>
+                    <sort_order>50</sort_order>
+                </rss_feed>
             </sidebar>
-            <rss_feed>
-                <title>Blog Rss</title>
-            </rss_feed>
             <permalink>
                 <route>blog</route>
                 <type>default</type>
