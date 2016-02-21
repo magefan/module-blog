@@ -158,6 +158,18 @@ class Url
     }
 
     /**
+     * Retrieve media url
+     * @param string $file
+     * @return string
+     */
+    public function getMediaUrl($file)
+    {
+        return $this->_url->getUrl(
+            \Magento\Framework\App\Filesystem\DirectoryList::PUB . '/' .
+            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
+    }
+
+    /**
      * Retrieve blog permalink config value
      * @param  string $key
      * @return string || null || int

@@ -165,6 +165,20 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
             ]
         );
 
+        if (is_array($model->getData('featured_img'))) {
+            $model->setData('featured_img', $model->getData('featured_img')['value']);
+        }
+        $fieldset->addField(
+            'featured_img',
+            'image',
+            [
+                'title' => __('Featured Image'),
+                'label' => __('Featured Image'),
+                'name' => 'post[featured_img]',
+                'note' => __('Allow image type: jpg, jpeg, gif, png'),
+            ]
+        );
+
         $dateFormat = $this->_localeDate->getDateFormat(
             \IntlDateFormatter::SHORT
         );

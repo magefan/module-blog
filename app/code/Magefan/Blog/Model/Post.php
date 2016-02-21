@@ -39,6 +39,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     const STATUS_DISABLED = 0;
 
     /**
+     * Base media folder path
+     */
+    const BASE_MEDIA_PATH = 'magefan_blog';
+
+    /**
      * Prefix of model events names
      *
      * @var string
@@ -176,6 +181,20 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getPostUrl()
     {
         return $this->_url->getUrl($this, URL::CONTROLLER_POST);
+    }
+
+    public function getFeaturedImage()
+    {
+        if (!$this->hasData('featured_image')) {
+            if ($file = $this->getData('featured_img')) {
+                $image = $this->_url->getMediaUrl($file);
+            } else {
+                $image = false;
+            }
+            $this->setData('featured_image', $image);
+        }
+
+        return $this->getData('featured_image');
     }
 
     /**

@@ -42,11 +42,20 @@
 
     <div class="post-content">
         <div class="post-description clearfix">
-            <?php echo $block->getShorContent() ?>
-            <a class="post-read-more" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>"
-               >
-               <?php echo __('Read more &#187;') ?>
-            </a>
+            <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+            <div class="post-ftimg-hld">
+                <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                </a>
+            </div>
+            <?php } ?>
+            <div class="post-text-hld">
+                <?php echo $block->getShorContent() ?>
+                <a class="post-read-more" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>"
+                   >
+                   <?php echo __('Read more &#187;') ?>
+                </a>
+            </div>
         </div>
     </div>
     <div class="post-footer">

@@ -16,7 +16,7 @@
 <?php
     $_post = $this->getPost();
     $_postUrl = $_post->getPostUrl();
-    $_postNameStripped = $block->stripTags($_post->getTitle(), null, true);
+    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
@@ -31,9 +31,16 @@
         </div>
 
         <div class="post-content">
-            <div class="post-description">
-                <?php echo $block->getContent() ?>
-                <div class="clear"></div>
+            <div class="post-description clearfix">
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                <div class="post-ftimg-hld">
+                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                </div>
+                <?php } ?>
+                <div class="post-text-hld">
+                    <?php echo $block->getContent() ?>
+                    <div class="clear"></div>
+                </div>
             </div>
         </div>
 
