@@ -38,6 +38,11 @@ class Url
     protected $_url;
 
     /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    /**
      * Core store config
      *
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -50,14 +55,17 @@ class Url
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         \Magento\Framework\Registry $registry,
         \Magento\Framework\UrlInterface $url,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->_registry = $registry;
         $this->_url = $url;
+        $this->_storeManager = $storeManager;
         $this->_scopeConfig = $scopeConfig;
     }
 
@@ -164,9 +172,8 @@ class Url
      */
     public function getMediaUrl($file)
     {
-        return $this->_url->getUrl(
-            \Magento\Framework\App\Filesystem\DirectoryList::PUB . '/' .
-            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
+        return $this->_storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
     }
 
     /**
