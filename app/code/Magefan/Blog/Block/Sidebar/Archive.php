@@ -92,13 +92,13 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
         );
     }
 
-	/**
+    /**
      * Retrieve blog identities
      * @return array
      */
-	public function getIdentities()
+    public function getIdentities()
     {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_archive_widget'  ];
+        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_archive_widget'];
     }
 
 }

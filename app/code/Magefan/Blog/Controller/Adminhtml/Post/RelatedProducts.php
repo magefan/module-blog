@@ -18,7 +18,7 @@ class RelatedProducts extends \Magefan\Blog\Controller\Adminhtml\Post
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */
-	public function execute()
+    public function execute()
     {
         $model = $this->_getModel();
         $this->_getRegistry()->register('current_model', $model);
@@ -27,7 +27,7 @@ class RelatedProducts extends \Magefan\Blog\Controller\Adminhtml\Post
             ->getLayout()
             ->getBlock('blog.post.edit.tab.relatedproducts')
             ->setProductsRelated($this->getRequest()->getPost('products_related', null));
- 
+
         $this->_view->renderLayout();
     }
 }

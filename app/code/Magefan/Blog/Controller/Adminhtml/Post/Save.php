@@ -56,30 +56,30 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         $fileSystem = $this->_objectManager->create('Magento\Framework\Filesystem');
         $mediaDirectory = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
 
-        if (!empty($_FILES['post']['name'][$imageField])) {
-
+        if (isset($data[$imageField]) && isset($data[$imageField]['value'])) {
+            if (isset($data[$imageField]['delete'])) {
+                unlink($mediaDirectory->getAbsolutePath() . $data[$imageField]['value']);
+                $model->setData($imageField, '');
+            } else {
+                $model->unsetData($imageField);
+            }
+        }
+        try {
             $uploader = $this->_objectManager->create('Magento\MediaStorage\Model\File\UploaderFactory');
-            $uploader = $uploader->create(['fileId' => 'post[featured_img]']);
+            $uploader = $uploader->create(['fileId' => 'post['.$imageField.']']);
             $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
             $uploader->setAllowRenameFiles(true);
             $uploader->setFilesDispersion(true);
-
+            $uploader->setAllowCreateFolders(true);
             $result = $uploader->save(
                 $mediaDirectory->getAbsolutePath(Post::BASE_MEDIA_PATH)
             );
             $model->setData($imageField, Post::BASE_MEDIA_PATH . $result['file']);
-        } else {
-            if (isset($data[$imageField]) && isset($data[$imageField]['value'])) {
-                if (isset($data[$imageField]['delete'])) {
-                    unlink($mediaDirectory->getAbsolutePath() . $data[$imageField]['value']);
-                    $model->setData($imageField, '');
-                } else {
-                    $model->unsetData($imageField);
-                }
+        } catch (\Exception $e) {
+            if ($e->getCode() != \Magento\Framework\File\Uploader::TMP_NAME_EMPTY) {
+                throw new FrameworkException($e->getMessage());
             }
         }
-
-
     }
 
 }
