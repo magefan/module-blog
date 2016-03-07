@@ -139,14 +139,7 @@ class RelatedProducts extends Extended implements \Magento\Backend\Block\Widget\
         $post = $this->getPost();
         $collection = $this->_productCollectionFactory->create()
             ->addAttributeToSelect('*')
-            ->joinField(
-                'websites',
-                'catalog_product_website',
-                'website_id',
-                'product_id=entity_id',
-                null,
-                'left'
-            );
+            ->addWebsiteNamesToResult();
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -239,7 +232,8 @@ class RelatedProducts extends Extended implements \Magento\Backend\Block\Widget\
                     'type' => 'options',
                     'options' => $this->_websiteFactory->create()->getCollection()->toOptionHash(),
                     'header_css_class' => 'col-websites',
-                    'column_css_class' => 'col-websites'
+                    'column_css_class' => 'col-websites',
+                    'filter_condition_callback' => array($this, '_filterWebsiteConditionCallback')
                 ]
             );
         }
@@ -278,6 +272,21 @@ class RelatedProducts extends Extended implements \Magento\Backend\Block\Widget\
         );
 
         return parent::_prepareColumns();
+    }
+
+    /**
+     * Add website filter
+     * @param  \Magento\Catalog\Model\ResourceModel\Product\Collection $collection
+     * @param  $column
+     * @return $this
+     */
+    protected function _filterWebsiteConditionCallback($collection, $column)
+    {
+        if ($column->getFilter()->getValue()) {
+            $this->getCollection()->addWebsiteFilter();
+        }
+
+        return $this;
     }
 
     /**
