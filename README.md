@@ -20,7 +20,8 @@ Blog extension for allows you to create a full-fledged blog on your [Magento 2](
 ## Installation
   * Download [ZIP Archive](https://github.com/IhorVansach/Blog-Extension-for-Magento-2/archive/master.zip)
   * Extract files
-  * Copy "app" folder to your Magento 2 root directory
+  * In your Magento 2 root directory create folder app/code/Magefan/Blog
+  * Copy files and folders to app/code/Magefan/Blog
   * In terminal change directory to your Magento 2 root directory using command
 ```
 cd /FULL_PATH_TO_YOUR_MAGENTO2
@@ -28,6 +29,8 @@ cd /FULL_PATH_TO_YOUR_MAGENTO2
   * Run Magento 2 upgrade command
 ```
 php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento setup:static-content:deploy
 ```
 
 ## Support
