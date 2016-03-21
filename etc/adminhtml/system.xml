@@ -98,6 +98,7 @@
 
                     <field id="disqus_forum_shortname" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Your Disqus Forum Shortname</label>
+                        <validate>required-entry</validate>
                         <depends>
                             <field id="type">disqus</field>
                         </depends>
