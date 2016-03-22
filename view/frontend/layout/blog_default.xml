@@ -41,8 +41,5 @@
             <referenceBlock name="catalog.compare.sidebar" remove="true"/>
             <referenceBlock name="wishlist_sidebar" remove="true"/>
         </referenceContainer>
-        <referenceContainer name="before.body.end">
-            <block class="Magento\Framework\View\Element\Template" template="Magefan_Blog::post/footer.phtml" />
-        </referenceContainer>
     </body>
 </page>
