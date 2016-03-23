@@ -4,9 +4,7 @@ Blog extension allows you to create a full-fledged blog on your [Magento 2](http
 
 ## Simple Demo
 
-<a href="http://magefan.com/magento2-blog-extension/#demo" target="_blank">
-http://magefan.com/magento2-blog-extension/#demo
-</a>
+<a href="http://magefan.com/magento2-blog-extension/#demo" target="_blank">http://magefan.com/magento2-blog-extension/#demo</a>
 
 ## Features
   * Unlimited blog posts and categories
