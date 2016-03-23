@@ -1,9 +1,6 @@
 {
     "name": "magefan/module-blog",
-    "description": "The Magefan_Blog implements the Blog functionality. This allows to create a Blog functionality in store based on Magento 2",
-    "require": {
-        "php": "~5.5.0|~5.6.0|~7.0.0"
-    },
+    "description": "Implements Blog functionality on Magento 2 store",
     "type": "magento2-module",
     "version": "2.0.1.1",
     "license": [
