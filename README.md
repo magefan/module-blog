@@ -2,9 +2,6 @@
 
 Blog extension allows you to create a full-fledged blog on your [Magento 2](http://magento.com/) Store.
 
-## Simple Demo
-http://magefan.com/magento2-blog-extension/#demo
-
 ## Features
   * Unlimited blog posts and categories
   * Multi Stores Support
@@ -16,6 +13,12 @@ http://magefan.com/magento2-blog-extension/#demo
   * Import Posts and Categories form WordPress
   * Sitemap XML
   * Blog Rss Feed
+
+## Simple Demo
+http://magefan.com/magento2-blog-extension/#demo
+
+## Online Documentation
+http://magefan.com/docs/magento-2-blog/
 
 ## Requirements
   * Magento Community Edition 2.x or Magento Enterprise Edition 2.x
