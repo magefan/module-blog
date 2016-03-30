@@ -6,7 +6,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Model;
+namespace Magefan\Blog\Model\Import;
 
 /**
  * Abstract import model
@@ -18,10 +18,10 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      */
     protected $_connect;
 
-	/**
-	 * @var array
-	 */
-	protected $_requiredFields;
+    /**
+     * @var array
+     */
+    protected $_requiredFields = [];
 
     /**
      * @var \Magefan\Blog\Model\PostFactory
@@ -95,11 +95,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         ]);
     }
 
-	/**
-	 * Prepare import data
-	 * @param  array $data
-	 * @return $this
-	 */
+    /**
+     * Prepare import data
+     * @param  array $data
+     * @return $this
+     */
     public function prepareData($data)
     {
         if (!is_array($data)) {
@@ -108,7 +108,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
 
         foreach($this->_requiredFields as $field) {
             if (empty($data[$field])) {
-            	throw new Exception(__('Parameter %1 is required', $field), 1);
+                throw new Exception(__('Parameter %1 is required', $field), 1);
             }
         }
 

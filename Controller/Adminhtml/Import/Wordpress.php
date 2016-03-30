@@ -33,4 +33,14 @@ class Wordpress extends \Magento\Backend\App\Action
 
         $this->_view->renderLayout();
     }
+
+    /**
+     * Check is allowed access
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Magefan_Blog::import');
+    }
 }

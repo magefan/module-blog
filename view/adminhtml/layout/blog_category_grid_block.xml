@@ -14,7 +14,7 @@
                 <arguments>
                     <argument name="id" xsi:type="string">subscriberGrid</argument>
                     <argument name="dataSource" xsi:type="object">Magefan\Blog\Model\ResourceModel\Category\Collection</argument>
-                    <argument name="default_sort" xsi:type="string">category_id</argument>
+                    <argument name="default_sort" xsi:type="string">id</argument>
                     <argument name="default_dir" xsi:type="string">desc</argument>
                     <argument name="use_ajax" xsi:type="string">1</argument>
                 </arguments>

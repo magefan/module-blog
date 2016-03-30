@@ -29,7 +29,7 @@ class Run extends \Magento\Backend\App\Action
             }
 
             $_type = ucfirst($data['type']);
-            $import = $this->_objectManager->create('\Magefan\Blog\Model\\'.$_type.'Import');
+            $import = $this->_objectManager->create('\Magefan\Blog\Model\Import\\'.$_type);
             $type = $data['type'];
             $import->prepareData($data)->execute();
 
@@ -67,5 +67,15 @@ class Run extends \Magento\Backend\App\Action
             $this->_getSession()->setData('import_'.$type.'_form_data', $data);
             $this->_redirect('*/*/'.$type);
         }
+    }
+
+    /**
+     * Check is allowed access
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Magefan_Blog::import');
     }
 }

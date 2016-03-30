@@ -6,12 +6,12 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Model;
+namespace Magefan\Blog\Model\Import;
 
 /**
  * Wordpress import model
  */
-class WordpressImport extends AbstractImport
+class Wordpress extends AbstractImport
 {
     protected $_requiredFields = ['dbname', 'uname', 'pwd', 'dbhost', 'prefix', 'store_id'];
 
