@@ -23,14 +23,14 @@ http://magefan.com/docs/magento-2-blog/
 ## Requirements
   * Magento Community Edition 2.x or Magento Enterprise Edition 2.x
 
-## Installing via composer
+## Installation Method 1 - Installing via composer
   * Open command line
   * Using command "cd" navigate to your magento2 root directory
   * Run command: composer require magefan/module-blog
 
   
 
-## Installing method 2
+## Installation Method 2 - Installing using archive
   * Download [ZIP Archive](https://github.com/magefan/module-blog/archive/master.zip)
   * Extract files
   * In your Magento 2 root directory create folder app/code/Magefan/Blog
