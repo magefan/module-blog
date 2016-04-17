@@ -31,7 +31,7 @@ http://magefan.com/docs/magento-2-blog/
   
 
 ## Installing method 2
-  * Download [ZIP Archive](module-blog-master)
+  * Download [ZIP Archive](https://github.com/magefan/module-blog/archive/master.zip)
   * Extract files
   * In your Magento 2 root directory create folder app/code/Magefan/Blog
   * Copy files and folders from archive to that folder
