@@ -48,11 +48,13 @@ class View extends \Magefan\Blog\Block\Post\PostList
     protected function _prepareLayout()
     {
         $category = $this->getCategory();
-        $this->_addBreadcrumbs($category);
-        $this->pageConfig->addBodyClass('blog-category-' . $category->getIdentifier());
-        $this->pageConfig->getTitle()->set($category->getTitle());
-        $this->pageConfig->setKeywords($category->getMetaKeywords());
-        $this->pageConfig->setDescription($category->getMetaDescription());
+        if ($category) {
+            $this->_addBreadcrumbs($category);
+            $this->pageConfig->addBodyClass('blog-category-' . $category->getIdentifier());
+            $this->pageConfig->getTitle()->set($category->getTitle());
+            $this->pageConfig->setKeywords($category->getMetaKeywords());
+            $this->pageConfig->setDescription($category->getMetaDescription());
+        }
 
         return parent::_prepareLayout();
     }

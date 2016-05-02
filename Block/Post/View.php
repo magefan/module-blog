@@ -22,11 +22,13 @@ class View extends AbstractPost
     protected function _prepareLayout()
     {
         $post = $this->getPost();
-        $this->_addBreadcrumbs($post);
-        $this->pageConfig->addBodyClass('blog-post-' . $post->getIdentifier());
-        $this->pageConfig->getTitle()->set($post->getTitle());
-        $this->pageConfig->setKeywords($post->getMetaKeywords());
-        $this->pageConfig->setDescription($post->getMetaDescription());
+        if ($post) {
+            $this->_addBreadcrumbs($post);
+            $this->pageConfig->addBodyClass('blog-post-' . $post->getIdentifier());
+            $this->pageConfig->getTitle()->set($post->getTitle());
+            $this->pageConfig->setKeywords($post->getMetaKeywords());
+            $this->pageConfig->setDescription($post->getMetaDescription());
+        }
 
         return parent::_prepareLayout();
     }
