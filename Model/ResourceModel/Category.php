@@ -77,16 +77,12 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
-        $oldStores = $this->lookupStoreIds($object->getId());
-        $newStores = (array)$object->getStores();
-
-        if (empty($newStores)) {
-            $newStores = (array)$object->getStoreId();
-        }
+        $oldStoreIds = $this->lookupStoreIds($object->getId());
+        $newStoreIds = (array)$object->getStoreIds();
 
         $table = $this->getTable('magefan_blog_category_store');
-        $insert = array_diff($newStores, $oldStores);
-        $delete = array_diff($oldStores, $newStores);
+        $insert = array_diff($newStoreIds, $oldStoreIds);
+        $delete = array_diff($oldStoreIds, $newStoreIds);
 
         if ($delete) {
             $where = ['category_id = ?' => (int)$object->getId(), 'store_id IN (?)' => $delete];
@@ -133,8 +129,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
     {
         if ($object->getId()) {
-            $stores = $this->lookupStoreIds($object->getId());
-            $object->setData('store_id', $stores);
+            $storeIds = $this->lookupStoreIds($object->getId());
+            $object->setData('store_ids', $storeIds);
         }
 
         return parent::_afterLoad($object);
@@ -148,7 +144,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int $storeId
      * @return int
      */
-    protected function _getLoadByIdentifierSelect($identifier, $store, $isActive = null)
+    protected function _getLoadByIdentifierSelect($identifier, $storeIds, $isActive = null)
     {
         $select = $this->getConnection()->select()->from(
             ['cp' => $this->getMainTable()]
@@ -161,7 +157,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $identifier
         )->where(
             'cps.store_id IN (?)',
-            $store
+            $storeIds
         );
 
         if (!is_null($isActive)) {
@@ -200,13 +196,13 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int|array $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $stores)
+    public function checkIdentifier($identifier, $storeIds)
     {
-        if (!is_array($stores)) {
-            $stores = [$stores];
+        if (!is_array($storeIds)) {
+            $storeIds = [$storeIds];
         }
-        $stores[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
-        $select = $this->_getLoadByIdentifierSelect($identifier, $stores, 1);
+        $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
+        $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds, 1);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.category_id')->order('cps.store_id DESC')->limit(1);
 
         return $this->getConnection()->fetchOne($select);

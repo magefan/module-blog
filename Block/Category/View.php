@@ -91,7 +91,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
 
             $_category = $category;
             $parentCategories = [];
-            while ($parentCategory = $_category->getParentCategory(true)) {
+            while ($parentCategory = $_category->getParentCategory()) {
                 $parentCategories[] = $_category = $parentCategory;
             }
 

@@ -19,6 +19,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_storeManager;
 
     /**
+     * @var int
+     */
+    protected $_storeId;
+
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -63,7 +68,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addFieldToFilter($field, $condition = null)
     {
-        if ($field === 'store_id') {
+        if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition, false);
         }
 
@@ -78,13 +83,23 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addStoreFilter($store, $withAdmin = true)
     {
+        if ($store === null) {
+            return $this;
+        }
+
         if (!$this->getFlag('store_filter_added')) {
             if ($store instanceof \Magento\Store\Model\Store) {
+                $this->_storeId = $store->getId();
                 $store = [$store->getId()];
             }
 
             if (!is_array($store)) {
+                $this->_storeId = $store;
                 $store = [$store];
+            }
+
+            if (in_array(\Magento\Store\Model\Store::DEFAULT_STORE_ID, $store)) {
+                return $this;
             }
 
             if ($withAdmin) {
@@ -142,14 +157,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     if ($result[$categoryId] == 0) {
                         $stores = $this->_storeManager->getStores(false, true);
                         $storeId = current($stores)->getId();
-                        $storeCode = key($stores);
                     } else {
                         $storeId = $result[$item->getData('category_id')];
-                        $storeCode = $this->_storeManager->getStore($storeId)->getCode();
                     }
                     $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_code', $storeCode);
-                    $item->setData('store_id', [$result[$categoryId]]);
+                    $item->setData('store_ids', [$result[$categoryId]]);
+                }
+            }
+
+            if ($this->_storeId) {
+                foreach ($this as $item) {
+                    $item->setStoreId($this->_storeId);
                 }
             }
         }

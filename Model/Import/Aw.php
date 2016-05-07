@@ -69,18 +69,17 @@ class Aw extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare category data */
 
-            /* Find stores */
-            $data['stores'] = [];
+            /* Find store ids */
+            $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_cat_store WHERE cat_id = "'.$data['old_id'].'"';
             $s_result = $this->_mysqliQuery($s_sql);
             while ($s_data = mysqli_fetch_assoc($s_result)) {
-                $data['stores'][] = $s_data['store_id'];
+                $data['store_ids'][] = $s_data['store_id'];
             }
-            if (empty($data['stores'])) {
-                $data['stores'][] = 0;
+            if (empty($data['store_ids'])) {
+                $data['store_ids'][] = 0;
             }
 
-            $data['store_id'] = $data['stores'];
             $data['is_active'] = 1;
             $data['path'] = 0;
             $data['identifier'] = trim(strtolower($data['identifier']));
@@ -117,22 +116,22 @@ class Aw extends AbstractImport
                 }
             }
 
-            /* Find stores */
-            $data['stores'] = [];
+            /* Find store ids */
+            $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_store WHERE post_id = "'.$data['post_id'].'"';
             $s_result = $this->_mysqliQuery($s_sql);
             while ($s_data = mysqli_fetch_assoc($s_result)) {
-                $data['stores'][] = $s_data['store_id'];
+                $data['store_ids'][] = $s_data['store_id'];
             }
 
             
-            if (empty($data['stores'])) {
-                $data['stores'] = 0;
+            if (empty($data['store_ids'])) {
+                $data['store_ids'] = 0;
             }
 
             /* Prepare post data */
             $data = [
-                'store_id' => $data['stores'],
+                'store_ids' => $data['store_ids'],
                 'title' => $data['title'],
                 'meta_keywords' => $data['meta_keywords'],
                 'meta_description' => $data['meta_description'],

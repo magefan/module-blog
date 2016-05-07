@@ -207,7 +207,8 @@ class Post extends \Magento\Framework\Model\AbstractModel
             $this->_parentCategories = $this->_categoryCollectionFactory->create()
                 ->addFieldToFilter('category_id', array('in' => $this->getCategories()))
                 ->addStoreFilter($this->getStoreId())
-                ->addActiveFilter();
+                ->addActiveFilter()
+                ->setOrder('position');
         }
 
         return $this->_parentCategories;
@@ -224,15 +225,14 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve post related posts
-     * @param  int $storeId
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
-    public function getRelatedPosts($storeId = null)
+    public function getRelatedPosts()
     {
         if (!$this->hasData('related_posts')) {
             $collection = $this->_relatedPostsCollection
                 ->addFieldToFilter('post_id', array('neq' => $this->getId()))
-                ->addStoreFilter( is_null($storeId) ? $this->getStoreId() : $storeId );
+                ->addStoreFilter($this->getStoreId());
             $collection->getSelect()->joinLeft(
                 ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedpost')],
                 'main_table.post_id = rl.related_id',
@@ -249,18 +249,15 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve post related products
-     * @param  int $storeId
      * @return \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
-    public function getRelatedProducts($storeId = null)
+    public function getRelatedProducts()
     {
         if (!$this->hasData('related_products')) {
             $collection = $this->_productCollectionFactory->create();
 
-            if (!is_null($storeId)) {
-                $collection->addStoreFilter($storeId);
-            } elseif ($storeIds = $this->getStoreId()) {
-                $collection->addStoreFilter($storeIds[0]);
+            if ($this->getStoreId()) {
+                $collection->addStoreFilter($this->getStoreId());
             }
 
             $collection->getSelect()->joinLeft(
@@ -276,6 +273,15 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->getData('related_products');
+    }
+
+    /**
+     * Retrieve if is visible on store
+     * @return bool
+     */
+    public function isVisibleOnStore($storeId)
+    {
+        return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
     }
 
 }

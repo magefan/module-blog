@@ -60,9 +60,8 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     protected function _prepareCollection()
     {
         $post = $this->getPost();
-        $storeId = $this->_storeManager->getStore()->getId();
 
-        $this->_itemCollection = $post->getRelatedProducts($storeId)
+        $this->_itemCollection = $post->getRelatedProducts()
             ->addAttributeToSelect('required_options');
 
         if ($this->_moduleManager->isEnabled('Magento_Checkout')) {

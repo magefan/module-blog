@@ -50,7 +50,7 @@ class InstallData implements InstallDataInterface
             'identifier' => 'hello-world',
             'content_heading' => 'Hello world!',
             'content' => 'Welcome to <a target="_blank" href="http://magefan.com/" title="Magefan - solutions for Magento 2">Magefan</a> blog extension for Magento&reg; 2. This is your first post. Edit or delete it, then start blogging!',
-            'stores' => [0]
+            'store_ids' => [0]
         ];
 
         $this->_postFactory->create()->setData($data)->save();

@@ -129,13 +129,9 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
         $oldIds = $this->lookupStoreIds($object->getId());
-        $newIds = (array)$object->getStores();
-        if (empty($newIds)) {
-            $newIds = (array)$object->getStoreId();
-        }
+        $newIds = (array)$object->getStoreIds();
+
         $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_store', 'store_id');
-
-
 
         $newIds = (array)$object->getCategories();
         foreach($newIds as $key => $id) {
@@ -234,8 +230,8 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
     {
         if ($object->getId()) {
-            $stores = $this->lookupStoreIds($object->getId());
-            $object->setData('store_id', $stores);
+            $storeIds = $this->lookupStoreIds($object->getId());
+            $object->setData('store_ids', $storeIds);
 
             $categories = $this->lookupCategoryIds($object->getId());
             $object->setCategories($categories);
@@ -252,7 +248,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int $storeId
      * @return int
      */
-    protected function _getLoadByIdentifierSelect($identifier, $store, $isActive = null)
+    protected function _getLoadByIdentifierSelect($identifier, $storeIds, $isActive = null)
     {
         $select = $this->getConnection()->select()->from(
             ['cp' => $this->getMainTable()]
@@ -265,7 +261,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $identifier
         )->where(
             'cps.store_id IN (?)',
-            $store
+            $storeIds
         );
 
         if (!is_null($isActive)) {
@@ -305,13 +301,13 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int|array $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $stores)
+    public function checkIdentifier($identifier, $storeIds)
     {
-        if (!is_array($stores)) {
-            $stores = [$stores];
+        if (!is_array($storeIds)) {
+            $storeIds = [$storeIds];
         }
-        $stores[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
-        $select = $this->_getLoadByIdentifierSelect($identifier, $stores, 1);
+        $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
+        $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds, 1);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.post_id')->order('cps.store_id DESC')->limit(1);
 
         return $this->getConnection()->fetchOne($select);

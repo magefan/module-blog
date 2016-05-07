@@ -14,15 +14,33 @@ namespace Magefan\Blog\Controller\Category;
 class View extends \Magento\Framework\App\Action\Action
 {
     /**
+     * Store manager
+     *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    /**
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
+        parent::__construct($context);
+        $this->_storeManager = $storeManager;
+    }
+
+    /**
      * View blog category action
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam('id');
-        $category = $this->_objectManager->create('Magefan\Blog\Model\Category')->load($id);
-        if (!$category->getId()) {
+        $category = $this->_initCategory();
+        if (!$category) {
             $this->_forward('index', 'noroute', 'cms');
             return;
         }
@@ -31,5 +49,26 @@ class View extends \Magento\Framework\App\Action\Action
 
         $this->_view->loadLayout();
         $this->_view->renderLayout();
+    }
+
+    /**
+     * Init category
+     *
+     * @return \Magefan\Blog\Model\category || false
+     */
+    protected function _initCategory()
+    {
+        $id = $this->getRequest()->getParam('id');
+        $storeId = $this->_storeManager->getStore()->getId();
+
+        $category = $this->_objectManager->create('Magefan\Blog\Model\Category')->load($id);
+
+        if (!$category->isVisibleOnStore($storeId)) {
+            return false;
+        }
+
+        $category->setStoreId($storeId);
+
+        return $category;
     }
 }

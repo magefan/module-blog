@@ -23,6 +23,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected $_date;
 
+    /**
+     * @var int
+     */
+    protected $_storeId;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
@@ -74,7 +78,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addFieldToFilter($field, $condition = null)
     {
-        if ($field === 'store_id') {
+        if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition, false);
         }
 
@@ -89,12 +93,18 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addStoreFilter($store, $withAdmin = true)
     {
+        if ($store === null) {
+            return $this;
+        }
+
         if (!$this->getFlag('store_filter_added')) {
             if ($store instanceof \Magento\Store\Model\Store) {
+                $this->_storeId = $store->getId();
                 $store = [$store->getId()];
             }
 
             if (!is_array($store)) {
+                $this->_storeId = $store;
                 $store = [$store];
             }
 
@@ -181,14 +191,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     if ($result[$postId] == 0) {
                         $stores = $this->_storeManager->getStores(false, true);
                         $storeId = current($stores)->getId();
-                        $storeCode = key($stores);
                     } else {
                         $storeId = $result[$item->getData('post_id')];
-                        $storeCode = $this->_storeManager->getStore($storeId)->getCode();
                     }
                     $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_code', $storeCode);
-                    $item->setData('store_id', [$result[$postId]]);
+                    $item->setData('store_ids', [$result[$postId]]);
+                }
+            }
+
+            if ($this->_storeId) {
+                foreach ($this as $item) {
+                    $item->setStoreId($this->_storeId);
                 }
             }
 

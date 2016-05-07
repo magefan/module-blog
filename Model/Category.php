@@ -158,10 +158,9 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve parent category
-     * @param  boolean $storeFilter
      * @return self || false
      */
-    public function getParentCategory($storeFilter = false)
+    public function getParentCategory()
     {
         $k = 'parent_category';
         if (!$this->hasData($k)) {
@@ -176,14 +175,9 @@ class Category extends \Magento\Framework\Model\AbstractModel
             }
         }
 
-        if (!$storeFilter) {
-            return $this->getData($k);
-        } elseif ($pCategory = $this->getData($k)) {
-            if (in_array(0, $this->getStoreId())
-                || in_array(0, $pCategory->getStoreId())
-                || array_intersect($this->getStoreId(), $pCategory->getStoreId())
-            ) {
-                return $pCategory;
+        if ($category = $this->getData($k)) {
+            if ($category->isVisibleOnStore($this->getStoreId())) {
+                return $category;
             }
         }
 
@@ -215,7 +209,6 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
             $categories = \Magento\Framework\App\ObjectManager::getInstance()
                 ->create($this->_collectionName);
-                //->addStoreFilter($this->getStoreId());
 
             $ids = [];
             foreach($categories as $category) {
@@ -267,5 +260,14 @@ class Category extends \Magento\Framework\Model\AbstractModel
     public function getCategoryUrl()
     {
         return $this->_url->getUrl($this, URL::CONTROLLER_CATEGORY);
+    }
+
+    /**
+     * Retrieve if is visible on store
+     * @return bool
+     */
+    public function isVisibleOnStore($storeId)
+    {
+        return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
     }
 }

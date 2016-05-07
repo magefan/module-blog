@@ -116,10 +116,10 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
          */
         if (!$this->_storeManager->isSingleStoreMode()) {
             $field = $fieldset->addField(
-                'store_id',
+                'store_ids',
                 'multiselect',
                 [
-                    'name' => 'stores[]',
+                    'name' => 'store_ids[]',
                     'label' => __('Store View'),
                     'title' => __('Store View'),
                     'required' => true,
@@ -133,11 +133,11 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
             $field->setRenderer($renderer);
         } else {
             $fieldset->addField(
-                'store_id',
+                'store_ids',
                 'hidden',
-                ['name' => 'stores[]', 'value' => $this->_storeManager->getStore(true)->getId()]
+                ['name' => 'store_ids[]', 'value' => $this->_storeManager->getStore(true)->getId()]
             );
-            $model->setStoreId($this->_storeManager->getStore(true)->getId());
+            $model->setStoreIds([$this->_storeManager->getStore(true)->getId()]);
         }
 
         $categories[] = ['label' => __('Please select'), 'value' => 0];

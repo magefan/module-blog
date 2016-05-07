@@ -1,4 +1,4 @@
-table.available-imports {width:100%;}
+table.available-imports {width:100%; max-width:850px;}
 table.available-imports td.item {width:25%;}
 table.available-imports td {text-align: center; margin:0px; padding:0px;}
 table.available-imports td .itm-hld  {margin: 10px; padding: 20px; background: #373330; cursor: pointer;}

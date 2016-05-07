@@ -32,9 +32,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     protected function _preparePostCollection()
     {
-        $storeId = $this->_storeManager->getStore()->getId();
-
-        $this->_postCollection = $this->getPost()->getRelatedPosts($storeId)
+        $this->_postCollection = $this->getPost()->getRelatedPosts()
             ->addActiveFilter()
             ->setPageSize(
                 (int) $this->_scopeConfig->getValue(
