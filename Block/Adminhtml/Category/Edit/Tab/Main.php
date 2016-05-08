@@ -20,15 +20,16 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
     protected $_systemStore;
 
     /**
-     * @var \Magefan\Blog\Model\ResourceModel\Category\Collection
+     * @var \Magefan\Blog\Model\Config\Source\Category
      */
-    protected $_categoryCollection;
+    protected $_categoryOption;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
      * @param \Magento\Store\Model\System\Store $systemStore
+     * @param \Magefan\Blog\Model\Config\Source\Category $categoryOption
      * @param array $data
      */
     public function __construct(
@@ -36,11 +37,11 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
-        \Magefan\Blog\Model\ResourceModel\Category\Collection $categoryCollection,
+        \Magefan\Blog\Model\Config\Source\Category $categoryOption,
         array $data = []
     ) {
         $this->_systemStore = $systemStore;
-        $this->_categoryCollection = $categoryCollection;
+        $this->_categoryOption = $categoryOption;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -140,35 +141,18 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
             $model->setStoreIds([$this->_storeManager->getStore(true)->getId()]);
         }
 
-        $categories[] = ['label' => __('Please select'), 'value' => 0];
-        $collection = $this->_categoryCollection
-            ->addFieldToFilter('category_id', array('neq' => $model->getId()))
-            ->setOrder('position')
-            ->getTreeOrderedArray();
-
-        foreach($collection as $item) {
-            if (!$model->isChild($item)) {
-                $categories[] = array(
-                    'label' => $this->_getSpaces($item->getLevel()).' '.$item->getTitle() . ($item->getIsActive() ? '' : ' ('.__('Disabled').')' ),
-                    'value' => ($item->getPath() ? $item->getPath().'/' : '') . $item->getId() ,
-                );
-            }
-        }
-
-        if (count($categories)) {
-            $field = $fieldset->addField(
-                'path',
-                'select',
-                [
-                    'name' => 'path',
-                    'label' => __('Parent Category'),
-                    'title' => __('Parent Category'),
-                    'values' => $categories,
-                    'disabled' => $isElementDisabled,
-                    'style' => 'width:100%',
-                ]
-            );
-        }
+        $field = $fieldset->addField(
+            'path',
+            'select',
+            [
+                'name' => 'path',
+                'label' => __('Parent Category'),
+                'title' => __('Parent Category'),
+                'values' => $this->_categoryOption->toOptionArray(),
+                'disabled' => $isElementDisabled,
+                'style' => 'width:100%',
+            ]
+        );
 
         $fieldset->addField(
             'position',
@@ -187,21 +171,6 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
         $this->setForm($form);
 
         return parent::_prepareForm();
-    }
-
-    /**
-     * Generate spaces
-     * @param  int $n
-     * @return string
-     */
-    protected function _getSpaces($n)
-    {
-        $s = '';
-        for($i = 0; $i < $n; $i++) {
-            $s .= '--- ';
-        }
-
-        return $s;
     }
 
     /**

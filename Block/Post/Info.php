@@ -22,13 +22,14 @@ class Info extends \Magento\Framework\View\Element\Template
     protected $_template = 'post/info.phtml';
 
     /**
+     * DEPRECATED METHOD!!!!
      * Retrieve formated posted date
      * @var string
      * @return string
      */
     public function getPostedOn($format = 'Y-m-d H:i:s')
     {
-        return date($format, strtotime($this->getPost()->getData('publish_time')));
+        return $this->getPost()->getPublishDate($format);
     }
 
 }

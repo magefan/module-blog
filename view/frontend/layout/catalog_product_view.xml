@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceContainer name="content.aside">
+            <block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="product.info.blog.relatedposts" as="relatedposts" before='-'  template="Magefan_Blog::catalog/product/relatedposts.phtml" />
+        </referenceContainer>
+    </body>
+</page>

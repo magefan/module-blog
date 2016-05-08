@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Product related posts template
+ *
+ * @var $block \Magefan\Blog\Block\Catalog\Product\RelatedPosts
+ */
+?>
+
+<?php if ($block->displayPosts()) { ?>
+    <?php $_postCollection = $block->getPostCollection(); ?>
+    <?php if ($_postCollection->count()) { ?>
+    <div class="block related">
+        <div class="block-title title">
+            <strong id="block-relatedposts-heading" role="heading" aria-level="2">
+                <?php echo __('Related posts') ?>
+            </strong>
+        </div>
+        <ol class="block-content">
+            <?php foreach ($_postCollection as $_post) { ?>
+                <li class="item">
+                    <a class="post-item-link"
+                       href="<?php echo $_post->getPostUrl() ?>">
+                        <?php echo $block->escapeHtml($_post->getTitle()); ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ol>
+    </div>
+    <?php } ?>
+<?php } ?>

@@ -53,6 +53,10 @@
                     <sort_order>50</sort_order>
                 </rss_feed>
             </sidebar>
+            <product_page>
+                <related_posts_enabled>1</related_posts_enabled>
+                <number_of_related_posts>5</number_of_related_posts>
+            </product_page>
             <permalink>
                 <route>blog</route>
                 <type>default</type>

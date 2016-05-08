@@ -284,4 +284,14 @@ class Post extends \Magento\Framework\Model\AbstractModel
         return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
     }
 
+    /**
+     * Retrieve post publish date using format
+     * @param  string $format
+     * @return string
+     */
+    public function getPublishDate($format = 'Y-m-d H:i:s')
+    {
+        return date($format, strtotime($this->getData('publish_time')));
+    }
+
 }

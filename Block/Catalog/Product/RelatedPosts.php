@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Block\Post\View;
+namespace Magefan\Blog\Block\Catalog\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -16,6 +16,7 @@ use Magento\Framework\View\Element\AbstractBlock;
  */
 class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
 {
+
     /**
      * Prepare posts collection
      *
@@ -24,15 +25,25 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected function _preparePostCollection()
     {
         $pageSize = (int) $this->_scopeConfig->getValue(
-            'mfblog/post_view/related_posts/number_of_posts',
+            'mfblog/product_page/number_of_related_posts',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+        if (!$pageSize) {
+            $pageSize = 5;
+        }
+        $this->setPageSize($pageSize);
 
-        $this->_postCollection = $this->getPost()->getRelatedPosts()
-            ->addActiveFilter()
-            ->setPageSize($pageSize ?: 5);
+        parent::_preparePostCollection();
 
-        $this->_postCollection->getSelect()->order('rl.position', 'ASC');
+        $product = $this->getProduct();
+        $this->_postCollection->getSelect()->joinLeft(
+            ['rl' => $product->getResource()->getTable('magefan_blog_post_relatedproduct')],
+            'main_table.post_id = rl.post_id',
+            ['position']
+        )->where(
+            'rl.related_id = ?',
+            $product->getId()
+        );
     }
 
     /**
@@ -42,7 +53,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     public function displayPosts()
     {
         return (bool) $this->_scopeConfig->getValue(
-            'mfblog/post_view/related_posts/enabled',
+            'mfblog/product_page/related_posts_enabled',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -52,14 +63,14 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return \Magefan\Blog\Model\Category
      */
-    public function getPost()
+    public function getProduct()
     {
-        if (!$this->hasData('post')) {
-            $this->setData('post',
-                $this->_coreRegistry->registry('current_blog_post')
+        if (!$this->hasData('product')) {
+            $this->setData('product',
+                $this->_coreRegistry->registry('current_product')
             );
         }
-        return $this->getData('post');
+        return $this->getData('product');
     }
 
     /**
@@ -68,6 +79,6 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getIdentities()
     {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_relatedposts_'.$this->getPost()->getId()  ];
+        return [\Magento\Catalog\Model\Product::CACHE_TAG . '_relatedposts_'.$this->getPost()->getId()  ];
     }
 }

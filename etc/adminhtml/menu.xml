@@ -16,5 +16,7 @@
         <add id="Magefan_Blog::category" title="Categories" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="20" action="blog/category/" resource="Magefan_Blog::category"/>
 
         <add id="Magefan_Blog::import" title="Import" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="30" action="blog/import/" resource="Magefan_Blog::import"/>
+
+        <add id="Magefan_Blog::config_blog" title="Configuration" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="40" action="adminhtml/system_config/edit/section/mfblog/" resource="Magefan_Blog::config_blog"/>
     </menu>
 </config>

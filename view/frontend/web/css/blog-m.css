@@ -182,3 +182,20 @@
     position: absolute;
     width: 1px;
 }
+
+.blog-widget-recent .post-list {
+    padding: 0px;
+    margin: 0px;
+}
+
+.blog-widget-recent .post-holder {
+    width: 29%;
+    float: left;
+    margin: 5px;
+}
+
+.blog-widget-recent .post-description .post-text-hld {
+    max-height: 150px;
+    min-height: 150px;
+    overflow-y: auto;
+}

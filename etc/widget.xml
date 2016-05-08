@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
+    <widget id="magefan_blog_recent" class="Magefan\Blog\Block\Widget\Recent">
+        <label translate="true">Recent Blog Posts</label>
+        <description>Display recent blog posts</description>
+        <parameters>
+            <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="number_of_posts" xsi:type="text"  visible="true" sort_order="20" >
+                <label translate="true">Number of Posts</label>
+            </parameter>
+            <parameter name="category_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\Category" visible="true" sort_order="30" >
+                <label translate="true">Blog Category</label>
+            </parameter>
+            <parameter name="template" xsi:type="text" visible="true" sort_order="40" >
+                <label translate="true">Template File</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

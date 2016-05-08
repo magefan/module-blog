@@ -15,7 +15,7 @@
 ?>
 
 <?php
-	$_postCollection = $block->getPostCollection();
+    $_postCollection = $block->getPostCollection();
 ?>
 <?php if ($_postCollection->count()) { ?>
 <div class="widget block block-recent-posts" data-bind="scope: 'recemt-posts'">
@@ -23,7 +23,7 @@
         <strong><?php echo __('Recent Posts') ?></strong>
     </div>
     <div class="block-content">
-    	<?php foreach ($_postCollection as $_post) { ?>
+        <?php foreach ($_postCollection as $_post) { ?>
             <div class="item">
                 <a class="post-item-link"
                    href="<?php echo $_post->getPostUrl() ?>">
