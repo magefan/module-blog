@@ -126,7 +126,7 @@ class Router implements \Magento\Framework\App\RouterInterface
 
         switch ($this->_url->getPermalinkType()) {
             case Url::PERMALINK_TYPE_DEFAULT:
-                foreach($pathInfo as $i => $route) {
+                foreach ($pathInfo as $i => $route) {
                     $pathInfo[$i] = $this->_url->getControllerName($route);
                 }
                 break;
@@ -215,7 +215,6 @@ class Router implements \Magento\Framework\App\RouterInterface
                     break;
 
                 case 'rss' :
-
                     $request->setModuleName('blog')->setControllerName('rss')->setActionName(
                         isset($info[1]) ? $info[1] : 'index'
                     );

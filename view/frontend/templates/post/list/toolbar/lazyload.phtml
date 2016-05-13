@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list lazyload template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar\Pager
+ */
+?>
+<?php if ($block->useLazyload()) { ?>
+    <?php
+        $config = $block->getLazyloadConfig([
+            'trigger_element' => '.mbblog-lazyload-trigger'
+        ]);
+    ?>
+    <div class="mfblog-autoloader" data-mage-init='{"<?php echo $block->getLazyloadJs() ?>" : <?php echo $config ?>}'>
+    	<button class="mbblog-lazyload-trigger mfblog-hide-onload action primary" title="<?php echo __('See more') ?>" type="button">
+            <span><?php echo __('See more') ?></span>
+        </button>
+        <img class="posts-loader mfblog-show-onload" src="<?php echo $block->getViewFileUrl('images/loader-2.gif') ?>" />
+    </div>
+<?php } ?>

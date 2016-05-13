@@ -199,3 +199,6 @@
     min-height: 150px;
     overflow-y: auto;
 }
+
+.mfblog-autoloader {text-align: center;}
+.mfblog-autoloader .mfblog-show-onload {display: none;}

@@ -17,7 +17,15 @@
                 </action>
             </block>
             <block class="Magefan\Blog\Block\Post\PostList\Toolbar" name="post_list_toolbar" template="post/list/toolbar.phtml">
-                <block class="Magento\Theme\Block\Html\Pager" name="post_list_toolbar_pager"/>
+                <block class="Magefan\Blog\Block\Post\PostList\Toolbar\Pager" name="post_list_toolbar_pager">
+                    <action ifconfig="mfblog/post_list/lazyload_enabled" method="setTemplate">
+                        <argument name="template" xsi:type="string">Magefan_Blog::post/list/toolbar/lazyload.phtml</argument>
+                    </action>
+                    <arguments>
+                        <argument name="lazyload_js" xsi:type="string">Magefan_Blog/js/lazyload</argument>
+                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list</argument>
+                    </arguments>
+                </block>
             </block>
             <action method="setToolbarBlockName">
                 <argument name="name" xsi:type="string">post_list_toolbar</argument>

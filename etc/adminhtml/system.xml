@@ -116,6 +116,19 @@
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Posts Per Page</label>
                 </field>
+                <field id="lazyload_enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Lazy Loading</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\LazyLoad</source_model>
+                    <comment>Automatically load more posts on page.</comment>
+                </field>
+                <field id="lazyload_padding" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto Triger Padding (px)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="lazyload_enabled">1</field>
+                    </depends>
+                    <comment>The distance in pixels from the bottom of the scrollable content at which to trigger the loading of the next set of posts.</comment>
+                </field>
             </group>
 
             <group id="sidebar" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
