@@ -5,9 +5,6 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
-use Magento\Framework\App\Action\Action;
-
 ?>
 <?php
 /**
@@ -29,6 +26,13 @@ $_postCollection = $block->getPostCollection();
             <?php foreach ($_postCollection as $_post): ?>
                 <?php echo $block->getPostHtml($_post) ?>
             <?php endforeach; ?>
+            <li class="hidden">
+                <script type="text/javascript">
+                    if (window.addthis) {
+                        addthis.toolbox('.addthis_toolbox');
+                    }
+                </script>
+            </li>
         </ol>
     </div>
 
@@ -38,7 +42,8 @@ $_postCollection = $block->getPostCollection();
     <script type="text/javascript" async src="//s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4def63cd3cf37569"></script>
     <script type="text/javascript">
         var addthis_config = {
-            ui_language: "en"
+            ui_language: "en",
+            data_track_clickback : false
         }
     </script>
 <?php endif; ?>

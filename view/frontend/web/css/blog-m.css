@@ -67,7 +67,7 @@
 }
 
 .post-list .post-holder .post-header .addthis_toolbox {float: right; padding-top: 20px;}
-
+.post-list .hidden {display:none;}
 
 .post-view .post-holder .post-header .addthis_toolbox {float: right;}
 .post-view .post-bottom {margin-top:30px;}
