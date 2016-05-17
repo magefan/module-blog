@@ -23,7 +23,7 @@
                     </action>
                     <arguments>
                         <argument name="lazyload_js" xsi:type="string">Magefan_Blog/js/lazyload</argument>
-                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list</argument>
+                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list, .blog-list-wrapper .blog-list</argument>
                     </arguments>
                 </block>
             </block>
