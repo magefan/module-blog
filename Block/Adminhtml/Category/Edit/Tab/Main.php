@@ -138,7 +138,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements
                 'hidden',
                 ['name' => 'store_ids[]', 'value' => $this->_storeManager->getStore(true)->getId()]
             );
-            $model->setStoreIds([$this->_storeManager->getStore(true)->getId()]);
+            $model->setStoreIds($this->_storeManager->getStore(true)->getId());
         }
 
         $field = $fieldset->addField(
