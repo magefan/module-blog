@@ -48,6 +48,13 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_categoryFactory;
 
     /**
+     * Author factory
+     *
+     * @var \Magefan\Blog\Model\AuthorFactory
+     */
+    protected $_authorFactory;
+
+    /**
      * Config primary
      *
      * @var \Magento\Framework\App\State
@@ -79,11 +86,17 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_categoryId;
 
     /**
+     * @var int
+     */
+    protected $_authorId;
+
+    /**
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
+     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\ResponseInterface $response
@@ -94,6 +107,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         Url $url,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response
     ) {
@@ -102,6 +116,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         $this->_url = $url;
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
+        $this->_authorFactory = $authorFactory;
         $this->_storeManager = $storeManager;
         $this->_response = $response;
     }
@@ -134,6 +149,8 @@ class Router implements \Magento\Framework\App\RouterInterface
                 if (isset($pathInfo[1])) {
                     if ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)) {
                         $pathInfo[1] = Url::CONTROLLER_SEARCH;
+                    } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_AUTHOR)) {
+                        $pathInfo[1] = Url::CONTROLLER_AUTHOR;
                     } elseif (count($pathInfo) == 1) {
                         if ($this->_isArchiveIdentifier($pathInfo[1])) {
                             $pathInfo[2] = $pathInfo[1];
@@ -184,40 +201,69 @@ class Router implements \Magento\Framework\App\RouterInterface
             $store = $this->_storeManager->getStore()->getId();
 
             switch ($info[0]) {
-                case 'post' :
+                case Url::CONTROLLER_POST :
                     if (!$postId = $this->_getPostId($info[1])) {
                         return null;
                     }
 
-                    $request->setModuleName('blog')->setControllerName('post')->setActionName('view')->setParam('id', $postId);
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_POST)
+                        ->setActionName('view')
+                        ->setParam('id', $postId);
+
                     $success = true;
                     break;
-                case 'category' :
+
+                case Url::CONTROLLER_CATEGORY :
                     if (!$categoryId = $this->_getCategoryId($info[1])) {
                         return null;
                     }
 
-                    $request->setModuleName('blog')->setControllerName('category')->setActionName('view')->setParam('id', $categoryId);
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_CATEGORY)
+                        ->setActionName('view')
+                        ->setParam('id', $categoryId);
+
                     $success = true;
                     break;
-                case 'archive' :
-                    $request->setModuleName('blog')->setControllerName('archive')->setActionName('view')
+
+                case Url::CONTROLLER_ARCHIVE :
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_ARCHIVE)
+                        ->setActionName('view')
                         ->setParam('date', $info[1]);
 
                     $success = true;
                     break;
 
-                case 'search' :
-                    $request->setModuleName('blog')->setControllerName('search')->setActionName('index')
+                case Url::CONTROLLER_AUTHOR :
+                    if (!$authorId = $this->_getAuthorId($info[1])) {
+                        return null;
+                    }
+
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_AUTHOR)
+                        ->setActionName('view')
+                        ->setParam('id', $authorId);
+
+                    $success = true;
+                    break;
+
+                case Url::CONTROLLER_SEARCH :
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_SEARCH)
+                        ->setActionName('index')
                         ->setParam('q', $info[1]);
 
                     $success = true;
                     break;
 
-                case 'rss' :
-                    $request->setModuleName('blog')->setControllerName('rss')->setActionName(
-                        isset($info[1]) ? $info[1] : 'index'
-                    );
+                case Url::CONTROLLER_RSS :
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_RSS)
+                        ->setActionName(
+                            isset($info[1]) ? $info[1] : 'index'
+                        );
 
                     $success = true;
                     break;
@@ -271,6 +317,23 @@ class Router implements \Magento\Framework\App\RouterInterface
         }
 
         return $this->_categoryId;
+    }
+
+    /**
+     * Retrieve category id by identifier
+     * @param  string $identifier
+     * @return int
+     */
+    protected function _getAuthorId($identifier)
+    {
+        if (is_null($this->_authorId)) {
+            $author = $this->_authorFactory->create();
+            $this->_authorId = $author->checkIdentifier(
+                $identifier
+            );
+        }
+
+        return $this->_authorId;
     }
 
     /**

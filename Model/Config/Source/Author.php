@@ -9,15 +9,15 @@
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
- * Used in recent post widget
+ * Authors list
  *
  */
-class Category implements \Magento\Framework\Option\ArrayInterface
+class Author implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @var \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory
+     * @var \Magento\User\Model\ResourceModel\User\CollectionFactory
      */
-    protected $categoryCollectionFactory;
+    protected $authorCollectionFactory;
 
     /**
      * @var array
@@ -27,13 +27,13 @@ class Category implements \Magento\Framework\Option\ArrayInterface
     /**
      * Initialize dependencies.
      *
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $authorCollectionFactory
+     * @param \Magento\User\Model\ResourceModel\User\CollectionFactory $authorCollectionFactory
      * @param void
      */
     public function __construct(
-        \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+        \Magento\User\Model\ResourceModel\User\CollectionFactory $authorCollectionFactory
     ) {
-        $this->categoryCollectionFactory = $categoryCollectionFactory;
+        $this->authorCollectionFactory = $authorCollectionFactory;
     }
 
     /**
@@ -45,14 +45,11 @@ class Category implements \Magento\Framework\Option\ArrayInterface
     {
         if ($this->options === null) {
             $this->options = [['label' => __('Please select'), 'value' => 0]];
-            $collection = $this->categoryCollectionFactory->create();
-            $collection->setOrder('position')
-                ->getTreeOrderedArray();
+            $collection = $this->authorCollectionFactory->create();
 
             foreach ($collection as $item) {
                 $this->options[] = array(
-                    'label' => $this->_getSpaces($item->getLevel()) . ' ' . $item->getTitle() .
-                        ($item->getIsActive() ? '' : ' ('.__('Disabled').')'),
+                    'label' => $item->getName(),
                     'value' => $item->getId(),
                 );
             }
@@ -75,19 +72,5 @@ class Category implements \Magento\Framework\Option\ArrayInterface
         return $array;
     }
 
-    /**
-     * Generate spaces
-     * @param  int $n
-     * @return string
-     */
-    protected function _getSpaces($n)
-    {
-        $s = '';
-        for ($i = 0; $i < $n; $i++) {
-            $s .= '--- ';
-        }
-
-        return $s;
-    }
 
 }

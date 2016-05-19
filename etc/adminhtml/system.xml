@@ -123,7 +123,6 @@
                 </field>
                 <field id="lazyload_padding" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Auto Triger Padding (px)</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="lazyload_enabled">1</field>
                     </depends>
@@ -131,7 +130,23 @@
                 </field>
             </group>
 
-            <group id="sidebar" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="author" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Author</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Author Information</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="page_enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Post List By Author</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <comment>If set to "Yes". author page with post list will be available.</comment>
+                </field>
+            </group>
+
+            <group id="sidebar" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Sidebar</label>
                 <group id="search" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Form Widget</label>
@@ -195,7 +210,7 @@
             </group>
 
 
-            <group id="product_page" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="product_page" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Product Page</label>
                 <field id="related_posts_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Related Posts</label>
@@ -210,7 +225,7 @@
                 </field>
             </group>
 
-            <group id="permalink" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="permalink" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Permalink Settings</label>
                 <field id="route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Blog Route</label>
@@ -242,7 +257,11 @@
                     </depends>
                     <comment>E.g.: "archive" will make the blog archive accessible from mystore.com/{blog_route}/archive/2016-02/</comment>
                 </field>
-                <field id="search_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="author_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Author Route</label>
+                    <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name/</comment>
+                </field>
+                <field id="search_route" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Route</label>
                     <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query/</comment>
                 </field>

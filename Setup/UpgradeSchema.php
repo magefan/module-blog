@@ -23,16 +23,20 @@ class UpgradeSchema implements UpgradeSchemaInterface
      */
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
+        $installer = $setup;
         $setup->startSetup();
 
-        if (version_compare($context->getVersion(), '2.0.1') < 0) {
+        $version = $context->getVersion();
+        $connection = $setup->getConnection();
 
-            foreach(['magefan_blog_post_relatedpost', 'magefan_blog_post_relatedproduct'] as $tableName) {
+        if (version_compare($version, '2.0.1') < 0) {
+
+            foreach (['magefan_blog_post_relatedpost', 'magefan_blog_post_relatedproduct'] as $tableName) {
                 // Get module table
                 $tableName = $setup->getTable($tableName);
 
                 // Check if the table already exists
-                if ($setup->getConnection()->isTableExists($tableName) == true) {
+                if ($connection->isTableExists($tableName) == true) {
 
                     $columns = [
                         'position' => [
@@ -42,7 +46,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                         ],
                     ];
 
-                    $connection = $setup->getConnection();
                     foreach ($columns as $name => $definition) {
                         $connection->addColumn($tableName, $name, $definition);
                     }
@@ -50,12 +53,37 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 }
             }
 
-            $connection->addColumn($setup->getTable('magefan_blog_post'), 'featured_img', [
-                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                'length' => 255,
-                'nullable' => true,
-                'comment' => 'Thumbnail Image',
-            ]);
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'featured_img',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Thumbnail Image',
+                ]
+            );
+        }
+
+        if (version_compare($version, '2.2.0') < 0) {
+            /* Add author field to posts tabel */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'author_id',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Author ID',
+
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_post'),
+                $setup->getIdxName($setup->getTable('magefan_blog_post'), ['author_id']),
+                ['author_id']
+            );
+
         }
 
         $setup->endSetup();

@@ -25,7 +25,10 @@ class Url
     const CONTROLLER_POST = 'post';
     const CONTROLLER_CATEGORY = 'category';
     const CONTROLLER_ARCHIVE = 'archive';
+    const CONTROLLER_AUTHOR = 'author';
     const CONTROLLER_SEARCH = 'search';
+    const CONTROLLER_RSS = 'rss';
+
 
     /**
      * @var \Magento\Framework\Registry
@@ -109,6 +112,7 @@ class Url
             self::CONTROLLER_POST,
             self::CONTROLLER_CATEGORY,
             self::CONTROLLER_ARCHIVE,
+            self::CONTROLLER_AUTHOR,
             self::CONTROLLER_SEARCH
         ] as $controllerName) {
             if ($this->getRoute($controllerName) == $route) {
@@ -157,7 +161,7 @@ class Url
             case self::PERMALINK_TYPE_DEFAULT :
                 return $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
             case self::PERMALINK_TYPE_SHORT :
-                if ($controllerName == self::CONTROLLER_SEARCH) {
+                if ($controllerName == self::CONTROLLER_SEARCH || $controllerName == self::CONTROLLER_AUTHOR) {
                     return $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
                 } else {
                     return $this->getRoute() . '/' . $identifier;

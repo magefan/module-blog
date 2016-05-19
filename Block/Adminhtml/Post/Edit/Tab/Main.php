@@ -24,11 +24,17 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
     protected $_categoryOption;
 
     /**
+     * @var \Magefan\Blog\Model\Config\Source\Author
+     */
+    protected $_authoryOption;
+
+    /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
      * @param \Magento\Store\Model\System\Store $systemStore
      * @param \Magefan\Blog\Model\Config\Source\Category $categoryOption
+     * @param \Magefan\Blog\Model\Config\Source\Author $authoryOption
      * @param array $data
      */
     public function __construct(
@@ -37,10 +43,12 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
         \Magefan\Blog\Model\Config\Source\Category $categoryOption,
+        \Magefan\Blog\Model\Config\Source\Author $authoryOption,
         array $data = []
     ) {
         $this->_systemStore = $systemStore;
         $this->_categoryOption = $categoryOption;
+        $this->_authoryOption = $authoryOption;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -112,6 +120,18 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
             $model->setData('is_active', $isElementDisabled ? '0' : '1');
         }
 
+        $field = $fieldset->addField(
+            'author_id',
+            'select',
+            [
+                'name' => 'post[author_id]',
+                'label' => __('Author'),
+                'title' => __('Author'),
+                'values' => $this->_authoryOption->toOptionArray(),
+                'disabled' => $isElementDisabled,
+            ]
+        );
+
         /**
          * Check is single store mode
          */
@@ -138,7 +158,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'hidden',
                 ['name' => 'post[store_ids][]', 'value' => $this->_storeManager->getStore(true)->getId()]
             );
-            $model->setStoreIds([$this->_storeManager->getStore(true)->getId()]);
+            $model->setStoreIds($this->_storeManager->getStore(true)->getId());
         }
 
         $field = $fieldset->addField(

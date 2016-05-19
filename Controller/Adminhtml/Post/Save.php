@@ -22,7 +22,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
      */
     protected function _beforeSave($model, $request)
     {
-        /* prepare publish date */
+        /* Prepare publish date */
         $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
         $data = $model->getData();
 
@@ -34,7 +34,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         $data = $inputFilter->getUnescaped();
         $model->setData($data);
 
-        /* prepare relative links */
+        /* Prepare author */
+        if (!$model->getAuthorId()) {
+            $authSession = $this->_objectManager->get('Magento\Backend\Model\Auth\Session');
+            $model->setAuthorId($authSession->getUser()->getId());
+        }
+
+        /* Prepare relative links */
         if ($links = $request->getPost('links')) {
 
             $jsHelper = $this->_objectManager->create('Magento\Backend\Helper\Js');
@@ -51,7 +57,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             }
         }
 
-        /* prepare featured image */
+        /* Prepare featured image */
         $imageField = 'featured_img';
         $fileSystem = $this->_objectManager->create('Magento\Framework\Filesystem');
         $mediaDirectory = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
@@ -77,7 +83,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             $model->setData($imageField, Post::BASE_MEDIA_PATH . $result['file']);
         } catch (\Exception $e) {
             if ($e->getCode() != \Magento\Framework\File\Uploader::TMP_NAME_EMPTY) {
-                throw new FrameworkException($e->getMessage());
+                throw new \Exception($e->getMessage());
             }
         }
     }

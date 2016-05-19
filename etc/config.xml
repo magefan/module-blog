@@ -31,6 +31,10 @@
                 <posts_per_page>10</posts_per_page>
                 <lazyload_padding>200</lazyload_padding>
             </post_list>
+            <author>
+                <enabled>1</enabled>
+                <page_enabled>1</page_enabled>
+            </author>
             <sidebar>
                 <search>
                     <enabled>1</enabled>
@@ -64,6 +68,7 @@
                 <post_route>post</post_route>
                 <category_route>category</category_route>
                 <archive_route>archive</archive_route>
+                <author_route>author</author_route>
                 <search_route>search</search_route>
             </permalink>
         </mfblog>

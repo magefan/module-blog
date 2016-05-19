@@ -31,4 +31,21 @@
         <?php } ?>
     </div>
     <?php } ?>
+    <?php if ($block->authorEnabled()) { ?>
+        <?php if ($_author = $_post->getAuthor()) { ?>
+        <div class="dash">|</div>
+        <div class="item post-author">
+            <span class="label"><?php echo __('Author:') ?></span>
+            <span class="value">
+                <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
+                <a title="<?php echo $block->escapeHtml($_author->getTitle()) ?>" href="<?php echo $_author->getAuthorUrl() ?>">
+                <?php } ?>
+                    <?php echo $block->escapeHtml($_author->getTitle()) ?>
+                <?php if ($authorPageEnabled) { ?>
+                </a>
+                <?php } ?>
+            </span>
+        </div>
+        <?php } ?>
+    <?php } ?>
 </div>

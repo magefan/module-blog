@@ -143,6 +143,28 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Add author filter to collection
+     * @param array|int|\Magefan\Blog\Model\Author  $author
+     * @return $this
+     */
+    public function addAuthorFilter($author)
+    {
+        if (!$this->getFlag('author_filter_added')) {
+            if ($author instanceof \Magefan\Blog\Model\Author) {
+                $author = [$author->getId()];
+            }
+
+            if (!is_array($author)) {
+                $author = [$author];
+            }
+
+            $this->addFilter('author_id', ['in' => $author], 'public');
+        }
+        return $this;
+    }
+
+
+    /**
      * Add is_active filter to collection
      * @return $this
      */

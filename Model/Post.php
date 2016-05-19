@@ -65,6 +65,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_url;
 
     /**
+     * @var \Magefan\Blog\Model\AuthorFactory
+     */
+    protected $_authorFactory;
+
+    /**
      * @var \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $_categoryCollectionFactory;
@@ -90,6 +95,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\Url $url
+     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
@@ -100,6 +106,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
+        \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
@@ -109,6 +116,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
         $this->_url = $url;
+        $this->_authorFactory = $authorFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_relatedPostsCollection = clone($this->getCollection());
@@ -273,6 +281,26 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->getData('related_products');
+    }
+
+    /**
+     * Retrieve post author
+     * @return \Magefan\Blog\Model\Author | false
+     */
+    public function getAuthor()
+    {
+        if (!$this->hasData('author')) {
+            $author = false;
+            if ($authorId = $this->getData('author_id')) {
+                $_author = $this->_authorFactory->create();
+                $_author->load($authorId);
+                if ($_author->getId()) {
+                    $author = $_author;
+                }
+            }
+            $this->setData('author', $author);
+        }
+        return $this->getData('author');
     }
 
     /**
