@@ -199,8 +199,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'name' => 'post[publish_time]',
                 'label' => __('Publish At'),
                 'date_format' => $dateFormat,
-                'disabled' => $isElementDisabled,
-                'class' => 'validate-date validate-date-range date-range-custom_theme-from'
+                'disabled' => $isElementDisabled
             ]
         );
 
