@@ -145,7 +145,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         $p = $isMb ? strpos($content, $pageBraker) : mb_strpos($content, $pageBraker);
 
         if ($p) {
-            $content = substr($content, 0, $p);
+            $content = mb_substr($content, 0, $p);
         }
 
         return $this->_filterProvider->getPageFilter()->filter($content);

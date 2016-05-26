@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post og:tags
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Opengraph
+ */
+?>
+
+<meta property="og:type" content="<?php echo $block->getType(); ?>" />
+<meta property="og:title" content="<?php echo $block->getTitle(); ?>" />
+<meta property="og:description" content="<?php echo $block->getDescription(); ?>" />
+<meta property="og:url" content="<?php echo $block->getPageUrl(); ?>" />
+<?php if ($image = $block->getImage()) { ?>
+<meta property="og:image" content="<?php echo $image; ?>" />
+<?php } ?>

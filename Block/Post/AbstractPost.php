@@ -98,17 +98,17 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      */
     public function getShorContent()
     {
-        $content = $this->getPost()->getContent();
+        $content = $this->getContent();
         $pageBraker = '<!-- pagebreak -->';
-        
+
         $isMb = function_exists('mb_strpos');
         $p = $isMb ? strpos($content, $pageBraker) : mb_strpos($content, $pageBraker);
 
         if ($p) {
-            $content = substr($content, 0, $p);
+            $content = mb_substr($content, 0, $p);
         }
 
-        return $this->_filterProvider->getPageFilter()->filter($content);
+        return $content;
     }
 
     /**
@@ -118,11 +118,15 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      */
     public function getContent()
     {
-        return $this->_filterProvider->getPageFilter()->filter(
-            $this->getPost()->getContent()
-        );
-
-        return $this->getData($k);
+        $post = $this->getPost();
+        $key = 'filtered_content';
+        if (!$post->hasData($key)) {
+            $cotent = $this->_filterProvider->getPageFilter()->filter(
+                $post->getContent()
+            );
+            $post->setData($key, $cotent);
+        }
+        return $post->getData($key);
     }
 
     /**
