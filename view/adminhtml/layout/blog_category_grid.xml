@@ -7,7 +7,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etclayout_generic.xsd">
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
     <update handle="formkey"/>
     <update handle="blog_category_grid_block"/>
     <container name="root">
