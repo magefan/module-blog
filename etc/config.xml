@@ -71,6 +71,10 @@
                 <author_route>author</author_route>
                 <search_route>search</search_route>
             </permalink>
+            <social>
+                <add_this_pubid>ra-4def63cd3cf37569</add_this_pubid>
+                <add_this_language>en</add_this_language>
+            </social>
         </mfblog>
     </default>
 </config>

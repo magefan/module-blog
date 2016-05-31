@@ -30,6 +30,8 @@
             <action method="setToolbarBlockName">
                 <argument name="name" xsi:type="string">post_list_toolbar</argument>
             </action>
+
+            <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
         </referenceBlock>
     </body>
 </page>
