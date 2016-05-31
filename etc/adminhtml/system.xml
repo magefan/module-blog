@@ -266,6 +266,15 @@
                     <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query/</comment>
                 </field>
             </group>
+            <group id="social" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social</label>
+                <field id="add_this_pubid" type="text" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AddThis ID</label>
+                </field>
+                <field id="add_this_language" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AddThis Language</label>
+                </field>
+            </group>
         </section>
     </system>
 </config>

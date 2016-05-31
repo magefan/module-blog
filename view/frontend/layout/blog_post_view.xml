@@ -21,7 +21,7 @@
                     <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\Comments" name="blog.post.comments" template="post/view/comments.phtml" />
-                    <block class="Magento\Framework\View\Element\Template" name="blog.post.js" as="js"  template="Magefan_Blog::post/view/js.phtml" />
+                    <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
                 </block>
             </block>
         </referenceContainer>
