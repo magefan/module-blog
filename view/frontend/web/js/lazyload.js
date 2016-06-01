@@ -41,7 +41,7 @@
          */
         function startLoading()
         {
-            if (that.opt.current_page <= that.opt.last_page && !that.loading) {
+            if (that.opt.current_page < that.opt.last_page && !that.loading) {
 
                 that.loading = true;
                 $('.mfblog-show-onload').show();
