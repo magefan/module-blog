@@ -52,6 +52,8 @@ class Aw extends AbstractImport
             throw new \Exception(__('AheadWorks Blog Extension not detected.'), 1);
         }
 
+        $storeIds = array_keys($this->_storeManager->getStores(true));
+
         $categories = [];
         $oldCategories = [];
 
@@ -76,8 +78,15 @@ class Aw extends AbstractImport
             while ($s_data = mysqli_fetch_assoc($s_result)) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
-            if (empty($data['store_ids'])) {
-                $data['store_ids'][] = 0;
+
+            foreach ($data['store_ids'] as $key => $id) {
+                if (!in_array($id, $storeIds)) {
+                    unset($data['store_ids'][$key]);
+                }
+            }
+
+            if (empty($data['store_ids']) || in_array(0, $data['store_ids'])) {
+                $data['store_ids'] = 0;
             }
 
             $data['is_active'] = 1;
@@ -112,7 +121,8 @@ class Aw extends AbstractImport
             while ($c_data = mysqli_fetch_assoc($c_result)) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
-                    $postCategories[] = $oldCategories[$oldId]->getId();
+                    $id = $oldCategories[$oldId]->getId();
+                    $postCategories[$id] = $id;
                 }
             }
 
@@ -124,8 +134,13 @@ class Aw extends AbstractImport
                 $data['store_ids'][] = $s_data['store_id'];
             }
 
-            
-            if (empty($data['store_ids'])) {
+            foreach ($data['store_ids'] as $key => $id) {
+                if (!in_array($id, $storeIds)) {
+                    unset($data['store_ids'][$key]);
+                }
+            }
+
+            if (empty($data['store_ids']) || in_array(0, $data['store_ids'])) {
                 $data['store_ids'] = 0;
             }
 

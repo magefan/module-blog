@@ -54,12 +54,18 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_skippedCategories = [];
 
     /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\PostFactory $postFactory,
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager,
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
@@ -69,12 +75,14 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Registry $registry,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
+        $this->_storeManager = $storeManager;
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
