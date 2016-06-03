@@ -75,6 +75,10 @@
                 <add_this_pubid>ra-4def63cd3cf37569</add_this_pubid>
                 <add_this_language>en</add_this_language>
             </social>
+            <top_menu>
+                <show_item>0</show_item>
+                <item_text>Blog</item_text>
+            </top_menu>
         </mfblog>
     </default>
 </config>

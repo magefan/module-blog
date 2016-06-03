@@ -275,6 +275,16 @@
                     <label>AddThis Language</label>
                 </field>
             </group>
+            <group id="top_menu" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Top Menu</label>
+                <field id="show_item" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Item</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="item_text" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Item Text</label>
+                </field>
+            </group>
         </section>
     </system>
 </config>
