@@ -276,13 +276,16 @@
                 </field>
             </group>
             <group id="top_menu" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Top Menu</label>
+                <label>Category Top Navigation</label>
                 <field id="show_item" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Show Item</label>
+                    <label>Display Blog Link</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="item_text" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Item Text</label>
+                    <label>Link Text</label>
+                    <depends>
+                        <field id="show_item">1</field>
+                    </depends>
                 </field>
             </group>
         </section>

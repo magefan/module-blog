@@ -76,7 +76,7 @@
                 <add_this_language>en</add_this_language>
             </social>
             <top_menu>
-                <show_item>0</show_item>
+                <show_item>1</show_item>
                 <item_text>Blog</item_text>
             </top_menu>
         </mfblog>
