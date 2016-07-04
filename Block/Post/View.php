@@ -28,6 +28,11 @@ class View extends AbstractPost
             $this->pageConfig->getTitle()->set($post->getTitle());
             $this->pageConfig->setKeywords($post->getMetaKeywords());
             $this->pageConfig->setDescription($post->getMetaDescription());
+            $this->pageConfig->addRemotePageAsset(
+                $post->getPostUrl(),
+                'canonical',
+                ['attributes' => ['rel' => 'canonical']]
+            );
         }
 
         return parent::_prepareLayout();

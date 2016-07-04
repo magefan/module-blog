@@ -55,6 +55,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $title = $this->_getTitle();
         $this->_addBreadcrumbs($title);
         $this->pageConfig->getTitle()->set($title);
+        $this->pageConfig->addRemotePageAsset(
+            $this->_url->getUrl(
+                $this->getYear() . '-' . str_pad($this->getMonth(), 2, '0', STR_PAD_LEFT),
+                \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
+            ),
+            'canonical',
+            ['attributes' => ['rel' => 'canonical']]
+        );
 
         return parent::_prepareLayout();
     }

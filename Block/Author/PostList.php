@@ -49,8 +49,11 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->_addBreadcrumbs($author);
             $this->pageConfig->addBodyClass('blog-author-' . $author->getIdentifier());
             $this->pageConfig->getTitle()->set($author->getTitle());
-            //$this->pageConfig->setKeywords($author->getMetaKeywords());
-            //$this->pageConfig->setDescription($author->getMetaDescription());
+            $this->pageConfig->addRemotePageAsset(
+                $author->getAuthorUrl(),
+                'canonical',
+                ['attributes' => ['rel' => 'canonical']]
+            );
         }
 
         return parent::_prepareLayout();

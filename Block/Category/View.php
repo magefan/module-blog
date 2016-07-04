@@ -54,6 +54,11 @@ class View extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($category->getTitle());
             $this->pageConfig->setKeywords($category->getMetaKeywords());
             $this->pageConfig->setDescription($category->getMetaDescription());
+            $this->pageConfig->addRemotePageAsset(
+                $category->getCategoryUrl(),
+                'canonical',
+                ['attributes' => ['rel' => 'canonical']]
+            );
         }
 
         return parent::_prepareLayout();
