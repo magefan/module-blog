@@ -191,6 +191,10 @@ class Post extends \Magento\Framework\Model\AbstractModel
         return $this->_url->getUrl($this, URL::CONTROLLER_POST);
     }
 
+    /**
+     * Retrieve featured image url
+     * @return string
+     */
     public function getFeaturedImage()
     {
         if (!$this->hasData('featured_image')) {
@@ -203,6 +207,25 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->getData('featured_image');
+    }
+
+    /**
+     * Retrieve meta description
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        $desc = $this->getData('meta_description');
+        if (!$desc) {
+            $desc = $this->getData('content');
+        }
+
+        $desc = strip_tags($desc);
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 160);
+        }
+
+        return $desc;
     }
 
     /**
