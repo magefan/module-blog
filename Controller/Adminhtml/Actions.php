@@ -301,11 +301,11 @@ abstract class Actions extends \Magento\Backend\App\Action
             $statusFieldName = $this->_statusField;
 
             if (is_null($status)) {
-                throw new Exception(__('Parameter "Status" missing in request data.'));
+                throw new \Exception(__('Parameter "Status" missing in request data.'));
             }
 
             if (is_null($statusFieldName)) {
-                throw new Exception(__('Status Field Name is not specified.'));
+                throw new \Exception(__('Status Field Name is not specified.'));
             }
 
             foreach($ids as $id) {

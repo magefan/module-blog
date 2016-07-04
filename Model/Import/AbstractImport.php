@@ -116,7 +116,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
 
         foreach($this->_requiredFields as $field) {
             if (empty($data[$field])) {
-                throw new Exception(__('Parameter %1 is required', $field), 1);
+                throw new \Exception(__('Parameter %1 is required', $field), 1);
             }
         }
 
