@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+
+    <!-- Login Example to get Bearer: curl -X POST "http://mystore.com/index.php/rest/V1/integration/admin/token" \
+     -H "Content-Type:application/json" \
+     -d '{"username":"username", "password":"userpassword"}' -->
+
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/post/create/" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"value_1\",\"param_2\":\"value_2\",\"param_n\":\"value_n\"}"}' -->
+    <route url="/V1/blog/post/create" method="POST">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/post/update/postId/" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"new_value_1\",\"param_2\":\"new_value_2\",\"param_n\":\"new_value_n\"}"}' -->
+    <route url="/V1/blog/post/update/:id/" method="POST">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X GET "http://mystore.com/m2_21/index.php/rest/V1/blog/post/delete/postId/" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/post/delete/:id/" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/category/create/" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"value_1\",\"param_2\":\"value_2\",\"param_n\":\"value_n\"}"}' -->
+    <route url="/V1/blog/category/create" method="POST">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/category/update/categoryId/" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"new_value_1\",\"param_2\":\"new_value_2\",\"param_n\":\"new_value_n\"}"}' -->
+    <route url="/V1/blog/category/update/:id/" method="POST">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X GET "http://mystore.com/m2_21/index.php/rest/V1/blog/post/category/categoryId/" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/category/delete/:id/" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+</routes>
