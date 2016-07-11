@@ -36,7 +36,12 @@
                     <label>Meta Description</label>
                 </field>
             </group>
-
+            <group id="rest" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>REST API Token</label>
+                <field id="token" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\Token</frontend_model>
+                </field>
+            </group>
             <group id="post_view" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Post View</label>
 
