@@ -37,7 +37,7 @@
                 </field>
             </group>
             <group id="rest" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>REST API Token</label>
+                <label>REST API Access</label>
                 <field id="token" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\Token</frontend_model>
                 </field>
