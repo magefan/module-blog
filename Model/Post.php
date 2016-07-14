@@ -222,7 +222,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
         $desc = strip_tags($desc);
         if (mb_strlen($desc) > 160) {
-            $desc = mb_substr($desc, 160);
+            $desc = mb_substr($desc, 0, 160);
         }
 
         return $desc;
