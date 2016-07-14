@@ -13,6 +13,7 @@ Blog extension allows you to create a full-fledged blog on your [Magento 2](http
   * Import Posts and Categories form WordPress
   * Sitemap XML
   * Blog Rss Feed
+  * REST API
 
 ## Simple Demo
 http://magefan.com/magento2-blog-extension/#demo
