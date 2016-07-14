@@ -1,0 +1,47 @@
+<?php
+
+namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
+
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Module\ModuleListInterface;
+use Magento\Backend\Block\Template\Context;
+
+/**
+ * Admin blog configurations information block
+ */
+class Token extends Field {
+
+	/**
+	 * @var \Magento\Framework\Module\ModuleListInterface
+	 */
+	protected $moduleList;
+
+	/**
+	 * @param \Magento\Framework\Module\ModuleListInterface $moduleList
+	 * @param \Magento\Backend\Block\Template\Context $context
+	 * @param array $data
+	 */
+	public function __construct(ModuleListInterface $moduleList, Context $context, array $data = []) {
+		parent::__construct($context, $data);
+		$this->moduleList = $moduleList;
+	}
+
+	/**
+	 * Return info block html
+	 * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+	 * @return string
+	 */
+	public function render(AbstractElement $element) {
+		$user = md5('USER');                    //User and password for access
+		$password = md5('PASSWORD');
+		
+		$URL = 'http://magento.loc/index.php';  //Magento Base URL
+
+		return "<div stylezz\"padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;\">
+			<div><b>URL:</b>&nbsp;<span>$URL</span></div>
+			<div><b>User:</b>&nbsp;<span>$user</span></div>	
+			<div><b>Password:</b>&nbsp;<span>$password</span></div>	
+		</div>";
+	}
+}
