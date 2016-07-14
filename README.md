@@ -6,13 +6,17 @@ Blog extension allows you to create a full-fledged blog on your [Magento 2](http
   * Unlimited blog posts and categories
   * Multi Stores Support
   * SEO friendly permalinks
-  * Facebook and Disqus comments on post page
+  * Facebook,Disqus and Google+ comments on post page
   * Related Products and Related Post
   * Available posts search
+  * Lazy load on posts list
+  * Author information and posts by author
   * Recent Posts, Archive, Categories, Search From sidebar widgets
-  * Import Posts and Categories form WordPress
+  * Import Posts and Categories form WordPress and AW Blog extension for M1
+  * Recent Posts Widget
   * Sitemap XML
   * Blog Rss Feed
+  * Open Graph (OG) meta tags
   * REST API
 
 ## Simple Demo
