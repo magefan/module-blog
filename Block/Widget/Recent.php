@@ -141,10 +141,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         $content = $post->getContent();
         $pageBraker = '<!-- pagebreak -->';
 
-        $isMb = function_exists('mb_strpos');
-        $p = $isMb ? strpos($content, $pageBraker) : mb_strpos($content, $pageBraker);
-
-        if ($p) {
+        if ($p = mb_strpos($content, $pageBraker)) {
             $content = mb_substr($content, 0, $p);
         }
 
