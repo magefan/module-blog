@@ -49,24 +49,6 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     }
 
     /**
-     * @return $this
-     */
-    public function _construct()
-    {
-        $size = $this->getData('number_of_posts');
-        if (!$size) {
-            $size = (int) $this->_scopeConfig->getValue(
-                'mfblog/sidebar/recent_posts/posts_per_page',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            );
-        }
-
-        $this->setPageSize($size);
-
-        return parent::_construct();
-    }
-
-    /**
      * Set blog template
      *
      * @return this
@@ -97,7 +79,18 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      */
     protected function _preparePostCollection()
     {
+    	$size = $this->getData('number_of_posts');
+        if (!$size) {
+            $size = (int) $this->_scopeConfig->getValue(
+                'mfblog/sidebar/recent_posts/posts_per_page',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+        }
+
+        $this->setPageSize($size);
+
         parent::_preparePostCollection();
+
         if ($category = $this->getCategory()) {
             $categories = $category->getChildrenIds();
             $categories[] = $category->getId();
