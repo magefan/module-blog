@@ -32,7 +32,7 @@ abstract class AbstractManagement implements ManagementInterface
             $data = json_decode($data, true);
             $item = $this->_itemFactory->create();
             $item->setData($data)->save();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
@@ -57,7 +57,7 @@ abstract class AbstractManagement implements ManagementInterface
             }
             $data = json_decode($data, true);
             $item->addData($data)->save();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
@@ -80,7 +80,7 @@ abstract class AbstractManagement implements ManagementInterface
                 return true;
             }
             return false;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
