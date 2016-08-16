@@ -14,10 +14,10 @@
  */
 ?>
 
-<meta property="og:type" content="<?php echo $block->getType(); ?>" />
-<meta property="og:title" content="<?php echo $block->getTitle(); ?>" />
-<meta property="og:description" content="<?php echo $block->getDescription(); ?>" />
-<meta property="og:url" content="<?php echo $block->getPageUrl(); ?>" />
+<meta property="og:type" content="<?php echo $block->escapeHtml($block->getType()); ?>" />
+<meta property="og:title" content="<?php echo $block->escapeHtml($block->getTitle()); ?>" />
+<meta property="og:description" content="<?php echo $block->escapeHtml($block->getDescription()); ?>" />
+<meta property="og:url" content="<?php echo $block->escapeHtml($block->getPageUrl()); ?>" />
 <?php if ($image = $block->getImage()) { ?>
-<meta property="og:image" content="<?php echo $image; ?>" />
+<meta property="og:image" content="<?php echo $block->escapeHtml($image); ?>" />
 <?php } ?>
