@@ -225,7 +225,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
             $desc = mb_substr($desc, 0, 160);
         }
 
-        return $desc;
+        return trim($desc);
     }
 
     /**
@@ -343,6 +343,16 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getPublishDate($format = 'Y-m-d H:i:s')
     {
         return date($format, strtotime($this->getData('publish_time')));
+    }
+
+    /**
+     * Retrieve post publish date using format
+     * @param  string $format
+     * @return string
+     */
+    public function getUpdateDate($format = 'Y-m-d H:i:s')
+    {
+        return date($format, strtotime($this->getData('update_time')));
     }
 
 }

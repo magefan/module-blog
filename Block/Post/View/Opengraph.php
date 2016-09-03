@@ -45,13 +45,7 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
      */
     public function getDescription()
     {
-        $content = trim($this->stripTags($this->getPost()->getContent()));
-        $max = 300;
-        if (mb_strlen($content) > $max) {
-            $content = mb_substr($content, 0, $max);
-        }
-
-        return $content;
+        return $this->stripTags($this->getPost()->getMetaDescription());
     }
 
     /**
