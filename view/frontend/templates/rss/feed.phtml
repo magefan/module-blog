@@ -24,10 +24,11 @@
    <item>
       <title><?php echo $block->escapeHtml($_post->getTitle(), null, true) ?></title>
       <link><?php echo $_post->getPostUrl() ?></link>
-      <description><![CDATA[<?php echo mb_substr($block->stripTags($_post->getContent()), 0, 255) ?>]]></description>
+      <description><![CDATA[<?php echo $_post->getContent() ?>]]></description>
       <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
          <image><?php echo $featuredImage ?></image>
       <?php } ?>
+      <pubDate><?php echo $_post->getPublishDate('c') ?></pubDate>
    </item>
    <?php } ?>
 </channel>
