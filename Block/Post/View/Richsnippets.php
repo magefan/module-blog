@@ -30,13 +30,12 @@ class Richsnippets extends Opengraph
             $post = $this->getPost();
 
             $logoBlock = $this->getLayout()->getBlock('logo');
-            $author = $this->getAuthor();
 
             $this->_options = array(
                 '@context' => 'http://schema.org',
                 '@type' => 'BlogPosting',
-                '@id' => $post->getPageUrl(),
-                'author' => $author,
+                '@id' => $post->getPostUrl(),
+                'author' => $this->getAuthor(),
                 'headline' => $this->getTitle(),
                 'description' => $this->getDescription(),
                 'datePublished' => $post->getPublishDate('c'),
@@ -50,12 +49,13 @@ class Richsnippets extends Opengraph
                 ],
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => $author,
+                    'name' => $this->getPublisher(),
                     'logo' => [
                         '@type' => 'ImageObject',
                         'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
                     ],
                 ],
+                'mainEntityOfPage' => $this->_url->getBaseUrl(),
             );
         }
 
@@ -69,16 +69,33 @@ class Richsnippets extends Opengraph
      */
     public function getAuthor()
     {
-        $author =  $this->_scopeConfig->getValue(
+        if ($author = $this->getPost()->getAuthor()) {
+            if ($author->getTitle()) {
+                return $author->getTitle();
+            }
+        }
+
+        // if no author name return name of publisher
+        return $this->getPublisher();
+    }
+
+    /**
+     * Retrieve publisher name
+     *
+     * @return array
+     */
+    public function getPublisher()
+    {
+        $publisher =  $this->_scopeConfig->getValue(
             'general/store_information/name',
             ScopeInterface::SCOPE_STORE
         );
 
-        if (!$author) {
-            $author = 'Magento2 Store';
+        if (!$publisher) {
+            $publisher = 'Magento2 Store';
         }
 
-        return $author;
+        return $publisher;
     }
 
     /**
