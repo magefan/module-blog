@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -29,6 +29,9 @@
          <image><?php echo $featuredImage ?></image>
       <?php } ?>
       <pubDate><?php echo $_post->getPublishDate('c') ?></pubDate>
+      <?php foreach($_post->getParentCategories() as $category) { ?>
+      <category><![CDATA[<?php echo $category->getTitle() ?>]]></category>
+      <?php } ?>
    </item>
    <?php } ?>
 </channel>
