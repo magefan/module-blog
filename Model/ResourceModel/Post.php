@@ -84,8 +84,8 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
-        foreach (['publish_time'] as $field) {
-            $value = !$object->getData($field) ? null : $object->getData($field);
+        foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $field) {
+            $value = $object->getData($field) ?: null;
             $object->setData($field, $this->dateTime->formatDate($value));
         }
 

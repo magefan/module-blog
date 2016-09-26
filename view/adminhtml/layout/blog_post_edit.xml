@@ -21,6 +21,7 @@
                 <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Main" name="blog.post.edit.tab.main"/>
                 <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Content" name="blog.post.edit.tab.content"/>
                 <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Meta" name="blog.post.edit.tab.meta"/>
+                <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Design" name="blog.post.edit.tab.design"/>
 
                 <action method="addTab">
                     <argument name="name" xsi:type="string">main_section</argument>
@@ -34,7 +35,10 @@
                     <argument name="name" xsi:type="string">meta_section</argument>
                     <argument name="block" xsi:type="string">blog.post.edit.tab.meta</argument>
                 </action>
-
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">design_section</argument>
+                    <argument name="block" xsi:type="string">blog.post.edit.tab.design</argument>
+                </action>
             </block>
         </referenceContainer>
     </body>

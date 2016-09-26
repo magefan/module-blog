@@ -86,6 +86,89 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         }
 
+
+        if (version_compare($version, '2.2.5') < 0) {
+            /* Add layout field to posts and category tabels */
+            foreach (['magefan_blog_post', 'magefan_blog_category'] as $table) {
+                $table = $setup->getTable($table);
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'page_layout',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 255,
+                        'nullable' => true,
+                        'comment' => 'Post Layout',
+                    ]
+                );
+
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'layout_update_xml',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => '64k',
+                        'nullable' => true,
+                        'comment' => 'Post Layout Update Content',
+                    ]
+                );
+
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'custom_theme',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 100,
+                        'nullable' => true,
+                        'comment' => 'Post Custom Theme',
+                    ]
+                );
+
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'custom_layout',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 255,
+                        'nullable' => true,
+                        'comment' => 'Post Custom Template',
+                    ]
+                );
+
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'custom_layout_update_xml',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => '64k',
+                        'nullable' => true,
+                        'comment' => 'Post Custom Layout Update Content',
+                    ]
+                );
+
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'custom_theme_from',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                        'nullable' => true,
+                        'comment' => 'Post Custom Theme Active From Date',
+                    ]
+                );
+
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'custom_theme_to',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                        'nullable' => true,
+                        'comment' => 'Post Custom Theme Active To Date',
+                    ]
+                );
+            }
+
+        }
+
         $setup->endSetup();
     }
 }

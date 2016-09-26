@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -22,12 +22,19 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
      */
     protected function _beforeSave($model, $request)
     {
-        /* Prepare publish date */
+        /* Prepare dates */
         $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
         $data = $model->getData();
 
+        $filterRules = [];
+        foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
+            if (!empty($data[$dateField])) {
+                $filterRules[$dateField] = $dateFilter;
+            }
+        }
+
         $inputFilter = new \Zend_Filter_Input(
-            ['publish_time' => $dateFilter],
+            $filterRules,
             [],
             $data
         );

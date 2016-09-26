@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -13,6 +13,26 @@ namespace Magefan\Blog\Model\ResourceModel;
  */
 class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
+    /**
+     * @var \Magento\Framework\Stdlib\DateTime
+     */
+    protected $dateTime;
+
+    /**
+     * Construct
+     *
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * @param \Magento\Framework\Stdlib\DateTime $dateTime
+     * @param string|null $resourcePrefix
+     */
+    public function __construct(
+        \Magento\Framework\Model\ResourceModel\Db\Context $context,
+        \Magento\Framework\Stdlib\DateTime $dateTime,
+        $resourcePrefix = null
+    ) {
+        parent::__construct($context, $resourcePrefix);
+        $this->dateTime = $dateTime;
+    }
 
     /**
      * Initialize resource model
@@ -50,6 +70,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
+        foreach (['custom_theme_from', 'custom_theme_to'] as $field) {
+            $value = $object->getData($field) ?: null;
+            $object->setData($field, $this->dateTime->formatDate($value));
+        }
+
         $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
                 ->create('Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator');
         $identifierGenerator->generate($object);

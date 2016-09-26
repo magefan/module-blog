@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -45,10 +45,12 @@ class View extends \Magento\Framework\App\Action\Action
             return;
         }
 
-        $this->_objectManager->get('\Magento\Framework\Registry')->register('current_blog_category', $category);
+        $this->_objectManager->get('\Magento\Framework\Registry')
+            ->register('current_blog_category', $category);
 
-        $this->_view->loadLayout();
-        $this->_view->renderLayout();
+        $resultPage = $this->_objectManager->get('Magefan\Blog\Helper\Page')
+            ->prepareResultPage($this, $category);
+        return $resultPage;
     }
 
     /**
