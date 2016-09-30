@@ -56,7 +56,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     public function _toHtml()
     {
         $this->setTemplate(
-            $this->getData('template') ?: 'widget/recent.phtml'
+            $this->getData('custom_template') ?: 'widget/recent.phtml'
         );
 
         return parent::_toHtml();
@@ -79,7 +79,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      */
     protected function _preparePostCollection()
     {
-    	$size = $this->getData('number_of_posts');
+        $size = $this->getData('number_of_posts');
         if (!$size) {
             $size = (int) $this->_scopeConfig->getValue(
                 'mfblog/sidebar/recent_posts/posts_per_page',
@@ -141,4 +141,3 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         return $this->_filterProvider->getPageFilter()->filter($content);
     }
 }
-

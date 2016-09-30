@@ -14,15 +14,19 @@
         <parameters>
             <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
                 <label translate="true">Title</label>
+                <description translate="true">Please specify title you want to display on the frontend. You can leave it blank if necessary.</description>
             </parameter>
             <parameter name="number_of_posts" xsi:type="text"  visible="true" sort_order="20" >
                 <label translate="true">Number of Posts</label>
+                <description translate="true">Please indicate number of recent posts you want to display. Leave blank to use predefined "Posts Per Page" value.</description>
             </parameter>
             <parameter name="category_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\Category" visible="true" sort_order="30" >
                 <label translate="true">Blog Category</label>
+                <description translate="true">Leave blank to display posts from all categories.</description>
             </parameter>
-            <parameter name="template" xsi:type="text" visible="true" sort_order="40" >
-                <label translate="true">Template File</label>
+            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
+                <label translate="true">Custom Template</label>
+                <description translate="true">Leave blank to use default template "Magefan_Blog::widget/recent.phtml".</description>
             </parameter>
         </parameters>
     </widget>
