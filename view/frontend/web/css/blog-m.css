@@ -200,6 +200,15 @@
     overflow-y: auto;
 }
 
+.blog-widget-recent-masonry .post-description .post-text-hld {
+    max-height: none;
+    min-height: 0;
+}
+.blog-widget-recent-masonry .post-description .post-ftimg-hld {
+    width: 100%;
+    margin: 0px;
+}
+
 .mfblog-autoloader {text-align: center;}
 .mfblog-autoloader .mfblog-show-onload {display: none;}
 

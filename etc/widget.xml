@@ -26,7 +26,10 @@
             </parameter>
             <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
                 <label translate="true">Custom Template</label>
-                <description translate="true">Leave blank to use default template "Magefan_Blog::widget/recent.phtml".</description>
+                <description translate="true"><![CDATA[
+                    Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>
+                    <em>Magefan_Blog::widget/recent_masonry.phtml</em> template is also available out of the box.
+                ]]></description>
             </parameter>
         </parameters>
     </widget>

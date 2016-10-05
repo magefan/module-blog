@@ -1,0 +1,101 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="post-list-wrapper blog-widget-recent blog-widget-recent-masonry">
+    <h3 class="title"><?php echo $block->escapeHtml($block->getTitle()) ?></h3>
+    <ul class="post-list clearfix">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $_post->getPostUrl();
+                $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+            ?>
+            <li class="post-holder post-holder-<?php echo $_post->getId() ?>">
+                <div class="post-header">
+
+                    <div class="post-title-holder clearfix">
+                        <div class="post-title">
+                            <a class="post-item-link"
+                               href="<?php echo $_postUrl ?>">
+                                <?php echo $_postName; ?>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="post-info clear">
+                        <div class="item post-posed-date">
+                            <span class="label"><?php echo __('Posted:') ?></span>
+                            <span class="value"><?php echo $_post->getPublishDate('F d, Y') ?></span>
+                        </div>
+                        <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                        <div class="dash">|</div>
+                        <div class="item post-categories">
+                            <span class="label"><?php echo __('Categories:') ?></span>
+                            <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
+                                <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>"><?php echo $block->escapeHtml($ct->getTitle()) ?></a>
+                                <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <div class="post-description clearfix">
+                        <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                        <div class="post-ftimg-hld">
+                            <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                                <img src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                            </a>
+                        </div>
+                        <?php } ?>
+                        <?php if ($content = $block->getShorContent($_post)) { ?>
+                            <div class="post-text-hld clearfix">
+                                <?php echo $content ?>
+                            </div>
+                        <?php } ?>
+                        <a class="post-read-more" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                           <?php echo __('Read more &#187;') ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="post-footer">
+
+                </div>
+            </li>
+
+        <?php } ?>
+    </ul>
+</div>
+<script>
+requirejs( [ 'require', 'jquery', 'Magefan_Blog/js/lib/masonry.pkgd.min' ],
+function( require, $, Masonry ) {
+    require( [ 'jquery-bridget/jquery-bridget' ],
+    function( jQueryBridget ) {
+        jQueryBridget( 'masonry', Masonry, $ );
+        $('.post-list').masonry({
+            itemSelector: '.post-holder',
+            percentPosition: true
+        })
+    });
+});
+<?php /* more info http://masonry.desandro.com/extras.html */ ?>
+</script>
+
+<?php } ?>
