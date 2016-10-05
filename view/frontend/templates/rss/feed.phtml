@@ -14,7 +14,7 @@
  */
 ?>
 <?php $_postCollection = $block->getPostCollection(); ?>
-<?xml version="1.0" encoding="UTF-8" ?>
+<?php echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n" ?>
 <rss version="2.0">
 <channel>
    <title><?php echo $block->escapeHtml($this->getTitle()) ?></title>
