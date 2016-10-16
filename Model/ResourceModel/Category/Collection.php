@@ -199,7 +199,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * Retrieve gruped category childs
      * @return array
      */
-    protected function _getGroupedChilds()
+    public function getGroupedChilds()
     {
         $childs = [];
         if (count($this)) {
@@ -217,7 +217,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function getTreeOrderedArray()
     {
         $tree = [];
-        if ($childs = $this->_getGroupedChilds()) {
+        if ($childs = $this->getGroupedChilds()) {
             $this->_toTree(0, $childs, $tree);
         }
         return $tree;

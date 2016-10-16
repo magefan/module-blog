@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -65,7 +65,7 @@ abstract class Actions extends \Magento\Backend\App\Action
      * Model Object
      * @var \Magento\Framework\Model\AbstractModel
      */
-	protected $_model;
+    protected $_model;
 
     /**
      * Core registry
@@ -80,7 +80,7 @@ abstract class Actions extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $_preparedActions = array('index', 'grid', 'new', 'edit', 'save', 'delete', 'config', 'massStatus');
+        $_preparedActions = ['index', 'grid', 'new', 'edit', 'save', 'delete', 'config', 'massStatus'];
         $_action = $this->getRequest()->getActionName();
         if (in_array($_action, $_preparedActions)) {
             $method = '_'.$_action.'Action';
@@ -195,6 +195,10 @@ abstract class Actions extends \Magento\Backend\App\Action
 
         try {
             $params = $this->_paramsHolder ? $request->getParam($this->_paramsHolder) : $request->getParams();
+            $idFieldName = $model->getResource()->getIdFieldName();
+            if (isset($params[$idFieldName]) && empty($params[$idFieldName])) {
+                unset($params[$idFieldName]);
+            }
             $model->addData($params);
 
             $this->_beforeSave($model, $request);
@@ -203,13 +207,6 @@ abstract class Actions extends \Magento\Backend\App\Action
 
             $this->messageManager->addSuccess(__($model->getOwnTitle().' has been saved.'));
             $this->_setFormData(false);
-
-            if ($request->getParam('back')) {
-                $this->_redirect('*/*/edit', [$this->_idKey => $model->getId()]);
-            } else {
-                $this->_redirect('*/*');
-            }
-            return;
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->messageManager->addError(nl2br($e->getMessage()));
             $this->_setFormData();
@@ -218,7 +215,29 @@ abstract class Actions extends \Magento\Backend\App\Action
             $this->_setFormData();
         }
 
-        $this->_redirect('*/*/edit', [$this->_idKey => $model->getId()]);
+        $hasError = (bool)$this->messageManager->getMessages()->getCountByType(
+            \Magento\Framework\Message\MessageInterface::TYPE_ERROR
+        );
+
+        if ($request->getParam('isAjax')) {
+            $block = $this->_objectManager->create('Magento\Framework\View\Layout')->getMessagesBlock();
+            $block->setMessages($this->messageManager->getMessages(true));
+
+            $this->getResponse()->setBody(json_encode(
+                [
+                    'messages' => $block->getGroupedHtml(),
+                    'error' => $hasError,
+                    'model' => $model->toArray(),
+                ]
+            ));
+        } else {
+            if ($hasError || $request->getParam('back')) {
+                $this->_redirect('*/*/edit', [$this->_idKey => $model->getId()]);
+            } else {
+                $this->_redirect('*/*');
+            }
+        }
+
     }
 
     /**
@@ -286,7 +305,7 @@ abstract class Actions extends \Magento\Backend\App\Action
     protected function _massStatusAction()
     {
         $ids = $this->getRequest()->getParam($this->_idKey);
-        
+
         if (!is_array($ids)) {
             $ids = [$ids];
         }
@@ -382,15 +401,15 @@ abstract class Actions extends \Magento\Backend\App\Action
      */
     protected function _getModel($load = true)
     {
-    	if (is_null($this->_model)) {
-    		$this->_model = $this->_objectManager->create($this->_modelClass);
+        if (is_null($this->_model)) {
+            $this->_model = $this->_objectManager->create($this->_modelClass);
 
             $id = (int)$this->getRequest()->getParam($this->_idKey);
-		    if ($id && $load) {
-		        $this->_model->load($id);
-		    }
-    	}
-    	return $this->_model;
+            if ($id && $load) {
+                $this->_model->load($id);
+            }
+        }
+        return $this->_model;
     }
 
 }

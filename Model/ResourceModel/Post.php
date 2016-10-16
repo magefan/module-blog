@@ -59,18 +59,26 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return $this
      */
-    protected function _beforeDelete(\Magento\Framework\Model\AbstractModel $object)
-    {
+    protected function _beforeDelete(
+        \Magento\Framework\Model\AbstractModel $object
+    ){
         $condition = ['post_id = ?' => (int)$object->getId()];
-
-        $this->getConnection()->delete($this->getTable('magefan_blog_post_store'), $condition);
-        $this->getConnection()->delete($this->getTable('magefan_blog_post_category'), $condition);
-        $this->getConnection()->delete($this->getTable('magefan_blog_post_relatedproduct'), $condition);
-
-        $this->getConnection()->delete($this->getTable('magefan_blog_post_relatedpost'), $condition);
-        $this->getConnection()->delete($this->getTable('magefan_blog_post_relatedpost'),
-            ['related_id = ?' => (int)$object->getId()]
-        );
+        $tableSufixs = [
+            'store',
+            'category',
+            'tag',
+            'relatedproduct',
+            'relatedpost',
+            'relatedpost',
+        ];
+        foreach ($tableSufixs as $sufix) {
+            $this->getConnection()->delete(
+                $this->getTable('magefan_blog_post_' . $sufix),
+                ($sufix == 'relatedpost')
+                    ? ['related_id = ?' => (int)$object->getId()]
+                    : $condition
+            );
+        }
 
         return parent::_beforeDelete($object);
     }
@@ -133,29 +141,58 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_store', 'store_id');
 
-        $newIds = (array)$object->getCategories();
+        /* Save category & tag links */
+        foreach (['category' => 'categories', 'tag' => 'tags'] as $linkType => $dataKey) {
+            $newIds = (array)$object->getData($dataKey);
+            foreach($newIds as $key => $id) {
+                if (!$id) { // e.g.: zero
+                    unset($newIds[$key]);
+                }
+            }
+            if (is_array($newIds)) {
+                $lookup = 'lookup' . ucfirst($linkType) . 'Ids';
+                $oldIds = $this->$lookup($object->getId());
+                $this->_updateLinks(
+                    $object,
+                    $newIds,
+                    $oldIds,
+                    'magefan_blog_post_' . $linkType,
+                    $linkType . '_id'
+                );
+            }
+        }
+
+        /* Save tags links */
+        $newIds = (array)$object->getTags();
         foreach($newIds as $key => $id) {
             if (!$id) { // e.g.: zero
                 unset($newIds[$key]);
             }
         }
         if (is_array($newIds)) {
-            $oldIds = $this->lookupCategoryIds($object->getId());
-            $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_category', 'category_id');
+            $oldIds = $this->lookupTagIds($object->getId());
+            $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_tag', 'tag_id');
         }
 
-
-        $linksData = $object->getData('relatedposts_links');
-        if (is_array($linksData)) {
-            $oldIds = $this->lookupRelatedPostIds($object->getId());
-            $this->_updateLinks($object, array_keys($linksData), $oldIds, 'magefan_blog_post_relatedpost', 'related_id', $linksData);
-        }
-
-
-        $linksData = $object->getData('relatedproducts_links');
-        if (is_array($linksData)) {
-            $oldIds = $this->lookupRelatedProductIds($object->getId());
-            $this->_updateLinks($object, array_keys($linksData), $oldIds, 'magefan_blog_post_relatedproduct', 'related_id', $linksData);
+        /* Save related post & product links */
+        if ($links = $object->getData('links')) {
+            if (is_array($links)) {
+                foreach (['post', 'product'] as $linkType) {
+                    if (!empty($links[$linkType]) && is_array($links[$linkType])) {
+                        $linksData = $links[$linkType];
+                        $lookup = 'lookupRelated' . ucfirst($linkType) . 'Ids';
+                        $oldIds = $this->$lookup($object->getId());
+                        $this->_updateLinks(
+                            $object,
+                            array_keys($linksData),
+                            $oldIds,
+                            'magefan_blog_post_related' . $linkType,
+                            'related_id',
+                            $linksData
+                        );
+                    }
+                }
+            }
         }
 
         return parent::_afterSave($object);
@@ -235,6 +272,9 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             $categories = $this->lookupCategoryIds($object->getId());
             $object->setCategories($categories);
+
+            $tags = $this->lookupTagIds($object->getId());
+            $object->setTags($tags);
         }
 
         return parent::_afterLoad($object);
@@ -316,7 +356,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get store ids to which specified item is assigned
      *
-     * @param int $pageId
+     * @param int $postId
      * @return array
      */
     public function lookupStoreIds($postId)
@@ -327,7 +367,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get category ids to which specified item is assigned
      *
-     * @param int $pageId
+     * @param int $postId
      * @return array
      */
     public function lookupCategoryIds($postId)
@@ -336,9 +376,20 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Get tag ids to which specified item is assigned
+     *
+     * @param int $postId
+     * @return array
+     */
+    public function lookupTagIds($postId)
+    {
+        return $this->_lookupIds($postId, 'magefan_blog_post_tag', 'tag_id');
+    }
+
+    /**
      * Get related post ids to which specified item is assigned
      *
-     * @param int $pageId
+     * @param int $postId
      * @return array
      */
     public function lookupRelatedPostIds($postId)
@@ -349,7 +400,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get related product ids to which specified item is assigned
      *
-     * @param int $pageId
+     * @param int $postId
      * @return array
      */
     public function lookupRelatedProductIds($postId)

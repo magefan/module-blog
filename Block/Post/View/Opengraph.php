@@ -14,8 +14,6 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
 {
-    const TYPE = 'article';
-
     /**
      * Retrieve page type
      *
@@ -23,7 +21,9 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
      */
     public function getType()
     {
-        return self::TYPE;
+        return $this->stripTags(
+            $this->getPost()->getOgType()
+        );
     }
 
     /**
@@ -34,7 +34,7 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
     public function getTitle()
     {
         return $this->stripTags(
-            $this->getPost()->getTitle()
+            $this->getPost()->getOgTitle()
         );
     }
 
@@ -45,7 +45,9 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
      */
     public function getDescription()
     {
-        return $this->stripTags($this->getPost()->getMetaDescription());
+        return $this->stripTags(
+            $this->getPost()->getOgDescription()
+        );
     }
 
     /**
@@ -67,7 +69,10 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
      */
     public function getImage()
     {
-        $image = $this->getPost()->getFeaturedImage();
+        $image = $this->getPost()->getOgImage();
+        if (!$image) {
+            $image = $this->getPost()->getFeaturedImage();
+        }
         if (!$image) {
             $content = $this->getContent();
             $match = null;

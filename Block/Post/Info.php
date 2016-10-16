@@ -15,7 +15,7 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Info extends \Magento\Framework\View\Element\Template
 {
-	/**
+    /**
      * Block template file
      * @var string
      */
@@ -43,7 +43,7 @@ class Info extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
-	
+
     /**
      * Retrieve 1 if author page is enabled
      * @return int

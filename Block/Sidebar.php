@@ -26,7 +26,7 @@ class Sidebar extends \Magento\Framework\View\Element\Text
         $this->setText('');
         $childNames = $this->getChildNames();
 
-        usort($childNames, array($this, 'sortChilds'));
+        usort($childNames, [$this, 'sortChilds']);
 
         $layout = $this->getLayout();
         foreach ($childNames as $child) {

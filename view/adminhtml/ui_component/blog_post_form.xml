@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">blog_post_form.post_form_data_source</item>
+            <item name="deps" xsi:type="string">blog_post_form.post_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Post Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">blog_post_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="post_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magefan\Blog\Ui\DataProvider\Post\Form\PostDataProvider</argument>
+            <argument name="name" xsi:type="string">post_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">post_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="blog/post/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="post_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">post_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Post</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">is_active</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Post Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <container name="container_categories">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataScope" xsi:type="string"></item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+            <field name="categories">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CategoryTree</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Categories</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="component" xsi:type="string">Magefan_Blog/js/components/new-category</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="dataScope" xsi:type="string">categories</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="chipsEnabled" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="index=create_category:responseData" xsi:type="string">setParsed</item>
+                            <item name="newOption" xsi:type="string">toggleOptionSelected</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <container name="create_category_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">New Category</item>
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="template" xsi:type="string">ui/form/components/button/container</item>
+
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.create_category_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.create_category_modal.create_category</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.create_category_modal.create_category</item>
+                                <item name="actionName" xsi:type="string">resetForm</item>
+                            </item>
+                        </item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="provider" xsi:type="boolean">false</item>
+                        <item name="source" xsi:type="string">post</item>
+                        <item name="displayArea" xsi:type="string">insideGroup</item>
+                    </item>
+                </argument>
+            </container>
+        </container>
+        <field name="content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"/>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">content</item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="additional_options">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Additional Options</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <field name="featured_img">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="label" xsi:type="string" translate="true">Featured Image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="blog/post_upload/featuredImg"/>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+        <field name="publish_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Publish Date</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">publish_time</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="author_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\Author</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Author</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">author_id</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </field>
+        <container name="container_tags">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataScope" xsi:type="string"></item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+            <field name="tags">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\Tag</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Tags</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="component" xsi:type="string">Magefan_Blog/js/components/new-tag</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="dataScope" xsi:type="string">tags</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="chipsEnabled" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item><!--default is true -->
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">true</item><!--default is true -->
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="sortOrder" xsi:type="number">40</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="index=create_tag:responseData" xsi:type="string">setParsed</item>
+                            <item name="newOption" xsi:type="string">toggleOptionSelected</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <container name="create_tag_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">New Tag</item>
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                        <!-- <item name="componentType" xsi:type="string">container</item> -->
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="template" xsi:type="string">ui/form/components/button/container</item>
+
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.create_tag_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.create_tag_modal.create_tag</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.create_tag_modal.create_tag</item>
+                                <item name="actionName" xsi:type="string">resetForm</item>
+                            </item>
+                        </item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="provider" xsi:type="boolean">false</item>
+                        <item name="source" xsi:type="string">post</item>
+                        <item name="displayArea" xsi:type="string">insideGroup</item>
+                    </item>
+                </argument>
+            </container>
+        </container>
+    </fieldset>
+    <fieldset name="search_engine_optimisation">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Search Engine Optimisation</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <field name="identifier">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Key</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">identifier</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+        <field name="meta_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Meta Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">meta_title</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="meta_keywords">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Meta Keywords</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">meta_keywords</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </field>
+        <field name="meta_description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Meta Description</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">meta_description</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="og_metadata">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Open Graph Metadata</item>
+                <item name="sortOrder" xsi:type="number">40</item>
+            </item>
+        </argument>
+        <field name="og_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OG Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">og_title</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="notice" xsi:type="string" translate="true">Leave blank to use Meta Title by default.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="og_description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OG Description</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">og_description</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="notice" xsi:type="string" translate="true">Leave blank to use Meta Description by default.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="og_img">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="label" xsi:type="string" translate="true">OG Image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="blog/post_upload/ogImg"/>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="notice" xsi:type="string" translate="true">Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="og_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OG Type</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">og_type</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="notice" xsi:type="string" translate="true">Leave blank to use "article" type by default.</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+    <fieldset name="websites" class="Magento\Store\Ui\Component\Form\Fieldset\Websites">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Post in Websites</item>
+                <item name="sortOrder" xsi:type="number">50</item>
+            </item>
+        </argument>
+        <field name="storeviews">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">store_ids</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="related">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Related Posts and Products</item>
+                <item name="sortOrder" xsi:type="number">60</item>
+            </item>
+        </argument>
+        <fieldset name="post">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Related Posts</item>
+                    <item name="additionalClasses" xsi:type="string">admin__fieldset-section</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+
+            <container name="button_set">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="boolean">false</item>
+                        <item name="content" xsi:type="string" translate="true">Related posts are shown to customers in addition to the item the customer is looking at.</item>
+                        <item name="template" xsi:type="string">ui/form/components/complex</item>
+                    </item>
+                </argument>
+                <container name="button_post">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Add Related Post</item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.related.post.modal</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.related.post.modal.blog_related_post_listing</item>
+                                    <item name="actionName" xsi:type="string">render</item>
+                                </item>
+                            </item>
+                            <item name="provider" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                </container>
+            </container>
+
+            <modal name="modal">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string"></item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/modal/modal-component</item>
+                        <item name="options" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Add Related Posts</item>
+                            <item name="buttons" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Cancel</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Add Selected Posts</item>
+                                    <item name="class" xsi:type="string">action-primary</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="targetName" xsi:type="string">index=blog_related_post_listing</item>
+                                            <item name="actionName" xsi:type="string">save</item>
+                                        </item>
+                                        <item name="1" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <insertListing name="blog_related_post_listing">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="autoRender" xsi:type="boolean">false</item>
+                            <item name="dataScope" xsi:type="string">blog_related_post_listing</item>
+                            <item name="externalProvider" xsi:type="string">blog_related_post_listing.blog_related_post_listing_data_source</item>
+                            <item name="selectionsProvider" xsi:type="string">blog_related_post_listing.blog_related_post_listing.post_columns.ids</item>
+                            <item name="ns" xsi:type="string">blog_related_post_listing</item>
+                            <item name="render_url" xsi:type="url" path="mui/index/render" />
+                            <item name="realTimeLink" xsi:type="boolean">true</item>
+                            <item name="dataLinks" xsi:type="array">
+                                <item name="imports" xsi:type="boolean">false</item>
+                                <item name="exports" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="behaviourType" xsi:type="string">simple</item>
+                            <item name="externalFilterMode" xsi:type="boolean">true</item>
+                            <item name="imports" xsi:type="array">
+                                <item name="postId" xsi:type="string">${ $.provider }:data.post.current_post_id</item>
+                            </item>
+                            <item name="exports" xsi:type="array">
+                                <item name="postId" xsi:type="string">${ $.externalProvider }:data.post.current_post_id</item>
+                            </item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/form/components/insert-listing</item>
+                        </item>
+                    </argument>
+                </insertListing>
+            </modal>
+
+            <dynamicRows name="post">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                        <item name="componentType" xsi:type="string">dynamicRows</item>
+
+                        <item name="label" xsi:type="boolean">false</item>
+                        <item name="columnsHeader" xsi:type="boolean">false</item>
+                        <item name="columnsHeaderAfterRender" xsi:type="boolean">true</item>
+                        <item name="renderDefaultRecord" xsi:type="boolean">false</item>
+                        <item name="template" xsi:type="string">ui/dynamic-rows/templates/grid</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/dynamic-rows-grid</item>
+                        <item name="addButton" xsi:type="boolean">false</item>
+                        <item name="recordTemplate" xsi:type="string">record</item>
+                        <item name="dataScope" xsi:type="string">data.links</item>
+                        <item name="deleteButtonLabel" xsi:type="string" translate="true">Remove</item>
+                        <item name="dataProvider" xsi:type="string">data.blog_related_post_listing</item>
+                        <item name="map" xsi:type="array">
+                            <item name="id" xsi:type="string">post_id</item>
+                            <item name="title" xsi:type="string">title</item>
+                            <item name="status" xsi:type="string">status</item>
+                        </item>
+                        <item name="links" xsi:type="array">
+                            <item name="insertData" xsi:type="string">${ $.provider }:${ $.dataProvider }</item>
+                        </item>
+
+                        <item name="sortOrder" xsi:type="string">2</item>
+                    </item>
+                </argument>
+                <container name="record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                            <!-- <item name="componentType" xsi:type="string">container</item> -->
+                            <!-- <item name="positionProvider" xsi:type="string">attribute_options.position</item> -->
+                            <item name="dataScope" xsi:type="string"></item>
+                        </item>
+                    </argument>
+                    <field name="id">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">id</item>
+                                <item name="fit" xsi:type="boolean">false</item>
+                                <item name="label" xsi:type="string" translate="true">ID</item>
+                                <item name="sortOrder" xsi:type="string">10</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="title">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">title</item>
+                                <item name="fit" xsi:type="boolean">false</item>
+                                <item name="label" xsi:type="string" translate="true">Title</item>
+                                <item name="sortOrder" xsi:type="string">20</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <actionDelete name="actionDelete">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="actionDelete" xsi:type="string">data-grid-actions-cell</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Actions</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="sortOrder" xsi:type="string">80</item>
+                            </item>
+                        </argument>
+                    </actionDelete>
+                    <field name="position">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="dataType" xsi:type="string">number</item>
+                                <item name="dataScope" xsi:type="string">position</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="label" xsi:type="string" translate="true">Thumbnail</item>
+                                <item name="sortOrder" xsi:type="string">90</item>
+                                <item name="visible" xsi:type="boolean">false</item>
+                            </item>
+                        </argument>
+                    </field>
+                </container>
+            </dynamicRows>
+        </fieldset>
+
+        <fieldset name="product">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Related Products</item>
+                    <item name="additionalClasses" xsi:type="string">admin__fieldset-section</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+
+            <container name="button_set">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="boolean">false</item>
+                        <item name="content" xsi:type="string" translate="true">Related products are shown to customers in addition to the item the customer is looking at.</item>
+                        <item name="template" xsi:type="string">ui/form/components/complex</item>
+                    </item>
+                </argument>
+                <container name="button_product">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Add Related Product</item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.related.product.modal</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">blog_post_form.blog_post_form.related.product.modal.blog_related_product_listing</item>
+                                    <item name="actionName" xsi:type="string">render</item>
+                                </item>
+                            </item>
+                            <item name="provider" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                </container>
+            </container>
+
+            <modal name="modal">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string"></item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/modal/modal-component</item>
+                        <item name="options" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Add Related Products</item>
+                            <item name="buttons" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Cancel</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="text" xsi:type="string" translate="true">Add Selected Products</item>
+                                    <item name="class" xsi:type="string">action-primary</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="targetName" xsi:type="string">index=blog_related_product_listing</item>
+                                            <item name="actionName" xsi:type="string">save</item>
+                                        </item>
+                                        <item name="1" xsi:type="string">closeModal</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <insertListing name="blog_related_product_listing">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="autoRender" xsi:type="boolean">false</item>
+                            <item name="dataScope" xsi:type="string">blog_related_product_listing</item>
+                            <item name="externalProvider" xsi:type="string">blog_related_product_listing.blog_related_product_listing_data_source</item>
+                            <item name="selectionsProvider" xsi:type="string">blog_related_product_listing.blog_related_product_listing.product_columns.ids</item>
+                            <item name="ns" xsi:type="string">blog_related_product_listing</item>
+                            <item name="render_url" xsi:type="url" path="mui/index/render" />
+                            <item name="realTimeLink" xsi:type="boolean">true</item>
+                            <item name="dataLinks" xsi:type="array">
+                                <item name="imports" xsi:type="boolean">false</item>
+                                <item name="exports" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="behaviourType" xsi:type="string">simple</item>
+                            <item name="externalFilterMode" xsi:type="boolean">true</item>
+                            <item name="imports" xsi:type="array">
+                                <item name="postId" xsi:type="string">${ $.provider }:data.post.current_post_id</item>
+                            </item>
+                            <item name="exports" xsi:type="array">
+                                <item name="postId" xsi:type="string">${ $.externalProvider }:data.post.current_post_id</item>
+                            </item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/form/components/insert-listing</item>
+                        </item>
+                    </argument>
+                </insertListing>
+            </modal>
+
+            <dynamicRows name="product">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                        <item name="componentType" xsi:type="string">dynamicRows</item>
+
+                        <item name="label" xsi:type="boolean">false</item>
+                        <item name="columnsHeader" xsi:type="boolean">false</item>
+                        <item name="columnsHeaderAfterRender" xsi:type="boolean">true</item>
+                        <item name="renderDefaultRecord" xsi:type="boolean">false</item>
+                        <item name="template" xsi:type="string">ui/dynamic-rows/templates/grid</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/dynamic-rows-grid</item>
+                        <item name="addButton" xsi:type="boolean">false</item>
+                        <item name="recordTemplate" xsi:type="string">record</item>
+                        <item name="dataScope" xsi:type="string">data.links</item>
+                        <item name="deleteButtonLabel" xsi:type="string" translate="true">Remove</item>
+                        <item name="dataProvider" xsi:type="string">data.blog_related_product_listing</item>
+                        <item name="map" xsi:type="array">
+                            <item name="id" xsi:type="string">entity_id</item>
+                            <item name="name" xsi:type="string">name</item>
+                            <item name="status" xsi:type="string">status</item>
+                        </item>
+                        <item name="links" xsi:type="array">
+                            <item name="insertData" xsi:type="string">${ $.provider }:${ $.dataProvider }</item>
+                        </item>
+
+                        <item name="sortOrder" xsi:type="string">2</item>
+                    </item>
+                </argument>
+                <container name="record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                            <item name="dataScope" xsi:type="string"></item>
+                        </item>
+                    </argument>
+                    <field name="id">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">id</item>
+                                <item name="fit" xsi:type="boolean">false</item>
+                                <item name="label" xsi:type="string" translate="true">ID</item>
+                                <item name="sortOrder" xsi:type="string">10</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="name">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/text</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="dataScope" xsi:type="string">name</item>
+                                <item name="fit" xsi:type="boolean">false</item>
+                                <item name="label" xsi:type="string" translate="true">Name</item>
+                                <item name="sortOrder" xsi:type="string">30</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <actionDelete name="actionDelete">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="actionDelete" xsi:type="string">data-grid-actions-cell</item>
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Actions</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="sortOrder" xsi:type="string">80</item>
+                            </item>
+                        </argument>
+                    </actionDelete>
+                    <field name="position">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="formElement" xsi:type="string">input</item>
+                                <item name="dataType" xsi:type="string">number</item>
+                                <item name="dataScope" xsi:type="string">position</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="label" xsi:type="string" translate="true">Thumbnail</item>
+                                <item name="sortOrder" xsi:type="string">90</item>
+                                <item name="visible" xsi:type="boolean">false</item>
+                            </item>
+                        </argument>
+                    </field>
+                </container>
+            </dynamicRows>
+        </fieldset>
+    </fieldset>
+    <fieldset name="design">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Design</item>
+                <item name="sortOrder" xsi:type="number">70</item>
+            </item>
+        </argument>
+        <field name="page_layout">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Model\Page\Source\PageLayout</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Layout</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">page_layout</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                </item>
+            </argument>
+        </field>
+        <field name="layout_update_xml">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Layout Update XML</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">layout_update_xml</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="custom_design_update">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Custom Design Update</item>
+                <item name="sortOrder" xsi:type="number">80</item>
+            </item>
+        </argument>
+        <field name="custom_theme_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">From</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">custom_theme_from</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-date" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="custom_theme_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">To</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">custom_theme_to</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-date" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="custom_theme">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Model\Page\Source\Theme</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">New Theme</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">custom_theme</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                </item>
+            </argument>
+        </field>
+        <field name="custom_layout">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Model\Page\Source\PageLayout</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">New Layout</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">custom_layout</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                </item>
+            </argument>
+        </field>
+        <field name="custom_layout_update_xml">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">New Layout Update XML</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">custom_layout_update_xml</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <modal name="create_category_modal">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="component" xsi:type="string">Magento_Ui/js/modal/modal-component</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" xsi:type="string">New Category</item>
+                    <item name="type" xsi:type="string">slide</item>
+                </item>
+                <item name="imports" xsi:type="array">
+                    <item name="state" xsi:type="string">!index=create_category:responseStatus</item>
+                </item>
+            </item>
+        </argument>
+        <container name="create_category">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true"></item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/insert-form</item>
+                    <item name="dataScope" xsi:type="string"></item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                        <param name="handle">blog_category_create</param>
+                        <param name="buttons">1</param>
+                    </item>
+                    <item name="autoRender" xsi:type="boolean">false</item>
+                    <item name="ns" xsi:type="string">blog_new_category_form</item>
+                    <item name="externalProvider" xsi:type="string">blog_new_category_form.blog_new_category_form_data_source</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                    <item name="formSubmitType" xsi:type="string">ajax</item>
+
+                </item>
+            </argument>
+        </container>
+    </modal>
+    <modal name="create_tag_modal">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="component" xsi:type="string">Magento_Ui/js/modal/modal-component</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" xsi:type="string">New Tag</item>
+                    <item name="type" xsi:type="string">slide</item>
+                </item>
+                <item name="imports" xsi:type="array">
+                    <item name="state" xsi:type="string">!index=create_tag:responseStatus</item>
+                </item>
+            </item>
+        </argument>
+        <container name="create_tag">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true"></item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/insert-form</item>
+                    <item name="dataScope" xsi:type="string"></item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                        <param name="handle">blog_tag_create</param>
+                        <param name="buttons">1</param>
+                    </item>
+                    <item name="autoRender" xsi:type="boolean">false</item>
+                    <item name="ns" xsi:type="string">blog_new_tag_form</item>
+                    <item name="externalProvider" xsi:type="string">blog_new_tag_form.blog_new_tag_form_data_source</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                    <item name="formSubmitType" xsi:type="string">ajax</item>
+                </item>
+            </argument>
+        </container>
+    </modal>
+
+
+</form>

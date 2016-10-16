@@ -236,7 +236,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get store ids to which specified item is assigned
      *
-     * @param int $pageId
+     * @param int $categoryId
      * @return array
      */
     public function lookupStoreIds($categoryId)

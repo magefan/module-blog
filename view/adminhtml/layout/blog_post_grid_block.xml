@@ -88,8 +88,8 @@
                     </block>
                     <block class="Magento\Backend\Block\Widget\Grid\Column" as="creation_time">
                         <arguments>
-                            <argument name="header" xsi:type="string" translate="true">Created</argument>
-                            <argument name="index" xsi:type="string">creation_time</argument>
+                            <argument name="header" xsi:type="string" translate="true">Published</argument>
+                            <argument name="index" xsi:type="string">publish_time</argument>
                             <argument name="type" xsi:type="string">datetime</argument>
                             <argument name="header_css_class" xsi:type="string">col-first-name</argument>
                             <argument name="column_css_class" xsi:type="string">col-first-name</argument>
@@ -104,7 +104,6 @@
                             <argument name="column_css_class" xsi:type="string">col-first-name</argument>
                         </arguments>
                     </block>
-                    
                     <block class="Magefan\Blog\Block\Adminhtml\Grid\Column\Statuses" as="status">
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Status</argument>

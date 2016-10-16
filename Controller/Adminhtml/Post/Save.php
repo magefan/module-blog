@@ -48,49 +48,45 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         }
 
         /* Prepare relative links */
-        if ($links = $request->getPost('links')) {
-
-            $jsHelper = $this->_objectManager->create('Magento\Backend\Helper\Js');
-
-            $links = is_array($links) ? $links : [];
-            $linkTypes = ['relatedposts', 'relatedproducts'];
-            foreach ($linkTypes as $type) {
-
-                if (isset($links[$type])) {
-                    $links[$type] = $jsHelper->decodeGridSerializedInput($links[$type]);
-
-                    $model->setData($type.'_links', $links[$type]);
+        $data = $request->getPost('data');
+        $links = isset($data['links']) ? $data['links'] : null;
+        if ($links && is_array($links)) {
+            foreach (['post', 'product'] as $linkType) {
+                if (!empty($links[$linkType]) && is_array($links[$linkType])) {
+                    $linksData = [];
+                    foreach ($links[$linkType] as $item) {
+                        $linksData[$item['id']] = [
+                            'position' => $item['position']
+                        ];
+                    }
+                    $links[$linkType] = $linksData;
                 }
             }
+            $model->setData('links', $links);
         }
 
-        /* Prepare featured image */
-        $imageField = 'featured_img';
-        $fileSystem = $this->_objectManager->create('Magento\Framework\Filesystem');
-        $mediaDirectory = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
-
-        if (isset($data[$imageField]) && isset($data[$imageField]['value'])) {
-            if (isset($data[$imageField]['delete'])) {
-                unlink($mediaDirectory->getAbsolutePath() . $data[$imageField]['value']);
-                $model->setData($imageField, '');
+        /* Prepare images */
+        $data = $model->getData();
+        foreach (['featured_img', 'og_img'] as $key) {
+            if (isset($data[$key]) && is_array($data[$key])) {
+                if (!empty($data[$key]['delete'])) {
+                    $model->setData($key, null);
+                } else {
+                    if (isset($data[$key][0]['name']) && isset($data[$key][0]['tmp_name'])) {
+                        $image = $data[$key][0]['name'];
+                        $model->setData($key, Post::BASE_MEDIA_PATH . DIRECTORY_SEPARATOR . $image);
+                        $imageUploader = $this->_objectManager->get(
+                            'Magefan\Blog\ImageUpload'
+                        );
+                        $imageUploader->moveFileFromTmp($image);
+                    } else {
+                        if (isset($data[$key][0]['name'])) {
+                            $model->setData($key, $data[$key][0]['name']);
+                        }
+                    }
+                }
             } else {
-                $model->unsetData($imageField);
-            }
-        }
-        try {
-            $uploader = $this->_objectManager->create('Magento\MediaStorage\Model\File\UploaderFactory');
-            $uploader = $uploader->create(['fileId' => 'post['.$imageField.']']);
-            $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
-            $uploader->setAllowRenameFiles(true);
-            $uploader->setFilesDispersion(true);
-            $uploader->setAllowCreateFolders(true);
-            $result = $uploader->save(
-                $mediaDirectory->getAbsolutePath(Post::BASE_MEDIA_PATH)
-            );
-            $model->setData($imageField, Post::BASE_MEDIA_PATH . $result['file']);
-        } catch (\Exception $e) {
-            if ($e->getCode() != \Magento\Framework\File\Uploader::TMP_NAME_EMPTY) {
-                throw new \Exception($e->getMessage());
+                $model->setData($key, null);
             }
         }
     }

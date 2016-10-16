@@ -1,45 +1,18 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
-    </head>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
     <update handle="editor"/>
     <body>
         <referenceContainer name="content">
-            <block class="Magefan\Blog\Block\Adminhtml\Post\Edit" name="blog.post.edit" />
-        </referenceContainer>
-        <referenceContainer name="left">
-            <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tabs" name="blog.post.edit.tabs">
-                <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Main" name="blog.post.edit.tab.main"/>
-                <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Content" name="blog.post.edit.tab.content"/>
-                <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Meta" name="blog.post.edit.tab.meta"/>
-                <block class="Magefan\Blog\Block\Adminhtml\Post\Edit\Tab\Design" name="blog.post.edit.tab.design"/>
-
-                <action method="addTab">
-                    <argument name="name" xsi:type="string">main_section</argument>
-                    <argument name="block" xsi:type="string">blog.post.edit.tab.main</argument>
-                </action>
-                <action method="addTab">
-                    <argument name="name" xsi:type="string">content_section</argument>
-                    <argument name="block" xsi:type="string">blog.post.edit.tab.content</argument>
-                </action>
-                <action method="addTab">
-                    <argument name="name" xsi:type="string">meta_section</argument>
-                    <argument name="block" xsi:type="string">blog.post.edit.tab.meta</argument>
-                </action>
-                <action method="addTab">
-                    <argument name="name" xsi:type="string">design_section</argument>
-                    <argument name="block" xsi:type="string">blog.post.edit.tab.design</argument>
-                </action>
-            </block>
+            <uiComponent name="blog_post_form"/>
         </referenceContainer>
     </body>
 </page>

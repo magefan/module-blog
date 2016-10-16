@@ -55,6 +55,13 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_authorFactory;
 
     /**
+     * Tag factory
+     *
+     * @var \Magefan\Blog\Model\TagFactory
+     */
+    protected $_tagFactory;
+
+    /**
      * Config primary
      *
      * @var \Magento\Framework\App\State
@@ -91,12 +98,18 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_authorId;
 
     /**
+     * @var int
+     */
+    protected $_tagId;
+
+    /**
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
+     * @param \Magefan\Blog\Model\TagFactory $tagFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\ResponseInterface $response
@@ -108,6 +121,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
+        \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response
     ) {
@@ -117,6 +131,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
         $this->_authorFactory = $authorFactory;
+        $this->_tagFactory = $tagFactory;
         $this->_storeManager = $storeManager;
         $this->_response = $response;
     }
@@ -151,6 +166,8 @@ class Router implements \Magento\Framework\App\RouterInterface
                         $pathInfo[1] = Url::CONTROLLER_SEARCH;
                     } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_AUTHOR)) {
                         $pathInfo[1] = Url::CONTROLLER_AUTHOR;
+                    } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_TAG)) {
+                        $pathInfo[1] = Url::CONTROLLER_TAG;
                     } elseif (count($pathInfo) == 1) {
                         if ($this->_isArchiveIdentifier($pathInfo[1])) {
                             $pathInfo[2] = $pathInfo[1];
@@ -249,6 +266,19 @@ class Router implements \Magento\Framework\App\RouterInterface
                     $success = true;
                     break;
 
+                case Url::CONTROLLER_TAG :
+                    if (!$tagId = $this->_getTagId($info[1])) {
+                        return null;
+                    }
+
+                    $request->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_TAG)
+                        ->setActionName('view')
+                        ->setParam('id', $tagId);
+
+                    $success = true;
+                    break;
+
                 case Url::CONTROLLER_SEARCH :
                     $request->setModuleName('blog')
                         ->setControllerName(Url::CONTROLLER_SEARCH)
@@ -334,6 +364,23 @@ class Router implements \Magento\Framework\App\RouterInterface
         }
 
         return $this->_authorId;
+    }
+
+    /**
+     * Retrieve tag id by identifier
+     * @param  string $identifier
+     * @return int
+     */
+    protected function _getTagId($identifier)
+    {
+        if (is_null($this->_tagId)) {
+            $tag = $this->_tagFactory->create();
+            $this->_tagId = $tag->checkIdentifier(
+                $identifier
+            );
+        }
+
+        return $this->_tagId;
     }
 
     /**

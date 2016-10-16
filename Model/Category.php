@@ -150,9 +150,11 @@ class Category extends \Magento\Framework\Model\AbstractModel
      */
     public function getParentId()
     {
-        if ($pIds = $this->getParentIds()) {
-            return $pIds[count($pIds) - 1];
+        $parentIds = $this->getParentIds();
+        if ($parentIds) {
+            return $parentIds[count($parentIds) - 1];
         }
+
         return 0;
     }
 
@@ -260,6 +262,39 @@ class Category extends \Magento\Framework\Model\AbstractModel
     public function getCategoryUrl()
     {
         return $this->_url->getUrl($this, URL::CONTROLLER_CATEGORY);
+    }
+
+    /**
+     * Retrieve meta title
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        $title = $this->getData('meta_title');
+        if (!$title) {
+            $title = $this->getData('title');
+        }
+
+        return trim($title);
+    }
+
+    /**
+     * Retrieve meta description
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        $desc = $this->getData('meta_description');
+        if (!$desc) {
+            $desc = $this->getData('content');
+        }
+
+        $desc = strip_tags($desc);
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 0, 160);
+        }
+
+        return trim($desc);
     }
 
     /**

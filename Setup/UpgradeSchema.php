@@ -169,6 +169,117 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         }
 
+        if (version_compare($version, '2.3.0') < 0) {
+            /* Add meta title field to posts tabel */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'meta_title',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Post Meta Title',
+                    'after' => 'title'
+                ]
+            );
+
+            /* Add og tags fields to post tabel */
+            foreach (['type', 'img', 'description', 'title'] as $type) {
+                $connection->addColumn(
+                    $setup->getTable('magefan_blog_post'),
+                    'og_' . $type,
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 255,
+                        'nullable' => true,
+                        'comment' => 'Post OG ' . ucfirst($type),
+                        'after' => 'identifier'
+                    ]
+                );
+            }
+
+            /* Add meta title field to category tabel */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'meta_title',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Category Meta Title',
+                    'after' => 'title'
+                ]
+            );
+
+            /**
+             * Create table 'magefan_blog_tag'
+             */
+            $table = $setup->getConnection()->newTable(
+                $setup->getTable('magefan_blog_tag')
+            )->addColumn(
+                'tag_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'nullable' => false, 'primary' => true],
+                'Tag ID'
+            )->addColumn(
+                'title',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => true],
+                'Tag Title'
+            )->addColumn(
+                'identifier',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                100,
+                ['nullable' => true, 'default' => null],
+                'Tag String Identifier'
+            )->addIndex(
+                $setup->getIdxName('magefan_blog_tag', ['identifier']),
+                ['identifier']
+            )->setComment(
+                'Magefan Blog Tag Table'
+            );
+            $setup->getConnection()->createTable($table);
+
+            /**
+             * Create table 'magefan_blog_post_tag'
+             */
+            $table = $setup->getConnection()->newTable(
+                $setup->getTable('magefan_blog_post_tag')
+            )->addColumn(
+                'post_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'primary' => true],
+                'Post ID'
+            )->addColumn(
+                'tag_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'primary' => true],
+                'Tag ID'
+            )->addIndex(
+                $setup->getIdxName('magefan_blog_post_tag', ['tag_id']),
+                ['tag_id']
+            )->addForeignKey(
+                $setup->getFkName('magefan_blog_post_tag', 'post_id', 'magefan_blog_post', 'post_id'),
+                'post_id',
+                $setup->getTable('magefan_blog_post'),
+                'post_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            )->addForeignKey(
+                $setup->getFkName('magefan_blog_post_tag', 'tag_id', 'magefan_blog_tag', 'tag_id'),
+                'tag_id',
+                $setup->getTable('magefan_blog_tag'),
+                'tag_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            )->setComment(
+                'Magefan Blog Post To Category Linkage Table'
+            );
+            $setup->getConnection()->createTable($table);
+        }
+
         $setup->endSetup();
     }
 }

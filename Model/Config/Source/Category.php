@@ -50,11 +50,11 @@ class Category implements \Magento\Framework\Option\ArrayInterface
                 ->getTreeOrderedArray();
 
             foreach ($collection as $item) {
-                $this->options[] = array(
+                $this->options[] = [
                     'label' => $this->_getSpaces($item->getLevel()) . ' ' . $item->getTitle() .
                         ($item->getIsActive() ? '' : ' ('.__('Disabled').')'),
                     'value' => $item->getId(),
-                );
+                ];
             }
         }
 

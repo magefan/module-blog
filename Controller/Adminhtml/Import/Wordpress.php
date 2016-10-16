@@ -26,7 +26,7 @@ class Wordpress extends \Magento\Backend\App\Action
         $this->_addBreadcrumb($title, $title);
 
         $config = new \Magento\Framework\DataObject(
-            (array)$this->_getSession()->getData('import_wordpress_form_data', true) ?: array()
+            (array)$this->_getSession()->getData('import_wordpress_form_data', true) ?: []
         );
 
         $this->_objectManager->get('\Magento\Framework\Registry')->register('import_config', $config);

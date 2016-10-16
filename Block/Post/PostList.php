@@ -17,7 +17,25 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Block template file
      * @var string
      */
-	protected $_defaultToolbarBlock = 'Magefan\Blog\Block\Post\PostList\Toolbar';
+    protected $_defaultToolbarBlock = 'Magefan\Blog\Block\Post\PostList\Toolbar';
+
+    /**
+     * Preparing global layout
+     *
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+        $page = $this->_request->getParam(
+            \Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME
+        );
+
+        if ($page > 1) {
+            $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+        }
+
+        return parent::_prepareLayout();
+    }
 
     /**
      * Retrieve post html
@@ -26,7 +44,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getPostHtml($post)
     {
-    	return $this->getChildBlock('blog.posts.list.item')->setPost($post)->toHtml();
+        return $this->getChildBlock('blog.posts.list.item')->setPost($post)->toHtml();
     }
 
     /**

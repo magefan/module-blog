@@ -8,10 +8,10 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Magefan_Blog" setup_version="2.2.5">
+    <module name="Magefan_Blog" setup_version="2.3.0">
          <sequence>
-             <module name="Magento_Cms"/>
-             <module name="Magento_Catalog"/>
+            <module name="Magento_Cms"/>
+            <module name="Magento_Catalog"/>
         </sequence>
     </module>
 </config>

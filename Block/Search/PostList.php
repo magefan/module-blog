@@ -35,12 +35,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
         $q = $this->getQuery();
         $this->_postCollection->addFieldToFilter(
-            array('title', 'content_heading', 'content'),
-            array(
-                array('like' => '%'.$q.'%'),
-                array('like' => '%'.$q.'%'),
-                array('like' => '% '.$q.' %')
-            )
+            ['title', 'content_heading', 'content'],
+            [
+                ['like' => '%'.$q.'%'],
+                ['like' => '%'.$q.'%'],
+                ['like' => '% '.$q.' %']
+            ]
         );
     }
 

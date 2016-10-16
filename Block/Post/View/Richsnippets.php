@@ -31,7 +31,7 @@ class Richsnippets extends Opengraph
 
             $logoBlock = $this->getLayout()->getBlock('logo');
 
-            $this->_options = array(
+            $this->_options = [
                 '@context' => 'http://schema.org',
                 '@type' => 'BlogPosting',
                 '@id' => $post->getPostUrl(),
@@ -56,7 +56,7 @@ class Richsnippets extends Opengraph
                     ],
                 ],
                 'mainEntityOfPage' => $this->_url->getBaseUrl(),
-            );
+            ];
         }
 
         return $this->_options;

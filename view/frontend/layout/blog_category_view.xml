@@ -8,11 +8,12 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-	<update handle="blog_default"/>
+    <update handle="blog_default"/>
     <update handle="blog_post_list"/>
     <body>
         <referenceContainer name="content">
-        	<block class="Magefan\Blog\Block\Category\View" name="blog.posts.list" template="post/list.phtml" />
+            <block class="Magefan\Blog\Block\Category\Info" name="blog.posts.info" template="Magefan_Blog::category/info.phtml" before="blog.posts.list" />
+            <block class="Magefan\Blog\Block\Category\View" name="blog.posts.list" template="post/list.phtml" />
         </referenceContainer>
     </body>
 </page>

@@ -34,7 +34,7 @@ class View extends \Magento\Framework\App\Action\Action
             return;
         }
 
-        $author = $this->_initCategory();
+        $author = $this->_initAuthor();
         if (!$author) {
             $this->_forward('index', 'noroute', 'cms');
             return;
@@ -51,7 +51,7 @@ class View extends \Magento\Framework\App\Action\Action
      *
      * @return \Magefan\Blog\Model\Author || false
      */
-    protected function _initCategory()
+    protected function _initAuthor()
     {
         $id = $this->getRequest()->getParam('id');
 

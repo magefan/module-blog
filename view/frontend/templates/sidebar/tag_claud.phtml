@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog tag claud sidebar template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
+ */
+?>
+
+<?php $tags = $this->getTags(); ?>
+
+<?php if (count($tags)) { ?>
+<?php $maxCount = $this->getMaxCount() ?>
+
+<div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
+    <div class="block-title">
+        <strong><?php echo __('Tags') ?></strong>
+    </div>
+
+    <div class="tagclaud-hld">
+    <?php foreach ($tags as $tag) { ?>
+        <?php $title = $block->escapeHtml($tag->getTitle()) ?>
+        <span class="<?php echo $this->getTagClass($tag) ?>">
+            <a href="<?php echo $tag->getTagUrl() ?>" title="<?php echo $title ?>">
+                <?php echo $title ?>
+            </a>
+        </span>
+    <?php } ?>
+    </div>
+</div>
+<?php } ?>

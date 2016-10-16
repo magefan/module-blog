@@ -67,6 +67,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['post_id'] = 'main_table.post_id';
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';
+        $this->_map['fields']['tag'] = 'tag_table.tag_id';
     }
 
     /**
@@ -143,6 +144,27 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Add tag filter to collection
+     * @param array|int|\Magefan\Blog\Model\Tag  $tag
+     * @return $this
+     */
+    public function addTagFilter($tag)
+    {
+        if (!$this->getFlag('tag_filter_added')) {
+            if ($tag instanceof \Magefan\Blog\Model\Tag) {
+                $tag = [$tag->getId()];
+            }
+
+            if (!is_array($tag)) {
+                $tag = [$tag];
+            }
+
+            $this->addFilter('tag', ['in' => $tag], 'public');
+        }
+        return $this;
+    }
+
+    /**
      * Add author filter to collection
      * @param array|int|\Magefan\Blog\Model\Author  $author
      * @return $this
@@ -172,7 +194,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         return $this
             ->addFieldToFilter('is_active', 1)
-            ->addFieldToFilter('publish_time', array('lteq' => $this->_date->gmtDate()));
+            ->addFieldToFilter('publish_time', ['lteq' => $this->_date->gmtDate()]);
     }
 
     /**
@@ -200,10 +222,12 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $items = $this->getColumnValues('post_id');
         if (count($items)) {
             $connection = $this->getConnection();
-            $select = $connection->select()->from(['cps' => $this->getTable('magefan_blog_post_store')])
+            $tableName = $this->getTable('magefan_blog_post_store');
+            $select = $connection->select()
+                ->from(['cps' => $tableName])
                 ->where('cps.post_id IN (?)', $items);
-            $result = $connection->fetchPairs($select);
 
+            $result = $connection->fetchPairs($select);
             if ($result) {
                 foreach ($this as $item) {
                     $postId = $item->getData('post_id');
@@ -227,23 +251,31 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 }
             }
 
-            $select = $connection->select()->from(['cps' => $this->getTable('magefan_blog_post_category')])
-                ->where('cps.post_id IN (?)', $items);
-            $result = $connection->fetchAll($select);
+            $map = [
+                'category' => 'categories',
+                'tag' => 'tags',
+            ];
 
-            if ($result) {
-                $categories = [];
-                foreach($result as $item) {
-                    $categories[$item['post_id']][] = $item['category_id'];
-                }
+            foreach ($map as $key => $property) {
+                $tableName = $this->getTable('magefan_blog_post_' . $key);
+                $select = $connection->select()
+                    ->from(['cps' => $tableName])
+                    ->where('cps.post_id IN (?)', $items);
 
-                foreach ($this as $item) {
-                    $postId = $item->getData('post_id');
-                    if (isset($categories[$postId])) {
-                        $item->setData('categories', $categories[$postId]);
+                $result = $connection->fetchAll($select);
+                if ($result) {
+                    $data = [];
+                    foreach($result as $item) {
+                        $data[$item['post_id']][] = $item[$key . '_id'];
+                    }
+
+                    foreach ($this as $item) {
+                        $postId = $item->getData('post_id');
+                        if (isset($data[$postId])) {
+                            $item->setData($property, $data[$postId]);
+                        }
                     }
                 }
-
             }
         }
 
@@ -258,7 +290,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _renderFiltersBefore()
     {
-        foreach(array('store', 'category') as $key) {
+        foreach(['store', 'category', 'tag'] as $key) {
             if ($this->getFilter($key)) {
                 $this->getSelect()->join(
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],

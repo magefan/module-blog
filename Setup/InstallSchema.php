@@ -381,7 +381,6 @@ class InstallSchema implements InstallSchemaInterface
             'Magefan Blog Post To Post Linkage Table'
         );
         $installer->getConnection()->createTable($table);
-        
 
         $installer->endSetup();
     }

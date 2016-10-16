@@ -51,7 +51,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
         if ($category) {
             $this->_addBreadcrumbs($category);
             $this->pageConfig->addBodyClass('blog-category-' . $category->getIdentifier());
-            $this->pageConfig->getTitle()->set($category->getTitle());
+            $this->pageConfig->getTitle()->set($category->getMetaTitle());
             $this->pageConfig->setKeywords($category->getMetaKeywords());
             $this->pageConfig->setDescription($category->getMetaDescription());
             $this->pageConfig->addRemotePageAsset(

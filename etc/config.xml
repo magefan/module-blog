@@ -26,6 +26,9 @@
                     <type>facebook</type>
                     <number_of_comments>4</number_of_comments>
                 </comments>
+                <nextprev>
+                    <enabled>1</enabled>
+                </nextprev>
             </post_view>
             <post_list>
                 <posts_per_page>10</posts_per_page>
@@ -53,6 +56,11 @@
                     <enabled>1</enabled>
                     <sort_order>40</sort_order>
                 </archive>
+                <tag_claud>
+                    <enabled>1</enabled>
+                    <!-- <max_tags_number>10</max_tags_number> -->
+                    <sort_order>45</sort_order>
+                </tag_claud>
                 <rss_feed>
                     <title>Blog Rss</title>
                     <sort_order>50</sort_order>
@@ -68,10 +76,12 @@
                 <post_route>post</post_route>
                 <category_route>category</category_route>
                 <archive_route>archive</archive_route>
+                <tag_route>tag</tag_route>
                 <author_route>author</author_route>
                 <search_route>search</search_route>
             </permalink>
             <social>
+                <add_this_enabled>1</add_this_enabled>
                 <add_this_pubid>ra-4def63cd3cf37569</add_this_pubid>
                 <add_this_language>en</add_this_language>
             </social>

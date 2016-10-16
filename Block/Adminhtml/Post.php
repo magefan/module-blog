@@ -20,7 +20,7 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _construct()
     {
-        $this->_controller = 'adminhtml';
+        $this->_controller = 'adminhtml_post';
         $this->_blockGroup = 'Magefan_Blog';
         $this->_headerText = __('Post');
         $this->_addButtonLabel = __('Add New Post');

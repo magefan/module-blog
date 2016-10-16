@@ -25,7 +25,7 @@ class View extends AbstractPost
         if ($post) {
             $this->_addBreadcrumbs($post);
             $this->pageConfig->addBodyClass('blog-post-' . $post->getIdentifier());
-            $this->pageConfig->getTitle()->set($post->getTitle());
+            $this->pageConfig->getTitle()->set($post->getMetaTitle());
             $this->pageConfig->setKeywords($post->getMetaKeywords());
             $this->pageConfig->setDescription($post->getMetaDescription());
             $this->pageConfig->addRemotePageAsset(

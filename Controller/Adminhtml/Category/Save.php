@@ -40,4 +40,20 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
         $data = $inputFilter->getUnescaped();
         $model->setData($data);
     }
+     
+    /**
+     * After model save
+     * @param  \Magefan\Blog\Model\Category $model
+     * @param  \Magento\Framework\App\Request\Http $request
+     * @return void
+     */
+    protected function _afterSave($model, $request)
+    {
+        $model->addData(
+            [
+                'parent_id' => $model->getParentId(),
+                'level' => $model->getLevel(),
+            ]
+        );
+    }
 }

@@ -48,10 +48,10 @@ class Author implements \Magento\Framework\Option\ArrayInterface
             $collection = $this->authorCollectionFactory->create();
 
             foreach ($collection as $item) {
-                $this->options[] = array(
+                $this->options[] = [
                     'label' => $item->getName(),
                     'value' => $item->getId(),
-                );
+                ];
             }
         }
 

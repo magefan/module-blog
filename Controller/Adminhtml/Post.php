@@ -43,9 +43,4 @@ class Post extends Actions
      */
     protected $_statusField     = 'is_active';
 
-    /**
-     * Save request params key
-     * @var string
-     */
-    protected $_paramsHolder 	= 'post';
 }

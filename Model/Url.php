@@ -28,6 +28,7 @@ class Url
     const CONTROLLER_AUTHOR = 'author';
     const CONTROLLER_SEARCH = 'search';
     const CONTROLLER_RSS = 'rss';
+    const CONTROLLER_TAG = 'tag';
 
 
     /**
@@ -113,6 +114,7 @@ class Url
             self::CONTROLLER_CATEGORY,
             self::CONTROLLER_ARCHIVE,
             self::CONTROLLER_AUTHOR,
+            self::CONTROLLER_TAG,
             self::CONTROLLER_SEARCH
         ] as $controllerName) {
             if ($this->getRoute($controllerName) == $route) {
@@ -161,7 +163,10 @@ class Url
             case self::PERMALINK_TYPE_DEFAULT :
                 return $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
             case self::PERMALINK_TYPE_SHORT :
-                if ($controllerName == self::CONTROLLER_SEARCH || $controllerName == self::CONTROLLER_AUTHOR) {
+                if ($controllerName == self::CONTROLLER_SEARCH
+                    || $controllerName == self::CONTROLLER_AUTHOR
+                    || $controllerName == self::CONTROLLER_TAG
+                ) {
                     return $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
                 } else {
                     return $this->getRoute() . '/' . $identifier;

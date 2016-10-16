@@ -6,6 +6,23 @@ use Magento\Store\Model\ScopeInterface;
 
 class AddThis extends \Magento\Framework\View\Element\Template
 {
+    /**
+     * Retrieve AddThis status
+     *
+     * @return boolean
+     */
+    public function getAddThisEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/social/add_this_enabled', ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Retrieve AddThis publisher id
+     *
+     * @return boolean
+     */
     public function getAddThisPubId()
     {
         return $this->_scopeConfig->getValue(
@@ -13,6 +30,11 @@ class AddThis extends \Magento\Framework\View\Element\Template
         );
     }
 
+    /**
+     * Retrieve AddThis language code
+     *
+     * @return boolean
+     */
     public function getAddThisLanguage()
     {
         return $this->_scopeConfig->getValue(
@@ -22,7 +44,7 @@ class AddThis extends \Magento\Framework\View\Element\Template
 
     public function toHtml()
     {
-        if (!$this->getAddThisPubId()) {
+        if (!$this->getAddThisEnabled() || !$this->getAddThisPubId()) {
             return '';
         }
 

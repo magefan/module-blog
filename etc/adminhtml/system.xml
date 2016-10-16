@@ -109,6 +109,14 @@
                         ]]></comment>
                     </field>
                 </group>
+
+                <group id="nextprev" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preview and Next Post</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display Prev. &amp; Next Post Links</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
             </group>
 
             <group id="post_list" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -191,7 +199,20 @@
                         <label>Sort Order</label>
                     </field>
                 </group>
-                <group id="rss_feed" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <group id="tag_claud" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tag Claud Widget</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <!-- <field id="max_tags_number" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Max. Tags Number</label>
+                    </field> -->
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                    </field>
+                </group>
+                <group id="rss_feed" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Rss Feed</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enabled</label>
@@ -257,6 +278,10 @@
                     </depends>
                     <comment>E.g.: "archive" will make the blog archive accessible from mystore.com/{blog_route}/archive/2016-02/</comment>
                 </field>
+                <field id="tag_route" translate="label comment" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tag Route</label>
+                    <comment>E.g.: "tag" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name/</comment>
+                </field>
                 <field id="author_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Author Route</label>
                     <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name/</comment>
@@ -268,10 +293,14 @@
             </group>
             <group id="social" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Social</label>
-                <field id="add_this_pubid" type="text" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="add_this_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AddThis Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_this_pubid" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>AddThis ID</label>
                 </field>
-                <field id="add_this_language" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="add_this_language" type="text" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>AddThis Language</label>
                 </field>
             </group>

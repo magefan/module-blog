@@ -75,6 +75,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_categoryCollectionFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory
+     */
+    protected $_tagCollectionFactory;
+
+    /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
     protected $_productCollectionFactory;
@@ -83,6 +88,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
      * @var \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     protected $_parentCategories;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Tag\Collection
+     */
+    protected $_relatedTags;
 
     /**
      * @var \Magefan\Blog\Model\ResourceModel\Post\Collection
@@ -97,6 +107,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
@@ -108,6 +119,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         Url $url,
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
@@ -118,6 +130,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         $this->_url = $url;
         $this->_authorFactory = $authorFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
+        $this->_tagCollectionFactory = $tagCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_relatedPostsCollection = clone($this->getCollection());
     }
@@ -210,6 +223,20 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve meta title
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        $title = $this->getData('meta_title');
+        if (!$title) {
+            $title = $this->getData('title');
+        }
+
+        return trim($title);
+    }
+
+    /**
      * Retrieve meta description
      * @return string
      */
@@ -229,6 +256,72 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve og title
+     * @return string
+     */
+    public function getOgTitle()
+    {
+        $title = $this->getData('og_title');
+        if (!$title) {
+            $title = $this->getMetaTitle();
+        }
+
+        return trim($title);
+    }
+
+    /**
+     * Retrieve og description
+     * @return string
+     */
+    public function getOgDescription()
+    {
+        $desc = $this->getData('og_description');
+        if (!$desc) {
+            $desc = $this->getMetaDescription();
+        } else {
+            $desc = strip_tags($desc);
+            if (mb_strlen($desc) > 160) {
+                $desc = mb_substr($desc, 0, 160);
+            }
+        }
+
+        return trim($desc);
+    }
+
+    /**
+     * Retrieve og type
+     * @return string
+     */
+    public function getOgType()
+    {
+        $type = $this->getData('og_type');
+        if (!$type)  {
+            $type = 'article';
+        }
+
+        return trim($type);
+    }
+
+    /**
+     * Retrieve og image url
+     * @return string
+     */
+    public function getOgImage()
+    {
+        if (!$this->hasData('og_image')) {
+
+            if ($file = $this->getData('og_img')) {
+                $image = $this->_url->getMediaUrl($file);
+            } else {
+                $image = false;
+            }
+            $this->setData('og_image', $image);
+        }
+
+        return $this->getData('og_image');
+    }
+
+    /**
      * Retrieve post parent categories
      * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
@@ -236,7 +329,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     {
         if (is_null($this->_parentCategories)) {
             $this->_parentCategories = $this->_categoryCollectionFactory->create()
-                ->addFieldToFilter('category_id', array('in' => $this->getCategories()))
+                ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
                 ->addStoreFilter($this->getStoreId())
                 ->addActiveFilter()
                 ->setOrder('position');
@@ -255,6 +348,30 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve post tags
+     * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
+     */
+    public function getRelatedTags()
+    {
+        if (is_null($this->_relatedTags)) {
+            $this->_relatedTags = $this->_tagCollectionFactory->create()
+                ->addFieldToFilter('tag_id', ['in' => $this->getTags()])
+                ->setOrder('title');
+        }
+
+        return $this->_relatedTags;
+    }
+
+    /**
+     * Retrieve post tags count
+     * @return int
+     */
+    public function getTagsCount()
+    {
+        return count($this->getRelatedTags());
+    }
+
+    /**
      * Retrieve post related posts
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
@@ -262,7 +379,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     {
         if (!$this->hasData('related_posts')) {
             $collection = $this->_relatedPostsCollection
-                ->addFieldToFilter('post_id', array('neq' => $this->getId()))
+                ->addFieldToFilter('post_id', ['neq' => $this->getId()])
                 ->addStoreFilter($this->getStoreId());
             $collection->getSelect()->joinLeft(
                 ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedpost')],
