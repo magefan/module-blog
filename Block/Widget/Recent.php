@@ -138,6 +138,12 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
             $content = mb_substr($content, 0, $p);
         }
 
-        return $this->_filterProvider->getPageFilter()->filter($content);
+        $content = $this->_filterProvider->getPageFilter()->filter($content);
+
+        $dom = new \DOMDocument();
+        $dom->loadHTML($content);
+        $content = $dom->saveHTML();
+
+        return $content;
     }
 }

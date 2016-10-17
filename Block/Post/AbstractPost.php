@@ -105,6 +105,10 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
             $content = mb_substr($content, 0, $p);
         }
 
+        $dom = new \DOMDocument();
+        $dom->loadHTML($content);
+        $content = $dom->saveHTML();
+
         return $content;
     }
 
