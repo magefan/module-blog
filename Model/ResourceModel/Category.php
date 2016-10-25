@@ -104,6 +104,9 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $oldStoreIds = $this->lookupStoreIds($object->getId());
         $newStoreIds = (array)$object->getStoreIds();
+        if (!$newStoreIds) {
+            $newStoreIds = [0];
+        }
 
         $table = $this->getTable('magefan_blog_category_store');
         $insert = array_diff($newStoreIds, $oldStoreIds);

@@ -138,6 +138,9 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $oldIds = $this->lookupStoreIds($object->getId());
         $newIds = (array)$object->getStoreIds();
+        if (!$newIds) {
+            $newIds = [0];
+        }
 
         $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_store', 'store_id');
 
