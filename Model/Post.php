@@ -472,4 +472,18 @@ class Post extends \Magento\Framework\Model\AbstractModel
         return date($format, strtotime($this->getData('update_time')));
     }
 
+    /**
+     * Temporary method to get images from some custom blog version. Do not use this method.
+     * @param  string $format
+     * @return string
+     */
+    public function getPostImage()
+    {
+        $image = $this->getData('featured_img');
+        if (!$image) {
+            $image = $this->getData('post_image');
+        }
+        return $image;
+    }
+
 }
