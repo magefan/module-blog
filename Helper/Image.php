@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace Magefan\Blog\Helper;
 
 use Magento\Framework\App\Area;
@@ -47,7 +44,7 @@ class Image extends AbstractHelper
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
-    	$this->_imageFactory = $imageFactory;
+        $this->_imageFactory = $imageFactory;
         $this->_mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->_storeManager = $storeManager;
         parent::__construct($context);
@@ -102,26 +99,26 @@ class Image extends AbstractHelper
 
     public function resize($width,$height = null)
     {
-    	if($this->_baseFile){
-			$this->_width = $width;
-			$this->_height = $height;
-			if(!$this->isCached()){
-				$path = 'blog/cache/'.$width.'x'.$height;
-				$this->_newFile = $path. '/' . $this->_baseFile;
-				$this->saveFile();
-		    }
+        if($this->_baseFile){
+            $this->_width = $width;
+            $this->_height = $height;
+            if(!$this->isCached()){
+                $path = 'blog/cache/'.$width.'x'.$height;
+                $this->_newFile = $path. '/' . $this->_baseFile;
+                $this->saveFile();
+            }
         }
         return $this;
     }
 
     public function __toString()
     {
-    	$url = "";
-    	if($this->_baseFile){
-			$url = $this->_storeManager->getStore()->getBaseUrl(
-				    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-				) . $this->_newFile;
-	    }
-		return $url;
+        $url = "";
+        if($this->_baseFile){
+            $url = $this->_storeManager->getStore()->getBaseUrl(
+                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                ) . $this->_newFile;
+        }
+        return $url;
     }
 }
