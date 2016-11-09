@@ -104,7 +104,7 @@ abstract class Actions extends \Magento\Backend\App\Action
 
         $this->_view->loadLayout();
         $this->_setActiveMenu($this->_activeMenu);
-        $title = __('Manage '.$this->_getModel(false)->getOwnTitle(true));
+        $title = __('Manage %1', $this->_getModel(false)->getOwnTitle(true));
         $this->_view->getPage()->getConfig()->getTitle()->prepend($title);
         $this->_addBreadcrumb($title, $title);
         $this->_view->renderLayout();
@@ -145,15 +145,15 @@ abstract class Actions extends \Magento\Backend\App\Action
         $title = $model->getOwnTitle();
 
         if ($model->getId()) {
-            $breadcrumbTitle = __('Edit '.$title);
+            $breadcrumbTitle = __('Edit %1', $title);
             $breadcrumbLabel = $breadcrumbTitle;
         } else {
-            $breadcrumbTitle = __('New '.$title);
-            $breadcrumbLabel = __('Create '.$title);
+            $breadcrumbTitle = __('New %1', $title);
+            $breadcrumbLabel = __('Create %1', $title);
         }
         $this->_view->getPage()->getConfig()->getTitle()->prepend(__($title));
         $this->_view->getPage()->getConfig()->getTitle()->prepend(
-            $model->getId() ? $this->_getModelName($model) : __('New '.$title)
+            $model->getId() ? $this->_getModelName($model) : __('New %1', $title)
         );
 
         $this->_addBreadcrumb($breadcrumbLabel, $breadcrumbTitle);
@@ -205,13 +205,19 @@ abstract class Actions extends \Magento\Backend\App\Action
             $model->save();
             $this->_afterSave($model, $request);
 
-            $this->messageManager->addSuccess(__($model->getOwnTitle().' has been saved.'));
+            $this->messageManager->addSuccess(__('%1 has been saved.', $model->getOwnTitle()));
             $this->_setFormData(false);
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->messageManager->addError(nl2br($e->getMessage()));
             $this->_setFormData();
         } catch (\Exception $e) {
-            $this->messageManager->addException($e, __('Something went wrong while saving this '.strtolower($model->getOwnTitle()).'.').' '.$e->getMessage());
+            $this->messageManager->addException(
+                $e,
+                __('Something went wrong while saving this %1. %2',
+                    strtolower($model->getOwnTitle()),
+                    $e->getMessage()
+                )
+            );
             $this->_setFormData();
         }
 
@@ -286,12 +292,18 @@ abstract class Actions extends \Magento\Backend\App\Action
             $this->messageManager->addError($e->getMessage());
         } catch (\Exception $e) {
             $error = true;
-            $this->messageManager->addException($e, __('We can\'t delete '.strtolower($this->_getModel(false)->getOwnTitle()).' right now. '.$e->getMessage()));
+            $this->messageManager->addException(
+                $e,
+                __("We can't delete %1 right now. %2",
+                    strtolower($this->_getModel(false)->getOwnTitle()),
+                    $e->getMessage()
+                )
+            );
         }
 
         if (!$error) {
             $this->messageManager->addSuccess(
-                __($this->_getModel(false)->getOwnTitle(count($ids) > 1).' have been deleted.')
+                __('%1 have been deleted.', $this->_getModel(false)->getOwnTitle(count($ids) > 1))
             );
         }
 
@@ -339,12 +351,18 @@ abstract class Actions extends \Magento\Backend\App\Action
             $this->messageManager->addError($e->getMessage());
         } catch (\Exception $e) {
             $error = true;
-            $this->messageManager->addException($e, __('We can\'t change status of '.strtolower($model->getOwnTitle()).' right now. '.$e->getMessage()));
+            $this->messageManager->addException(
+                $e,
+                __("We can't change status of %1 right now. %2",
+                    strtolower($model->getOwnTitle()),
+                    $e->getMessage()
+                )
+            );
         }
 
         if (!$error) {
             $this->messageManager->addSuccess(
-                __($model->getOwnTitle(count($ids) > 1).' status have been changed.')
+                __('%1 status have been changed.', $model->getOwnTitle(count($ids) > 1))
             );
         }
 
