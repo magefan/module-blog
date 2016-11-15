@@ -179,6 +179,11 @@ class Router implements \Magento\Framework\App\RouterInterface
                             $pathInfo[2] = $pathInfo[1];
                             $pathInfo[1] = Url::CONTROLLER_CATEGORY;
                         }
+                    } elseif (count($pathInfo) > 1) {
+                        if ($postId = $this->_getPostId(implode('/', $pathInfo))) {
+                            $pathInfo[2] = implode('/', $pathInfo);
+                            $pathInfo[1] = Url::CONTROLLER_POST;
+                        }
                     }
                 }
                 break;
