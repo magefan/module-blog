@@ -102,9 +102,9 @@ class Image extends AbstractHelper
         if($this->_baseFile){
             $this->_width = $width;
             $this->_height = $height;
+            $path = 'blog/cache/'.$width.'x'.$height;
+            $this->_newFile = $path. '/' . $this->_baseFile;
             if(!$this->isCached()){
-                $path = 'blog/cache/'.$width.'x'.$height;
-                $this->_newFile = $path. '/' . $this->_baseFile;
                 $this->saveFile();
             }
         }
