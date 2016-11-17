@@ -132,6 +132,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
      */
     public function getIdentities()
     {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_relatedproducts_'.$this->getPost()->getId()  ];
+        $post = $this->getPost();
+        return $post ? [ \Magento\Cms\Model\Page::CACHE_TAG . '_relatedproducts_' . $post->getId() ] : [];
     }
 }
