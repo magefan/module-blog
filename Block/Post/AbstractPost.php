@@ -106,7 +106,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         }
 
         $dom = new \DOMDocument();
-        $dom->loadHTML($content);
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
         $content = $dom->saveHTML();
 
         return $content;
