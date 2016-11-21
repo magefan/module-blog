@@ -141,7 +141,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         $content = $this->_filterProvider->getPageFilter()->filter($content);
 
         $dom = new \DOMDocument();
-        $dom->loadHTML($content);
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
         $content = $dom->saveHTML();
 
         return $content;
