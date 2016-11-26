@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page layout="pramp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="blog.posts.list" destination="amp.content" before="-" />
+        <referenceBlock name="head.additional">
+            <block class="Plumrocket\Amp\Block\Page\Head\Og\Cms"
+                name="amp.ogtags"
+                as="amp.ogtags"
+                template="Plumrocket_Amp::head/ogtags.phtml" />
+            <block class="Magefan\Blog\Block\Amp\Ldjson\PostList"
+                name="amp.ldjson" as="amp.ldjson"
+                template="Plumrocket_Amp::head/ldjson.phtml" />
+        </referenceBlock>
+        <referenceBlock name="ampcss">
+            <block class="Plumrocket\Amp\Block\Page\Head\Style" name="ampcss.blog.post.list" as="ampcss.blog.post.list" template="Magefan_Blog::amp/head/css/blog_post_list.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="blog.posts.list">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magefan_Blog::amp/post/list.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="blog.posts.list.item">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magefan_Blog::amp/post/list/item.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="post_list_toolbar_pager">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::html/pager.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="blog.post.info">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magefan_Blog::amp/post/info.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

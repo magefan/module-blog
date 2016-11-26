@@ -12,7 +12,7 @@
         <referenceBlock name="blog.posts.list">
             <block class="Magefan\Blog\Block\Post\PostList\Item" name="blog.posts.list.item" template="post/list/item.phtml">
                 <block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
-                <action method="setProductInfoBlockName">
+                <action method="setPostInfoBlockName">
                     <argument name="name" xsi:type="string">blog.post.info</argument>
                 </action>
             </block>

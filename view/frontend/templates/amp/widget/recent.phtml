@@ -1,0 +1,66 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+    $imageHelper = $this->helper('Magefan\Blog\Helper\Image');
+    $imageWidth = 500;
+    $imageHeight = 300;
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="post-list-wrapper blog-widget-recent">
+    <h3 class="title"><?php echo $block->escapeHtml($block->getTitle()) ?></h3>
+    <amp-carousel
+             width="500"
+             height="400"
+             layout="responsive"
+             type="slides"
+             autoplay
+             delay="5000"
+             >
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $_post->getPostUrl();
+                $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+            ?>
+            <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
+                <div class="post-content">
+                    <div class="post-description clearfix">
+                        <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                        <div class="post-ftimg-hld">
+                            <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                                <amp-img layout="responsive" width="<?php echo $imageWidth ?>" height="<?php echo $imageHeight ?>" src="<?php echo $this->helper('Magefan\Blog\Helper\Image')->init($_post->getFeaturedImg())->resize($imageWidth, $imageHeight) ?>" alt="<?php echo $_postName ?>"></amp-img>
+                            </a>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="post-header">
+                    <div class="post-title-holder clearfix">
+                        <div class="post-title">
+                            <a class="post-item-link"
+                               href="<?php echo $_postUrl ?>">
+                                <?php echo $_postName; ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
+    </amp-carousel>
+</div>
+<?php } ?>

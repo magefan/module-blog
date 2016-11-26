@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post social share template
+ *
+ * @var $block \Magento\Framework\View\Element\Template
+ */
+?>
+<div class="block social-share">
+    <div class="block-title title">
+        <strong id="block-relatedposts-heading" role="heading" aria-level="2">
+            <?php echo __('Share with friends') ?>
+        </strong>
+    </div>
+    <amp-social-share type="facebook" width="60" height="44"></amp-social-share>
+    <amp-social-share type="twitter" width="60" height="44"> </amp-social-share>
+    <amp-social-share type="gplus" width="60" height="44"></amp-social-share>
+    <amp-social-share type="email" width="60" height="44"></amp-social-share>
+</div>

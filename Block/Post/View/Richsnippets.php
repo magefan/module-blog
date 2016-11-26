@@ -30,6 +30,9 @@ class Richsnippets extends Opengraph
             $post = $this->getPost();
 
             $logoBlock = $this->getLayout()->getBlock('logo');
+            if (!$logoBlock) {
+                $logoBlock = $this->getLayout()->getBlock('amp.logo');
+            }
 
             $this->_options = [
                 '@context' => 'http://schema.org',

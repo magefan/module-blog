@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list item template
+ *
+ * @var $block \Magefan\Blog\Block\Post\AbstractPost
+ */
+?>
+<?php
+    $_post = $this->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+
+    $imageHelper = $this->helper('Magefan\Blog\Helper\Image');
+    $imageWidth = 500;
+    $imageHeight = 200;
+?>
+<li class="post-holder post-holder-<?php echo $_post->getId() ?>">
+    <div class="post-header">
+
+        <div class="post-title-holder clearfix">
+            <h2 class="post-title">
+                <a class="post-item-link"
+                   href="<?php echo $_postUrl ?>">
+                    <?php echo $_postName; ?>
+                </a>
+            </h2>
+        </div>
+
+        <?php echo $this->getInfoHtml() ?>
+    </div>
+
+    <div class="post-content">
+        <div class="post-description clearfix">
+            <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+            <div class="post-ftimg-hld">
+                <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                    <amp-img layout="responsive" width="<?php echo $imageWidth ?>" height="<?php echo $imageHeight ?>" src="<?php echo $this->helper('Magefan\Blog\Helper\Image')->init($_post->getFeaturedImg())->resize($imageWidth, $imageHeight) ?>" alt="<?php echo $_postName ?>"></amp-img>
+                </a>
+            </div>
+            <?php } ?>
+            <div class="post-text-hld clearfix">
+                <?php echo $block->getShorContent() ?>
+            </div>
+            <a class="post-read-more" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>"
+               >
+               <?php echo __('Read more &#187;') ?>
+            </a>
+        </div>
+    </div>
+    <div class="post-footer">
+
+    </div>
+</li>

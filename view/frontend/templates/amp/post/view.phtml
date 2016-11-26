@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $this->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+
+    $imageHelper = $this->helper('Magefan\Blog\Helper\Image');
+    $imageWidth = 500;
+    $imageHeight = 200;
+?>
+<div class="post-view">
+    <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
+        <div class="post-content">
+            <div class="post-description clearfix">
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                <div class="post-ftimg-hld">
+                    <amp-img layout="responsive" width="<?php echo $imageWidth ?>" height="<?php echo $imageHeight ?>" src="<?php echo $this->helper('Magefan\Blog\Helper\Image')->init($_post->getFeaturedImg())->resize($imageWidth, $imageHeight) ?>" alt="<?php echo $_postName ?>"></amp-img>
+                </div>
+                <?php } ?>
+                <div class="post-text-hld">
+                    <?php echo $block->getContent() ?>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+            <?php echo $this->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

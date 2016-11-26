@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post info template
+ *
+ * @var $block \Magefan\Blog\Block\Post\Info
+ */
+?>
+
+<?php $_post = $block->getPost() ?>
+<div class="post-info clear">
+    <div class="item post-posed-date">
+        <span class="label"><?php echo __('Posted:') ?></span>
+        <span class="value"><?php echo $_post->getPublishDate('F d, Y') ?></span>
+    </div>
+    <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+    <div class="dash">|</div>
+    <div class="item post-categories">
+        <span class="label"><?php echo __('Categories:') ?></span>
+        <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
+            <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>">
+                <?php echo $block->escapeHtml($ct->getTitle()) ?>
+            </a>
+            <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+        <?php } ?>
+    </div>
+    <?php } ?>
+    <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+    <div class="dash">|</div>
+    <div class="item post-categories">
+        <span class="label"><?php echo __('Tags:') ?></span>
+        <?php $n = 0; foreach($_post->getRelatedTags() as $tag) { $n++; ?>
+            <a title="<?php echo $block->escapeHtml($tag->getTitle()) ?>" href="<?php echo $tag->getTagUrl() ?>">
+                <?php echo $block->escapeHtml($tag->getTitle()) ?>
+            </a>
+            <?php if ($n != $_tagsCount) { ?>, <?php } ?>
+        <?php } ?>
+    </div>
+    <?php } ?>
+    <?php if ($block->authorEnabled()) { ?>
+        <?php if ($_author = $_post->getAuthor()) { ?>
+        <div class="dash">|</div>
+        <div class="item post-author">
+            <span class="label"><?php echo __('Author:') ?></span>
+            <span class="value">
+                <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
+                <a title="<?php echo $block->escapeHtml($_author->getTitle()) ?>" href="<?php echo $_author->getAuthorUrl() ?>">
+                <?php } ?>
+                    <?php echo $block->escapeHtml($_author->getTitle()) ?>
+                <?php if ($authorPageEnabled) { ?>
+                </a>
+                <?php } ?>
+            </span>
+        </div>
+        <?php } ?>
+    <?php } ?>
+</div>

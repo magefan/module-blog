@@ -12,31 +12,19 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  */
 class Image extends AbstractHelper
 {
-    protected $_width;
-    protected $_height;
-
     /**
      * Default quality value (for JPEG images only).
      *
      * @var int
      */
     protected $_quality = 100;
-    protected $_keepAspectRatio = false;
-    protected $_keepFrame = false;
+    protected $_keepAspectRatio = true;
+    protected $_keepFrame = true;
     protected $_keepTransparency = true;
     protected $_constrainOnly = true;
     protected $_backgroundColor = [255, 255, 255];
     protected $_baseFile;
-    protected $_isBaseFilePlaceholder;
     protected $_newFile;
-    protected $_processor;
-    protected $_destinationSubdir;
-    protected $_angle;
-    protected $_watermarkFile;
-    protected $_watermarkPosition;
-    protected $_watermarkWidth;
-    protected $_watermarkHeight;
-    protected $_watermarkImageOpacity = 0;
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -57,64 +45,52 @@ class Image extends AbstractHelper
         return $this;
     }
 
-    public function getImageProcessor()
+    public function resize($width, $height = null)
     {
-        //if (!$this->_processor) {
-            $filename = $this->_baseFile ? $this->_mediaDirectory->getAbsolutePath($this->_baseFile) : null;
-            $this->_processor = $this->_imageFactory->create($filename);
-        //}
-        $this->_processor->keepAspectRatio($this->_keepAspectRatio);
-        $this->_processor->keepFrame($this->_keepFrame);
-        $this->_processor->keepTransparency($this->_keepTransparency);
-        $this->_processor->constrainOnly($this->_constrainOnly);
-        $this->_processor->backgroundColor($this->_backgroundColor);
-        $this->_processor->quality($this->_quality);
-        $this->_processor->resize($this->_width, $this->_height);
-        return $this->_processor;
-    }
-
-    public function saveFile()
-    {
-        $filename = $this->_mediaDirectory->getAbsolutePath($this->_newFile);
-        $this->getImageProcessor()->save($filename);
-        //$this->_coreFileStorageDatabase->saveFile($filename);
-        return $this;
-    }
-
-    protected function _fileExists($filename)
-    {
-        if ($this->_mediaDirectory->isFile($filename)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function isCached()
-    {
-        if (is_string($this->_newFile)) {
-            return $this->_fileExists($this->_newFile);
-        }
-    }
-
-    public function resize($width,$height = null)
-    {
-        if($this->_baseFile){
-            $this->_width = $width;
-            $this->_height = $height;
-            $path = 'blog/cache/'.$width.'x'.$height;
+        if ($this->_baseFile){
+            $path = 'blog/cache/' . $width . 'x' . $height;
             $this->_newFile = $path. '/' . $this->_baseFile;
-            if(!$this->isCached()){
-                $this->saveFile();
+            if (true || !$this->fileExists($this->_newFile)) {
+                $this->resizeBaseFile($width, $height);
             }
         }
         return $this;
     }
 
+    protected function resizeBaseFile($width, $height)
+    {
+        if (!$this->fileExists($this->_baseFile)) {
+            $this->_baseFile = null;
+            return $this;
+        }
+
+        $processor = $this->_imageFactory->create(
+            $this->_mediaDirectory->getAbsolutePath($this->_baseFile)
+        );
+        $processor->keepAspectRatio($this->_keepAspectRatio);
+        $processor->keepFrame($this->_keepFrame);
+        $processor->keepTransparency($this->_keepTransparency);
+        $processor->constrainOnly($this->_constrainOnly);
+        $processor->backgroundColor($this->_backgroundColor);
+        $processor->quality($this->_quality);
+        $processor->resize($width, $height);
+
+        $newFile = $this->_mediaDirectory->getAbsolutePath($this->_newFile);
+        $processor->save($newFile);
+        unset($processor);
+
+        return $this;
+    }
+
+    protected function fileExists($filename)
+    {
+        return $this->_mediaDirectory->isFile($filename);
+    }
+
     public function __toString()
     {
         $url = "";
-        if($this->_baseFile){
+        if ($this->_baseFile){
             $url = $this->_storeManager->getStore()->getBaseUrl(
                     \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
                 ) . $this->_newFile;
