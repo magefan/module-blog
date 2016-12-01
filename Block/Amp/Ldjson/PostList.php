@@ -11,7 +11,13 @@ namespace Magefan\Blog\Block\Amp\Ldjson;
 /**
  * Blog post list ldJson block
  */
-class PostList extends \Plumrocket\Amp\Block\Page\Head\Ldjson\Cms
+if (class_exists('\Plumrocket\Amp\Block\Page\Head\Ldjson\Cms')) {
+    class PostListIntermediate extends \Plumrocket\Amp\Block\Page\Head\Ldjson\Cms {}
+} else {
+    class PostListIntermediate extends \Magento\Framework\View\Element\AbstractBlock {}
+}
+
+class PostList extends PostListIntermediate
 {
     /**
      * Retrieve page structure structure data in JSON

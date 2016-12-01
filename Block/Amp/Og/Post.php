@@ -12,7 +12,14 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Blog post opengraph for amp
  */
-class Post extends \Plumrocket\Amp\Block\Page\Head\Og\AbstractOg
+
+if (class_exists('\Plumrocket\Amp\Block\Page\Head\Og\AbstractOg')) {
+    class PostIntermediate extends \Plumrocket\Amp\Block\Page\Head\Og\AbstractOg {}
+} else {
+    class PostIntermediate extends \Magento\Framework\View\Element\AbstractBlock {}
+}
+
+class Post extends PostIntermediate
 {
     /**
      * Retrieve open graph params
