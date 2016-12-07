@@ -82,8 +82,10 @@ class NextPrev extends \Magento\Framework\View\Element\Template
             $collection = $this->_getFrontendCollection()->addFieldToFilter(
                 'publish_time', [
                     'gteq' => $this->getPost()->getPublishTime()
-                ]
-            );
+                ])
+                ->setOrder('publish_time', 'ASC')
+                ->setPageSize(1);
+
             $post = $collection->getFirstItem();
 
             if ($post->getId()) {
@@ -105,8 +107,10 @@ class NextPrev extends \Magento\Framework\View\Element\Template
             $collection = $this->_getFrontendCollection()->addFieldToFilter(
                 'publish_time', [
                     'lteq' => $this->getPost()->getPublishTime()
-                ]
-            );
+                ])
+                ->setOrder('publish_time', 'DESC')
+                ->setPageSize(1);
+
             $post = $collection->getFirstItem();
 
             if ($post->getId()) {
