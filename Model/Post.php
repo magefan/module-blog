@@ -152,7 +152,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getOwnTitle($plural = false)
     {
-        return $plural ? 'Post' : 'Posts';
+        return $plural ? 'Posts' : 'Post';
     }
 
     /**

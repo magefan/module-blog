@@ -94,7 +94,7 @@ class Category extends \Magento\Framework\Model\AbstractModel
      */
     public function getOwnTitle($plural = false)
     {
-        return $plural ? 'Category' : 'Categories';
+        return $plural ? 'Categories' : 'Category';
     }
 
     /**
