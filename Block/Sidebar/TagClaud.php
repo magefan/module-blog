@@ -70,7 +70,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
                 []
             )->joinLeft(
                 ['ps' => $resource->getTable('magefan_blog_post_store')],
-                'p.post_id = pt.post_id',
+                'p.post_id = ps.post_id',
                 ['count' => 'count(main_table.tag_id)']
             )->group(
                 'main_table.tag_id'
