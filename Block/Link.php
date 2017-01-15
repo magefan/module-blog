@@ -39,4 +39,21 @@ class Link extends \Magento\Framework\View\Element\Html\Link
     {
         return $this->_url->getBaseUrl();
     }
+
+    /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        if (!$this->_scopeConfig->getValue(
+            \Magefan\Blog\Helper\Config::XML_PATH_EXTENSION_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        )) {
+            return '';
+        }
+
+        return parent::_toHtml();
+    }
 }

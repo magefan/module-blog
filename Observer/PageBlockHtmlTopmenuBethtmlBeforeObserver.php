@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -10,6 +10,8 @@ namespace Magefan\Blog\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Data\Tree\Node;
+use Magento\Store\Model\ScopeInterface;
+use Magefan\Blog\Helper\Config;
 
 /**
  * Blog observer
@@ -56,7 +58,11 @@ class PageBlockHtmlTopmenuBethtmlBeforeObserver implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if (!$this->_scopeConfig->isSetFlag(static::XML_PATH_TOP_MENU_SHOW_ITEM, \Magento\Store\Model\ScopeInterface::SCOPE_STORE)) {
+        if (!$this->_scopeConfig->isSetFlag(static::XML_PATH_TOP_MENU_SHOW_ITEM, ScopeInterface::SCOPE_STORE)) {
+            return;
+        }
+
+        if (!$this->_scopeConfig->isSetFlag(Config::XML_PATH_EXTENSION_ENABLED, ScopeInterface::SCOPE_STORE)) {
             return;
         }
 
@@ -66,7 +72,7 @@ class PageBlockHtmlTopmenuBethtmlBeforeObserver implements ObserverInterface
 
         $tree = $menu->getTree();
         $data = [
-            'name'      => $this->_scopeConfig->getValue(static::XML_PATH_TOP_MENU_ITEM_TEXT, \Magento\Store\Model\ScopeInterface::SCOPE_STORE),
+            'name'      => $this->_scopeConfig->getValue(static::XML_PATH_TOP_MENU_ITEM_TEXT, ScopeInterface::SCOPE_STORE),
             'id'        => 'magefan-blog',
             'url'       => $this->_url->getBaseUrl(),
             'is_active' => ($block->getRequest()->getModuleName() == 'blog'),

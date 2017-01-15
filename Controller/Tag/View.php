@@ -1,11 +1,10 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Tag;
 
 use \Magento\Store\Model\ScopeInterface;
@@ -13,7 +12,7 @@ use \Magento\Store\Model\ScopeInterface;
 /**
  * Blog tag posts view
  */
-class View extends \Magento\Framework\App\Action\Action
+class View extends \Magefan\Blog\App\Action\Action
 {
     /**
      * View blog author action
@@ -22,12 +21,13 @@ class View extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $config = $this->_objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+        if (!$this->moduleEnabled()) {
+            return $this->_forwardNoroute();
+        }
 
         $tag = $this->_initTag();
         if (!$tag) {
-            $this->_forward('index', 'noroute', 'cms');
-            return;
+            return $this->_forwardNoroute();
         }
 
         $this->_objectManager->get('\Magento\Framework\Registry')->register('current_blog_tag', $tag);

@@ -1,19 +1,16 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Author;
-
-use \Magento\Store\Model\ScopeInterface;
 
 /**
  * Blog author posts view
  */
-class View extends \Magento\Framework\App\Action\Action
+class View extends \Magefan\Blog\App\Action\Action
 {
     /**
      * View blog author action
@@ -22,22 +19,20 @@ class View extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $config = $this->_objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+        if (!$this->moduleEnabled()) {
+            return $this->_forwardNoroute();
+        }
 
-        $enabled = (int) $config->getValue('mfblog/author/enabled',
-            ScopeInterface::SCOPE_STORE);
-        $pageEnabled = (int) $config->getValue('mfblog/author/page_enabled',
-            ScopeInterface::SCOPE_STORE);
+        $enabled = (int) $this->getConfigValue('mfblog/author/enabled');
+        $pageEnabled = (int) $this->getConfigValue('mfblog/author/page_enabled');
 
         if (!$enabled || !$pageEnabled) {
-            $this->_forward('index', 'noroute', 'cms');
-            return;
+            return $this->_forwardNoroute();
         }
 
         $author = $this->_initAuthor();
         if (!$author) {
-            $this->_forward('index', 'noroute', 'cms');
-            return;
+            return $this->_forwardNoroute();
         }
 
         $this->_objectManager->get('\Magento\Framework\Registry')->register('current_blog_author', $author);

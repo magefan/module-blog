@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -10,7 +10,7 @@ namespace Magefan\Blog\Controller\Archive;
 /**
  * Blog archive view
  */
-class View extends \Magento\Framework\App\Action\Action
+class View extends \Magefan\Blog\App\Action\Action
 {
     /**
      * View blog archive action
@@ -19,6 +19,10 @@ class View extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
+        if (!$this->moduleEnabled()) {
+            return $this->_forwardNoroute();
+        }
+
         $date = $this->getRequest()->getParam('date');
 
         $date = explode('-', $date);
@@ -26,8 +30,7 @@ class View extends \Magento\Framework\App\Action\Action
         $time = strtotime(implode('-', $date));
 
         if (!$time || count($date) != 3) {
-            $this->_forward('index', 'noroute', 'cms');
-            return;
+            return $this->_forwardNoroute();
         }
 
         $registry = $this->_objectManager->get('\Magento\Framework\Registry');

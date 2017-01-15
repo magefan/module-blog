@@ -1,17 +1,16 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Category;
 
 /**
  * Blog category view
  */
-class View extends \Magento\Framework\App\Action\Action
+class View extends \Magefan\Blog\App\Action\Action
 {
     /**
      * Store manager
@@ -39,10 +38,13 @@ class View extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
+        if (!$this->moduleEnabled()) {
+            return $this->_forwardNoroute();
+        }
+
         $category = $this->_initCategory();
         if (!$category) {
-            $this->_forward('index', 'noroute', 'cms');
-            return;
+            return $this->_forwardNoroute();
         }
 
         $this->_objectManager->get('\Magento\Framework\Registry')

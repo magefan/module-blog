@@ -101,4 +101,20 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
         return $this->_postCollection;
     }
 
+    /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        if (!$this->_scopeConfig->getValue(
+            \Magefan\Blog\Helper\Config::XML_PATH_EXTENSION_ENABLED,
+            ScopeInterface::SCOPE_STORE
+        )) {
+            return '';
+        }
+
+        return parent::_toHtml();
+    }
 }
