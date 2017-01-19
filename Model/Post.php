@@ -459,7 +459,10 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getPublishDate($format = 'Y-m-d H:i:s')
     {
-        return date($format, strtotime($this->getData('publish_time')));
+        return \Magefan\Blog\Helper\Data::getTranslatedDate(
+            $format,
+            $this->getData('publish_time')
+        );
     }
 
     /**
@@ -469,7 +472,10 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getUpdateDate($format = 'Y-m-d H:i:s')
     {
-        return date($format, strtotime($this->getData('update_time')));
+        return \Magefan\Blog\Helper\Data::getTranslatedDate(
+            $format,
+            $this->getData('update_time')
+        );
     }
 
     /**
