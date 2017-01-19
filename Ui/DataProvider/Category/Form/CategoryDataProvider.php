@@ -78,6 +78,7 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $items = $this->collection->getItems();
         /** @var $category \Magefan\Blog\Model\Category */
         foreach ($items as $category) {
+            $category = $category->load($category->getId()); //temporary fix
             $this->loadedData[$category->getId()] = $category->getData();
         }
 

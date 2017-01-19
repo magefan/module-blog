@@ -78,6 +78,7 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $items = $this->collection->getItems();
         /** @var $post \Magefan\Blog\Model\Post */
         foreach ($items as $post) {
+            $post = $post->load($post->getId()); //temporary fix
             $data = $post->getData();
 
             /* Prepare Featured Image */
