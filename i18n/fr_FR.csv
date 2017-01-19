@@ -45,7 +45,6 @@ Blog,Blog
 "The category URL key cannot be made of only numbers.","La clé URL de catégorie ne peut pas être composée uniquement de chiffres."
 "The post URL key contains capital letters or disallowed symbols.","La clé URL de l'article contient des majuscules ou des symbôles non autorisés."
 "The post URL key cannot be made of only numbers.","La clé URL de l'article ne peut pas contenir uniquement des nombres."
-
 "The tag is already exist.","La balise existe déjà."
 "The tag URL key contains capital letters or disallowed symbols.","La clé URL de l'étiquette contient des lettres majuscules ou des symboles non autorisés."
 "The tag URL key cannot be made of only numbers.","La clé URL de l'étiquette ne peut pas être composée uniquement de chiffres."
@@ -85,7 +84,7 @@ Comments,Commentaires
 "Use Lazy Loading","Utiliser le Lazy Loading"
 "Automatically load more posts on page.","Charger automatiquement des articles supplémentaires sur la page."
 "Auto Triger Padding (px)","Auto Triger Padding (px)"
-Author,Auteur,
+Author,Auteur
 "Display Author Information","Afficher les informations de l'auteur"
 "Display Post List By Author","Afficher les articles par nom d'auteur"
 Sidebar,"Barre latérale"

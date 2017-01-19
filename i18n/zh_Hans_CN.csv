@@ -21,7 +21,7 @@ Blog,博客
 "Something went wrong while saving this %1. %2","保存时发生错误 %1. %2"
 "We can't delete %1 right now. %2","我们现在不能删除 %1 . %2"
 "%1 have been deleted.","%1 已经删除."
-"Parameter ""Status"" missing in request data.",缺少"参数 ""状态""请求数据."
+"Parameter ""Status"" missing in request data.","缺少 参数 ""状态""请求数据."
 "Status Field Name is not specified.","未指定状态字段名称."
 "We can't change status of %1 right now. %2","我们现在不能修改%1的状态. %2"
 "%1 status have been changed.","%1 状态已改变."

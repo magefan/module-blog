@@ -3,15 +3,15 @@
 "Start Import","Start Importeren"
 NOTICE,"LET OP"
 "Database Name","Database Naam"
-"User Name","Gebruikers Naam“
+"User Name","Gebruikers Naam"
 "Database Host","Database Host"
 "Table Prefix","Table Prefix"
 Post,Plaats
 "Add New Post","Voeg Nieuw Bericht Toe"
 Blog,Blog
-"Go to Blog Home Page","Ga naar Blog Home Pagina“
+"Go to Blog Home Page","Ga naar Blog Home Pagina"
 "Monthly Archives: %s %s","Maandelijkse Archieven: %s %s"
-"Search “"%1""","Zoeken ""%1"""
+"Search ""%1""","Zoeken ""%1"""
 "Recent Blog Posts","Recente Blog Berichten"
 "Manage %1","Beheer %1"
 "Edit %1","Bewerk %1"
@@ -31,7 +31,7 @@ Blog,Blog
 "The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4","Het importeer proces is compleet. %1 berichten en %2 categorien zijn geimpoteerd. Sommige berichten of categorien zijn overgeslaan.<br/> %3 %4"
 "Nothing to import.","Niets om te Importeren."
 "Can not make import.","Kan niet Importeren."
-"Something went wrong: “,"Er is iets mis gegaan: "
+"Something went wrong: ","Er is iets mis gegaan: "
 "Blog Import from WordPress (beta)","Blog Importeren vanaf WordPress (beta)"
 "Please select","Selecteer"
 "Use Facebook Comments","Gebruik Facebook Comments"
@@ -39,7 +39,7 @@ Blog,Blog
 "Use Google Comments (beta)","Gebruik Google Comments (beta)"
 "Yes (With auto trigger)","Ja (Met auto trigger)"
 "Yes (Without auto trigger)","Ja (Zonder auto trigger)"
-"Parameter %1 is required","Parameter %1 is verplicht“
+"Parameter %1 is required","Parameter %1 is verplicht"
 "AheadWorks Blog Extension not detected.","AheadWorks Blog Extensie niet gedetecteerd."
 "The category URL key contains capital letters or disallowed symbols.","De URL key bevat hoofdletters of niet toegestane symbolen."
 "The category URL key cannot be made of only numbers.","De categorie URL key mag niet alleen uit nummers bestaan."
@@ -48,39 +48,39 @@ Blog,Blog
 "The tag is already exist.","Deze tag bestaat al."
 "The tag URL key contains capital letters or disallowed symbols.","De tag URL key bevat hoofdletters of niet toegestane symbolen."
 "The tag URL key cannot be made of only numbers.","De tag URL key mag niet alleen uit nummers bestaan."
-"Related posts","Gerelateerde berichten“
+"Related posts","Gerelateerde berichten"
 Posted:,Geplaatst:
 Categories:,Categorien:
 Tags:,Tags:
 Author:,Auteur:
 "We can't find posts matching the selection.","We kunnen geen berichten vinden die overeen komen met deze selectie."
 "Read more &#187;","Lees meer &#187;"
-"See more","Bekijk meer“
+"See more","Bekijk meer"
 "Read %1","Lees %1"
 "&larr; Previous","&larr; Vorige"
 "Next &rarr;","Volgende &rarr;"
 "Related Posts","Gerelateerde Berichten"
 Archive,Archief
 "Archive %s","Archief %s"
-"Recent Posts","Recente Berichten“
+"Recent Posts","Recente Berichten"
 "RSS Feed","RSS Feed"
 "Search posts here...","Zoek Bericht Hier…"
 Tags,Tags
 "MageFan Extensions","MageFan Extensions"
 "Blog Information","Blog Informatie"
 "Blog Index Page","Blog Index Pagina"
-"Post View","Bericht Bekijken“
-"Display Related Posts","Toon Gerelateerde Berichten“
+"Post View","Bericht Bekijken"
+"Display Related Posts","Toon Gerelateerde Berichten"
 "Number of Posts","Aantal berichten"
-"Display Related Products","Toon Gerelateerde Producten“
-"Number of Products","Aantal Producten“
+"Display Related Products","Toon Gerelateerde Producten"
+"Number of Products","Aantal Producten"
 Comments,Opmerkingen
-"Number of Comments","Aantal Opmerkingen“
+"Number of Comments","Aantal Opmerkingen"
 "Facebook Application ID","Facebook Applicatie ID"
-"Preview and Next Post","Voorvertoning en Volgende Bericht“
+"Preview and Next Post","Voorvertoning en Volgende Bericht"
 "Display Prev. & Next Post Links","Toon Vorige. & Volgende Bericht Link."
 "Post List","Berichten Lijst"
-"Posts Per Page","Bericht Per Pagina“
+"Posts Per Page","Bericht Per Pagina"
 "Use Lazy Loading","Gebruik Lazy Loading"
 "Automatically load more posts on page.","Automatiche meerdere berichten per pagina laden."
 "Auto Triger Padding (px)","Auto Triger Padding (px)"
@@ -91,42 +91,42 @@ Sidebar,Sidebar
 "Search Form Widget","Zoek Formulier Widget"
 "Categories Widget","Categorien Widget"
 "Recent Posts Widget","Recente Berichten Widget"
-"Posts Number","Bericht Nummer“
+"Posts Number","Bericht Nummer"
 "Archive Widget","Archief Widget"
 "Tag Claud Widget","Tag Cloud Widget"
 "Rss Feed","Rss Feed"
 "Feed Title","Feed Titel"
 "Feed Description","Feed Beschrijving"
-"Product Page","Produkt Pagina“
+"Product Page","Produkt Pagina"
 "Permalink Settings","Permalink Instelling"
 "Blog Route","Blog Route"
 "Permalink Type","Permalink Type"
-"Post Route","Plaats Route“
+"Post Route","Plaats Route"
 "Category Route","Categorie Route"
 "Archive Route","Archief Route"
-"Tag Route","Tag Route“
+"Tag Route","Tag Route"
 "Author Route","Auteurs Route"
-"Search Route","Zoek Route“
+"Search Route","Zoek Route"
 Social,Sociaal
 "AddThis Enabled","Inschakelen Toevoegen"
-"AddThis ID","Dit ID Toevoegen“
-"AddThis Language","Deze Taal Toevoegen“
+"AddThis ID","Dit ID Toevoegen"
+"AddThis Language","Deze Taal Toevoegen"
 "Category Top Navigation","Categorie Top Navigatie"
 "Display Blog Link","Toon Blog link"
 "Blog Category","Blog Categorie"
-"Leave blank to display posts from all categories.","Leeg laten om berichten van alle categorien te tonen.“
+"Leave blank to display posts from all categories.","Leeg laten om berichten van alle categorien te tonen."
 "Custom Template","Custom Template"
 Published,Gepubliceerd
-"Category Information","Categorie Informatie“
+"Category Information","Categorie Informatie"
 "Enable Category","Activeer Categorie"
 "Category Title","Categorie Titel"
 "Category in Websites","Categorie in Websites"
 "-- Please Select --","-- Selecteer --"
 "Tag Title","Tag Titel"
 "Post Information","Bericht Informatie"
-"Enable Post","Activeer Bericht“
+"Enable Post","Activeer Bericht"
 "Post Title","Bericht Titel"
-"New Category","Nieuwe Categorie“
+"New Category","Nieuwe Categorie"
 "Additional Options","Extra Opties"
 "Featured Image","Uitgelichte Afbeelding"
 "Publish Date","Publicatiedatum"
@@ -140,12 +140,12 @@ Published,Gepubliceerd
 "Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Leeg laten om uitgelichte afbeelding als standaard te gebruiken. Toegestane afbeeldings typen: jpg, jpeg, gif, png."
 "OG Type","OG Type"
 "Leave blank to use ""article"" type by default.","Leeg laten om te gebruiken ""article"" standaard type."
-"Post in Websites","Berichten in Websites“
+"Post in Websites","Berichten in Websites"
 "Related Posts and Products","Gerelateerde berichten en Producten"
 "Related posts are shown to customers in addition to the item the customer is looking at.","Gerelateerde berichten worden getoond aan klanten naast het item wat de klant bekijkt."
-"Add Related Post","Voeg gerelateerd bericht toe“
+"Add Related Post","Voeg gerelateerd bericht toe"
 "Add Related Posts","Voeg Gerelateerde berichten toe"
-"Add Selected Posts","Voeg geselecteerde berichten toe“
+"Add Selected Posts","Voeg geselecteerde berichten toe"
 "January","Januari"
 "February","Februari"
 "March","Maart"
