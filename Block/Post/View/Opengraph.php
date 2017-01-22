@@ -70,16 +70,9 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
     public function getImage()
     {
         $image = $this->getPost()->getOgImage();
+
         if (!$image) {
-            $image = $this->getPost()->getFeaturedImage();
-        }
-        if (!$image) {
-            $content = $this->getContent();
-            $match = null;
-            preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $content, $match);
-            if (!empty($match['src'])) {
-                $image = $match['src'];
-            }
+            $image = $this->getPost()->getFirstImage();
         }
 
         if ($image) {

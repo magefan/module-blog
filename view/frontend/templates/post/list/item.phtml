@@ -29,7 +29,12 @@
                 </a>
             </h2>
 
-            <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $_postUrl ?>">
+            <div class="addthis_toolbox addthis_default_style"
+                addthis:url="<?php echo $_postUrl ?>"
+                addthis:title="<?php echo $_postName; ?>"
+                <?php if ($firstImage = $_post->getFirstImage()) { ?>
+                addthis:media="<?php echo $firstImage ?>"
+                <?php } ?>>
                 <a class="addthis_button_facebook"></a>
                 <a class="addthis_button_twitter"></a>
                 <a class="addthis_button_email"></a>

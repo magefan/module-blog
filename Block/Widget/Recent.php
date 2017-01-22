@@ -131,29 +131,6 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      */
     public function getShorContent($post)
     {
-        $content = $this->_filterProvider->getPageFilter()->filter(
-            $post->getContent()
-        );
-        $pageBraker = '<!-- pagebreak -->';
-
-        if ($p = mb_strpos($content, $pageBraker)) {
-            $content = mb_substr($content, 0, $p);
-            try {
-                libxml_use_internal_errors(true);
-                $dom = new \DOMDocument();
-                $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                $body = $dom->getElementsByTagName('body');
-                if ( $body && $body->length > 0 ) {
-                    $body = $body->item(0);
-                    $_content = new \DOMDocument;
-                    foreach ($body->childNodes as $child){
-                        $_content->appendChild($_content->importNode($child, true));
-                    }
-                    $content = $_content->saveHTML();
-                }
-            } catch (\Exception $e) {}
-        }
-
-        return $content;
+        return $post->getShortFilteredContent();
     }
 }

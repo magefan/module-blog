@@ -17,6 +17,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
 {
 
     /**
+     * Deprecated property. Do not use it.
      * @var \Magento\Cms\Model\Template\FilterProvider
      */
     protected $_filterProvider;
@@ -98,28 +99,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      */
     public function getShorContent()
     {
-        $content = $this->getContent();
-        $pageBraker = '<!-- pagebreak -->';
-
-        if ($p = mb_strpos($content, $pageBraker)) {
-            $content = mb_substr($content, 0, $p);
-            try {
-                libxml_use_internal_errors(true);
-                $dom = new \DOMDocument();
-                $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                $body = $dom->getElementsByTagName('body');
-                if ( $body && $body->length > 0 ) {
-                    $body = $body->item(0);
-                    $_content = new \DOMDocument;
-                    foreach ($body->childNodes as $child){
-                        $_content->appendChild($_content->importNode($child, true));
-                    }
-                    $content = $_content->saveHTML();
-                }
-            } catch (\Exception $e) {}
-        }
-
-        return $content;
+        return $this->getPost()->getShortFilteredContent();
     }
 
     /**
@@ -129,15 +109,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      */
     public function getContent()
     {
-        $post = $this->getPost();
-        $key = 'filtered_content';
-        if (!$post->hasData($key)) {
-            $cotent = $this->_filterProvider->getPageFilter()->filter(
-                $post->getContent()
-            );
-            $post->setData($key, $cotent);
-        }
-        return $post->getData($key);
+        return $this->getPost()->getFilteredContent();
     }
 
     /**

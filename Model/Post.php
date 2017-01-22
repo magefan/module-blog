@@ -60,6 +60,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_eventObject = 'blog_post';
 
     /**
+     * @var \Magento\Cms\Model\Template\FilterProvider
+     */
+    protected $filterProvider;
+
+    /**
      * @var \Magefan\Blog\Model\Url
      */
     protected $_url;
@@ -104,6 +109,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
@@ -116,6 +122,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
+        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         Url $url,
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
@@ -127,6 +134,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
+        $this->filterProvider = $filterProvider;
         $this->_url = $url;
         $this->_authorFactory = $authorFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
@@ -220,6 +228,81 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->getData('featured_image');
+    }
+
+    /**
+     * Retrieve first image url
+     * @return string
+     */
+    public function getFirstImage()
+    {
+        if (!$this->hasData('first_image')) {
+            $image = $this->getFeaturedImage();
+            if (!$image) {
+                $content = $this->getFilteredContent();
+                $match = null;
+                preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $content, $match);
+                if (!empty($match['src'])) {
+                    $image = $match['src'];
+                }
+            }
+            $this->setData('first_image', $image);
+        }
+
+        return $this->getData('first_image');
+    }
+
+    /**
+     * Retrieve filtered content
+     *
+     * @return string
+     */
+    public function getFilteredContent()
+    {
+        $key = 'filtered_content';
+        if (!$this->hasData($key)) {
+            $content = $this->filterProvider->getPageFilter()->filter(
+                $this->getContent()
+            );
+            $this->setData($key, $content);
+        }
+        return $this->getData($key);
+    }
+
+    /**
+     * Retrieve short filtered content
+     *
+     * @return string
+     */
+    public function getShortFilteredContent()
+    {
+        $key = 'short_filtered_content';
+        if (!$this->hasData($key)) {
+            $content = $this->getFilteredContent();
+            $pageBraker = '<!-- pagebreak -->';
+
+            if ($p = mb_strpos($content, $pageBraker)) {
+                $content = mb_substr($content, 0, $p);
+                try {
+                    libxml_use_internal_errors(true);
+                    $dom = new \DOMDocument();
+                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
+                    $body = $dom->getElementsByTagName('body');
+                    if ( $body && $body->length > 0 ) {
+                        $body = $body->item(0);
+                        $_content = new \DOMDocument;
+                        foreach ($body->childNodes as $child){
+                            $_content->appendChild($_content->importNode($child, true));
+                        }
+                        $content = $_content->saveHTML();
+                    }
+                } catch (\Exception $e) {}
+            }
+
+            $this->setData($key, $content);
+        }
+
+        return $this->getData($key);;
     }
 
     /**
