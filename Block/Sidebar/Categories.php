@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -60,6 +60,21 @@ class Categories extends \Magento\Framework\View\Element\Template
         }
 
         return $this->getData($k);
+    }
+
+    /**
+     * Retrieve true if need to show posts count
+     * @return int
+     */
+    public function showPostsCount()
+    {
+        $key = 'show_posts_count';
+        if (!$this->hasData($key)) {
+            $this->setData($key, (bool)$this->_scopeConfig->getValue(
+                'mfblog/sidebar/'.$this->_widgetKey.'/show_posts_count', ScopeInterface::SCOPE_STORE
+            ));
+        }
+        return $this->getData($key);
     }
 
 

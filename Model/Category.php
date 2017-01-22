@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -56,6 +56,11 @@ class Category extends \Magento\Framework\Model\AbstractModel
     protected $_url;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory
+     */
+    protected $postCollectionFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -69,11 +74,13 @@ class Category extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
+        \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_url = $url;
+        $this->postCollectionFactory = $postCollectionFactory;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
@@ -304,5 +311,31 @@ class Category extends \Magento\Framework\Model\AbstractModel
     public function isVisibleOnStore($storeId)
     {
         return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
+    }
+
+    /**
+     * Retrieve number of posts in this category
+     *
+     * @return int
+     */
+    public function getPostsCount()
+    {
+        $key = 'posts_count';
+        if (!$this->hasData($key)) {
+
+            $categories = $this->getChildrenIds();
+            $categories[] = $this->getId();
+
+            $posts = $this->postCollectionFactory->create()
+                ->addActiveFilter()
+                ->addStoreFilter($this->getStoreId())
+                ->addCategoryFilter($categories);
+
+
+
+            $this->setData($key, (int)$posts->getSize());
+        }
+
+        return $this->getData($key);
     }
 }
