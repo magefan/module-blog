@@ -107,6 +107,44 @@ class Wordpress extends AbstractImport
             $ct->save();
         }
 
+        /* Import tags */
+        $tags = [];
+        $oldTags = [];
+
+        $sql = 'SELECT
+                    t.term_id as old_id,
+                    t.name as title,
+                    t.slug as identifier,
+                    tt.parent as parent_id
+                FROM '.$_pref.'terms t
+                LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
+                WHERE tt.taxonomy = "post_tag" AND t.slug <> "uncategorized"';
+
+        $result = $this->_mysqliQuery($sql);
+        while ($data = mysqli_fetch_assoc($result)) {
+            /* Prepare tag data */
+            foreach (['title', 'identifier'] as $key) {
+                $data[$key] = utf8_encode($data[$key]);
+            }
+
+            $data['identifier'] = trim(strtolower($data['identifier']));
+            if (strlen($data['identifier']) == 1) {
+                $data['identifier'] .= $data['identifier'];
+            }
+
+            $tag = $this->_tagFactory->create();
+            try {
+                /* Initial saving */
+                $tag->setData($data)->save();
+                $this->_importedTagsCount++;
+                $tags[$tag->getId()] = $tag;
+                $oldTags[$tag->getOldId()] = $tag;
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                unset($tag);
+                $this->_skippedTags[] = $data['title'];
+            }
+        }
+
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'posts WHERE `post_type` = "post"';
         $result = $this->_mysqliQuery($sql);
@@ -118,13 +156,28 @@ class Wordpress extends AbstractImport
 
             $sql = 'SELECT tt.term_id as term_id FROM '.$_pref.'term_relationships tr
                     LEFT JOIN '.$_pref.'term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                    WHERE tr.`object_id` = "'.$data['ID'].'"';
+                    WHERE tr.`object_id` = "'.$data['ID'].'" AND tt.taxonomy = "category"';
 
             $result2 = $this->_mysqliQuery($sql);
             while ($data2 = mysqli_fetch_assoc($result2)) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldCategories[$oldTermId])) {
                     $postCategories[] = $oldCategories[$oldTermId]->getId();
+                }
+            }
+
+            /* find post tags*/
+            $postTags = [];
+
+            $sql = 'SELECT tt.term_id as term_id FROM '.$_pref.'term_relationships tr
+                    LEFT JOIN '.$_pref.'term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                    WHERE tr.`object_id` = "'.$data['ID'].'" AND tt.taxonomy = "post_tag"';
+
+            $result2 = $this->_mysqliQuery($sql);
+            while ($data2 = mysqli_fetch_assoc($result2)) {
+                $oldTermId = $data2['term_id'];
+                if (isset($oldTags[$oldTermId])) {
+                    $postTags[] = $oldTags[$oldTermId]->getId();
                 }
             }
 
@@ -179,6 +232,7 @@ class Wordpress extends AbstractImport
                 'publish_time' => $creationTime,
                 'is_active' => (int)($data['post_status'] == 'publish'),
                 'categories' => $postCategories,
+                'tags' => $postTags,
                 'featured_img' => $data['featured_img'],
             ];
             $data['identifier'] = trim(strtolower($data['identifier']));

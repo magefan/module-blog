@@ -44,11 +44,13 @@ class Run extends \Magento\Backend\App\Action
                     ));
                 } else {
                     $this->messageManager->addNotice(__(
-                        'The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4',
+                        'The import process completed. %1 posts and %2 categories and %3 tags where imported. Some posts or categories or tags where skipped.<br/> %3 %4',
                         $stats->getData('imported_posts_count'),
                         $stats->getData('imported_categories_count'),
-                        $stats->getData('skipped_posts') ? __('Skipped Posts').': '. implode(', ', $stats->getData('skipped_posts')) .'.<br/>' : '',
-                        $stats->getData('skipped_posts') ? __('Skipped Categories').': '. implode(', ', $stats->getData('skipped_categories')) .'. ' : ''
+                        $stats->getData('imported_tags_count'),
+                        $stats->getData('skipped_posts') ? __('Skipped Posts') . ': '. implode(', ', $stats->getData('skipped_posts')) . '.<br/>' : '',
+                        $stats->getData('skipped_posts') ? __('Skipped Categories') . ': '. implode(', ', $stats->getData('skipped_categories')) . '. ' : '',
+                        $stats->getData('skipped_posts') ? __('Skipped Tags') . ': '. implode(', ', $stats->getData('skipped_tags')) . '. ' : ''
                     ));
                 }
             } else {

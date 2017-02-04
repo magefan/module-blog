@@ -34,6 +34,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_categoryFactory;
 
     /**
+     * @var \Magefan\Blog\Model\TagFactory
+     */
+    protected $_tagFactory;
+
+    /**
      * @var integer
      */
     protected $_importedPostsCount = 0;
@@ -44,6 +49,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_importedCategoriesCount = 0;
 
     /**
+     * @var integer
+     */
+    protected $_importedTagsCount = 0;
+
+    /**
      * @var array
      */
     protected $_skippedPosts = [];
@@ -52,6 +62,12 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @var array
      */
     protected $_skippedCategories = [];
+
+    /**
+     * @var array
+     */
+    protected $_skippedTags = [];
+
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -75,6 +91,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Registry $registry,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
@@ -82,6 +99,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     ) {
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
+        $this->_tagFactory = $tagFactory;
         $this->_storeManager = $storeManager;
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
@@ -98,8 +116,10 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             'imported_categories_count' => $this->_importedCategoriesCount,
             'skipped_posts'             => $this->_skippedPosts,
             'skipped_categories'        => $this->_skippedCategories,
-            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount,
-            'skipped_count'              => count($this->_skippedPosts) + count($this->_skippedCategories),
+            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount + $this->_importedTagsCount,
+            'skipped_count'             => count($this->_skippedPosts) + count($this->_skippedCategories) + count($this->_skippedTags),
+            'imported_tags_count'       => $this->_importedTagsCount,
+            'skipped_tags'              => $this->_skippedTags,
         ]);
     }
 
