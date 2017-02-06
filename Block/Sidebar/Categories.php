@@ -49,7 +49,7 @@ class Categories extends \Magento\Framework\View\Element\Template
     public function getGroupedChilds()
     {
         $k = 'grouped_childs';
-        if (!$this->hasDat($k)) {
+        if (!$this->hasData($k)) {
             $array = $this->_categoryCollection
                 ->addActiveFilter()
                 ->addStoreFilter($this->_storeManager->getStore()->getId())
