@@ -144,6 +144,38 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Add archive filter to collection
+     * @param int $year
+     * @param int $month
+     * @return $this
+     */
+    public function addArchiveFilter($year, $month)
+    {
+        $this->getSelect()
+            ->where('YEAR(publish_time) = ?', $year)
+            ->where('MONTH(publish_time) = ?', $month);
+        return $this;
+    }
+
+    /**
+     * Add search filter to collection
+     * @param string $term
+     * @return $this
+     */
+    public function addSearchFilter($term)
+    {
+        $this->addFieldToFilter(
+            ['title', 'content_heading', 'content'],
+            [
+                ['like' => '%' . $term . '%'],
+                ['like' => '%' . $term . '%'],
+                ['like' => '% ' . $term . ' %']
+            ]
+        );
+        return $this;
+    }
+
+    /**
      * Add tag filter to collection
      * @param array|int|\Magefan\Blog\Model\Tag  $tag
      * @return $this
@@ -184,7 +216,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         return $this;
     }
-
 
     /**
      * Add is_active filter to collection

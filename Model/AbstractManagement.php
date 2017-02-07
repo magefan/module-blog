@@ -32,11 +32,10 @@ abstract class AbstractManagement implements ManagementInterface
             $data = json_decode($data, true);
             $item = $this->_itemFactory->create();
             $item->setData($data)->save();
+            return json_encode($item->getData());
         } catch (\Exception $e) {
             return false;
         }
-
-        return json_encode($item->getData());
     }
 
     /**
@@ -57,11 +56,10 @@ abstract class AbstractManagement implements ManagementInterface
             }
             $data = json_decode($data, true);
             $item->addData($data)->save();
+            return json_encode($item->getData());
         } catch (\Exception $e) {
             return false;
         }
-
-        return json_encode($item->getData());
     }
 
     /**
@@ -84,5 +82,50 @@ abstract class AbstractManagement implements ManagementInterface
             return false;
         }
     }
+
+    /**
+     * Get item by id
+     *
+     * @param  int $id
+     * @return bool
+     */
+    public function get($id)
+    {
+        try {
+            $item = $this->_itemFactory->create();
+            $item->load($id);
+
+            if (!$item->getId()) {
+                return false;
+            }
+            return json_encode($item->getData());
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Get item by id and store id, only if item published
+     *
+     * @param  int $id
+     * @param  int $storeId
+     * @return bool
+     */
+    public function view($id, $storeId)
+    {
+        try {
+            $item = $this->_itemFactory->create();
+            $item->load($id);
+
+            if (!$item->isVisibleOnStore($storeId)) {
+                return false;
+            }
+            $item->initDinamicData();
+            return json_encode($item->getData());
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
 
 }

@@ -41,6 +41,29 @@
             <resource ref="Magefan_Blog::post"/>
         </resources>
     </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/post/:id" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/view/:id/:store_id" -->
+    <route url="/V1/blog/post/view/:id/:store_id" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="view"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit" -->
+    <route url="/V1/blog/post/list/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="list"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/category" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
       -H "Content-Type:application/json" \
@@ -67,6 +90,21 @@
         <service class="Magefan\Blog\Api\CategoryManagementInterface" method="delete"/>
         <resources>
             <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/category/:id" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/view/:id/:store_id" -->
+    <route url="/V1/blog/category/view/:id/:store_id" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="view"/>
+        <resources>
+            <resource ref="anonymous" />
         </resources>
     </route>
 </routes>

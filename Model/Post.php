@@ -209,7 +209,12 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getPostUrl()
     {
-        return $this->_url->getUrl($this, URL::CONTROLLER_POST);
+        if (!$this->hasData('post_url')) {
+            $url = $this->_url->getUrl($this, URL::CONTROLLER_POST);
+            $this->setData('post_url', $url);
+        }
+
+        return $this->getData('post_url');
     }
 
     /**
@@ -573,6 +578,37 @@ class Post extends \Magento\Framework\Model\AbstractModel
             $image = $this->getData('post_image');
         }
         return $image;
+    }
+
+    /**
+     * Prepare all additional data
+     * @param  string $format
+     * @return self
+     */
+    public function initDinamicData()
+    {
+        $keys = [
+            'og_image',
+            'og_type',
+            'og_description',
+            'og_title',
+            'meta_description',
+            'meta_title',
+            'short_filtered_content',
+            'filtered_content',
+            'first_image',
+            'featured_image',
+            'post_url',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace('_', '',
+                ucwords($key, '_')
+            );
+            $this->$method();
+        }
+
+        return $this;
     }
 
 }

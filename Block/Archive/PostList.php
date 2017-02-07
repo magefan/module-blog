@@ -22,9 +22,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     protected function _preparePostCollection()
     {
         parent::_preparePostCollection();
-        $this->_postCollection->getSelect()
-            ->where('MONTH(publish_time) = ?', $this->getMonth())
-            ->where('YEAR(publish_time) = ?', $this->getYear());
+        $this->_postCollection->addArchiveFilter(
+            $this->getYear(),
+            $this->getMonth()
+        );
     }
 
     /**

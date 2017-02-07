@@ -338,4 +338,27 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
         return $this->getData($key);
     }
+
+    /**
+     * Prepare all additional data
+     * @param  string $format
+     * @return self
+     */
+    public function initDinamicData()
+    {
+        $keys = [
+            'meta_description',
+            'meta_title',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace('_', '',
+                ucwords($key, '_')
+            );
+            $this->$method();
+        }
+
+        return $this;
+    }
+
 }

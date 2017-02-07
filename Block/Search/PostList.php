@@ -32,15 +32,8 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     protected function _preparePostCollection()
     {
         parent::_preparePostCollection();
-
-        $q = $this->getQuery();
-        $this->_postCollection->addFieldToFilter(
-            ['title', 'content_heading', 'content'],
-            [
-                ['like' => '%'.$q.'%'],
-                ['like' => '%'.$q.'%'],
-                ['like' => '% '.$q.' %']
-            ]
+        $this->_postCollection->addSearchFilter(
+            $this->getQuery()
         );
     }
 
