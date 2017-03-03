@@ -194,7 +194,7 @@ class Wordpress extends AbstractImport
                         AND wm1.meta_key = "_thumbnail_id"
                     )
                 LEFT JOIN
-                    wp_postmeta wm2
+                    '.$_pref.'postmeta wm2
                     ON (
                         wm1.meta_value = wm2.post_id
                         AND wm2.meta_key = "_wp_attached_file"
