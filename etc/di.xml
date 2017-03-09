@@ -33,6 +33,11 @@
             <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
         </arguments>
     </type>
+    <type name="Magefan\Blog\Controller\Adminhtml\Post\Upload\Gallery">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
+        </arguments>
+    </type>
     <type name="Plumrocket\Amp\Helper\Data">
         <plugin name="plumrocket_amp_helper_data_magefan_blog"
                 type="Magefan\Blog\Plugin\Plumrocket\Amp\HelperDataPlugin" sortOrder="10"/>

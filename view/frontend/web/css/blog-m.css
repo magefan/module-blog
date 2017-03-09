@@ -79,6 +79,10 @@
 .post-view .post-nextprev-hld .prev-link {float:left}
 .post-view .post-nextprev-hld .next-link {float:right}
 
+.post-view .post-gallery {margin:15px 0 15px 0}
+.post-view .post-gallery .gallery-image-hld {margin: 0 14px 14px 0; border:1px solid #ccc; display: block; float:left}
+.post-view .post-gallery .gallery-image{padding: 0px; margin:0px; display:block}
+
 .post-view .block {margin-bottom: 30px;}
 
 .widget.block-recent-posts .block-content .item {

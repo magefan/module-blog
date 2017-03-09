@@ -39,6 +39,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     const STATUS_DISABLED = 0;
 
     /**
+     * Gallery images separator
+     */
+    const GALLERY_IMAGES_SEPARATOR = ';';
+
+    /**
      * Base media folder path
      */
     const BASE_MEDIA_PATH = 'magefan_blog';
@@ -105,6 +110,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_relatedPostsCollection;
 
     /**
+     * @var \Magefan\Blog\Model\ImageFactory
+     */
+    protected $imageFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -124,6 +134,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Registry $registry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         Url $url,
+        \Magefan\Blog\Model\ImageFactory $imageFactory,
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
@@ -136,6 +147,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
         $this->filterProvider = $filterProvider;
         $this->_url = $url;
+        $this->imageFactory = $imageFactory;
         $this->_authorFactory = $authorFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
         $this->_tagCollectionFactory = $tagCollectionFactory;
@@ -233,6 +245,54 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->getData('featured_image');
+    }
+
+    /**
+     * Set media gallery images url
+     *
+     * @param array $images
+     * @return this
+     */
+    public function setGalleryImages(array $images)
+    {
+        $this->setData('media_gallery',
+            implode(
+                self::GALLERY_IMAGES_SEPARATOR,
+                $images
+            )
+        );
+
+        /* Reinit Media Gallery Images */
+        $this->unsetData('gallery_images');
+        $this->getGalleryImages();
+
+        return $this;
+    }
+
+    /**
+     * Retrieve media gallery images url
+     * @return string
+     */
+    public function getGalleryImages()
+    {
+        if (!$this->hasData('gallery_images')) {
+            $images = array();
+            $gallery = explode(
+                self::GALLERY_IMAGES_SEPARATOR,
+                $this->getData('media_gallery')
+            );
+            if (!empty($gallery)) {
+                foreach ($gallery as $file) {
+                    if ($file) {
+                        $images[] = $this->imageFactory->create()
+                            ->setFile($file);
+                    }
+                }
+            }
+            $this->setData('gallery_images', $images);
+        }
+
+        return $this->getData('gallery_images');
     }
 
     /**

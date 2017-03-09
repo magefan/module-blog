@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -13,7 +13,7 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
- * Blog update
+ * Blog schema update
  */
 class UpgradeSchema implements UpgradeSchemaInterface
 {
@@ -278,6 +278,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'Magefan Blog Post To Category Linkage Table'
             );
             $setup->getConnection()->createTable($table);
+        }
+
+        if (version_compare($version, '2.4.4') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'media_gallery',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '2M',
+                    'nullable' => true,
+                    'comment' => 'Media Gallery',
+                ]
+            );
         }
 
         $setup->endSetup();

@@ -89,6 +89,33 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                 $model->setData($key, null);
             }
         }
+
+        /* Prepare Media Gallery */
+        $data = $model->getData();
+
+        if (!empty($data['media_gallery']['images'])) {
+            $images = $data['media_gallery']['images'];
+            usort($images, function ($imageA, $imageB) {
+                return ($imageA['position'] < $imageB['position']) ? -1 : 1;
+            });
+            $gallery = array();
+            foreach ($images as $image) {
+                if (empty($image['removed'])) {
+                    if (!empty($image['value_id'])) {
+                        $gallery[] = $image['value_id'];
+                    } else {
+                        $imageUploader = $this->_objectManager->get(
+                            'Magefan\Blog\ImageUpload'
+                        );
+                        $imageUploader->moveFileFromTmp($image['file']);
+                        $gallery[] = Post::BASE_MEDIA_PATH . DIRECTORY_SEPARATOR . $image['file'];
+                    }
+                }
+            }
+
+            $model->setGalleryImages($gallery);
+
+        }
     }
 
 }

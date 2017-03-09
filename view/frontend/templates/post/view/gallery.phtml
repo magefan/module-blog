@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post media gallery images template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Gallery
+ */
+?>
+
+<?php
+    $post = $block->getPost();
+    $galleryImages = $post->getGalleryImages();
+?>
+
+<?php if (count($galleryImages)) { ?>
+    <div class="post-gallery clearfix">
+        <?php foreach ($galleryImages as $image) { ?>
+            <a class="gallery-image-hld" data-fancybox="gallery" href="<?php echo $block->escapeHtml($image) ?>">
+                <img class="gallery-image" src="<?php echo $block->escapeHtml($image->resize(200)) ?>" alt="" />
+            </a>
+        <?php } ?>
+    </div>
+    <script>
+    require(['jquery', 'domReady!'], function($){
+        /* Deferer fancybox css loading */
+        $("head").append($("<link rel='stylesheet' href='<?php echo $block->getViewFileUrl("Magefan_Blog::css/jquery.fancybox.min.css") ?>' type='text/css' media='screen' />"));
+        /* Deferer fancybox js loading */
+        require(['Magefan_Blog/js/jquery.fancybox.min'], function(){});
+    });
+</script>
+<?php } ?>
