@@ -14,11 +14,7 @@
     </head>
     <body>
         <referenceBlock name="footer_links">
-            <block class="Magefan\Blog\Block\Link" name="footer_blog_link">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">Blog</argument>
-                </arguments>
-            </block>
+            <block class="Magefan\Blog\Block\Link" name="footer_blog_link" />
         </referenceBlock>
     </body>
 </page>

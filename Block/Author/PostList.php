@@ -46,7 +46,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     protected function _prepareLayout()
     {
         if ($author = $this->getAuthor()) {
-            $this->_addBreadcrumbs($author);
+            $this->_addBreadcrumbs($author->getTitle(), 'blog_author');
             $this->pageConfig->addBodyClass('blog-author-' . $author->getIdentifier());
             $this->pageConfig->getTitle()->set($author->getTitle());
             $this->pageConfig->addRemotePageAsset(
@@ -59,40 +59,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         return parent::_prepareLayout();
     }
 
-    /**
-     * Prepare breadcrumbs
-     *
-     * @param \Magefan\Blog\Model\Author $author
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @return void
-     */
-    protected function _addBreadcrumbs($author)
-    {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
-            && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
-        ) {
-            $breadcrumbsBlock->addCrumb(
-                'home',
-                [
-                    'label' => __('Home'),
-                    'title' => __('Go to Home Page'),
-                    'link' => $this->_storeManager->getStore()->getBaseUrl()
-                ]
-            );
-
-            $breadcrumbsBlock->addCrumb(
-                'blog',
-                [
-                    'label' => __('Blog'),
-                    'title' => __('Go to Blog Home Page'),
-                    'link' => $this->_url->getBaseUrl()
-                ]
-            );
-
-            $breadcrumbsBlock->addCrumb('blog_author',[
-                'label' => $author->getTitle(),
-                'title' => $author->getTitle()
-            ]);
-        }
-    }
 }

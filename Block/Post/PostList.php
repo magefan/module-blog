@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Block\Post;
 
+use Magento\Store\Model\ScopeInterface;
+
 /**
  * Blog post list block
  */
@@ -91,6 +93,59 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
         $this->setChild('toolbar', $toolbar);
 
         return parent::_beforeToHtml();
+    }
+
+    /**
+     * Prepare breadcrumbs
+     *
+     * @param  string $title
+     * @param  string $key
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return void
+     */
+    protected function _addBreadcrumbs($title = null, $key = null)
+    {
+        if ($breadcrumbsBlock = $this->getBreadcrumbsBlock()) {
+            $breadcrumbsBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Go to Home Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl()
+                ]
+            );
+
+            $blogTitle = $this->_scopeConfig->getValue(
+                'mfblog/index_page/title',
+                ScopeInterface::SCOPE_STORE
+            );
+            $breadcrumbsBlock->addCrumb(
+                'blog',
+                [
+                    'label' => __($blogTitle),
+                    'title' => __($blogTitle),
+                    'link' => $this->_url->getBaseUrl()
+                ]
+            );
+
+            if ($title) {
+                $breadcrumbsBlock->addCrumb($key ?: 'blog_item', ['label' => $title, 'title' => $title]);
+            }
+        }
+    }
+
+    /**
+     * Retrieve breadcrumbs block
+     *
+     * @return mixed
+     */
+    protected function getBreadcrumbsBlock()
+    {
+        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)) {
+            return $this->getLayout()->getBlock('breadcrumbs');
+        }
+
+        return false;
     }
 
 }

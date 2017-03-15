@@ -45,42 +45,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     protected function _prepareLayout()
     {
         $title = $this->_getTitle();
-        $this->_addBreadcrumbs($title);
+        $this->_addBreadcrumbs($title, 'blog_search');
         $this->pageConfig->getTitle()->set($title);
 
         return parent::_prepareLayout();
-    }
-
-    /**
-     * Prepare breadcrumbs
-     *
-     * @param  string $title
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @return void
-     */
-    protected function _addBreadcrumbs($title)
-    {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
-            && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
-        ) {
-            $breadcrumbsBlock->addCrumb(
-                'home',
-                [
-                    'label' => __('Home'),
-                    'title' => __('Go to Home Page'),
-                    'link' => $this->_storeManager->getStore()->getBaseUrl()
-                ]
-            );
-            $breadcrumbsBlock->addCrumb(
-                'blog',
-                [
-                    'label' => __('Blog'),
-                    'title' => __('Go to Blog Home Page'),
-                    'link' => $this->_url->getBaseUrl()
-                ]
-            );
-            $breadcrumbsBlock->addCrumb('blog_search', ['label' => $title, 'title' => $title]);
-        }
     }
 
     /**

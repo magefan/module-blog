@@ -23,7 +23,7 @@ class View extends AbstractPost
     {
         $post = $this->getPost();
         if ($post) {
-            $this->_addBreadcrumbs($post);
+            $this->_addBreadcrumbs($post->getTitle(), 'blog_post');
             $this->pageConfig->addBodyClass('blog-post-' . $post->getIdentifier());
             $this->pageConfig->getTitle()->set($post->getMetaTitle());
             $this->pageConfig->setKeywords($post->getMetaKeywords());
@@ -41,11 +41,12 @@ class View extends AbstractPost
     /**
      * Prepare breadcrumbs
      *
-     * @param \Magefan\Blog\Model\Post $post
+     * @param  string $title
+     * @param  string $key
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return void
      */
-    protected function _addBreadcrumbs(\Magefan\Blog\Model\Post $post)
+    protected function _addBreadcrumbs($title = null, $key = null)
     {
         if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
             && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
@@ -58,17 +59,22 @@ class View extends AbstractPost
                     'link' => $this->_storeManager->getStore()->getBaseUrl()
                 ]
             );
+
+            $blogTitle = $this->_scopeConfig->getValue(
+                'mfblog/index_page/title',
+                ScopeInterface::SCOPE_STORE
+            );
             $breadcrumbsBlock->addCrumb(
                 'blog',
                 [
-                    'label' => __('Blog'),
-                    'title' => __('Go to Blog Home Page'),
+                    'label' => __($blogTitle),
+                    'title' => __($blogTitle),
                     'link' => $this->_url->getBaseUrl()
                 ]
             );
-            $breadcrumbsBlock->addCrumb('blog_post', [
-                'label' => $post->getTitle(),
-                'title' => $post->getTitle()
+            $breadcrumbsBlock->addCrumb($key, [
+                'label' => $title ,
+                'title' => $title
             ]);
         }
     }

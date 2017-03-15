@@ -36,35 +36,6 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
-     * Prepare breadcrumbs
-     *
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @return void
-     */
-    protected function _addBreadcrumbs()
-    {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
-            && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
-        ) {
-            $breadcrumbsBlock->addCrumb(
-                'home',
-                [
-                    'label' => __('Home'),
-                    'title' => __('Go to Home Page'),
-                    'link' => $this->_storeManager->getStore()->getBaseUrl()
-                ]
-            );
-            $breadcrumbsBlock->addCrumb(
-                'blog',
-                [
-                    'label' => __('Blog'),
-                    'title' => __(sprintf('Go to Blog Home Page'))
-                ]
-            );
-        }
-    }
-
-    /**
      * Retrieve blog title
      * @return string
      */

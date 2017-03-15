@@ -41,6 +41,17 @@ class Link extends \Magento\Framework\View\Element\Html\Link
     }
 
     /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/index_page/title',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * Render block HTML
      *
      * @return string

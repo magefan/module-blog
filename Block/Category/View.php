@@ -67,45 +67,27 @@ class View extends \Magefan\Blog\Block\Post\PostList
     /**
      * Prepare breadcrumbs
      *
-     * @param \Magefan\Blog\Model\Category $category
+     * @param  string $title
+     * @param  string $key
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return void
      */
-    protected function _addBreadcrumbs($category)
+    protected function _addBreadcrumbs($title = null, $key = null)
     {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
-            && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
-        ) {
-            $breadcrumbsBlock->addCrumb(
-                'home',
-                [
-                    'label' => __('Home'),
-                    'title' => __('Go to Home Page'),
-                    'link' => $this->_storeManager->getStore()->getBaseUrl()
-                ]
-            );
-
-            $breadcrumbsBlock->addCrumb(
-                'blog',
-                [
-                    'label' => __('Blog'),
-                    'title' => __('Go to Blog Home Page'),
-                    'link' => $this->_url->getBaseUrl()
-                ]
-            );
-
-            $_category = $category;
+        parent::_addBreadcrumbs();
+        if ($breadcrumbsBlock = $this->getBreadcrumbsBlock()) {
+            $category = $this->getCategory();
             $parentCategories = [];
-            while ($parentCategory = $_category->getParentCategory()) {
-                $parentCategories[] = $_category = $parentCategory;
+            while ($parentCategory = $category->getParentCategory()) {
+                $parentCategories[] = $category = $parentCategory;
             }
 
             for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
-                $_category = $parentCategories[$i];
-                $breadcrumbsBlock->addCrumb('blog_parent_category_'.$_category->getId(), [
-                    'label' => $_category->getTitle(),
-                    'title' => $_category->getTitle(),
-                    'link'  => $_category->getCategoryUrl()
+                $category = $parentCategories[$i];
+                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $category->getId(), [
+                    'label' => $category->getTitle(),
+                    'title' => $category->getTitle(),
+                    'link'  => $category->getCategoryUrl()
                 ]);
             }
 

@@ -46,7 +46,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     protected function _prepareLayout()
     {
         if ($tag = $this->getTag()) {
-            $this->_addBreadcrumbs($tag);
+            $this->_addBreadcrumbs($tag->getTitle(), 'blog_tag');
             $this->pageConfig->addBodyClass('blog-tag-' . $tag->getIdentifier());
             $this->pageConfig->getTitle()->set($tag->getTitle());
             $this->pageConfig->addRemotePageAsset(
@@ -59,40 +59,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         return parent::_prepareLayout();
     }
 
-    /**
-     * Prepare breadcrumbs
-     *
-     * @param \Magefan\Blog\Model\Tag $tag
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @return void
-     */
-    protected function _addBreadcrumbs($tag)
-    {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
-            && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
-        ) {
-            $breadcrumbsBlock->addCrumb(
-                'home',
-                [
-                    'label' => __('Home'),
-                    'title' => __('Go to Home Page'),
-                    'link' => $this->_storeManager->getStore()->getBaseUrl()
-                ]
-            );
-
-            $breadcrumbsBlock->addCrumb(
-                'blog',
-                [
-                    'label' => __('Blog'),
-                    'title' => __('Go to Blog Home Page'),
-                    'link' => $this->_url->getBaseUrl()
-                ]
-            );
-
-            $breadcrumbsBlock->addCrumb('blog_tag',[
-                'label' => $tag->getTitle(),
-                'title' => $tag->getTitle()
-            ]);
-        }
-    }
 }
