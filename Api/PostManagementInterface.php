@@ -20,5 +20,5 @@ interface PostManagementInterface extends ManagementInterface
      * @param  int $limit
      * @return bool
      */
-    public function list($type, $term, $storeId, $page, $limit);
+    public function getList($type, $term, $storeId, $page, $limit);
 }

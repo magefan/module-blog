@@ -58,7 +58,7 @@
     </route>
     <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit" -->
     <route url="/V1/blog/post/list/:type/:term/:store_id/:page/:limit" method="GET">
-        <service class="Magefan\Blog\Api\PostManagementInterface" method="list"/>
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="getList"/>
         <resources>
             <resource ref="anonymous" />
         </resources>

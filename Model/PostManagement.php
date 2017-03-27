@@ -39,7 +39,7 @@ class PostManagement extends AbstractManagement
      * @param  int $limit
      * @return bool
      */
-    public function list($type, $term, $storeId, $page, $limit)
+    public function getList($type, $term, $storeId, $page, $limit)
     {
         try {
             $collection = $this->_itemFactory->create()->getCollection();
