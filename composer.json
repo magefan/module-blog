@@ -2,7 +2,7 @@
     "name": "magefan/module-blog",
     "description": "Implements Blog functionality on Magento 2 store",
     "type": "magento2-module",
-    "version": "2.4.4",
+    "version": "2.5.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
