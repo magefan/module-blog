@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -669,6 +669,32 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this;
+    }
+
+    /**
+     * Duplicate post and return new object
+     * @return self
+     */
+    public function duplicate()
+    {
+        $object = clone $this;
+        $object
+            ->unsetData('post_id')
+            ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
+            ->setData('is_active', 0);
+
+        $relatedProductIds = $this->getRelatedProducts()->getAllIds();
+        $relatedPpostIds = $this->getRelatedPosts()->getAllIds();
+
+        $object->setData(
+            'links',
+            [
+                'product' => array_combine($relatedProductIds, $relatedProductIds),
+                'post' => array_combine($relatedPpostIds, $relatedPpostIds),
+            ]
+        );
+
+        return $object->save();
     }
 
 }

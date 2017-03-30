@@ -361,4 +361,19 @@ class Category extends \Magento\Framework\Model\AbstractModel
         return $this;
     }
 
+    /**
+     * Duplicate category and return new object
+     * @return self
+     */
+    public function duplicate()
+    {
+        $object = clone $this;
+        $object
+            ->unsetData('category_id')
+            ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
+            ->setData('is_active', 0);
+
+        return $object->save();
+    }
+
 }
