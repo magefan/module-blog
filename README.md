@@ -5,10 +5,11 @@ Blog module allows you to create a full-fledged blog on your [Magento 2](http://
 ## Features
   * Unlimited blog posts and categories
   * Post tags are available
-  * Multi Stores Support
+  * Multi-store support
   * SEO friendly permalinks
-  * Facebook,Disqus and Google+ comments on post page
-  * Related Products and Related Post
+  * Post media gallery
+  * Facebook, Disqus and Google+ comments on post page
+  * Related products and related post
   * Available posts search
   * Lazy load on posts list
   * Author information and posts by author
@@ -16,9 +17,10 @@ Blog module allows you to create a full-fledged blog on your [Magento 2](http://
   * Import Posts and Categories form WordPress and AW Blog extension for M1
   * Recent Posts Widget
   * Sitemap XML
+  * Posts and Categories duplicate
   * Blog Rss Feed
   * Open Graph (OG) meta tags
-  * REST API
+  * REST API  
   * Compatible with [Porto Theme](https://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864?ref=magefan) for Magento 2
   * Accelerated Mobile Pages (AMP) Project support. To enable AMP view on blog pages [Magento Amp Extension](http://magefan.com/accelerated-mobile-pages/) by Plumrocket is required.
 
@@ -29,7 +31,7 @@ http://magefan.com/magento2-blog-extension/#demo
 http://magefan.com/docs/magento-2-blog/
 
 ## Requirements
-  * Magento Community Edition 2.x or Magento Enterprise Edition 2.x
+  * Magento Community Edition 2.1.x or Magento Enterprise Edition 2.1.x
 
 ## Installation Method 1 - Installing via composer
   * Open command line
