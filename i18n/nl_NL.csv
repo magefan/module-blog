@@ -28,7 +28,7 @@ Blog,Blog
 "Blog Import","Blog Import"
 "Blog import type is not specified.","Blog import type zijn niet gespecificeerd."
 "The import process was completed successfully. %1 posts and %2 categories where imported.","Het importeer proces is compleet geluk. %1 berichten en %2 categorieën zijn geïmporteerd."
-"The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4","Het importeer proces is compleet. %1 berichten en %2 categorieën zijn geimpoteerd. Sommige berichten of categorieën zijn overgeslaan.<br/> %3 %4"
+"The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4","Het importeer proces is compleet. %1 berichten en %2 categorieën zijn geimpoteerd. Sommige berichten of categorieën zijn overgeslagen.<br/> %3 %4"
 "Nothing to import.","Niets om te Importeren."
 "Can not make import.","Kan niet Importeren."
 "Something went wrong: ","Er is iets mis gegaan: "
