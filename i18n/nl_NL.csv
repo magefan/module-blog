@@ -27,8 +27,8 @@ Blog,Blog
 "%1 status have been changed.","%1 Status is veranderd."
 "Blog Import","Blog Import"
 "Blog import type is not specified.","Blog import type zijn niet gespecificeerd."
-"The import process was completed successfully. %1 posts and %2 categories where imported.","Het importeer proces is compleet geluk. %1 berichten en %2 categorien zijn geïmporteerd."
-"The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4","Het importeer proces is compleet. %1 berichten en %2 categorien zijn geimpoteerd. Sommige berichten of categorien zijn overgeslaan.<br/> %3 %4"
+"The import process was completed successfully. %1 posts and %2 categories where imported.","Het importeer proces is compleet geluk. %1 berichten en %2 categorieën zijn geïmporteerd."
+"The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4","Het importeer proces is compleet. %1 berichten en %2 categorieën zijn geimpoteerd. Sommige berichten of categorieën zijn overgeslaan.<br/> %3 %4"
 "Nothing to import.","Niets om te Importeren."
 "Can not make import.","Kan niet Importeren."
 "Something went wrong: ","Er is iets mis gegaan: "
@@ -50,7 +50,7 @@ Blog,Blog
 "The tag URL key cannot be made of only numbers.","De tag URL key mag niet alleen uit nummers bestaan."
 "Related posts","Gerelateerde berichten"
 Posted:,Geplaatst:
-Categories:,Categorien:
+Categories:,Categorieën:
 Tags:,Tags:
 Author:,Auteur:
 "We can't find posts matching the selection.","We kunnen geen berichten vinden die overeen komen met deze selectie."
@@ -89,7 +89,7 @@ Author,Auteur
 "Display Post List By Author","Sorteer Berichten Lijst op Auteur"
 Sidebar,Sidebar
 "Search Form Widget","Zoek Formulier Widget"
-"Categories Widget","Categorien Widget"
+"Categories Widget","Categorieën Widget"
 "Recent Posts Widget","Recente Berichten Widget"
 "Posts Number","Bericht Nummer"
 "Archive Widget","Archief Widget"
@@ -114,7 +114,7 @@ Social,Sociaal
 "Category Top Navigation","Categorie Top Navigatie"
 "Display Blog Link","Toon Blog link"
 "Blog Category","Blog Categorie"
-"Leave blank to display posts from all categories.","Leeg laten om berichten van alle categorien te tonen."
+"Leave blank to display posts from all categories.","Leeg laten om berichten van alle categorieën te tonen."
 "Custom Template","Custom Template"
 Published,Gepubliceerd
 "Category Information","Categorie Informatie"
