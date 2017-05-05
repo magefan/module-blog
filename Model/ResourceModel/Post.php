@@ -181,7 +181,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($links = $object->getData('links')) {
             if (is_array($links)) {
                 foreach (['post', 'product'] as $linkType) {
-                    if (!empty($links[$linkType]) && is_array($links[$linkType])) {
+                    if (isset($links[$linkType]) && is_array($links[$linkType])) {
                         $linksData = $links[$linkType];
                         $lookup = 'lookupRelated' . ucfirst($linkType) . 'Ids';
                         $oldIds = $this->$lookup($object->getId());
