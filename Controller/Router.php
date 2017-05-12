@@ -326,11 +326,16 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected function _getPostId($identifier)
     {
         if (is_null($this->_postId)) {
-            $post = $this->_postFactory->create();
-            $this->_postId = $post->checkIdentifier(
-                $identifier,
-                $this->_storeManager->getStore()->getId()
-            );
+            $trimmedIdentifier = $this->_url->trimSufix($identifier);
+            if ($this->_url->getPostUrlSufix() && $trimmedIdentifier == $identifier) { //if url without sufix
+                $this->_postId = 0;
+            } else {
+                $post = $this->_postFactory->create();
+                $this->_postId = $post->checkIdentifier(
+                    $trimmedIdentifier,
+                    $this->_storeManager->getStore()->getId()
+                );
+            }
         }
 
         return $this->_postId;

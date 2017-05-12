@@ -273,6 +273,10 @@
                     </depends>
                     <comment>E.g.: "post" will make the blog post accessible from mystore.com/{blog_route}/post/post-title/</comment>
                 </field>
+                <field id="post_sufix" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Post URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog post accessible from mystore.com/{blog_route}/post/post-title.html</comment>
+                </field>
                 <field id="category_route" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Category Route</label>
                     <depends>

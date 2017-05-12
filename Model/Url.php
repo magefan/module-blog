@@ -142,9 +142,17 @@ class Url
      */
     public function getUrl($identifier, $controllerName)
     {
-        return $this->_url->getUrl(
+        $url = $this->_url->getUrl(
             $this->getUrlPath($identifier, $controllerName)
         );
+
+        if ($controllerName == self::CONTROLLER_POST) {
+            if ($sufix = $this->getPostUrlSufix()) {
+                $url = trim($url, '/') . $sufix;
+            }
+        }
+
+        return $url;
     }
 
     /**
@@ -183,6 +191,28 @@ class Url
     {
         return $this->_storeManager->getStore()
             ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
+    }
+
+    /**
+     * Retrieve trimmed url without sufix
+     * @param  string $identifier
+     * @return string
+     */
+    public function trimSufix($identifier)
+    {
+        return trim(
+            $identifier,
+            $this->getPostUrlSufix()
+        );
+    }
+
+    /**
+     * Retrieve post url sufix
+     * @return string
+     */
+    public function getPostUrlSufix()
+    {
+        return trim($this->_getConfig('post_sufix'));
     }
 
     /**
