@@ -69,6 +69,12 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     protected $filterProvider;
 
+
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
+
     /**
      * @var \Magefan\Blog\Model\Url
      */
@@ -120,6 +126,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
@@ -133,6 +140,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         Url $url,
         \Magefan\Blog\Model\ImageFactory $imageFactory,
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
@@ -146,6 +154,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
         $this->filterProvider = $filterProvider;
+        $this->scopeConfig = $scopeConfig;
         $this->_url = $url;
         $this->imageFactory = $imageFactory;
         $this->_authorFactory = $authorFactory;
@@ -346,7 +355,15 @@ class Post extends \Magento\Framework\Model\AbstractModel
             $content = $this->getFilteredContent();
             $pageBraker = '<!-- pagebreak -->';
 
-            if ($p = mb_strpos($content, $pageBraker)) {
+            $p = mb_strpos($content, $pageBraker);
+            if (!$p) {
+                $p = (int) $this->scopeConfig->getValue(
+                    'mfblog/post_list/shortcotent_length',
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                );
+            }
+
+            if ($p) {
                 $content = mb_substr($content, 0, $p);
                 try {
                     libxml_use_internal_errors(true);
