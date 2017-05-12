@@ -13,7 +13,7 @@ namespace Magefan\Blog\Model\Import;
  */
 class Wordpress extends AbstractImport
 {
-    protected $_requiredFields = ['dbname', 'uname', 'pwd', 'dbhost', 'prefix', 'store_id'];
+    protected $_requiredFields = ['dbname', 'uname', 'pwd', 'dbhost', 'prefix'];
 
     public function execute()
     {
@@ -219,6 +219,16 @@ class Wordpress extends AbstractImport
             }
 
             $creationTime = strtotime($data['post_date_gmt']);
+
+            $content = $data['post_content'];
+            $content = str_replace('<!--more-->', '<!-- pagebreak -->', $content);
+
+            $content = preg_replace(
+                '/((http:\/\/|https:\/\/|\/\/)(.*)|(\s|"|\')|(\/[\d\w_\-\.]*))\/wp-content\/uploads(.*)((\.jpg|\.jpeg|\.gif|\.png|\.tiff|\.tif|\.svg)|(\s|"|\'))/Ui',
+                '$4{{media url="magefan_blog$6$8"}}$9',
+                $content
+            );
+
             $data = [
                 'store_ids' => [$this->getStoreId()],
                 'title' => $data['post_title'],
@@ -226,7 +236,7 @@ class Wordpress extends AbstractImport
                 'meta_description' => '',
                 'identifier' => $data['post_name'],
                 'content_heading' => '',
-                'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['post_content']),
+                'content' => $content,
                 'creation_time' => $creationTime,
                 'update_time' => strtotime($data['post_modified_gmt']),
                 'publish_time' => $creationTime,

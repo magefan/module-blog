@@ -163,7 +163,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                     'label' => __('Store View'),
                     'title' => __('Store View'),
                     'required' => true,
-                    'values' => $this->_systemStore->getStoreValuesForForm(false, false),
+                    'values' => $this->_systemStore->getStoreValuesForForm(false, true),
                     'disabled' => $isElementDisabled,
                 ]
             );
