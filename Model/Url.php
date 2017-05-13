@@ -200,10 +200,17 @@ class Url
      */
     public function trimSufix($identifier)
     {
-        return trim(
-            $identifier,
-            $this->getPostUrlSufix()
-        );
+        $sufix = $this->getPostUrlSufix();
+        if ($sufix) {
+            $p = mb_strrpos($identifier, $sufix);
+            $li = mb_strlen($identifier);
+            $ls = mb_strlen($sufix);
+            if ($p + $ls == $li) {
+                $identifier = mb_substr($identifier, 0, $p);
+            }
+        }
+
+        return $identifier;
     }
 
     /**
