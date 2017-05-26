@@ -84,24 +84,60 @@ class View extends \Magefan\Blog\Block\Post\PostList
         parent::_addBreadcrumbs();
         if ($breadcrumbsBlock = $this->getBreadcrumbsBlock()) {
             $category = $this->getCategory();
-            $parentCategories = [];
-            while ($parentCategory = $category->getParentCategory()) {
-                $parentCategories[] = $category = $parentCategory;
-            }
-
-            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
-                $category = $parentCategories[$i];
-                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $category->getId(), [
-                    'label' => $category->getTitle(),
-                    'title' => $category->getTitle(),
-                    'link'  => $category->getCategoryUrl()
-                ]);
-            }
+            
+            $this->addParentCategoriesBreadcrumbs($category, $breadcrumbsBlock);
 
             $breadcrumbsBlock->addCrumb('blog_category',[
                 'label' => $category->getTitle(),
                 'title' => $category->getTitle()
             ]);
         }
+    }
+    /**
+     * Get Blog categories as array recursively
+     *
+     * @param $category
+     * @param array $result
+     * @return array
+     */
+    public function getCategoriesAsArrayRecursively($category, $result = []) {
+
+        if ($parentCategory = $category->getParentCategory()) {
+
+            $categoryData = array (
+                array (
+                    'title' => $parentCategory->getTitle(),
+                    'key' => 'blog_parent_category_'.$parentCategory->getId(),
+                    'url' => $parentCategory->getCategoryUrl()
+                )
+            );
+
+            $result = array_merge($result, $this->getCategoriesAsArrayRecursively($parentCategory, $categoryData));
+        }
+
+        return $result;
+
+    }
+
+    /**
+     * Add blog categories to breadcrumbs
+     *
+     * @param $category
+     * @param $breadcrumbsBlock
+     */
+    public function addParentCategoriesBreadcrumbs($category, $breadcrumbsBlock) {
+
+        $categoryCollection = $this->getCategoriesAsArrayRecursively($category);
+
+        foreach (array_reverse($categoryCollection) as $category) {
+
+            $breadcrumbsBlock->addCrumb($category['key'], [
+                'label' => $category['title'],
+                'title' => $category['title'],
+                'link'  => $category['url']
+            ]);
+
+        }
+
     }
 }
