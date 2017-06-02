@@ -48,7 +48,7 @@ class Image extends AbstractHelper
     public function resize($width, $height = null)
     {
         if ($this->_baseFile){
-            $path = 'blog/cache/' . $width . 'x' . $height;
+            $path = 'blog/cache/' . $width . ($height?'x' . $height:'');
             $this->_newFile = $path. '/' . $this->_baseFile;
             if (true || !$this->fileExists($this->_newFile)) {
                 $this->resizeBaseFile($width, $height);
@@ -57,7 +57,7 @@ class Image extends AbstractHelper
         return $this;
     }
 
-    protected function resizeBaseFile($width, $height)
+    protected function resizeBaseFile($width, $height=null)
     {
         if (!$this->fileExists($this->_baseFile)) {
             $this->_baseFile = null;
