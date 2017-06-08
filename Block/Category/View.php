@@ -98,6 +98,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
                 ]);
             }
 
+            $category = $this->getCategory();
             $breadcrumbsBlock->addCrumb('blog_category',[
                 'label' => $category->getTitle(),
                 'title' => $category->getTitle()
