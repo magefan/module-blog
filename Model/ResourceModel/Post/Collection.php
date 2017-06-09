@@ -80,7 +80,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addFieldToFilter($field, $condition = null)
     {
         if ($field === 'store_id' || $field === 'store_ids') {
-            return $this->addStoreFilter($condition, false);
+            return $this->addStoreFilter($condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -258,7 +258,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ->from(['cps' => $tableName])
                 ->where('cps.post_id IN (?)', $items);
 
-            $result = $connection->fetchPairs($select);
+            $result = [];
+            foreach ($connection->fetchAll($select) as $item) {
+                if (!isset($result[$item['post_id']])) {
+                    $result[$item['post_id']] = [];
+                }
+                $result[$item['post_id']][] = $item['store_id'];
+            }
+
             if ($result) {
                 foreach ($this as $item) {
                     $postId = $item->getData('post_id');
@@ -272,7 +279,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         $storeId = $result[$item->getData('post_id')];
                     }
                     $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_ids', [$result[$postId]]);
+                    $item->setData('store_ids', $result[$postId]);
                 }
             }
 
