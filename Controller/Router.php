@@ -168,6 +168,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                         $pathInfo[1] = Url::CONTROLLER_AUTHOR;
                     } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_TAG)) {
                         $pathInfo[1] = Url::CONTROLLER_TAG;
+                        $pathInfo[2] = urldecode($pathInfo[2]);
                     } elseif (count($pathInfo) == 1) {
                         if ($this->_isArchiveIdentifier($pathInfo[1])) {
                             $pathInfo[2] = $pathInfo[1];
