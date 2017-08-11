@@ -65,10 +65,14 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_eventObject = 'blog_post';
 
     /**
+     * @var \Magento\Framework\Math\Random
+     */
+    protected $random;
+
+    /**
      * @var \Magento\Cms\Model\Template\FilterProvider
      */
     protected $filterProvider;
-
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -121,10 +125,16 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $imageFactory;
 
     /**
+     * @var string
+     */
+    protected $controllerName;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Framework\Math\Random $random
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magefan\Blog\Model\Url $url
@@ -139,6 +149,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
+        \Magento\Framework\Math\Random $random,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         Url $url,
@@ -154,6 +165,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
         $this->filterProvider = $filterProvider;
+        $this->random = $random;
         $this->scopeConfig = $scopeConfig;
         $this->_url = $url;
         $this->imageFactory = $imageFactory;
@@ -172,6 +184,16 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected function _construct()
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Post');
+        $this->controllerName = URL::CONTROLLER_POST;
+    }
+
+    /**
+     * Retrieve controller name
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
     }
 
     /**
@@ -216,12 +238,12 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Retrieve post url route path
+     * Retrieve post url path
      * @return string
      */
     public function getUrl()
     {
-        return $this->_url->getUrlPath($this, URL::CONTROLLER_POST);
+        return $this->_url->getUrlPath($this->getIdentifier(), $this->controllerName);
     }
 
     /**
@@ -231,11 +253,20 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getPostUrl()
     {
         if (!$this->hasData('post_url')) {
-            $url = $this->_url->getUrl($this, URL::CONTROLLER_POST);
+            $url = $this->_url->getUrl($this, $this->controllerName);
             $this->setData('post_url', $url);
         }
 
         return $this->getData('post_url');
+    }
+
+    /**
+     * Retrieve post canonical url
+     * @return string
+     */
+    public function getCanonicalUrl()
+    {
+        return $this->_url->getUrl($this->getIdentifier(), $this->controllerName);
     }
 
     /**
@@ -504,6 +535,26 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve parent category
+     * @return \Magefan\Blog\Model\Category || false
+     */
+    public function getParentCategory()
+    {
+        $k = 'parent_category';
+        if (null === $this->getData($k)) {
+            $this->setData($k, false);
+            foreach ($this->getParentCategories() as $category) {
+                if ($category->isVisibleOnStore($this->getStoreId())) {
+                    $this->setData($k, $category);
+                    break;
+                }
+            }
+        }
+
+        return $this->getData($k);
+    }
+
+    /**
      * Retrieve post parent categories count
      * @return int
      */
@@ -614,7 +665,18 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function isVisibleOnStore($storeId)
     {
-        return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
+        return $this->getIsActive()
+            && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
+            && array_intersect([0, $storeId], $this->getStoreIds());
+    }
+
+    /**
+     * Retrieve if is preview secret is valid
+     * @return bool
+     */
+    public function isValidSecret($secret)
+    {
+        return ($secret && $this->getSecret() === $secret);
     }
 
     /**
@@ -712,6 +774,23 @@ class Post extends \Magento\Framework\Model\AbstractModel
         );
 
         return $object->save();
+    }
+
+    /**
+     * Retrieve secret key of post, it can be used during preview
+     * @return string
+     */
+    public function getSecret()
+    {
+        if ($this->getId() && !$this->getData('secret')) {
+            $this->setData(
+                'secret',
+                $this->random->getRandomString(32)
+            );
+            $this->save();
+        }
+
+        return $this->getData('secret');
     }
 
 }

@@ -92,9 +92,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         parent::_preparePostCollection();
 
         if ($category = $this->getCategory()) {
-            $categories = $category->getChildrenIds();
-            $categories[] = $category->getId();
-            $this->_postCollection->addCategoryFilter($categories);
+            $this->_postCollection->addCategoryFilter($category);
         }
     }
 

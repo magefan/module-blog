@@ -24,9 +24,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
     {
         parent::_preparePostCollection();
         if ($category = $this->getCategory()) {
-            $categories = $category->getChildrenIds();
-            $categories[] = $category->getId();
-            $this->_postCollection->addCategoryFilter($categories);
+            $this->_postCollection->addCategoryFilter($category);
         }
     }
 
@@ -55,7 +53,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setKeywords($category->getMetaKeywords());
             $this->pageConfig->setDescription($category->getMetaDescription());
             $this->pageConfig->addRemotePageAsset(
-                $category->getCategoryUrl(),
+                $category->getCanonicalUrl(),
                 'canonical',
                 ['attributes' => ['rel' => 'canonical']]
             );

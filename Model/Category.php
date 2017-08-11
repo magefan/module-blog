@@ -61,6 +61,16 @@ class Category extends \Magento\Framework\Model\AbstractModel
     protected $postCollectionFactory;
 
     /**
+     * @var array
+     */
+    static private $loadedCategoriesRepository = [];
+
+    /**
+     * @var string
+     */
+    protected $controllerName;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -92,6 +102,44 @@ class Category extends \Magento\Framework\Model\AbstractModel
     protected function _construct()
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Category');
+        $this->controllerName = URL::CONTROLLER_CATEGORY;
+    }
+
+    /**
+     * Load object data
+     *
+     * @param integer $modelId
+     * @param null|string $field
+     * @return $this
+     * @deprecated
+     */
+    public function load($modelId, $field = null)
+    {
+        $object = parent::load($modelId, $field);
+        if (!isset(self::$loadedCategoriesRepository[$object->getId()])) {
+            self::$loadedCategoriesRepository[$object->getId()] = $object;
+        }
+
+        return $object;
+    }
+
+    private function loadFromRepository($categoryId)
+    {
+        if (!isset(self::$loadedCategoriesRepository[$categoryId])) {
+            $category = clone $this;
+            $category->load($categoryId);
+        }
+
+        return self::$loadedCategoriesRepository[$categoryId];
+    }
+
+    /**
+     * Retrieve controller name
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
     }
 
     /**
@@ -172,25 +220,19 @@ class Category extends \Magento\Framework\Model\AbstractModel
     public function getParentCategory()
     {
         $k = 'parent_category';
-        if (!$this->hasData($k)) {
-
+        if (null === $this->getData($k)) {
+            $this->setData($k, false);
             if ($pId = $this->getParentId()) {
-                $category = clone $this;
-                $category->load($pId);
-
+                $category = $this->loadFromRepository($pId);
                 if ($category->getId()) {
-                    $this->setData($k, $category);
+                    if ($category->isVisibleOnStore($this->getStoreId())) {
+                        $this->setData($k, $category);
+                    }
                 }
             }
         }
 
-        if ($category = $this->getData($k)) {
-            if ($category->isVisibleOnStore($this->getStoreId())) {
-                return $category;
-            }
-        }
-
-        return false;
+        return $this->getData($k);
     }
 
     /**
@@ -259,7 +301,7 @@ class Category extends \Magento\Framework\Model\AbstractModel
      */
     public function getUrl()
     {
-        return $this->_url->getUrlPath($this, URL::CONTROLLER_CATEGORY);
+        return $this->_url->getUrlPath($this->getIdentifier(), $this->controllerName);
     }
 
     /**
@@ -268,7 +310,16 @@ class Category extends \Magento\Framework\Model\AbstractModel
      */
     public function getCategoryUrl()
     {
-        return $this->_url->getUrl($this, URL::CONTROLLER_CATEGORY);
+        return $this->_url->getUrl($this, $this->controllerName);
+    }
+
+    /**
+     * Retrieve catgegory canonical url
+     * @return string
+     */
+    public function getCanonicalUrl()
+    {
+        return $this->_url->getUrl($this->getIdentifier(), $this->controllerName);
     }
 
     /**
@@ -323,15 +374,10 @@ class Category extends \Magento\Framework\Model\AbstractModel
         $key = 'posts_count';
         if (!$this->hasData($key)) {
 
-            $categories = $this->getChildrenIds();
-            $categories[] = $this->getId();
-
             $posts = $this->postCollectionFactory->create()
                 ->addActiveFilter()
                 ->addStoreFilter($this->getStoreId())
-                ->addCategoryFilter($categories);
-
-
+                ->addCategoryFilter($this);
 
             $this->setData($key, (int)$posts->getSize());
         }

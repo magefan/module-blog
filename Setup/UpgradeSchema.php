@@ -293,6 +293,54 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.5.2') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'secret',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '32',
+                    'nullable' => true,
+                    'comment' => 'Post Secret',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'views_count',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    null,
+                    'nullable' => true,
+                    'comment' => 'Post Views Count',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'is_recent_posts_skip',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => true,
+                    'comment' => 'Is Post Skipped From Recent Posts',
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_post'),
+                $setup->getIdxName($setup->getTable('magefan_blog_post'), ['views_count']),
+                ['views_count']
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_post'),
+                $setup->getIdxName($setup->getTable('magefan_blog_post'), ['is_recent_posts_skip']),
+                ['is_recent_posts_skip']
+            );
+
+        }
+
         $setup->endSetup();
     }
 }

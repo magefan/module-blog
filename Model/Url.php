@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -54,6 +54,12 @@ class Url
     protected $_scopeConfig;
 
     /**
+     * Store id
+     * @var int | null
+     */
+    protected $storeId;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Registry $registry
@@ -94,7 +100,7 @@ class Url
             $controllerName .= '_';
         }
 
-        if ($route = $this->_getConfig($controllerName.'route')) {
+        if ($route = $this->_getConfig($controllerName . 'route')) {
             return $route;
         } else {
             return $skip ? $controllerName : null;
@@ -142,15 +148,11 @@ class Url
      */
     public function getUrl($identifier, $controllerName)
     {
-        $url = $this->_url->getUrl(
-            $this->getUrlPath($identifier, $controllerName)
-        );
+        $url = $this->_url->getUrl('', [
+            '_direct' => $this->getUrlPath($identifier, $controllerName)
+        ]);
 
-        if ($controllerName == self::CONTROLLER_POST) {
-            if ($sufix = $this->getPostUrlSufix()) {
-                $url = trim($url, '/') . $sufix;
-            }
-        }
+        $url =  trim($url, '/');
 
         return $url;
     }
@@ -163,23 +165,111 @@ class Url
      */
     public function getUrlPath($identifier, $controllerName)
     {
-        if (is_object($identifier)) {
-            $identifier = $identifier->getIdentifier();
-        }
-
+        $identifier = $this->getExpandedItentifier($identifier);
         switch ($this->getPermalinkType()) {
             case self::PERMALINK_TYPE_DEFAULT :
-                return $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
+                $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
+                break;
             case self::PERMALINK_TYPE_SHORT :
                 if ($controllerName == self::CONTROLLER_SEARCH
                     || $controllerName == self::CONTROLLER_AUTHOR
                     || $controllerName == self::CONTROLLER_TAG
                 ) {
-                    return $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
+                    $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
                 } else {
-                    return $this->getRoute() . '/' . $identifier;
+                    $path = $this->getRoute() . '/' . $identifier;
                 }
+                break;
         }
+
+        $path = $this->addUrlSufix($path, $controllerName);
+
+        return $path;
+    }
+
+    /**
+     * Retrieve itentifier what include parent categories itentifier
+     * @param  \Magento\Framework\Model\AbstractModel || string $identifier
+     * @return string
+     */
+    protected function getExpandedItentifier($identifier)
+    {
+        if (is_object($identifier)) {
+            $object = $identifier;
+            $identifier = $identifier->getIdentifier();
+
+            $controllerName = $object->getControllerName();
+            if ($this->_getConfig($controllerName . '_use_categories')
+            ) {
+                if ($parentCategory = $object->getParentCategory()) {
+                    if ($parentIdentifier = $this->getExpandedItentifier($parentCategory)) {
+                        $identifier = $parentIdentifier . '/' . $identifier;
+                    }
+                }
+            }
+        }
+
+        return $identifier;
+    }
+
+    /**
+     * Add url sufix
+     * @param string $url
+     * @param string $controllerName
+     * @return string
+     */
+    protected function addUrlSufix($url, $controllerName)
+    {
+        if (in_array($controllerName, [self::CONTROLLER_POST, self::CONTROLLER_CATEGORY])) {
+            if ($sufix = $this->getUrlSufix($controllerName)) {
+                $char = false;
+                foreach(['#', '?'] as $ch) {
+                    if (false !== strpos($url, $ch)) {
+                        $char = $ch;
+                    }
+                }
+                if ($char) {
+                    $data = explode($char, $url);
+                    $data[0] = trim($data[0], '/')  . $sufix;
+                    $url = implode($char, $url);
+                } else {
+                    $url = trim($url, '/') . $sufix;
+                }
+            }
+        }
+
+        return $url;
+    }
+
+    /**
+     * Retrieve trimmed url without sufix
+     * @param  string $identifier
+     * @param  string $sufix
+     * @return string
+     */
+    public function trimSufix($identifier, $sufix)
+    {
+        if ($sufix) {
+            $p = mb_strrpos($identifier, $sufix);
+            if (false !== $p) {
+                $li = mb_strlen($identifier);
+                $ls = mb_strlen($sufix);
+                if ($p + $ls == $li) {
+                    $identifier = mb_substr($identifier, 0, $p);
+                }
+            }
+        }
+
+        return $identifier;
+    }
+
+    /**
+     * Retrieve post url sufix
+     * @return string
+     */
+    public function getUrlSufix($controllerName)
+    {
+        return trim($this->_getConfig($controllerName . '_sufix'));
     }
 
     /**
@@ -194,35 +284,6 @@ class Url
     }
 
     /**
-     * Retrieve trimmed url without sufix
-     * @param  string $identifier
-     * @return string
-     */
-    public function trimSufix($identifier)
-    {
-        $sufix = $this->getPostUrlSufix();
-        if ($sufix) {
-            $p = mb_strrpos($identifier, $sufix);
-            $li = mb_strlen($identifier);
-            $ls = mb_strlen($sufix);
-            if ($p + $ls == $li) {
-                $identifier = mb_substr($identifier, 0, $p);
-            }
-        }
-
-        return $identifier;
-    }
-
-    /**
-     * Retrieve post url sufix
-     * @return string
-     */
-    public function getPostUrlSufix()
-    {
-        return trim($this->_getConfig('post_sufix'));
-    }
-
-    /**
      * Retrieve blog permalink config value
      * @param  string $key
      * @return string || null || int
@@ -231,7 +292,8 @@ class Url
     {
         return $this->_scopeConfig->getValue(
             'mfblog/permalink/'.$key,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeId
         );
     }
 

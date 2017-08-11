@@ -25,6 +25,7 @@
             <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DeleteButton</item>
             <item name="reset" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\ResetButton</item>
             <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DuplicateButton</item>
+            <item name="preview" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\PreviewButton</item>
             <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveButton</item>
             <item name="save_and_continue" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveAndContinueButton</item>
         </item>
@@ -293,6 +294,19 @@
                 </argument>
             </container>
         </container>
+        <!-- <field name="is_recent_posts_skip">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Skipped From Recent Posts List</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">is_recent_posts_skip</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </field> -->
     </fieldset>
     <fieldset name="search_engine_optimisation">
         <argument name="data" xsi:type="array">

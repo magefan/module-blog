@@ -29,6 +29,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_storeId;
 
     /**
+     * @var \Magefan\Blog\Model\Category
+     */
+    protected $category;
+
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -131,14 +136,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         if (!$this->getFlag('category_filter_added')) {
             if ($category instanceof \Magefan\Blog\Model\Category) {
-                $category = [$category->getId()];
+                $this->category = $category;
+                $categories = $category->getChildrenIds();
+                $categories[] = $category->getId();
+            } else {
+                $categories = $category;
+                if (!is_array($categories)) {
+                    $categories = [$categories];
+                }
             }
 
-            if (!is_array($category)) {
-                $category = [$category];
-            }
-
-            $this->addFilter('category', ['in' => $category], 'public');
+            $this->addFilter('category', ['in' => $categories], 'public');
         }
         return $this;
     }
@@ -283,9 +291,13 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 }
             }
 
-            if ($this->_storeId) {
-                foreach ($this as $item) {
+            foreach ($this as $item) {
+                if ($this->_storeId) {
                     $item->setStoreId($this->_storeId);
+                }
+
+                if ($this->category) {
+                    $item->setData('parent_category', $this->category);
                 }
             }
 
