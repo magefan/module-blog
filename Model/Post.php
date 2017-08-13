@@ -266,7 +266,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function getCanonicalUrl()
     {
-        return $this->_url->getUrl($this->getIdentifier(), $this->controllerName);
+        return $this->_url->getCanonicalUrl($this);
     }
 
     /**

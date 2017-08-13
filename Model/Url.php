@@ -152,10 +152,55 @@ class Url
             '_direct' => $this->getUrlPath($identifier, $controllerName)
         ]);
 
-        $url =  trim($url, '/');
+        return $url;
+    }
+
+    /**
+     * Retrieve canonical url
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return string
+     */
+    public function getCanonicalUrl(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $storeIds = $object->getStoreIds();
+        $useDefaultStore = false;
+        $currentStore = $this->_storeManager->getStore($object->getStoreId());
+
+        if (is_array($storeIds)) {
+            if (0 == array_values($storeIds)[0]) {
+                $useDefaultStore = true;
+            } elseif (count($storeIds > 1)) {
+                foreach ($storeIds as $storeId) {
+                    if ($storeId != $currentStore->getId()) {
+                        $store = $this->_storeManager->getStore($storeId);
+                        if ($store->getGroupId() == $currentStore->getGroupId()) {
+                            $useDefaultStore = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        $storeChanged = false;
+        if ($useDefaultStore) {
+            $newStore = $currentStore->getGroup()->getDefaultStore();
+            $origStore = $this->_url->getScope();
+            if ($newStore->getId() != $origStore->getId()) {
+                $this->_url->setScope($newStore);
+                $storeChanged = true;
+            }
+        }
+
+        $url = $this->getUrl($object->getIdentifier(), $object->getControllerName());
+
+        if ($storeChanged) {
+            $this->_url->setScope($origStore);
+        }
 
         return $url;
     }
+
 
     /**
      * Retrieve blog url path
@@ -168,16 +213,16 @@ class Url
         $identifier = $this->getExpandedItentifier($identifier);
         switch ($this->getPermalinkType()) {
             case self::PERMALINK_TYPE_DEFAULT :
-                $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
+                $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
                 break;
             case self::PERMALINK_TYPE_SHORT :
                 if ($controllerName == self::CONTROLLER_SEARCH
                     || $controllerName == self::CONTROLLER_AUTHOR
                     || $controllerName == self::CONTROLLER_TAG
                 ) {
-                    $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier;
+                    $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
                 } else {
-                    $path = $this->getRoute() . '/' . $identifier;
+                    $path = $this->getRoute() . '/' . $identifier . ( $identifier ? '/' : '');
                 }
                 break;
         }
@@ -296,5 +341,6 @@ class Url
             $this->storeId
         );
     }
+
 
 }

@@ -155,32 +155,39 @@ class Router implements \Magento\Framework\App\RouterInterface
         unset($pathInfo[0]);
 
         if (!count($pathInfo)) {
-            $request->setControllerName('index')->setActionName('index');
+            $request
+                ->setModuleName('blog')
+                ->setControllerName('index')
+                ->setActionName('index');
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_RSS)) {
             $request
                 ->setModuleName('blog')
                 ->setControllerName(Url::CONTROLLER_RSS)
-                ->setActionName(isset($info[2]) ? $info[2] : 'index');
-        } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)) {
+                ->setActionName(isset($pathInfo[2]) ? $pathInfo[2] : 'index');
+        } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)
+            && !empty($pathInfo[2])
+        ) {
             $request
                 ->setModuleName('blog')
                 ->setControllerName(Url::CONTROLLER_SEARCH)
                 ->setActionName('index')
-                ->setParams('q', $pathInfo[2]);
+                ->setParam('q', $pathInfo[2]);
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_AUTHOR)
-            && ($authorId = $this->_getAuthorId($info[2]))
+            && !empty($pathInfo[2])
+            && ($authorId = $this->_getAuthorId($pathInfo[2]))
         ) {
             $request
                 ->setModuleName('blog')
                 ->setControllerName(Url::CONTROLLER_AUTHOR)
                 ->setActionName('view')
-                ->setParam('id', $$authorId);
+                ->setParam('id', $authorId);
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_TAG)
-            && $tagId = $this->_getTagId($info[2])
+            && !empty($pathInfo[2])
+            && $tagId = $this->_getTagId($pathInfo[2])
         ) {
             $request
                 ->setModuleName('blog')
-                ->setControllerName(Url::CONTROLLER_AUTHOR)
+                ->setControllerName(Url::CONTROLLER_TAG)
                 ->setActionName('view')
                 ->setParam('id', $tagId);
         } else {
