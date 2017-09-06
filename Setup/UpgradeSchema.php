@@ -349,7 +349,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => '2M',
                     'nullable' => true,
-                    'comment' => 'Post short content',
+                    'comment' => 'Post Short Content',
                 ]
             );
         }
