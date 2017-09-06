@@ -341,6 +341,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         }
 
+        if (version_compare($version, '2.5.3') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'short_content',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '2M',
+                    'nullable' => true,
+                    'comment' => 'Post short content',
+                ]
+            );
+        }
+
         $setup->endSetup();
     }
 }
