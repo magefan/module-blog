@@ -153,11 +153,11 @@
             </argument>
         </field>
     </fieldset>
-    <fieldset name="search_engine_optimisation">
+    <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="label" xsi:type="string" translate="true">Search Engine Optimisation</item>
+                <item name="label" xsi:type="string" translate="true">Search Engine Optimization</item>
                 <item name="sortOrder" xsi:type="number">40</item>
             </item>
         </argument>
