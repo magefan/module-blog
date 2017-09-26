@@ -19,6 +19,13 @@ class CategoryPath extends CategoryTree
         $childs =  $this->_getChilds();
         $options = [];
 
+        if (!$itemId) {
+            $options[] = [
+                'label' => '',
+                'value' => 0,
+            ];
+        }
+
         if (isset($childs[$itemId])) {
             foreach ($childs[$itemId] as $item) {
                 $data = [
