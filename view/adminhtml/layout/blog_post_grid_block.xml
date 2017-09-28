@@ -74,6 +74,18 @@
                             <argument name="column_css_class" xsi:type="string">col-identifier</argument>
                         </arguments>
                     </block>
+                    <block class="Magefan\Blog\Block\Adminhtml\Grid\Column\Categories" as="categories">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Category</argument>
+                            <argument name="index" xsi:type="string">categories</argument>
+                            <argument name="type" xsi:type="string">category</argument>
+                            <argument name="store_all" xsi:type="string">1</argument>
+                            <argument name="store_view" xsi:type="string">1</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="column_css_class" xsi:type="string">col-categories</argument>
+                            <argument name="header_css_class" xsi:type="string">col-categories</argument>
+                        </arguments>
+                    </block>
                     <block class="Magento\Backend\Block\Widget\Grid\Column\Multistore" as="store_ids">
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Store View</argument>
@@ -123,36 +135,6 @@
                             <argument name="column_css_class" xsi:type="string">col-status</argument>
                         </arguments>
                     </block>
-                    <!-- <block class="Magento\Backend\Block\Widget\Grid\Column\Multistore" as="website">
-                        <arguments>
-                            <argument name="header" xsi:type="string" translate="true">Web Site</argument>
-                            <argument name="index" xsi:type="string">website_id</argument>
-                            <argument name="type" xsi:type="string">options</argument>
-                            <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Website\OptionHash"/>
-                            <argument name="header_css_class" xsi:type="string">col-website</argument>
-                            <argument name="column_css_class" xsi:type="string">col-website</argument>
-                        </arguments>
-                    </block>
-                    <block class="Magento\Backend\Block\Widget\Grid\Column\Multistore" as="group">
-                        <arguments>
-                            <argument name="header" xsi:type="string" translate="true">Store</argument>
-                            <argument name="index" xsi:type="string">group_id</argument>
-                            <argument name="type" xsi:type="string">options</argument>
-                            <argument name="options" xsi:type="options" model="Magento\Newsletter\Block\Subscribe\Grid\Options\GroupOptionHash"/>
-                            <argument name="header_css_class" xsi:type="string">col-store</argument>
-                            <argument name="column_css_class" xsi:type="string">col-store</argument>
-                        </arguments>
-                    </block>
-                    <block class="Magento\Backend\Block\Widget\Grid\Column\Multistore" as="store">
-                        <arguments>
-                            <argument name="header" xsi:type="string" translate="true">Store View</argument>
-                            <argument name="index" xsi:type="string">store_id</argument>
-                            <argument name="type" xsi:type="string">options</argument>
-                            <argument name="options" xsi:type="options" model="Magento\Newsletter\Block\Subscribe\Grid\Options\StoreOptionHash"/>
-                            <argument name="header_css_class" xsi:type="string">col-store-view</argument>
-                            <argument name="column_css_class" xsi:type="string">col-store-view</argument>
-                        </arguments>
-                    </block> -->
                 </block>
             </block>
         </referenceBlock>

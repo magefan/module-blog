@@ -88,6 +88,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             return $this->addStoreFilter($condition);
         }
 
+        if ($field === 'category' || $field === 'categories') {
+            return $this->addCategoryFilter($condition);
+        }
+
         return parent::addFieldToFilter($field, $condition);
     }
 
