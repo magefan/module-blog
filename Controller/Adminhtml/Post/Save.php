@@ -22,25 +22,6 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
      */
     protected function _beforeSave($model, $request)
     {
-        /* Prepare dates */
-        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
-        $data = $model->getData();
-
-        $filterRules = [];
-        foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
-            if (!empty($data[$dateField])) {
-                $filterRules[$dateField] = $dateFilter;
-            }
-        }
-
-        $inputFilter = new \Zend_Filter_Input(
-            $filterRules,
-            [],
-            $data
-        );
-        $data = $inputFilter->getUnescaped();
-        $model->setData($data);
-
         /* Prepare author */
         if (!$model->getAuthorId()) {
             $authSession = $this->_objectManager->get('Magento\Backend\Model\Auth\Session');
@@ -119,5 +100,34 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         }
     }
+
+    /**
+     * Filter request params
+     * @param  array $data
+     * @return array
+     */
+    protected function filterParams($data)
+    {
+        /* Prepare dates */
+        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
+
+        $filterRules = [];
+        foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
+            if (!empty($data[$dateField])) {
+                $filterRules[$dateField] = $dateFilter;
+            }
+        }
+
+        $inputFilter = new \Zend_Filter_Input(
+            $filterRules,
+            [],
+            $data
+        );
+
+        $data = $inputFilter->getUnescaped();
+
+        return $data;
+    }
+
 
 }

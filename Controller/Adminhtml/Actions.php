@@ -8,6 +8,9 @@
 
 namespace Magefan\Blog\Controller\Adminhtml;
 
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Backend\App\Action\Context;
+
 /**
  * Abstract admin controller
  */
@@ -73,6 +76,25 @@ abstract class Actions extends \Magento\Backend\App\Action
      * @var \Magento\Framework\Registry
      */
     protected $_coreRegistry = null;
+
+
+    /**
+     * @var DataPersistorInterface
+     */
+    protected $dataPersistor;
+
+    /**
+     * @param Action\Context $context
+     * @param PostDataProcessor $dataProcessor
+     * @param DataPersistorInterface $dataPersistor
+     */
+    public function __construct(
+        Context $context,
+        DataPersistorInterface $dataPersistor
+    ) {
+        $this->dataPersistor = $dataPersistor;
+        parent::__construct($context);
+    }
 
     /**
      * Action execute
@@ -195,6 +217,8 @@ abstract class Actions extends \Magento\Backend\App\Action
 
         try {
             $params = $this->_paramsHolder ? $request->getParam($this->_paramsHolder) : $request->getParams();
+            $params = $this->filterParams($params);
+
             $idFieldName = $model->getResource()->getIdFieldName();
             if (isset($params[$idFieldName]) && empty($params[$idFieldName])) {
                 unset($params[$idFieldName]);
@@ -209,7 +233,7 @@ abstract class Actions extends \Magento\Backend\App\Action
             $this->_setFormData(false);
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->messageManager->addError(nl2br($e->getMessage()));
-            $this->_setFormData();
+            $this->_setFormData($params);
         } catch (\Exception $e) {
             $this->messageManager->addException(
                 $e,
@@ -218,7 +242,7 @@ abstract class Actions extends \Magento\Backend\App\Action
                     $e->getMessage()
                 )
             );
-            $this->_setFormData();
+            $this->_setFormData($params);
         }
 
         $hasError = (bool)$this->messageManager->getMessages()->getCountByType(
@@ -413,10 +437,30 @@ abstract class Actions extends \Magento\Backend\App\Action
      */
     protected function _setFormData($data = null)
     {
-        $this->_getSession()->setData($this->_formSessionKey,
-            is_null($data) ? $this->getRequest()->getParams() : $data);
+        if (null === $data) {
+            $data = $this->getRequest()->getParams();
+        }
+
+        if (false === $data) {
+            $this->dataPersistor->clear($this->_formSessionKey);
+        } else {
+            $this->dataPersistor->set($this->_formSessionKey, $data);
+        }
+
+        /* deprecated save in session */
+        $this->_getSession()->setData($this->_formSessionKey, $data);
 
         return $this;
+    }
+
+    /**
+     * Filter request params
+     * @param  array $data
+     * @return array
+     */
+    protected function filterParams($data)
+    {
+        return $data;
     }
 
     /**
