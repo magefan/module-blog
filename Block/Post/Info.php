@@ -19,7 +19,7 @@ class Info extends \Magento\Framework\View\Element\Template
      * Block template file
      * @var string
      */
-    protected $_template = 'post/info.phtml';
+    protected $_template = 'Magefan_Blog::post/info.phtml';
 
     /**
      * DEPRECATED METHOD!!!!

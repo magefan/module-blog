@@ -153,12 +153,13 @@ class Category extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Deprecated
      * Retrieve true if category is active
      * @return boolean [description]
      */
     public function isActive()
     {
-        return ($this->getStatus() == self::STATUS_ENABLED);
+        return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**

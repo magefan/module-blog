@@ -19,4 +19,6 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
      * Extension enabled config path
      */
     const XML_PATH_EXTENSION_ENABLED = 'mfblog/general/enabled';
+    const GUEST_COMMENT = 'mfblog/post_view/comments/guest_comments';
+    const COMMENT_STATUS = 'mfblog/post_view/comments/status';
 }

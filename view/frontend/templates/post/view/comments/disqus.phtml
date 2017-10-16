@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Comments
+ */
+?>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = "<?php echo $block->getPost()->getPostUrl() ?>";
+        this.page.identifier = "<?php echo $block->getPost()->getUrl() ?>"
+    };
+
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '<?php echo '/' . '/' . $block->getDisqusShortname() ?>.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>

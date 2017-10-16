@@ -1,0 +1,162 @@
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+
+#magefan-comment-block * {
+	box-sizing: border-box;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.post-view .comments #magefan-comment-block {display: block}
+.post-view .comments .load.indicator  {display: none}
+
+/*styles for all blocks*/
+.c-count {
+	margin-bottom: 15px;
+	font-weight: 700;
+	padding-bottom: 10px;
+	font-size: 16px;
+	border-bottom: 1px solid #d5d6da;
+	color: #222;
+}
+.c-img {width: 48px; position: absolute; left: 0; top: 0; z-index: 5;}
+.c-img img {width: 100%;}
+.c-reply, .c-comment {position: relative; margin-bottom: 18px;} 
+.c-replyform, .c-post {margin-left: 56px;}
+.c-allcomments {
+	display: block;
+	width: 100%;
+	font-weight: 700;
+	font-size: 14px;
+	color: #fff;
+    background: #4080ff;
+    margin-top: 24px;
+    line-height: 40px;
+	text-align: center;
+	border-radius: 3px;
+	transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
+}
+
+.c-allcomments:hover {
+	background-color: #e2e2e2;
+	color: #fff;
+}
+
+/*reply form*/
+.c-replyform .left-hld,
+.c-replyform .right-hld {float:left; width: 30%; padding: 0px 15px 0 0;}
+.c-replyform textarea,
+.c-replyform input {
+	/*border-bottom: 0!important;*/
+	color: #222;
+	background: #fff!important;
+	display: block;
+}
+.c-replyform textarea {
+	padding: 8px;
+	height: 70px;
+	border-bottom: 0px;
+}
+.c-replyform textarea:focus,
+.c-replyform input:focus {
+	box-shadow:none;
+}
+
+.c-replyform div.mage-error[generated] {display: none!important}
+.c-replyform .mage-error{background-color: #fff3f3!important;border-color:#d5d6da}
+
+.c-replyform button {
+	display: inline-block;
+    background: #f00;
+    padding: 2px 8px;
+    font-weight: 700;
+    border-radius: 3px!important;
+    font-size: 14px;
+    background-color: #4267b2;
+    border:1px solid #4267b2;
+    color: #fff;
+    cursor: pointer;
+    transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
+    box-shadow: none;
+}
+
+/*.c-replyform button:hover {
+    background-color: #365899;
+    border-color: #365899;
+}*/
+
+.c-replyform button.cancel {
+    background-color: #f6f7f9;
+    border-color: #ced0d4;
+    color: #4b4f56;
+}
+
+.c-replyform button.cancel:hover {background-color: #e9ebee;}
+
+.c-replyform .c-btn-hld {
+	background: #f6f7f9;
+	border:1px solid #d5d6da;
+	padding: 8px;
+	text-align: right;
+}
+
+/*comment*/
+.c-post .p-name { font-weight: 700;  color: #365899;}
+.c-post .p-actions {padding: 8px 0 10px;}
+.c-post .p-actions {font-size: 12px;}
+.c-post .p-actions a {color: #4267b2;}
+.c-post .p-actions a:hover {text-decoration: underline; }
+.c-post .p-actions span {
+	color: #90949c;
+}
+
+/*post's replies and reply form*/
+.p-replies {border-left: 1px dotted #bdbdbd; padding-left: 10px;}
+.p-replies .c-img {width: 36px;}
+.p-replies .c-post, .p-replies .c-replyform {margin-left: 44px;}
+.p-replies .c-comment {margin-bottom: 10px;}
+.p-replies .c-more {
+    background: #e2eafb;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.p-replies .c-more a {color: #4267b2; font-weight: 700; font-size: 11px;}
+.p-replies .c-more a:hover {text-decoration: underline;}
+.p-replies .c-more i{
+    width: 0px;
+    height: 0px;
+    border-left: 3px solid rgba(0, 0, 0, 0);
+    border-right: 3px solid rgba(0, 0, 0, 0);
+    border-top: 3px solid #768196;
+    vertical-align: middle;
+    margin-left: 3px;
+    position: relative;
+    top: 7px;
+}
+
+
+@media screen and (max-width: 450px) {
+
+	.c-img {width: 38px;}
+
+	.c-post {font-size: 13px;}
+	.c-post .p-actions {font-size: 11px;}
+
+	.c-reply, .c-comment {position: relative; margin-bottom: 18px;} 
+	.c-replyform, .c-post {margin-left: 44px;}
+	.p-replies {padding-left: 5px;}
+	.p-replies .c-img {width: 28px;}
+	.p-replies .c-post, .p-replies .c-replyform {margin-left: 34px;}
+
+	.p-replies .c-more a {font-size: 10px; padding: 3px;}
+}
+
+
+
+
+

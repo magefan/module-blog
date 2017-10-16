@@ -1,0 +1,96 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Comments\Magefan\Comment
+ */
+?>
+
+<?php
+    $comment = $block->getComment();
+?>
+<div class="c-comment">
+    <?php if ($authorImage = $comment->getAuthorImage()) { ?>
+    <div class="c-img">
+        <img src="<?php echo $authorImage ?>" alt="<?php echo $block->escapeHtml($comment->getAuthorName()) ?>">
+    </div>
+    <?php } ?>
+    <div class="c-post">
+        <div class="p-name"><?php echo $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+        <div class="p-text"><?php echo $block->escapeHtml($comment->getText()) ?></div>
+        <div class="p-actions">
+            <a href="#" title="Reply"><?php echo __('Reply') ?></a>
+            <span><?php echo $comment->getPublishTime('M d, Y H:i') ?></span>
+        </div>
+
+        <?php
+            $replies = $comment->getReplies();
+            if (count($replies)) {
+        ?>
+            <div class="p-replies">
+                <?php foreach ($replies as $reply) { ?>
+                    <?php echo $block->setComment($reply)->toHtml() ?>
+                <?php } ?>
+                <!-- reply 1 -->
+                <?php /*
+                <div class="c-comment">
+                    <div class="c-img">
+                        <img src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p32x32/15380753_10209130657802538_9201694447968531699_n.jpg?oh=46c288bf1b0b0cf97dfa3d96858814c1&oe=5A2321D6" alt="">
+                    </div>
+                    <div class="c-post">
+                        <div class="p-name">John Doe</div>
+                        <div class="p-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam id ratione labore esse dolores fuga hic animi est voluptatem, provident molestias beatae! Voluptas nesciunt fugit est, similique rerum. Commodi, doloribus!</div>
+                        <div class="p-actions">
+                            <a href="#" title="Reply">Reply</a>
+                            <span>· Nov 21, 2017 5:57am</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- reply 2 -->
+                <div class="c-comment">
+                    <div class="c-img">
+                        <img src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p32x32/15380753_10209130657802538_9201694447968531699_n.jpg?oh=46c288bf1b0b0cf97dfa3d96858814c1&oe=5A2321D6" alt="">
+                    </div>
+                    <div class="c-post">
+                        <div class="p-name">John Doe</div>
+                        <div class="p-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam id ratione labore esse dolores fuga hic animi est voluptatem, provident molestias beatae! Voluptas nesciunt fugit est, similique rerum. Commodi, doloribus!</div>
+                        <div class="p-actions">
+                            <a href="#" title="Reply">Reply</a>
+                            <span>· Nov 21, 2017 5:57am</span>
+                        </div>
+                    </div>
+                </div>
+                */ ?>
+                <!-- reply for for post -->
+                <?php /*
+                <div class="c-reply cf">
+                    <div class="c-img">
+                        <img src="<?php echo $comment->getAuthorImage()) ?>" alt="<?php echo $block->escapeHtml($comment->getAuthorName()) ?>">
+                    </div>
+                    <div class="c-replyform">
+                        <form action="">
+                            <textarea name="" id="" placeholder="<?php echo __('Add a reply...') ?>"></textarea>
+                            <div class="c-btn-hld">
+                                <button type="button" class="cancel"><?php __('Cancel') ?></button>
+                                <button type="submit"><?php echo __('Submit') ?></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                */ ?>
+                <!-- more post -->
+                <div class="c-more">
+                    <a href="#"><?php echo __('Show more replies in this thread') ?><i></i></a>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
