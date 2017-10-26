@@ -124,7 +124,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
                 [
                     'label' => __($blogTitle),
                     'title' => __($blogTitle),
-                    'link' => $title ? $this->_url->getBaseUrl() : null,
+                    'link' => $this->_url->getBaseUrl(),
                 ]
             );
 

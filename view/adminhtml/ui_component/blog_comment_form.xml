@@ -76,7 +76,7 @@
                 </item>
             </argument>
         </field>
-        <field name="post">
+        <field name="post_url">
             <argument name="data" xsi:type="array">
                  <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Post</item>
@@ -91,7 +91,7 @@
               </item>
             </argument>
         </field>
-        <field name="author">
+        <field name="author_url">
             <argument name="data" xsi:type="array">
                  <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Author</item>
@@ -106,7 +106,22 @@
               </item>
             </argument>
         </field>
-        <field name="author_id">
+        <field name="parent_url">
+            <argument name="data" xsi:type="array">
+                 <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Parent Comment</item>
+                    <item name="component" xsi:type="string">Magefan_Blog/js/form/element/link</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="dataScope" xsi:type="string">parent_url</item>
+                    <item name="validation" xsi:type="array">
+                </item>
+              </item>
+            </argument>
+        </field>
+        <field name="status">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CommentStatus</item>
                 <item name="config" xsi:type="array">
@@ -119,17 +134,17 @@
                 </item>
             </argument>
         </field>
-        <field name="date">
+        <field name="creation_time">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Publish Date</item>
-                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="dataType" xsi:type="string">datetime</item>
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">page</item>
                     <item name="dataScope" xsi:type="string">creation_time</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>

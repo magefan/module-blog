@@ -16,8 +16,8 @@ define([
     return Component.extend({
         initialize: function($options) {
 
-            var msgLifetime = 6000;
-            var $hd = $('#magefan-comment-block');
+            var msgLifetime = 4000;
+            var $hd = $('#post-comments');
 
             var getMessageHtml = function(msg, type) {
                 var h = '<div class="message-' + type + ' ' + type + ' message">'
@@ -67,6 +67,33 @@ define([
                     })
                 }
                 return false;
+            });
+
+            $hd.find('.more-comments-action').click(function(){
+                var id = $(this).data('comment');
+                $hd.find('.c-comment-parent-'+id).fadeIn();
+                $(this).hide();
+                return false;
+            });
+
+            $hd.find('form textarea').click(function(){
+                $(this).parents('.no-active').removeClass('no-active');
+            });
+
+            var $rf = $('#c-replyform-comment');
+            $hd.find('.reply-action').click(function(){
+                var id = $(this).data('comment');
+                $rf.hide();
+                $rf.appendTo('.c-post-'+id);
+                $rf.find('.refresh-value').val('').html('');
+                $rf.find('[name=parent_id]').val(id);
+                $rf.find('form').show();
+                $rf.fadeIn();
+                return false;
+            });
+
+            $hd.find('.reply-cancel-action').click(function(){
+                $rf.hide();
             });
 
             return this;

@@ -13,21 +13,14 @@
  * @var $block \Magefan\Blog\Block\Post\View\Comments
  */
 ?>
-<?php /*
-<div id="comments_content" data-bind="scope:'comments_content'" data-mage-init='{"Magento_Ui/js/core/app":<?php echo $block->getJsLayout();?>}' >
-    <!-- ko template: getTemplate() --><!-- /ko -->
-</div>
-*/ ?>
 <?php
     $comments = $block->getCommentsCollection();
+    $numberOfCommentsToDisplay = $block->getNumberOfComments();
     $session = $block->getCustomerSession();
 
     $canPost = $block->canPost();
 ?>
-
-<!-- Start -->
-<div class="load indicator"></div>
-<div id="magefan-comment-block">
+<div id="post-comments">
     <div class="c-count"><?php echo __('%1 Comment(s)', $comments->getSize()) ?></div>
     <!-- reply form -->
     <div class="c-reply cf">
@@ -36,7 +29,7 @@
             <img src="<?php echo $image ?>" alt="<?php echo $block->escapeHtml($block->getCustomerName()) ?>">
         </div>
         <?php } ?>
-        <div class="c-replyform">
+        <div class="c-replyform no-active">
             <form action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
                 <?php echo $block->getBlockHtml('formkey') ?>
                 <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
@@ -46,7 +39,7 @@
                     <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
                     <div class="lr-hld">
                         <div class="left-hld">
-                            <input type="text" name="author_nickname" value="" placeholder="<?php echo __('Nickname') ?>" class="input-text required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true">
+                            <input type="text" name="author_nickname" value="" placeholder="<?php echo __('Full Name') ?>" class="input-text required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true">
                         </div>
                         <div class="right-hld">
                             <input type="email" name="author_email" autocomplete="email"  value="" placeholder="<?php echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}" aria-required="true">
@@ -55,110 +48,70 @@
                     <?php } ?>
 
                     <?php if ($canPost) { ?>
-                        <button class="action primary" type="submit"><?php echo __('Submit') ?></button>
+                        <button type="submit"><?php echo __('Submit') ?></button>
                     <?php } else { ?>
-                        <button class="action primary" type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
+                        <button type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
                     <?php } ?>
                     <div class="clearfix"></div>
                 </div>
             </form>
         </div>
     </div>
+<?php
+    $commentsCount = count($comments);
+    if ($commentsCount) {
+?>
     <!-- comments list -->
-    <div class="c-comments">
-        <!-- comment 1 -->
+    <div class="c-comments" >
+        <?php $i = 0 ?>
         <?php foreach ($comments as $comment) { ?>
+            <?php
+                $i++;
+                $comment->setIsHidden($i > $numberOfCommentsToDisplay);
+            ?>
             <?php echo $block->getCommentHtml($comment) ?>
         <?php } ?>
-        <?php /*
-        <!-- comment 2 -->
-        <div class="c-comment">
-            <div class="c-img">
-                <img src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p32x32/15380753_10209130657802538_9201694447968531699_n.jpg?oh=46c288bf1b0b0cf97dfa3d96858814c1&oe=5A2321D6" alt="">
-            </div>
-            <div class="c-post">
-                <div class="p-name">John Doe</div>
-                <div class="p-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam id ratione labore esse dolores fuga hic animi est voluptatem, provident molestias beatae! Voluptas nesciunt fugit est, similique rerum. Commodi, doloribus!</div>
-                <div class="p-actions">
-                    <a href="#" title="Reply">Reply</a>
-                    <span>· Nov 21, 2017 5:57am</span>
-                </div>
-            </div>
-        </div>
-        */ ?>
-        <!-- all comments loader -->
-        <a href="#" class="c-allcomments"><?php __('Load more comments') ?></a>
+        <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
+            <a href="#" class="c-allcomments more-comments-action" data-comment="0"><?php echo __('Load more comments') ?></a>
+        <?php } ?>
     </div>
-</div>
-<div class="c-replyform">
-    <form action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
-        <?php echo $block->getBlockHtml('formkey') ?>
-        <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
-        <textarea name="text" placeholder="<?php echo $canPost ? __('Add a reply...') : __('Sign in to add a comment...') ?>" <?php if (!$canPost) {?>disabled="disabled"<?php } ?> data-validate="{required:true}"></textarea>
-        <div class="c-btn-hld">
 
-            <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
-            <div class="lr-hld">
-                <div class="left-hld">
-                    <input type="text" name="author_nickname" value="" placeholder="<?php echo __('Nickname') ?>" class="input-text required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true">
-                </div>
-                <div class="right-hld">
-                    <input type="email" name="author_email" autocomplete="email"  value="" placeholder="<?php echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}" aria-required="true">
-                </div>
-            </div>
-            <?php } ?>
-            <!-- <button type="button" class="cancel"><?php __('Cancel') ?></button> -->
-            <?php if ($canPost) { ?>
-                <button class="action primary" type="submit"><?php echo __('Submit') ?></button>
-            <?php } else { ?>
-                <button class="action primary" type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
-            <?php } ?>
-            <div class="clearfix"></div>
-        </div>
-    </form>
-</div>
-<?php /*
-<div id="add-reply" class="c-reply cf" style="display:none">
-    <?php if ($image = $block->getCustomerImage()) { ?>
-    <div class="c-img">
-        <img src="<?php echo $image ?>" alt="<?php echo $block->escapeHtml($block->getCustomerName()) ?>">
-    </div>
-    <?php } ?>
-    <div class="c-replyform">
-        <form action="">
+    <!-- reply comment form -->
+    <div id="c-replyform-comment" class="c-replyform c-replyform-comment" style="display:none">
+        <form action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
             <?php echo $block->getBlockHtml('formkey') ?>
-            <textarea name="" id="" placeholder="<?php echo __('Add a reply...') ?>" <?php if (!$canPost) {?>disabled="disabled"<?php } ?>></textarea>
-            <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
-            <div class="clearfix">
-                <div class="left-hld">
-                    <input type="email" name="email" autocomplete="email"  value="" placeholder="<?php echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}" aria-required="true">
-                </div>
-                <div class="right-hld">
-                    <input type="text" name="nickname" value="" placeholder="<?php echo __('Name') ?>" class="input-text required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true">
-                </div>
-            </div>
-            <?php } ?>
+            <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
+            <input type="hidden" name="parent_id" value="" />
+            <textarea class="refresh-value" name="text" placeholder="<?php echo $canPost ? __('Add a reply...') : __('Sign in to add a comment...') ?>" <?php if (!$canPost) {?>disabled="disabled"<?php } ?> data-validate="{required:true}"></textarea>
             <div class="c-btn-hld">
-                <button type="button" class="cancel"><?php __('Cancel') ?></button>
-                <button type="submit"><?php echo __('Submit') ?></button>
+
+                <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
+                <div class="lr-hld">
+                    <div class="left-hld">
+                        <input type="text" name="author_nickname" value="" placeholder="<?php echo __('Full Name') ?>" class="input-text required-entry refresh-value" data-validate="{required:true}" autocomplete="off" aria-required="true">
+                    </div>
+                    <div class="right-hld">
+                        <input type="email" name="author_email" autocomplete="email"  value="" placeholder="<?php echo __('Email') ?>" class="input-text required-entry refresh-value" data-validate="{required:true, 'validate-email':true}" aria-required="true">
+                    </div>
+                </div>
+                <?php } ?>
+                <button type="button" class="cancel reply-cancel-action" ><?php echo __('Cancel') ?></button>
+                <?php if ($canPost) { ?>
+                    <button type="submit"><?php echo __('Submit') ?></button>
+                <?php } else { ?>
+                    <button type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
+                <?php } ?>
+                <div class="clearfix"></div>
             </div>
         </form>
     </div>
+<?php } ?>
 </div>
-*/ ?>
-<!-- // End -->
 
 <script type="text/x-magento-init">
 {
-    "#magefan-comment-block": {
+    "#post-comments": {
         "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout() ?>
     }
 }
 </script>
-<script>
-require(['jquery', 'domReady!'], function($){
-    /* Deferer comments css loading */
-    $("head").append($("<link rel='stylesheet' href='<?php echo $block->getViewFileUrl("Magefan_Blog::css/comments.css") ?>' type='text/css' media='screen' />"));
-});
-</script>
-

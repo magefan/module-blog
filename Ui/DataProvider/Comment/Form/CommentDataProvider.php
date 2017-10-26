@@ -119,6 +119,24 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                     ];
                     break;
             }
+
+            if ($comment->getParentId()
+                && ($parentComment = $comment->getParentComment())
+            ) {
+                $text = (mb_strlen($parentComment->getText()) > 200) ? (mb_substr($parentComment->getText(), 0, 200) . '...') : $parentComment->getText();
+                $text = htmlspecialchars($text);
+                $this->loadedData[$comment->getId()]['parent_url'] = [
+                    'url' => $this->url->getUrl('blog/comment/edit', ['id' => $parentComment->getId()]),
+                    'title' => htmlspecialchars($parentComment->getText()),
+                    'text' => '#' . $parentComment->getId() . '. ' . $text,
+                ];
+            } else {
+                $this->loadedData[$comment->getId()]['parent_url'] = [
+                    'url' => '',
+                    'title' => '',
+                    'text' => '',
+                ];
+            }
         }
 
         $data = $this->dataPersistor->get('blog_comment_form_data');

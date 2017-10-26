@@ -47,4 +47,40 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         );
     }
 
+
+    /**
+     * Prepare breadcrumbs
+     *
+     * @param  string $title
+     * @param  string $key
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return void
+     */
+    protected function _addBreadcrumbs($title = null, $key = null)
+    {
+        if ($breadcrumbsBlock = $this->getBreadcrumbsBlock()) {
+            $breadcrumbsBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Go to Home Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl()
+                ]
+            );
+
+            $blogTitle = $this->_scopeConfig->getValue(
+                'mfblog/index_page/title',
+                ScopeInterface::SCOPE_STORE
+            );
+            $breadcrumbsBlock->addCrumb(
+                'blog',
+                [
+                    'label' => __($blogTitle),
+                    'title' => __($blogTitle),
+                    'link' => null,
+                ]
+            );
+        }
+    }
+
 }

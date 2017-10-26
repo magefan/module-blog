@@ -128,10 +128,24 @@ class Post extends \Magefan\Blog\App\Action\Action
         );
 
         try {
-            if (!$this->initPost()
-                || ($request->getParam('parent_id') && !$this->initParentComment())
-            ) {
-                throw new \Exception(__('We can\'t post your comment right now.'), 1);
+            $post = $this->initPost();
+            if (!$post)  {
+                throw new \Exception(__('You cannot post comment. Blog post is not longer exist.'), 1);
+            }
+
+            if ($request->getParam('parent_id')) {
+                $parentComment = $this->initParentComment();
+                if (!$parentComment) {
+                    throw new \Exception(__('You cannot reply to this comment. Comment is not longer exist.'), 1);
+                }
+
+                if (!$parentComment->getPost()
+                    || $parentComment->getPost()->getId() != $post->getId()
+                ) {
+                    throw new \Exception(__('You cannot reply to this comment.'), 1);
+                }
+
+                $comment->setParentId($parentComment->getId());
             }
 
             $comment->save();
@@ -147,7 +161,7 @@ class Post extends \Magefan\Blog\App\Action\Action
             'success' => true,
             'message' => ($comment->getStatus() == \Magefan\Blog\Model\Config\Source\CommentStatus::PENDING)
                 ? __('You submitted your comment for moderation.')
-                : __('Thank you for your comment')
+                : __('Thank you for your comment.')
         ]));
     }
 

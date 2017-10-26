@@ -123,6 +123,11 @@ class Category extends \Magento\Framework\Model\AbstractModel
         return $object;
     }
 
+    /**
+     * Load category by id
+     * @param  int $categoryId
+     * @return self
+     */
     private function loadFromRepository($categoryId)
     {
         if (!isset(self::$loadedCategoriesRepository[$categoryId])) {

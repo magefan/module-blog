@@ -5,13 +5,10 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-#magefan-comment-block * {
+#post-comments * {
 	box-sizing: border-box;
 	font-family: Helvetica, Arial, sans-serif;
 }
-
-.post-view .comments #magefan-comment-block {display: block}
-.post-view .comments .load.indicator  {display: none}
 
 /*styles for all blocks*/
 .c-count {
@@ -25,8 +22,9 @@
 .c-img {width: 48px; position: absolute; left: 0; top: 0; z-index: 5;}
 .c-img img {width: 100%;}
 .c-reply, .c-comment {position: relative; margin-bottom: 18px;} 
-.c-replyform, .c-post {margin-left: 56px;}
-.c-allcomments {
+.c-replyform, .c-post {margin-left: 25px;}
+.c-allcomments,
+.c-allcomments:visited {
 	display: block;
 	width: 100%;
 	font-weight: 700;
@@ -38,11 +36,13 @@
 	text-align: center;
 	border-radius: 3px;
 	transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
+	text-decoration: none;
 }
 
 .c-allcomments:hover {
 	background-color: #e2e2e2;
 	color: #fff;
+	text-decoration: none;
 }
 
 /*reply form*/
@@ -50,7 +50,6 @@
 .c-replyform .right-hld {float:left; width: 30%; padding: 0px 15px 0 0;}
 .c-replyform textarea,
 .c-replyform input {
-	/*border-bottom: 0!important;*/
 	color: #222;
 	background: #fff!important;
 	display: block;
@@ -70,7 +69,6 @@
 
 .c-replyform button {
 	display: inline-block;
-    background: #f00;
     padding: 2px 8px;
     font-weight: 700;
     border-radius: 3px!important;
@@ -81,12 +79,13 @@
     cursor: pointer;
     transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
     box-shadow: none;
+    margin-top: 5px;
 }
 
-/*.c-replyform button:hover {
+.c-replyform button:hover {
     background-color: #365899;
     border-color: #365899;
-}*/
+}
 
 .c-replyform button.cancel {
     background-color: #f6f7f9;
@@ -103,6 +102,12 @@
 	text-align: right;
 }
 
+.c-replyform.no-active .c-btn-hld {display: none}
+.c-replyform.no-active textarea {
+	border-bottom: 1px solid #c2c2c2;
+	height: 45px;
+}
+
 /*comment*/
 .c-post .p-name { font-weight: 700;  color: #365899;}
 .c-post .p-actions {padding: 8px 0 10px;}
@@ -116,7 +121,7 @@
 /*post's replies and reply form*/
 .p-replies {border-left: 1px dotted #bdbdbd; padding-left: 10px;}
 .p-replies .c-img {width: 36px;}
-.p-replies .c-post, .p-replies .c-replyform {margin-left: 44px;}
+.p-replies .c-post, .p-replies .c-replyform {margin-left: 20px;}
 .p-replies .c-comment {margin-bottom: 10px;}
 .p-replies .c-more {
     background: #e2eafb;

@@ -610,9 +610,10 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve post comments
+     * @param  boolean $active
      * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
      */
-    public function getComments()
+    public function getComments($active = true)
     {
         if (null === $this->comments) {
             $this->comments = $this->_commentCollectionFactory->create()
@@ -620,6 +621,22 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->comments;
+    }
+
+    /**
+     * Retrieve active comments count
+     * @return int
+     */
+    public function getCommentsCount()
+    {
+        if (!$this->hasData('comments_count')) {
+            $comments = $this->_commentCollectionFactory->create()
+                ->addFieldToFilter('post_id', $this->getId())
+                ->addActiveFilter()
+                ->addFieldToFilter('parent_id', 0);
+            $this->setData('comments_count', (int)$comments->getSize());
+        }
+        return $this->getData('comments_count');
     }
 
     /**

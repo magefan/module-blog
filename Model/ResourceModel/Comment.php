@@ -59,7 +59,6 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $gmtDate = $this->date->gmtDate();
 
         if ($object->isObjectNew() && !$object->getCreationTime()) {
-            echo 'a'; exit();
             $object->setCreationTime($gmtDate);
         }
 

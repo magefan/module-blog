@@ -66,6 +66,11 @@ class Comment extends AbstractModel
     protected $author;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment\Collection
+     */
+    protected $comments;
+
+    /**
      * Initialize dependencies.
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
@@ -190,17 +195,38 @@ class Comment extends AbstractModel
     }
 
     /**
+     * Retrieve parent comment
+     * @return self || false
+     */
+    public function getParentComment()
+    {
+        $k = 'parent_comment';
+        if (null === $this->getData($k)) {
+            $this->setData($k, false);
+            if ($pId = $this->getParentId()) {
+                $comment = clone $this;
+                $comment->load($pId);
+                if ($comment->getId()) {
+                    $this->setData($k, $comment);
+                }
+            }
+        }
+
+        return $this->getData($k);
+    }
+
+    /**
      * Retrieve child comments
-     * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
+     * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
      */
     public function getChildComments()
     {
-        if (is_null($this->_comments)) {
-            $this->_comments = $this->_commentCollectionFactory->create()
+        if (is_null($this->comments)) {
+            $this->comments = $this->commentCollectionFactory->create()
                 ->addFieldToFilter('parent_id', $this->getId());
         }
 
-        return $this->_comments;
+        return $this->comments;
     }
 
     /**
@@ -231,5 +257,18 @@ class Comment extends AbstractModel
         if (mb_strlen($this->getText()) < 3) {
             throw new \Exception(__('Comment text is too short.'), 1);
         }
+    }
+
+    /**
+     * Retrieve post publish date using format
+     * @param  string $format
+     * @return string
+     */
+    public function getPublishDate($format = 'Y-m-d H:i:s')
+    {
+        return \Magefan\Blog\Helper\Data::getTranslatedDate(
+            $format,
+            $this->getData('creation_time')
+        );
     }
 }

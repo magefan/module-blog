@@ -16,6 +16,9 @@ use Magefan\Blog\Model\Config\Source\CommetType;
  */
 class Magefan extends \Magefan\Blog\Block\Post\View\Comments
 {
+    /**
+     * @var string
+     */
     protected $commetType = CommetType::MAGEFAN;
 
     /**
@@ -103,20 +106,18 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments
      */
     protected function prepareCommentCollection()
     {
+
         $this->commentCollection = $this->getPost()->getComments()
     		->addActiveFilter()
-    		->setPageSize(5)
+            ->addFieldToFilter('parent_id', 0)
+    		/*->setPageSize($this->getNumberOfComments())*/
             ->setOrder('creation_time', 'DESC');
-
-        //if ($this->getPageSize()) {
-            $this->commentCollection->setPageSize(5);
-        //}
     }
 
     /**
      * Prepare posts collection
      *
-     * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
+     * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
      */
     public function getCommentsCollection()
     {
@@ -156,6 +157,19 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments
             \Magefan\Blog\Helper\Config::GUEST_COMMENT,
             ScopeInterface::SCOPE_STORE
         ) || $this->getCustomerSession()->getCustomerGroupId();
+    }
+
+    /**
+     * Retrieve number of comments to display
+     *
+     * @return string
+     */
+    public function getNumberOfComments()
+    {
+        return $this->_scopeConfig->getValue(
+            \Magefan\Blog\Helper\Config::NUMBER_OF_COMMENTS,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**

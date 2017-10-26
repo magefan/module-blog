@@ -56,4 +56,16 @@ class Info extends \Magento\Framework\View\Element\Template
         );
     }
 
+    /**
+     * Retrieve true if magefan comments are enabled
+     * @return bool
+     */
+    public function magefanCommentsEnabled()
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/post_view/comments/type',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
+    }
+
 }

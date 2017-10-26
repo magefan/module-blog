@@ -85,7 +85,14 @@
                     <field id="number_of_comments" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Number of Comments</label>
                         <depends>
-                            <field id="type">facebook</field>
+                            <field id="type" separator="|">facebook|magefan</field>
+                        </depends>
+                    </field>
+
+                    <field id="number_of_replies" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Replies</label>
+                        <depends>
+                            <field id="type">magefan</field>
                         </depends>
                     </field>
 

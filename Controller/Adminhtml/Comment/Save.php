@@ -23,7 +23,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
     protected function filterParams($data)
     {
         /* Prepare dates */
-        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
+        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\DateTime');
 
         $filterRules = [];
         foreach (['creation_time'] as $dateField) {
