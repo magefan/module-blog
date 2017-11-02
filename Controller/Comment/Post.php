@@ -141,6 +141,7 @@ class Post extends \Magefan\Blog\App\Action\Action
 
                 if (!$parentComment->getPost()
                     || $parentComment->getPost()->getId() != $post->getId()
+                    || $parentComment->isReply()
                 ) {
                     throw new \Exception(__('You cannot reply to this comment.'), 1);
                 }

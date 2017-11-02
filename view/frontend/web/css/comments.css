@@ -30,9 +30,9 @@
 	font-weight: 700;
 	font-size: 14px;
 	color: #fff;
-    background: #4080ff;
-    margin-top: 24px;
-    line-height: 40px;
+	background: #1979c3;
+	margin-top: 24px;
+	line-height: 40px;
 	text-align: center;
 	border-radius: 3px;
 	transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
@@ -47,7 +47,7 @@
 
 /*reply form*/
 .c-replyform .left-hld,
-.c-replyform .right-hld {float:left; width: 30%; padding: 0px 15px 0 0;}
+.c-replyform .right-hld {float:left; width: 35%; padding: 0px 15px 0 0;}
 .c-replyform textarea,
 .c-replyform input {
 	color: #222;
@@ -69,28 +69,28 @@
 
 .c-replyform button {
 	display: inline-block;
-    padding: 2px 8px;
-    font-weight: 700;
-    border-radius: 3px!important;
-    font-size: 14px;
-    background-color: #4267b2;
-    border:1px solid #4267b2;
-    color: #fff;
-    cursor: pointer;
-    transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
-    box-shadow: none;
-    margin-top: 5px;
+	padding: 2px 8px;
+	font-weight: 700;
+	border-radius: 3px!important;
+	font-size: 14px;
+	background-color: #1979c3;
+	border:1px solid #1979c3;
+	color: #fff;
+	cursor: pointer;
+	transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;
+	box-shadow: none;
+	margin-top: 5px;
 }
 
 .c-replyform button:hover {
-    background-color: #365899;
-    border-color: #365899;
+	background-color: #365899;
+	border-color: #365899;
 }
 
 .c-replyform button.cancel {
-    background-color: #f6f7f9;
-    border-color: #ced0d4;
-    color: #4b4f56;
+	background-color: #f6f7f9;
+	border-color: #ced0d4;
+	color: #4b4f56;
 }
 
 .c-replyform button.cancel:hover {background-color: #e9ebee;}
@@ -124,44 +124,37 @@
 .p-replies .c-post, .p-replies .c-replyform {margin-left: 20px;}
 .p-replies .c-comment {margin-bottom: 10px;}
 .p-replies .c-more {
-    background: #e2eafb;
-    padding: 5px;
-    font-size: 12px;
-    border-radius: 3px;
+	background: #d7eaf9;
+	padding: 5px;
+	font-size: 12px;
+	border-radius: 3px;
+	margin-bottom: 10px;
 }
 
 .p-replies .c-more a {color: #4267b2; font-weight: 700; font-size: 11px;}
 .p-replies .c-more a:hover {text-decoration: underline;}
 .p-replies .c-more i{
-    width: 0px;
-    height: 0px;
-    border-left: 3px solid rgba(0, 0, 0, 0);
-    border-right: 3px solid rgba(0, 0, 0, 0);
-    border-top: 3px solid #768196;
-    vertical-align: middle;
-    margin-left: 3px;
-    position: relative;
-    top: 7px;
+	width: 0px;
+	height: 0px;
+	border-left: 3px solid rgba(0, 0, 0, 0);
+	border-right: 3px solid rgba(0, 0, 0, 0);
+	border-top: 3px solid #768196;
+	vertical-align: middle;
+	margin-left: 3px;
+	position: relative;
+	top: 7px;
 }
 
-
 @media screen and (max-width: 450px) {
-
 	.c-img {width: 38px;}
-
 	.c-post {font-size: 13px;}
 	.c-post .p-actions {font-size: 11px;}
-
 	.c-reply, .c-comment {position: relative; margin-bottom: 18px;} 
-	.c-replyform, .c-post {margin-left: 44px;}
+	.c-replyform, .c-post {margin-left: 0}
 	.p-replies {padding-left: 5px;}
 	.p-replies .c-img {width: 28px;}
 	.p-replies .c-post, .p-replies .c-replyform {margin-left: 34px;}
-
 	.p-replies .c-more a {font-size: 10px; padding: 3px;}
+	.c-replyform .left-hld,
+	.c-replyform .right-hld {float:none; width: 100%; padding: 0 0 5px 0}
 }
-
-
-
-
-

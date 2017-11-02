@@ -23,7 +23,7 @@
         <img src="<?php echo $authorImage ?>" alt="<?php echo $block->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
-    <div class="c-post c-post-<?php echo $comment->getId() ?>">
+    <div class="c-post c-post-<?php echo $comment->getId() ?>" id="c-post-<?php echo $comment->getId() ?>">
         <div class="p-name"><?php echo $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
         <div class="p-text"><?php echo $block->escapeHtml($comment->getText()) ?></div>
         <div class="p-actions">
