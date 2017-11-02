@@ -85,7 +85,14 @@
                     <field id="number_of_comments" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Number of Comments</label>
                         <depends>
-                            <field id="type">facebook</field>
+                            <field id="type" separator="|">facebook|magefan</field>
+                        </depends>
+                    </field>
+
+                    <field id="number_of_replies" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Replies</label>
+                        <depends>
+                            <field id="type">magefan</field>
                         </depends>
                     </field>
 
@@ -112,6 +119,22 @@
                                 What's a shortname?
                             </a>
                         ]]></comment>
+                    </field>
+                    <field id="guest_comments" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow Guest Comments</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment></comment>
+                    </field>
+                    <field id="default_status" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Comment Status</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\CommentStatus</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment></comment>
                     </field>
                 </group>
 

@@ -101,6 +101,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_tagCollectionFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory
+     */
+    protected $_commentCollectionFactory;
+
+    /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
     protected $_productCollectionFactory;
@@ -114,6 +119,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
      * @var \Magefan\Blog\Model\ResourceModel\Tag\Collection
      */
     protected $_relatedTags;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment\Collection
+     */
+    protected $comments;
 
     /**
      * @var \Magefan\Blog\Model\ResourceModel\Post\Collection
@@ -142,6 +152,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
      * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
@@ -158,6 +169,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
+        \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
@@ -173,6 +185,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         $this->_authorFactory = $authorFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
         $this->_tagCollectionFactory = $tagCollectionFactory;
+        $this->_commentCollectionFactory = $commentCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_relatedPostsCollection = clone($this->getCollection());
     }
@@ -208,12 +221,13 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Deprecated
      * Retrieve true if post is active
      * @return boolean [description]
      */
     public function isActive()
     {
-        return ($this->getStatus() == self::STATUS_ENABLED);
+        return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**
@@ -592,6 +606,37 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getTagsCount()
     {
         return count($this->getRelatedTags());
+    }
+
+    /**
+     * Retrieve post comments
+     * @param  boolean $active
+     * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
+     */
+    public function getComments($active = true)
+    {
+        if (null === $this->comments) {
+            $this->comments = $this->_commentCollectionFactory->create()
+                ->addFieldToFilter('post_id', $this->getId());
+        }
+
+        return $this->comments;
+    }
+
+    /**
+     * Retrieve active comments count
+     * @return int
+     */
+    public function getCommentsCount()
+    {
+        if (!$this->hasData('comments_count')) {
+            $comments = $this->_commentCollectionFactory->create()
+                ->addFieldToFilter('post_id', $this->getId())
+                ->addActiveFilter()
+                ->addFieldToFilter('parent_id', 0);
+            $this->setData('comments_count', (int)$comments->getSize());
+        }
+        return $this->getData('comments_count');
     }
 
     /**

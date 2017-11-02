@@ -94,7 +94,7 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
      */
     public function getPostCollection()
     {
-        if (is_null($this->_postCollection)) {
+        if (null === $this->_postCollection) {
             $this->_preparePostCollection();
         }
 

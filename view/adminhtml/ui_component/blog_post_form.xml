@@ -931,9 +931,6 @@
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">custom_theme_from</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>
@@ -945,9 +942,6 @@
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">custom_theme_to</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>

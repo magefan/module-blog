@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -26,16 +26,16 @@ class Comments extends \Magento\Framework\View\Element\Template
     protected $_coreRegistry;
 
     /**
-     * Construct
-     *
-     * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry,
-     * @param \Magento\Cms\Model\Page $post
-     * @param \Magento\Framework\Registry $coreRegistry,
-     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Cms\Model\PageFactory $postFactory
-     * @param array $data
+     * @var string
+     */
+    protected $commetType;
+
+    /**
+     * Constructor
+     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Magento\Framework\Registry                      $coreRegistry
+     * @param \Magento\Framework\Locale\ResolverInterface      $localeResolver
+     * @param array                                            $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -120,5 +120,19 @@ class Comments extends \Magento\Framework\View\Element\Template
             );
         }
         return $this->getData('post');
+    }
+
+    /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        if ($this->commetType && $this->commetType != $this->getCommentsType()) {
+            return '';
+        }
+
+        return parent::_toHtml();
     }
 }

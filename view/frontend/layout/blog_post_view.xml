@@ -23,7 +23,22 @@
                     <block class="Magefan\Blog\Block\Post\View\NextPrev" name="blog.post.nextprev" as="nextprev"  template="Magefan_Blog::post/view/nextprev.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />
-                    <block class="Magefan\Blog\Block\Post\View\Comments" name="blog.post.comments" template="post/view/comments.phtml" />
+                    <container name="blog.post.comments" label="Comments Container" htmlTag="div" htmlClass="block comments" >
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Magefan" name="blog.post.comments.magefan" template="post/view/comments/magefan.phtml">
+                            <arguments>
+                                <argument name="jsLayout" xsi:type="array">
+                                    <item name="components" xsi:type="array">
+                                        <item name="magefan-comments.js" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magefan_Blog/js/magefan-comments</item>
+                                        </item>
+                                    </item>
+                                </argument>
+                            </arguments>
+                        </block>
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Facebook" name="blog.post.comments.facebook" template="post/view/comments/facebook.phtml" />
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Disqus" name="blog.post.comments.disqus" template="post/view/comments/disqus.phtml" />
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Google" name="blog.post.comments.google" template="post/view/comments/google.phtml" />
+                    </container>
                     <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
                 </block>
             </block>

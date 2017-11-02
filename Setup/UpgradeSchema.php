@@ -354,6 +354,110 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.6.0') < 0)
+        {
+             /**
+             * Create table 'magefan_blog_comment'
+             */
+            $table = $setup->getConnection()->newTable(
+                $setup->getTable('magefan_blog_comment')
+            )->addColumn(
+                'comment_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'nullable' => false, 'primary' => true],
+                'Comment ID'
+            )->addColumn(
+                'parent_id',
+                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                 null,
+                ['nullable' => false],
+                'Parent Comment ID'
+            )->addColumn(
+                'post_id',
+                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                 null,
+                ['nullable' => false],
+                'Post ID'
+            )->addColumn(
+                'customer_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => true],
+                'Customer ID'
+            )->addColumn(
+                'admin_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => true],
+                'Admin User ID'
+            )->addColumn(
+                'status',
+                \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                null,
+                ['nullable' => false],
+                'Comment status'
+            )->addColumn(
+                'author_type',
+                \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                null,
+                ['nullable' => false],
+                'Author Type'
+            )->addColumn(
+                'author_nickname',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => false],
+                'Comment Author Nickname'
+            )->addColumn(
+                'author_email',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => true],
+                'Comment Author Email'
+            )->addColumn(
+                'text',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                '2M',
+                [],
+                'Text'
+            )->addColumn(
+                'creation_time',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                null,
+                 ['nullable' => false],
+                 'Comment Creation Time'
+            )->addColumn(
+                'update_time',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                null,
+                 ['nullable' => false],
+                 'Comment Update Time'
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['parent_id']),
+                ['parent_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['post_id']),
+                ['post_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['customer_id']),
+                ['customer_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['admin_id']),
+                ['admin_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['status']),
+                ['status']
+            )->addForeignKey(
+                $installer->getFkName('magefan_blog_comment', 'post_id', 'magefan_blog_post', 'post_id'),
+                'post_id',
+                $installer->getTable('magefan_blog_post'),
+                'post_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            );
+            $setup->getConnection()->createTable($table);
+        }
+
         $setup->endSetup();
     }
 }

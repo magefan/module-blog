@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Comments
+ */
+?>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "<?php echo '/' . '/' ?>connect.facebook.net/<?php echo $block->getLocaleCode() ?>/sdk.js#xfbml=1&version=v2.5&appId=<?php echo $block->getFacebookAppId() ?>";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="post-comments clear">
+    <div class="fb-comments" data-href="<?php echo $block->getPost()->getPostUrl() ?>" data-width="100%" data-numposts="<?php echo $block->getNumberOfComments() ?>"></div>
+</div>

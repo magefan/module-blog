@@ -27,7 +27,9 @@
                 </related_products>
                 <comments>
                     <type>facebook</type>
-                    <number_of_comments>4</number_of_comments>
+                    <number_of_comments>5</number_of_comments>
+                    <number_of_replies>5</number_of_replies>
+                    <guest_comments>1</guest_comments>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
