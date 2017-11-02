@@ -22,6 +22,6 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const GUEST_COMMENT = 'mfblog/post_view/comments/guest_comments';
     const NUMBER_OF_COMMENTS = 'mfblog/post_view/comments/number_of_comments';
     const NUMBER_OF_REPLIES = 'mfblog/post_view/comments/number_of_replies';
-    const COMMENT_STATUS = 'mfblog/post_view/comments/status';
+    const COMMENT_STATUS = 'mfblog/post_view/comments/default_status';
 
 }

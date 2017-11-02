@@ -6,7 +6,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace MageFan\Blog\Model\ResourceModel;
+namespace Magefan\Blog\Model\ResourceModel;
 
 /**
  * Blog comment resource model
