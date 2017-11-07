@@ -29,7 +29,7 @@
             <img src="<?php echo $image ?>" alt="<?php echo $block->escapeHtml($block->getCustomerName()) ?>">
         </div>
         <?php } ?>
-        <div class="c-replyform no-active">
+        <div class="c-replyform <?php if ($canPost)  echo 'no-active' ?>">
             <form action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
                 <?php echo $block->getBlockHtml('formkey') ?>
                 <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
