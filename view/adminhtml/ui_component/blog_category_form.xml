@@ -153,11 +153,11 @@
             </argument>
         </field>
     </fieldset>
-    <fieldset name="search_engine_optimisation">
+    <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="label" xsi:type="string" translate="true">Search Engine Optimisation</item>
+                <item name="label" xsi:type="string" translate="true">Search Engine Optimization</item>
                 <item name="sortOrder" xsi:type="number">40</item>
             </item>
         </argument>
@@ -280,9 +280,6 @@
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">category</item>
                     <item name="dataScope" xsi:type="string">custom_theme_from</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>
@@ -294,9 +291,6 @@
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">category</item>
                     <item name="dataScope" xsi:type="string">custom_theme_to</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>

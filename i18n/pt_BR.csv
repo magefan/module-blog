@@ -1,0 +1,173 @@
+Add New Category,Adicionar Nova Categoria
+Are you sure you want to do this?,Tem certeza disso?
+Start Import,Começar Importação
+NOTICE,AVISO
+Database Name,Nome do Banco de Dados
+User Name,Nome do Usuário
+Database Host,Host do Banco de Dados
+Table Prefix,Prefixo da Tabela
+Post,Post
+Add New Post,Adicionar Novo Post
+Blog,Blog
+Go to Blog Home Page,Ir Para Home Page do Blog
+Monthly Archives: %s %s,Arquivo Mensal: %s %s
+"Search ""%1""","Procurar ""%1"""
+Recent Blog Posts,Posts Recentes
+Manage %1,Gerenciar %1
+Edit %1,Editar %1
+New %1,Novo %1
+Create %1,Criar %1
+%1 has been saved.,%1 foi salvo.
+Something went wrong while saving this %1. %2,Ocorreu um erro ao salvar isso %1. %2
+We can't delete %1 right now. %2,Não é possível deletar %1 no momento. %2
+%1 have been deleted.,%1 foi deletado.
+"Parameter ""Status"" missing in request data.","Parameter ""Status"" missing in request data."
+Status Field Name is not specified.,O nome do campo status não foi especificado.
+We can't change status of %1 right now. %2,Não é possível alterar o status de %1 nesse momento. %2
+%1 status have been changed.,%1 status foi alterado.
+Blog Import,Importar Blog
+Blog import type is not specified.,O tipo de blog a importar não foi especificado.
+The import process was completed successfully. %1 posts and %2 categories where imported.,O processo de importação foi conluído com êxito. %1 posts e %2 categorias foram importados.
+The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,O processo de importação foi conluído. %1 posts e %2 categorias foram importados. Alguns posts ou categorias faltaram.<br/> %3 %4
+Nothing to import.,Nada para importar.
+Can not make import.,Não foi possível importar.
+Something went wrong: ,Ocorreu um erro: 
+Blog Import from WordPress (beta),Importar Blog do Wordpress (Beta)
+Please select,Selecione
+Use Facebook Comments,Usar Comentários do Facebook
+Use Disqus Comments,Usar Comentários do Disqus
+Use Google Comments (beta),Usar Comentários do Google (Beta)
+Yes (With auto trigger),Sim (Automaticamente)
+Yes (Without auto trigger),Yes (Manualmente)
+Parameter %1 is required,O parâmetro %1 é requerido
+AheadWorks Blog Extension not detected.,A extensão Blog da AheadWorks não foi detectada.
+The category URL key contains capital letters or disallowed symbols.,A URL key da categoria contém letras maiúsculas ou símbolos não permitidos.
+The category URL key cannot be made of only numbers.,A URL key da categoria não pode ser contituida apenas de números.
+The post URL key contains capital letters or disallowed symbols.,A URL key do post contém letras maiúsculas ou símbolos não permitidos.
+The post URL key cannot be made of only numbers.,A URL key do post não pode ser contituida apenas de números.
+The tag is already exist.,A tag já existe.
+The tag URL key contains capital letters or disallowed symbols.,A URL key da tag contém letras maiúsculas ou símbolos não permitidos.
+The tag URL key cannot be made of only numbers.,A URL key da tag não pode ser contituida apenas de números.
+Related posts,Posts relacionados
+Posted:,Publicado:
+Categories:,Categorias:
+Tags:,Tags:
+Author:,Autor:
+We can't find posts matching the selection.,Não foi possível encontrar posts que se enquadrem na seleção.
+Read more &#187;,Leia mais &#187;
+See more,Veja mais
+Read %1,Ler %1
+&larr; Previous,&larr; Anterior
+Next &rarr;,Próximo &rarr;
+Related Posts,Posts Relacionados
+Archive,Arquivo
+Archive %s,Arquivo %s
+Recent Posts,Posts Recentes
+RSS Feed,Feed RSS
+Search posts here...,Procure posts aqui…
+Tags,Tags
+MageFan Extensions,Extensões da MageFan
+Blog Information,Informações do Blog
+Blog Index Page,Página Index do Blog
+Post View,Visualização do Post
+Display Related Posts,Mostrar Posts Relacionados
+Number of Posts,Número de Posts
+Display Related Products,Mostrar Produtos Relacionados
+Number of Products,Número de Produtos
+Comments,Comentários
+Number of Comments,Número de Comentários
+Facebook Application ID,ID da Aplicação Facebook
+Preview and Next Post,Post Anterior e Próximo
+Display Prev. & Next Post Links,Mostrar Links Ant. & Próx. Nos Posts
+Post List,Lista de Posts
+Posts Per Page,Posts Por Página
+Use Lazy Loading,Usar Lazy Loading
+Automatically load more posts on page.,Carrega mais posts na página automaticamente.
+Auto Triger Padding (px),Ativar Padding Automaticamente (px)
+Author,Autor
+Display Author Information,Mostras Informações do Autor
+Display Post List By Author,Mostrar a Lista de Posts por Autor
+Sidebar,Barra Lateral
+Search Form Widget,Widget Formulário de Busca
+Categories Widget,Widget Categorias
+Recent Posts Widget,Widget Posts Recentes
+Posts Number,Número dos Posts
+Archive Widget,Widget Arquivo
+Tag Claud Widget,Widget Nuvem de Tags
+Rss Feed,Feed RSS
+Feed Title,Título do Feed
+Feed Description,Descrição do Feed
+Product Page,Página do Produto
+Permalink Settings,Configurações do Permalink
+Blog Route,Rota do Blog
+Permalink Type,Tipo do Permalink
+Post Route,Rota do Post
+Category Route,Rota da Categoria
+Archive Route,Rota do Arquivo
+Tag Route,Rota da Tag
+Author Route,Rota do Autor
+Search Route,Rota da Busca
+Social,Social
+AddThis Enabled,Ativar AddThis
+AddThis ID,ID do AddThis
+AddThis Language,Idioma do AddThis
+Category Top Navigation,Navegação Superior da Categoria
+Display Blog Link,Mostrar Link do Blog
+Blog Category,Categoria do Blog
+Leave blank to display posts from all categories.,Deixe em branco para mostrar posts de todas as categorias.
+Custom Template,Template Personalizado
+Published,Publicado
+Category Information,Informações da Categoria
+Enable Category,Ativar Categoria
+Category Title,Título da Categoria
+Category in Websites,Categoria em Websites
+-- Please Select --,-- Selecione --
+Tag Title,Título da Tag
+Post Information,Informações do Post
+Enable Post,Ativar Post
+Post Title,Título do Post
+New Category,Nova Categoria
+Additional Options,Opções Adicionais
+Featured Image,Imagem Destaque
+Publish Date,Data de Publicação
+New Tag,Nova Tag
+Open Graph Metadata,Metadata do Open Graph
+OG Title,Título do OG
+Leave blank to use Meta Title by default.,Deixa em branco para usar os metadados por padrão.
+OG Description,Descrição do OG
+Leave blank to use Meta Description by default.,Deixa em branco para usar os metadados por padrão.
+OG Image,Imagem do OG
+"Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Deixe em branco para usar a Imagem Destaque por padrão. Formatos permitidos de imagem: jpg, jpeg, gif, png."
+OG Type,Tipo do OG
+"Leave blank to use ""article"" type by default.",Deixe em branco para usar “artigo” como tipo padrão.
+Post in Websites,Post em Websites
+Related Posts and Products,Posts e Produtos Relacionados
+Related posts are shown to customers in addition to the item the customer is looking at.,"Posts relacionados são mostrados ao consumidor, além do produto que ele está visualizando."
+Add Related Post,Adicionar Post Relacionado
+Add Related Posts,Adicionar Posts Relacionados
+Add Selected Posts,Adicionar Posts Selecionados
+January,Janeiro
+February,Fevereiro
+March,Março
+April,Abril
+May,Maio
+June,Junho
+July,Julho
+August,Agosto
+September,Setembro
+October,Outubro
+November,Novembro
+December,Dezembro
+Jan,Jan
+Feb,Fev
+Mar,Mar
+Apr,Abr
+May,Mai
+Jun,Jun
+Jul,Jul
+Aug,Ago
+Sep,Set
+Oct,Out
+Nov,Nov
+Dec,Dez
+Read more >,Leia mais >

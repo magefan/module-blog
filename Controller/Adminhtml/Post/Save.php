@@ -22,25 +22,6 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
      */
     protected function _beforeSave($model, $request)
     {
-        /* Prepare dates */
-        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
-        $data = $model->getData();
-
-        $filterRules = [];
-        foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
-            if (!empty($data[$dateField])) {
-                $filterRules[$dateField] = $dateFilter;
-            }
-        }
-
-        $inputFilter = new \Zend_Filter_Input(
-            $filterRules,
-            [],
-            $data
-        );
-        $data = $inputFilter->getUnescaped();
-        $model->setData($data);
-
         /* Prepare author */
         if (!$model->getAuthorId()) {
             $authSession = $this->_objectManager->get('Magento\Backend\Model\Auth\Session');
@@ -49,17 +30,19 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         /* Prepare relative links */
         $data = $request->getPost('data');
-        $links = isset($data['links']) ? $data['links'] : null;
-        if ($links && is_array($links)) {
+        $links = isset($data['links']) ? $data['links'] : ['post' => [], 'product' => []];
+        if (is_array($links)) {
             foreach (['post', 'product'] as $linkType) {
-                if (!empty($links[$linkType]) && is_array($links[$linkType])) {
+                if (isset($links[$linkType]) && is_array($links[$linkType])) {
                     $linksData = [];
                     foreach ($links[$linkType] as $item) {
                         $linksData[$item['id']] = [
-                            'position' => $item['position']
+                            'position' => isset($item['position']) ? $item['position'] : 0
                         ];
                     }
                     $links[$linkType] = $linksData;
+                } else {
+                    $links[$linkType] = [];
                 }
             }
             $model->setData('links', $links);
@@ -74,7 +57,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                 } else {
                     if (isset($data[$key][0]['name']) && isset($data[$key][0]['tmp_name'])) {
                         $image = $data[$key][0]['name'];
-                        $model->setData($key, Post::BASE_MEDIA_PATH . DIRECTORY_SEPARATOR . $image);
+                        $model->setData($key, Post::BASE_MEDIA_PATH . '/' . $image);
                         $imageUploader = $this->_objectManager->get(
                             'Magefan\Blog\ImageUpload'
                         );
@@ -108,7 +91,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                             'Magefan\Blog\ImageUpload'
                         );
                         $imageUploader->moveFileFromTmp($image['file']);
-                        $gallery[] = Post::BASE_MEDIA_PATH . DIRECTORY_SEPARATOR . $image['file'];
+                        $gallery[] = Post::BASE_MEDIA_PATH . '/' . $image['file'];
                     }
                 }
             }
@@ -117,5 +100,34 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         }
     }
+
+    /**
+     * Filter request params
+     * @param  array $data
+     * @return array
+     */
+    protected function filterParams($data)
+    {
+        /* Prepare dates */
+        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
+
+        $filterRules = [];
+        foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
+            if (!empty($data[$dateField])) {
+                $filterRules[$dateField] = $dateFilter;
+            }
+        }
+
+        $inputFilter = new \Zend_Filter_Input(
+            $filterRules,
+            [],
+            $data
+        );
+
+        $data = $inputFilter->getUnescaped();
+
+        return $data;
+    }
+
 
 }

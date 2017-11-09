@@ -29,7 +29,7 @@ class View extends AbstractPost
             $this->pageConfig->setKeywords($post->getMetaKeywords());
             $this->pageConfig->setDescription($post->getMetaDescription());
             $this->pageConfig->addRemotePageAsset(
-                $post->getPostUrl(),
+                $post->getCanonicalUrl(),
                 'canonical',
                 ['attributes' => ['rel' => 'canonical']]
             );
@@ -39,6 +39,10 @@ class View extends AbstractPost
                 $pageMainTitle->setPageTitle(
                     $this->escapeHtml($post->getTitle())
                 );
+            }
+
+            if ($post->getIsPreviewMode()) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
             }
         }
 
@@ -79,6 +83,23 @@ class View extends AbstractPost
                     'link' => $this->_url->getBaseUrl()
                 ]
             );
+
+            $parentCategories = [];
+            $parentCategory = $this->getPost()->getParentCategory();
+            while ($parentCategory ) {
+                $parentCategories[] = $parentCategory;
+                $parentCategory = $parentCategory->getParentCategory();
+            }
+
+            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                $parentCategory = $parentCategories[$i];
+                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $parentCategory->getId(), [
+                    'label' => $parentCategory->getTitle(),
+                    'title' => $parentCategory->getTitle(),
+                    'link'  => $parentCategory->getCategoryUrl()
+                ]);
+            }
+
             $breadcrumbsBlock->addCrumb($key, [
                 'label' => $title ,
                 'title' => $title

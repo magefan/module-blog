@@ -54,6 +54,15 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Retrieve date object
+     * @return \Magento\Framework\Stdlib\DateTime
+     */
+    public function getDate()
+    {
+        return $this->_date;
+    }
+
+    /**
      * Process post data before deleting
      *
      * @param \Magento\Framework\Model\AbstractModel $object
@@ -181,7 +190,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($links = $object->getData('links')) {
             if (is_array($links)) {
                 foreach (['post', 'product'] as $linkType) {
-                    if (!empty($links[$linkType]) && is_array($links[$linkType])) {
+                    if (isset($links[$linkType]) && is_array($links[$linkType])) {
                         $linksData = $links[$linkType];
                         $lookup = 'lookupRelated' . ucfirst($linkType) . 'Ids';
                         $oldIds = $this->$lookup($object->getId());
@@ -291,7 +300,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int $storeId
      * @return int
      */
-    protected function _getLoadByIdentifierSelect($identifier, $storeIds, $isActive = null)
+    protected function _getLoadByIdentifierSelect($identifier, $storeIds)
     {
         $select = $this->getConnection()->select()->from(
             ['cp' => $this->getMainTable()]
@@ -307,10 +316,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $storeIds
         );
 
-        if (!is_null($isActive)) {
-            $select->where('cp.is_active = ?', $isActive)
-                ->where('cp.publish_time <= ?', $this->_date->gmtDate());
-        }
         return $select;
     }
 
@@ -350,7 +355,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $storeIds = [$storeIds];
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
-        $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds, 1);
+        $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.post_id')->order('cps.store_id DESC')->limit(1);
 
         return $this->getConnection()->fetchOne($select);

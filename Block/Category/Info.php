@@ -19,7 +19,7 @@ class Info extends \Magento\Framework\View\Element\Template
     protected $_filterProvider;
 
     /**
-     * @var Magento\Framework\Registry
+     * @var \Magento\Framework\Registry
      */
     protected $_coreRegistry;
 

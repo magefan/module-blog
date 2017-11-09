@@ -56,7 +56,7 @@
         </referenceBlock>
 
         <referenceBlock name="blog.post.bottom">
-            <block class="\Magento\Framework\View\Element\Template" name="amp.blog.post.social.share" template="Magefan_Blog::amp/post/view/socialshare.phtml" before="blog.post.relatedposts" />
+            <block class="Magento\Framework\View\Element\Template" name="amp.blog.post.social.share" template="Magefan_Blog::amp/post/view/socialshare.phtml" before="blog.post.relatedposts" />
         </referenceBlock>
 
         <referenceBlock name="blog.post.comments" remove="true" />

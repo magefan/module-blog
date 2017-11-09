@@ -11,4 +11,7 @@
     <event name="page_block_html_topmenu_gethtml_before">
         <observer name="magefan_blog_topmenu_observer" instance="Magefan\Blog\Observer\PageBlockHtmlTopmenuBethtmlBeforeObserver" />
     </event>
+    <event name="layout_load_before">
+        <observer name="magefan_blog_layout_load_before" instance="Magefan\Blog\Observer\LayoutLoadBeforeObserver" />
+    </event>
 </config>

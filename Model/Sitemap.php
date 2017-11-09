@@ -21,6 +21,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
     protected function _initSitemapItems()
     {
         parent::_initSitemapItems();
+        $this->_sitemapItems = [];
 
         $this->_sitemapItems[] = new \Magento\Framework\DataObject(
             [
@@ -45,6 +46,15 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                     ->addActiveFilter(),
             ]
         );
+    }
+
+    /**
+     * Disable save action
+     * @return sekf
+     */
+    public function save()
+    {
+        return $this;
     }
 
 }

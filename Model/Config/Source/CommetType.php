@@ -10,10 +10,34 @@ namespace Magefan\Blog\Model\Config\Source;
 
 /**
  * Used in creating options for commetns config value selection
- *
  */
 class CommetType implements \Magento\Framework\Option\ArrayInterface
 {
+    /**
+     * @const int
+     */
+    const DISABLED = 0;
+
+    /**
+     * @const string
+     */
+    const MAGEFAN = 'magefan';
+
+    /**
+     * @const string
+     */
+    const FACEBOOK = 'facebook';
+
+    /**
+     * @const string
+     */
+    const DISQUS = 'disqus';
+
+    /**
+     * @const string
+     */
+    const GOOGLE = 'google';
+
     /**
      * Options getter
      *
@@ -22,10 +46,11 @@ class CommetType implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            ['value' => 0, 'label' => __('Disabled')],
-            ['value' => 'facebook', 'label' => __('Use Facebook Comments')],
-            ['value' => 'disqus', 'label' => __('Use Disqus Comments')],
-            ['value' => 'google', 'label' => __('Use Google Comments (beta)')],
+            ['value' => self::DISABLED, 'label' => __('Disabled')],
+            ['value' => self::MAGEFAN, 'label' => __('Use Magefan Blog Comments')],
+            ['value' => self::FACEBOOK, 'label' => __('Use Facebook Comments')],
+            ['value' => self::DISQUS, 'label' => __('Use Disqus Comments')],
+            ['value' => self::GOOGLE, 'label' => __('Use Google Comments')],
         ];
     }
 

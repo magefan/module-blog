@@ -125,6 +125,14 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->loadedData[$post->getId()] = $data;
         }
 
+        $data = $this->dataPersistor->get('blog_post_form_data');
+        if (!empty($data)) {
+            $post = $this->collection->getNewEmptyItem();
+            $post->setData($data);
+            $this->loadedData[$post->getId()] = $post->getData();
+            $this->dataPersistor->clear('blog_post_form_data');
+        }
+
         return $this->loadedData;
     }
 }

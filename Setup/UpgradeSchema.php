@@ -293,6 +293,171 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.5.2') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'secret',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '32',
+                    'nullable' => true,
+                    'comment' => 'Post Secret',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'views_count',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    null,
+                    'nullable' => true,
+                    'comment' => 'Post Views Count',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'is_recent_posts_skip',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => true,
+                    'comment' => 'Is Post Skipped From Recent Posts',
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_post'),
+                $setup->getIdxName($setup->getTable('magefan_blog_post'), ['views_count']),
+                ['views_count']
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_post'),
+                $setup->getIdxName($setup->getTable('magefan_blog_post'), ['is_recent_posts_skip']),
+                ['is_recent_posts_skip']
+            );
+
+        }
+
+        if (version_compare($version, '2.5.3') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'short_content',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '2M',
+                    'nullable' => true,
+                    'comment' => 'Post Short Content',
+                ]
+            );
+        }
+
+        if (version_compare($version, '2.6.0') < 0)
+        {
+             /**
+             * Create table 'magefan_blog_comment'
+             */
+            $table = $setup->getConnection()->newTable(
+                $setup->getTable('magefan_blog_comment')
+            )->addColumn(
+                'comment_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'nullable' => false, 'primary' => true],
+                'Comment ID'
+            )->addColumn(
+                'parent_id',
+                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                 null,
+                ['nullable' => false],
+                'Parent Comment ID'
+            )->addColumn(
+                'post_id',
+                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                 null,
+                ['nullable' => false],
+                'Post ID'
+            )->addColumn(
+                'customer_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => true],
+                'Customer ID'
+            )->addColumn(
+                'admin_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => true],
+                'Admin User ID'
+            )->addColumn(
+                'status',
+                \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                null,
+                ['nullable' => false],
+                'Comment status'
+            )->addColumn(
+                'author_type',
+                \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                null,
+                ['nullable' => false],
+                'Author Type'
+            )->addColumn(
+                'author_nickname',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => false],
+                'Comment Author Nickname'
+            )->addColumn(
+                'author_email',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => true],
+                'Comment Author Email'
+            )->addColumn(
+                'text',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                '2M',
+                [],
+                'Text'
+            )->addColumn(
+                'creation_time',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                null,
+                 ['nullable' => false],
+                 'Comment Creation Time'
+            )->addColumn(
+                'update_time',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                null,
+                 ['nullable' => false],
+                 'Comment Update Time'
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['parent_id']),
+                ['parent_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['post_id']),
+                ['post_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['customer_id']),
+                ['customer_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['admin_id']),
+                ['admin_id']
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_comment', ['status']),
+                ['status']
+            )->addForeignKey(
+                $installer->getFkName('magefan_blog_comment', 'post_id', 'magefan_blog_post', 'post_id'),
+                'post_id',
+                $installer->getTable('magefan_blog_post'),
+                'post_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            );
+            $setup->getConnection()->createTable($table);
+        }
+
         $setup->endSetup();
     }
 }

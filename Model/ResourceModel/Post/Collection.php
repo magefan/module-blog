@@ -29,6 +29,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_storeId;
 
     /**
+     * @var \Magefan\Blog\Model\Category
+     */
+    protected $category;
+
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -80,7 +85,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addFieldToFilter($field, $condition = null)
     {
         if ($field === 'store_id' || $field === 'store_ids') {
-            return $this->addStoreFilter($condition, false);
+            return $this->addStoreFilter($condition);
+        }
+
+        if ($field === 'category' || $field === 'categories') {
+            return $this->addCategoryFilter($condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -131,14 +140,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         if (!$this->getFlag('category_filter_added')) {
             if ($category instanceof \Magefan\Blog\Model\Category) {
-                $category = [$category->getId()];
+                $this->category = $category;
+                $categories = $category->getChildrenIds();
+                $categories[] = $category->getId();
+            } else {
+                $categories = $category;
+                if (!is_array($categories)) {
+                    $categories = [$categories];
+                }
             }
 
-            if (!is_array($category)) {
-                $category = [$category];
-            }
-
-            $this->addFilter('category', ['in' => $category], 'public');
+            $this->addFilter('category', ['in' => $categories], 'public');
         }
         return $this;
     }
@@ -258,7 +270,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ->from(['cps' => $tableName])
                 ->where('cps.post_id IN (?)', $items);
 
-            $result = $connection->fetchPairs($select);
+            $result = [];
+            foreach ($connection->fetchAll($select) as $item) {
+                if (!isset($result[$item['post_id']])) {
+                    $result[$item['post_id']] = [];
+                }
+                $result[$item['post_id']][] = $item['store_id'];
+            }
+
             if ($result) {
                 foreach ($this as $item) {
                     $postId = $item->getData('post_id');
@@ -272,13 +291,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         $storeId = $result[$item->getData('post_id')];
                     }
                     $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_ids', [$result[$postId]]);
+                    $item->setData('store_ids', $result[$postId]);
                 }
             }
 
-            if ($this->_storeId) {
-                foreach ($this as $item) {
+            foreach ($this as $item) {
+                if ($this->_storeId) {
                     $item->setStoreId($this->_storeId);
+                }
+
+                if ($this->category) {
+                    $item->setData('parent_category', $this->category);
                 }
             }
 

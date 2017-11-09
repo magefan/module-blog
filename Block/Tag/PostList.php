@@ -54,6 +54,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 'canonical',
                 ['attributes' => ['rel' => 'canonical']]
             );
+            $this->pageConfig->setRobots('NOINDEX,FOLLOW');
         }
 
         return parent::_prepareLayout();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -83,12 +83,12 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_response;
 
     /**
-     * @var int
+     * @var array
      */
     protected $_postId;
 
     /**
-     * @var int
+     * @var array
      */
     protected $_categoryId;
 
@@ -154,44 +154,149 @@ class Router implements \Magento\Framework\App\RouterInterface
         }
         unset($pathInfo[0]);
 
-        switch ($this->_url->getPermalinkType()) {
-            case Url::PERMALINK_TYPE_DEFAULT:
-                foreach ($pathInfo as $i => $route) {
-                    $pathInfo[$i] = $this->_url->getControllerName($route);
+        if (!count($pathInfo)) {
+            $request
+                ->setModuleName('blog')
+                ->setControllerName('index')
+                ->setActionName('index');
+        } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_RSS)) {
+            $request
+                ->setModuleName('blog')
+                ->setControllerName(Url::CONTROLLER_RSS)
+                ->setActionName(isset($pathInfo[2]) ? $pathInfo[2] : 'index');
+        } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)
+            && !empty($pathInfo[2])
+        ) {
+            $request
+                ->setModuleName('blog')
+                ->setControllerName(Url::CONTROLLER_SEARCH)
+                ->setActionName('index')
+                ->setParam('q', $pathInfo[2]);
+        } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_AUTHOR)
+            && !empty($pathInfo[2])
+            && ($authorId = $this->_getAuthorId($pathInfo[2]))
+        ) {
+            $request
+                ->setModuleName('blog')
+                ->setControllerName(Url::CONTROLLER_AUTHOR)
+                ->setActionName('view')
+                ->setParam('id', $authorId);
+        } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_TAG)
+            && !empty($pathInfo[2])
+            && $tagId = $this->_getTagId($pathInfo[2])
+        ) {
+            $request
+                ->setModuleName('blog')
+                ->setControllerName(Url::CONTROLLER_TAG)
+                ->setActionName('view')
+                ->setParam('id', $tagId);
+        } else {
+
+            $controllerName = null;
+            if (Url::PERMALINK_TYPE_DEFAULT == $this->_url->getPermalinkType()) {
+                $controllerName = $this->_url->getControllerName($pathInfo[1]);
+                unset($pathInfo[1]);
+            }
+
+            $pathInfo = array_values($pathInfo);
+            $pathInfoCount = count($pathInfo);
+
+            if ($pathInfoCount == 1) {
+                if ( (!$controllerName || $controllerName == Url::CONTROLLER_ARCHIVE)
+                    && $this->_isArchiveIdentifier($pathInfo[0])
+                ) {
+                    $request
+                        ->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_ARCHIVE)
+                        ->setActionName('view')
+                        ->setParam('date', $pathInfo[0]);
+
+                } elseif ( (!$controllerName || $controllerName == Url::CONTROLLER_POST)
+                    && $postId = $this->_getPostId($pathInfo[0])
+                ) {
+                    $request
+                        ->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_POST)
+                        ->setActionName('view')
+                        ->setParam('id', $postId);
+
+                } elseif ( (!$controllerName || $controllerName == Url::CONTROLLER_CATEGORY)
+                    && $categoryId = $this->_getCategoryId($pathInfo[0])
+                ) {
+                    $request
+                        ->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_CATEGORY)
+                        ->setActionName('view')
+                        ->setParam('id', $categoryId);
                 }
-                break;
-            case Url::PERMALINK_TYPE_SHORT:
-                if (isset($pathInfo[1])) {
-                    if ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)) {
-                        $pathInfo[1] = Url::CONTROLLER_SEARCH;
-                    } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_AUTHOR)) {
-                        $pathInfo[1] = Url::CONTROLLER_AUTHOR;
-                    } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_TAG)) {
-                        $pathInfo[1] = Url::CONTROLLER_TAG;
-                    } elseif (count($pathInfo) == 1) {
-                        if ($this->_isArchiveIdentifier($pathInfo[1])) {
-                            $pathInfo[2] = $pathInfo[1];
-                            $pathInfo[1] = Url::CONTROLLER_ARCHIVE;
-                        } elseif ($postId = $this->_getPostId($pathInfo[1])) {
-                            $pathInfo[2] = $pathInfo[1];
-                            $pathInfo[1] = Url::CONTROLLER_POST;
-                        } elseif ($categoryId = $this->_getCategoryId($pathInfo[1])) {
-                            $pathInfo[2] = $pathInfo[1];
-                            $pathInfo[1] = Url::CONTROLLER_CATEGORY;
+            } elseif ($pathInfoCount > 1) {
+
+                $postId = 0;
+                $categoryId = 0;
+                $first = true;
+                $pathExist = true;
+
+                for ($i = $pathInfoCount - 1; $i >= 0; $i--) {
+                    if ( (!$controllerName || $controllerName == Url::CONTROLLER_POST)
+                        && $first
+                        && ($postId = $this->_getPostId($pathInfo[$i]))
+                    ) {
+                        //we have postId
+                    } elseif ( (!$controllerName || !$first || $controllerName == Url::CONTROLLER_CATEGORY)
+                        && ($cid = $this->_getCategoryId($pathInfo[$i], $first))
+                    ) {
+                        if (!$categoryId) {
+                            $categoryId = $cid;
                         }
-                    } elseif (count($pathInfo) > 1) {
-                        if ($postId = $this->_getPostId(implode('/', $pathInfo))) {
-                            $pathInfo[2] = implode('/', $pathInfo);
-                            $pathInfo[1] = Url::CONTROLLER_POST;
-                        }
+                    } else {
+                        $pathExist = false;
+                        break;
+                    }
+
+                    if ($first) {
+                        $first = false;
                     }
                 }
-                break;
+
+
+                if ($pathExist) {
+                    if ($postId) {
+                        $request
+                            ->setModuleName('blog')
+                            ->setControllerName(Url::CONTROLLER_POST)
+                            ->setActionName('view')
+                            ->setParam('id', $postId);
+                        if ($categoryId) {
+                            $request->setParam('category_id', $categoryId);
+                        }
+                    } elseif ($categoryId) {
+                        $request
+                            ->setModuleName('blog')
+                            ->setControllerName(Url::CONTROLLER_CATEGORY)
+                            ->setActionName('view')
+                            ->setParam('id', $categoryId);
+                    }
+
+                } elseif ( (!$controllerName || $controllerName == Url::CONTROLLER_POST)
+                    && $postId = $this->_getPostId(implode('/', $pathInfo))
+                ) {
+
+                    $request
+                        ->setModuleName('blog')
+                        ->setControllerName(Url::CONTROLLER_POST)
+                        ->setActionName('view')
+                        ->setParam('id', $postId);
+                }
+            }
         }
 
-        $identifier = implode('/', $pathInfo);
-
-        $condition = new \Magento\Framework\DataObject(['identifier' => $identifier, 'continue' => true]);
+        $condition = new \Magento\Framework\DataObject(
+            [
+                'identifier' => $_identifier,
+                'request' => $request,
+                'continue' => true
+            ]
+        );
         $this->_eventManager->dispatch(
             'magefan_blog_controller_router_match_before',
             ['router' => $this, 'condition' => $condition]
@@ -210,103 +315,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             return null;
         }
 
-        $identifier = $condition->getIdentifier();
-
-        $success = false;
-        $info = explode('/', $identifier);
-
-        if (!$identifier) {
-            $request->setModuleName('blog')->setControllerName('index')->setActionName('index');
-            $success = true;
-        } elseif (count($info) > 1) {
-
-            $store = $this->_storeManager->getStore()->getId();
-
-            switch ($info[0]) {
-                case Url::CONTROLLER_POST :
-                    if (!$postId = $this->_getPostId($info[1])) {
-                        return null;
-                    }
-
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_POST)
-                        ->setActionName('view')
-                        ->setParam('id', $postId);
-
-                    $success = true;
-                    break;
-
-                case Url::CONTROLLER_CATEGORY :
-                    if (!$categoryId = $this->_getCategoryId($info[1])) {
-                        return null;
-                    }
-
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_CATEGORY)
-                        ->setActionName('view')
-                        ->setParam('id', $categoryId);
-
-                    $success = true;
-                    break;
-
-                case Url::CONTROLLER_ARCHIVE :
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_ARCHIVE)
-                        ->setActionName('view')
-                        ->setParam('date', $info[1]);
-
-                    $success = true;
-                    break;
-
-                case Url::CONTROLLER_AUTHOR :
-                    if (!$authorId = $this->_getAuthorId($info[1])) {
-                        return null;
-                    }
-
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_AUTHOR)
-                        ->setActionName('view')
-                        ->setParam('id', $authorId);
-
-                    $success = true;
-                    break;
-
-                case Url::CONTROLLER_TAG :
-                    if (!$tagId = $this->_getTagId($info[1])) {
-                        return null;
-                    }
-
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_TAG)
-                        ->setActionName('view')
-                        ->setParam('id', $tagId);
-
-                    $success = true;
-                    break;
-
-                case Url::CONTROLLER_SEARCH :
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_SEARCH)
-                        ->setActionName('index')
-                        ->setParam('q', $info[1]);
-
-                    $success = true;
-                    break;
-
-                case Url::CONTROLLER_RSS :
-                    $request->setModuleName('blog')
-                        ->setControllerName(Url::CONTROLLER_RSS)
-                        ->setActionName(
-                            isset($info[1]) ? $info[1] : 'index'
-                        );
-
-                    $success = true;
-                    break;
-            }
-
-        }
-
-        if (!$success) {
+        if (!$request->getModuleName()) {
             return null;
         }
 
@@ -323,17 +332,24 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @param  string $identifier
      * @return int
      */
-    protected function _getPostId($identifier)
+    protected function _getPostId($identifier, $checkSufix = true)
     {
-        if (is_null($this->_postId)) {
-            $post = $this->_postFactory->create();
-            $this->_postId = $post->checkIdentifier(
-                $identifier,
-                $this->_storeManager->getStore()->getId()
-            );
+        $key = $identifier . ($checkSufix ? '-checksufix' : '');
+        if (!isset($this->_postId[$key])) {
+            $sufix = $this->_url->getUrlSufix(Url::CONTROLLER_POST);
+            $trimmedIdentifier = $this->_url->trimSufix($identifier, $sufix);
+            if ($checkSufix && $sufix && $trimmedIdentifier == $identifier) { //if url without sufix
+                $this->_postId[$key] = 0;
+            } else {
+                $post = $this->_postFactory->create();
+                $this->_postId[$key] = $post->checkIdentifier(
+                    $trimmedIdentifier,
+                    $this->_storeManager->getStore()->getId()
+                );
+            }
         }
 
-        return $this->_postId;
+        return $this->_postId[$key];
     }
 
     /**
@@ -341,17 +357,26 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @param  string $identifier
      * @return int
      */
-    protected function _getCategoryId($identifier)
+    protected function _getCategoryId($identifier, $checkSufix = true)
     {
-        if (is_null($this->_categoryId)) {
-            $category = $this->_categoryFactory->create();
-            $this->_categoryId = $category->checkIdentifier(
-                $identifier,
-                $this->_storeManager->getStore()->getId()
-            );
+        $key = $identifier . ($checkSufix ? '-checksufix' : '');
+        if (!isset($this->_categoryId[$key])) {
+            $sufix = $this->_url->getUrlSufix(Url::CONTROLLER_CATEGORY);
+
+            $trimmedIdentifier = $this->_url->trimSufix($identifier, $sufix);
+
+            if ($checkSufix && $sufix && $trimmedIdentifier == $identifier) { //if url without sufix
+                $this->_categoryId[$key] = 0;
+            } else {
+                $category = $this->_categoryFactory->create();
+                $this->_categoryId[$key] = $category->checkIdentifier(
+                    $trimmedIdentifier,
+                    $this->_storeManager->getStore()->getId()
+                );
+            }
         }
 
-        return $this->_categoryId;
+        return $this->_categoryId[$key];
     }
 
     /**

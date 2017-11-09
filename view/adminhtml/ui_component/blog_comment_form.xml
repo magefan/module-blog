@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">blog_comment_form.comment_form_data_source</item>
+            <item name="deps" xsi:type="string">blog_comment_form.comment_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Comment Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">blog_comment_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="childDefaults" xsi:type="array">
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">commentGrid</item>
+                        <item name="target" xsi:type="string">selectComment</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+    </argument>
+    <dataSource name="comment_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magefan\Blog\Ui\DataProvider\Comment\Form\CommentDataProvider</argument>
+            <argument name="name" xsi:type="string">comment_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">comment_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="blog/comment/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="comment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">comment</item>
+                    <item name="dataScope" xsi:type="string">comment_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="post_url">
+            <argument name="data" xsi:type="array">
+                 <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Post</item>
+                    <item name="component" xsi:type="string">Magefan_Blog/js/form/element/link</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="dataScope" xsi:type="string">post_url</item>
+                    <item name="validation" xsi:type="array">
+                </item>
+              </item>
+            </argument>
+        </field>
+        <field name="author_url">
+            <argument name="data" xsi:type="array">
+                 <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Author</item>
+                    <item name="component" xsi:type="string">Magefan_Blog/js/form/element/link</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="dataScope" xsi:type="string">author_url</item>
+                    <item name="validation" xsi:type="array">
+                </item>
+              </item>
+            </argument>
+        </field>
+        <field name="parent_url">
+            <argument name="data" xsi:type="array">
+                 <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Parent Comment</item>
+                    <item name="component" xsi:type="string">Magefan_Blog/js/form/element/link</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="dataScope" xsi:type="string">parent_url</item>
+                    <item name="validation" xsi:type="array">
+                </item>
+              </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CommentStatus</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="creation_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Publish Date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="dataType" xsi:type="string">datetime</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="dataScope" xsi:type="string">creation_time</item>
+                </item>
+            </argument>
+        </field>
+        <field name="text">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

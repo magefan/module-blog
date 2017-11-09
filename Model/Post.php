@@ -26,6 +26,7 @@ use Magefan\Blog\Model\Url;
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
  * @method string getContent()
+ * @method string getShortContent()
  * @method $this setContent(string $value)
  * @method string getContentHeading()
  * @method $this setContentHeading(string $value)
@@ -65,9 +66,19 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_eventObject = 'blog_post';
 
     /**
+     * @var \Magento\Framework\Math\Random
+     */
+    protected $random;
+
+    /**
      * @var \Magento\Cms\Model\Template\FilterProvider
      */
     protected $filterProvider;
+
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
 
     /**
      * @var \Magefan\Blog\Model\Url
@@ -90,6 +101,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_tagCollectionFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory
+     */
+    protected $_commentCollectionFactory;
+
+    /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
     protected $_productCollectionFactory;
@@ -105,6 +121,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $_relatedTags;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment\Collection
+     */
+    protected $comments;
+
+    /**
      * @var \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
     protected $_relatedPostsCollection;
@@ -115,15 +136,23 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected $imageFactory;
 
     /**
+     * @var string
+     */
+    protected $controllerName;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Framework\Math\Random $random
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
@@ -132,12 +161,15 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
+        \Magento\Framework\Math\Random $random,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         Url $url,
         \Magefan\Blog\Model\ImageFactory $imageFactory,
         \Magefan\Blog\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
+        \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
@@ -146,11 +178,14 @@ class Post extends \Magento\Framework\Model\AbstractModel
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
         $this->filterProvider = $filterProvider;
+        $this->random = $random;
+        $this->scopeConfig = $scopeConfig;
         $this->_url = $url;
         $this->imageFactory = $imageFactory;
         $this->_authorFactory = $authorFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;
         $this->_tagCollectionFactory = $tagCollectionFactory;
+        $this->_commentCollectionFactory = $commentCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_relatedPostsCollection = clone($this->getCollection());
     }
@@ -163,6 +198,16 @@ class Post extends \Magento\Framework\Model\AbstractModel
     protected function _construct()
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Post');
+        $this->controllerName = URL::CONTROLLER_POST;
+    }
+
+    /**
+     * Retrieve controller name
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
     }
 
     /**
@@ -176,12 +221,13 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Deprecated
      * Retrieve true if post is active
      * @return boolean [description]
      */
     public function isActive()
     {
-        return ($this->getStatus() == self::STATUS_ENABLED);
+        return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**
@@ -207,12 +253,12 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Retrieve post url route path
+     * Retrieve post url path
      * @return string
      */
     public function getUrl()
     {
-        return $this->_url->getUrlPath($this, URL::CONTROLLER_POST);
+        return $this->_url->getUrlPath($this->getIdentifier(), $this->controllerName);
     }
 
     /**
@@ -222,11 +268,20 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getPostUrl()
     {
         if (!$this->hasData('post_url')) {
-            $url = $this->_url->getUrl($this, URL::CONTROLLER_POST);
+            $url = $this->_url->getUrl($this, $this->controllerName);
             $this->setData('post_url', $url);
         }
 
         return $this->getData('post_url');
+    }
+
+    /**
+     * Retrieve post canonical url
+     * @return string
+     */
+    public function getCanonicalUrl()
+    {
+        return $this->_url->getCanonicalUrl($this);
     }
 
     /**
@@ -343,27 +398,41 @@ class Post extends \Magento\Framework\Model\AbstractModel
     {
         $key = 'short_filtered_content';
         if (!$this->hasData($key)) {
-            $content = $this->getFilteredContent();
-            $pageBraker = '<!-- pagebreak -->';
+            if ($this->getShortContent()) {
+                $content = $this->filterProvider->getPageFilter()->filter(
+                    $this->getShortContent()
+                );
+            } else {
+                $content = $this->getFilteredContent();
+                $pageBraker = '<!-- pagebreak -->';
 
-            if ($p = mb_strpos($content, $pageBraker)) {
-                $content = mb_substr($content, 0, $p);
-                try {
-                    libxml_use_internal_errors(true);
-                    $dom = new \DOMDocument();
-                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                    $body = $dom->getElementsByTagName('body');
-                    if ( $body && $body->length > 0 ) {
-                        $body = $body->item(0);
-                        $_content = new \DOMDocument;
-                        foreach ($body->childNodes as $child){
-                            $_content->appendChild($_content->importNode($child, true));
+                $p = mb_strpos($content, $pageBraker);
+                if (!$p) {
+                    $p = (int)$this->scopeConfig->getValue(
+                        'mfblog/post_list/shortcotent_length',
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                    );
+                }
+
+                if ($p) {
+                    $content = mb_substr($content, 0, $p);
+                    try {
+                        libxml_use_internal_errors(true);
+                        $dom = new \DOMDocument();
+                        $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
+                        $body = $dom->getElementsByTagName('body');
+                        if ($body && $body->length > 0) {
+                            $body = $body->item(0);
+                            $_content = new \DOMDocument;
+                            foreach ($body->childNodes as $child) {
+                                $_content->appendChild($_content->importNode($child, true));
+                            }
+                            $content = $_content->saveHTML();
                         }
-                        $content = $_content->saveHTML();
+                    } catch (\Exception $e) {
                     }
-                } catch (\Exception $e) {}
+                }
             }
-
             $this->setData($key, $content);
         }
 
@@ -487,6 +556,26 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve parent category
+     * @return \Magefan\Blog\Model\Category || false
+     */
+    public function getParentCategory()
+    {
+        $k = 'parent_category';
+        if (null === $this->getData($k)) {
+            $this->setData($k, false);
+            foreach ($this->getParentCategories() as $category) {
+                if ($category->isVisibleOnStore($this->getStoreId())) {
+                    $this->setData($k, $category);
+                    break;
+                }
+            }
+        }
+
+        return $this->getData($k);
+    }
+
+    /**
      * Retrieve post parent categories count
      * @return int
      */
@@ -517,6 +606,37 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getTagsCount()
     {
         return count($this->getRelatedTags());
+    }
+
+    /**
+     * Retrieve post comments
+     * @param  boolean $active
+     * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
+     */
+    public function getComments($active = true)
+    {
+        if (null === $this->comments) {
+            $this->comments = $this->_commentCollectionFactory->create()
+                ->addFieldToFilter('post_id', $this->getId());
+        }
+
+        return $this->comments;
+    }
+
+    /**
+     * Retrieve active comments count
+     * @return int
+     */
+    public function getCommentsCount()
+    {
+        if (!$this->hasData('comments_count')) {
+            $comments = $this->_commentCollectionFactory->create()
+                ->addFieldToFilter('post_id', $this->getId())
+                ->addActiveFilter()
+                ->addFieldToFilter('parent_id', 0);
+            $this->setData('comments_count', (int)$comments->getSize());
+        }
+        return $this->getData('comments_count');
     }
 
     /**
@@ -597,7 +717,18 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function isVisibleOnStore($storeId)
     {
-        return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
+        return $this->getIsActive()
+            && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
+            && array_intersect([0, $storeId], $this->getStoreIds());
+    }
+
+    /**
+     * Retrieve if is preview secret is valid
+     * @return bool
+     */
+    public function isValidSecret($secret)
+    {
+        return ($secret && $this->getSecret() === $secret);
     }
 
     /**
@@ -695,6 +826,23 @@ class Post extends \Magento\Framework\Model\AbstractModel
         );
 
         return $object->save();
+    }
+
+    /**
+     * Retrieve secret key of post, it can be used during preview
+     * @return string
+     */
+    public function getSecret()
+    {
+        if ($this->getId() && !$this->getData('secret')) {
+            $this->setData(
+                'secret',
+                $this->random->getRandomString(32)
+            );
+            $this->save();
+        }
+
+        return $this->getData('secret');
     }
 
 }

@@ -85,7 +85,14 @@
                     <field id="number_of_comments" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Number of Comments</label>
                         <depends>
-                            <field id="type">facebook</field>
+                            <field id="type" separator="|">facebook|magefan</field>
+                        </depends>
+                    </field>
+
+                    <field id="number_of_replies" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Replies</label>
+                        <depends>
+                            <field id="type">magefan</field>
                         </depends>
                     </field>
 
@@ -113,6 +120,22 @@
                             </a>
                         ]]></comment>
                     </field>
+                    <field id="guest_comments" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow Guest Comments</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment></comment>
+                    </field>
+                    <field id="default_status" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Comment Status</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\CommentStatus</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment></comment>
+                    </field>
                 </group>
 
                 <group id="nextprev" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -126,6 +149,9 @@
 
             <group id="post_list" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Post List</label>
+                <field id="shortcotent_length" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Default Short Content Length</label>
+                    </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Posts Per Page</label>
                 </field>
@@ -271,14 +297,30 @@
                     <depends>
                         <field id="type">default</field>
                     </depends>
-                    <comment>E.g.: "post" will make the blog post accessible from mystore.com/{blog_route}/post/post-title/</comment>
+                    <comment>E.g.: "post" will make the blog post accessible from mystore.com/{blog_route}/post/post-identifier/</comment>
+                </field>
+                <field id="post_sufix" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Post URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog post accessible from mystore.com/{blog_route}/post/post-identifier.html</comment>
+                </field>
+                <field id="post_use_categories" translate="label" type="select" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Categories Path for Post URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="category_route" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Category Route</label>
                     <depends>
                         <field id="type">default</field>
                     </depends>
-                    <comment>E.g.: "category" will make the blog category accessible from mystore.com/{blog_route}/category/category-title/</comment>
+                    <comment>E.g.: "category" will make the blog category accessible from mystore.com/{blog_route}/category/category-identifier/</comment>
+                </field>
+                <field id="category_sufix" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog category accessible from mystore.com/{blog_route}/post/post-identifier.html</comment>
+                </field>
+                <field id="category_use_categories" translate="label" type="select" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Parent Category Path for Category URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="archive_route" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Archive Route</label>

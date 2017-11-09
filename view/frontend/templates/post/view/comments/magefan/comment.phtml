@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Comments\Magefan\Comment
+ */
+?>
+<?php
+    $comment = $block->getComment();
+    $numberOfCommentsToDisplay = $block->getNumberOfReplies();
+?>
+<div class="c-comment c-comment-parent-<?php echo (int)$comment->getParentId() ?>" <?php if ($comment->getIsHidden()) echo 'style="display:none"' ?>>
+    <?php if ($authorImage = $comment->getAuthorImage()) { ?>
+    <div class="c-img">
+        <img src="<?php echo $authorImage ?>" alt="<?php echo $block->escapeHtml($comment->getAuthorName()) ?>">
+    </div>
+    <?php } ?>
+    <div class="c-post c-post-<?php echo $comment->getId() ?>" id="c-post-<?php echo $comment->getId() ?>">
+        <div class="p-name"><?php echo $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+        <div class="p-text"><?php echo $block->escapeHtml($comment->getText()) ?></div>
+        <div class="p-actions">
+            <a href="#" class="reply-action" data-comment="<?php echo $comment->isReply() ? $comment->getParentId() : $comment->getId() ?>" title="<?php echo __('Reply') ?>"><?php echo __('Reply') ?></a>
+            <span class="publish-date"><?php echo $block->escapeHtml($comment->getPublishDate('M d, Y H:i')) ?></span>
+        </div>
+        <?php
+            $replies = $block->getRepliesCollection();
+            $commentsCount = count($replies);
+            if ($commentsCount) {
+        ?>
+            <div class="p-replies">
+                <?php $i = 0 ?>
+                <?php foreach ($replies as $reply) { ?>
+                    <?php
+                        $i++;
+                        $reply->setIsHidden($i > $numberOfCommentsToDisplay);
+                    ?>
+                    <?php echo $block->setComment($reply)->toHtml() ?>
+                <?php } ?>
+
+                <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
+                <div class="c-more more-comments-action" data-comment="<?php echo $comment->getId() ?>">
+                    <a href="#" ><?php echo __('Show more replies in this thread') ?><i></i></a>
+                </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>

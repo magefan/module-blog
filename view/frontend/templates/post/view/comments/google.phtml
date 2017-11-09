@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Comments
+ */
+?>
+<script src="https://apis.google.com/js/plusone.js"></script>
+<div id="mfblog_gcomments" data-width="100%" height="200px"></div>
+<script>
+    gapi.comments.render('mfblog_gcomments', {
+        href: '<?php echo $block->getPost()->getPostUrl() ?>',
+        first_party_property: 'BLOGGER',
+        view_type: 'FILTERED_POSTMOD'
+    });
+</script>

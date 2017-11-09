@@ -63,17 +63,48 @@ class View extends \Magefan\Blog\App\Action\Action
     protected function _initPost()
     {
         $id = $this->getRequest()->getParam('id');
+        $secret = $this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $post = $this->_objectManager->create('Magefan\Blog\Model\Post')->load($id);
 
-        if (!$post->isVisibleOnStore($storeId)) {
+        if (!$post->isVisibleOnStore($storeId) && !$post->isValidSecret($secret)) {
             return false;
+        }
+
+        if ($post->isValidSecret($secret)) {
+            $post->setIsPreviewMode(true);
         }
 
         $post->setStoreId($storeId);
 
+        if ($category = $this->_initCategory()) {
+            $post->setData('parent_category', $category);
+        }
+
         return $post;
+    }
+
+    /**
+     * Init category
+     *
+     * @return \Magefan\Blog\Model\category || false
+     */
+    protected function _initCategory()
+    {
+        $id = $this->getRequest()->getParam('category_id');
+
+        $storeId = $this->_storeManager->getStore()->getId();
+
+        $category = $this->_objectManager->create('Magefan\Blog\Model\Category')->load($id);
+
+        if (!$category->isVisibleOnStore($storeId)) {
+            return false;
+        }
+
+        $category->setStoreId($storeId);
+
+        return $category;
     }
 
 }

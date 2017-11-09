@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Magefan_Blog" setup_version="2.5.0">
+    <module name="Magefan_Blog" setup_version="2.6.1">
          <sequence>
             <module name="Magento_Cms"/>
             <module name="Magento_Catalog"/>

@@ -15,7 +15,7 @@
     <update handle="editor"/>
     <body>
         <referenceContainer name="content">
-            <block class="\Magento\Backend\Block\Template" name="blog.import" template="Magefan_Blog::import.phtml" />
+            <block class="Magento\Backend\Block\Template" name="blog.import" template="Magefan_Blog::import.phtml" />
         </referenceContainer>
     </body>
 </page>

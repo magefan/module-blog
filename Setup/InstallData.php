@@ -49,7 +49,7 @@ class InstallData implements InstallDataInterface
             'meta_description' => 'Magento 2 blog default post.',
             'identifier' => 'hello-world',
             'content_heading' => 'Hello world!',
-            'content' => '<p>Welcome to <a title="Magefan - solutions for Magento 2" href="http://magefan.com/" target="_blank">Magefan</a> blog extension for Magento&reg; 2. This is your first post. Edit or delete it, then start blogging!</p>
+            'content' => '<p>Welcome to <a title="Magefan - solutions for Magento 2" href="http://magefan.com/" target="_blank">Magefan</a> <a title="Magento 2 Blog extension" href="https://magefan.com/magento2-blog-extension/" target="_blank">blog extension for Magento&reg; 2</a>. This is your first post. Edit or delete it, then start blogging!</p>
 <p><!-- pagebreak --></p>
 <p>Please also read&nbsp;<a title="Magento 2 Blog online documentation" href="http://magefan.com/docs/magento-2-blog/" target="_blank">Online documentation</a>&nbsp;and&nbsp;<a href="http://magefan.com/blog/add-read-more-tag-to-blog-post-content/" target="_blank">How to add "read more" tag to post content</a></p>
 <p>Follow Magefan on:</p>

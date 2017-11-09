@@ -10,7 +10,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Magefan\Blog\Api\PostManagementInterface" type="Magefan\Blog\Model\PostManagement" />
     <preference for="Magefan\Blog\Api\CategoryManagementInterface" type="Magefan\Blog\Model\CategoryManagement" />
-    <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" />
+    <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
     <virtualType name="Magefan\Blog\ImageUpload" type="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">magefan_blog/tmp</argument>
@@ -46,5 +46,10 @@
     <type name="Plumrocket\Amp\Model\System\Config\Source\Page">
         <plugin name="plumrocket_amp_source_page_magefan_blog"
                 type="Magefan\Blog\Plugin\Plumrocket\Amp\SourcePagePlugin" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sitemap\Model\Sitemap">
+        <plugin name="magento_sitemap_model_sitemap_magefan_blog"
+                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
     </type>
 </config>

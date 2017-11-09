@@ -82,12 +82,12 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->loadedData[$category->getId()] = $category->getData();
         }
 
-        $data = $this->dataPersistor->get('current_model');
+        $data = $this->dataPersistor->get('blog_category_form_data');
         if (!empty($data)) {
             $category = $this->collection->getNewEmptyItem();
             $category->setData($data);
             $this->loadedData[$category->getId()] = $category->getData();
-            $this->dataPersistor->clear('current_model');
+            $this->dataPersistor->clear('blog_category_form_data');
         }
 
         return $this->loadedData;

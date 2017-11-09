@@ -35,7 +35,11 @@ class Statuses extends \Magento\Backend\Block\Widget\Grid\Column
     public function decorateStatus($value, $row, $column, $isExport)
     {
         if ($row->getIsActive() || $row->getStatus()) {
-            $cell = '<span class="grid-severity-notice"><span>' . $value . '</span></span>';
+            if ($row->getStatus() == 2) {
+                $cell = '<span class="grid-severity-minor"><span>' . $value . '</span></span>';
+            } else {
+                $cell = '<span class="grid-severity-notice"><span>' . $value . '</span></span>';
+            }
         } else {
             $cell = '<span class="grid-severity-critical"><span>' . $value . '</span></span>';
         }

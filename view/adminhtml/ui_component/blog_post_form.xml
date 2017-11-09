@@ -25,6 +25,7 @@
             <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DeleteButton</item>
             <item name="reset" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\ResetButton</item>
             <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DuplicateButton</item>
+            <item name="preview" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\PreviewButton</item>
             <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveButton</item>
             <item name="save_and_continue" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveAndContinueButton</item>
         </item>
@@ -176,6 +177,38 @@
             </argument>
         </field>
     </fieldset>
+    <fieldset name="short_content">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Short Content</item>
+                <item name="sortOrder" xsi:type="number">15</item>
+            </item>
+        </argument>
+        <container name="short_content_notice">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="boolean">false</item>
+                    <item name="content" xsi:type="string" translate="true"><![CDATA[
+                        <strong>Notice:</strong> <em>Please use this section only if you need to enter short content completely different from main content.<br/>Please <a href="https://magefan.com/blog/add-read-more-tag-to-blog-post-content/" target="_blank" title="Add &quot;read more&quot; tag to Magento 2 blog post content">read more</a> about how to configure "read more" tag.</em>
+                    ]]></item>
+                    <item name="template" xsi:type="string">ui/form/components/complex</item>
+                </item>
+            </argument>
+        </container>
+        <field name="short_content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Short Content</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">short_content</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
     <fieldset name="additional_options">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
@@ -267,7 +300,6 @@
                         <item name="title" xsi:type="string" translate="true">New Tag</item>
                         <item name="formElement" xsi:type="string">container</item>
                         <item name="additionalClasses" xsi:type="string">admin__field-small</item>
-                        <!-- <item name="componentType" xsi:type="string">container</item> -->
                         <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
                         <item name="template" xsi:type="string">ui/form/components/button/container</item>
 
@@ -294,11 +326,35 @@
             </container>
         </container>
     </fieldset>
-    <fieldset name="search_engine_optimisation">
+    <htmlContent name="gallery" sortOrder="22">
+        <argument name="data" xsi:type="array">
+            <item name="wrapper" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Media Gallery</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <settings>
+            <wrapper>
+                <canShow>true</canShow>
+                <componentType>fieldset</componentType>
+            </wrapper>
+        </settings>
+        <block name="gallery" class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery">
+            <block class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content" as="content">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="parentComponent" xsi:type="string">blog_post_form.blog_post_form.block_gallery.block_gallery</item>
+                    </argument>
+                </arguments>
+            </block>
+        </block>
+    </htmlContent>
+    <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="label" xsi:type="string" translate="true">Search Engine Optimisation</item>
+                <item name="label" xsi:type="string" translate="true">Search Engine Optimization</item>
                 <item name="sortOrder" xsi:type="number">30</item>
             </item>
         </argument>
@@ -584,8 +640,6 @@
                             <item name="is_collection" xsi:type="boolean">true</item>
                             <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
                             <item name="componentType" xsi:type="string">container</item>
-                            <!-- <item name="componentType" xsi:type="string">container</item> -->
-                            <!-- <item name="positionProvider" xsi:type="string">attribute_options.position</item> -->
                             <item name="dataScope" xsi:type="string"></item>
                         </item>
                     </argument>
@@ -885,9 +939,6 @@
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">custom_theme_from</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>
@@ -899,9 +950,6 @@
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">custom_theme_to</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="validate-date" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>

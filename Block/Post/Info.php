@@ -19,7 +19,7 @@ class Info extends \Magento\Framework\View\Element\Template
      * Block template file
      * @var string
      */
-    protected $_template = 'post/info.phtml';
+    protected $_template = 'Magefan_Blog::post/info.phtml';
 
     /**
      * DEPRECATED METHOD!!!!
@@ -54,6 +54,18 @@ class Info extends \Magento\Framework\View\Element\Template
             'mfblog/author/page_enabled',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Retrieve true if magefan comments are enabled
+     * @return bool
+     */
+    public function magefanCommentsEnabled()
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/post_view/comments/type',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
     }
 
 }

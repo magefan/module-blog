@@ -106,6 +106,7 @@ class Aw extends AbstractImport
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 unset($category);
                 $this->_skippedCategories[] = $data['title'];
+                $this->_logger->addDebug('Blog Category Import [' . $data['title'] . ']: '. $e->getMessage());
             }
         }
 
@@ -168,6 +169,7 @@ class Aw extends AbstractImport
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
+                $this->_logger->addDebug('Blog Post Import [' . $data['title'] . ']: '. $e->getMessage());
             }
 
             unset($post);

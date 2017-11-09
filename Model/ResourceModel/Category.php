@@ -172,7 +172,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int $storeId
      * @return int
      */
-    protected function _getLoadByIdentifierSelect($identifier, $storeIds, $isActive = null)
+    protected function _getLoadByIdentifierSelect($identifier, $storeIds)
     {
         $select = $this->getConnection()->select()->from(
             ['cp' => $this->getMainTable()]
@@ -188,9 +188,6 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $storeIds
         );
 
-        if (!is_null($isActive)) {
-            $select->where('cp.is_active = ?', $isActive);
-        }
         return $select;
     }
 
@@ -230,7 +227,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $storeIds = [$storeIds];
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
-        $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds, 1);
+        $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.category_id')->order('cps.store_id DESC')->limit(1);
 
         return $this->getConnection()->fetchOne($select);

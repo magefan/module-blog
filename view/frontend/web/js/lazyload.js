@@ -1,5 +1,5 @@
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -86,7 +86,7 @@
         if (that.opt.auto_trigger) {
             var $w = $(window);
             $w.scroll(function() {
-                if ($w.scrollTop() + $w.height() >= $(document).height() - that.opt.padding)  {
+                if ($w.scrollTop() + $w.height() >= $(that.opt.trigger_element).offset().top - that.opt.padding)  {
                     startLoading();
                 }
             });

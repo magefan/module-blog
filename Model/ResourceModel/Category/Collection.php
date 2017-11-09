@@ -69,7 +69,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addFieldToFilter($field, $condition = null)
     {
         if ($field === 'store_id' || $field === 'store_ids') {
-            return $this->addStoreFilter($condition, false);
+            return $this->addStoreFilter($condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -147,7 +147,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $connection = $this->getConnection();
             $select = $connection->select()->from(['cps' => $this->getTable('magefan_blog_category_store')])
                 ->where('cps.category_id IN (?)', $items);
-            $result = $connection->fetchPairs($select);
+
+            $result = [];
+            foreach ($connection->fetchAll($select) as $item) {
+                if (!isset($result[$item['category_id']])) {
+                    $result[$item['category_id']] = [];
+                }
+                $result[$item['category_id']][] = $item['store_id'];
+            }
+
             if ($result) {
                 foreach ($this as $item) {
                     $categoryId = $item->getData('category_id');
@@ -161,7 +169,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         $storeId = $result[$item->getData('category_id')];
                     }
                     $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_ids', [$result[$categoryId]]);
+                    $item->setData('store_ids', $result[$categoryId]);
                 }
             }
 
