@@ -24,4 +24,24 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const NUMBER_OF_REPLIES = 'mfblog/post_view/comments/number_of_replies';
     const COMMENT_STATUS = 'mfblog/post_view/comments/default_status';
 
+    /**
+     * Show top menu item config path
+     */
+    const XML_PATH_TOP_MENU_SHOW_ITEM = 'mfblog/top_menu/show_item';
+
+    /**
+     * Top menu item text config path
+     */
+    const XML_PATH_TOP_MENU_ITEM_TEXT = 'mfblog/top_menu/item_text';
+
+    /**
+     * Top menu include categories config path
+     */
+    const XML_PATH_TOP_MENU_INCLUDE_CATEGORIES = 'mfblog/top_menu/include_categories';
+
+    /**
+     * Top menu max depth config path
+     */
+    const XML_PATH_TOP_MENU_MAX_DEPTH = 'mfblog/top_menu/max_depth';
+
 }
