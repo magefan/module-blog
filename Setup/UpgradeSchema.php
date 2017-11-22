@@ -458,6 +458,28 @@ class UpgradeSchema implements UpgradeSchemaInterface
             $setup->getConnection()->createTable($table);
         }
 
+        if (version_compare($version, '2.6.2') < 0)
+        {
+            /* Add include in menu field into categories tabel */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'include_in_menu',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    ['nullable' => false, 'default' => '0'],
+                    'comment' => 'Category In Menu',
+                    'after' => 'position'
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_category'),
+                $setup->getIdxName($setup->getTable('magefan_blog_category'), ['include_in_menu']),
+                ['include_in_menu']
+            );
+        }
+
         $setup->endSetup();
     }
 }

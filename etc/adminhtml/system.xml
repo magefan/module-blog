@@ -367,6 +367,20 @@
                         <field id="show_item">1</field>
                     </depends>
                 </field>
+                <field id="include_categories" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Blog Categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="show_item">1</field>
+                    </depends>
+                </field>
+                <field id="max_depth" type="text" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximal Depth</label>
+                    <depends>
+                        <field id="show_item">1</field>
+                        <field id="include_categories">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

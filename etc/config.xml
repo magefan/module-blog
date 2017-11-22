@@ -95,6 +95,8 @@
             <top_menu>
                 <show_item>1</show_item>
                 <item_text>Blog</item_text>
+                <include_categories>1</include_categories>
+                <max_depth>0</max_depth>
             </top_menu>
         </mfblog>
     </default>
