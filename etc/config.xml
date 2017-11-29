@@ -59,6 +59,11 @@
                     <posts_per_page>5</posts_per_page>
                     <sort_order>30</sort_order>
                 </recent_posts>
+                <featured_posts>
+                    <enabled>0</enabled>
+                    <posts_ids></posts_ids>
+                    <sort_order>35</sort_order>
+                </featured_posts>
                 <archive>
                     <enabled>1</enabled>
                     <sort_order>40</sort_order>

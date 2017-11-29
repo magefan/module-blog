@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar recent posts template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Featured
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="widget block block-recent-posts" data-bind="scope: 'recemt-posts'">
+    <div class="block-title">
+        <strong><?php echo __('Featured Posts') ?></strong>
+    </div>
+    <div class="block-content">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <div class="item">
+                <a class="post-item-link"
+                   href="<?php echo $_post->getPostUrl() ?>">
+                    <?php echo $block->escapeHtml($_post->getTitle()) ?>
+                </a>
+            </div>
+
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>
