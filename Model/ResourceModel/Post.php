@@ -338,7 +338,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^[a-z0-9][a-z0-9_\/-]+(\.[a-z0-9_-]+)?$/', $object->getData('identifier'));
+        return preg_match('/^[A-z0-9][A-z0-9_\/-]+(\.[A-z0-9_-]+)?$/', $object->getData('identifier'));
     }
 
     /**
