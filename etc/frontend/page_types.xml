@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015-17 Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page_types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_types.xsd">
+    <type id="blog_archive_view" label="Blog Archive Page"/>
+    <type id="blog_author_view" label="Blog Author Page"/>
+    <type id="blog_category_view" label="Blog Category Page"/>
+    <type id="blog_default" label="Blog All Pages"/>
+    <type id="blog_index_index" label="Blog Homepage"/>
+    <type id="blog_post_list" label="Blog Post List (Blog Category, Arcive, Search, etc.)"/>
+    <type id="blog_post_view" label="Blog Post View Page"/>
+    <type id="blog_search_index" label="Blog Search Page"/>
+    <type id="blog_tag_view" label="Blog Tag View Page"/>
+    <type id="blog_post_index" label="Blog Post View Page"/>
+    <type id="amp_blog_archive_view" label="Blog Archive Page (AMP)"/>
+    <type id="amp_blog_author_view" label="Blog Author Page (AMP)"/>
+    <type id="amp_blog_category_view" label="Blog Category Page (AMP)"/>
+    <type id="amp_blog_default" label="Blog All Pages (AMP)"/>
+    <type id="amp_blog_index_index" label="Blog Homepage (AMP)"/>
+    <type id="amp_blog_post_list" label="Blog Post List (Blog Category, Arcive, Search, etc.) (AMP)"/>
+    <type id="amp_blog_post_view" label="Blog Post View Page (AMP)"/>
+    <type id="amp_blog_search_index" label="Blog Search Page (AMP)"/>
+    <type id="amp_blog_tag_view" label="Blog Tag Page (AMP)"/>
+</page_types>
