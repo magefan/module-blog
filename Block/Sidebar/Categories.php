@@ -56,6 +56,13 @@ class Categories extends \Magento\Framework\View\Element\Template
                 ->setOrder('position')
                 ->getTreeOrderedArray();
 
+            foreach ($array as $key => $item) {
+                $maxDepth = $this->maxDepth();
+                if ($maxDepth > 0 && $item->getLevel() >= $maxDepth) {
+                    unset($array[$key]);
+                }
+            }
+
             $this->setData($k, $array);
         }
 
@@ -85,5 +92,19 @@ class Categories extends \Magento\Framework\View\Element\Template
     public function getIdentities()
     {
         return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_categories_widget'  ];
+    }
+
+
+    /**
+     * Retrieve categories maximum depth
+     * @return int
+     */
+    public function maxDepth()
+    {
+        $maxDepth = $this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/max_depth', ScopeInterface::SCOPE_STORE
+        );
+        
+        return (int)$maxDepth;
     }
 }

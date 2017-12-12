@@ -15,6 +15,7 @@
             </general>
             <index_page>
                 <title>Blog</title>
+                <display_mode>0></display_mode>
             </index_page>
             <post_view>
                 <related_posts>
@@ -53,6 +54,7 @@
                     <enabled>1</enabled>
                     <show_posts_count>1</show_posts_count>
                     <sort_order>20</sort_order>
+                    <max_depth>2</max_depth>
                 </categories>
                 <recent_posts>
                     <enabled>1</enabled>

@@ -28,23 +28,8 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected function _preparePostCollection()
     {
         parent::_preparePostCollection();
-
-        $postIds = $this->getPostIdsConfigValue();
-        $postIds = explode(',', $postIds);
-        foreach ($postIds as $key => $id) {
-            $id = trim($id);
-            if (!$id) {
-                unset($postIds[$key]);
-            }
-        }
-
-        if (!count($postIds)) {
-            $postIds = [0];
-        }
-
-        $this->_postCollection->addFieldToFilter(
-            'post_id',
-            ['in' => $postIds]
+        $this->_postCollection->addPostsFilter(
+            $this->getPostIdsConfigValue()
         );
     }
 

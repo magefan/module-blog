@@ -132,6 +132,33 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Add posts filter to collection
+     * @param array|int|string  $category
+     * @return $this
+     */
+    public function addPostsFilter($postIds)
+    {
+        if (!is_array($postIds)) {
+            $postIds = explode(',', $postIds);
+            foreach ($postIds as $key => $id) {
+                $id = trim($id);
+                  if (!$id) {
+                  unset($postIds[$key]);
+                }
+            }
+        }
+
+        if (!count($postIds)) {
+            $postIds = [0];
+        }
+
+        $this->addFieldToFilter(
+            'post_id',
+            ['in' => $postIds]
+        );
+    }
+
+    /**
      * Add category filter to collection
      * @param array|int|\Magefan\Blog\Model\Category  $category
      * @return $this

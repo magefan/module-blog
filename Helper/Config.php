@@ -30,6 +30,16 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_TOP_MENU_SHOW_ITEM = 'mfblog/top_menu/show_item';
 
     /**
+     * Blog homepage display mode
+     */
+    const XML_PATH_HOMEPAGE_DISPLAY_MODE = 'mfblog/index_page/display_mode';
+
+    /**
+     * Blog homepage featured post ids
+     */
+    const XML_PATH_HOMEPAGE_FEATURED_POST_IDS = 'mfblog/index_page/post_ids';
+
+    /**
      * Top menu item text config path
      */
     const XML_PATH_TOP_MENU_ITEM_TEXT = 'mfblog/top_menu/item_text';
