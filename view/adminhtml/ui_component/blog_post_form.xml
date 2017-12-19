@@ -326,30 +326,6 @@
             </container>
         </container>
     </fieldset>
-    <htmlContent name="gallery" sortOrder="22">
-        <argument name="data" xsi:type="array">
-            <item name="wrapper" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Media Gallery</item>
-                <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="opened" xsi:type="boolean">false</item>
-            </item>
-        </argument>
-        <settings>
-            <wrapper>
-                <canShow>true</canShow>
-                <componentType>fieldset</componentType>
-            </wrapper>
-        </settings>
-        <block name="gallery" class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery">
-            <block class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content" as="content">
-                <arguments>
-                    <argument name="config" xsi:type="array">
-                        <item name="parentComponent" xsi:type="string">blog_post_form.blog_post_form.block_gallery.block_gallery</item>
-                    </argument>
-                </arguments>
-            </block>
-        </block>
-    </htmlContent>
     <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
