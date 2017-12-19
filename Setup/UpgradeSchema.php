@@ -30,14 +30,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $connection = $setup->getConnection();
 
         if (version_compare($version, '2.0.1') < 0) {
-
             foreach (['magefan_blog_post_relatedpost', 'magefan_blog_post_relatedproduct'] as $tableName) {
                 // Get module table
                 $tableName = $setup->getTable($tableName);
 
                 // Check if the table already exists
                 if ($connection->isTableExists($tableName) == true) {
-
                     $columns = [
                         'position' => [
                             'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -49,7 +47,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     foreach ($columns as $name => $definition) {
                         $connection->addColumn($tableName, $name, $definition);
                     }
-
                 }
             }
 
@@ -83,7 +80,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $setup->getIdxName($setup->getTable('magefan_blog_post'), ['author_id']),
                 ['author_id']
             );
-
         }
 
 
@@ -166,7 +162,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     ]
                 );
             }
-
         }
 
         if (version_compare($version, '2.3.0') < 0) {
@@ -338,7 +333,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $setup->getIdxName($setup->getTable('magefan_blog_post'), ['is_recent_posts_skip']),
                 ['is_recent_posts_skip']
             );
-
         }
 
         if (version_compare($version, '2.5.3') < 0) {
@@ -354,9 +348,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-        if (version_compare($version, '2.6.0') < 0)
-        {
-             /**
+        if (version_compare($version, '2.6.0') < 0) {
+        /**
              * Create table 'magefan_blog_comment'
              */
             $table = $setup->getConnection()->newTable(
@@ -369,14 +362,14 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'Comment ID'
             )->addColumn(
                 'parent_id',
-                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                 null,
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
                 ['nullable' => false],
                 'Parent Comment ID'
             )->addColumn(
                 'post_id',
-                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                 null,
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
                 ['nullable' => false],
                 'Post ID'
             )->addColumn(
@@ -425,14 +418,14 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'creation_time',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                 null,
-                 ['nullable' => false],
-                 'Comment Creation Time'
+                ['nullable' => false],
+                'Comment Creation Time'
             )->addColumn(
                 'update_time',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                 null,
-                 ['nullable' => false],
-                 'Comment Update Time'
+                ['nullable' => false],
+                'Comment Update Time'
             )->addIndex(
                 $installer->getIdxName('magefan_blog_comment', ['parent_id']),
                 ['parent_id']
@@ -458,9 +451,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
             $setup->getConnection()->createTable($table);
         }
 
-        if (version_compare($version, '2.6.2') < 0)
-        {
-            /* Add include in menu field into categories tabel */
+        if (version_compare($version, '2.6.2') < 0) {
+        /* Add include in menu field into categories tabel */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'include_in_menu',

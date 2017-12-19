@@ -72,7 +72,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     public function getLimit()
     {
         return $this->_scopeConfig->getValue(
-            'mfblog/post_list/posts_per_page', 
+            'mfblog/post_list/posts_per_page',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -127,5 +127,4 @@ class Toolbar extends \Magento\Framework\View\Element\Template
 
         return '';
     }
-
 }

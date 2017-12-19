@@ -14,7 +14,7 @@
 ], function (domReady, $) {
     'use strict';
 
-    var Lazyload = function(options) {
+    var Lazyload = function (options) {
 
         var that = this;
 
@@ -42,7 +42,6 @@
         function startLoading()
         {
             if (that.opt.current_page < that.opt.last_page && !that.loading) {
-
                 that.loading = true;
                 $('.mfblog-show-onload').show();
                 $('.mfblog-hide-onload').hide();
@@ -50,7 +49,7 @@
                 $.ajax({
                     "url":that.opt.page_url[that.opt.current_page+1],
                     "cache":true
-                }).success(function(data) {
+                }).success(function (data) {
                     var $html = $(data);
                     var ws = that.opt.list_wrapper;
                     var $nw = $html.find(ws);
@@ -61,7 +60,7 @@
 
                     endLoading();
 
-                }).fail(function(xhr, ajaxOptions, thrownError) {
+                }).fail(function (xhr, ajaxOptions, thrownError) {
                     console.log(thrownError);
                     endLoading();
                 });
@@ -71,7 +70,8 @@
         /**
          * On loading end
          */
-        function endLoading() {
+        function endLoading()
+        {
             that.loading = false;
             $('.mfblog-show-onload').hide();
             if (that.opt.current_page < that.opt.last_page) {
@@ -85,8 +85,8 @@
         /* If auto trigger enabled */
         if (that.opt.auto_trigger) {
             var $w = $(window);
-            $w.scroll(function() {
-                if ($w.scrollTop() + $w.height() >= $(that.opt.trigger_element).offset().top - that.opt.padding)  {
+            $w.scroll(function () {
+                if ($w.scrollTop() + $w.height() >= $(that.opt.trigger_element).offset().top - that.opt.padding) {
                     startLoading();
                 }
             });
@@ -94,7 +94,7 @@
 
         /* On trigger element click */
         if (that.opt.trigger_element) {
-            $(that.opt.trigger_element).click(function(){
+            $(that.opt.trigger_element).click(function () {
                 startLoading();
             });
         }

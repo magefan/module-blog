@@ -15,10 +15,10 @@ use Magento\Store\Model\ScopeInterface;
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList
 {
-	/**
-	 * Retrieve query
-	 * @return string
-	 */
+    /**
+     * Retrieve query
+     * @return string
+     */
     public function getQuery()
     {
         return urldecode($this->getRequest()->getParam('q'));
@@ -60,5 +60,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     {
         return __('Search "%1"', $this->getQuery());
     }
-
 }

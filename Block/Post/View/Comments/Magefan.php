@@ -70,7 +70,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments
      */
     public function getCommentBlock()
     {
-    	$k = 'comment_block';
+        $k = 'comment_block';
         if (!$this->hasData($k)) {
             $blockName = $this->getCommentBlockName();
             if ($blockName) {
@@ -94,9 +94,9 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments
      */
     public function getCommentHtml(\Magefan\Blog\Model\Comment $comment)
     {
-    	return $this->getCommentBlock()
-    		->setComment($comment)
-    		->toHtml();
+        return $this->getCommentBlock()
+            ->setComment($comment)
+            ->toHtml();
     }
 
     /**
@@ -108,9 +108,9 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments
     {
 
         $this->commentCollection = $this->getPost()->getComments()
-    		->addActiveFilter()
+            ->addActiveFilter()
             ->addFieldToFilter('parent_id', 0)
-    		/*->setPageSize($this->getNumberOfComments())*/
+            /*->setPageSize($this->getNumberOfComments())*/
             ->setOrder('creation_time', 'DESC');
     }
 
@@ -180,5 +180,4 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments
     {
         return $this->getUrl('blog/comment/post');
     }
-
 }

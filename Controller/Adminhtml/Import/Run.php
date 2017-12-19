@@ -13,7 +13,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Import;
  */
 class Run extends \Magento\Backend\App\Action
 {
-	/**
+    /**
      * Run import
      * @return \Magento\Framework\Controller\ResultInterface
      */
@@ -63,7 +63,6 @@ class Run extends \Magento\Backend\App\Action
 
             $this->_getSession()->setData('import_'.$type.'_form_data', null);
             $this->_redirect('*/*/');
-
         } catch (\Exception $e) {
             $this->messageManager->addException($e, __('Something went wrong: ').' '.$e->getMessage());
             $this->_getSession()->setData('import_'.$type.'_form_data', $data);

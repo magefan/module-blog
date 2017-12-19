@@ -31,5 +31,4 @@ class FeaturedImg extends Action
     {
         return $this->_authorization->isAllowed('Magefan_Blog::post');
     }
-
 }

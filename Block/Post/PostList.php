@@ -147,5 +147,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
         return false;
     }
-
 }

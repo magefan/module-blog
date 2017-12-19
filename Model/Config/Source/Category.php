@@ -89,5 +89,4 @@ class Category implements \Magento\Framework\Option\ArrayInterface
 
         return $s;
     }
-
 }

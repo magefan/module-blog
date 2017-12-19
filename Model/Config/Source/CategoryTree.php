@@ -85,5 +85,4 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
         }
         return $this->_childs;
     }
-
 }

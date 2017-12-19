@@ -102,7 +102,7 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             /* Prepare related posts */
             $collection = $post->getRelatedPosts();
             $items = [];
-            foreach($collection as $item) {
+            foreach ($collection as $item) {
                 $items[] = [
                     'id' => $item->getId(),
                     'title' => $item->getTitle(),
@@ -113,7 +113,7 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             /* Prepare related products */
             $collection = $post->getRelatedProducts()->addAttributeToSelect('name');
             $items = [];
-            foreach($collection as $item) {
+            foreach ($collection as $item) {
                 $items[] = [
                     'id' => $item->getId(),
                     'name' => $item->getName(),

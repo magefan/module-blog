@@ -105,5 +105,4 @@ class Tag extends \Magento\Framework\Model\AbstractModel
     {
         return $this->_url->getUrl($this, URL::CONTROLLER_TAG);
     }
-
 }

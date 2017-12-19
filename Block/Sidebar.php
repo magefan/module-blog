@@ -52,5 +52,4 @@ class Sidebar extends \Magento\Framework\View\Element\Text
             return $r;
         }
     }
-
 }

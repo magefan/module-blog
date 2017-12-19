@@ -53,7 +53,7 @@ class PostManagement extends AbstractManagement
             $type = strtolower($type);
 
             switch ($type) {
-                case 'archive' :
+                case 'archive':
                     $term = explode('-', $term);
                     if (count($term) < 2) {
                         return false;
@@ -71,16 +71,16 @@ class PostManagement extends AbstractManagement
 
                     $collection->addArchiveFilter($year, $month);
                     break;
-                case 'author' :
+                case 'author':
                     $collection->addAuthorFilter($term);
                     break;
-                case 'category' :
+                case 'category':
                     $collection->addCategoryFilter($term);
                     break;
-                case 'search' :
+                case 'search':
                     $collection->addSearchFilter($term);
                     break;
-                case 'tag' :
+                case 'tag':
                     $collection->addTagFilter($term);
                     break;
             }
@@ -103,5 +103,4 @@ class PostManagement extends AbstractManagement
             return false;
         }
     }
-
 }

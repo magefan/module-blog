@@ -78,7 +78,7 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      *
      * @return array
      */
-      public function getData()
+    public function getData()
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;
@@ -97,21 +97,21 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
             $author = $comment->getAuthor();
             switch ($comment->getAuthorType()) {
-                case \Magefan\Blog\Model\Config\Source\AuthorType::GUEST :
+                case \Magefan\Blog\Model\Config\Source\AuthorType::GUEST:
                     $this->loadedData[$comment->getId()]['author_url'] = [
                         'url' => 'mailto:' . $author->getEmail(),
                         'title' => $author->getNickname(),
                         'text' => $author->getNickname() . ' - ' . $author->getEmail() . ' (' . __('Guest')  . ')',
                     ];
                     break;
-                case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER :
+                case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER:
                     $this->loadedData[$comment->getId()]['author_url'] = [
                         'url' => $this->url->getUrl('customer/index/edit', ['id' => $comment->getCustomerId()]),
                         'title' => $author->getNickname(),
                         'text' => '#' . $comment->getCustomerId() . '. ' . $author->getNickname() . ' (' . __('Customer')  . ')',
                     ];
                     break;
-                case \Magefan\Blog\Model\Config\Source\AuthorType::ADMIN :
+                case \Magefan\Blog\Model\Config\Source\AuthorType::ADMIN:
                     $this->loadedData[$comment->getId()]['author_url'] = [
                         'url' => $this->url->getUrl('admin/user/edit', ['id' => $comment->getAdminId()]),
                         'title' => $author->getNickname(),

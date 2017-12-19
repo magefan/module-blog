@@ -20,13 +20,17 @@ class Aw extends AbstractImport
         $config = \Magento\Framework\App\ObjectManager::getInstance()
             ->get('Magento\Framework\App\DeploymentConfig');
         $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
-        $this->setData('dbhost',
+        $this->setData(
+            'dbhost',
             $config->get($pref . ConfigOptionsListConstants::KEY_HOST)
-        )->setData('uname',
+        )->setData(
+            'uname',
             $config->get($pref . ConfigOptionsListConstants::KEY_USER)
-        )->setData('pwd',
+        )->setData(
+            'pwd',
             $config->get($pref . ConfigOptionsListConstants::KEY_PASSWORD)
-        )->setData('dbname',
+        )->setData(
+            'dbname',
             $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
         );
 
@@ -41,7 +45,8 @@ class Aw extends AbstractImport
             throw new \Exception("Failed connect to magento database", 1);
         }
 
-        $_pref = mysqli_real_escape_string($con,
+        $_pref = mysqli_real_escape_string(
+            $con,
             $config->get($pref . ConfigOptionsListConstants::KEY_PREFIX)
         );
 
@@ -115,7 +120,6 @@ class Aw extends AbstractImport
         $result = $this->_mysqliQuery($sql);
 
         while ($data = mysqli_fetch_assoc($result)) {
-
             /* Find post categories*/
             $c_sql = 'SELECT cat_id as category_id FROM '.$_pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
             $c_result = $this->_mysqliQuery($c_sql);
@@ -178,6 +182,4 @@ class Aw extends AbstractImport
 
         mysqli_close($con);
     }
-
 }
-

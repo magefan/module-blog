@@ -211,7 +211,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         $childs = [];
         if (count($this)) {
-            foreach($this as $item) {
+            foreach ($this as $item) {
                 $childs[$item->getParentId()][] = $item;
             }
         }
@@ -242,10 +242,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
 
         if (isset($childs[$itemId])) {
-            foreach($childs[$itemId] as $i) {
+            foreach ($childs[$itemId] as $i) {
                 $this->_toTree($i->getId(), $childs, $tree);
             }
         }
     }
-
 }

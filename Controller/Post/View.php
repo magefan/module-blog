@@ -106,5 +106,4 @@ class View extends \Magefan\Blog\App\Action\Action
 
         return $category;
     }
-
 }

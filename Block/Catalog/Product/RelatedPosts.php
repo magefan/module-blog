@@ -66,7 +66,8 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     public function getProduct()
     {
         if (!$this->hasData('product')) {
-            $this->setData('product',
+            $this->setData(
+                'product',
                 $this->_coreRegistry->registry('current_product')
             );
         }

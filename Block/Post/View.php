@@ -86,7 +86,7 @@ class View extends AbstractPost
 
             $parentCategories = [];
             $parentCategory = $this->getPost()->getParentCategory();
-            while ($parentCategory ) {
+            while ($parentCategory) {
                 $parentCategories[] = $parentCategory;
                 $parentCategory = $parentCategory->getParentCategory();
             }
@@ -106,5 +106,4 @@ class View extends AbstractPost
             ]);
         }
     }
-
 }

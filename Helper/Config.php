@@ -53,5 +53,4 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
      * Top menu max depth config path
      */
     const XML_PATH_TOP_MENU_MAX_DEPTH = 'mfblog/top_menu/max_depth';
-
 }

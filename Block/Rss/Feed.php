@@ -30,7 +30,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTitle()
     {
-    	 return $this->_scopeConfig->getValue('mfblog/rss_feed/title', ScopeInterface::SCOPE_STORE);
+         return $this->_scopeConfig->getValue('mfblog/rss_feed/title', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -39,7 +39,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getDescription()
     {
-    	 return $this->_scopeConfig->getValue('mfblog/rss_feed/description', ScopeInterface::SCOPE_STORE);
+         return $this->_scopeConfig->getValue('mfblog/rss_feed/description', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -50,5 +50,4 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return [\Magento\Cms\Model\Page::CACHE_TAG . '_blog_rss_feed'  ];
     }
-
 }

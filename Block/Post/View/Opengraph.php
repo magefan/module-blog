@@ -78,7 +78,5 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
         if ($image) {
             return $this->stripTags($image);
         }
-
     }
-
 }

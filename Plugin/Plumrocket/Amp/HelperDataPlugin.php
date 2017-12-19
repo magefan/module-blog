@@ -29,5 +29,4 @@ class HelperDataPlugin
 
         return $allowedPages;
     }
-
 }

@@ -34,5 +34,4 @@ class Rss extends \Magento\Framework\View\Element\Template
     {
         return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_rss_widget'  ];
     }
-
 }

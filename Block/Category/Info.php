@@ -78,5 +78,4 @@ class Info extends \Magento\Framework\View\Element\Template
         }
         return $category->getData($key);
     }
-
 }

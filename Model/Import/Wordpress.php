@@ -103,7 +103,7 @@ class Wordpress extends AbstractImport
         }
         /* end*/
 
-        foreach($categories as $ct) {
+        foreach ($categories as $ct) {
             /* Final saving */
             $ct->save();
         }
@@ -152,7 +152,6 @@ class Wordpress extends AbstractImport
         $result = $this->_mysqliQuery($sql);
 
         while ($data = mysqli_fetch_assoc($result)) {
-
             /* find post categories*/
             $postCategories = [];
 
@@ -268,5 +267,4 @@ class Wordpress extends AbstractImport
 
         mysqli_close($con);
     }
-
 }

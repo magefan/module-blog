@@ -57,5 +57,4 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     {
         return $post->getShortFilteredContent();
     }
-
 }

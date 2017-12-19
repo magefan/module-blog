@@ -156,20 +156,19 @@ class Comment extends AbstractModel
     public function getAuthor()
     {
         if (null === $this->author) {
-
             $this->author = new \Magento\Framework\DataObject;
             $this->author->setType(
                 $this->getAuthorType()
             );
 
             switch ($this->getAuthorType()) {
-                case \Magefan\Blog\Model\Config\Source\AuthorType::GUEST :
+                case \Magefan\Blog\Model\Config\Source\AuthorType::GUEST:
                     $this->author->setData([
                         'nickname' => $this->getAuthorNickname(),
                         'email' => $this->getAuthorEmail(),
                     ]);
                     break;
-                case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER :
+                case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER:
                     $customer = $this->customerFactory->create();
                     $customer->load($this->getCustomerId());
                     $this->author->setData([
@@ -178,7 +177,7 @@ class Comment extends AbstractModel
                         'customer' => $customer,
                     ]);
                     break;
-                case \Magefan\Blog\Model\Config\Source\AuthorType::ADMIN :
+                case \Magefan\Blog\Model\Config\Source\AuthorType::ADMIN:
                     $admin = $this->userFactory->create();
                     $admin->load($this->getAdminId());
                     $this->author->setData([
@@ -188,7 +187,6 @@ class Comment extends AbstractModel
                     ]);
                     break;
             }
-
         }
 
         return $this->author;

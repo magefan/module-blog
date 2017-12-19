@@ -87,7 +87,7 @@ class AdminNotificationFeed extends \Magento\AdminNotification\Model\Feed
         $url = $this->_feedUrl . 'domain/' . urlencode($domain);
 
         $modulesParams = [];
-        foreach($this->getMagefanModules() as $key => $module) {
+        foreach ($this->getMagefanModules() as $key => $module) {
             $key = str_replace('Magefan_', '', $key);
             $modulesParams[] = $key . ',' . $module['setup_version'];
         }
@@ -107,8 +107,8 @@ class AdminNotificationFeed extends \Magento\AdminNotification\Model\Feed
     protected function getMagefanModules()
     {
         $modules = [];
-        foreach($this->_moduleList->getAll() as $moduleName => $module) {
-            if ( strpos($moduleName, 'Magefan_') !== false && $this->_moduleManager->isEnabled($moduleName) ) {
+        foreach ($this->_moduleList->getAll() as $moduleName => $module) {
+            if (strpos($moduleName, 'Magefan_') !== false && $this->_moduleManager->isEnabled($moduleName)) {
                 $modules[$moduleName] = $module;
             }
         }
@@ -166,5 +166,4 @@ class AdminNotificationFeed extends \Magento\AdminNotification\Model\Feed
         $this->_cacheManager->save(time(), 'magefan_admin_notifications_lastcheck');
         return $this;
     }
-
 }

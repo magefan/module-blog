@@ -14,9 +14,13 @@ use Magento\Store\Model\ScopeInterface;
  */
 
 if (class_exists('\Plumrocket\Amp\Block\Page\Head\Og\AbstractOg')) {
-    class PostIntermediate extends \Plumrocket\Amp\Block\Page\Head\Og\AbstractOg {}
+    class PostIntermediate extends \Plumrocket\Amp\Block\Page\Head\Og\AbstractOg
+    {
+    }
 } else {
-    class PostIntermediate extends \Magento\Framework\View\Element\AbstractBlock {}
+    class PostIntermediate extends \Magento\Framework\View\Element\AbstractBlock
+    {
+    }
 }
 
 class Post extends PostIntermediate
@@ -64,7 +68,5 @@ class Post extends PostIntermediate
         if ($image) {
             return $this->stripTags($image);
         }
-
     }
-
 }

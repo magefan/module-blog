@@ -237,7 +237,8 @@ abstract class Actions extends \Magento\Backend\App\Action
         } catch (\Exception $e) {
             $this->messageManager->addException(
                 $e,
-                __('Something went wrong while saving this %1. %2',
+                __(
+                    'Something went wrong while saving this %1. %2',
                     strtolower($model->getOwnTitle()),
                     $e->getMessage()
                 )
@@ -267,7 +268,6 @@ abstract class Actions extends \Magento\Backend\App\Action
                 $this->_redirect('*/*');
             }
         }
-
     }
 
     /**
@@ -286,10 +286,11 @@ abstract class Actions extends \Magento\Backend\App\Action
 
             $this->messageManager->addSuccess(__('%1 has been duplicated.', $model->getOwnTitle()));
             $this->_redirect('*/*/edit', [$this->_idKey => $model->getId()]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->messageManager->addException(
                 $e,
-                __('Something went wrong while saving this %1. %2',
+                __(
+                    'Something went wrong while saving this %1. %2',
                     strtolower($model->getOwnTitle()),
                     $e->getMessage()
                 )
@@ -302,25 +303,33 @@ abstract class Actions extends \Magento\Backend\App\Action
      * Before model Save action
      * @return void
      */
-    protected function _beforeSave($model, $request) {}
+    protected function _beforeSave($model, $request)
+    {
+    }
 
     /**
      * After model action
      * @return void
      */
-    protected function _afterSave($model, $request) {}
+    protected function _afterSave($model, $request)
+    {
+    }
 
     /**
      * Before action
      * @return void
      */
-    protected function _beforeAction() {}
+    protected function _beforeAction()
+    {
+    }
 
     /**
      * After action
      * @return void
      */
-    protected function _afterAction() {}
+    protected function _afterAction()
+    {
+    }
 
     /**
      * Delete action
@@ -336,7 +345,7 @@ abstract class Actions extends \Magento\Backend\App\Action
 
         $error = false;
         try {
-            foreach($ids as $id) {
+            foreach ($ids as $id) {
                 $this->_objectManager->create($this->_modelClass)->setId($id)->delete();
             }
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
@@ -346,7 +355,8 @@ abstract class Actions extends \Magento\Backend\App\Action
             $error = true;
             $this->messageManager->addException(
                 $e,
-                __("We can't delete %1 right now. %2",
+                __(
+                    "We can't delete %1 right now. %2",
                     strtolower($this->_getModel(false)->getOwnTitle()),
                     $e->getMessage()
                 )
@@ -379,7 +389,6 @@ abstract class Actions extends \Magento\Backend\App\Action
         $error = false;
 
         try {
-
             $status = $this->getRequest()->getParam('status');
             $statusFieldName = $this->_statusField;
 
@@ -391,13 +400,12 @@ abstract class Actions extends \Magento\Backend\App\Action
                 throw new \Exception(__('Status Field Name is not specified.'));
             }
 
-            foreach($ids as $id) {
+            foreach ($ids as $id) {
                 $this->_objectManager->create($this->_modelClass)
                     ->load($id)
                     ->setData($this->_statusField, $status)
                     ->save();
             }
-
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $error = true;
             $this->messageManager->addError($e->getMessage());
@@ -405,7 +413,8 @@ abstract class Actions extends \Magento\Backend\App\Action
             $error = true;
             $this->messageManager->addException(
                 $e,
-                __("We can't change status of %1 right now. %2",
+                __(
+                    "We can't change status of %1 right now. %2",
                     strtolower($model->getOwnTitle()),
                     $e->getMessage()
                 )
@@ -419,7 +428,6 @@ abstract class Actions extends \Magento\Backend\App\Action
         }
 
         $this->_redirect('*/*');
-
     }
 
     /**
@@ -501,5 +509,4 @@ abstract class Actions extends \Magento\Backend\App\Action
         }
         return $this->_model;
     }
-
 }

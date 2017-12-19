@@ -87,7 +87,8 @@ class Notification
 
         if ($pendignComment->getId()) {
             $this->messageManager->addNotice(
-                __('Some blog comments are pending for approval. <a href="%1">Manage Comments</a>.',
+                __(
+                    'Some blog comments are pending for approval. <a href="%1">Manage Comments</a>.',
                     $this->url->getUrl('blog/comment/index')
                 )
             );

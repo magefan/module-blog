@@ -121,5 +121,4 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         return preg_match('/^[a-z0-9][a-z0-9_\/-]+(\.[a-z0-9_-]+)?$/', $object->getData('identifier'));
     }
-
 }

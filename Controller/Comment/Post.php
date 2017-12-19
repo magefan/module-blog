@@ -129,7 +129,7 @@ class Post extends \Magefan\Blog\App\Action\Action
 
         try {
             $post = $this->initPost();
-            if (!$post)  {
+            if (!$post) {
                 throw new \Exception(__('You cannot post comment. Blog post is not longer exist.'), 1);
             }
 
@@ -198,5 +198,4 @@ class Post extends \Magefan\Blog\App\Action\Action
 
         return $comment;
     }
-
 }

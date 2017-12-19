@@ -43,6 +43,4 @@ class CategoryPath extends CategoryTree
 
         return $options;
     }
-
-
 }

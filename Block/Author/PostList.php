@@ -59,5 +59,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
         return parent::_prepareLayout();
     }
-
 }

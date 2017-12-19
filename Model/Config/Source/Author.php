@@ -71,6 +71,4 @@ class Author implements \Magento\Framework\Option\ArrayInterface
         }
         return $array;
     }
-
-
 }

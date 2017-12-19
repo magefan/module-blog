@@ -64,5 +64,4 @@ class Comment extends \Magento\Framework\View\Element\Template
             ScopeInterface::SCOPE_STORE
         );
     }
-
 }

@@ -76,7 +76,6 @@ class PageIdentifierGenerator
 
         $number = 1;
         while (true) {
-
             $finalIdentifier = $identifier . ($number > 1 ? '-'.$number : '');
 
             $postId = $post->checkIdentifier($finalIdentifier, $object->getStoreId());

@@ -25,5 +25,4 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         parent::_construct();
         $this->_init('Magefan\Blog\Model\Tag', 'Magefan\Blog\Model\ResourceModel\Tag');
     }
-
 }

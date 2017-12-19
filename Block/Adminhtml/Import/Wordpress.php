@@ -33,9 +33,11 @@ class Wordpress extends \Magento\Backend\Block\Widget\Form\Container
         if (!$this->_isAllowedAction('Magefan_Blog::import')) {
             $this->buttonList->remove('save');
         } else {
-          $this->updateButton(
-              'save', 'label', __('Start Import')
-          );
+            $this->updateButton(
+                'save',
+                'label',
+                __('Start Import')
+            );
         }
 
         $this->buttonList->remove('delete');
@@ -62,5 +64,4 @@ class Wordpress extends \Magento\Backend\Block\Widget\Form\Container
     {
         return $this->getUrl('*/*/run', ['_current' => true]);
     }
-
 }

@@ -47,7 +47,7 @@ class Image extends AbstractHelper
 
     public function resize($width, $height = null)
     {
-        if ($this->_baseFile){
+        if ($this->_baseFile) {
             $path = 'blog/cache/' . $width . 'x' . $height;
             $this->_newFile = $path. '/' . $this->_baseFile;
             if (true || !$this->fileExists($this->_newFile)) {
@@ -90,10 +90,10 @@ class Image extends AbstractHelper
     public function __toString()
     {
         $url = "";
-        if ($this->_baseFile){
+        if ($this->_baseFile) {
             $url = $this->_storeManager->getStore()->getBaseUrl(
-                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                ) . $this->_newFile;
+                \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+            ) . $this->_newFile;
         }
         return $url;
     }

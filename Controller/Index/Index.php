@@ -26,5 +26,4 @@ class Index extends \Magefan\Blog\App\Action\Action
         $this->_view->loadLayout();
         $this->_view->renderLayout();
     }
-
 }

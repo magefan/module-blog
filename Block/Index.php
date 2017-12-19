@@ -105,5 +105,4 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             );
         }
     }
-
 }

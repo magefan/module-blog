@@ -59,5 +59,4 @@ class InstallData implements InstallDataInterface
 
         $this->_postFactory->create()->setData($data)->save();
     }
-
 }

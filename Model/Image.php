@@ -83,5 +83,4 @@ class Image extends \Magento\Framework\DataObject
     {
         return $this->getUrl();
     }
-
 }

@@ -15,7 +15,7 @@ class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
 {
     public function execute()
     {
-    	try {
+        try {
             $post = $this->_getModel();
             if (!$post->getId()) {
                 throw new \Exception("Item is not longer exist.", 1);
@@ -28,7 +28,6 @@ class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
             );
 
             $this->getResponse()->setRedirect($redirectUrl);
-
         } catch (\Exception $e) {
             $this->messageManager->addException(
                 $e,

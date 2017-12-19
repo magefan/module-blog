@@ -30,5 +30,4 @@ class Feed extends \Magefan\Blog\App\Action\Action
                 $this->_view->getLayout()->getBlock('blog.rss.feed')->toHtml()
             );
     }
-
 }

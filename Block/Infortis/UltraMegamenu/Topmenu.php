@@ -33,7 +33,6 @@ class Topmenu extends \Magento\Framework\View\Element\Text
     ) {
         $this->menuHelper = $menuHelper;
         parent::__construct($context, $data);
-
     }
 
     /**
@@ -47,9 +46,9 @@ class Topmenu extends \Magento\Framework\View\Element\Text
 
         $html = '';
         if ($blogNode) {
-
             $max_level = $this->_scopeConfig->getValue(
-                Config::XML_PATH_TOP_MENU_MAX_DEPTH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                Config::XML_PATH_TOP_MENU_MAX_DEPTH,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
 
             $children = $blogNode->getChildren();
@@ -60,9 +59,9 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             <li class="nav-item level0 level-top classic ' . ($active ? 'active' : '') . ' ' . ($hasChildren ? 'parent nav-item--only-subcategories' : '') . ' ">
                 <a class="level-top" href="' . $blogNode->getUrl() . '" title="' . $this->escapeHtml($blogNode->getName()) . '">
                     <span>' . $this->escapeHtml($blogNode->getName()) . '</span>';
-                    if ($hasChildren) {
-                        $html .= '<span class="caret"></span>';
-                    }
+            if ($hasChildren) {
+                $html .= '<span class="caret"></span>';
+            }
             $html .= '</a>';
             if ($hasChildren) {
                 $html .= '<span class="opener"></span>';
@@ -84,13 +83,12 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         $html = '';
 
         if (!$max_level || $max_level >= $level) {
-
             $html .= '<ul class="level0 nav-submenu nav-panel--dropdown nav-panel">';
             foreach ($children as $child) {
                 $subChildren = $child->getChildren();
                 $html .= '<li class="nav-item level' . $level . ' classic">
                     <a href="' . $child->getUrl() . '"><span>' . $this->escapeHtml($child->getName()) . '</span></a>
-                    ' . (count($subChildren) > 0 ? $this->getSubmenuItemsHtml($subChildren, $level+1, $max_level ) : '') . '
+                    ' . (count($subChildren) > 0 ? $this->getSubmenuItemsHtml($subChildren, $level+1, $max_level) : '') . '
                 </li>';
             }
             $html .= '</ul>';
@@ -98,5 +96,4 @@ class Topmenu extends \Magento\Framework\View\Element\Text
 
         return $html;
     }
-
 }

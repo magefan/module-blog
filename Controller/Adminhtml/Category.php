@@ -13,10 +13,10 @@ namespace Magefan\Blog\Controller\Adminhtml;
  */
 class Category extends Actions
 {
-	/**
-	 * Form session key
-	 * @var string
-	 */
+    /**
+     * Form session key
+     * @var string
+     */
     protected $_formSessionKey  = 'blog_category_form_data';
 
     /**

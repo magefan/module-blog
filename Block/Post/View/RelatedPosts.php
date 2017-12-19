@@ -55,7 +55,8 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     public function getPost()
     {
         if (!$this->hasData('post')) {
-            $this->setData('post',
+            $this->setData(
+                'post',
                 $this->_coreRegistry->registry('current_blog_post')
             );
         }

@@ -33,7 +33,6 @@ class Topmenu extends \Magento\Framework\View\Element\Text
     ) {
         $this->menuHelper = $menuHelper;
         parent::__construct($context, $data);
-
     }
 
     /**
@@ -49,7 +48,8 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         $sw_menu_cat_columns = $this->getData('sw_menu_cat_columns') ?: 4;
         $sw_menu_static_width = $this->getData('sw_menu_static_width');
         $max_level = $this->_scopeConfig->getValue(
-            Config::XML_PATH_TOP_MENU_MAX_DEPTH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            Config::XML_PATH_TOP_MENU_MAX_DEPTH,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
         $custom_style = '';
@@ -68,9 +68,9 @@ class Topmenu extends \Magento\Framework\View\Element\Text
 
             $html .= '
                 <li class="ui-menu-item level0 ' . $menu_type . ' '  . ($hasChildren ? 'parent' : '')  . '">';
-                if ($hasChildren) {
-                    $html .= '<div class="open-children-toggle"></div>';
-                }
+            if ($hasChildren) {
+                $html .= '<div class="open-children-toggle"></div>';
+            }
                 $html .= '<a href="' . $blogNode->getUrl() . '" class="level-top"><span>' . $this->escapeHtml($blogNode->getName()) . '</span></a>';
 
             if ($hasChildren) {
@@ -87,7 +87,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         return $html;
     }
 
-    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0, $column_width=12, $menu_type = 'fullwidth', $columns = null)
+    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0, $column_width = 12, $menu_type = 'fullwidth', $columns = null)
     {
         $html = '';
 
@@ -102,8 +102,9 @@ class Topmenu extends \Magento\Framework\View\Element\Text
                 $sub_children = $child->getChildren();
 
                 $item_class = 'level'.$level.' ';
-                if (count($sub_children) > 0)
+                if (count($sub_children) > 0) {
                     $item_class .= 'parent ';
+                }
                 $html .= '<li class="ui-menu-item '.$item_class.'">';
                 if (count($sub_children) > 0) {
                     $html .= '<div class="open-children-toggle"></div>';
@@ -123,5 +124,4 @@ class Topmenu extends \Magento\Framework\View\Element\Text
 
         return $html;
     }
-
 }

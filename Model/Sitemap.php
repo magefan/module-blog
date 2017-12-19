@@ -28,8 +28,8 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'changefreq' => 'weekly',
                 'priority' => '0.25',
                 'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
-                        'Magefan\Blog\Model\Category'
-                    )->getCollection($this->getStoreId())
+                    'Magefan\Blog\Model\Category'
+                )->getCollection($this->getStoreId())
                     ->addStoreFilter($this->getStoreId())
                     ->addActiveFilter(),
             ]
@@ -40,8 +40,8 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'changefreq' => 'weekly',
                 'priority' => '0.25',
                 'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
-                        'Magefan\Blog\Model\Post'
-                    )->getCollection($this->getStoreId())
+                    'Magefan\Blog\Model\Post'
+                )->getCollection($this->getStoreId())
                     ->addStoreFilter($this->getStoreId())
                     ->addActiveFilter(),
             ]
@@ -56,5 +56,4 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
     {
         return $this;
     }
-
 }

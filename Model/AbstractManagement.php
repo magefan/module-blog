@@ -17,7 +17,7 @@ abstract class AbstractManagement implements ManagementInterface
 {
     /**
      * @var Magento\Framework\Model\AbstractModel
-    */
+     */
     protected $_itemFactory;
 
     /**
@@ -126,6 +126,4 @@ abstract class AbstractManagement implements ManagementInterface
             return false;
         }
     }
-
-
 }

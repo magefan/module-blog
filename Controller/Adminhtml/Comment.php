@@ -13,10 +13,10 @@ namespace Magefan\Blog\Controller\Adminhtml;
  */
 class Comment extends Actions
 {
-	/**
-	 * Form session key
-	 * @var string
-	 */
+    /**
+     * Form session key
+     * @var string
+     */
     protected $_formSessionKey  = 'blog_comment_form_data';
 
     /**
@@ -42,5 +42,4 @@ class Comment extends Actions
      * @var string
      */
     protected $_statusField     = 'status';
-
 }

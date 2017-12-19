@@ -72,5 +72,4 @@ class Tag implements \Magento\Framework\Option\ArrayInterface
         }
         return $array;
     }
-
 }

@@ -197,7 +197,8 @@ class Category extends \Magento\Framework\Model\AbstractModel
     {
         $k = 'parent_ids';
         if (!$this->hasData($k)) {
-            $this->setData($k,
+            $this->setData(
+                $k,
                 $this->getPath() ? explode('/', $this->getPath()) : []
             );
         }
@@ -263,18 +264,18 @@ class Category extends \Magento\Framework\Model\AbstractModel
     {
         $k = 'children_ids';
         if (!$this->hasData($k)) {
-
             $categories = \Magento\Framework\App\ObjectManager::getInstance()
                 ->create($this->_collectionName);
 
             $ids = [];
-            foreach($categories as $category) {
+            foreach ($categories as $category) {
                 if ($category->isParent($this)) {
                     $ids[] = $category->getId();
                 }
             }
 
-            $this->setData($k,
+            $this->setData(
+                $k,
                 $ids
             );
         }
@@ -379,7 +380,6 @@ class Category extends \Magento\Framework\Model\AbstractModel
     {
         $key = 'posts_count';
         if (!$this->hasData($key)) {
-
             $posts = $this->postCollectionFactory->create()
                 ->addActiveFilter()
                 ->addStoreFilter($this->getStoreId())
@@ -404,7 +404,9 @@ class Category extends \Magento\Framework\Model\AbstractModel
         ];
 
         foreach ($keys as $key) {
-            $method = 'get' . str_replace('_', '',
+            $method = 'get' . str_replace(
+                '_',
+                '',
                 ucwords($key, '_')
             );
             $this->$method();
@@ -427,5 +429,4 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
         return $object->save();
     }
-
 }

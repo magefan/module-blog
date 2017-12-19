@@ -83,7 +83,7 @@ class Author extends \Magento\Framework\Model\AbstractModel
     public function checkIdentifier($identifier)
     {
         $authors = $this->getCollection();
-        foreach($authors as $author) {
+        foreach ($authors as $author) {
             if ($author->getIdentifier() == $identifier) {
                 return $author->getId();
             }
@@ -120,5 +120,4 @@ class Author extends \Magento\Framework\Model\AbstractModel
     {
         return $this->getFirstname() . $separator . $this->getLastname();
     }
-
 }

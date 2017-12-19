@@ -112,5 +112,4 @@ class Page extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $resultPage;
     }
-
 }

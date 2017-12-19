@@ -28,5 +28,4 @@ class CategoryManagement extends AbstractManagement
     ) {
         $this->_itemFactory = $categoryFactory;
     }
-
 }

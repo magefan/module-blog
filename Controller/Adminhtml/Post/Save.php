@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Controller\Adminhtml\Post;
 
 use Magefan\Blog\Model\Post;
+
 /**
  * Blog post save controller
  */
@@ -81,7 +82,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             usort($images, function ($imageA, $imageB) {
                 return ($imageA['position'] < $imageB['position']) ? -1 : 1;
             });
-            $gallery = array();
+            $gallery = [];
             foreach ($images as $image) {
                 if (empty($image['removed'])) {
                     if (!empty($image['value_id'])) {
@@ -97,7 +98,6 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             }
 
             $model->setGalleryImages($gallery);
-
         }
     }
 
@@ -128,6 +128,4 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         return $data;
     }
-
-
 }

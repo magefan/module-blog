@@ -53,5 +53,4 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_featured_posts_widget_' . $this->getPostIdsConfigValue() ];
     }
-
 }

@@ -11,7 +11,8 @@ define([
 ], function (_, Select) {
     'use strict';
 
-    function flatten(a, s, cr) {
+    function flatten(a, s, cr)
+    {
         var i = 0, c;
         a = _.compact(a);
         cr = cr || [];

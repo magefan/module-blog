@@ -21,7 +21,8 @@ trait Widget
     {
         if (!$this->hasData('sort_order')) {
             $this->setData('sort_order', $this->_scopeConfig->getValue(
-                'mfblog/sidebar/'.$this->_widgetKey.'/sort_order', \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                'mfblog/sidebar/'.$this->_widgetKey.'/sort_order',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             ));
         }
         return (int) $this->getData('sort_order');
@@ -35,7 +36,8 @@ trait Widget
     protected function _toHtml()
     {
         if ($this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/enabled', \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            'mfblog/sidebar/'.$this->_widgetKey.'/enabled',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )) {
             return parent::_toHtml();
         }

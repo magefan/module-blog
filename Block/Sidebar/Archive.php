@@ -49,7 +49,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
         if (is_null($this->_months)) {
             $this->_months = [];
             $this->_preparePostCollection();
-            foreach($this->_postCollection as $post) {
+            foreach ($this->_postCollection as $post) {
                 $time = strtotime($post->getData('publish_time'));
                 $this->_months[date('Y-m', $time)] = $time;
             }
@@ -100,5 +100,4 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_archive_widget'];
     }
-
 }

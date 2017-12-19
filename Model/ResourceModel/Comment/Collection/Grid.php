@@ -105,13 +105,9 @@ class Grid extends Collection
                     $item->setStoreId($this->_storeId);
                 }
             }
-
         }
 
         $this->_previewFlag = false;
         return parent::_afterLoad();
     }
-
-
-
 }

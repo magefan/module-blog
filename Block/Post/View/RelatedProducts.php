@@ -14,8 +14,7 @@ use Magento\Framework\View\Element\AbstractBlock;
 /**
  * Blog post related products block
  */
-class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
-    implements \Magento\Framework\DataObject\IdentityInterface
+class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
@@ -50,7 +49,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     ) {
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_moduleManager = $moduleManager;
-        parent::__construct($context, $data );
+        parent::__construct($context, $data);
     }
 
     /**
@@ -119,7 +118,8 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     public function getPost()
     {
         if (!$this->hasData('post')) {
-            $this->setData('post',
+            $this->setData(
+                'post',
                 $this->_coreRegistry->registry('current_blog_post')
             );
         }

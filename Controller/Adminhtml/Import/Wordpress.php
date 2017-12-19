@@ -13,7 +13,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Import;
  */
 class Wordpress extends \Magento\Backend\App\Action
 {
-	/**
+    /**
      * Prepare wordpress import
      * @return \Magento\Framework\Controller\ResultInterface
      */

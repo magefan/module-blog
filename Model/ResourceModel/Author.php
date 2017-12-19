@@ -23,5 +23,4 @@ class Author extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $this->_init('admin_user', 'user_id');
     }
-
 }

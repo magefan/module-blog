@@ -31,5 +31,4 @@ class SourcePagePlugin
 
         return $pages;
     }
-
 }

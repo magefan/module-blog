@@ -253,5 +253,4 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         return $adapter->fetchCol($select);
     }
-
 }

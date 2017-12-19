@@ -23,7 +23,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public static function getTranslatedDate($format, $dateOrTime)
     {
-    	$time = is_numeric($dateOrTime) ? $dateOrTime : strtotime($dateOrTime);
+        $time = is_numeric($dateOrTime) ? $dateOrTime : strtotime($dateOrTime);
         $month = ['F' => '%1', 'M' => '%2'];
 
         foreach ($month as $from => $to) {

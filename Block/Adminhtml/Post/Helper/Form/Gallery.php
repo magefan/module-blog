@@ -90,11 +90,11 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
      */
     public function getImages()
     {
-        $result = array();
+        $result = [];
         $gallery = $this->registry->registry('current_model')->getGalleryImages();
 
         if (count($gallery)) {
-            $result['images'] = array();
+            $result['images'] = [];
             $position = 1;
             foreach ($gallery as $image) {
                 $result['images'][] = [

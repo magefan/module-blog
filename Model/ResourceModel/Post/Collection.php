@@ -142,8 +142,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $postIds = explode(',', $postIds);
             foreach ($postIds as $key => $id) {
                 $id = trim($id);
-                  if (!$id) {
-                  unset($postIds[$key]);
+                if (!$id) {
+                    unset($postIds[$key]);
                 }
             }
         }
@@ -346,7 +346,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $result = $connection->fetchAll($select);
                 if ($result) {
                     $data = [];
-                    foreach($result as $item) {
+                    foreach ($result as $item) {
                         $data[$item['post_id']][] = $item[$key . '_id'];
                     }
 
@@ -371,7 +371,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _renderFiltersBefore()
     {
-        foreach(['store', 'category', 'tag'] as $key) {
+        foreach (['store', 'category', 'tag'] as $key) {
             if ($this->getFilter($key)) {
                 $this->getSelect()->join(
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],
@@ -384,5 +384,4 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         parent::_renderFiltersBefore();
     }
-
 }

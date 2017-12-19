@@ -10,7 +10,7 @@ namespace Magefan\Blog\Api;
 
 interface PostManagementInterface extends ManagementInterface
 {
-	/**
+    /**
      * Retrieve list of post by page type, term, store, etc
      *
      * @param  string $type

@@ -78,7 +78,8 @@ class Categories extends \Magento\Framework\View\Element\Template
         $key = 'show_posts_count';
         if (!$this->hasData($key)) {
             $this->setData($key, (bool)$this->_scopeConfig->getValue(
-                'mfblog/sidebar/'.$this->_widgetKey.'/show_posts_count', ScopeInterface::SCOPE_STORE
+                'mfblog/sidebar/'.$this->_widgetKey.'/show_posts_count',
+                ScopeInterface::SCOPE_STORE
             ));
         }
         return $this->getData($key);
@@ -102,7 +103,8 @@ class Categories extends \Magento\Framework\View\Element\Template
     public function maxDepth()
     {
         $maxDepth = $this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/max_depth', ScopeInterface::SCOPE_STORE
+            'mfblog/sidebar/'.$this->_widgetKey.'/max_depth',
+            ScopeInterface::SCOPE_STORE
         );
         
         return (int)$maxDepth;

@@ -62,7 +62,7 @@ class CommetType implements \Magento\Framework\Option\ArrayInterface
     public function toArray()
     {
         $array = [];
-        foreach($this->toOptionArray() as $item) {
+        foreach ($this->toOptionArray() as $item) {
             $array[$item['value']] = $item['label'];
         }
         return $array;

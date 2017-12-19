@@ -85,7 +85,8 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     public function getPost()
     {
         if (!$this->hasData('post')) {
-            $this->setData('post',
+            $this->setData(
+                'post',
                 $this->_coreRegistry->registry('current_blog_post')
             );
         }
@@ -145,5 +146,4 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
 
         return $this->getData($k)->setPost($this->getPost());
     }
-
 }

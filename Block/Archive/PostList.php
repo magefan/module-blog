@@ -78,8 +78,8 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $time = strtotime($this->getYear().'-'.$this->getMonth().'-01');
         return sprintf(
             __('Monthly Archives: %s %s'),
-            __(date('F', $time)), date('Y', $time)
+            __(date('F', $time)),
+            date('Y', $time)
         );
     }
-
 }

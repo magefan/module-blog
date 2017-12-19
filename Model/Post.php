@@ -310,7 +310,8 @@ class Post extends \Magento\Framework\Model\AbstractModel
      */
     public function setGalleryImages(array $images)
     {
-        $this->setData('media_gallery',
+        $this->setData(
+            'media_gallery',
             implode(
                 self::GALLERY_IMAGES_SEPARATOR,
                 $images
@@ -331,7 +332,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getGalleryImages()
     {
         if (!$this->hasData('gallery_images')) {
-            $images = array();
+            $images = [];
             $gallery = explode(
                 self::GALLERY_IMAGES_SEPARATOR,
                 $this->getData('media_gallery')
@@ -436,7 +437,8 @@ class Post extends \Magento\Framework\Model\AbstractModel
             $this->setData($key, $content);
         }
 
-        return $this->getData($key);;
+        return $this->getData($key);
+        ;
     }
 
     /**
@@ -512,7 +514,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getOgType()
     {
         $type = $this->getData('og_type');
-        if (!$type)  {
+        if (!$type) {
             $type = 'article';
         }
 
@@ -526,7 +528,6 @@ class Post extends \Magento\Framework\Model\AbstractModel
     public function getOgImage()
     {
         if (!$this->hasData('og_image')) {
-
             if ($file = $this->getData('og_img')) {
                 $image = $this->_url->getMediaUrl($file);
             } else {
@@ -793,7 +794,9 @@ class Post extends \Magento\Framework\Model\AbstractModel
         ];
 
         foreach ($keys as $key) {
-            $method = 'get' . str_replace('_', '',
+            $method = 'get' . str_replace(
+                '_',
+                '',
                 ucwords($key, '_')
             );
             $this->$method();
@@ -844,5 +847,4 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
         return $this->getData('secret');
     }
-
 }

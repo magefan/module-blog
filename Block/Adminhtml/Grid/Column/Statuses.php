@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column;
 
 /**
- * Admin blog grid statuses 
+ * Admin blog grid statuses
  */
 class Statuses extends \Magento\Backend\Block\Widget\Grid\Column
 {

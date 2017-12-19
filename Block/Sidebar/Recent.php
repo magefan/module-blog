@@ -42,5 +42,4 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_recent_posts_widget'  ];
     }
-
 }

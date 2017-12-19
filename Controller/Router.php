@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Controller;
 
 use \Magefan\Blog\Model\Url;
+
 /**
  * Blog Controller Router
  */
@@ -191,7 +192,6 @@ class Router implements \Magento\Framework\App\RouterInterface
                 ->setActionName('view')
                 ->setParam('id', $tagId);
         } else {
-
             $controllerName = null;
             if (Url::PERMALINK_TYPE_DEFAULT == $this->_url->getPermalinkType()) {
                 $controllerName = $this->_url->getControllerName($pathInfo[1]);
@@ -202,7 +202,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             $pathInfoCount = count($pathInfo);
 
             if ($pathInfoCount == 1) {
-                if ( (!$controllerName || $controllerName == Url::CONTROLLER_ARCHIVE)
+                if ((!$controllerName || $controllerName == Url::CONTROLLER_ARCHIVE)
                     && $this->_isArchiveIdentifier($pathInfo[0])
                 ) {
                     $request
@@ -210,8 +210,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                         ->setControllerName(Url::CONTROLLER_ARCHIVE)
                         ->setActionName('view')
                         ->setParam('date', $pathInfo[0]);
-
-                } elseif ( (!$controllerName || $controllerName == Url::CONTROLLER_POST)
+                } elseif ((!$controllerName || $controllerName == Url::CONTROLLER_POST)
                     && $postId = $this->_getPostId($pathInfo[0])
                 ) {
                     $request
@@ -219,8 +218,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                         ->setControllerName(Url::CONTROLLER_POST)
                         ->setActionName('view')
                         ->setParam('id', $postId);
-
-                } elseif ( (!$controllerName || $controllerName == Url::CONTROLLER_CATEGORY)
+                } elseif ((!$controllerName || $controllerName == Url::CONTROLLER_CATEGORY)
                     && $categoryId = $this->_getCategoryId($pathInfo[0])
                 ) {
                     $request
@@ -230,19 +228,18 @@ class Router implements \Magento\Framework\App\RouterInterface
                         ->setParam('id', $categoryId);
                 }
             } elseif ($pathInfoCount > 1) {
-
                 $postId = 0;
                 $categoryId = 0;
                 $first = true;
                 $pathExist = true;
 
                 for ($i = $pathInfoCount - 1; $i >= 0; $i--) {
-                    if ( (!$controllerName || $controllerName == Url::CONTROLLER_POST)
+                    if ((!$controllerName || $controllerName == Url::CONTROLLER_POST)
                         && $first
                         && ($postId = $this->_getPostId($pathInfo[$i]))
                     ) {
                         //we have postId
-                    } elseif ( (!$controllerName || !$first || $controllerName == Url::CONTROLLER_CATEGORY)
+                    } elseif ((!$controllerName || !$first || $controllerName == Url::CONTROLLER_CATEGORY)
                         && ($cid = $this->_getCategoryId($pathInfo[$i], $first))
                     ) {
                         if (!$categoryId) {
@@ -276,11 +273,9 @@ class Router implements \Magento\Framework\App\RouterInterface
                             ->setActionName('view')
                             ->setParam('id', $categoryId);
                     }
-
-                } elseif ( (!$controllerName || $controllerName == Url::CONTROLLER_POST)
+                } elseif ((!$controllerName || $controllerName == Url::CONTROLLER_POST)
                     && $postId = $this->_getPostId(implode('/', $pathInfo))
                 ) {
-
                     $request
                         ->setModuleName('blog')
                         ->setControllerName(Url::CONTROLLER_POST)
@@ -427,5 +422,4 @@ class Router implements \Magento\Framework\App\RouterInterface
             && is_numeric($info[0])
             && is_numeric($info[1]);
     }
-
 }

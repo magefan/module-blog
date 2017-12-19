@@ -115,7 +115,7 @@ class Url
      */
     public function getControllerName($route, $skip = true)
     {
-        foreach([
+        foreach ([
             self::CONTROLLER_POST,
             self::CONTROLLER_CATEGORY,
             self::CONTROLLER_ARCHIVE,
@@ -212,10 +212,10 @@ class Url
     {
         $identifier = $this->getExpandedItentifier($identifier);
         switch ($this->getPermalinkType()) {
-            case self::PERMALINK_TYPE_DEFAULT :
+            case self::PERMALINK_TYPE_DEFAULT:
                 $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
                 break;
-            case self::PERMALINK_TYPE_SHORT :
+            case self::PERMALINK_TYPE_SHORT:
                 if ($controllerName == self::CONTROLLER_SEARCH
                     || $controllerName == self::CONTROLLER_AUTHOR
                     || $controllerName == self::CONTROLLER_TAG
@@ -268,7 +268,7 @@ class Url
         if (in_array($controllerName, [self::CONTROLLER_POST, self::CONTROLLER_CATEGORY])) {
             if ($sufix = $this->getUrlSufix($controllerName)) {
                 $char = false;
-                foreach(['#', '?'] as $ch) {
+                foreach (['#', '?'] as $ch) {
                     if (false !== strpos($url, $ch)) {
                         $char = $ch;
                     }
@@ -341,6 +341,4 @@ class Url
             $this->storeId
         );
     }
-
-
 }

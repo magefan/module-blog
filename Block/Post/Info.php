@@ -67,5 +67,4 @@ class Info extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
     }
-
 }

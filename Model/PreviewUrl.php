@@ -51,7 +51,8 @@ class PreviewUrl extends Url
 
         $scope = $this->_storeManager->getStore($this->storeId);
         $url = $this->_url->setScope($scope)
-            ->getUrl('',
+            ->getUrl(
+                '',
                 [
                     '_direct'   => $this->getUrlPath($object->getIdentifier(), $controllerName),
                     'key'       => null,
@@ -64,5 +65,4 @@ class PreviewUrl extends Url
 
         return $url;
     }
-
 }

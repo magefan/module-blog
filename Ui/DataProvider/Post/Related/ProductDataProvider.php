@@ -127,5 +127,4 @@ class ProductDataProvider extends DataProvider
 
         return $this->post = $this->postRepository->getById($id);
     }
-
 }

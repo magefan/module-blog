@@ -80,13 +80,15 @@ class NextPrev extends \Magento\Framework\View\Element\Template
         if ($this->_prevPost === null) {
             $this->_prevPost = false;
             $collection = $this->_getFrontendCollection()->addFieldToFilter(
-                'publish_time', [
+                'publish_time',
+                [
                     'gteq' => $this->getPost()->getPublishTime()
-                ])
+                ]
+            )
                 ->setOrder('publish_time', 'ASC')
                 ->setPageSize(1);
 
-            $post = $collection->getFirstItem();
+                $post = $collection->getFirstItem();
 
             if ($post->getId()) {
                 $this->_prevPost = $post;
@@ -105,13 +107,15 @@ class NextPrev extends \Magento\Framework\View\Element\Template
         if ($this->_nextPost === null) {
             $this->_nextPost = false;
             $collection = $this->_getFrontendCollection()->addFieldToFilter(
-                'publish_time', [
+                'publish_time',
+                [
                     'lteq' => $this->getPost()->getPublishTime()
-                ])
+                ]
+            )
                 ->setOrder('publish_time', 'DESC')
                 ->setPageSize(1);
 
-            $post = $collection->getFirstItem();
+                $post = $collection->getFirstItem();
 
             if ($post->getId()) {
                 $this->_nextPost = $post;
@@ -145,5 +149,4 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     {
         return $this->_coreRegistry->registry('current_blog_post');
     }
-
 }

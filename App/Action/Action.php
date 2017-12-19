@@ -48,5 +48,4 @@ abstract class Action extends \Magento\Framework\App\Action\Action
     {
         $this->_forward('index', 'noroute', 'cms');
     }
-
 }

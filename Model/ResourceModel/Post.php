@@ -70,7 +70,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeDelete(
         \Magento\Framework\Model\AbstractModel $object
-    ){
+    ) {
         $condition = ['post_id = ?' => (int)$object->getId()];
         $tableSufixs = [
             'store',
@@ -156,7 +156,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         /* Save category & tag links */
         foreach (['category' => 'categories', 'tag' => 'tags'] as $linkType => $dataKey) {
             $newIds = (array)$object->getData($dataKey);
-            foreach($newIds as $key => $id) {
+            foreach ($newIds as $key => $id) {
                 if (!$id) { // e.g.: zero
                     unset($newIds[$key]);
                 }
@@ -176,7 +176,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         /* Save tags links */
         $newIds = (array)$object->getTags();
-        foreach($newIds as $key => $id) {
+        foreach ($newIds as $key => $id) {
             if (!$id) { // e.g.: zero
                 unset($newIds[$key]);
             }
@@ -222,8 +222,8 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _updateLinks(
         \Magento\Framework\Model\AbstractModel $object,
-        Array $newRelatedIds,
-        Array $oldRelatedIds,
+        array $newRelatedIds,
+        array $oldRelatedIds,
         $tableName,
         $field,
         $rowData = []
@@ -244,7 +244,8 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             foreach ($insert as $id) {
                 $id = (int)$id;
-                $data[] = array_merge(['post_id' => (int)$object->getId(), $field => $id],
+                $data[] = array_merge(
+                    ['post_id' => (int)$object->getId(), $field => $id],
                     (isset($rowData[$id]) && is_array($rowData[$id])) ? $rowData[$id] : []
                 );
             }
@@ -437,5 +438,4 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         return $adapter->fetchCol($select);
     }
-
 }

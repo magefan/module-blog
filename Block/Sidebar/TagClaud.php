@@ -133,5 +133,4 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     {
         return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_tag_claud_widget'  ];
     }
-
 }

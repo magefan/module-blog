@@ -83,13 +83,14 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
         $addedNodes[0] = new Node($data, 'id', $tree, $menu);
 
         $includeCategories = $this->scopeConfig->getValue(
-            Config::XML_PATH_TOP_MENU_INCLUDE_CATEGORIES, ScopeInterface::SCOPE_STORE
+            Config::XML_PATH_TOP_MENU_INCLUDE_CATEGORIES,
+            ScopeInterface::SCOPE_STORE
         );
 
         if ($includeCategories) {
-
             $maxDepth = $this->scopeConfig->getValue(
-                Config::XML_PATH_TOP_MENU_MAX_DEPTH, ScopeInterface::SCOPE_STORE
+                Config::XML_PATH_TOP_MENU_MAX_DEPTH,
+                ScopeInterface::SCOPE_STORE
             );
 
             $items = $this->getGroupedChilds();
@@ -98,14 +99,13 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
                 : 0;
 
             foreach ($items as $item) {
-
                 $parentId = (int) $item->getParentId();
 
                 if (!isset($addedNodes[$parentId])) {
                     continue;
                 }
 
-                if ($maxDepth > 0  &&  $item->getLevel() >= $maxDepth) {
+                if ($maxDepth > 0 && $item->getLevel() >= $maxDepth) {
                     continue;
                 }
 
@@ -147,5 +147,4 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->registry->registry('current_blog_category');
     }
-
 }
