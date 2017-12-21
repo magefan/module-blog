@@ -33,20 +33,29 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     protected $categoryCollectionFactory;
 
     /**
-     * @param \Magento\Framework\App\Helper\Context                        $context
-     * @param \Magefan\Blog\Model\Url                                      $url
-     * @param \Magento\Framework\Registry                                  $registry
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    /**
+     * Menu constructor.
+     * @param \Magento\Framework\App\Helper\Context                         $context
+     * @param \Magefan\Blog\Model\Url                                       $url
+     * @param \Magento\Framework\Registry                                   $registry
+     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory  $categoryCollectionFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                    $storeManager
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magefan\Blog\Model\Url $url,
         \Magento\Framework\Registry $registry,
-        \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+        \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->url = $url;
         $this->registry = $registry;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
+        $this->_storeManager = $storeManager;
         parent::__construct($context);
     }
 
@@ -98,8 +107,14 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
                 ? $this->getCurrentCategory()->getId()
                 : 0;
 
+            $storeId = $this->getStoreId();
+
             foreach ($items as $item) {
                 $parentId = (int) $item->getParentId();
+                
+                if(!$item->isVisibleOnStore($storeId)){
+                    continue;
+                }
 
                 if (!isset($addedNodes[$parentId])) {
                     continue;
@@ -146,5 +161,15 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     protected function getCurrentCategory()
     {
         return $this->registry->registry('current_blog_category');
+    }
+
+    /**
+     * Get store identifier
+     *
+     * @return  int
+     */
+    public function getStoreId()
+    {
+        return $this->_storeManager->getStore()->getId();
     }
 }
