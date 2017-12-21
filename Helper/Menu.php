@@ -33,20 +33,28 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     protected $categoryCollectionFactory;
 
     /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
      * @param \Magento\Framework\App\Helper\Context                        $context
      * @param \Magefan\Blog\Model\Url                                      $url
      * @param \Magento\Framework\Registry                                  $registry
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Store\Model\StoreManagerInterface                   $storeManager
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magefan\Blog\Model\Url $url,
         \Magento\Framework\Registry $registry,
-        \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+        \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->url = $url;
         $this->registry = $registry;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
+        $this->storeManager = $storeManager;
         parent::__construct($context);
     }
 
@@ -134,6 +142,7 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->categoryCollectionFactory->create()
             ->addActiveFilter()
+            ->addStoreFilter($this->storeManager->getStore()->getId())
             ->addFieldToFilter('include_in_menu', 1)
             ->setOrder('position')
             ->getTreeOrderedArray();
