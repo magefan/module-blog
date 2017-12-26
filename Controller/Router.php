@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -157,19 +157,19 @@ class Router implements \Magento\Framework\App\RouterInterface
 
         if (!count($pathInfo)) {
             $request
-                ->setModuleName('blog')
+                ->setRouteName('blog')
                 ->setControllerName('index')
                 ->setActionName('index');
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_RSS)) {
             $request
-                ->setModuleName('blog')
+                ->setRouteName('blog')
                 ->setControllerName(Url::CONTROLLER_RSS)
                 ->setActionName(isset($pathInfo[2]) ? $pathInfo[2] : 'index');
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)
             && !empty($pathInfo[2])
         ) {
             $request
-                ->setModuleName('blog')
+                ->setRouteName('blog')
                 ->setControllerName(Url::CONTROLLER_SEARCH)
                 ->setActionName('index')
                 ->setParam('q', $pathInfo[2]);
@@ -178,7 +178,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             && ($authorId = $this->_getAuthorId($pathInfo[2]))
         ) {
             $request
-                ->setModuleName('blog')
+                ->setRouteName('blog')
                 ->setControllerName(Url::CONTROLLER_AUTHOR)
                 ->setActionName('view')
                 ->setParam('id', $authorId);
@@ -187,7 +187,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             && $tagId = $this->_getTagId($pathInfo[2])
         ) {
             $request
-                ->setModuleName('blog')
+                ->setRouteName('blog')
                 ->setControllerName(Url::CONTROLLER_TAG)
                 ->setActionName('view')
                 ->setParam('id', $tagId);
@@ -206,7 +206,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     && $this->_isArchiveIdentifier($pathInfo[0])
                 ) {
                     $request
-                        ->setModuleName('blog')
+                        ->setRouteName('blog')
                         ->setControllerName(Url::CONTROLLER_ARCHIVE)
                         ->setActionName('view')
                         ->setParam('date', $pathInfo[0]);
@@ -214,7 +214,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     && $postId = $this->_getPostId($pathInfo[0])
                 ) {
                     $request
-                        ->setModuleName('blog')
+                        ->setRouteName('blog')
                         ->setControllerName(Url::CONTROLLER_POST)
                         ->setActionName('view')
                         ->setParam('id', $postId);
@@ -222,7 +222,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     && $categoryId = $this->_getCategoryId($pathInfo[0])
                 ) {
                     $request
-                        ->setModuleName('blog')
+                        ->setRouteName('blog')
                         ->setControllerName(Url::CONTROLLER_CATEGORY)
                         ->setActionName('view')
                         ->setParam('id', $categoryId);
@@ -259,7 +259,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                 if ($pathExist) {
                     if ($postId) {
                         $request
-                            ->setModuleName('blog')
+                            ->setRouteName('blog')
                             ->setControllerName(Url::CONTROLLER_POST)
                             ->setActionName('view')
                             ->setParam('id', $postId);
@@ -268,7 +268,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                         }
                     } elseif ($categoryId) {
                         $request
-                            ->setModuleName('blog')
+                            ->setRouteName('blog')
                             ->setControllerName(Url::CONTROLLER_CATEGORY)
                             ->setActionName('view')
                             ->setParam('id', $categoryId);
@@ -277,7 +277,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     && $postId = $this->_getPostId(implode('/', $pathInfo))
                 ) {
                     $request
-                        ->setModuleName('blog')
+                        ->setRouteName('blog')
                         ->setControllerName(Url::CONTROLLER_POST)
                         ->setActionName('view')
                         ->setParam('id', $postId);
