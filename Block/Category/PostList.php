@@ -62,4 +62,70 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
         return parent::_toHtml();
     }
+
+    /**
+     * Preparing global layout
+     *
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+        $category = $this->getCategory();
+        if ($category) {
+            $this->_addBreadcrumbs($category);
+            $this->pageConfig->addBodyClass('blog-category-' . $category->getIdentifier());
+            $this->pageConfig->getTitle()->set($category->getMetaTitle());
+            $this->pageConfig->setKeywords($category->getMetaKeywords());
+            $this->pageConfig->setDescription($category->getMetaDescription());
+            $this->pageConfig->addRemotePageAsset(
+                $category->getCanonicalUrl(),
+                'canonical',
+                ['attributes' => ['rel' => 'canonical']]
+            );
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $this->escapeHtml($category->getTitle())
+                );
+            }
+        }
+
+        return parent::_prepareLayout();
+    }
+
+    /**
+     * Prepare breadcrumbs
+     *
+     * @param  string $title
+     * @param  string $key
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return void
+     */
+    protected function _addBreadcrumbs($title = null, $key = null)
+    {
+        parent::_addBreadcrumbs();
+        if ($breadcrumbsBlock = $this->getBreadcrumbsBlock()) {
+            $category = $this->getCategory();
+            $parentCategories = [];
+            while ($parentCategory = $category->getParentCategory()) {
+                $parentCategories[] = $category = $parentCategory;
+            }
+
+            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                $category = $parentCategories[$i];
+                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $category->getId(), [
+                    'label' => $category->getTitle(),
+                    'title' => $category->getTitle(),
+                    'link'  => $category->getCategoryUrl()
+                ]);
+            }
+
+            $category = $this->getCategory();
+            $breadcrumbsBlock->addCrumb('blog_category', [
+                'label' => $category->getTitle(),
+                'title' => $category->getTitle()
+            ]);
+        }
+    }
 }

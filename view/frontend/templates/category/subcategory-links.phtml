@@ -23,7 +23,7 @@
             <?php foreach ($subCategoriesCollection as $category) { ?>
                 <li>
                     <?php $categoryTitle = $block->escapeHtml($category->getTitle()) ?>
-                    <a href="<?php $category->getUrl() ?>" title="<?= $categoryTitle ?>">
+                    <a href="<?= $category->getCategoryUrl() ?>" title="<?= $categoryTitle ?>">
                         <?= $categoryTitle ?>
                     </a>
                 </li>
