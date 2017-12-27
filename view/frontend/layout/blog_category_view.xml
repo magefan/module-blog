@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -13,7 +13,9 @@
     <body>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Category\Info" name="blog.posts.info" template="Magefan_Blog::category/info.phtml" before="blog.posts.list" />
-            <block class="Magefan\Blog\Block\Category\View" name="blog.posts.list" template="post/list.phtml" />
+            <block class="Magefan\Blog\Block\Category\SubCategoryLinks" name="blog.category.subcategory.links" template="Magefan_Blog::category/subcategory-links.phtml"  before="blog.posts.list" />
+            <block class="Magefan\Blog\Block\Category\PostLinks" name="blog.posts.links" template="Magefan_Blog::post/links.phtml"  before="blog.posts.list" />
+            <block class="Magefan\Blog\Block\Category\PostList" name="blog.posts.list" template="Magefan_Blog::post/list.phtml" />
         </referenceContainer>
     </body>
 </page>

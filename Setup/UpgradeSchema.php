@@ -472,6 +472,22 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.6.3') < 0) {
+        /* Add display mode field into category tabel */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'display_mode',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '0',
+                    'comment' => 'Display Mode',
+                    'after' => 'is_active'
+                ]
+            );
+        }
+
         $setup->endSetup();
     }
 }

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog subcategory links template
+ *
+ * @var $block \Magefan\Blog\Block\Category\SubCategoryLinks
+ */
+?>
+
+<?php
+    $subCategoriesCollection = $block->getSubCategories();
+?>
+<?php if ($subCategoriesCollection->count()) { ?>
+    <div class="subcategory-links-wrapper">
+        <ul class="subcategory-links">
+            <?php foreach ($subCategoriesCollection as $category) { ?>
+                <li>
+                    <?php $categoryTitle = $block->escapeHtml($category->getTitle()) ?>
+                    <a href="<?php $category->getUrl() ?>" title="<?= $categoryTitle ?>">
+                        <?= $categoryTitle ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>

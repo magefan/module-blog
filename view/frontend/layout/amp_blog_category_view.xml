@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -10,4 +10,9 @@
 <page layout="pramp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="amp_blog_default"/>
     <update handle="amp_blog_post_list"/>
+    <body>
+        <move element="blog.posts.links" destination="amp.content" before="-" />
+        <move element="blog.category.subcategory.links" destination="amp.content" before="-" />
+        <move element="blog.posts.info" destination="amp.content" before="-" />
+    </body>
 </page>

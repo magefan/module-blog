@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -11,71 +11,71 @@ namespace Magefan\Blog\Block\Category;
 /**
  * Blog category info
  */
-class Info extends \Magento\Framework\View\Element\Template
+class Info extends \Magefan\Blog\Block\Category\AbstractCategory
 {
     /**
-     * @var \Magento\Cms\Model\Template\FilterProvider
-     */
-    protected $_filterProvider;
-
-    /**
-     * @var \Magento\Framework\Registry
-     */
-    protected $_coreRegistry;
-
-    /**
-     * @var \Magefan\Blog\Model\Url
-     */
-    protected $_url;
-
-    /**
-     * Construct
+     * Preparing global layout
      *
-     * @param \Magento\Framework\View\Element\Context $context
-
-     * @param \Magento\Framework\Registry $coreRegistry,
-     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magefan\Blog\Model\Url $url
-     * @param array $data
+     * @return $this
      */
-    public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magefan\Blog\Model\Url $url,
-        array $data = []
-    ) {
-        parent::__construct($context, $data);
-        $this->_coreRegistry = $coreRegistry;
-        $this->_filterProvider = $filterProvider;
-        $this->_url = $url;
-    }
-
-    /**
-     * Retrieve category instance
-     *
-     * @return \Magefan\Blog\Model\Category
-     */
-    public function getCategory()
-    {
-        return $this->_coreRegistry->registry('current_blog_category');
-    }
-
-    /**
-     * Retrieve post content
-     *
-     * @return string
-     */
-    public function getContent()
+    protected function _prepareLayout()
     {
         $category = $this->getCategory();
-        $key = 'filtered_content';
-        if (!$category->hasData($key)) {
-            $cotent = $this->_filterProvider->getPageFilter()->filter(
-                $category->getContent()
+        if ($category) {
+            $this->_addBreadcrumbs($category);
+            $this->pageConfig->addBodyClass('blog-category-' . $category->getIdentifier());
+            $this->pageConfig->getTitle()->set($category->getMetaTitle());
+            $this->pageConfig->setKeywords($category->getMetaKeywords());
+            $this->pageConfig->setDescription($category->getMetaDescription());
+            $this->pageConfig->addRemotePageAsset(
+                $category->getCanonicalUrl(),
+                'canonical',
+                ['attributes' => ['rel' => 'canonical']]
             );
-            $category->setData($key, $cotent);
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $this->escapeHtml($category->getTitle())
+                );
+            }
         }
-        return $category->getData($key);
+
+        return parent::_prepareLayout();
+    }
+
+    /**
+     * Prepare breadcrumbs
+     *
+     * @param  string $title
+     * @param  string $key
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return void
+     */
+    protected function _addBreadcrumbs($title = null, $key = null)
+    {
+        parent::_addBreadcrumbs();
+        if ($breadcrumbsBlock = $this->getBreadcrumbsBlock()) {
+            $category = $this->getCategory();
+            $parentCategories = [];
+            while ($parentCategory = $category->getParentCategory()) {
+                $parentCategories[] = $category = $parentCategory;
+            }
+
+            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                $category = $parentCategories[$i];
+                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $category->getId(), [
+                    'label' => $category->getTitle(),
+                    'title' => $category->getTitle(),
+                    'link'  => $category->getCategoryUrl()
+                ]);
+            }
+
+            $category = $this->getCategory();
+            $breadcrumbsBlock->addCrumb('blog_category', [
+                'label' => $category->getTitle(),
+                'title' => $category->getTitle()
+            ]);
+        }
     }
 }

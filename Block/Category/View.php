@@ -11,6 +11,8 @@ namespace Magefan\Blog\Block\Category;
 use Magento\Store\Model\ScopeInterface;
 
 /**
+ * DEPRECATED !!!!
+ *
  * Blog category view
  */
 class View extends \Magefan\Blog\Block\Post\PostList

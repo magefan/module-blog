@@ -258,29 +258,33 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve children category ids
+     * @param  bool  $grandchildren
      * @return array
      */
-    public function getChildrenIds()
+    public function getChildrenIds($grandchildren = true)
     {
         $k = 'children_ids';
         if (!$this->hasData($k)) {
             $categories = \Magento\Framework\App\ObjectManager::getInstance()
                 ->create($this->_collectionName);
 
-            $ids = [];
+            $allIds = $ids = [];
             foreach ($categories as $category) {
                 if ($category->isParent($this)) {
-                    $ids[] = $category->getId();
+                    $allIds[] = $category->getId();
+                    if ($category->getLevel() == $this->getLevel() + 1) {
+                        $ids[] = $category->getId();
+                    }
                 }
             }
 
-            $this->setData(
-                $k,
-                $ids
-            );
+            $this->setData('all_' . $k, $allIds);
+            $this->setData($k, $ids);
         }
 
-        return $this->getData($k);
+        return $this->getData(
+            ($grandchildren ? 'all_' : '') . $k
+        );
     }
 
     /**

@@ -43,6 +43,9 @@
 
 .blog-category-view .category-content {padding-left: 40px;}
 
+.subcategory-links-wrapper ul,
+.post-links-wrapper ul {list-style: none}
+
 .post-content .post-description img {margin:0 15px 0 15px;}
 .post-content .post-description ul,
 .post-content .post-description ol {list-style-position: inside;}
