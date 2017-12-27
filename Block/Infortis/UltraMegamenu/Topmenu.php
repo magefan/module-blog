@@ -52,7 +52,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             );
 
             $children = $blogNode->getChildren();
-            $hasChildren = count($children);
+            $hasChildren = $children->count();
             $active = ($this->getRequest()->getModuleName() == 'blog');
 
             $html .= '
@@ -88,7 +88,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
                 $subChildren = $child->getChildren();
                 $html .= '<li class="nav-item level' . $level . ' classic">
                     <a href="' . $child->getUrl() . '"><span>' . $this->escapeHtml($child->getName()) . '</span></a>
-                    ' . (count($subChildren) > 0 ? $this->getSubmenuItemsHtml($subChildren, $level+1, $max_level) : '') . '
+                    ' . ($subChildren->count() ? $this->getSubmenuItemsHtml($subChildren, $level+1, $max_level) : '') . '
                 </li>';
             }
             $html .= '</ul>';
