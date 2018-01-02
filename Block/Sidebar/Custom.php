@@ -69,4 +69,16 @@ class Custom extends \Magento\Framework\View\Element\Template
         }
         return $this->getData($key);
     }
+
+    /**
+     * Get cache key informative items
+     *
+     * @return array
+     */
+    public function getCacheKeyInfo()
+    {
+        $cacheKeyInfo = parent::getCacheKeyInfo();
+        $cacheKeyInfo['block_name'] = $this->getNameInLayout();
+        return $cacheKeyInfo;
+    }
 }
