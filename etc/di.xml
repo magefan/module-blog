@@ -52,4 +52,45 @@
         <plugin name="magento_sitemap_model_sitemap_magefan_blog"
                 type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
     </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_post_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magefan\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magefan_blog_post</argument>
+            <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_category_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magefan\Blog\Model\ResourceModel\Category\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magefan_blog_category</argument>
+            <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Category</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_comment_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Comment\Collection\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+    <!--<virtualType name="Magefan\Blog\Model\ResourceModel\Comment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">-->
+        <!--<arguments>-->
+            <!--<argument name="mainTable" xsi:type="string">magefan_blog_comment</argument>-->
+            <!--<argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Comment</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
 </config>

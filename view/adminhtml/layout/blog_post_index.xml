@@ -8,11 +8,9 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="formkey"/>
-    <update handle="blog_post_grid_block"/>
     <body>
         <referenceContainer name="content">
-            <block class="Magefan\Blog\Block\Adminhtml\Post" name="blog.post.container"/>
+            <uiComponent name="blog_post_listing"/>
         </referenceContainer>
     </body>
 </page>

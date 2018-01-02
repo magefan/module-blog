@@ -488,6 +488,20 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.6.3.1') < 0)
+        {
+            $installer->getConnection()->addIndex(
+                $installer->getTable('magefan_blog_post'),
+                $setup->getIdxName(
+                    $installer->getTable('magefan_blog_post'),
+                    ['title', 'meta_title','content_heading','short_content'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                ),
+                ['title', 'meta_title','content_heading','short_content'],
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+            );
+        }
+
         $setup->endSetup();
     }
 }

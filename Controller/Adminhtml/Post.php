@@ -42,4 +42,5 @@ class Post extends Actions
      * @var string
      */
     protected $_statusField     = 'is_active';
+
 }

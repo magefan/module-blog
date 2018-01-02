@@ -8,11 +8,9 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="formkey"/>
-    <update handle="blog_comment_grid_block"/>
     <body>
         <referenceContainer name="content">
-            <block class="Magefan\Blog\Block\Adminhtml\Comment" name="blog.comment.container"/>
+                <uiComponent name="blog_comment_listing"/>
         </referenceContainer>
     </body>
 </page>

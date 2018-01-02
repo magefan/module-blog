@@ -339,6 +339,9 @@ abstract class Actions extends \Magento\Backend\App\Action
     {
         $ids = $this->getRequest()->getParam($this->_idKey);
 
+        if (!$ids) {
+          $ids = $this->getRequest()->getParam('selected');
+        }
         if (!is_array($ids)) {
             $ids = [$ids];
         }
@@ -379,6 +382,10 @@ abstract class Actions extends \Magento\Backend\App\Action
     protected function _massStatusAction()
     {
         $ids = $this->getRequest()->getParam($this->_idKey);
+
+        if (!$ids) {
+          $ids = $this->getRequest()->getParam('selected');
+        }
 
         if (!is_array($ids)) {
             $ids = [$ids];

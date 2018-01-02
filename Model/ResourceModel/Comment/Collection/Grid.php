@@ -9,8 +9,14 @@
 namespace Magefan\Blog\Model\ResourceModel\Comment\Collection;
 
 use \Magefan\Blog\Model\ResourceModel\Comment\Collection;
+use \Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy;
+use \Magento\Framework\Data\Collection\EntityFactoryInterface as EntityFactory;
+use \Magento\Framework\Event\ManagerInterface as EventManager;
+use \Psr\Log\LoggerInterface as Logger;
+use \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult;
+use \Magento\Store\Model\StoreManagerInterface;
 
-class Grid extends Collection
+class Grid extends SearchResult
 {
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -28,19 +34,20 @@ class Grid extends Collection
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager,
-     * @param \Magento\Framework\DB\Adapter\AdapterInterface $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
      */
     public function __construct(
-        \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
-        \Magento\Framework\Event\ManagerInterface $eventManager,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        EntityFactory $entityFactory,
+        Logger $logger,
+        FetchStrategy $fetchStrategy,
+        EventManager $eventManager,
+        StoreManagerInterface $storeManager,
+        $mainTable = 'magefan_blog_comment',
+        $resourceModel = 'Magefan\Blog\Model\ResourceModel\Comment',
+        $identifierName = null,
+        $connectionName = null
+
     ) {
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
+        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel,$identifierName,$connectionName);
         $this->_storeManager = $storeManager;
     }
 
