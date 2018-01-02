@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2015-2018 Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar custom HTML template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Search
+ */
+?>
+
+<div class="widget block blog-custom" >
+	<div class="block-content">
+        <?php /* without html encode */ ?>
+		<?= $block->getContent() ?>
+	</div>
+</div>

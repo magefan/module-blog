@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2018 Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -36,6 +36,16 @@
                     </action>
                 </block>
                 <block class="Magefan\Blog\Block\Sidebar\TagClaud" name="blog.sidebar.tagclaud" template="sidebar/tag_claud.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Custom" name="blog.sidebar.custom" template="sidebar/custom.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\CustomTwo" name="blog.sidebar.custom2" template="sidebar/custom.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
