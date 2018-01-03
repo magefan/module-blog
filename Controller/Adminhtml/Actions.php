@@ -140,15 +140,15 @@ abstract class Actions extends \Magento\Backend\App\Action
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
-                foreach (array_keys($postItems) as $commentId) {
+                foreach (array_keys($postItems) as $postId) {
                     /** @var \Magefan\Blog\Model\Block $post */
-                    $comment = $this->_getModel(false)->load($commentId);
+                    $post = $this->_getModel(false)->load($postId);
                     try {
-                        $comment->setData(array_merge($comment->getData(), $postItems[$commentId]));
-                        $comment->save();
+                        $post->setData(array_merge($post->getData(), $postItems[$postId]));
+                        $post->save();
                     } catch (\Exception $e) {
                         $messages[] = $this->getErrorWithcommentId(
-                            $comment,
+                            $post,
                             __($e->getMessage())
                         );
                         $error = true;
