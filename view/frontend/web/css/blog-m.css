@@ -115,8 +115,8 @@
     margin-bottom: 40px;
     position: relative;
     float: right;
-    /*padding-left: 15px;*/
-    z-index: 4;
+    /*padding-left: 15px;
+    z-index: 4;*/
 }
 
 .widget.blog-search .block-content {
