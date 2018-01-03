@@ -198,17 +198,6 @@
               <!--<label translate="true">Categories</label>-->
           <!--</settings>-->
         <!--</column>-->
-        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
-            <settings>
-                <options class="Magento\Cms\Model\Block\Source\IsActive"/>
-                <filter>select</filter>
-                <editor>
-                    <editorType>select</editorType>
-                </editor>
-                <dataType>select</dataType>
-                <label translate="true">Status</label>
-            </settings>
-        </column>
         <column name="publish_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
             <settings>
                 <filter>dateRange</filter>
@@ -221,6 +210,17 @@
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
                 <label translate="true">Modified</label>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Cms\Model\Block\Source\IsActive"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
             </settings>
         </column>
         <actionsColumn name="actions" class="Magefan\Blog\Ui\Component\Listing\Column\PostActions">

@@ -87,10 +87,4 @@
             </argument>
         </arguments>
     </type>
-    <!--<virtualType name="Magefan\Blog\Model\ResourceModel\Comment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">-->
-        <!--<arguments>-->
-            <!--<argument name="mainTable" xsi:type="string">magefan_blog_comment</argument>-->
-            <!--<argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Comment</argument>-->
-        <!--</arguments>-->
-    <!--</virtualType>-->
 </config>

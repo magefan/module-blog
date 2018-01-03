@@ -500,6 +500,17 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ['title', 'meta_title','content_heading','short_content'],
                 \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
             );
+
+            $installer->getConnection()->addIndex(
+                $installer->getTable('magefan_blog_comment'),
+                $setup->getIdxName(
+                    $installer->getTable('magefan_blog_comment'),
+                    ['author_nickname','author_email','text'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                ),
+                ['author_nickname','author_email','text'],
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+            );
         }
 
         $setup->endSetup();

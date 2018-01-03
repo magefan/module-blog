@@ -84,15 +84,25 @@ abstract class Actions extends \Magento\Backend\App\Action
     protected $dataPersistor;
 
     /**
+     * @var \Magento\Framework\Controller\Result\JsonFactory
+     */
+    protected $jsonFactory;
+
+    /**
      * @param Action\Context $context
      * @param PostDataProcessor $dataProcessor
      * @param DataPersistorInterface $dataPersistor
+     * @param null|\\Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      */
     public function __construct(
         Context $context,
-        DataPersistorInterface $dataPersistor
+        DataPersistorInterface $dataPersistor,
+        $jsonFactory = null
     ) {
         $this->dataPersistor = $dataPersistor;
+        $this->jsonFactory = $jsonFactory ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+           \Magento\Framework\Controller\Result\JsonFactory::class
+     );
         parent::__construct($context);
     }
 
@@ -102,7 +112,7 @@ abstract class Actions extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $_preparedActions = ['index', 'grid', 'new', 'edit', 'save', 'duplicate', 'delete', 'config', 'massStatus'];
+        $_preparedActions = ['index', 'grid', 'new', 'edit', 'save', 'duplicate', 'delete', 'config', 'massStatus', 'inlineEdit'];
         $_action = $this->getRequest()->getActionName();
         if (in_array($_action, $_preparedActions)) {
             $method = '_'.$_action.'Action';
@@ -111,6 +121,57 @@ abstract class Actions extends \Magento\Backend\App\Action
             $this->$method();
             $this->_afterAction();
         }
+    }
+
+    /**
+     * inlineEdit action
+     * @return void
+     */
+    protected function _inlineEditAction()
+    {
+        /** @var \Magento\Framework\Controller\Result\Json $resultJson */
+        $resultJson = $this->jsonFactory->create();
+        $error = false;
+        $messages = [];
+
+        if ($this->getRequest()->getParam('isAjax')) {
+            $postItems = $this->getRequest()->getParam('items', []);
+            if (!count($postItems)) {
+                $messages[] = __('Please correct the data sent.');
+                $error = true;
+            } else {
+                foreach (array_keys($postItems) as $commentId) {
+                    /** @var \Magefan\Blog\Model\Block $post */
+                    $comment = $this->_getModel(false)->load($commentId);
+                    try {
+                        $comment->setData(array_merge($comment->getData(), $postItems[$commentId]));
+                        $comment->save();
+                    } catch (\Exception $e) {
+                        $messages[] = $this->getErrorWithcommentId(
+                            $comment,
+                            __($e->getMessage())
+                        );
+                        $error = true;
+                    }
+                }
+            }
+        }
+        return $resultJson->setData([
+            'messages' => $messages,
+            'error' => $error
+        ]);
+    }
+
+    /**
+     * Add block title to error message
+     *
+     * @param $block
+     * @param string $errorText
+     * @return string
+     */
+    protected function getErrorWithcommentId($block, $errorText)
+    {
+        return '[Block ID: ' . $block->getId() . '] ' . $errorText;
     }
 
     /**

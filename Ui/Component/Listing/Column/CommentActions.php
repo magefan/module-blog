@@ -73,7 +73,7 @@ class CommentActions extends Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_EDIT,
                                 [
-                                    'comment_id' => $item['comment_id']
+                                    'id' => $item['comment_id']
                                 ]
                             ),
                             'label' => __('Edit')
@@ -82,7 +82,7 @@ class CommentActions extends Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_DELETE,
                                 [
-                                    'comment_id' => $item['comment_id']
+                                    'id' => $item['comment_id']
                                 ]
                             ),
                             'label' => __('Delete'),

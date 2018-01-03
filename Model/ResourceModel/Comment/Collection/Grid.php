@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,7 +8,6 @@
 
 namespace Magefan\Blog\Model\ResourceModel\Comment\Collection;
 
-use \Magefan\Blog\Model\ResourceModel\Comment\Collection;
 use \Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy;
 use \Magento\Framework\Data\Collection\EntityFactoryInterface as EntityFactory;
 use \Magento\Framework\Event\ManagerInterface as EventManager;
