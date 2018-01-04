@@ -42,6 +42,8 @@ http://magefan.com/docs/magento-2-blog/
   * Open command line
   * Using command "cd" navigate to your magento2 root directory
   * Run command: composer require magefan/module-blog
+  
+  * If you are using Magento 2.2.x please run the command: composer require magefan/module-blog-m22
 
   
 
