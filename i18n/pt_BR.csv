@@ -41,12 +41,12 @@ Yes (With auto trigger),Sim (Automaticamente)
 Yes (Without auto trigger),Yes (Manualmente)
 Parameter %1 is required,O parâmetro %1 é requerido
 AheadWorks Blog Extension not detected.,A extensão Blog da AheadWorks não foi detectada.
-The category URL key contains capital letters or disallowed symbols.,A URL key da categoria contém letras maiúsculas ou símbolos não permitidos.
+The category URL key contains disallowed symbols.,A URL key da categoria contém letras maiúsculas ou símbolos não permitidos.
 The category URL key cannot be made of only numbers.,A URL key da categoria não pode ser contituida apenas de números.
-The post URL key contains capital letters or disallowed symbols.,A URL key do post contém letras maiúsculas ou símbolos não permitidos.
+The post URL key contains disallowed symbols.,A URL key do post contém letras maiúsculas ou símbolos não permitidos.
 The post URL key cannot be made of only numbers.,A URL key do post não pode ser contituida apenas de números.
 The tag is already exist.,A tag já existe.
-The tag URL key contains capital letters or disallowed symbols.,A URL key da tag contém letras maiúsculas ou símbolos não permitidos.
+The tag URL key contains disallowed symbols.,A URL key da tag contém letras maiúsculas ou símbolos não permitidos.
 The tag URL key cannot be made of only numbers.,A URL key da tag não pode ser contituida apenas de números.
 Related posts,Posts relacionados
 Posted:,Publicado:

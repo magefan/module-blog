@@ -41,12 +41,12 @@ Yes (With auto trigger),Da (Cu declansare automata)
 Yes (Without auto trigger),Da (Fara declansare automata)
 Parameter %1 is required,E nevoie de parametrul %1
 AheadWorks Blog Extension not detected.,Extensia pentru Blog AheadWorks nu a fost gasita
-The category URL key contains capital letters or disallowed symbols.,URL-ul categoriei contine litere mai sau simboluri nepermise.
+The category URL key contains disallowed symbols.,URL-ul categoriei contine litere mai sau simboluri nepermise.
 The category URL key cannot be made of only numbers.,URL-ul nu poate fi compus doar din numere.
-The post URL key contains capital letters or disallowed symbols.,URL-il postarii contine litere mari sau simboluri nepermise.
+The post URL key contains disallowed symbols.,URL-il postarii contine litere mari sau simboluri nepermise.
 The post URL key cannot be made of only numbers.,URL-ul postarii nu poate fi compus doar din numere.
 The tag is already exist.,Tag-ul is exista deja.
-The tag URL key contains capital letters or disallowed symbols.,Tag-ul URL contine litere mari sau simboluri nepermise.
+The tag URL key contains disallowed symbols.,Tag-ul URL contine litere mari sau simboluri nepermise.
 The tag URL key cannot be made of only numbers.,Tag-ul URL nu poate fi compus doar din numere.
 Related posts,Postari pe aceeasi tema
 Posted:,Postat:
