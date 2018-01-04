@@ -70,7 +70,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         if (!$this->isValidPageIdentifier($object)) {
             throw new \Magento\Framework\Exception\LocalizedException(
-                __('The tag URL key contains capital letters or disallowed symbols.')
+                __('The tag URL key contains disallowed symbols.')
             );
         }
 
@@ -119,6 +119,6 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^[a-z0-9][a-z0-9_\/-]+(\.[a-z0-9_-]+)?$/', $object->getData('identifier'));
+        return preg_match('/^([^?#<>@!&*()$%^\\/+=,{}]+)?$/', $object->getData('identifier'));
     }
 }
