@@ -65,15 +65,16 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
-        \Magefan\Blog\Model\TagFactory $tagFactory,
-        \Magefan\Blog\Model\AuthorFactory $authorFactory,
+        $tagFactory = null,
+        $authorFactory = null,
         array $data = []
     ) {
         parent::__construct($context, $coreRegistry, $filterProvider, $postCollectionFactory, $url, $data);
         $this->_categoryFactory = $categoryFactory;
-        $this->tagFactory = $tagFactory;
-        $this->authorFactory = $authorFactory;
 
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->tagFactory = $objectManager->create(\Magefan\Blog\Model\TagFactory::class);
+        $this->authorFactory = $objectManager->create(\Magefan\Blog\Model\AuthorFactory::class);
     }
 
     /**
@@ -142,14 +143,16 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
                     $category->setStoreId($storeId);
                     return $this->_category = $category;
                 }
-                 if ($tag = $this->getTag()) {
+            }
+        }
+
+        if ($tag = $this->getTag()) {
             $this->_postCollection->addTagFilter($tag);
         }
 
         if ($author = $this->getAuthor()) {
             $this->_postCollection->addAuthorFilter($author);
         }
-
         if ($this->getData('from')) {
             $this->_postCollection
                 ->addFieldToFilter('publish_time', array('gteq' => $this->getData('from') . " 00:00:00"));
@@ -207,12 +210,6 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         return $this->tag;
 
-            }
-
-            $this->_category = false;
-        }
-
-        return $this->_category;
     }
 
     /**
