@@ -44,7 +44,7 @@ class Tag implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         if ($this->options === null) {
-            $this->options = [];
+            $this->options = [['label' => __('Please select'), 'value' => 0]];
             $collection = $this->tagCollectionFactory->create();
             $collection->setOrder('title');
 
