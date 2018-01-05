@@ -92,7 +92,7 @@ abstract class Actions extends \Magento\Backend\App\Action
      * @param Action\Context $context
      * @param PostDataProcessor $dataProcessor
      * @param DataPersistorInterface $dataPersistor
-     * @param null|\\Magento\Framework\Controller\Result\JsonFactory $jsonFactory
+     * @param null|\Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      */
     public function __construct(
         Context $context,
@@ -135,20 +135,20 @@ abstract class Actions extends \Magento\Backend\App\Action
         $messages = [];
 
         if ($this->getRequest()->getParam('isAjax')) {
-            $postItems = $this->getRequest()->getParam('items', []);
-            if (!count($postItems)) {
+            $items = $this->getRequest()->getParam('items', []);
+            if (!count($items)) {
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
-                foreach (array_keys($postItems) as $postId) {
-                    /** @var \Magefan\Blog\Model\Block $post */
-                    $post = $this->_getModel(false)->load($postId);
+                foreach (array_keys($items) as $id) {
+                    /** @var \Magefan\Blog\Model\Block $object */
+                    $object = $this->_getModel(false)->load($id);
                     try {
-                        $post->setData(array_merge($post->getData(), $postItems[$postId]));
-                        $post->save();
+                        $object->setData(array_merge($object->getData(), $items[$id]));
+                        $object->save();
                     } catch (\Exception $e) {
                         $messages[] = $this->getErrorWithcommentId(
-                            $post,
+                            $object,
                             __($e->getMessage())
                         );
                         $error = true;
@@ -169,9 +169,9 @@ abstract class Actions extends \Magento\Backend\App\Action
      * @param string $errorText
      * @return string
      */
-    protected function getErrorWithcommentId($block, $errorText)
+    protected function getErrorWithcommentId($object, $errorText)
     {
-        return '[Block ID: ' . $block->getId() . '] ' . $errorText;
+        return '[ID: ' .  $object->getId() . '] ' . $errorText;
     }
 
     /**
