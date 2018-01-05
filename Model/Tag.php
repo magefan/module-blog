@@ -87,6 +87,17 @@ class Tag extends \Magento\Framework\Model\AbstractModel
     {
         return $this->load($identifier)->getId();
     }
+    
+     /**
+     * Retrieve if is visible on store
+     * @return bool
+     */
+    public function isVisibleOnStore($storeId)
+    {
+        return $this->getIsActive()
+            && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
+            && array_intersect([0, $storeId], $this->getStoreIds());
+    }
 
     /**
      * Retrieve catgegory url route path
