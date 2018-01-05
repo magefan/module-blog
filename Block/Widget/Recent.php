@@ -18,7 +18,28 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      * @var \Magefan\Blog\Model\CategoryFactory
      */
     protected $_categoryFactory;
+    
+     /**
+     * @var \Magefan\Blog\Model\TagFactory
+     */
+    protected $tagFactory;
 
+    /**
+     * @var \Magefan\Blog\Model\Tag
+     */
+    protected $tag;
+
+    /**
+     * @var \Magefan\Blog\Model\AuthorFactory
+     */
+    protected $authorFactory;
+
+    /**
+     * @var \Magefan\Blog\Model\Author
+     */
+    protected $author;
+
+    
     /**
      * @var \Magefan\Blog\Model\Category
      */
@@ -33,6 +54,8 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
+     * @param \Magefan\Blog\Model\TagFactory $tagFactory
+     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param array $data
      */
     public function __construct(
@@ -42,10 +65,15 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magefan\Blog\Model\TagFactory $tagFactory,
+        \Magefan\Blog\Model\AuthorFactory $authorFactory,
         array $data = []
     ) {
         parent::__construct($context, $coreRegistry, $filterProvider, $postCollectionFactory, $url, $data);
         $this->_categoryFactory = $categoryFactory;
+        $this->tagFactory = $tagFactory;
+        $this->authorFactory = $authorFactory;
+
     }
 
     /**
@@ -94,6 +122,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         if ($category = $this->getCategory()) {
             $this->_postCollection->addCategoryFilter($category);
         }
+        
     }
 
     /**
@@ -113,6 +142,71 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
                     $category->setStoreId($storeId);
                     return $this->_category = $category;
                 }
+                 if ($tag = $this->getTag()) {
+            $this->_postCollection->addTagFilter($tag);
+        }
+
+        if ($author = $this->getAuthor()) {
+            $this->_postCollection->addAuthorFilter($author);
+        }
+
+        if ($this->getData('from')) {
+            $this->_postCollection
+                ->addFieldToFilter('publish_time', array('gteq' => $this->getData('from') . " 00:00:00"));
+        }
+
+        if ($this->getData('to')) {
+            $this->_postCollection
+                ->addFieldToFilter('publish_time', array('lteq' => $this->getData('to') . " 00:00:00"));
+        }
+    }
+
+
+    /**
+     * Retrieve author instance
+     *
+     * @return \Magefan\Blog\Model\Author
+     */
+    public function getAuthor()
+    {
+        if ($this->author === null) {
+            if ($authotId = $this->getData('author_id')) {
+                $author = $this->authorFactory->create();
+                $author->load($authotId);
+
+                return $this->author = $author;
+
+            }
+
+            $this->author = false;
+        }
+
+        return $this->author;
+
+    }
+
+    /**
+     * Retrieve tag instance
+     *
+     * @return \Magefan\Blog\Model\Tag
+     */
+    public function getTag()
+    {
+        if ($this->tag === null) {
+            if ($tagId = $this->getData('tags_id')) {
+
+                $tag = $this->tagFactory->create();
+                $tag->load($tagId);
+
+                return $this->tag = $tag;
+
+            }
+
+            $this->tag = false;
+        }
+
+        return $this->tag;
+
             }
 
             $this->_category = false;
