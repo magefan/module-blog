@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -24,7 +24,23 @@
                 <label translate="true">Blog Category</label>
                 <description translate="true">Leave blank to display posts from all categories.</description>
             </parameter>
-            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
+            <parameter name="tag_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\WidgetTag" visible="true" sort_order="40" >
+                <label translate="true">Blog Tag</label>
+                <description translate="true">Leave blank to display posts from all tags.</description>
+            </parameter>
+            <parameter name="author_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\Author" visible="true" sort_order="50" >
+                <label translate="true">Blog Author</label>
+                <description translate="true">Leave blank to display posts from all author.</description>
+            </parameter>
+            <parameter name="from" xsi:type="text" visible="true" sort_order="60" >
+                <label translate="true">Blog Publish Date From</label>
+                <description translate="true">Please use date format YYYY-MM-DD.</description>
+            </parameter>
+            <parameter name="to" xsi:type="text"  visible="true" sort_order="70" >
+                <label translate="true">Blog Publish Date To</label>
+                <description translate="true">Please use date format YYYY-MM-DD.</description>
+            </parameter>
+            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="80" >
                 <label translate="true">Custom Template</label>
                 <description translate="true"><![CDATA[
                     Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>

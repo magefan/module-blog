@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
- * Used in recent post widget
+ * Used in recent post widget & post edit page
  *
  */
 class Tag implements \Magento\Framework\Option\ArrayInterface

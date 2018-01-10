@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -93,6 +93,24 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         if ($category = $this->getCategory()) {
             $this->_postCollection->addCategoryFilter($category);
+        }
+
+        if ($tagId = $this->getData('tag_id')) {
+            $this->_postCollection->addTagFilter($tagId);
+        }
+
+        if ($authorId = $this->getData('author_id')) {
+            $this->_postCollection->addAuthorFilter($authorId);
+        }
+
+        if ($from = $this->getData('from')) {
+            $this->_postCollection
+                ->addFieldToFilter('publish_time', array('gteq' => $from . " 00:00:00"));
+        }
+
+        if ($to = $this->getData('to')) {
+            $this->_postCollection
+                ->addFieldToFilter('publish_time', array('lteq' => $to . " 00:00:00"));
         }
     }
 
