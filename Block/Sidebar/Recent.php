@@ -34,6 +34,17 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
         return parent::_construct();
     }
 
+    /*
+     * Prepare posts collection
+     *
+     * @return void
+     */
+    protected function _preparePostCollection()
+    {
+        parent::_preparePostCollection();
+        $this->_postCollection->addRecentFilter();
+    }
+
     /**
      * Retrieve block identities
      * @return array

@@ -63,7 +63,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.2.0') < 0) {
-            /* Add author field to posts tabel */
+            /* Add author field to posts table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_post'),
                 'author_id',
@@ -84,7 +84,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
 
         if (version_compare($version, '2.2.5') < 0) {
-            /* Add layout field to posts and category tabels */
+            /* Add layout field to posts and category table */
             foreach (['magefan_blog_post', 'magefan_blog_category'] as $table) {
                 $table = $setup->getTable($table);
                 $connection->addColumn(
@@ -165,7 +165,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.3.0') < 0) {
-            /* Add meta title field to posts tabel */
+            /* Add meta title field to posts table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_post'),
                 'meta_title',
@@ -178,7 +178,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
 
-            /* Add og tags fields to post tabel */
+            /* Add og tags fields to post table */
             foreach (['type', 'img', 'description', 'title'] as $type) {
                 $connection->addColumn(
                     $setup->getTable('magefan_blog_post'),
@@ -193,7 +193,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 );
             }
 
-            /* Add meta title field to category tabel */
+            /* Add meta title field to category table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'meta_title',
@@ -452,7 +452,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.6.2') < 0) {
-        /* Add include in menu field into categories tabel */
+        /* Add include in menu field into categories table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'include_in_menu',
@@ -473,7 +473,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.6.3') < 0) {
-        /* Add display mode field into category tabel */
+        /* Add display mode field into category table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'display_mode',
@@ -483,6 +483,23 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'nullable' => false,
                     'default' => '0',
                     'comment' => 'Display Mode',
+                    'after' => 'is_active'
+                ]
+            );
+        }
+
+
+        if (version_compare($version, '2.6.3.1') < 0) {
+            /* Add include in recent posts into post table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'include_in_recent',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '1',
+                    'comment' => 'Include in Recent Posts',
                     'after' => 'is_active'
                 ]
             );

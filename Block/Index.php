@@ -48,6 +48,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             \Magefan\Blog\Helper\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
             ScopeInterface::SCOPE_STORE
         );
+
         /* If featured posts enabled */
         if ($displayMode == 1) {
             $postIds = $this->_scopeConfig->getValue(
@@ -55,6 +56,8 @@ class Index extends \Magefan\Blog\Block\Post\PostList
                 ScopeInterface::SCOPE_STORE
             );
             $this->_postCollection->addPostsFilter($postIds);
+        } else {
+            $this->_postCollection->addRecentFilter();
         }
     }
 

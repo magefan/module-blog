@@ -130,7 +130,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         return $this;
     }
-
+    
+    /**
+     * Add "include in recent" filter to collection
+     * @return $this
+     */
+    public function addRecentFilter()
+    {
+      return $this->addFieldToFilter('include_in_recent', 1);
+    }
+    
     /**
      * Add posts filter to collection
      * @param array|int|string  $category
