@@ -21,24 +21,24 @@
                 <description translate="true">Please indicate number of recent posts you want to display. Leave blank to use predefined "Posts Per Page" value.</description>
             </parameter>
             <parameter name="category_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\Category" visible="true" sort_order="30" >
-                <label translate="true">Blog Category</label>
+                <label translate="true">Posts Category</label>
                 <description translate="true">Leave blank to display posts from all categories.</description>
             </parameter>
             <parameter name="tag_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\WidgetTag" visible="true" sort_order="40" >
-                <label translate="true">Blog Tag</label>
+                <label translate="true">Posts Tag</label>
                 <description translate="true">Leave blank to display posts from all tags.</description>
             </parameter>
             <parameter name="author_id" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\Author" visible="true" sort_order="50" >
-                <label translate="true">Blog Author</label>
-                <description translate="true">Leave blank to display posts from all author.</description>
+                <label translate="true">Posts Author</label>
+                <description translate="true">Leave blank to display posts from all authors.</description>
             </parameter>
             <parameter name="from" xsi:type="text" visible="true" sort_order="60" >
-                <label translate="true">Blog Publish Date From</label>
-                <description translate="true">Please use date format YYYY-MM-DD.</description>
+                <label translate="true">Posts Publish Date From</label>
+                <description translate="true">Leave blank or use date format YYYY-MM-DD.</description>
             </parameter>
             <parameter name="to" xsi:type="text"  visible="true" sort_order="70" >
-                <label translate="true">Blog Publish Date To</label>
-                <description translate="true">Please use date format YYYY-MM-DD.</description>
+                <label translate="true">Posts Publish Date To</label>
+                <description translate="true">Leave blank or use date format YYYY-MM-DD.</description>
             </parameter>
             <parameter name="custom_template" xsi:type="text" visible="true" sort_order="80" >
                 <label translate="true">Custom Template</label>
