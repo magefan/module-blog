@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -18,28 +18,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      * @var \Magefan\Blog\Model\CategoryFactory
      */
     protected $_categoryFactory;
-    
-     /**
-     * @var \Magefan\Blog\Model\TagFactory
-     */
-    protected $tagFactory;
 
-    /**
-     * @var \Magefan\Blog\Model\Tag
-     */
-    protected $tag;
-
-    /**
-     * @var \Magefan\Blog\Model\AuthorFactory
-     */
-    protected $authorFactory;
-
-    /**
-     * @var \Magefan\Blog\Model\Author
-     */
-    protected $author;
-
-    
     /**
      * @var \Magefan\Blog\Model\Category
      */
@@ -54,8 +33,6 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
-     * @param \Magefan\Blog\Model\TagFactory $tagFactory
-     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
      * @param array $data
      */
     public function __construct(
@@ -65,16 +42,10 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
-        $tagFactory = null,
-        $authorFactory = null,
         array $data = []
     ) {
         parent::__construct($context, $coreRegistry, $filterProvider, $postCollectionFactory, $url, $data);
         $this->_categoryFactory = $categoryFactory;
-
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->tagFactory = $objectManager->create(\Magefan\Blog\Model\TagFactory::class);
-        $this->authorFactory = $objectManager->create(\Magefan\Blog\Model\AuthorFactory::class);
     }
 
     /**
@@ -123,7 +94,24 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         if ($category = $this->getCategory()) {
             $this->_postCollection->addCategoryFilter($category);
         }
-        
+
+        if ($tagId = $this->getData('tag_id')) {
+            $this->_postCollection->addTagFilter($tagId);
+        }
+
+        if ($authorId = $this->getData('author_id')) {
+            $this->_postCollection->addAuthorFilter($authorId);
+        }
+
+        if ($from = $this->getData('from')) {
+            $this->_postCollection
+                ->addFieldToFilter('publish_time', array('gteq' => $from . " 00:00:00"));
+        }
+
+        if ($to = $this->getData('to')) {
+            $this->_postCollection
+                ->addFieldToFilter('publish_time', array('lteq' => $to . " 00:00:00"));
+        }
     }
 
     /**
@@ -144,72 +132,11 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
                     return $this->_category = $category;
                 }
             }
+
+            $this->_category = false;
         }
 
-        if ($tag = $this->getTag()) {
-            $this->_postCollection->addTagFilter($tag);
-        }
-
-        if ($author = $this->getAuthor()) {
-            $this->_postCollection->addAuthorFilter($author);
-        }
-        if ($this->getData('from')) {
-            $this->_postCollection
-                ->addFieldToFilter('publish_time', array('gteq' => $this->getData('from') . " 00:00:00"));
-        }
-
-        if ($this->getData('to')) {
-            $this->_postCollection
-                ->addFieldToFilter('publish_time', array('lteq' => $this->getData('to') . " 00:00:00"));
-        }
-    }
-
-
-    /**
-     * Retrieve author instance
-     *
-     * @return \Magefan\Blog\Model\Author
-     */
-    public function getAuthor()
-    {
-        if ($this->author === null) {
-            if ($authotId = $this->getData('author_id')) {
-                $author = $this->authorFactory->create();
-                $author->load($authotId);
-
-                return $this->author = $author;
-
-            }
-
-            $this->author = false;
-        }
-
-        return $this->author;
-
-    }
-
-    /**
-     * Retrieve tag instance
-     *
-     * @return \Magefan\Blog\Model\Tag
-     */
-    public function getTag()
-    {
-        if ($this->tag === null) {
-            if ($tagId = $this->getData('tags_id')) {
-
-                $tag = $this->tagFactory->create();
-                $tag->load($tagId);
-
-                return $this->tag = $tag;
-
-            }
-
-            $this->tag = false;
-        }
-
-        return $this->tag;
-
+        return $this->_category;
     }
 
     /**

@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
- * Used in recent post widget
+ * Used in recent post widget & post edit page
  *
  */
 class Tag implements \Magento\Framework\Option\ArrayInterface
@@ -44,7 +44,7 @@ class Tag implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         if ($this->options === null) {
-            $this->options = [['label' => __('Please select'), 'value' => 0]];
+            $this->options = [];
             $collection = $this->tagCollectionFactory->create();
             $collection->setOrder('title');
 
