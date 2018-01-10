@@ -46,7 +46,14 @@ class Grid extends SearchResult
         $connectionName = null
 
     ) {
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel,$identifierName,$connectionName);
+        if (property_exists($this, 'identifierName')) {
+            /* magento > 2.2.x */
+            parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel, $identifierName, $connectionName);
+        } else {
+            /* magento = 2.1.x */
+            parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);
+        }
+
         $this->_storeManager = $storeManager;
     }
 
