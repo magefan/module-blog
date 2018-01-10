@@ -140,11 +140,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             }
         }
 
-        foreach ($data as $field => $value) {
-            if (!in_array($field, $this->_requiredFields)) {
-                unset($data[$field]);
-            }
-        }
+//        foreach ($data as $field => $value) {
+//            if (!in_array($field, $this->_requiredFields)) {
+//                unset($data[$field]);
+//            }
+//        }
 
         $this->setData($data);
 
