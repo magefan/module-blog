@@ -470,23 +470,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $setup->getIdxName($setup->getTable('magefan_blog_category'), ['include_in_menu']),
                 ['include_in_menu']
             );
-              if (version_compare($version, '2.6.3') < 0)
-             {
-            /* Add include in recent posts into post table */
-            $connection->addColumn(
-                $setup->getTable('magefan_blog_post'),
-                'include_in_recent',
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                    null,
-                    'nullable' => false,
-                    'default' => '1',
-                    'comment' => 'Include in Recent Posts',
-                    'after' => 'is_active'
-                ]
-            );
-        }
-
         }
 
         if (version_compare($version, '2.6.3') < 0) {
@@ -500,6 +483,23 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'nullable' => false,
                     'default' => '0',
                     'comment' => 'Display Mode',
+                    'after' => 'is_active'
+                ]
+            );
+        }
+
+
+        if (version_compare($version, '2.6.3.1') < 0) {
+            /* Add include in recent posts into post table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'include_in_recent',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '1',
+                    'comment' => 'Include in Recent Posts',
                     'after' => 'is_active'
                 ]
             );

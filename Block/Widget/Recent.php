@@ -91,6 +91,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         parent::_preparePostCollection();
 
+        $this->_postCollection->addRecentFilter();
         if ($category = $this->getCategory()) {
             $this->_postCollection->addCategoryFilter($category);
         }

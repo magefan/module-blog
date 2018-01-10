@@ -84,6 +84,7 @@ class PostManagement extends AbstractManagement
                     $collection->addTagFilter($term);
                     break;
             }
+
             $posts = [];
             foreach ($collection as $item) {
                 $item->initDinamicData();

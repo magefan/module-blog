@@ -844,6 +844,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
             );
             $this->save();
         }
+
         return $this->getData('secret');
     }
 }
