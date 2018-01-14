@@ -43,15 +43,6 @@ class Custom extends \Magento\Framework\View\Element\Template
     protected $_widgetKey = 'custom';
 
     /**
-     * Retrieve query
-     * @return string
-     */
-    public function getQuery()
-    {
-        return urldecode($this->getRequest()->getParam('q', ''));
-    }
-
-    /**
      * Retrieve filtered content
      *
      * @return string
