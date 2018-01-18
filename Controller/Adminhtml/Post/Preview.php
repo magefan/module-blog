@@ -21,7 +21,7 @@ class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
                 throw new \Exception("Item is not longer exist.", 1);
             }
 
-            $previewUrl = $this->_objectManager->get('\Magefan\Blog\Model\PreviewUrl');
+            $previewUrl = $this->_objectManager->get(\Magefan\Blog\Model\PreviewUrl::class);
             $redirectUrl = $previewUrl->getUrl(
                 $post,
                 $previewUrl::CONTROLLER_POST

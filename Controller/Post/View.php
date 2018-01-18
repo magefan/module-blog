@@ -48,9 +48,9 @@ class View extends \Magefan\Blog\App\Action\Action
             return $this->_forwardNoroute();
         }
 
-        $this->_objectManager->get('\Magento\Framework\Registry')
+        $this->_objectManager->get(\Magento\Framework\Registry::class)
             ->register('current_blog_post', $post);
-        $resultPage = $this->_objectManager->get('Magefan\Blog\Helper\Page')
+        $resultPage = $this->_objectManager->get(\Magefan\Blog\Helper\Page::class)
             ->prepareResultPage($this, $post);
         return $resultPage;
     }
@@ -66,7 +66,7 @@ class View extends \Magefan\Blog\App\Action\Action
         $secret = $this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
-        $post = $this->_objectManager->create('Magefan\Blog\Model\Post')->load($id);
+        $post = $this->_objectManager->create(\Magefan\Blog\Model\Post::class)->load($id);
 
         if (!$post->isVisibleOnStore($storeId) && !$post->isValidSecret($secret)) {
             return false;
@@ -96,7 +96,7 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $storeId = $this->_storeManager->getStore()->getId();
 
-        $category = $this->_objectManager->create('Magefan\Blog\Model\Category')->load($id);
+        $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);
 
         if (!$category->isVisibleOnStore($storeId)) {
             return false;

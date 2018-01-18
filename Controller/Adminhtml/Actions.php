@@ -251,7 +251,7 @@ abstract class Actions extends \Magento\Backend\App\Action
         );
 
         if ($request->getParam('isAjax')) {
-            $block = $this->_objectManager->create('Magento\Framework\View\Layout')->getMessagesBlock();
+            $block = $this->_objectManager->create(\Magento\Framework\View\Layout::class)->getMessagesBlock();
             $block->setMessages($this->messageManager->getMessages(true));
 
             $this->getResponse()->setBody(json_encode(
@@ -478,7 +478,7 @@ abstract class Actions extends \Magento\Backend\App\Action
     protected function _getRegistry()
     {
         if (is_null($this->_coreRegistry)) {
-            $this->_coreRegistry = $this->_objectManager->get('\Magento\Framework\Registry');
+            $this->_coreRegistry = $this->_objectManager->get(\Magento\Framework\Registry::class);
         }
         return $this->_coreRegistry;
     }
