@@ -157,40 +157,55 @@ abstract class Actions extends \Magento\Backend\App\Action
      */
     public function _editAction()
     {
-        $model = $this->_getModel();
 
-        $this->_getRegistry()->register('current_model', $model);
+        try {
+            $model = $this->_getModel();
+            $id = $this->getRequest()->getParam('id');
+            if(!$model->getId() && $id) {
+                throw new \Exception("Item is not longer exist.", 1);
+            }
+            $this->_getRegistry()->register('current_model', $model);
 
-        $this->_view->loadLayout();
-        $this->_setActiveMenu($this->_activeMenu);
+            $this->_view->loadLayout();
+            $this->_setActiveMenu($this->_activeMenu);
 
-        $title = $model->getOwnTitle();
+            $title = $model->getOwnTitle();
+            if ($model->getId()) {
+                $breadcrumbTitle = __('Edit %1', $title);
+                $breadcrumbLabel = $breadcrumbTitle;
+            } else {
+                $breadcrumbTitle = __('New %1', $title);
+                $breadcrumbLabel = __('Create %1', $title);
+            }
+            $this->_view->getPage()->getConfig()->getTitle()->prepend(__($title));
+            $this->_view->getPage()->getConfig()->getTitle()->prepend(
+                $model->getId() ? $this->_getModelName($model) : __('New %1', $title)
+            );
 
-        if ($model->getId()) {
-            $breadcrumbTitle = __('Edit %1', $title);
-            $breadcrumbLabel = $breadcrumbTitle;
-        } else {
-            $breadcrumbTitle = __('New %1', $title);
-            $breadcrumbLabel = __('Create %1', $title);
+            $this->_addBreadcrumb($breadcrumbLabel, $breadcrumbTitle);
+
+            // restore data
+            $values = $this->_getSession()->getData($this->_formSessionKey, true);
+            if ($this->_paramsHolder) {
+                $values = isset($values[$this->_paramsHolder]) ? $values[$this->_paramsHolder] : null;
+            }
+
+            if ($values) {
+                $model->addData($values);
+            }
+
+            $this->_view->renderLayout();
+        } catch (\Exception $e) {
+            $this->messageManager->addException(
+                $e,
+                __(
+                    'Something went wrong while saving this %1. %2',
+                    strtolower($model->getOwnTitle()),
+                    $e->getMessage()
+                )
+            );
+            $this->_redirect('*/*/', [$this->_idKey => $model->getId()]);
         }
-        $this->_view->getPage()->getConfig()->getTitle()->prepend(__($title));
-        $this->_view->getPage()->getConfig()->getTitle()->prepend(
-            $model->getId() ? $this->_getModelName($model) : __('New %1', $title)
-        );
-
-        $this->_addBreadcrumb($breadcrumbLabel, $breadcrumbTitle);
-
-        // restore data
-        $values = $this->_getSession()->getData($this->_formSessionKey, true);
-        if ($this->_paramsHolder) {
-            $values = isset($values[$this->_paramsHolder]) ? $values[$this->_paramsHolder] : null;
-        }
-
-        if ($values) {
-            $model->addData($values);
-        }
-
-        $this->_view->renderLayout();
     }
 
     /**
