@@ -95,7 +95,6 @@ class AdminNotificationFeed extends \Magento\AdminNotification\Model\Feed
         if (count($modulesParams)) {
             $url .= '/modules/'.base64_encode(implode(';', $modulesParams));
         }
-z
         return $url;
     }
 
