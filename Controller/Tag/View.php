@@ -45,7 +45,7 @@ class View extends \Magefan\Blog\App\Action\Action
     {
         $id = $this->getRequest()->getParam('id');
 
-        $tag = $this->_objectManager->create(Magefan\Blog\Model\Tag::class)->load($id);
+        $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
         if (!$tag->getId()) {
             return false;
