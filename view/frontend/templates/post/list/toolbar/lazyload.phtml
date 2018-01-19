@@ -19,10 +19,10 @@
             'trigger_element' => '.mbblog-lazyload-trigger'
         ]);
     ?>
-    <div class="mfblog-autoloader" data-mage-init='{"<?php echo $block->getLazyloadJs() ?>" : <?php echo $config ?>}'>
-    	<button class="mbblog-lazyload-trigger mfblog-hide-onload action primary" title="<?php echo __('See more') ?>" type="button">
-            <span><?php echo __('See more') ?></span>
+    <div class="mfblog-autoloader" data-mage-init='{"<?= /* @noEscape */ $block->getLazyloadJs() ?>" : <?= $config ?>}'>
+    	<button class="mbblog-lazyload-trigger mfblog-hide-onload action primary" title="<?= __('See more') ?>" type="button">
+            <span><?= __('See more') ?></span>
         </button>
-        <img class="posts-loader mfblog-show-onload" src="<?php echo $block->getViewFileUrl('images/loader-2.gif') ?>" alt="<?php echo __('Posts loader') ?>" />
+        <img class="posts-loader mfblog-show-onload" src="<?= $block->getViewFileUrl('images/loader-2.gif') ?>" alt="<?= __('Posts loader') ?>" />
     </div>
 <?php } ?>

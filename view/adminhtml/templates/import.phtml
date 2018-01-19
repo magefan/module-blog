@@ -20,8 +20,8 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.location='<?php echo $block->getUrl('blog/import/wordpress') ?>'">
-                            <img class="img" src="<?php echo $this->getViewFileUrl('Magefan_Blog::images/wordpress.png') ?>" />
+                        <div class="itm-hld" onclick="window.location='<?= $block->getUrl('blog/import/wordpress') ?>'">
+                            <img class="img" src="<?= $this->getViewFileUrl('Magefan_Blog::images/wordpress.png') ?>" />
                             <br/>
                             <span class="lable">Import from WordPress<br/><br/></span>
                         </div>
@@ -34,12 +34,12 @@
                 <tr>
                     <td>
                         <div class="itm-hld" onclick="goToAwImport();">
-                            <img class="img" src="<?php echo $this->getViewFileUrl('Magefan_Blog::images/aw_blog.png') ?>" />
+                            <img class="img" src="<?= $this->getViewFileUrl('Magefan_Blog::images/aw_blog.png') ?>" />
                             <br/>
                             <span class="lable">Import from aheadWorks<br/> blog extension</span>
-                            <form id="start_aw_import" action="<?php echo $block->getUrl('blog/import/run') ?>" method="post">
+                            <form id="start_aw_import" action="<?= $block->getUrl('blog/import/run') ?>" method="post">
                                 <input type="hidden" name="type" value="aw" />
-                                <?php echo $block->getLayout()->getBlock('formkey')->toHtml() ?>
+                                <?= $block->escapeHtml($block->getLayout()->getBlock('formkey')->toHtml()) ?>
                             </form>
                         </div>
                     </td>

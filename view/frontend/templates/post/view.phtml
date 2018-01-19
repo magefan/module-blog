@@ -15,37 +15,37 @@
 ?>
 <?php
     $_post = $this->getPost();
-    $_postUrl = $_post->getPostUrl();
+    $_postUrl = $block->escapeUrl($_post->getPostUrl());
     $_postName = $block->escapeHtml($_post->getTitle(), null, true);
 ?>
 <div class="post-view">
-    <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
+    <div class="post-holder post-holder-<?= $_post->getId() ?>">
         <div class="post-header clearfix">
-            <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $_postUrl ?>">
+            <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $_postUrl ?>">
                 <a class="addthis_button_facebook"></a>
                 <a class="addthis_button_twitter"></a>
                 <a class="addthis_button_email"></a>
                 <a class="addthis_button_compact"></a>
             </div>
-            <?php echo $this->getInfoHtml() ?>
+            <?= $this->getInfoHtml() ?>
         </div>
 
         <div class="post-content">
             <div class="post-description clearfix">
                 <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
                 <div class="post-ftimg-hld">
-                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                    <img src="<?= $featuredImage ?>" alt="<?= $_postName ?>" />
                 </div>
                 <?php } ?>
                 <div class="post-text-hld">
-                    <?php echo $block->getContent() ?>
+                    <?= $block->getContent() ?>
                     <div class="clear"></div>
                 </div>
             </div>
         </div>
 
         <div class="post-bottom">
-            <?php echo $this->getChildHtml('blog.post.bottom') ?>
+            <?= $this->getChildHtml('blog.post.bottom') ?>
         </div>
     </div>
 </div>

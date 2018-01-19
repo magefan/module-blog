@@ -16,6 +16,6 @@
 <?php if ($block->getCollection()->getSize()) { ?>
 	<?php $woj = $block->getWidgetOptionsJson() ?>
     <div class="toolbar toolbar-blog-posts" <?php if ($woj) echo 'data-mage-init="'.$woj.'"' ?>>
-        <?php echo $block->getPagerHtml() ?>
+        <?= $block->getPagerHtml() ?>
     </div>
 <?php } ?>

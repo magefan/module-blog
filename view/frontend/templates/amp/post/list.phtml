@@ -17,14 +17,14 @@
 $_postCollection = $block->getPostCollection();
 ?>
 <?php if (!$_postCollection->count()): ?>
-    <div class="message info empty"><div><?php echo __('We can\'t find posts matching the selection.') ?></div></div>
+    <div class="message info empty"><div><?= __('We can\'t find posts matching the selection.') ?></div></div>
 <?php else: ?>
-    <?php echo $block->getAdditionalHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
     <div class="post-list-wrapper">
         <?php $iterator = 1; ?>
         <ol class="post-list">
             <?php foreach ($_postCollection as $_post): ?>
-                <?php echo $block->getPostHtml($_post) ?>
+                <?= $block->getPostHtml($_post) ?>
             <?php endforeach; ?>
             <li class="hidden">
                 <script type="text/javascript">
@@ -36,5 +36,5 @@ $_postCollection = $block->getPostCollection();
         </ol>
     </div>
 
-    <?php echo $block->getToolbarHtml() ?>
+    <?= $block->getToolbarHtml() ?>
 <?php endif; ?>

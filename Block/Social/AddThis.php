@@ -1,11 +1,41 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
 
 namespace Magefan\Blog\Block\Social;
 
 use Magento\Store\Model\ScopeInterface;
 
+/**
+ * Class AddThis
+ * @package Magefan\Blog\Block\Social
+ */
 class AddThis extends \Magento\Framework\View\Element\Template
 {
+    /**
+     * @var \Magento\Framework\Json\Helper\Data
+     */
+    protected $jsonHelper;
+
+    /**
+     * Constructor.
+     *
+     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     */
+    public function __construct(
+        \Magento\Framework\Json\Helper\Data $jsonHelper,
+        \Magento\Framework\View\Element\Template\Context $context,
+        array $data = []
+    )
+    {
+        $this->jsonHelper = $jsonHelper;
+        parent::__construct($context, $data);
+    }
+
     /**
      * Retrieve AddThis status
      *
@@ -43,6 +73,23 @@ class AddThis extends \Magento\Framework\View\Element\Template
             'mfblog/social/add_this_language',
             ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Retrieve AddThis json config
+     *
+     * @return string
+     */
+    public function getAddthisConfig()
+    {
+        $config = [
+            'ui_language' => $this->getAddThisLanguage(),
+            'data_track_clickback' => false
+        ];
+
+        $encodedData = $this->jsonHelper->jsonEncode($config);
+
+        return $encodedData;
     }
 
     public function toHtml()

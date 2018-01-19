@@ -33,13 +33,13 @@ if ($exist = $block->getItems()->getSize() && $this->displayProducts()) {
 ?>
 
 <?php if ($exist):?>
-<div class="block <?php echo $class; ?>">
+<div class="block <?= $block->escapeHtml($class) ?>">
     <div class="block-title title">
-        <strong id="block-<?php echo $class?>-heading" role="heading" aria-level="2"><?php echo $title; ?></strong>
+        <strong id="block-<?= $block->escapeHtml($class) ?>-heading" role="heading" aria-level="2"><?= $block->escapeHtml($title) ?></strong>
     </div>
-    <div class="block-content content" aria-labelledby="block-<?php echo $class?>-heading">
+    <div class="block-content content" aria-labelledby="block-<?= $block->escapeHtml($class) ?>-heading">
 
-        <div class="products wrapper grid products-grid products-<?php echo $type; ?>">
+        <div class="products wrapper grid products-grid products-<?= $block->escapeHtml($type) ?>">
              <amp-carousel
              width="500"
              height="400"
@@ -58,24 +58,24 @@ if ($exist = $block->getItems()->getSize() && $this->displayProducts()) {
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if ($type == 'related' || $type == 'upsell'): ?>
-                    <?php echo($iterator++ == 1) ? '<div class="item product product-item" style="display: none;">' : '</div><div class="item product product-item" style="display: none;">' ?>
+                    <?=($iterator++ == 1) ? '<div class="item product product-item" style="display: none;">' : '</div><div class="item product product-item" style="display: none;">' ?>
                 <?php else: ?>
-                    <?php echo($iterator++ == 1) ? '<div class="item product product-item">' : '</div><div class="item product product-item">' ?>
+                    <?=($iterator++ == 1) ? '<div class="item product product-item">' : '</div><div class="item product product-item">' ?>
                 <?php endif; ?>
-                <div class="product-item-info <?php echo $available; ?>">
-                    <?php echo '<!-- ' . $image . '-->' ?>
-                    <a href="<?php echo $block->getProductUrl($_item) ?>" class="product photo product-item-photo">
-                        <?php echo $block->getImage($_item, $image)->toHtml(); ?>
+                <div class="product-item-info <?= $block->escapeHtml($available); ?>">
+                    <?= $block->escapeHtml('<!-- ' . $image . '-->') ?>
+                    <a href="<?= $block->getProductUrl($_item) ?>" class="product photo product-item-photo">
+                        <?= $block->escapeHtml($block->getImage($_item, $image)->toHtml()); ?>
                     </a>
                     <div class="product details product-item-details">
-                        <strong class="product name product-item-name"><a class="product-item-link" title="<?php echo $block->escapeHtml($_item->getName()) ?>" href="<?php echo $block->getProductUrl($_item) ?>">
-                            <?php echo $block->escapeHtml($_item->getName()) ?></a>
+                        <strong class="product name product-item-name"><a class="product-item-link" title="<?= $block->escapeHtml($_item->getName()) ?>" href="<?= $block->getProductUrl($_item) ?>">
+                            <?= $block->escapeHtml($_item->getName()) ?></a>
                         </strong>
 
-                        <?php echo $block->getProductPrice($_item); ?>
+                        <?= $block->escapeHtml($block->getProductPrice($_item)); ?>
                         </div>
                     </div>
-                    <?php echo($iterator == count($items)+1) ? '</div>' : '' ?>
+                    <?=($iterator == count($items)+1) ? '</div>' : '' ?>
                 <?php endforeach ?>
             </amp-carousel>
         </div>

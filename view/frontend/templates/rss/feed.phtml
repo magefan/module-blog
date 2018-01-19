@@ -18,20 +18,20 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
 ?>
 <rss version="2.0">
 <channel>
-   <title><?php echo $block->escapeHtml($this->getTitle()) ?></title>
-   <link><?php echo $this->getLink() ?></link>
-   <description><?php echo $block->escapeHtml($this->getDescription()) ?></description>
+   <title><?= $block->escapeHtml($this->getTitle()) ?></title>
+   <link><?= $this->getLink() ?></link>
+   <description><?= $block->escapeHtml($this->getDescription()) ?></description>
    <?php foreach($_postCollection as $_post) { ?>
    <item>
-      <title><?php echo $block->escapeHtml($_post->getTitle(), null, true) ?></title>
-      <link><?php echo $_post->getPostUrl() ?></link>
-      <description><![CDATA[<?php echo $_post->getFilteredContent() ?>]]></description>
+      <title><?= $block->escapeHtml($_post->getTitle(), null, true) ?></title>
+      <link><?= $block->escapeUrl($_post->getPostUrl()) ?></link>
+      <description><![CDATA[<?= $block->escapeHtml($_post->getFilteredContent()) ?>]]></description>
       <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
-         <image><?php echo $featuredImage ?></image>
+         <image><?= $block->escapeHtml($featuredImage) ?></image>
       <?php } ?>
-      <pubDate><?php echo $_post->getPublishDate('c') ?></pubDate>
+      <pubDate><?= $block->escapeHtml($_post->getPublishDate('c')) ?></pubDate>
       <?php foreach($_post->getParentCategories() as $category) { ?>
-      <category><![CDATA[<?php echo $category->getTitle() ?>]]></category>
+      <category><![CDATA[<?= $block->escapeHtml($category->getTitle()) ?>]]></category>
       <?php } ?>
    </item>
    <?php } ?>

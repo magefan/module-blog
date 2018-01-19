@@ -23,11 +23,11 @@
     <ul class="post-list clearfix">
         <?php foreach ($_postCollection as $_post) { ?>
             <?php
-                $_postUrl = $_post->getPostUrl();
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
                 $_postName = $block->escapeHtml($_post->getTitle(), null, true);
             ?>
             <li class="post-holder post-holder-<?php echo $_post->getId() ?>">
-                <div class="post-header">
+                <div class="zpost-header">
 
                     <div class="post-title-holder clearfix">
                         <div class="post-title">

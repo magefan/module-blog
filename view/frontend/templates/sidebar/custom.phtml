@@ -17,6 +17,6 @@
 <?php if ($conetnt) { ?>
     <div class="widget block blog-custom" >
         <?php /* without html encode */ ?>
-        <?= $conetnt ?>
+        <?= $block->escapeHtml($conetnt) ?>
     </div>
 <?php } ?>

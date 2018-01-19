@@ -21,15 +21,15 @@
 
 <div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
     <div class="block-title">
-        <strong><?php echo __('Tags') ?></strong>
+        <strong><?= __('Tags') ?></strong>
     </div>
 
     <div class="tagclaud-hld">
     <?php foreach ($tags as $tag) { ?>
         <?php $title = $block->escapeHtml($tag->getTitle()) ?>
-        <span class="<?php echo $this->getTagClass($tag) ?>">
-            <a href="<?php echo $tag->getTagUrl() ?>" title="<?php echo $title ?>">
-                <?php echo $title ?>
+        <span class="<?= $block->escapeHtml($this->getTagClass($tag)) ?>">
+            <a href="<?= $block->escapeUrl($tag->getTagUrl()) ?>" title="<?= $title ?>">
+                <?= $title ?>
             </a>
         </span>
     <?php } ?>

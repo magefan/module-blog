@@ -1,7 +1,19 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Product related posts template
+ *
+ * @var $block \Magefan\Blog\Block\Catalog\Product\RelatedPosts
+ */
+?>
 <script type="text/javascript">
-    var addthis_config = {
-        "ui_language": '<?php echo $this->getAddThisLanguage(); ?>',
-        "data_track_clickback":false
-    }
+    var addthis_config = <?= $block->getAddthisConfig() ?>;
 </script>
-<script type="text/javascript" async src="<?php echo '/' . '/' ?>s7.addthis.com/js/250/addthis_widget.js#pubid=<?php echo $this->getAddThisPubId(); ?>"></script>
+<script type="text/javascript" async src="<?= '/' . '/' ?>s7.addthis.com/js/250/addthis_widget.js#pubid=<?= $block->escapeHtml($block->getAddThisPubId()) ?>"></script>

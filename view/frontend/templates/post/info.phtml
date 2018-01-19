@@ -18,16 +18,16 @@
 
 <div class="post-info clear">
     <div class="item post-posed-date">
-        <span class="label"><?php echo __('Posted:') ?></span>
-        <span class="value"><?php echo $_post->getPublishDate('F d, Y') ?></span>
+        <span class="label"><?= __('Posted:') ?></span>
+        <span class="value"><?= $block->escapeHtml($_post->getPublishDate('F d, Y')) ?></span>
     </div>
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
     <div class="dash">|</div>
     <div class="item post-categories">
-        <span class="label"><?php echo __('Categories:') ?></span>
+        <span class="label"><?= __('Categories:') ?></span>
         <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
-            <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>">
-                <?php echo $block->escapeHtml($ct->getTitle()) ?>
+            <a title="<?= $block->escapeHtml($ct->getTitle()) ?>" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>">
+                <?= $block->escapeHtml($ct->getTitle()) ?>
             </a>
             <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
         <?php } ?>
@@ -36,19 +36,19 @@
     <?php if ($this->magefanCommentsEnabled()) { ?>
     <div class="dash">|</div>
     <div class="item post-comments">
-        <span class="label"><?php echo __('Comments:') ?></span>
-        <a title="<?php echo $block->escapeHtml($_post->getTitle()) ?>" href="<?php echo $_post->getPostUrl() ?>#post-comments">
-            <?php echo $block->escapeHtml($_post->getCommentsCount()) ?>
+        <span class="label"><?= __('Comments:') ?></span>
+        <a title="<?= $block->escapeHtml($_post->getTitle()) ?>" href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments">
+            <?= $block->escapeHtml($_post->getCommentsCount()) ?>
         </a>
     </div>
     <?php } ?>
     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
     <div class="dash">|</div>
     <div class="item post-categories">
-        <span class="label"><?php echo __('Tags:') ?></span>
+        <span class="label"><?= __('Tags:') ?></span>
         <?php $n = 0; foreach($_post->getRelatedTags() as $tag) { $n++; ?>
-            <a title="<?php echo $block->escapeHtml($tag->getTitle()) ?>" href="<?php echo $tag->getTagUrl() ?>">
-                <?php echo $block->escapeHtml($tag->getTitle()) ?>
+            <a title="<?= $block->escapeHtml($tag->getTitle()) ?>" href="<?= $block->escapeUrl($tag->getTagUrl()) ?>">
+                <?= $block->escapeHtml($tag->getTitle()) ?>
             </a>
             <?php if ($n != $_tagsCount) { ?>, <?php } ?>
         <?php } ?>
@@ -58,12 +58,12 @@
         <?php if ($_author = $_post->getAuthor()) { ?>
         <div class="dash">|</div>
         <div class="item post-author">
-            <span class="label"><?php echo __('Author:') ?></span>
+            <span class="label"><?= __('Author:') ?></span>
             <span class="value">
                 <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
-                <a title="<?php echo $block->escapeHtml($_author->getTitle()) ?>" href="<?php echo $_author->getAuthorUrl() ?>">
+                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>" href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>">
                 <?php } ?>
-                    <?php echo $block->escapeHtml($_author->getTitle()) ?>
+                    <?= $block->escapeHtml($_author->getTitle()) ?>
                 <?php if ($authorPageEnabled) { ?>
                 </a>
                 <?php } ?>
