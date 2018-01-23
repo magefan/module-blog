@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -64,7 +64,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         $html = '';
         if ($blogNode) {
             $children = $blogNode->getChildren();
-            $hasChildren = count($children);
+            $hasChildren = $children->count();
 
             $html .= '
                 <li class="ui-menu-item level0 ' . $menu_type . ' '  . ($hasChildren ? 'parent' : '')  . '">';
@@ -100,20 +100,21 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             $html = '<ul class="subchildmenu '.$column_class.'">';
             foreach ($children as $child) {
                 $sub_children = $child->getChildren();
+                $hasSubChildren = $sub_children->count();
 
                 $item_class = 'level'.$level.' ';
-                if (count($sub_children) > 0) {
+                if ($hasSubChildren) {
                     $item_class .= 'parent ';
                 }
                 $html .= '<li class="ui-menu-item '.$item_class.'">';
-                if (count($sub_children) > 0) {
+                if ($hasSubChildren) {
                     $html .= '<div class="open-children-toggle"></div>';
                 }
 
                 $html .= '<a href="'.$child->getUrl().'">';
                 $html .= '<span>'.$child->getName();
                 $html .= '</span></a>';
-                if (count($sub_children) > 0) {
+                if ($hasSubChildren) {
                     $html .= $this->getSubmenuItemsHtml($sub_children, $level+1, $max_level, $column_width, $menu_type);
                 }
                 $html .= '</li>';
