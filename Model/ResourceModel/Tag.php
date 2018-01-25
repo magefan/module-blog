@@ -101,7 +101,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     *  Check whether category identifier is numeric
+     *  Check whether tag identifier is numeric
      *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
@@ -112,7 +112,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     *  Check whether category identifier is valid
+     *  Check whether tag identifier is valid
      *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
