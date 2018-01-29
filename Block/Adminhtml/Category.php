@@ -26,4 +26,21 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_addButtonLabel = __('Add New Category');
         parent::_construct();
     }
+
+    /**
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+
+        $onClick = "setLocation('" . $this->getUrl('*/import/*') . "')";
+
+        $this->getToolbar()->addChild(
+            'options_button',
+            \Magento\Backend\Block\Widget\Button::class,
+            ['label' => __('Import Categories'), 'onclick' => $onClick]
+        );
+
+        return parent::_prepareLayout();
+    }
 }

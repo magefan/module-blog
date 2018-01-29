@@ -34,7 +34,7 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
     protected function _prepareLayout()
     {
 
-        $onClick = "setLocation('" . $this->getUrl('blog/import/wordpress') . "')";
+        $onClick = "setLocation('" . $this->getUrl('*/import/*') . "')";
 
         $this->getToolbar()->addChild(
             'options_button',
