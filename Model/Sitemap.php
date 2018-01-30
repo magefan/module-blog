@@ -9,6 +9,8 @@
 namespace Magefan\Blog\Model;
 
 /**
+ * Deprecated
+ * Used for Magento 2.1.x only to create blog_sitemap.xml
  * Overide sitemap
  */
 class Sitemap extends \Magento\Sitemap\Model\Sitemap
@@ -50,7 +52,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
 
     /**
      * Disable save action
-     * @return sekf
+     * @return self
      */
     public function save()
     {

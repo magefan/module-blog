@@ -8,9 +8,9 @@
 
 namespace Magefan\Blog\Plugin\Magento\Sitemap;
 
+use Magefan\Blog\Model\CategoryFactory;
+use Magefan\Blog\Model\PostFactory;
 use Magento\Framework\DataObject;
-use Magefan\Blog\Model\Category;
-use Magefan\Blog\Model\Post;
 use Magento\Sitemap\Model\Sitemap;
 
 /**
@@ -23,15 +23,11 @@ class SitemapPlugin
      */
     protected $sitemapFactory;
 
-    /**
-     * @var
-     */
-    protected $category;
 
-    /**
-     * @var Post
-     */
-    protected $post;
+    protected $categoryFactory;
+
+
+    protected $postFactory;
 
     /**
      * Generated sitemaps
@@ -47,15 +43,17 @@ class SitemapPlugin
      */
     public function __construct(
         \Magefan\Blog\Model\SitemapFactory $sitemapFactory,
-        Category $category,
-        Post $post
+        CategoryFactory $categoryFactory,
+        PostFactory $postFactory
     ) {
-        $this->post = $post;
-        $this->category = $category;
+        $this->postFactory = $postFactory;
+        $this->categoryFactory = $categoryFactory;
         $this->sitemapFactory = $sitemapFactory;
     }
 
     /**
+     * Deprecated
+     * Used for Magento 2.1.x only to create blog_sitemap.xml
      * Add magefan blog actions to allowed list
      * @param  \Magento\Sitemap\Model\Sitemap $sitemap
      * @return array
@@ -99,7 +97,7 @@ class SitemapPlugin
             [
                 'changefreq' => 'weekly',
                 'priority' => '0.25',
-                'collection' =>  $this->category
+                'collection' =>  $this->categoryFactory->create()
                     ->getCollection($storeId)
                     ->addStoreFilter($storeId)
                     ->addActiveFilter(),
@@ -110,7 +108,7 @@ class SitemapPlugin
             [
                 'changefreq' => 'weekly',
                 'priority' => '0.25',
-                'collection' =>  $this->post
+                'collection' =>  $this->postFactory->create()
                     ->getCollection($storeId)
                     ->addStoreFilter($storeId)
                     ->addActiveFilter(),
