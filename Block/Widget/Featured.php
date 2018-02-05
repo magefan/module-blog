@@ -25,7 +25,7 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
             $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
         );
 
-        return parent::_toHtml();
+        return \Magento\Framework\View\Element\Template::_toHtml();
     }
 
     /**
