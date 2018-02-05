@@ -115,6 +115,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
             if (!empty($data[$dateField])) {
                 $filterRules[$dateField] = $dateFilter;
+                $data[$dateField] = preg_replace('/(.*)(\+\d\d\d\d\d\d)(\d\d)/U', '$1$3', $data[$dateField]);
             }
         }
 
