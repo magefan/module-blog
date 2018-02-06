@@ -41,8 +41,6 @@
 
 .post-list .post-content .post-read-more {padding-top:10px; float:right;}
 
-.blog-category-view .category-content {padding-left: 40px;}
-
 .subcategory-links-wrapper ul,
 .post-links-wrapper ul {list-style: none}
 
@@ -51,9 +49,9 @@
 .post-content .post-description ol {list-style-position: inside;}
 
 .post-content .post-description .post-ftimg-hld {float: left; margin: 0 15px 0 15px; width: 33%}
-.post-content .post-description .post-ftimg-hld img {width:100%; padding:0px; margin:0px;}
+.post-content .post-description .post-ftimg-hld img {width:100%; padding:0; margin:0;}
 @media (max-width: 496px) {
-  .post-content .post-description .post-ftimg-hld {width: 100%; margin:0px;}
+  .post-content .post-description .post-ftimg-hld {width: 100%; margin:0;}
 }
 
 .post-list .post-header .post-title {max-width:80%;}
@@ -66,7 +64,7 @@
 
 
 .post-list .post-header .post-title {
-    margin: 0px;
+    margin: 0;
     padding: 10px 0;
     float:left;
 }
@@ -84,17 +82,17 @@
 
 .post-view .post-gallery {margin:15px 0 15px 0}
 .post-view .post-gallery .gallery-image-hld {margin: 0 14px 14px 0; border:1px solid #ccc; display: block; float:left}
-.post-view .post-gallery .gallery-image{padding: 0px; margin:0px; display:block}
+.post-view .post-gallery .gallery-image{padding: 0; margin:0; display:block}
 
 .post-view .block {margin-bottom: 30px;}
 
 .widget.block-recent-posts .block-content .item {
-        padding: 8px 0 0px 0px;
+        padding: 8px 0 0 0;
 }
 
 .widget.block-categories ul {
     list-style: initial;
-    padding-left:0px;
+    padding-left:0;
 }
 
 .widget.block-categories ul ul {
@@ -104,7 +102,7 @@
 .widget.block-categories ul,
 .widget.block-categories li {
     margin: 5px 0 5px 9px;
-    padding: 0px;
+    padding: 0;
 }
 
 .widget.block-rss .rss-icon {float: left; width: 23px; padding-right: 10px;}
@@ -205,8 +203,8 @@
 .widget.block-tagclaud .largest{font-size:2em}
 
 .blog-widget-recent .post-list {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 .blog-widget-recent .post-holder {
@@ -227,7 +225,7 @@
 }
 .blog-widget-recent-masonry .post-description .post-ftimg-hld {
     width: 100%;
-    margin: 0px;
+    margin: 0;
 }
 
 .mfblog-autoloader {text-align: center;}
@@ -237,3 +235,7 @@
 @media (max-width: 420px) {
   #mfblog_gcomments {max-width:345px; overflow-y: scroll;}
 }
+
+.blog-index-index .post-list-wrapper .post-list,
+.blog-category-view .post-list-wrapper .post-list {padding-left: 0;}
+.blog-category-view .category-content {padding-left: 0;}
