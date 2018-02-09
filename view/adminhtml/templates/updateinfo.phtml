@@ -13,15 +13,11 @@
  * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo
  */
 ?>
-<?php
-if ($block->needToUpdate()) {
-    ?>
+<?php if ($block->needToUpdate()) { ?>
     <div class="messages">
         <div class="message message-notice notice">
             <div data-ui-id="messages-message-error">
-               <?php $html = __('Important: It is recommended to update Blog Extension to the version %1 You can update it via
-                    composer or download the new versions archive from <a href="https://magefan.com/magento2-blog-extension" target="_blank">Magefan store</a>.
-                    Please <a href="https://magefan.com/contact" target="_blank">contact</a> Magefan if you have any questions or need help with an update', $block->getLatestVersion());
+               <?php $html = __('Important: It is recommended to update Blog Extension to the version %1. You can update it via composer or download the new versions archive from <a href="https://magefan.com/magento2-blog-extension?utm_source=update_blog_info_block_in_adminp&utm_medium=link1&utm_campaign=new_blog_version" target="_blank">Magefan Store</a>. Please <a href="https://magefan.com/contact?utm_source=update_blog_info_block_in_adminp&utm_medium=link2&utm_campaign=new_blog_version" target="_blank">contact</a> Magefan Team if you have any questions or need help with an update.', $block->getLatestVersion());
                ?>
                 <?= $html ?>
             </div>
