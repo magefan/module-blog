@@ -33,7 +33,7 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
     protected function _prepareLayout()
     {
 
-        $onClick = "setLocation('" . $this->getUrl('*/import/*') . "')";
+        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
 
         $this->getToolbar()->addChild(
             'options_button',
