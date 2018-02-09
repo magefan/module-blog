@@ -29,7 +29,7 @@ class Wordpress extends \Magento\Backend\App\Action
             (array)$this->_getSession()->getData('import_wordpress_form_data', true) ?: []
         );
 
-        $this->_objectManager->get('\Magento\Framework\Registry')->register('import_config', $config);
+        $this->_objectManager->get(\Magento\Framework\Registry::class)->register('import_config', $config);
 
         $this->_view->renderLayout();
     }

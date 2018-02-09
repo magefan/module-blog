@@ -33,7 +33,7 @@ class View extends \Magefan\Blog\App\Action\Action
             return $this->_forwardNoroute();
         }
 
-        $registry = $this->_objectManager->get('\Magento\Framework\Registry');
+        $registry = $this->_objectManager->get(\Magento\Framework\Registry::class);
         $registry->register('current_blog_archive_year', (int)$date[0]);
         $registry->register('current_blog_archive_month', (int)$date[1]);
 

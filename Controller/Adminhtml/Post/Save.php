@@ -25,7 +25,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
     {
         /* Prepare author */
         if (!$model->getAuthorId()) {
-            $authSession = $this->_objectManager->get('Magento\Backend\Model\Auth\Session');
+            $authSession = $this->_objectManager->get(\Magento\Backend\Model\Auth\Session::class);
             $model->setAuthorId($authSession->getUser()->getId());
         }
 
@@ -60,7 +60,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                         $image = $data[$key][0]['name'];
                         $model->setData($key, Post::BASE_MEDIA_PATH . '/' . $image);
                         $imageUploader = $this->_objectManager->get(
-                            'Magefan\Blog\ImageUpload'
+                            \Magefan\Blog\ImageUpload::class
                         );
                         $imageUploader->moveFileFromTmp($image);
                     } else {
@@ -89,7 +89,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                         $gallery[] = $image['value_id'];
                     } else {
                         $imageUploader = $this->_objectManager->get(
-                            'Magefan\Blog\ImageUpload'
+                            \Magefan\Blog\ImageUpload::class
                         );
                         $imageUploader->moveFileFromTmp($image['file']);
                         $gallery[] = Post::BASE_MEDIA_PATH . '/' . $image['file'];
@@ -109,7 +109,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
     protected function filterParams($data)
     {
         /* Prepare dates */
-        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
+        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\Date::class);
 
         $filterRules = [];
         foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {

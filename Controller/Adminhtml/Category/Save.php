@@ -37,7 +37,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
     protected function filterParams($data)
     {
         /* Prepare dates */
-        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\Date');
+        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\Date::class);
 
         $filterRules = [];
         foreach (['custom_theme_from', 'custom_theme_to'] as $dateField) {

@@ -30,7 +30,7 @@ class View extends \Magefan\Blog\App\Action\Action
             return $this->_forwardNoroute();
         }
 
-        $this->_objectManager->get('\Magento\Framework\Registry')->register('current_blog_tag', $tag);
+        $this->_objectManager->get(\Magento\Framework\Registry::class)->register('current_blog_tag', $tag);
 
         $this->_view->loadLayout();
         $this->_view->renderLayout();
@@ -45,7 +45,7 @@ class View extends \Magefan\Blog\App\Action\Action
     {
         $id = $this->getRequest()->getParam('id');
 
-        $tag = $this->_objectManager->create('Magefan\Blog\Model\Tag')->load($id);
+        $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
         if (!$tag->getId()) {
             return false;
