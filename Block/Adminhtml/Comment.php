@@ -20,10 +20,27 @@ class Comment extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _construct()
     {
-        $this->_controller = 'adminhtml_Blog';
+        $this->_controller = 'adminhtml_comment';
         $this->_blockGroup = 'Magefan_Blog';
         //$this->_addButtonLabel = __('Add New Comment');
         parent::_construct();
         $this->removeButton('add');
+    }
+
+    /**
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+
+        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+
+        $this->getToolbar()->addChild(
+            'options_button',
+            \Magento\Backend\Block\Widget\Button::class,
+            ['label' => __('Import Comments'), 'onclick' => $onClick]
+        );
+
+        return parent::_prepareLayout();
     }
 }

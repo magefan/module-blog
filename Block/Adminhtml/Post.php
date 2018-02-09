@@ -24,6 +24,25 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_blockGroup = 'Magefan_Blog';
         $this->_headerText = __('Post');
         $this->_addButtonLabel = __('Add New Post');
+
         parent::_construct();
     }
+
+    /**
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+
+        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+
+        $this->getToolbar()->addChild(
+            'options_button',
+            \Magento\Backend\Block\Widget\Button::class,
+            ['label' => __('Import Posts'), 'onclick' => $onClick]
+        );
+
+        return parent::_prepareLayout();
+    }
+
 }
