@@ -387,9 +387,17 @@
                     <label>Tag Route</label>
                     <comment>E.g.: "tag" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name/</comment>
                 </field>
+                <field id="tag_sufix" translate="label comment" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tag URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog tag accessible from mystore.com/{blog_route}/tag/tag-name.html</comment>
+                </field>
                 <field id="author_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Author Route</label>
                     <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name/</comment>
+                </field>
+                <field id="author_sufix" translate="label comment" type="text" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Author URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog author accessible from mystore.com/{blog_route}/author/author-name.html</comment>
                 </field>
                 <field id="search_route" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Route</label>

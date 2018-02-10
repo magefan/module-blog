@@ -265,7 +265,12 @@ class Url
      */
     protected function addUrlSufix($url, $controllerName)
     {
-        if (in_array($controllerName, [self::CONTROLLER_POST, self::CONTROLLER_CATEGORY])) {
+        if (in_array($controllerName, [
+            self::CONTROLLER_POST,
+            self::CONTROLLER_CATEGORY,
+            self::CONTROLLER_AUTHOR,
+            self::CONTROLLER_TAG
+        ])) {
             if ($sufix = $this->getUrlSufix($controllerName)) {
                 $char = false;
                 foreach (['#', '?'] as $ch) {
