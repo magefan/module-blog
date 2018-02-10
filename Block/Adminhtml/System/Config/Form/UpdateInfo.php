@@ -21,11 +21,34 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     const PATH_TO_JSON_FILE = 'https://magefan.com/media/product-versions.json';
     const LATESTS_VERSION_CACHE_KEY = 'magefan_latests_product_versions';
 
+    /**
+     * @var \Magento\Framework\HTTP\Client\Curl
+     */
     protected $curlClient;
-    protected $_moduleList;
+
+    /**
+     * @var ModuleListInterface
+     */
+    protected $moduleList;
+
+    /**
+     * @var mixed
+     */
     protected $latestVersion;
+
+    /**
+     * @var mixed
+     */
     protected $currentVersion;
+
+    /**
+     * @var AdminNotificationFeed
+     */
     protected $adminNotificationFeed;
+
+    /**
+     * @var \Magento\Framework\App\CacheInterface
+     */
     protected $cacheManager;
 
     /**
@@ -33,11 +56,11 @@ class UpdateInfo extends \Magento\Backend\Block\Template
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\HTTP\Client\Curl $curl
      * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param AdminNotificationFeed $adminNotificationFeed
      * @param ModuleListInterface $moduleList
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\App\CacheInterface $cacheManager,
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\HTTP\Client\Curl $curl,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
@@ -45,9 +68,9 @@ class UpdateInfo extends \Magento\Backend\Block\Template
         ModuleListInterface $moduleList,
         array $data = []
     ) {
-        $this->cacheManager = $cacheManager;
+        $this->cacheManager = $context->getCache();
         $this->adminNotificationFeed = $adminNotificationFeed;
-        $this->_moduleList = $moduleList;
+        $this->moduleList = $moduleList;
         $this->jsonHelper = $jsonHelper;
         $this->curlClient = $curl;
         parent::__construct($context, $data);
@@ -59,7 +82,7 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     public function getCurrentVersion()
     {
         if (null === $this->currentVersion) {
-            $this->currentVersion = $this->_moduleList
+            $this->currentVersion = $this->moduleList
                 ->getOne($this->getModuleName())['setup_version'];
         }
 

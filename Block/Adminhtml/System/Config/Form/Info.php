@@ -43,7 +43,7 @@ class Info extends \Magento\Config\Block\System\Config\Form\Field
     {
         $m = $this->moduleList->getOne($this->getModuleName());
         $html = '<div style="padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;">
-            Blog Extension v' . $m['setup_version'] . ' was developed by <a href="http://magefan.com/" target="_blank">MageFan</a>.
+            Blog Extension v' . $m['setup_version'] . ' was developed by <a href="https://magefan.com?utm_source=m2admin_blog_config&utm_medium=link&utm_campaign=regular" target="_blank">Magefan</a>.
         </div>';
 
         return $html;

@@ -10,7 +10,6 @@
 <layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
     <update handle="formkey"/>
     <update handle="blog_comment_grid_block"/>
-    <update handle="blog_update_info"/>
     <container name="root">
         <block class="Magento\Backend\Block\Widget\Grid\Container" name="blog.comment.container" template="Magento_Backend::widget/grid/container/empty.phtml"/>
     </container>
