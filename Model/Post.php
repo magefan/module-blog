@@ -392,53 +392,57 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve short filtered content
-     *
+     * @param  mixed $len
      * @return string
      */
-    public function getShortFilteredContent()
+    public function getShortFilteredContent($len = null)
     {
-        $key = 'short_filtered_content';
+        $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
+
             if ($this->getShortContent()) {
                 $content = $this->filterProvider->getPageFilter()->filter(
                     $this->getShortContent()
                 );
             } else {
                 $content = $this->getFilteredContent();
-                $pageBraker = '<!-- pagebreak -->';
 
-                $p = mb_strpos($content, $pageBraker);
-                if (!$p) {
-                    $p = (int)$this->scopeConfig->getValue(
-                        'mfblog/post_list/shortcotent_length',
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-                    );
-                }
-
-                if ($p) {
-                    $content = mb_substr($content, 0, $p);
-                    try {
-                        
-                        $previousLoaderState = libxml_disable_entity_loader(true);
-                        $previousErrorState = libxml_use_internal_errors(true);
-                        $dom = new \DOMDocument();
-                        $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                        libxml_disable_entity_loader($previousLoaderState);
-                        libxml_use_internal_errors($previousErrorState);
-
-                        $body = $dom->getElementsByTagName('body');
-                        if ($body && $body->length > 0) {
-                            $body = $body->item(0);
-                            $_content = new \DOMDocument;
-                            foreach ($body->childNodes as $child) {
-                                $_content->appendChild($_content->importNode($child, true));
-                            }
-                            $content = $_content->saveHTML();
-                        }
-                    } catch (\Exception $e) {
+                if (!$len) {
+                    $pageBraker = '<!-- pagebreak -->';
+                    $len = mb_strpos($content, $pageBraker);
+                    if (!$len) {
+                        $len = (int)$this->scopeConfig->getValue(
+                            'mfblog/post_list/shortcotent_length',
+                            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                        );
                     }
                 }
             }
+
+            if ($len) {
+                $content = mb_substr($content, 0, $len);
+                try {
+                    
+                    $previousLoaderState = libxml_disable_entity_loader(true);
+                    $previousErrorState = libxml_use_internal_errors(true);
+                    $dom = new \DOMDocument();
+                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
+                    libxml_disable_entity_loader($previousLoaderState);
+                    libxml_use_internal_errors($previousErrorState);
+
+                    $body = $dom->getElementsByTagName('body');
+                    if ($body && $body->length > 0) {
+                        $body = $body->item(0);
+                        $_content = new \DOMDocument;
+                        foreach ($body->childNodes as $child) {
+                            $_content->appendChild($_content->importNode($child, true));
+                        }
+                        $content = $_content->saveHTML();
+                    }
+                } catch (\Exception $e) {
+                }
+            }
+            
             $this->setData($key, $content);
         }
 
