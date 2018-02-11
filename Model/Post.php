@@ -393,9 +393,10 @@ class Post extends \Magento\Framework\Model\AbstractModel
     /**
      * Retrieve short filtered content
      * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShortFilteredContent($len = null)
+    public function getShortFilteredContent($len = null, $endСharacters = null)
     {
         $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
@@ -440,6 +441,18 @@ class Post extends \Magento\Framework\Model\AbstractModel
                         $content = $_content->saveHTML();
                     }
                 } catch (\Exception $e) {
+                }
+            }
+
+            if ($len && $endСharacters) {
+                $trimMask = " \t\n\r\0\x0B,.!?";
+                if ($p = strrpos($content, '</')) {
+                    $content = trim(substr($content, 0, $p), $trimMask)
+                        . $endСharacters
+                        . substr($content, $p);
+                } else {
+                    $content = trim($content, $trimMask)
+                        . $endСharacters;
                 }
             }
             
