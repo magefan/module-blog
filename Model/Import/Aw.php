@@ -34,12 +34,24 @@ class Aw extends AbstractImport
             $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
         );
 
-        $con = $this->_connect = mysqli_connect(
-            $this->getData('dbhost'),
-            $this->getData('uname'),
-            $this->getData('pwd'),
-            $this->getData('dbname')
-        );
+        $host = $this->getData('dbhost') ?: $this->getData('host');
+        if (false !== strpos($host, '.sock')) {
+            $con = $this->_connect = mysqli_connect(
+                'localhost',
+                $this->getData('uname'),
+                $this->getData('pwd'),
+                $this->getData('dbname'),
+                null,
+                $host
+            );
+        } else {
+            $con = $this->_connect = mysqli_connect(
+                $host,
+                $this->getData('uname'),
+                $this->getData('pwd'),
+                $this->getData('dbname')
+            );
+        }
 
         if (mysqli_connect_errno()) {
             throw new \Exception("Failed connect to magento database", 1);
