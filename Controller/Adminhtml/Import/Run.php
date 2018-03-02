@@ -23,12 +23,14 @@ class Run extends \Magento\Backend\App\Action
 
         $data = $this->getRequest()->getPost();
         $type = '';
+
         try {
             if (empty($data['type'])) {
                 throw new \Exception(__('Blog import type is not specified.'), 1);
             }
 
             $_type = ucfirst($data['type']);
+
             $import = $this->_objectManager->create('\Magefan\Blog\Model\Import\\'.$_type);
             $type = $data['type'];
             $import->prepareData($data)->execute();

@@ -33,14 +33,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="goToAwImport();">
+                        <div class="itm-hld" onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw')) ?>'">
                             <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
                             <br/>
-                            <span class="lable">Import from aheadWorks</br> Blog Extension</span>
-                            <form id="start_aw_import" action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>" method="post">
-                                <input type="hidden" name="type" value="aw" />
-                                <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
-                            </form>
+                            <span class="lable">Import from WordPress<br/><br/></span>
                         </div>
                     </td>
                 <tr>
