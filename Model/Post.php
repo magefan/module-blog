@@ -40,6 +40,11 @@ class Post extends \Magento\Framework\Model\AbstractModel
     const STATUS_DISABLED = 0;
 
     /**
+     * blog cache post
+     */
+    const CACHE_TAG = 'magefan_blog_post';
+
+    /**
      * Gallery images separator
      */
     const GALLERY_IMAGES_SEPARATOR = ';';
@@ -200,6 +205,58 @@ class Post extends \Magento\Framework\Model\AbstractModel
         $this->_init('Magefan\Blog\Model\ResourceModel\Post');
         $this->controllerName = URL::CONTROLLER_POST;
     }
+
+    /**
+     * Get identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $identities = [];
+        if ($this->getId()) {
+            $identities[] = self::CACHE_TAG . '_' . $this->getId();
+        }
+//        if ($this->getIsChangedCategories()) {
+//            foreach ($this->getAffectedCategoryIds() as $categoryId) {
+//                $identities[] = self::CACHE_PRODUCT_CATEGORY_TAG . '_' . $categoryId;
+//            }
+//        }
+//        if (($this->getOrigData('status') != $this->getData('status')) || $this->isStockStatusChanged()) {
+//            foreach ($this->getCategoryIds() as $categoryId) {
+//                $identities[] = self::CACHE_PRODUCT_CATEGORY_TAG . '_' . $categoryId;
+//            }
+//        }
+//        if ($this->_appState->getAreaCode() == \Magento\Framework\App\Area::AREA_FRONTEND) {
+//            $identities[] = self::CACHE_TAG;
+//        }
+        return array_unique($identities);
+    }
+
+    /**
+     * Clear cache related with post id
+     *
+     * @return $this
+     */
+    public function cleanCache()
+    {
+        if ($this->getId()) {
+            $this->_cacheManager->clean(
+                self::CACHE_TAG . '_' . $this->getId()
+            );
+        }
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function beforeSave()
+    {
+        $this->cleanCache();
+        return parent::beforeSave();
+    }
+
 
     /**
      * Retrieve controller name
