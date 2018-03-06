@@ -192,6 +192,19 @@
                 </item>
             </argument>
         </field>
+        <field name="posts_sort_by">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\PostsSortBy</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Posts Sort By</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="dataScope" xsi:type="string">posts_sort_by</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">

@@ -55,7 +55,6 @@ class Categories extends \Magento\Framework\View\Element\Template
                 ->addStoreFilter($this->_storeManager->getStore()->getId())
                 ->setOrder('position')
                 ->getTreeOrderedArray();
-
             foreach ($array as $key => $item) {
                 $maxDepth = $this->maxDepth();
                 if ($maxDepth > 0 && $item->getLevel() >= $maxDepth) {
