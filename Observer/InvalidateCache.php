@@ -11,6 +11,8 @@ namespace Magefan\Blog\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
+ * DEPRECATED
+ *
  * Blog observer
  */
 class InvalidateCache implements ObserverInterface
