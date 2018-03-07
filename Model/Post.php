@@ -31,7 +31,7 @@ use Magefan\Blog\Model\Url;
  * @method string getContentHeading()
  * @method $this setContentHeading(string $value)
  */
-class Post extends \Magento\Framework\Model\AbstractModel
+class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * Posts's Statuses
@@ -42,7 +42,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
     /**
      * blog cache post
      */
-    const CACHE_TAG = 'magefan_blog_post';
+    const CACHE_TAG = 'mfb_p';
 
     /**
      * Gallery images separator
@@ -207,56 +207,24 @@ class Post extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Get identities
+     * Retrieve identities
      *
      * @return array
      */
     public function getIdentities()
     {
-        $identities = [];
-        if ($this->getId()) {
-            $identities[] = self::CACHE_TAG . '_' . $this->getId();
-        }
-//        if ($this->getIsChangedCategories()) {
-//            foreach ($this->getAffectedCategoryIds() as $categoryId) {
-//                $identities[] = self::CACHE_PRODUCT_CATEGORY_TAG . '_' . $categoryId;
-//            }
-//        }
-//        if (($this->getOrigData('status') != $this->getData('status')) || $this->isStockStatusChanged()) {
-//            foreach ($this->getCategoryIds() as $categoryId) {
-//                $identities[] = self::CACHE_PRODUCT_CATEGORY_TAG . '_' . $categoryId;
-//            }
-//        }
-//        if ($this->_appState->getAreaCode() == \Magento\Framework\App\Area::AREA_FRONTEND) {
-//            $identities[] = self::CACHE_TAG;
-//        }
-        return array_unique($identities);
+        return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
     /**
-     * Clear cache related with post id
+     * Retrieve block identifier
      *
-     * @return $this
+     * @return string
      */
-    public function cleanCache()
+    public function getIdentifier()
     {
-        if ($this->getId()) {
-            $this->_cacheManager->clean(
-                self::CACHE_TAG . '_' . $this->getId()
-            );
-        }
-        return $this;
+        return (string)$this->getData('identifier');
     }
-
-    /**
-     * @return $this
-     */
-    public function beforeSave()
-    {
-        $this->cleanCache();
-        return parent::beforeSave();
-    }
-
 
     /**
      * Retrieve controller name

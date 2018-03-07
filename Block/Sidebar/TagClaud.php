@@ -125,12 +125,4 @@ class TagClaud extends \Magento\Framework\View\Element\Template
         return 'largest';
     }
 
-    /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_tag_claud_widget'  ];
-    }
 }

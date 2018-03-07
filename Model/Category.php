@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Category model
@@ -26,8 +27,14 @@ use Magefan\Blog\Model\Url;
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
  */
-class Category extends \Magento\Framework\Model\AbstractModel
+class Category extends \Magento\Framework\Model\AbstractModel implements IdentityInterface
 {
+
+    /**
+     * blog cache category
+     */
+    const CACHE_TAG = 'mfb_c';
+
     /**
      * Category's Statuses
      */
@@ -103,6 +110,16 @@ class Category extends \Magento\Framework\Model\AbstractModel
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Category');
         $this->controllerName = URL::CONTROLLER_CATEGORY;
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
     /**

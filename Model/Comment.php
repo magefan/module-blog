@@ -38,7 +38,7 @@ use \Magento\Framework\Model\AbstractModel;
  * @method string getUpdateTime()
  * @method $this setUpdateTime(string $value)
  */
-class Comment extends AbstractModel
+class Comment extends AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magefan\Blog\Model\AuthorFactory
@@ -71,6 +71,11 @@ class Comment extends AbstractModel
     protected $comments;
 
     /**
+     * blog cache comment
+     */
+    const CACHE_TAG = 'mfb_co';
+
+    /**
      * Initialize dependencies.
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
@@ -100,6 +105,17 @@ class Comment extends AbstractModel
         $this->userFactory = $userFactory;
         $this->commentCollectionFactory = $commentCollectionFactory;
     }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
+    }
+
 
     /**
      * Initialize resource model

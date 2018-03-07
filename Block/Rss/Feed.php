@@ -42,12 +42,4 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
          return $this->_scopeConfig->getValue('mfblog/rss_feed/description', ScopeInterface::SCOPE_STORE);
     }
 
-    /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_blog_rss_feed'  ];
-    }
 }
