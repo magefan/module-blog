@@ -14,7 +14,7 @@ use Magento\Framework\View\Element\AbstractBlock;
 /**
  * Blog post related products block
  */
-class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct implements \Magento\Framework\DataObject\IdentityInterface
+class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
 {
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
