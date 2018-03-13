@@ -62,7 +62,6 @@ class PreviewUrl extends Url
 
         $url .= (false === strpos($url, '?')) ? '?' : '&';
         $url .= 'secret=' . $object->getSecret();
-
         return $url;
     }
 }

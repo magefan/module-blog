@@ -32,8 +32,10 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $this->_objectManager->get(\Magento\Framework\Registry::class)->register('current_blog_tag', $tag);
 
-        $this->_view->loadLayout();
-        $this->_view->renderLayout();
+        $resultPage = $this->_objectManager->get(\Magefan\Blog\Helper\Page::class)
+            ->prepareResultPage($this, $tag);
+
+        return $resultPage;
     }
 
     /**
@@ -47,7 +49,7 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
-        if (!$tag->getId()) {
+        if (!$tag->getId() || !$tag->isActive()) {
             return false;
         }
 

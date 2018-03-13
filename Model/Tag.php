@@ -77,6 +77,26 @@ class Tag extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
+     * Retrieve true if post is active
+     * @return boolean [description]
+     */
+    public function isActive()
+    {
+        return ($this->getIsActive() == 1);
+    }
+
+    /**
+     * Retrieve model title
+     * @param  boolean $plural
+     * @return string
+     */
+    public function getOwnTitle($plural = false)
+    {
+        return $plural ? 'Tags' : 'Tag';
+    }
+
+
+    /**
      * Check if category identifier exist for specific store
      * return category id if category exists
      *
@@ -105,4 +125,38 @@ class Tag extends \Magento\Framework\Model\AbstractModel
     {
         return $this->_url->getUrl($this, URL::CONTROLLER_TAG);
     }
+
+    /**
+     * Retrieve meta title
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        $title = $this->getData('meta_title');
+        if (!$title) {
+            $title = $this->getData('title');
+        }
+
+        return trim($title);
+    }
+
+    /**
+     * Retrieve meta description
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        $desc = $this->getData('meta_description');
+        if (!$desc) {
+            $desc = $this->getData('content');
+        }
+
+        $desc = strip_tags($desc);
+        if (mb_strlen($desc) > 300) {
+            $desc = mb_substr($desc, 0, 300);
+        }
+
+        return trim($desc);
+    }
+
 }
