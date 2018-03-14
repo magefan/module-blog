@@ -22,6 +22,10 @@ use Magefan\Blog\Model\Url;
  */
 class Tag extends \Magento\Framework\Model\AbstractModel
 {
+    /**
+     * Tag Status
+     */
+    const STATUS_ENABLED = 1;
 
     /**
      * Prefix of model events names
@@ -82,7 +86,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel
      */
     public function isActive()
     {
-        return ($this->getIsActive() == 1);
+        return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**

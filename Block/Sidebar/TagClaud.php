@@ -58,9 +58,9 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     public function getTags()
     {
         if ($this->_tags === null) {
-            $this->_tags = $this->_tagCollectionFactory->create()->addActiveFilter();
+            $this->_tags = $this->_tagCollectionFactory->create()
+                ->addActiveFilter();
 
-            if (count($this->_tags)) {
             $resource = $this->_tags->getResource();
                 $this->_tags->getSelect()->joinLeft(
                     ['pt' => $resource->getTable('magefan_blog_post_tag')],
@@ -80,7 +80,6 @@ class TagClaud extends \Magento\Framework\View\Element\Template
                     'ps.store_id IN (?)',
                     [0, (int)$this->_storeManager->getStore()->getId()]
                 );
-            }
         }
 
         return $this->_tags;

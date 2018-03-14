@@ -49,7 +49,7 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
-        if (!$tag->getId() || !$tag->isActive()) {
+        if (!$tag->isActive()) {
             return false;
         }
 

@@ -640,6 +640,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
                         'comment' => 'Tag Custom Theme Active To Date',
                     ]
                 );
+
+                $connection->addIndex(
+                    $setup->getTable($table),
+                    $setup->getIdxName($setup->getTable($table), ['is_active']),
+                    ['is_active']
+                );
         }
 
         $setup->endSetup();

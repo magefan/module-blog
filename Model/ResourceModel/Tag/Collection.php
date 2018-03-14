@@ -13,6 +13,10 @@ namespace Magefan\Blog\Model\ResourceModel\Tag;
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * Tag Status
+     */
+    const STATUS_ENABLED = 1;
 
     /**
      * Constructor
@@ -33,6 +37,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addActiveFilter()
     {
         return $this
-            ->addFieldToFilter('is_active', 1);
+            ->addFieldToFilter('main_table.is_active', self::STATUS_ENABLED);
     }
 }
