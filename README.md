@@ -32,9 +32,9 @@ This Magento 2 Blog module allows you to create a full-fledged blog on your [Mag
   * Open Graph (OG) meta tags
   * Canonical URL  
 
-## Demo (See it in action)
+## Demo
 
-Try out our open demo and if you like our extension **first give us some star on Github ★**
+Try out our open demo and if you like our extension **please give us some star on Github ★**
 <table>
   <tbody>
     <tr>
