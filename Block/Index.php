@@ -51,7 +51,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         /* If featured posts enabled */
         if ($displayMode == 1) {
             $postIds = $this->_scopeConfig->getValue(
-                \Magefan\Blog\Helper\ConfigF::XML_PATH_HOMEPAGE_FEATURED_POST_IDS,
+                \Magefan\Blog\Helper\Config::XML_PATH_HOMEPAGE_FEATURED_POST_IDS,
                 ScopeInterface::SCOPE_STORE
             );
             $this->_postCollection->addPostsFilter($postIds);
