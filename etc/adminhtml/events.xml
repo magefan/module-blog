@@ -11,10 +11,12 @@
     <event name="controller_action_predispatch">
         <observer name="magefan_blog_controller_action_predispatch" instance="Magefan\Blog\Observer\PredispathAdminActionControllerObserver" />
     </event>
+    <!--
     <event name="controller_action_postdispatch_blog_post_save">
         <observer name="magefan_blog_invalidate_cache" instance="Magefan\Blog\Observer\InvalidateCache" />
     </event>
     <event name="controller_action_postdispatch_blog_category_save">
         <observer name="magefan_blog_invalidate_cache" instance="Magefan\Blog\Observer\InvalidateCache" />
     </event>
+    -->
 </config>

@@ -13,7 +13,7 @@ use Magento\Framework\Api\SortOrder;
 /**
  * Abstract blog post list block
  */
-abstract class AbstractList extends \Magento\Framework\View\Element\Template
+abstract class AbstractList extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magento\Cms\Model\Template\FilterProvider
@@ -137,5 +137,19 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
         }
 
         return parent::_toHtml();
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities() {
+        $identities = [];
+        foreach ($this->getPostCollection() as $item) {
+            $identities = array_merge($identities, $item->getIdentities());
+        }
+
+        return array_unique($identities);
     }
 }

@@ -45,12 +45,4 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
         );
     }
 
-    /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_featured_posts_widget_' . $this->getPostIdsConfigValue() ];
-    }
 }

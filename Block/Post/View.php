@@ -12,8 +12,19 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Blog post view
  */
-class View extends AbstractPost
+class View extends AbstractPost implements \Magento\Framework\DataObject\IdentityInterface
 {
+
+    /**
+     * Retrieve identities
+     *
+     * @return string
+     */
+    public function getIdentities()
+    {
+        return $this->getPost()->getIdentities();
+    }
+
     /**
      * Preparing global layout
      *

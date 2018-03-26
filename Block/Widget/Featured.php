@@ -14,6 +14,7 @@ namespace Magefan\Blog\Block\Widget;
 
 class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\Widget\Block\BlockInterface
 {
+
     /**
      * Set blog template
      *

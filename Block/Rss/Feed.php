@@ -48,15 +48,6 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_blog_rss_feed'  ];
-    }
-
-    /**
      * Retrieve rss feed collection size
      * @return string
      */

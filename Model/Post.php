@@ -31,13 +31,18 @@ use Magefan\Blog\Model\Url;
  * @method string getContentHeading()
  * @method $this setContentHeading(string $value)
  */
-class Post extends \Magento\Framework\Model\AbstractModel
+class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * Posts's Statuses
      */
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
+
+    /**
+     * blog cache post
+     */
+    const CACHE_TAG = 'mfb_p';
 
     /**
      * Gallery images separator
@@ -199,6 +204,26 @@ class Post extends \Magento\Framework\Model\AbstractModel
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Post');
         $this->controllerName = URL::CONTROLLER_POST;
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
+    }
+
+    /**
+     * Retrieve block identifier
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return (string)$this->getData('identifier');
     }
 
     /**

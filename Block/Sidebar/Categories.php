@@ -13,7 +13,7 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Blog sidebar categories block
  */
-class Categories extends \Magento\Framework\View\Element\Template
+class Categories extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
 {
     use Widget;
 
@@ -84,17 +84,6 @@ class Categories extends \Magento\Framework\View\Element\Template
         return $this->getData($key);
     }
 
-
-    /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_categories_widget'  ];
-    }
-
-
     /**
      * Retrieve categories maximum depth
      * @return int
@@ -107,5 +96,19 @@ class Categories extends \Magento\Framework\View\Element\Template
         );
         
         return (int)$maxDepth;
+    }
+
+    /**
+     * Retrieve block identities
+     *
+     * @return array
+     */
+    public function getIdentities() {
+        $identities = [];
+        foreach ($this->getGroupedChilds() as $item) {
+            $identities = array_merge($identities, $item->getIdentities());
+        }
+
+        return array_unique($identities);
     }
 }
