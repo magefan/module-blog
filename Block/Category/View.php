@@ -17,7 +17,6 @@ use Magento\Store\Model\ScopeInterface;
  */
 class View extends \Magefan\Blog\Block\Post\PostList
 {
-
     /**
      * Prepare posts collection
      *
