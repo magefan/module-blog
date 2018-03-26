@@ -14,7 +14,7 @@ use Magento\Framework\View\Element\AbstractBlock;
 /**
  * Blog post related products block
  */
-class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
+class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
@@ -125,4 +125,20 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct
         }
         return $this->getData('post');
     }
+
+     /**
+     * Return identifiers for produced content
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $identities = [];
+        foreach ($this->getItems() as $item) {
+            $identities = array_merge($identities, $item->getIdentities());
+        }
+
+        return $identities;
+    }
+    
 }
