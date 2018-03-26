@@ -14,7 +14,7 @@ use Magento\Framework\DataObject\IdentityInterface;
 /**
  * Blog category posts list
  */
-class PostList extends \Magefan\Blog\Block\Post\PostList implements IdentityInterface
+class PostList extends \Magefan\Blog\Block\Post\PostList
 {
 
     /**
