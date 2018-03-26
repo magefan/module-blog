@@ -9,14 +9,12 @@
 namespace Magefan\Blog\Block\Category;
 
 use Magefan\Blog\Model\Config\Source\CategoryDisplayMode;
-use Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Blog category posts list
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList
 {
-
     /**
      * Prepare posts collection
      *
