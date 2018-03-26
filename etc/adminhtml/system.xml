@@ -38,6 +38,10 @@
                     <label>Display Mode</label>
                     <source_model>Magefan\Blog\Model\Config\Source\DisplayMode</source_model>
                 </field>
+                <field id="posts_sort_by" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Posts Sort By</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PostsSortBy</source_model>
+                </field>
                 <field id="post_ids" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Post IDs</label>
                     <depends>

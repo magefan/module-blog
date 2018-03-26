@@ -505,6 +505,22 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.7.2') < 0) {
+            /* Add position posts into post table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'position',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '0',
+                    'comment' => 'Position',
+                    'after' => 'include_in_recent'
+                ]
+            );
+        }
+
         $setup->endSetup();
     }
 }

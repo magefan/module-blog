@@ -66,7 +66,7 @@ class PageIdentifierGenerator
 
         $identifier = str_replace($from, $to, $identifier);
         $identifier = mb_strtolower($identifier);
-        $identifier = preg_replace('/[?#<>@!&*()$%^\\/+=,{}]+/', '-', $identifier);
+        $identifier = preg_replace('/[?#<>@!&*()$%^\\/+=,{}\s]+/', '-', $identifier);
         $identifier = preg_replace('/[--]+/', '-', $identifier);
 
         $identifier = trim($identifier, '-');
