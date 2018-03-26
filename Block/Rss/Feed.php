@@ -50,4 +50,15 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return [\Magento\Cms\Model\Page::CACHE_TAG . '_blog_rss_feed'  ];
     }
+
+    /**
+     * Prepare posts collection
+     *
+     * @return void
+     */
+    protected function _preparePostCollection()
+    {
+        parent::_preparePostCollection();
+        $this->_postCollection->setPageSize(10);
+    }
 }
