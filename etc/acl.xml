@@ -17,6 +17,7 @@
                         <resource id="Magefan_Blog::category" title="Categories" sortOrder="20" />
                         <resource id="Magefan_Blog::comment" title="Comments" sortOrder="30" />
                         <resource id="Magefan_Blog::import" title="Import" sortOrder="40" />
+                        <resource id="Magefan_Blog::tags" title="Tags" sortOrder="50" />
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">

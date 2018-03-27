@@ -13,7 +13,7 @@
     <update handle="blog_update_info"/>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="blog_new_tag_form"/>
+            <uiComponent name="blog_tag_form"/>
         </referenceContainer>
     </body>
 </page>

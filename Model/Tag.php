@@ -20,12 +20,17 @@ use Magefan\Blog\Model\Url;
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
  */
-class Tag extends \Magento\Framework\Model\AbstractModel
+class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * Tag Status
      */
     const STATUS_ENABLED = 1;
+
+    /**
+     * blog cache tag
+     */
+    const CACHE_TAG = 'mfb_t';
 
     /**
      * Prefix of model events names
@@ -161,6 +166,26 @@ class Tag extends \Magento\Framework\Model\AbstractModel
         }
 
         return trim($desc);
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
+    }
+
+    /**
+     * Retrieve block identifier
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return (string)$this->getData('identifier');
     }
 
 }

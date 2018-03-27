@@ -11,7 +11,7 @@ namespace Magefan\Blog\Block\Tag;
 /**
  * Blog category abstract
  */
-abstract class AbstractTag extends \Magento\Framework\View\Element\Template
+abstract class AbstractTag extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magento\Cms\Model\Template\FilterProvider
@@ -77,5 +77,10 @@ abstract class AbstractTag extends \Magento\Framework\View\Element\Template
             $tag->setData($key, $cotent);
         }
         return $tag->getData($key);
+    }
+
+    public function getIdentities()
+    {
+        return $this->getTag()->getIdentities();
     }
 }
