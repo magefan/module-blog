@@ -43,7 +43,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      */
     protected function _prepareForm()
     {
-        //Magento\Backend\Model\Session
         $form = $this->_formFactory->create(
             ['data' => ['id' => 'edit_form', 'action' => $this->getData('action'), 'method' => 'post']]
         );
@@ -51,9 +50,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
 
         $data = $this->_coreRegistry->registry('import_config')->getData();
 
-        /*
-         * Checking if user have permissions to save information
-         */
         if ($this->_authorization->isAllowed('Magefan_Blog::import')) {
             $isElementDisabled = false;
         } else {

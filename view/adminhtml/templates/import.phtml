@@ -36,7 +36,7 @@
                         <div class="itm-hld" onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw')) ?>'">
                             <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
                             <br/>
-                            <span class="lable">Import from WordPress<br/><br/></span>
+                            <span class="lable">Import from AheadWorks<br/><br/></span>
                         </div>
                     </td>
                 <tr>
@@ -125,11 +125,3 @@
         <td class="item"></td>
     </tr>
 </table>
-<script type="text/javascript">
-    function goToAwImport()
-    {
-        if (confirm('Are you sure you want to start import from aheadWorks blog? Attention! Do not run this import again.')) {
-            document.getElementById('start_aw_import').submit();
-        }
-    }
-</script>

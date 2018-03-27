@@ -21,7 +21,7 @@ class Aw extends \Magento\Backend\App\Action
     {
         $this->_view->loadLayout();
         $this->_setActiveMenu('Magefan_Blog::import');
-        $title = __('Blog Import from AheadWorks (beta)');
+        $title = __('Blog Import from AheadWorks');
         $this->_view->getPage()->getConfig()->getTitle()->prepend($title);
         $this->_addBreadcrumb($title, $title);
 
