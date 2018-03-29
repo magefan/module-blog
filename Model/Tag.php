@@ -86,8 +86,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
-     * Retrieve true if post is active
-     * @return boolean [description]
+     * Retrieve true if tag is active
+     * @return boolean
      */
     public function isActive()
     {
