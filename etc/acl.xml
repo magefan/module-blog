@@ -15,9 +15,9 @@
                     <resource id="Magefan_Blog::elements" title="Blog" sortOrder="10">
                         <resource id="Magefan_Blog::post" title="Posts" sortOrder="10" />
                         <resource id="Magefan_Blog::category" title="Categories" sortOrder="20" />
+                        <resource id="Magefan_Blog::tags" title="Tags" sortOrder="25" />
                         <resource id="Magefan_Blog::comment" title="Comments" sortOrder="30" />
                         <resource id="Magefan_Blog::import" title="Import" sortOrder="40" />
-                        <resource id="Magefan_Blog::tags" title="Tags" sortOrder="50" />
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">
