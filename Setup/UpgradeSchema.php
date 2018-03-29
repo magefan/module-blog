@@ -528,7 +528,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     null,
                     'nullable' => false,
                     'default' => '0',
-                    'comment' => 'Post sort by',
+                    'comment' => 'Post Sort By',
                     'after' => 'position'
                 ]
             );
