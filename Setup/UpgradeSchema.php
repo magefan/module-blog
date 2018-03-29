@@ -535,7 +535,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.8.0') < 0) {
-            /* Add layout field to posts and category table */
+            /* Add layout field to tag table */
             $table = $setup->getTable('magefan_blog_tag');
             $connection->addColumn(
                 $setup->getTable($table),
