@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Tag;
 
 /**
- * Blog category abstract
+ * Blog tag abstract block
  */
 abstract class AbstractTag extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
 {
