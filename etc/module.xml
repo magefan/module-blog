@@ -12,6 +12,7 @@
          <sequence>
             <module name="Magento_Cms"/>
             <module name="Magento_Catalog"/>
+            <module name="Magefan_Community"/>
         </sequence>
     </module>
 </config>
