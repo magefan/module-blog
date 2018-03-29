@@ -40,7 +40,7 @@
                     </arguments>
                 </block>
 
-                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="blog.post.grid.columnSet" as="grid.columnSet">
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="blog.tag.grid.columnSet" as="grid.columnSet">
                     <arguments>
                         <argument name="id" xsi:type="string">columnSet</argument>
                         <argument name="rowUrl" xsi:type="array">
