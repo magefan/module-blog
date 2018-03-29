@@ -106,8 +106,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
 
     /**
-     * Check if category identifier exist for specific store
-     * return category id if category exists
+     * Check if tag identifier exist for specific store
+     * return tag id if tag exists
      *
      * @param string $identifier
      * @return int
