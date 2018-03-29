@@ -62,13 +62,4 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
         }
         return $this->getData('post');
     }
-
-    /**
-     * Get Block Identities
-     * @return Array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_relatedposts_'.$this->getPost()->getId()  ];
-    }
 }

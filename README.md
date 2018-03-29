@@ -32,10 +32,59 @@ This Magento 2 Blog module allows you to create a full-fledged blog on your [Mag
   * Open Graph (OG) meta tags
   * Canonical URL  
 
-## Storefront Demo
-http://blog.demo.magefan.com/blog/
-## Admin Panel Demo
-http://blog.demo.magefan.com/admin/
+## Demo
+
+Try out our open demo and if you like our extension **please give us some star on Github ★**
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        Storefront Demo
+      </td>
+      <td align="center" valign="middle">
+        Admin Panel Demo
+      </td align="center" valign="middle">
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="http://blog.demo.magefan.com/blog/">
+          <img
+            src="https://magefan.com/static/version1520969775/frontend/Magefan/default/en_US/images/product-tab-demo-1.jpg"
+            alt="Magneto 2 Blog Extension Storefront Demo"
+            height="220"
+          >
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="http://blog.demo.magefan.com/admin/">
+          <img
+            src="https://magefan.com/static/version1520969775/frontend/Magefan/default/en_US/images/product-tab-demo-2.jpg"
+            alt="Magneto 2 Blog Extension Admin Panel Demo"
+            height="220"
+          >
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="http://blog.demo.magefan.com/blog/">
+          view
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="http://blog.demo.magefan.com/admin/">
+          view
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Add-ons
+  * [Blog Media Gallery for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-m22)
+  * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
+
 
 ## Online Documentation
 http://magefan.com/docs/magento-2-blog/

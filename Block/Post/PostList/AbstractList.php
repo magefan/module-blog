@@ -9,11 +9,11 @@
 namespace Magefan\Blog\Block\Post\PostList;
 
 use Magento\Store\Model\ScopeInterface;
-
+use Magento\Framework\Api\SortOrder;
 /**
  * Abstract blog post list block
  */
-abstract class AbstractList extends \Magento\Framework\View\Element\Template
+abstract class AbstractList extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magento\Cms\Model\Template\FilterProvider
@@ -44,6 +44,9 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
      * @var \Magefan\Blog\Model\Url
      */
     protected $_url;
+
+    const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
+    const POSTS_SORT_FIELD_BY_POSITION = 'position';
 
     /**
      * Construct
@@ -80,11 +83,29 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
         $this->_postCollection = $this->_postCollectionFactory->create()
             ->addActiveFilter()
             ->addStoreFilter($this->_storeManager->getStore()->getId())
-            ->setOrder('publish_time', 'DESC');
+            ->setOrder($this->getCollectionOrderField(), $this->getCollectionOrderDirection());
 
         if ($this->getPageSize()) {
             $this->_postCollection->setPageSize($this->getPageSize());
         }
+    }
+
+    /**
+     * Retrieve collection order field
+     *
+     * @return string
+     */
+    public function getCollectionOrderField() {
+        return self::POSTS_SORT_FIELD_BY_PUBLISH_TIME;
+    }
+
+    /**
+     * Retrieve collection order direction
+     *
+     * @return string
+     */
+    public function getCollectionOrderDirection() {
+        return SortOrder::SORT_DESC;
     }
 
     /**
@@ -116,5 +137,19 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template
         }
 
         return parent::_toHtml();
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities() {
+        $identities = [];
+        foreach ($this->getPostCollection() as $item) {
+            $identities = array_merge($identities, $item->getIdentities());
+        }
+
+        return array_unique($identities);
     }
 }

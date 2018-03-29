@@ -35,6 +35,11 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_HOMEPAGE_DISPLAY_MODE = 'mfblog/index_page/display_mode';
 
     /**
+     * Blog homepage display mode
+     */
+    const XML_PATH_HOMEPAGE_POSTS_SORT_BY = 'mfblog/index_page/posts_sort_by';
+
+    /**
      * Blog homepage featured post ids
      */
     const XML_PATH_HOMEPAGE_FEATURED_POST_IDS = 'mfblog/index_page/post_ids';

@@ -15,6 +15,11 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 {
+    /*
+     * Collection page size
+     */
+    const PAGE_SIZE = 10;
+
     /**
      * Retrieve rss feed url
      * @return string
@@ -43,11 +48,11 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * Retrieve block identities
-     * @return array
+     * Retrieve rss feed collection size
+     * @return string
      */
-    public function getIdentities()
+    public function getPageSize()
     {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_blog_rss_feed'  ];
+        return $this->getData('page_size') ?: self::PAGE_SIZE;
     }
 }

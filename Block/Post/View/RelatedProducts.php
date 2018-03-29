@@ -126,13 +126,19 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
         return $this->getData('post');
     }
 
-    /**
-     * Get Block Identities
-     * @return Array
+     /**
+     * Return identifiers for produced content
+     *
+     * @return array
      */
     public function getIdentities()
     {
-        $post = $this->getPost();
-        return $post ? [ \Magento\Cms\Model\Page::CACHE_TAG . '_relatedproducts_' . $post->getId() ] : [];
+        $identities = [];
+        foreach ($this->getItems() as $item) {
+            $identities = array_merge($identities, $item->getIdentities());
+        }
+
+        return $identities;
     }
+    
 }

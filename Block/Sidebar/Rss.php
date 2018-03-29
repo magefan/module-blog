@@ -26,12 +26,4 @@ class Rss extends \Magento\Framework\View\Element\Template
      */
     protected $_months;
 
-    /**
-     * Retrieve blog identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_rss_widget'  ];
-    }
 }
