@@ -52,9 +52,9 @@ abstract class AbstractTag extends \Magento\Framework\View\Element\Template impl
     }
 
     /**
-     * Retrieve category instance
+     * Retrieve tag instance
      *
-     * @return \Magefan\Blog\Model\Category
+     * @return \Magefan\Blog\Model\Tag
      */
     public function getTag()
     {
@@ -62,7 +62,7 @@ abstract class AbstractTag extends \Magento\Framework\View\Element\Template impl
     }
 
     /**
-     * Retrieve post content
+     * Retrieve tag content
      *
      * @return string
      */
