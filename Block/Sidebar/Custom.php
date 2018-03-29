@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Block\Sidebar;
 
 use \Magento\Store\Model\ScopeInterface;
+
 /**
  * Blog sidebar custom block
  */
@@ -51,7 +52,6 @@ class Custom extends \Magento\Framework\View\Element\Template
     {
         $key = 'content';
         if (!$this->hasData($key)) {
-
             $content = $this->_scopeConfig->getValue('mfblog/sidebar/'.$this->_widgetKey.'/html', ScopeInterface::SCOPE_STORE);
             $content = $this->filterProvider->getPageFilter()->filter(
                 $content

@@ -44,5 +44,4 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
         parent::_preparePostCollection();
         $this->_postCollection->addRecentFilter();
     }
-
 }

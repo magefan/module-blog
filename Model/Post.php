@@ -425,7 +425,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
-
             if ($this->getShortContent()) {
                 $content = $this->filterProvider->getPageFilter()->filter(
                     $this->getShortContent()
@@ -448,7 +447,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             if ($len) {
                 $content = mb_substr($content, 0, $len);
                 try {
-                    
                     $previousLoaderState = libxml_disable_entity_loader(true);
                     $previousErrorState = libxml_use_internal_errors(true);
                     $dom = new \DOMDocument();

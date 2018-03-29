@@ -137,7 +137,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addRecentFilter()
     {
-      return $this->addFieldToFilter('include_in_recent', 1);
+        return $this->addFieldToFilter('include_in_recent', 1);
     }
     
     /**

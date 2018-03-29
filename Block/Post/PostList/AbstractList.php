@@ -10,6 +10,7 @@ namespace Magefan\Blog\Block\Post\PostList;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Api\SortOrder;
+
 /**
  * Abstract blog post list block
  */
@@ -95,7 +96,8 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      *
      * @return string
      */
-    public function getCollectionOrderField() {
+    public function getCollectionOrderField()
+    {
         return self::POSTS_SORT_FIELD_BY_PUBLISH_TIME;
     }
 
@@ -104,7 +106,8 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      *
      * @return string
      */
-    public function getCollectionOrderDirection() {
+    public function getCollectionOrderDirection()
+    {
         return SortOrder::SORT_DESC;
     }
 
@@ -144,7 +147,8 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      *
      * @return array
      */
-    public function getIdentities() {
+    public function getIdentities()
+    {
         $identities = [];
         foreach ($this->getPostCollection() as $item) {
             $identities = array_merge($identities, $item->getIdentities());

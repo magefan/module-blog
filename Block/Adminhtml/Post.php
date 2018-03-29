@@ -44,5 +44,4 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
 
         return parent::_prepareLayout();
     }
-
 }

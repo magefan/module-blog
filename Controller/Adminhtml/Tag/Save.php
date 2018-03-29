@@ -13,7 +13,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Tag;
  */
 class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
-	/**
+    /**
      * Filter request params
      * @param  array $data
      * @return array

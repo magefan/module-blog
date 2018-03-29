@@ -110,8 +110,8 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response
-    )
-    {
+    ) {
+    
         $this->actionFactory = $actionFactory;
         $this->_eventManager = $eventManager;
         $this->_url = $url;

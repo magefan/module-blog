@@ -112,7 +112,6 @@ class UpdateInfo extends \Magento\Backend\Block\Template
                     throw new \Exception('Empty response');
                 }
                 $this->latestVersion = $encodedData[self::MODULE_NAME];
-
             } catch (\Exception $e) {
                 $this->latestVersion = false;
             }
@@ -128,5 +127,4 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     {
         return (version_compare($this->getCurrentVersion(), $this->getLatestVersion()) < 0);
     }
-
 }

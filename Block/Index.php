@@ -61,11 +61,12 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     }
 
      /**
-     * Retrieve collection order field
-     *
-     * @return string
-     */
-    public function getCollectionOrderField(){
+      * Retrieve collection order field
+      *
+      * @return string
+      */
+    public function getCollectionOrderField()
+    {
         $postsSortBy = $this->_scopeConfig->getValue(
             \Magefan\Blog\Helper\Config::XML_PATH_HOMEPAGE_POSTS_SORT_BY,
             ScopeInterface::SCOPE_STORE

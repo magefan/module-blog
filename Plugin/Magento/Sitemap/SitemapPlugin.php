@@ -61,7 +61,6 @@ class SitemapPlugin
     public function afterGenerateXml(Sitemap $sitemap, $result)
     {
         if (!method_exists($sitemap, 'collectSitemapItems')) {
-
             $sitemapId = $sitemap->getId() ?: 0;
             if (in_array($sitemapId, $this->generated)) {
                 return $result;
@@ -78,7 +77,6 @@ class SitemapPlugin
             );
 
             $blogSitemap->generateXml();
-
         }
 
         return $result;
@@ -89,7 +87,8 @@ class SitemapPlugin
      * @param $result
      * @return mixed
      */
-    public function afterCollectSitemapItems(Sitemap $sitemap, $result) {
+    public function afterCollectSitemapItems(Sitemap $sitemap, $result)
+    {
 
         $storeId = $sitemap->getStoreId();
 

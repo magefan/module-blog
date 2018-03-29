@@ -126,5 +126,4 @@ class TagClaud extends \Magento\Framework\View\Element\Template
         }
         return 'largest';
     }
-
 }

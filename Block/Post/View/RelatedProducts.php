@@ -127,10 +127,10 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
     }
 
      /**
-     * Return identifiers for produced content
-     *
-     * @return array
-     */
+      * Return identifiers for produced content
+      *
+      * @return array
+      */
     public function getIdentities()
     {
         $identities = [];
@@ -140,5 +140,4 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
 
         return $identities;
     }
-    
 }

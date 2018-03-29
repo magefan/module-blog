@@ -44,5 +44,4 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
-
 }

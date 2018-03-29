@@ -103,7 +103,8 @@ class Categories extends \Magento\Framework\View\Element\Template implements \Ma
      *
      * @return array
      */
-    public function getIdentities() {
+    public function getIdentities()
+    {
         $identities = [];
         foreach ($this->getGroupedChilds() as $item) {
             $identities = array_merge($identities, $item->getIdentities());

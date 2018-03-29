@@ -25,5 +25,4 @@ class Rss extends \Magento\Framework\View\Element\Template
      * @var array
      */
     protected $_months;
-
 }

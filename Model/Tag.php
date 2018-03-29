@@ -187,5 +187,4 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     {
         return (string)$this->getData('identifier');
     }
-
 }
