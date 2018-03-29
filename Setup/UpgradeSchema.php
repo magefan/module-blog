@@ -519,6 +519,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'after' => 'include_in_recent'
                 ]
             );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'posts_sort_by',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '0',
+                    'comment' => 'Post Sort By',
+                    'after' => 'position'
+                ]
+            );
         }
 
         $setup->endSetup();
