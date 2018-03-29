@@ -27,8 +27,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * Retrieve true if post is active
-     * @return boolean [description]
+     * Add active filter to collection
+     * @return self
      */
     public function addActiveFilter()
     {
