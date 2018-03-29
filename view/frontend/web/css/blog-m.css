@@ -38,6 +38,7 @@
     margin-bottom: 20px;
     list-style: none;
 }
+.post-list-wrapper .post-list {padding-left: 0}
 
 .post-list .post-content .post-read-more {padding-top:10px; float:right;}
 
@@ -236,6 +237,5 @@
   #mfblog_gcomments {max-width:345px; overflow-y: scroll;}
 }
 
-.blog-index-index .post-list-wrapper .post-list,
-.blog-category-view .post-list-wrapper .post-list {padding-left: 0;}
-.blog-category-view .category-content {padding-left: 0;}
+.blog-category-view .category-content,
+.blog-tag-view .tag-content {padding-left: 0}
