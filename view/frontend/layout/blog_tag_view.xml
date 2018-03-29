@@ -13,7 +13,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Tag\PostList" name="blog.posts.list" template="post/list.phtml" />
-            <block class="Magefan\Blog\Block\Tag\Info" name="blog.tag.info" template="Magefan_Blog::category/info.phtml" before="blog.posts.list" />
+            <block class="Magefan\Blog\Block\Tag\Info" name="blog.tag.info" template="Magefan_Blog::tag/info.phtml" before="blog.posts.list" />
         </referenceContainer>
     </body>
 </page>
