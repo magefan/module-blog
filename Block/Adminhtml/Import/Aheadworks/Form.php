@@ -179,10 +179,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
 
         $this->_eventManager->dispatch('magefan_blog_import_aheadworks_prepare_form', ['form' => $form]);
 
-        /*if (empty($data['homepageurl'])) {
-            $data['homepageurl'] = $this->getUrl('blog', ['_store' => 1]);
-        }*/
-
         if (empty($data['prefix'])) {
             $data['prefix'] = 'aw_';
         }
@@ -196,7 +192,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $form->setValues($data);
 
         $this->setForm($form);
-
 
         return parent::_prepareForm();
     }
