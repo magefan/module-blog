@@ -25,4 +25,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         parent::_construct();
         $this->_init('Magefan\Blog\Model\Tag', 'Magefan\Blog\Model\ResourceModel\Tag');
     }
+
+    /**
+     * Add active filter to collection
+     * @return self
+     */
+    public function addActiveFilter()
+    {
+        return $this
+            ->addFieldToFilter('main_table.is_active', \Magefan\Blog\Model\Tag::STATUS_ENABLED);
+    }
 }

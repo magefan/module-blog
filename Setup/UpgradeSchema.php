@@ -504,9 +504,9 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
-
+        
         if (version_compare($version, '2.7.2') < 0) {
-            /* Add position posts into post table */
+            /* Add position column into post table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_post'),
                 'position',
@@ -531,6 +531,149 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'comment' => 'Post Sort By',
                     'after' => 'position'
                 ]
+            );
+        }
+
+        if (version_compare($version, '2.8.0') < 0) {
+            /* Add layout field to tag table */
+            $table = $setup->getTable('magefan_blog_tag');
+            $connection->addColumn(
+                $setup->getTable($table),
+                'page_layout',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Layout',
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable($table),
+                'is_active',
+                [
+                    'type' =>\Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    'length' => null,
+                    'nullable' => false,
+                    'default' => 1,
+                    'comment' => 'Is Tag Active'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'content',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '2M',
+                     [],
+                    'comment' =>'Tag Content'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'meta_title',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Meta Title',
+                    'after' => 'title'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'meta_keywords',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Meta Keywords',
+                    'after' => 'title'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'meta_description',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Meta Description',
+                    'after' => 'title'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'layout_update_xml',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '64k',
+                    'nullable' => true,
+                    'comment' => 'Tag Layout Update Content',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'custom_theme',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 100,
+                    'nullable' => true,
+                    'comment' => 'Tag Custom Theme',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'custom_layout',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Custom Template',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'custom_layout_update_xml',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '64k',
+                    'nullable' => true,
+                    'comment' => 'Tag Custom Layout Update Content',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'custom_theme_from',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                    'nullable' => true,
+                    'comment' => 'Tag Custom Theme Active From Date',
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'custom_theme_to',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                    'nullable' => true,
+                    'comment' => 'Tag Custom Theme Active To Date',
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable($table),
+                $setup->getIdxName($setup->getTable($table), ['is_active']),
+                ['is_active']
             );
         }
 

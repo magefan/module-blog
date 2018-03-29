@@ -20,8 +20,17 @@ use Magefan\Blog\Model\Url;
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
  */
-class Tag extends \Magento\Framework\Model\AbstractModel
+class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
+    /**
+     * Tag Status
+     */
+    const STATUS_ENABLED = 1;
+
+    /**
+     * blog cache tag
+     */
+    const CACHE_TAG = 'mfb_t';
 
     /**
      * Prefix of model events names
@@ -77,8 +86,28 @@ class Tag extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Check if category identifier exist for specific store
-     * return category id if category exists
+     * Retrieve true if tag is active
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return ($this->getIsActive() == self::STATUS_ENABLED);
+    }
+
+    /**
+     * Retrieve model title
+     * @param  boolean $plural
+     * @return string
+     */
+    public function getOwnTitle($plural = false)
+    {
+        return $plural ? 'Tags' : 'Tag';
+    }
+
+
+    /**
+     * Check if tag identifier exist for specific store
+     * return tag id if tag exists
      *
      * @param string $identifier
      * @return int
@@ -105,4 +134,58 @@ class Tag extends \Magento\Framework\Model\AbstractModel
     {
         return $this->_url->getUrl($this, URL::CONTROLLER_TAG);
     }
+
+    /**
+     * Retrieve meta title
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        $title = $this->getData('meta_title');
+        if (!$title) {
+            $title = $this->getData('title');
+        }
+
+        return trim($title);
+    }
+
+    /**
+     * Retrieve meta description
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        $desc = $this->getData('meta_description');
+        if (!$desc) {
+            $desc = $this->getData('content');
+        }
+
+        $desc = strip_tags($desc);
+        if (mb_strlen($desc) > 300) {
+            $desc = mb_substr($desc, 0, 300);
+        }
+
+        return trim($desc);
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
+    }
+
+    /**
+     * Retrieve block identifier
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return (string)$this->getData('identifier');
+    }
+
 }

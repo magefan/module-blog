@@ -9,9 +9,9 @@
 namespace Magefan\Blog\Block\Adminhtml;
 
 /**
- * Admin blog comment
+ * Admin blog tag
  */
-class Comment extends \Magento\Backend\Block\Widget\Grid\Container
+class Tag extends \Magento\Backend\Block\Widget\Grid\Container
 {
     /**
      * Constructor
@@ -20,11 +20,12 @@ class Comment extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _construct()
     {
-        $this->_controller = 'adminhtml_comment';
+        $this->_controller = 'adminhtml_tag';
         $this->_blockGroup = 'Magefan_Blog';
-        //$this->_addButtonLabel = __('Add New Comment');
+        $this->_headerText = __('Tag');
+        $this->_addButtonLabel = __('Add New Tag');
+
         parent::_construct();
-        $this->removeButton('add');
     }
 
     /**
@@ -38,9 +39,10 @@ class Comment extends \Magento\Backend\Block\Widget\Grid\Container
         $this->getToolbar()->addChild(
             'options_button',
             \Magento\Backend\Block\Widget\Button::class,
-            ['label' => __('Import Comments'), 'onclick' => $onClick]
+            ['label' => __('Import Tags'), 'onclick' => $onClick]
         );
 
         return parent::_prepareLayout();
     }
+
 }

@@ -23,7 +23,7 @@ class Tag extends Actions
      * Allowed Key
      * @var string
      */
-    protected $_allowedKey      = 'Magefan_Blog::post';
+    protected $_allowedKey      = 'Magefan_Blog::tag';
 
     /**
      * Model class name
@@ -35,5 +35,5 @@ class Tag extends Actions
      * Active menu key
      * @var string
      */
-    protected $_activeMenu      = 'Magefan_Blog::post';
+    protected $_activeMenu      = 'Magefan_Blog::tag';
 }

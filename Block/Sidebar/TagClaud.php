@@ -58,26 +58,28 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     public function getTags()
     {
         if ($this->_tags === null) {
-            $this->_tags = $this->_tagCollectionFactory->create();
+            $this->_tags = $this->_tagCollectionFactory->create()
+                ->addActiveFilter();
+
             $resource = $this->_tags->getResource();
-            $this->_tags->getSelect()->joinLeft(
-                ['pt' => $resource->getTable('magefan_blog_post_tag')],
-                'main_table.tag_id = pt.tag_id',
-                []
-            )->joinLeft(
-                ['p' => $resource->getTable('magefan_blog_post')],
-                'p.post_id = pt.post_id',
-                []
-            )->joinLeft(
-                ['ps' => $resource->getTable('magefan_blog_post_store')],
-                'p.post_id = ps.post_id',
-                ['count' => 'count(main_table.tag_id)']
-            )->group(
-                'main_table.tag_id'
-            )->where(
-                'ps.store_id IN (?)',
-                [0, (int)$this->_storeManager->getStore()->getId()]
-            );
+                $this->_tags->getSelect()->joinLeft(
+                    ['pt' => $resource->getTable('magefan_blog_post_tag')],
+                    'main_table.tag_id = pt.tag_id',
+                    []
+                )->joinLeft(
+                    ['p' => $resource->getTable('magefan_blog_post')],
+                    'p.post_id = pt.post_id',
+                    []
+                )->joinLeft(
+                    ['ps' => $resource->getTable('magefan_blog_post_store')],
+                    'p.post_id = ps.post_id',
+                    ['count' => 'count(main_table.tag_id)']
+                )->group(
+                    'main_table.tag_id'
+                )->where(
+                    'ps.store_id IN (?)',
+                    [0, (int)$this->_storeManager->getStore()->getId()]
+                );
         }
 
         return $this->_tags;

@@ -48,7 +48,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         if ($tag = $this->getTag()) {
             $this->_addBreadcrumbs($tag->getTitle(), 'blog_tag');
             $this->pageConfig->addBodyClass('blog-tag-' . $tag->getIdentifier());
-            $this->pageConfig->getTitle()->set($tag->getTitle());
+            $this->pageConfig->getTitle()->set($tag->getMetaTitle());
+            $this->pageConfig->setKeywords($tag->getMetaKeywords());
+            $this->pageConfig->setDescription($tag->getMetaDescription());
             $this->pageConfig->addRemotePageAsset(
                 $tag->getTagUrl(),
                 'canonical',
