@@ -19,7 +19,19 @@ class Aw extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $this->_redirect('*/*/');
+        $this->_view->loadLayout();
+        $this->_setActiveMenu('Magefan_Blog::import');
+        $title = __('Blog Import from Aw');
+        $this->_view->getPage()->getConfig()->getTitle()->prepend($title);
+        $this->_addBreadcrumb($title, $title);
+
+        $config = new \Magento\Framework\DataObject(
+            (array)$this->_getSession()->getData('import_aw_form_data', true) ?: []
+        );
+
+        $this->_objectManager->get(\Magento\Framework\Registry::class)->register('import_config', $config);
+
+        $this->_view->renderLayout();
     }
 
     /**

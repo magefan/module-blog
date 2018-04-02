@@ -17,22 +17,10 @@ class Aw extends AbstractImport
 {
     public function execute()
     {
+
         $config = \Magento\Framework\App\ObjectManager::getInstance()
             ->get('Magento\Framework\App\DeploymentConfig');
         $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
-        $this->setData(
-            'dbhost',
-            $config->get($pref . ConfigOptionsListConstants::KEY_HOST)
-        )->setData(
-            'uname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_USER)
-        )->setData(
-            'pwd',
-            $config->get($pref . ConfigOptionsListConstants::KEY_PASSWORD)
-        )->setData(
-            'dbname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
-        );
 
         $host = $this->getData('dbhost') ?: $this->getData('host');
         if (false !== strpos($host, '.sock')) {
@@ -130,7 +118,6 @@ class Aw extends AbstractImport
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog';
         $result = $this->_mysqliQuery($sql);
-
         while ($data = mysqli_fetch_assoc($result)) {
             /* Find post categories*/
             $c_sql = 'SELECT cat_id as category_id FROM '.$_pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
