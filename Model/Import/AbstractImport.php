@@ -165,4 +165,24 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
 
         return $result;
     }
+
+    /**
+     * Prepare import identifier
+     * @param  string $identifier
+     * @return string
+     */
+    protected function prepareIdentifier($identifier)
+    {
+        $identifier = urldecode(trim(strtolower($identifier)));
+
+        if (is_numeric($identifier)) {
+            $identifier .= 'u' . $identifier;
+        }
+
+        if (strlen($identifier) == 1) {
+            $identifier .= $identifier;
+        }
+
+        return $identifier;
+    }
 }

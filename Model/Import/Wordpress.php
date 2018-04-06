@@ -54,10 +54,7 @@ class Wordpress extends AbstractImport
             $data['is_active'] = 1;
             $data['position'] = 0;
             $data['path'] = 0;
-            $data['identifier'] = trim(strtolower($data['identifier']));
-            if (strlen($data['identifier']) == 1) {
-                $data['identifier'] .= $data['identifier'];
-            }
+            $data['identifier'] = $this->prepareIdentifier($data['identifier']);
 
             $category = $this->_categoryFactory->create();
             try {
@@ -128,10 +125,12 @@ class Wordpress extends AbstractImport
                 $data[$key] = utf8_encode($data[$key]);
             }
 
-            $data['identifier'] = trim(strtolower($data['identifier']));
-            if (strlen($data['identifier']) == 1) {
-                $data['identifier'] .= $data['identifier'];
+            if ($data['title']{0} == '?') {
+                /* fix for ???? titles */
+                $data['title'] = $data['identifier'];
             }
+
+            $data['identifier'] = $this->prepareIdentifier($data['identifier']);
 
             $tag = $this->_tagFactory->create();
             try {
@@ -246,10 +245,7 @@ class Wordpress extends AbstractImport
                 'tags' => $postTags,
                 'featured_img' => $data['featured_img'],
             ];
-            $data['identifier'] = trim(strtolower($data['identifier']));
-            if (strlen($data['identifier']) == 1) {
-                $data['identifier'] .= $data['identifier'];
-            }
+            $data['identifier'] = $this->prepareIdentifier($data['identifier']);
 
             $post = $this->_postFactory->create();
             try {
