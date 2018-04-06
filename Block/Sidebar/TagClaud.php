@@ -79,6 +79,9 @@ class TagClaud extends \Magento\Framework\View\Element\Template
                 )->where(
                     'ps.store_id IN (?)',
                     [0, (int)$this->_storeManager->getStore()->getId()]
+                )->where(
+                    'main_table.is_active = ?',
+                    \Magefan\Blog\Model\Tag::STATUS_ENABLED
                 );
         }
 
