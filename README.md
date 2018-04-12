@@ -95,9 +95,17 @@ http://magefan.com/docs/magento-2-blog/
 ## Installation Method 1 - Installing via composer
   * Open command line
   * Using command "cd" navigate to your magento2 root directory
-  * Run command: composer require magefan/module-blog
-  
-  * If you are using Magento 2.2.x please run the command: composer require magefan/module-blog-m22
+  * Run commands:
+```
+composer require magefan/module-blog
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento setup:static-content:deploy
+```
+  * If you are using Magento 2.2.x please run the command: 
+```
+composer require magefan/module-blog-m22
+```
 
   
 
