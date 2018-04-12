@@ -112,7 +112,7 @@ composer require magefan/module-blog-m22
 ## Installation Method 2 - Installing using archive
   * Download [ZIP Archive](https://github.com/magefan/module-blog/archive/master.zip)
   * Extract files
-  * In your Magento 2 root directory create folder app/code/Magefan/Blog
+  * In your Magento 2 root directory create folder app/code/Magefan/BlogM22
   * Copy files and folders from archive to that folder
   * In command line, using "cd", navigate to your Magento 2 root directory
   * Run commands:
