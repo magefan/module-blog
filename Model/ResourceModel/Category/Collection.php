@@ -57,6 +57,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_init('Magefan\Blog\Model\Category', 'Magefan\Blog\Model\ResourceModel\Category');
         $this->_map['fields']['category_id'] = 'main_table.category_id';
         $this->_map['fields']['store'] = 'store_table.store_id';
+        $this->_map['fields']['group'] = 'group_table.group_id';
     }
 
     /**
@@ -191,16 +192,39 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _renderFiltersBefore()
     {
-        if ($this->getFilter('store')) {
-            $this->getSelect()->join(
-                ['store_table' => $this->getTable('magefan_blog_category_store')],
-                'main_table.category_id = store_table.category_id',
-                []
-            )->group(
-                'main_table.category_id'
-            );
+        foreach (['store', 'group'] as $key) {
+            if ($this->getFilter($key)) {
+                $this->getSelect()->join(
+                    [$key.'_table' => $this->getTable('magefan_blog_category_'.$key)],
+                    'main_table.category_id = '.$key.'_table.category_id',
+                    []
+                )->group(
+                    'main_table.category_id'
+                );
+            }
         }
         parent::_renderFiltersBefore();
+    }
+
+    /**
+     * Add group filter to collection
+     * @param array|int|\Magento\Store\Model\Group  $group
+     * @return $this
+     */
+    public function addGroupFilter($group)
+    {
+        if (!$this->getFlag('group_filter_added')) {
+            if ($group instanceof \Magento\Customer\Model\Group) {
+                $group = [$group->getId()];
+            }
+
+            if (!is_array($group)) {
+                $group = [$group];
+            }
+
+            $this->addFilter('group', ['in' => $group], 'public');
+        }
+        return $this;
     }
 
     /**

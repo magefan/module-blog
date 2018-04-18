@@ -73,6 +73,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
+        $this->_map['fields']['group'] = 'group_table.group_id';
     }
 
     /**
@@ -245,6 +246,27 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Add group filter to collection
+     * @param array|int|\Magento\Store\Model\Group  $group
+     * @return $this
+     */
+    public function addGroupFilter($group)
+    {
+        if (!$this->getFlag('group_filter_added')) {
+            if ($group instanceof \Magento\Customer\Model\Group) {
+                $group = [$group->getId()];
+            }
+
+            if (!is_array($group)) {
+                $group = [$group];
+            }
+
+            $this->addFilter('group', ['in' => $group], 'public');
+        }
+        return $this;
+    }
+
+    /**
      * Add author filter to collection
      * @param array|int|\Magefan\Blog\Model\Author  $author
      * @return $this
@@ -344,6 +366,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $map = [
                 'category' => 'categories',
                 'tag' => 'tags',
+                /*'group' => 'groups',*/
             ];
 
             foreach ($map as $key => $property) {
@@ -380,7 +403,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _renderFiltersBefore()
     {
-        foreach (['store', 'category', 'tag'] as $key) {
+        foreach (['store', 'category', 'tag', 'group'] as $key) {
             if ($this->getFilter($key)) {
                 $this->getSelect()->join(
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],

@@ -46,6 +46,8 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      */
     protected $_url;
 
+    protected $_customerSession;
+
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
 
@@ -64,10 +66,12 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
+        \Magento\Customer\Model\Session $customerSession,
         \Magefan\Blog\Model\Url $url,
         array $data = []
     ) {
         parent::__construct($context, $data);
+        $this->_customerSession = $customerSession;
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
         $this->_postCollectionFactory = $postCollectionFactory;
@@ -84,10 +88,19 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         $this->_postCollection = $this->_postCollectionFactory->create()
             ->addActiveFilter()
             ->addStoreFilter($this->_storeManager->getStore()->getId())
+            ->addGroupFilter($this->getCustomerGroup())
             ->setOrder($this->getCollectionOrderField(), $this->getCollectionOrderDirection());
 
         if ($this->getPageSize()) {
             $this->_postCollection->setPageSize($this->getPageSize());
+        }
+    }
+
+    protected function getCustomerGroup(){
+        if ($this->_customerSession->isLoggedIn()) {
+            return $this->_customerSession->getCustomer()->getGroupId();
+        } else {
+            return 0;
         }
     }
 

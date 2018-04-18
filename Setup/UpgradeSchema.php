@@ -675,6 +675,68 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $setup->getIdxName($setup->getTable($table), ['is_active']),
                 ['is_active']
             );
+
+            /**
+             * Create table 'magefan_blog_post_group'
+             */
+            $table = $installer->getConnection()
+                ->newTable($installer->getTable('magefan_blog_post_group'))
+                ->addColumn(
+                    'post_id',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    null,
+                    ['nullable' => false, 'primary' => true],
+                    'Post ID'
+                )
+                ->addColumn(
+                    'group_id',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    ['nullable' => false, 'primary' => true],
+                    'Group ID'
+                )->addIndex(
+                    $installer->getIdxName('magefan_blog_post_group', ['group_id']),
+                    ['group_id']
+                )->addForeignKey(
+                    $installer->getFkName('magefan_blog_post_group', 'post_id', 'magefan_blog_post', 'post_id'),
+                    'post_id',
+                    $installer->getTable('magefan_blog_post'),
+                    'post_id',
+                    \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+                )->setComment('Catalog Rules To Posts Groups');
+
+            $installer->getConnection()->createTable($table);
+
+
+            /**
+             * Create table 'magefan_blog_category_group'
+             */
+            $table = $installer->getConnection()->newTable(
+                $installer->getTable('magefan_blog_category_group')
+            )->addColumn(
+                'category_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'primary' => true],
+                'Category ID'
+            )->addColumn(
+                'group_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                null,
+                ['unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Group ID'
+            )->addIndex(
+                $installer->getIdxName('magefan_blog_category_group', ['group_id']),
+                ['group_id']
+            )->addForeignKey(
+                $installer->getFkName('magefan_blog_category_group', 'category_id', 'magefan_blog_post', 'post_id'),
+                'category_id',
+                $installer->getTable('magefan_blog_post'),
+                'post_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            )->setComment('Catalog Rules To Category Groups');
+
+            $installer->getConnection()->createTable($table);
         }
 
         $setup->endSetup();

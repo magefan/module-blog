@@ -76,6 +76,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             'store',
             'category',
             'tag',
+            'group',
             'relatedproduct',
             'relatedpost',
             'relatedpost',
@@ -153,14 +154,9 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_store', 'store_id');
 
-        /* Save category & tag links */
-        foreach (['category' => 'categories', 'tag' => 'tags'] as $linkType => $dataKey) {
+        foreach (['category' => 'categories', 'tag' => 'tags', 'group' => 'groups'] as $linkType => $dataKey) {
+
             $newIds = (array)$object->getData($dataKey);
-            foreach ($newIds as $key => $id) {
-                if (!$id) { // e.g.: zero
-                    unset($newIds[$key]);
-                }
-            }
             if (is_array($newIds)) {
                 $lookup = 'lookup' . ucfirst($linkType) . 'Ids';
                 $oldIds = $this->$lookup($object->getId());
@@ -172,18 +168,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     $linkType . '_id'
                 );
             }
-        }
-
-        /* Save tags links */
-        $newIds = (array)$object->getTags();
-        foreach ($newIds as $key => $id) {
-            if (!$id) { // e.g.: zero
-                unset($newIds[$key]);
-            }
-        }
-        if (is_array($newIds)) {
-            $oldIds = $this->lookupTagIds($object->getId());
-            $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_tag', 'tag_id');
         }
 
         /* Save related post & product links */
@@ -232,6 +216,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $insert = $newRelatedIds;
         $delete = $oldRelatedIds;
+
 
         if ($delete) {
             $where = ['post_id = ?' => (int)$object->getId(), $field.' IN (?)' => $delete];
@@ -288,6 +273,9 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             $tags = $this->lookupTagIds($object->getId());
             $object->setTags($tags);
+
+            $group = $this->lookupGroupIds($object->getId());
+            $object->setGroups($group);
         }
 
         return parent::_afterLoad($object);
@@ -393,6 +381,17 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     public function lookupTagIds($postId)
     {
         return $this->_lookupIds($postId, 'magefan_blog_post_tag', 'tag_id');
+    }
+
+    /**
+     * Get group ids to which specified item is assigned
+     *
+     * @param int $postId
+     * @return array
+     */
+    public function lookupGroupIds($postId)
+    {
+        return $this->_lookupIds($postId, 'magefan_blog_post_group', 'group_id');
     }
 
     /**

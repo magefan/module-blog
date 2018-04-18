@@ -355,6 +355,28 @@
                 </item>
             </argument>
         </field>
+        <field name="groups" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">post</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>number</dataType>
+                <label translate="true">Visible For Customer Groups</label>
+                <dataScope>groups</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Magefan\Blog\Model\Rule\CustomerGroupsOptions"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
     </fieldset>
     <!-- Revert htmlContent to enable post gallery images on Magento 2.2.2
     <htmlContent name="gallery" sortOrder="22">
