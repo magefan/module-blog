@@ -36,4 +36,10 @@ class Tag extends Actions
      * @var string
      */
     protected $_activeMenu      = 'Magefan_Blog::tag';
+
+    /**
+     * Status field name
+     * @var string
+     */
+    protected $_statusField     = 'is_active';
 }
