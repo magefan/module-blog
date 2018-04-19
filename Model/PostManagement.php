@@ -37,7 +37,7 @@ class PostManagement extends AbstractManagement
      * @param  int $storeId
      * @param  int $page
      * @param  int $limit
-     * @return bool
+     * @return string
      */
     public function getList($type, $term, $storeId, $page, $limit)
     {
