@@ -676,6 +676,9 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ['is_active']
             );
 
+        }
+
+        if (version_compare($version, '2.8.1') < 0) {
             /**
              * Create table 'magefan_blog_post_group'
              */
@@ -729,10 +732,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $installer->getIdxName('magefan_blog_category_group', ['group_id']),
                 ['group_id']
             )->addForeignKey(
-                $installer->getFkName('magefan_blog_category_group', 'category_id', 'magefan_blog_post', 'post_id'),
+                $installer->getFkName('magefan_blog_category_group', 'category_id', 'magefan_blog_category', 'category_id'),
                 'category_id',
-                $installer->getTable('magefan_blog_post'),
-                'post_id',
+                $installer->getTable('magefan_blog_category'),
+                'category_id',
                 \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
             )->setComment('Catalog Rules To Category Groups');
 

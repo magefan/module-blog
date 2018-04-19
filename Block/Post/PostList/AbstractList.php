@@ -60,15 +60,16 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
+     * @param null|\Magento\Customer\Model\Session $customerSession
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
-        \Magento\Customer\Model\Session $customerSession,
         \Magefan\Blog\Model\Url $url,
-        array $data = []
+        array $data = [],
+        $customerSession = null
     ) {
         parent::__construct($context, $data);
         $this->_customerSession = $customerSession;
@@ -76,6 +77,9 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         $this->_filterProvider = $filterProvider;
         $this->_postCollectionFactory = $postCollectionFactory;
         $this->_url = $url;
+        $this->_customerSession = $customerSession ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Customer\Model\Session::class
+        );
     }
 
     /**

@@ -275,6 +275,9 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $object->setTags($tags);
 
             $group = $this->lookupGroupIds($object->getId());
+            if (!$group) {
+                $group = [(string)0];
+            }
             $object->setGroups($group);
         }
 

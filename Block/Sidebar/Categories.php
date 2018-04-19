@@ -26,6 +26,8 @@ class Categories extends \Magento\Framework\View\Element\Template implements \Ma
      * @var \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     protected $_categoryCollection;
+
+    protected $_customerSession;
     /**
      * Construct
      *
@@ -36,9 +38,11 @@ class Categories extends \Magento\Framework\View\Element\Template implements \Ma
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magefan\Blog\Model\ResourceModel\Category\Collection $categoryCollection,
+        \Magento\Customer\Model\Session $customerSession,
         array $data = []
     ) {
         parent::__construct($context, $data);
+        $this->_customerSession = $customerSession;
         $this->_categoryCollection = $categoryCollection;
     }
 
@@ -50,8 +54,10 @@ class Categories extends \Magento\Framework\View\Element\Template implements \Ma
     {
         $k = 'grouped_childs';
         if (!$this->hasData($k)) {
+
             $array = $this->_categoryCollection
                 ->addActiveFilter()
+                ->addGroupFilter($this->getCustomerGroup())
                 ->addStoreFilter($this->_storeManager->getStore()->getId())
                 ->setOrder('position')
                 ->getTreeOrderedArray();
@@ -67,6 +73,15 @@ class Categories extends \Magento\Framework\View\Element\Template implements \Ma
 
         return $this->getData($k);
     }
+
+    protected function getCustomerGroup(){
+        if ($this->_customerSession->isLoggedIn()) {
+            return $this->_customerSession->getCustomer()->getGroupId();
+        } else {
+            return 0;
+        }
+    }
+
 
     /**
      * Retrieve true if need to show posts count

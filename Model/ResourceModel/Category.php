@@ -147,7 +147,6 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
         foreach (['group' => 'groups', 'store' => 'stores'] as $linkType => $dataKey) {
-
             $newIds = (array)$object->getData($dataKey);
 
             if (is_array($newIds)) {
@@ -160,6 +159,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     'magefan_blog_category_' . $linkType,
                     $linkType . '_id'
                 );
+
             }
         }
 
@@ -197,6 +197,9 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $object->setData('store_ids', $storeIds);
 
             $group = $this->lookupGroupIds($object->getId());
+            if (!$group) {
+                $group = [(string)0];
+            }
             $object->setGroups($group);
         }
 
