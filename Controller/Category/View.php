@@ -20,14 +20,21 @@ class View extends \Magefan\Blog\App\Action\Action
     protected $_storeManager;
 
     /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
+
+    /**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Session $customerSession
     ) {
         parent::__construct($context);
+        $this->_customerSession = $customerSession;
         $this->_storeManager = $storeManager;
     }
 
@@ -46,6 +53,13 @@ class View extends \Magefan\Blog\App\Action\Action
         if (!$category) {
             return $this->_forwardNoroute();
         }
+        $groupId = $this->_customerSession->getCustomer()->getGroupId();
+
+        if (!$category->isVisibleForGroup($groupId)) {
+            $this->_redirect('customer/account/login');
+            return;
+        }
+
 
         $this->_objectManager->get(\Magento\Framework\Registry::class)
             ->register('current_blog_category', $category);

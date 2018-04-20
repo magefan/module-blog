@@ -146,9 +146,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
-        foreach (['group' => 'groups', 'store' => 'stores'] as $linkType => $dataKey) {
+        foreach (['store' => 'store_ids', 'group' => 'groups'] as $linkType => $dataKey) {
             $newIds = (array)$object->getData($dataKey);
-
             if (is_array($newIds)) {
                 $lookup = 'lookup' . ucfirst($linkType) . 'Ids';
                 $oldIds = $this->$lookup($object->getId());

@@ -154,7 +154,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_store', 'store_id');
 
-        foreach (['category' => 'categories', 'tag' => 'tags', 'group' => 'groups'] as $linkType => $dataKey) {
+        foreach (['group' => 'groups', 'category' => 'categories', 'tag' => 'tags'] as $linkType => $dataKey) {
 
             $newIds = (array)$object->getData($dataKey);
             if (is_array($newIds)) {

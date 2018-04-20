@@ -21,14 +21,23 @@ class View extends \Magefan\Blog\App\Action\Action
     protected $_storeManager;
 
     /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
+
+    /**
+     * View constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Customer\Model\Session $customerSession
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Session $customerSession
     ) {
         parent::__construct($context);
+        $this->_customerSession = $customerSession;
         $this->_storeManager = $storeManager;
     }
 
@@ -70,6 +79,13 @@ class View extends \Magefan\Blog\App\Action\Action
 
         if (!$post->isVisibleOnStore($storeId) && !$post->isValidSecret($secret)) {
             return false;
+        }
+
+        $groupId = $this->_customerSession->getCustomer()->getGroupId();
+
+        if (!$post->isVisibleForGroup($groupId)) {
+            $this->_redirect('customer/account/login');
+            return;
         }
 
         if ($post->isValidSecret($secret)) {

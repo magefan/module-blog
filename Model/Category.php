@@ -78,16 +78,23 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     protected $controllerName;
 
     /**
-     * Initialize dependencies.
-     *
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
+
+    /**
+     * Category constructor.
+     * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param ResourceModel\Post\CollectionFactory $postCollectionFactory
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param array $data
      */
     public function __construct(
+        \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
@@ -97,6 +104,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         array $data = []
     ) {
         $this->_url = $url;
+        $this->_customerSession = $customerSession;
         $this->postCollectionFactory = $postCollectionFactory;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
@@ -393,6 +401,15 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * Retrieve if is visible for group
+     * @return bool
+     */
+    public function isVisibleForGroup($groupId)
+    {
+        return $this->getIsActive() && array_intersect([0, $groupId], $this->getGroups());
+    }
+
+    /**
      * Retrieve number of posts in this category
      *
      * @return int
@@ -403,6 +420,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         if (!$this->hasData($key)) {
             $posts = $this->postCollectionFactory->create()
                 ->addActiveFilter()
+                ->addGroupFilter($this->_customerSession->getCustomer()->getGroupId())
                 ->addStoreFilter($this->getStoreId())
                 ->addCategoryFilter($this);
 

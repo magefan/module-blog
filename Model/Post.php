@@ -236,6 +236,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve if is visible for group
+     * @return bool
+     */
+    public function isVisibleForGroup($groupId)
+    {
+        return $this->getIsActive() && array_intersect([0, $groupId], $this->getGroups());
+    }
+
+    /**
      * Retrieve model title
      * @param  boolean $plural
      * @return string
