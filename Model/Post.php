@@ -145,6 +145,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     protected $controllerName;
 
+    protected $_customerSession;
+
     /**
      * Initialize dependencies.
      *
@@ -165,6 +167,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
+        \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Math\Random $random,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
@@ -182,6 +185,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
+        $this->_customerSession = $customerSession;
         $this->filterProvider = $filterProvider;
         $this->random = $random;
         $this->scopeConfig = $scopeConfig;
@@ -600,9 +604,11 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     public function getParentCategories()
     {
         if (is_null($this->_parentCategories)) {
+            $customerGroup = $this->_customerSession->getCustomer()->getGroupId();
             $this->_parentCategories = $this->_categoryCollectionFactory->create()
                 ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
                 ->addStoreFilter($this->getStoreId())
+                ->addGroupFilter($customerGroup)
                 ->addActiveFilter()
                 ->setOrder('position');
         }
@@ -702,8 +708,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     public function getRelatedPosts()
     {
         if (!$this->hasData('related_posts')) {
+            $customerGroup = $this->_customerSession->getCustomer()->getGroupId();
             $collection = $this->_relatedPostsCollection
                 ->addFieldToFilter('post_id', ['neq' => $this->getId()])
+                ->addGroupFilter($customerGroup)
                 ->addStoreFilter($this->getStoreId());
             $collection->getSelect()->joinLeft(
                 ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedpost')],
