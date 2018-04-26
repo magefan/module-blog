@@ -217,7 +217,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             [
                 ['like' => '%' . $term . '%'],
                 ['like' => '%' . $term . '%'],
-                ['like' => '% ' . $term . ' %']
+                ['like' => '%' . $term . '%']
             ]
         );
         return $this;
