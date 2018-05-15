@@ -245,10 +245,8 @@ class Wordpress extends AbstractImport
                 'tags' => $postTags,
                 'featured_img' => $data['featured_img'],
             ];
-            $data['identifier'] = trim(strtolower($data['identifier']));
-            if (strlen($data['identifier']) == 1) {
-                $data['identifier'] .= $data['identifier'];
-            }
+
+            $data['identifier'] = $this->prepareIdentifier($data['identifier']);
 
             $post = $this->_postFactory->create();
             try {
@@ -286,7 +284,7 @@ class Wordpress extends AbstractImport
                         unset($comment);
                     }
                 }
-                   $this->_importedPostsCount++;
+                $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
                 $this->_logger->addDebug('Blog Post Import [' . $data['title'] . ']: '. $e->getMessage());
