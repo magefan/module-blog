@@ -47,7 +47,7 @@ class Wordpress extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare category data */
             foreach (['title', 'identifier'] as $key) {
-                $data[$key] = utf8_encode($data[$key]);
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
             $data['store_ids'] = [$this->getStoreId()];
@@ -122,7 +122,7 @@ class Wordpress extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare tag data */
             foreach (['title', 'identifier'] as $key) {
-                $data[$key] = utf8_encode($data[$key]);
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
             if ($data['title']{0} == '?') {
@@ -215,7 +215,7 @@ class Wordpress extends AbstractImport
 
             /* Prepare post data */
             foreach (['post_title', 'post_name', 'post_content'] as $key) {
-                $data[$key] = utf8_encode($data[$key]);
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
             $creationTime = strtotime($data['post_date_gmt']);
@@ -228,7 +228,7 @@ class Wordpress extends AbstractImport
                 '$4{{media url="magefan_blog$6$8"}}$9',
                 $content
             );
-
+            $wordpressPostId = $data['ID'];
             $data = [
                 'store_ids' => [$this->getStoreId()],
                 'title' => $data['post_title'],
@@ -245,12 +245,45 @@ class Wordpress extends AbstractImport
                 'tags' => $postTags,
                 'featured_img' => $data['featured_img'],
             ];
+
             $data['identifier'] = $this->prepareIdentifier($data['identifier']);
 
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
                 $post->setData($data)->save();
+
+                /* find post comment s*/
+                $sql = 'SELECT * FROM '.$_pref.'comments WHERE `comment_approved`=1 AND `comment_post_ID` = ' . $wordpressPostId;
+                $resultComments = $this->_mysqliQuery($sql);
+                $commentParents = [];
+
+                while ($comments = mysqli_fetch_assoc($resultComments)) {
+
+                    $commentParentId = 0;
+                    if (!($comments['comment_parent'] == 0)) $commentParentId = $commentParents[$comments["comment_parent"]];
+
+                    $commentData = [
+                        'parent_id' => $commentParentId,
+                        'post_id' => $post->getPostId(),
+                        'status' => \Magefan\Blog\Model\Config\Source\CommentStatus::APPROVED,
+                        'author_type' => \Magefan\Blog\Model\Config\Source\AuthorType::GUEST,
+                        'author_nickname' => $comments['comment_author'],
+                        'author_email' => $comments['comment_author_email'],
+                        'text' => $comments['comment_content'],
+                        'creation_time' => $comments['comment_date'],
+                    ];
+
+                    $comment = $this->_commentFactory->create($commentData);
+
+                    try {
+                        /* Initial saving */
+                        $comment->setData($commentData)->save();
+                        $commentParents[$comments["comment_ID"]] = $comment->getCommentId();
+                    } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                        unset($comment);
+                    }
+                }
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
