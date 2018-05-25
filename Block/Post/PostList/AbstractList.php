@@ -46,6 +46,9 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      */
     protected $_url;
 
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
     protected $_customerSession;
 
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
