@@ -101,10 +101,13 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
             $this->_postCollection->setPageSize($this->getPageSize());
         }
     }
-
+    /**
+     * Retrieve customer group id
+     * @return int
+     */
     protected function getCustomerGroup(){
         if ($this->_customerSession->isLoggedIn()) {
-            return $this->_customerSession->getCustomer()->getGroupId();
+            return (int) $this->_customerSession->getCustomer()->getGroupId();
         } else {
             return 0;
         }
