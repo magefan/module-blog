@@ -30,14 +30,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         }
     }
 
-    protected function getCustomerGroup(){
-        if ($this->_customerSession->isLoggedIn()) {
-            return $this->_customerSession->getCustomer()->getGroupId();
-        } else {
-            return 0;
-        }
-    }
-
     /**
      * Retrieve collection order field
      *
