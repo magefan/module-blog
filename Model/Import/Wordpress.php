@@ -47,8 +47,8 @@ class Wordpress extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare category data */
             foreach (['title', 'identifier'] as $key) {
-                $data[$key] = utf8_encode($data[$key]);
-//                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
+                /*$data[$key] = utf8_encode($data[$key]);*/
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
             $data['store_ids'] = [$this->getStoreId()];
@@ -123,8 +123,8 @@ class Wordpress extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare tag data */
             foreach (['title', 'identifier'] as $key) {
-                $data[$key] = utf8_encode($data[$key]);
-//                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
+                /*$data[$key] = utf8_encode($data[$key]);*/
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
             if ($data['title']{0} == '?') {
@@ -217,8 +217,8 @@ class Wordpress extends AbstractImport
 
             /* Prepare post data */
             foreach (['post_title', 'post_name', 'post_content'] as $key) {
-                $data[$key] = utf8_encode($data[$key]);
-//                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
+                /*$data[$key] = utf8_encode($data[$key]);*/
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
             $creationTime = strtotime($data['post_date_gmt']);
