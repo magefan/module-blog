@@ -101,6 +101,7 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
             $this->_postCollection->setPageSize($this->getPageSize());
         }
     }
+   
     /**
      * Retrieve customer group id
      * @return int
