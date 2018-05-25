@@ -75,7 +75,7 @@ class SitemapPlugin
     public function afterGenerateXml(Sitemap $sitemap, $result)
     {
         if ($this->isEnabled($sitemap)) {
-            if (!method_exists($sitemap, 'collectSitemapItems')) {
+            if ($this->isMageWorxXmlSitemap($sitemap) || !method_exists($sitemap, 'collectSitemapItems')) {
                 $sitemapId = $sitemap->getId() ?: 0;
                 if (in_array($sitemapId, $this->generated)) {
                     return $result;
@@ -105,7 +105,7 @@ class SitemapPlugin
      */
     public function afterCollectSitemapItems(Sitemap $sitemap, $result)
     {
-        if ($this->isEnabled($sitemap)) {
+        if ($this->isEnabled($sitemap) && !$this->isMageWorxXmlSitemap($sitemap)) {
             $storeId = $sitemap->getStoreId();
 
             $sitemap->addSitemapItem(new DataObject(
@@ -145,5 +145,14 @@ class SitemapPlugin
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $sitemap->getStoreId()
         );
+    }
+
+    /**
+     * @param $sitemap
+     * @return mixed
+     */
+    public function isMageWorxXmlSitemap($sitemap)
+    {
+        return (get_class($sitemap) == 'MageWorx\XmlSitemap\Model\Rewrite\Sitemap\Interceptor');
     }
 }
