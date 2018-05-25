@@ -15,27 +15,10 @@ use Magento\Framework\Config\ConfigOptionsListConstants;
  */
 class Aw extends AbstractImport
 {
-    protected $_requiredFields = ['dbname', 'uname', 'pwd', 'dbhost', 'prefix'];
+    protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
 
     public function execute()
     {
-        $config = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get('Magento\Framework\App\DeploymentConfig');
-        $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
-        $this->setData(
-            'dbhost',
-            $config->get($pref . ConfigOptionsListConstants::KEY_HOST)
-        )->setData(
-            'uname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_USER)
-        )->setData(
-            'pwd',
-            $config->get($pref . ConfigOptionsListConstants::KEY_PASSWORD)
-        )->setData(
-            'dbname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
-        );
-
         $host = $this->getData('dbhost') ?: $this->getData('host');
         if (false !== strpos($host, '.sock')) {
             $con = $this->_connect = mysqli_connect(
@@ -59,10 +42,7 @@ class Aw extends AbstractImport
             throw new \Exception("Failed connect to magento database", 1);
         }
 
-        $_pref = mysqli_real_escape_string(
-            $con,
-            $config->get($pref . ConfigOptionsListConstants::KEY_PREFIX)
-        );
+        $_pref = mysqli_real_escape_string($con, $this->getData('prefix'));
 
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_cat LIMIT 1';
         try {

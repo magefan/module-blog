@@ -13,7 +13,7 @@ namespace Magefan\Blog\Model\Import;
  */
 class Wordpress extends AbstractImport
 {
-    protected $_requiredFields = ['dbname', 'uname', 'pwd', 'dbhost', 'prefix'];
+    protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
 
     public function execute()
     {
@@ -47,7 +47,6 @@ class Wordpress extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare category data */
             foreach (['title', 'identifier'] as $key) {
-                /*$data[$key] = utf8_encode($data[$key]);*/
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
@@ -123,7 +122,6 @@ class Wordpress extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare tag data */
             foreach (['title', 'identifier'] as $key) {
-                /*$data[$key] = utf8_encode($data[$key]);*/
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
@@ -217,7 +215,6 @@ class Wordpress extends AbstractImport
 
             /* Prepare post data */
             foreach (['post_title', 'post_name', 'post_content'] as $key) {
-                /*$data[$key] = utf8_encode($data[$key]);*/
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 

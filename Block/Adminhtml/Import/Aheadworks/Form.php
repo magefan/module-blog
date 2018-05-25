@@ -73,16 +73,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         );
 
         $fieldset->addField(
-            'notice',
-            'label',
-            [
-                'label' => __('NOTICE'),
-                'name' => 'prefix',
-                'after_element_html' => 'When the import is completed successfully, please copy image files from AheadWorks <strong style="color:#bd1616;">aw-content/uploads</strong> directory to Magento <strong style="color:#105610;">pub/media/magefan_blog</strong> directory.',
-            ]
-        );
-
-        $fieldset->addField(
             'dbname',
             'text',
             [
@@ -115,7 +105,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Password'),
                 'title' => __('Password'),
                 'name' => 'pwd',
-                'required' => true,
+                'required' => false,
                 'disabled' => $isElementDisabled,
                 'after_element_html' => '<small>…and your AW MySQL password.</small>',
             ]
@@ -141,7 +131,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Table Prefix'),
                 'title' => __('Table Prefix'),
                 'name' => 'prefix',
-                'required' => true,
+                'required' => false,
                 'disabled' => $isElementDisabled,
                 'after_element_html' => '<small>…and your AW MySQL table prefix.</small>',
             ]
@@ -179,9 +169,11 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
 
         $this->_eventManager->dispatch('magefan_blog_import_aheadworks_prepare_form', ['form' => $form]);
 
+        /*
         if (empty($data['prefix'])) {
             $data['prefix'] = 'aw_';
         }
+        */
 
         if (empty($data['dbhost'])) {
             $data['dbhost'] = 'localhost';

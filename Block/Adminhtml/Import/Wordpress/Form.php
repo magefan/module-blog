@@ -119,7 +119,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Password'),
                 'title' => __('Password'),
                 'name' => 'pwd',
-                'required' => true,
+                'required' => false,
                 'disabled' => $isElementDisabled,
                 'after_element_html' => '<small>…and your WP MySQL password.</small>',
             ]
@@ -145,7 +145,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Table Prefix'),
                 'title' => __('Table Prefix'),
                 'name' => 'prefix',
-                'required' => true,
+                'required' => false,
                 'disabled' => $isElementDisabled,
                 'after_element_html' => '<small>…and your WP MySQL table prefix.</small>',
             ]
