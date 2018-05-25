@@ -72,7 +72,6 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         $customerSession = null
     ) {
         parent::__construct($context, $data);
-        $this->_customerSession = $customerSession;
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
         $this->_postCollectionFactory = $postCollectionFactory;
