@@ -15,6 +15,8 @@ use Magento\Framework\Config\ConfigOptionsListConstants;
  */
 class Aw extends AbstractImport
 {
+    protected $_requiredFields = ['dbname', 'uname', 'pwd', 'dbhost', 'prefix'];
+
     public function execute()
     {
         $config = \Magento\Framework\App\ObjectManager::getInstance()
@@ -46,7 +48,7 @@ class Aw extends AbstractImport
             );
         } else {
             $con = $this->_connect = mysqli_connect(
-                $host,
+                $this->getData('dbhost'),
                 $this->getData('uname'),
                 $this->getData('pwd'),
                 $this->getData('dbname')

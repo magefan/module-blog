@@ -32,11 +32,11 @@ The import process completed. %1 posts and %2 categories where imported. Some po
 Nothing to import.,Nu e nimic de importat.
 Can not make import.,Nu pot realiza importul.
 Something went wrong:,Ceva nu e in regula:
-Blog Import from WordPress (beta),Importa Blog din WordPress (beta)
+Blog Import from WordPress,Importa Blog din WordPress
 Please select,Va rugam alegeti
 Use Facebook Comments,Foloseste Comentararii Facebook
 Use Disqus Comments,Foloseste Comentarii Disqus
-Use Google Comments (beta),Foloseste Comentareii Google (beta)
+Use Google Comments,Foloseste Comentareii Google
 Yes (With auto trigger),Da (Cu declansare automata)
 Yes (Without auto trigger),Da (Fara declansare automata)
 Parameter %1 is required,E nevoie de parametrul %1

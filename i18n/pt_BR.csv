@@ -32,11 +32,11 @@ The import process completed. %1 posts and %2 categories where imported. Some po
 Nothing to import.,Nada para importar.
 Can not make import.,Não foi possível importar.
 Something went wrong: ,Ocorreu um erro: 
-Blog Import from WordPress (beta),Importar Blog do Wordpress (Beta)
+Blog Import from WordPress,Importar Blog do Wordpress
 Please select,Selecione
 Use Facebook Comments,Usar Comentários do Facebook
 Use Disqus Comments,Usar Comentários do Disqus
-Use Google Comments (beta),Usar Comentários do Google (Beta)
+Use Google Comments,Usar Comentários do Google
 Yes (With auto trigger),Sim (Automaticamente)
 Yes (Without auto trigger),Yes (Manualmente)
 Parameter %1 is required,O parâmetro %1 é requerido

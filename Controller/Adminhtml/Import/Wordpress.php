@@ -21,7 +21,7 @@ class Wordpress extends \Magento\Backend\App\Action
     {
         $this->_view->loadLayout();
         $this->_setActiveMenu('Magefan_Blog::import');
-        $title = __('Blog Import from WordPress (beta)');
+        $title = __('Blog Import from WordPress');
         $this->_view->getPage()->getConfig()->getTitle()->prepend($title);
         $this->_addBreadcrumb($title, $title);
 
