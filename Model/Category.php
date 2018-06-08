@@ -119,7 +119,13 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     public function getIdentities()
     {
-        return [self::CACHE_TAG . '_' . $this->getId()];
+        $identities = [];
+
+        if ($this->getId()) {
+            $identities[] = self::CACHE_TAG . '_' . $this->getId();
+        }
+
+        return $identities;
     }
 
     /**
