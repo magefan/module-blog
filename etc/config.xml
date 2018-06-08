@@ -31,6 +31,7 @@
                     <number_of_comments>5</number_of_comments>
                     <number_of_replies>5</number_of_replies>
                     <guest_comments>1</guest_comments>
+                    <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>

@@ -52,7 +52,11 @@
                     <?php } else { ?>
                         <button type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
                     <?php } ?>
+                    <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
+                        <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
+                    <?php } ?>
                     <div class="clearfix"></div>
+
                 </div>
             </form>
         </div>
@@ -98,7 +102,13 @@
                 <button type="button" class="cancel reply-cancel-action" ><?php echo __('Cancel') ?></button>
                 <?php if ($canPost) { ?>
                     <button type="submit"><?php echo __('Submit') ?></button>
+                    <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
+                        <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
+                    <?php } ?>
                 <?php } else { ?>
+                    <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
+                        <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
+                    <?php } ?>
                     <button type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
                 <?php } ?>
                 <div class="clearfix"></div>

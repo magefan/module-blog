@@ -1,0 +1,12 @@
+<?php
+     $id = 'blog_comment_privacy_' . $block->getCommentType();
+?>
+<div class="input-box required" novalidate="novalidate">
+    <input type="checkbox" value="1"  data-validate="{required:true}" class="checkbox required-entry" id="<?= $id ?>" name="privacy">
+    <?php
+    $privacyPolicy = "<a href=".$block->getUrl('privacy-policy-cookie-restriction-mode')." target='_blank' style='text-decoration: underline;'>". __('privacy policy') . "</a>"
+    ?>
+    <label for="<?= $id ?>" class="required"><?= __('Yes, I have read the %1 and agree to the processing of my personal data.', $privacyPolicy) ?></label>
+</div>
+
+

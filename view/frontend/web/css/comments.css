@@ -108,6 +108,12 @@
     height: 45px;
 }
 
+.c-replyform form .c-btn-hld  .input-box {text-align: left;padding: 10px 0;margin-top: 10px;}
+.c-replyform form .c-btn-hld  .input-box #privacy {float: left;margin: 4px 10px 0 0;}
+
+
+
+
 /*comment*/
 .c-post .p-name { font-weight: 700;  color: #365899;}
 .c-post .p-actions {padding: 8px 0 10px;}
