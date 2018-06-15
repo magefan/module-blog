@@ -171,18 +171,17 @@
 
 .widget.blog-search .action.search:before {
     -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-    line-height: 32px;
-    color: #8f8f8f;
-    content: '\e615';
-    font-family: 'luma-icons';
+    content: '';
     margin: 0;
     vertical-align: top;
     display: inline-block;
-    font-weight: normal;
     overflow: hidden;
     speak: none;
-    text-align: center;
+    width: 16px;
+    height: 32px;
+    background: url(../images/search-icon.svg) no-repeat -10px -7px;
+    background-size: 35px;
+    opacity: 0.5;
 }
 
 .widget.blog-search .action.search > span {
