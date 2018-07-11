@@ -67,6 +67,16 @@ class Comments extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * @return bool
+     */
+    public function displayPrivacyPolicyCheckbox() {
+        return $this->_scopeConfig->getValue(
+            'mfblog/post_view/comments/display_privacy_policy_checkbox',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * Retrieve number of comments to display
      * @return int
      */
