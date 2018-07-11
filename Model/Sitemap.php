@@ -32,6 +32,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
                     \Magefan\Blog\Model\Category::class
                 )->getCollection($this->getStoreId())
+                    ->addGroupFilter(0)
                     ->addStoreFilter($this->getStoreId())
                     ->addActiveFilter(),
             ]
@@ -45,6 +46,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                     \Magefan\Blog\Model\Post::class
                 )->getCollection($this->getStoreId())
                     ->addStoreFilter($this->getStoreId())
+                    ->addGroupFilter(0)
                     ->addActiveFilter(),
             ]
         );

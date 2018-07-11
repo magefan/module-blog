@@ -46,6 +46,11 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      */
     protected $_url;
 
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
+
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
 
@@ -58,6 +63,7 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
+     * @param null|\Magento\Customer\Model\Session $customerSession
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -65,13 +71,17 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
-        array $data = []
+        array $data = [],
+        $customerSession = null
     ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
         $this->_postCollectionFactory = $postCollectionFactory;
         $this->_url = $url;
+        $this->_customerSession = $customerSession ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Customer\Model\Session::class
+        );
     }
 
     /**
@@ -84,10 +94,23 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         $this->_postCollection = $this->_postCollectionFactory->create()
             ->addActiveFilter()
             ->addStoreFilter($this->_storeManager->getStore()->getId())
+            ->addGroupFilter($this->getCustomerGroup())
             ->setOrder($this->getCollectionOrderField(), $this->getCollectionOrderDirection());
 
         if ($this->getPageSize()) {
             $this->_postCollection->setPageSize($this->getPageSize());
+        }
+    }
+   
+    /**
+     * Retrieve customer group id
+     * @return int
+     */
+    protected function getCustomerGroup(){
+        if ($this->_customerSession->isLoggedIn()) {
+            return (int) $this->_customerSession->getCustomer()->getGroupId();
+        } else {
+            return 0;
         }
     }
 

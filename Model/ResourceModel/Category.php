@@ -54,9 +54,9 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _beforeDelete(\Magento\Framework\Model\AbstractModel $object)
     {
         $condition = ['category_id = ?' => (int)$object->getId()];
-
         $this->getConnection()->delete($this->getTable('magefan_blog_category_store'), $condition);
         $this->getConnection()->delete($this->getTable('magefan_blog_post_category'), $condition);
+        $this->getConnection()->delete($this->getTable('magefan_blog_category_group'), $condition);
 
         return parent::_beforeDelete($object);
     }
@@ -95,25 +95,30 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Assign category to store views
-     *
-     * @param \Magento\Framework\Model\AbstractModel $object
-     * @return $this
+     * Update post connections
+     * @param  \Magento\Framework\Model\AbstractModel $object
+     * @param  Array $newRelatedIds
+     * @param  Array $oldRelatedIds
+     * @param  String $tableName
+     * @param  String  $field
+     * @param  Array  $rowData
+     * @return void
      */
-    protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
-    {
-        $oldStoreIds = $this->lookupStoreIds($object->getId());
-        $newStoreIds = (array)$object->getStoreIds();
-        if (!$newStoreIds) {
-            $newStoreIds = [0];
-        }
+    protected function _updateLinks(
+        \Magento\Framework\Model\AbstractModel $object,
+        array $newRelatedIds,
+        array $oldRelatedIds,
+        $tableName,
+        $field,
+        $rowData = []
+    ) {
+        $table = $this->getTable($tableName);
 
-        $table = $this->getTable('magefan_blog_category_store');
-        $insert = array_diff($newStoreIds, $oldStoreIds);
-        $delete = array_diff($oldStoreIds, $newStoreIds);
+        $insert = $newRelatedIds;
+        $delete = $oldRelatedIds;
 
         if ($delete) {
-            $where = ['category_id = ?' => (int)$object->getId(), 'store_id IN (?)' => $delete];
+            $where = ['category_id = ?' => (int)$object->getId(), $field.' IN (?)' => $delete];
 
             $this->getConnection()->delete($table, $where);
         }
@@ -121,15 +126,45 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($insert) {
             $data = [];
 
-            foreach ($insert as $storeId) {
-                $data[] = ['category_id' => (int)$object->getId(), 'store_id' => (int)$storeId];
+            foreach ($insert as $id) {
+                $id = (int)$id;
+                $data[] = array_merge(
+                    ['category_id' => (int)$object->getId(), $field => $id],
+                    (isset($rowData[$id]) && is_array($rowData[$id])) ? $rowData[$id] : []
+                );
             }
 
             $this->getConnection()->insertMultiple($table, $data);
         }
+    }
+
+    /**
+     * Assign category to store views
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return $this
+     */
+    protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
+    {
+        foreach (['store' => 'store_ids', 'group' => 'groups'] as $linkType => $dataKey) {
+            $newIds = (array)$object->getData($dataKey);
+            if (is_array($newIds)) {
+                $lookup = 'lookup' . ucfirst($linkType) . 'Ids';
+                $oldIds = $this->$lookup($object->getId());
+                $this->_updateLinks(
+                    $object,
+                    $newIds,
+                    $oldIds,
+                    'magefan_blog_category_' . $linkType,
+                    $linkType . '_id'
+                );
+
+            }
+        }
 
         return parent::_afterSave($object);
     }
+
 
     /**
      * Load an object using 'identifier' field if there's no field specified and value is not numeric
@@ -159,6 +194,12 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($object->getId()) {
             $storeIds = $this->lookupStoreIds($object->getId());
             $object->setData('store_ids', $storeIds);
+
+            $group = $this->lookupGroupIds($object->getId());
+            if (!$group) {
+                $group = [(string)0];
+            }
+            $object->setGroups($group);
         }
 
         return parent::_afterLoad($object);
@@ -239,13 +280,38 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int $categoryId
      * @return array
      */
+
     public function lookupStoreIds($categoryId)
+    {
+        return $this->_lookupIds($categoryId, 'magefan_blog_category_store', 'store_id');
+    }
+
+    /**
+     * Get group ids to which specified item is assigned
+     *
+     * @param int $postId
+     * @return array
+     */
+    public function lookupGroupIds($postId)
+    {
+        return $this->_lookupIds($postId, 'magefan_blog_category_group', 'group_id');
+    }
+
+    /**
+     * Get ids to which specified item is assigned
+     * @param  int $categoryId
+     * @param  string $tableName
+     * @param  string $field
+     * @return array
+     */
+
+    protected function _lookupIds($categoryId, $tableName, $field)
     {
         $adapter = $this->getConnection();
 
         $select = $adapter->select()->from(
-            $this->getTable('magefan_blog_category_store'),
-            'store_id'
+            $this->getTable($tableName),
+            $field
         )->where(
             'category_id = ?',
             (int)$categoryId
