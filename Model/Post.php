@@ -213,7 +213,36 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getIdentities()
     {
-        return [self::CACHE_TAG . '_' . $this->getId()];
+        $identities = [];
+
+        if ($this->getId()) {
+            $identities[] = self::CACHE_TAG . '_' . $this->getId();
+        }
+
+        $oldCategories = $this->getOrigData('categories');
+        if (!is_array($oldCategories)) {
+            $oldCategories = [];
+        }
+
+        $newCategories = $this->getData('categories');
+        if (!is_array($newCategories)) {
+            $newCategories = [];
+        }
+
+
+        $isChangedCategories = count(array_diff($oldCategories, $newCategories));
+
+        if ($isChangedCategories) {
+            $changedCategories = array_unique(
+                array_merge($oldCategories, $newCategories)
+            );
+            foreach ($changedCategories as $categoryId) {
+                $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
+            }
+        }
+
+
+        return $identities;
     }
 
     /**
@@ -706,7 +735,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             );
             $this->setData('related_posts', $collection);
         }
-
         return $this->getData('related_posts');
     }
 

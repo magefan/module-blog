@@ -113,7 +113,10 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      */
     public function getIdentities()
     {
-        return [self::CACHE_TAG . '_' . $this->getId()];
+        return [
+            self::CACHE_TAG . '_' . $this->getId(),
+            \Magefan\Blog\Model\Post::CACHE_TAG . '_' . $this->getPostId()
+        ];
     }
 
 
