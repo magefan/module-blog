@@ -1,0 +1,15 @@
+<?xml version="1.0"?><svg width="793.7007874015749" height="1122.5196850393702" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>search icon</title>
+ <defs>
+  <linearGradient id="linearGradient12975">
+   <stop stop-color="#ffffff" id="stop12977" offset="0"/>
+   <stop stop-color="#d2d5d8" id="stop12979" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="1.236288" x2="0.162791" y1="0.166667" x1="0.5" id="linearGradient12981" xlink:href="#linearGradient12975"/>
+ </defs>
+ <metadata id="metadata12220">image/svg+xmlSergio Luiz Araujo Silvasearchiconsinformaticcomputer</metadata>
+ <g>
+  <title>Layer 1</title>
+  <path fill="#454040" stroke-width="9.756173" id="path12423" d="m295.938995,422.085999c-43.272995,43.272003 -43.378998,114.158997 -0.105988,157.432007c36.662994,36.663025 93.201996,42.25 135.92099,16.765991l76.343994,74.234985c10.506989,10.197998 27.084991,9.821045 37.116974,-0.843994c10.03302,-10.664978 9.77002,-27.445984 -0.737976,-37.643982l-75.182983,-72.864014c26.360992,-42.846985 21.007996,-100.044983 -16.028015,-137.080994c-43.27298,-43.27301 -114.054993,-43.27301 -157.326996,0l0,0zm31.738983,31.739014c26.10202,-26.10202 67.746033,-26.10202 93.848022,0c26.10199,26.10199 26.10199,67.745972 0,93.847961c-26.10199,26.102051 -67.746002,26.102051 -93.848022,0c-26.10199,-26.10199 -26.10199,-67.745972 0,-93.847961z"/>
+ </g>
+</svg>
