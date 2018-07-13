@@ -109,7 +109,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
     protected function filterParams($data)
     {
         /* Prepare dates */
-        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\Date::class);
+        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\DateTime::class);
 
         $filterRules = [];
         foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
