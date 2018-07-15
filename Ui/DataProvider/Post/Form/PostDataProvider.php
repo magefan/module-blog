@@ -114,10 +114,9 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $collection = $post->getRelatedProducts()->addAttributeToSelect('name');
             $items = [];
             foreach ($collection as $item) {
-                $items[] = [
-                    'id' => $item->getId(),
-                    'name' => $item->getName(),
-                ];
+                $itemData = $item->getData();
+                $itemData['id'] = $item->getId();
+                $items[] = $itemData;
             }
             $data['data']['links']['product'] = $items;
 
