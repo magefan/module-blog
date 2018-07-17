@@ -38,7 +38,7 @@
 	{
 		var value = document.getElementById('blog_search').value;
 		if (value) {
-			window.location = e.form.action + value + '/';
+			window.location = e.form.action + encodeURI(value) + '/';
 		}
 		return false;
 	}
