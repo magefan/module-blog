@@ -47,6 +47,10 @@ class PreviewUrl extends Url
             $storeId = 0;
         }
 
+        if (0 == $storeId) {
+            $storeId = $this->_storeManager->getDefaultStoreView()->getId();
+        }
+
         $this->storeId = $storeId;
 
         $scope = $this->_storeManager->getStore($this->storeId);
