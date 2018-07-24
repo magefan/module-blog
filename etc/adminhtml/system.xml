@@ -117,7 +117,7 @@
                             <field id="type">facebook</field>
                         </depends>
                         <comment><![CDATA[
-                            <a href="https://help.yahoo.com/kb/SLN18861.html" target="_blank">
+                            <a href="https://developers.facebook.com/docs/apps/register/" target="_blank">
                                 How do I get a Facebook Application ID?
                             </a>
                         ]]></comment>
