@@ -244,6 +244,11 @@
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">publish_time</item>
                     <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                 </item>
             </argument>
         </field>
