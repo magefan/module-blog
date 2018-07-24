@@ -260,7 +260,9 @@ class Wordpress extends AbstractImport
 
                 while ($comments = mysqli_fetch_assoc($resultComments)) {
                     $commentParentId = 0;
-                    if (!($comments['comment_parent'] == 0)) $commentParentId = $commentParents[$comments["comment_parent"]];
+                    if (!($comments['comment_parent'] == 0) && isset($commentParents[$comments["comment_parent"]])) {
+                        $commentParentId = $commentParents[$comments["comment_parent"]];
+                    }
                     $commentData = [
                         'parent_id' => $commentParentId,
                         'post_id' => $post->getPostId(),
