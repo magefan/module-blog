@@ -552,7 +552,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'is_active',
                 [
                     'type' =>\Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                    'length' => null,
+                    'length' => 1,
                     'nullable' => false,
                     'default' => 1,
                     'comment' => 'Is Tag Active'
