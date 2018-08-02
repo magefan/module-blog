@@ -154,7 +154,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     public function canPost()
     {
         return $this->_scopeConfig->getValue(
-            \Magefan\Blog\Helper\Config::GUEST_COMMENT,
+            \Magefan\Blog\Model\Config::GUEST_COMMENT,
             ScopeInterface::SCOPE_STORE
         ) || $this->getCustomerSession()->getCustomerGroupId();
     }
@@ -167,7 +167,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     public function getNumberOfComments()
     {
         return $this->_scopeConfig->getValue(
-            \Magefan\Blog\Helper\Config::NUMBER_OF_COMMENTS,
+            \Magefan\Blog\Model\Config::NUMBER_OF_COMMENTS,
             ScopeInterface::SCOPE_STORE
         );
     }

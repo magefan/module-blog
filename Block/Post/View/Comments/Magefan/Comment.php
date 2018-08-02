@@ -71,7 +71,7 @@ class Comment extends \Magento\Framework\View\Element\Template implements \Magen
     public function getNumberOfReplies()
     {
         return $this->_scopeConfig->getValue(
-            \Magefan\Blog\Helper\Config::NUMBER_OF_REPLIES,
+            \Magefan\Blog\Model\Config::NUMBER_OF_REPLIES,
             ScopeInterface::SCOPE_STORE
         );
     }

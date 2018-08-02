@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Model;
 
-use \Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Comment model

@@ -7,7 +7,7 @@
  */
 namespace Magefan\Blog\Controller\Tag;
 
-use \Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Blog tag posts view

@@ -46,7 +46,7 @@ class Link extends \Magento\Framework\View\Element\Html\Link
     public function getLabel()
     {
         return $this->_scopeConfig->getValue(
-            'mfblog/index_page/title',
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_TITLE,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -59,7 +59,7 @@ class Link extends \Magento\Framework\View\Element\Html\Link
     protected function _toHtml()
     {
         if (!$this->_scopeConfig->getValue(
-            \Magefan\Blog\Helper\Config::XML_PATH_EXTENSION_ENABLED,
+            \Magefan\Blog\Model\Config::XML_PATH_EXTENSION_ENABLED,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )) {
             return '';

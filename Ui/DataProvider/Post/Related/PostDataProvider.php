@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Ui\DataProvider\Post\Related;
 
-use \Magento\Ui\DataProvider\AbstractDataProvider;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magefan\Blog\Model\ResourceModel\Post\Collection;
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Framework\App\RequestInterface;

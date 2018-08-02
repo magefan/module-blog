@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Infortis\UltraMegamenu;
 
 use Magento\Store\Model\ScopeInterface;
-use \Magefan\Blog\Helper\Config;
+use Magefan\Blog\Model\Config;
 
 /**
  * Blog Smartwave Megamenu Block

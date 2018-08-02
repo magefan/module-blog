@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Model\ResourceModel\Comment\Collection;
 
-use \Magefan\Blog\Model\ResourceModel\Comment\Collection;
+use Magefan\Blog\Model\ResourceModel\Comment\Collection;
 
 class Grid extends Collection
 {

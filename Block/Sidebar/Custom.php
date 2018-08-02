@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Block\Sidebar;
 
-use \Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Blog sidebar custom block

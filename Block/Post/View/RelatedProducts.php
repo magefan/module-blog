@@ -71,7 +71,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
 
         $this->_itemCollection->setPageSize(
             (int) $this->_scopeConfig->getValue(
-                'mfblog/post_view/related_products/number_of_products',
+                \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_NUMBER,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         );
@@ -94,7 +94,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
     public function displayProducts()
     {
         return (bool) $this->_scopeConfig->getValue(
-            'mfblog/post_view/related_products/enabled',
+            \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_ENABLED,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

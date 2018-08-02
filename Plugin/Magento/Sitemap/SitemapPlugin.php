@@ -36,7 +36,7 @@ class SitemapPlugin
     /**
      * @var mixed
      */
-    protected $scopeConfig;
+    protected $config;
 
     /**
      * Generated sitemaps
@@ -49,20 +49,20 @@ class SitemapPlugin
      * @param \Magefan\Blog\Model\SitemapFactory $sitemapFactory
      * @param CategoryFactory $categoryFactory
      * @param PostFactory $postFactory
-     * @param null|\Magento\Framework\App\ObjectManager scopeConfig
+     * @param null|\Magefan\Blog\Model\Config config
      */
     public function __construct(
         \Magefan\Blog\Model\SitemapFactory $sitemapFactory,
         CategoryFactory $categoryFactory,
         PostFactory $postFactory,
-        $scopeConfig = null
+        $config = null
     ) {
         $this->postFactory = $postFactory;
         $this->categoryFactory = $categoryFactory;
         $this->sitemapFactory = $sitemapFactory;
 
-        $this->scopeConfig = $scopeConfig ?: \Magento\Framework\App\ObjectManager::getInstance()
-            ->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+        $this->config = $config ?: \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(\Magefan\Blog\Model\Config::class);
     }
 
     /**
@@ -140,9 +140,7 @@ class SitemapPlugin
      */
     protected function isEnabled($sitemap)
     {
-        return $this->scopeConfig->getValue(
-            'mfblog/general/enabled',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+        return $this->config->isEnabled(
             $sitemap->getStoreId()
         );
     }

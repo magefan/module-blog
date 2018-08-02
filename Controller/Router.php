@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Controller;
 
-use \Magefan\Blog\Model\Url;
+use Magefan\Blog\Model\Url;
 
 /**
  * Blog Controller Router

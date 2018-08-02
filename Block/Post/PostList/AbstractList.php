@@ -133,7 +133,7 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
     protected function _toHtml()
     {
         if (!$this->_scopeConfig->getValue(
-            \Magefan\Blog\Helper\Config::XML_PATH_EXTENSION_ENABLED,
+            \Magefan\Blog\Model\Config::XML_PATH_EXTENSION_ENABLED,
             ScopeInterface::SCOPE_STORE
         )) {
             return '';
