@@ -94,6 +94,7 @@
                 <tag_route>tag</tag_route>
                 <author_route>author</author_route>
                 <search_route>search</search_route>
+                <rss_route>rss</rss_route>
             </permalink>
             <social>
                 <add_this_enabled>1</add_this_enabled>

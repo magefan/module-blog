@@ -35,7 +35,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTitle()
     {
-         return $this->_scopeConfig->getValue('mfblog/rss_feed/title', ScopeInterface::SCOPE_STORE);
+         return $this->_scopeConfig->getValue('mfblog/sidebar/rss_feed/title', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -44,7 +44,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getDescription()
     {
-         return $this->_scopeConfig->getValue('mfblog/rss_feed/description', ScopeInterface::SCOPE_STORE);
+         return $this->_scopeConfig->getValue('mfblog/sidebar/rss_feed/description', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -54,5 +54,22 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     public function getPageSize()
     {
         return $this->getData('page_size') ?: self::PAGE_SIZE;
+    }
+
+    /**
+     * Retrieve post filtered content
+     * @param  \Magefan\Blog\Model\Post $post
+     * @return string
+     */
+    public function getPostContent($post)
+    {
+        $content = $post->getFilteredContent();
+        /* Remove iframes */
+        $content = preg_replace('/<iframe.*?\/iframe>/i','', $content);
+
+        /* Remove style tags */
+        $content = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $content);
+
+        return $content;
     }
 }

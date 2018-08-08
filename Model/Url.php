@@ -219,6 +219,7 @@ class Url
                 if ($controllerName == self::CONTROLLER_SEARCH
                     || $controllerName == self::CONTROLLER_AUTHOR
                     || $controllerName == self::CONTROLLER_TAG
+                    || $controllerName == self::CONTROLLER_RSS
                 ) {
                     $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
                 } else {
