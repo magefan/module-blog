@@ -106,6 +106,7 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                 $items[] = [
                     'id' => $item->getId(),
                     'title' => $item->getTitle(),
+                    'auto_related' => $item->getAutoRelated()
                 ];
             }
             $data['data']['links']['post'] = $items;
