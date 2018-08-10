@@ -103,10 +103,9 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $collection = $post->getRelatedPosts();
             $items = [];
             foreach ($collection as $item) {
-                $items[] = [
-                    'id' => $item->getId(),
-                    'title' => $item->getTitle(),
-                ];
+                    $itemData = $item->getData();
+                    $itemData['id'] = $item->getId();
+                    $items[] = $itemData;
             }
             $data['data']['links']['post'] = $items;
 
