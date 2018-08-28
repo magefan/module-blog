@@ -25,7 +25,7 @@
     <?php } ?>
     <div class="c-post c-post-<?php echo $comment->getId() ?>" id="c-post-<?php echo $comment->getId() ?>">
         <div class="p-name"><?php echo $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
-        <div class="p-text"><?php echo $block->escapeHtml($comment->getText()) ?></div>
+        <div class="p-text"><?php echo nl2br($block->escapeHtml($comment->getText())) ?></div>
         <div class="p-actions">
             <a href="#" class="reply-action" data-comment="<?php echo $comment->isReply() ? $comment->getParentId() : $comment->getId() ?>" title="<?php echo __('Reply') ?>"><?php echo __('Reply') ?></a>
             <span class="publish-date"><?php echo $block->escapeHtml($comment->getPublishDate('M d, Y H:i')) ?></span>
