@@ -11,6 +11,7 @@ Post,Публікація
 Blog,Блог
 "Go to Blog Home Page","Повернутись на головну сторінку блогу"
 "Monthly Archives: %s %s","Архів по місяцям: %s %s"
+"Archive","Архів"
 "Search ""%1""","Шукати ""%1"""
 "Recent Blog Posts","Останні публікації"
 "Manage %1","Управляти %1"
@@ -60,7 +61,7 @@ Author:,Аутор:
 "Read %1","Читати %1"
 "&larr; Previous","&larr; Попередня"
 "Next &rarr;","Наступна &rarr;"
-"Related Posts","Related Posts"
+"Related Posts","Пов'язані публікації"
 Archive,Архів
 "Archive %s","Архів %s"
 "Recent Posts","Останні публікації"
