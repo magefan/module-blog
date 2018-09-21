@@ -35,6 +35,20 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $this->_postCollection->addSearchFilter(
             $this->getQuery()
         );
+        $this->_postCollection->setOrder(
+            self::POSTS_SORT_FIELD_BY_PUBLISH_TIME,
+            \Magento\Framework\Api\SortOrder::SORT_DESC
+        );
+    }
+
+    /**
+     * Retrieve collection order field
+     *
+     * @return string
+     */
+    public function getCollectionOrderField()
+    {
+        return 'search_rate';
     }
 
     /**

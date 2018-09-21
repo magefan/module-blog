@@ -213,13 +213,27 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addSearchFilter($term)
     {
         $this->addFieldToFilter(
-            ['title', 'content_heading', 'content'],
+            ['title', 'short_content', 'content'],
             [
                 ['like' => '%' . $term . '%'],
                 ['like' => '%' . $term . '%'],
                 ['like' => '%' . $term . '%']
             ]
         );
+
+        $this->addExpressionFieldToSelect(
+            'search_rate',
+            '(0
+              + (MATCH (content) AGAINST ("{{content}}")) * 1
+              + (MATCH (content) AGAINST ("{{short_content}}")) * 2
+              + (MATCH (title) AGAINST ("{{title}}")) * 5)',
+            [
+                'content' => $term,
+                'short_content' => $term,
+                'title' => $term
+            ]
+        );
+
         return $this;
     }
 
