@@ -78,7 +78,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             'tag',
             'relatedproduct',
             'relatedpost',
-            'relatedpost',
         ];
         foreach ($tableSufixs as $sufix) {
             $this->getConnection()->delete(
