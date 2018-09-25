@@ -156,6 +156,7 @@
 .widget.blog-search .action.search {
     position: absolute;
     right: 10px;
+    top: 0;
     top: calc(50% - 16px);
     z-index: 1;
     display: inline-block;
