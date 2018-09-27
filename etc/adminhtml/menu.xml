@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -12,6 +12,7 @@
         <add id="Magefan_Blog::elements" title="Blog" module="Magefan_Blog" parent="Magento_Backend::content" sortOrder="10"  resource="Magefan_Blog::elements"/>
         <add id="Magefan_Blog::post" title="Posts" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="10" action="blog/post" resource="Magefan_Blog::post"/>
         <add id="Magefan_Blog::category" title="Categories" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="20" action="blog/category" resource="Magefan_Blog::category"/>
+        <add id="Magefan_Blog::tag" title="Tags" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="25" action="blog/tag" resource="Magefan_Blog::tag"/>
         <add id="Magefan_Blog::comment" title="Comments" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="30" action="blog/comment" resource="Magefan_Blog::comment"/>
         <add id="Magefan_Blog::import" title="Import" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="40" action="blog/import" resource="Magefan_Blog::import"/>
         <add id="Magefan_Blog::config_blog" title="Configuration" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="50" action="adminhtml/system_config/edit/section/mfblog" resource="Magefan_Blog::config_blog"/>

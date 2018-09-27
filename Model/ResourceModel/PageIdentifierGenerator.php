@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -66,7 +66,7 @@ class PageIdentifierGenerator
 
         $identifier = str_replace($from, $to, $identifier);
         $identifier = mb_strtolower($identifier);
-        $identifier = preg_replace('/[^A-Za-z0-9-]+/', '-', $identifier);
+        $identifier = preg_replace('/[?#<>@!&*()$%^\\/+=,{}\s]+/', '-', $identifier);
         $identifier = preg_replace('/[--]+/', '-', $identifier);
 
         $identifier = trim($identifier, '-');

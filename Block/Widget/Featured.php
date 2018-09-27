@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -14,6 +14,7 @@ namespace Magefan\Blog\Block\Widget;
 
 class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\Widget\Block\BlockInterface
 {
+
     /**
      * Set blog template
      *
@@ -25,7 +26,7 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
             $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
         );
 
-        return parent::_toHtml();
+        return \Magento\Framework\View\Element\Template::_toHtml();
     }
 
     /**

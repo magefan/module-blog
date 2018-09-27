@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -37,7 +37,7 @@ class PostManagement extends AbstractManagement
      * @param  int $storeId
      * @param  int $page
      * @param  int $limit
-     * @return bool
+     * @return string
      */
     public function getList($type, $term, $storeId, $page, $limit)
     {

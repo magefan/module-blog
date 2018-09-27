@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -35,6 +35,20 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $this->_postCollection->addSearchFilter(
             $this->getQuery()
         );
+        $this->_postCollection->setOrder(
+            self::POSTS_SORT_FIELD_BY_PUBLISH_TIME,
+            \Magento\Framework\Api\SortOrder::SORT_DESC
+        );
+    }
+
+    /**
+     * Retrieve collection order field
+     *
+     * @return string
+     */
+    public function getCollectionOrderField()
+    {
+        return 'search_rate';
     }
 
     /**

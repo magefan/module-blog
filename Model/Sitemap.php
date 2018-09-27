@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -9,6 +9,8 @@
 namespace Magefan\Blog\Model;
 
 /**
+ * Deprecated
+ * Used for Magento 2.1.x only to create blog_sitemap.xml
  * Overide sitemap
  */
 class Sitemap extends \Magento\Sitemap\Model\Sitemap
@@ -28,7 +30,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'changefreq' => 'weekly',
                 'priority' => '0.25',
                 'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
-                    'Magefan\Blog\Model\Category'
+                    \Magefan\Blog\Model\Category::class
                 )->getCollection($this->getStoreId())
                     ->addStoreFilter($this->getStoreId())
                     ->addActiveFilter(),
@@ -40,7 +42,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'changefreq' => 'weekly',
                 'priority' => '0.25',
                 'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
-                    'Magefan\Blog\Model\Post'
+                    \Magefan\Blog\Model\Post::class
                 )->getCollection($this->getStoreId())
                     ->addStoreFilter($this->getStoreId())
                     ->addActiveFilter(),
@@ -50,7 +52,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
 
     /**
      * Disable save action
-     * @return sekf
+     * @return self
      */
     public function save()
     {

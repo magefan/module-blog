@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -90,14 +90,5 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
             date('Y-m', $time),
             \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
         );
-    }
-
-    /**
-     * Retrieve blog identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_archive_widget'];
     }
 }

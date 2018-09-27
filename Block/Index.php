@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -45,20 +45,38 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         parent::_preparePostCollection();
 
         $displayMode = $this->_scopeConfig->getValue(
-            \Magefan\Blog\Helper\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
             ScopeInterface::SCOPE_STORE
         );
-
         /* If featured posts enabled */
         if ($displayMode == 1) {
             $postIds = $this->_scopeConfig->getValue(
-                \Magefan\Blog\Helper\Config::XML_PATH_HOMEPAGE_FEATURED_POST_IDS,
+                \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_FEATURED_POST_IDS,
                 ScopeInterface::SCOPE_STORE
             );
             $this->_postCollection->addPostsFilter($postIds);
         } else {
             $this->_postCollection->addRecentFilter();
         }
+    }
+
+     /**
+      * Retrieve collection order field
+      *
+      * @return string
+      */
+    public function getCollectionOrderField()
+    {
+        $postsSortBy = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_POSTS_SORT_BY,
+            ScopeInterface::SCOPE_STORE
+        );
+
+        if ($postsSortBy) {
+            return self::POSTS_SORT_FIELD_BY_POSITION;
+        }
+
+        return parent::getCollectionOrderField();
     }
 
     /**

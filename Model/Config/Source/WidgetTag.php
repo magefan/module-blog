@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -12,7 +12,7 @@ namespace Magefan\Blog\Model\Config\Source;
  * Used in recent post widget
  *
  */
-class WidgetTag extends Tag 
+class WidgetTag extends Tag
 {
     /**
      * Options getter
@@ -20,7 +20,7 @@ class WidgetTag extends Tag
      * @return array
      */
     public function toOptionArray()
-    {   
+    {
         if ($this->options === null) {
             parent::toOptionArray();
             array_unshift($this->options, ['label' => __('Please select'), 'value' => 0]);
@@ -28,5 +28,4 @@ class WidgetTag extends Tag
 
         return $this->options;
     }
-
 }

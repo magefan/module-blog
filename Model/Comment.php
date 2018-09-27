@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Model;
 
-use \Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Comment model
@@ -38,7 +38,7 @@ use \Magento\Framework\Model\AbstractModel;
  * @method string getUpdateTime()
  * @method $this setUpdateTime(string $value)
  */
-class Comment extends AbstractModel
+class Comment extends AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * @var \Magefan\Blog\Model\AuthorFactory
@@ -71,6 +71,11 @@ class Comment extends AbstractModel
     protected $comments;
 
     /**
+     * blog cache comment
+     */
+    const CACHE_TAG = 'mfb_co';
+
+    /**
      * Initialize dependencies.
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
@@ -100,6 +105,20 @@ class Comment extends AbstractModel
         $this->userFactory = $userFactory;
         $this->commentCollectionFactory = $commentCollectionFactory;
     }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [
+            self::CACHE_TAG . '_' . $this->getId(),
+            \Magefan\Blog\Model\Post::CACHE_TAG . '_' . $this->getPostId()
+        ];
+    }
+
 
     /**
      * Initialize resource model

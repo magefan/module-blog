@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Ui\DataProvider\Post\Related;
 
-use \Magento\Ui\DataProvider\AbstractDataProvider;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magefan\Blog\Model\ResourceModel\Post\Collection;
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Framework\App\RequestInterface;

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Category;
 
+use Magento\Framework\Api\SortOrder;
 use Magefan\Blog\Model\Config\Source\CategoryDisplayMode;
 
 /**
@@ -15,6 +16,7 @@ use Magefan\Blog\Model\Config\Source\CategoryDisplayMode;
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList
 {
+
     /**
      * Prepare posts collection
      *
@@ -26,6 +28,20 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         if ($category = $this->getCategory()) {
             $this->_postCollection->addCategoryFilter($category);
         }
+    }
+
+    /**
+     * Retrieve collection order field
+     *
+     * @return string
+     */
+    public function getCollectionOrderField()
+    {
+        if ($this->getCategory()->getData('posts_sort_by')) {
+            return self::POSTS_SORT_FIELD_BY_POSITION;
+        }
+
+        return parent::getCollectionOrderField();
     }
 
     /**

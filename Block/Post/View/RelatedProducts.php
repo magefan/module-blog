@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -71,7 +71,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
 
         $this->_itemCollection->setPageSize(
             (int) $this->_scopeConfig->getValue(
-                'mfblog/post_view/related_products/number_of_products',
+                \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_NUMBER,
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         );
@@ -94,7 +94,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
     public function displayProducts()
     {
         return (bool) $this->_scopeConfig->getValue(
-            'mfblog/post_view/related_products/enabled',
+            \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_ENABLED,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -126,13 +126,18 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
         return $this->getData('post');
     }
 
-    /**
-     * Get Block Identities
-     * @return Array
-     */
+     /**
+      * Return identifiers for produced content
+      *
+      * @return array
+      */
     public function getIdentities()
     {
-        $post = $this->getPost();
-        return $post ? [ \Magento\Cms\Model\Page::CACHE_TAG . '_relatedproducts_' . $post->getId() ] : [];
+        $identities = [];
+        foreach ($this->getItems() as $item) {
+            $identities = array_merge($identities, $item->getIdentities());
+        }
+
+        return $identities;
     }
 }

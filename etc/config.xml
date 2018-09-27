@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -31,6 +31,7 @@
                     <number_of_comments>5</number_of_comments>
                     <number_of_replies>5</number_of_replies>
                     <guest_comments>1</guest_comments>
+                    <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
@@ -93,6 +94,7 @@
                 <tag_route>tag</tag_route>
                 <author_route>author</author_route>
                 <search_route>search</search_route>
+                <rss_route>rss</rss_route>
             </permalink>
             <social>
                 <add_this_enabled>1</add_this_enabled>

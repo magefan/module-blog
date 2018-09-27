@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Infortis\UltraMegamenu;
 
 use Magento\Store\Model\ScopeInterface;
-use \Magefan\Blog\Helper\Config;
+use Magefan\Blog\Model\Config;
 
 /**
  * Blog Smartwave Megamenu Block

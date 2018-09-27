@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -58,26 +58,31 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     public function getTags()
     {
         if ($this->_tags === null) {
-            $this->_tags = $this->_tagCollectionFactory->create();
+            $this->_tags = $this->_tagCollectionFactory->create()
+                ->addActiveFilter();
+
             $resource = $this->_tags->getResource();
-            $this->_tags->getSelect()->joinLeft(
-                ['pt' => $resource->getTable('magefan_blog_post_tag')],
-                'main_table.tag_id = pt.tag_id',
-                []
-            )->joinLeft(
-                ['p' => $resource->getTable('magefan_blog_post')],
-                'p.post_id = pt.post_id',
-                []
-            )->joinLeft(
-                ['ps' => $resource->getTable('magefan_blog_post_store')],
-                'p.post_id = ps.post_id',
-                ['count' => 'count(main_table.tag_id)']
-            )->group(
-                'main_table.tag_id'
-            )->where(
-                'ps.store_id IN (?)',
-                [0, (int)$this->_storeManager->getStore()->getId()]
-            );
+                $this->_tags->getSelect()->joinLeft(
+                    ['pt' => $resource->getTable('magefan_blog_post_tag')],
+                    'main_table.tag_id = pt.tag_id',
+                    []
+                )->joinLeft(
+                    ['p' => $resource->getTable('magefan_blog_post')],
+                    'p.post_id = pt.post_id',
+                    []
+                )->joinLeft(
+                    ['ps' => $resource->getTable('magefan_blog_post_store')],
+                    'p.post_id = ps.post_id',
+                    ['count' => 'count(main_table.tag_id)']
+                )->group(
+                    'main_table.tag_id'
+                )->where(
+                    'ps.store_id IN (?)',
+                    [0, (int)$this->_storeManager->getStore()->getId()]
+                )->where(
+                    'main_table.is_active = ?',
+                    \Magefan\Blog\Model\Tag::STATUS_ENABLED
+                );
         }
 
         return $this->_tags;
@@ -123,14 +128,5 @@ class TagClaud extends \Magento\Framework\View\Element\Template
             return 'large';
         }
         return 'largest';
-    }
-
-    /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_tag_claud_widget'  ];
     }
 }

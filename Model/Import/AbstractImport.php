@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -39,6 +39,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_tagFactory;
 
     /**
+     * @var \Magefan\Blog\Model\CommentFactory
+     */
+    protected $_commentFactory;
+
+    /**
      * @var integer
      */
     protected $_importedPostsCount = 0;
@@ -68,7 +73,6 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      */
     protected $_skippedTags = [];
 
-
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
@@ -81,6 +85,8 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\PostFactory $postFactory,
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+     * @param \Magefan\Blog\Model\TagFactory $tagFactory,
+     * @param \Magefan\Blog\Model\CommentFactory $commentFactory,
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager,
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
@@ -92,6 +98,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
         \Magefan\Blog\Model\TagFactory $tagFactory,
+        \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
@@ -100,6 +107,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
         $this->_tagFactory = $tagFactory;
+        $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
@@ -164,5 +172,25 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         }
 
         return $result;
+    }
+
+    /**
+     * Prepare import identifier
+     * @param  string $identifier
+     * @return string
+     */
+    protected function prepareIdentifier($identifier)
+    {
+        $identifier = urldecode(trim(strtolower($identifier)));
+
+        if (is_numeric($identifier)) {
+            $identifier .= 'u' . $identifier;
+        }
+
+        if (strlen($identifier) == 1) {
+            $identifier .= $identifier;
+        }
+
+        return $identifier;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -101,7 +101,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     *  Check whether category identifier is numeric
+     *  Check whether tag identifier is numeric
      *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
@@ -112,7 +112,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     *  Check whether category identifier is valid
+     *  Check whether tag identifier is valid
      *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool

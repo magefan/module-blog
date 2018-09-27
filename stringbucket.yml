@@ -1,0 +1,4 @@
+files:
+  - source: /i18n/en_US.csv
+    translation: /i18n/%two_letters_code%.csv
+    scheme: 'identifier,source_or_translation,context'

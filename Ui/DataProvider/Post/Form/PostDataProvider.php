@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -103,10 +103,9 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $collection = $post->getRelatedPosts();
             $items = [];
             foreach ($collection as $item) {
-                $items[] = [
-                    'id' => $item->getId(),
-                    'title' => $item->getTitle(),
-                ];
+                    $itemData = $item->getData();
+                    $itemData['id'] = $item->getId();
+                    $items[] = $itemData;
             }
             $data['data']['links']['post'] = $items;
 
@@ -114,10 +113,9 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $collection = $post->getRelatedProducts()->addAttributeToSelect('name');
             $items = [];
             foreach ($collection as $item) {
-                $items[] = [
-                    'id' => $item->getId(),
-                    'name' => $item->getName(),
-                ];
+                $itemData = $item->getData();
+                $itemData['id'] = $item->getId();
+                $items[] = $itemData;
             }
             $data['data']['links']['product'] = $items;
 

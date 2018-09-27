@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -15,40 +15,34 @@ use Magento\Framework\Config\ConfigOptionsListConstants;
  */
 class Aw extends AbstractImport
 {
+    protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
+
     public function execute()
     {
-        $config = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get('Magento\Framework\App\DeploymentConfig');
-        $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
-        $this->setData(
-            'dbhost',
-            $config->get($pref . ConfigOptionsListConstants::KEY_HOST)
-        )->setData(
-            'uname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_USER)
-        )->setData(
-            'pwd',
-            $config->get($pref . ConfigOptionsListConstants::KEY_PASSWORD)
-        )->setData(
-            'dbname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
-        );
-
-        $con = $this->_connect = mysqli_connect(
-            $this->getData('dbhost'),
-            $this->getData('uname'),
-            $this->getData('pwd'),
-            $this->getData('dbname')
-        );
+        $host = $this->getData('dbhost') ?: $this->getData('host');
+        if (false !== strpos($host, '.sock')) {
+            $con = $this->_connect = mysqli_connect(
+                'localhost',
+                $this->getData('uname'),
+                $this->getData('pwd'),
+                $this->getData('dbname'),
+                null,
+                $host
+            );
+        } else {
+            $con = $this->_connect = mysqli_connect(
+                $this->getData('dbhost'),
+                $this->getData('uname'),
+                $this->getData('pwd'),
+                $this->getData('dbname')
+            );
+        }
 
         if (mysqli_connect_errno()) {
             throw new \Exception("Failed connect to magento database", 1);
         }
 
-        $_pref = mysqli_real_escape_string(
-            $con,
-            $config->get($pref . ConfigOptionsListConstants::KEY_PREFIX)
-        );
+        $_pref = mysqli_real_escape_string($con, $this->getData('prefix'));
 
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_cat LIMIT 1';
         try {

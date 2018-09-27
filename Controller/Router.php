@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Magefan (support@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Controller;
 
-use \Magefan\Blog\Model\Url;
+use Magefan\Blog\Model\Url;
 
 /**
  * Blog Controller Router
@@ -84,24 +84,9 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $_response;
 
     /**
-     * @var array
+     * @var array;
      */
-    protected $_postId;
-
-    /**
-     * @var array
-     */
-    protected $_categoryId;
-
-    /**
-     * @var int
-     */
-    protected $_authorId;
-
-    /**
-     * @var int
-     */
-    protected $_tagId;
+    protected $ids;
 
     /**
      * @param \Magento\Framework\App\ActionFactory $actionFactory
@@ -126,6 +111,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response
     ) {
+    
         $this->actionFactory = $actionFactory;
         $this->_eventManager = $eventManager;
         $this->_url = $url;
@@ -330,22 +316,12 @@ class Router implements \Magento\Framework\App\RouterInterface
      */
     protected function _getPostId($identifier, $checkSufix = true)
     {
-        $key = $identifier . ($checkSufix ? '-checksufix' : '');
-        if (!isset($this->_postId[$key])) {
-            $sufix = $this->_url->getUrlSufix(Url::CONTROLLER_POST);
-            $trimmedIdentifier = $this->_url->trimSufix($identifier, $sufix);
-            if ($checkSufix && $sufix && $trimmedIdentifier == $identifier) { //if url without sufix
-                $this->_postId[$key] = 0;
-            } else {
-                $post = $this->_postFactory->create();
-                $this->_postId[$key] = $post->checkIdentifier(
-                    $trimmedIdentifier,
-                    $this->_storeManager->getStore()->getId()
-                );
-            }
-        }
-
-        return $this->_postId[$key];
+        return $this->getObjectId(
+            $this->_postFactory,
+            Url::CONTROLLER_POST,
+            $identifier,
+            $checkSufix
+        );
     }
 
     /**
@@ -355,58 +331,73 @@ class Router implements \Magento\Framework\App\RouterInterface
      */
     protected function _getCategoryId($identifier, $checkSufix = true)
     {
-        $key = $identifier . ($checkSufix ? '-checksufix' : '');
-        if (!isset($this->_categoryId[$key])) {
-            $sufix = $this->_url->getUrlSufix(Url::CONTROLLER_CATEGORY);
+        return $this->getObjectId(
+            $this->_categoryFactory,
+            Url::CONTROLLER_CATEGORY,
+            $identifier,
+            $checkSufix
+        );
+    }
+
+    /**
+     * Retrieve category id by identifier
+     * @param string $identifier
+     * @param bool $checkSufix
+     * @return int
+     */
+    protected function _getAuthorId($identifier, $checkSufix = true)
+    {
+        return $this->getObjectId(
+            $this->_authorFactory,
+            Url::CONTROLLER_AUTHOR,
+            $identifier,
+            $checkSufix
+        );
+    }
+
+    /**
+     * Retrieve tag id by identifier
+     * @param string $identifier
+     * @param bool $checkSufix
+     * @return int
+     */
+    protected function _getTagId($identifier, $checkSufix = true)
+    {
+        return $this->getObjectId(
+            $this->_tagFactory,
+            Url::CONTROLLER_TAG,
+            $identifier,
+            $checkSufix
+        );
+    }
+
+    /**
+     * @param $factory
+     * @param string $controllerName
+     * @param string $identifier
+     * @param bool $checkSufix
+     * @return mixed
+     */
+    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    {
+        $key =  $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
+        if (!isset($this->ids[$key])) {
+            $sufix = $this->_url->getUrlSufix($controllerName);
 
             $trimmedIdentifier = $this->_url->trimSufix($identifier, $sufix);
 
             if ($checkSufix && $sufix && $trimmedIdentifier == $identifier) { //if url without sufix
-                $this->_categoryId[$key] = 0;
+                $this->ids[$key] = 0;
             } else {
-                $category = $this->_categoryFactory->create();
-                $this->_categoryId[$key] = $category->checkIdentifier(
+                $object = $factory->create();
+                $this->ids[$key] = $object->checkIdentifier(
                     $trimmedIdentifier,
                     $this->_storeManager->getStore()->getId()
                 );
             }
         }
 
-        return $this->_categoryId[$key];
-    }
-
-    /**
-     * Retrieve category id by identifier
-     * @param  string $identifier
-     * @return int
-     */
-    protected function _getAuthorId($identifier)
-    {
-        if (is_null($this->_authorId)) {
-            $author = $this->_authorFactory->create();
-            $this->_authorId = $author->checkIdentifier(
-                $identifier
-            );
-        }
-
-        return $this->_authorId;
-    }
-
-    /**
-     * Retrieve tag id by identifier
-     * @param  string $identifier
-     * @return int
-     */
-    protected function _getTagId($identifier)
-    {
-        if (is_null($this->_tagId)) {
-            $tag = $this->_tagFactory->create();
-            $this->_tagId = $tag->checkIdentifier(
-                $identifier
-            );
-        }
-
-        return $this->_tagId;
+        return $this->ids[$key];
     }
 
     /**

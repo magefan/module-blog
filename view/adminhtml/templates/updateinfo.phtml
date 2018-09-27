@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog available for to get notification
+ *
+ * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo
+ */
+?>
+<?php if ($block->needToUpdate()) { ?>
+    <div class="messages">
+        <div class="message message-notice notice">
+            <div data-ui-id="messages-message-error">
+               <?php $html = __('Your Blog Extension is out of date. You can update it to the <strong>version %1</strong> via composer or you can download the new version archive from the <a href="https://magefan.com/magento2-blog-extension?utm_source=m2admin_blog_updateinfo&utm_medium=link1&utm_campaign=new_blog_version" target="_blank">Magefan Store</a>. Please <a href="https://magefan.com/contact?utm_source=m2admin_blog_updateinfo&utm_medium=link2&utm_campaign=new_blog_version" target="_blank">contact</a> Magefan Team if you have any questions or need help with an update.', $block->getLatestVersion());
+               ?>
+                <?= $html ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>

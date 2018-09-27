@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -12,8 +12,19 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Blog post view
  */
-class View extends AbstractPost
+class View extends AbstractPost implements \Magento\Framework\DataObject\IdentityInterface
 {
+
+    /**
+     * Retrieve identities
+     *
+     * @return string
+     */
+    public function getIdentities()
+    {
+        return $this->getPost()->getIdentities();
+    }
+
     /**
      * Preparing global layout
      *

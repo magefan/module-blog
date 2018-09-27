@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -95,7 +95,6 @@ class AdminNotificationFeed extends \Magento\AdminNotification\Model\Feed
         if (count($modulesParams)) {
             $url .= '/modules/'.base64_encode(implode(';', $modulesParams));
         }
-
         return $url;
     }
 

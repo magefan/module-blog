@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -24,7 +24,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected function _preparePostCollection()
     {
         $pageSize = (int) $this->_scopeConfig->getValue(
-            'mfblog/post_view/related_posts/number_of_posts',
+            \Magefan\Blog\Model\Config::XML_RELATED_POSTS_NUMBER,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
@@ -42,7 +42,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     public function displayPosts()
     {
         return (bool) $this->_scopeConfig->getValue(
-            'mfblog/post_view/related_posts/enabled',
+            \Magefan\Blog\Model\Config::XML_RELATED_POSTS_ENABLED,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -61,14 +61,5 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
             );
         }
         return $this->getData('post');
-    }
-
-    /**
-     * Get Block Identities
-     * @return Array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_relatedposts_'.$this->getPost()->getId()  ];
     }
 }

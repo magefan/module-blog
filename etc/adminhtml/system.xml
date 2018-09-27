@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -37,6 +37,10 @@
                 <field id="display_mode" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Mode</label>
                     <source_model>Magefan\Blog\Model\Config\Source\DisplayMode</source_model>
+                </field>
+                <field id="posts_sort_by" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Posts Sort By</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PostsSortBy</source_model>
                 </field>
                 <field id="post_ids" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Post IDs</label>
@@ -113,7 +117,7 @@
                             <field id="type">facebook</field>
                         </depends>
                         <comment><![CDATA[
-                            <a href="https://help.yahoo.com/kb/SLN18861.html" target="_blank">
+                            <a href="https://developers.facebook.com/docs/apps/register/" target="_blank">
                                 How do I get a Facebook Application ID?
                             </a>
                         ]]></comment>
@@ -146,6 +150,10 @@
                             <field id="type">magefan</field>
                         </depends>
                         <comment></comment>
+                    </field>
+                    <field id="display_privacy_policy_checkbox" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display Privacy Policy Agreement</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                 </group>
 
@@ -387,9 +395,17 @@
                     <label>Tag Route</label>
                     <comment>E.g.: "tag" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name/</comment>
                 </field>
+                <field id="tag_sufix" translate="label comment" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tag URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog tag accessible from mystore.com/{blog_route}/tag/tag-name.html</comment>
+                </field>
                 <field id="author_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Author Route</label>
                     <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name/</comment>
+                </field>
+                <field id="author_sufix" translate="label comment" type="text" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Author URL Suffix</label>
+                    <comment>E.g.: ".html" will make the blog author accessible from mystore.com/{blog_route}/author/author-name.html</comment>
                 </field>
                 <field id="search_route" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Route</label>

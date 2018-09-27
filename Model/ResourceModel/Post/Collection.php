@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -137,7 +137,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addRecentFilter()
     {
-      return $this->addFieldToFilter('include_in_recent', 1);
+        return $this->addFieldToFilter('include_in_recent', 1);
     }
     
     /**
@@ -213,13 +213,27 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addSearchFilter($term)
     {
         $this->addFieldToFilter(
-            ['title', 'content_heading', 'content'],
+            ['title', 'short_content', 'content'],
             [
                 ['like' => '%' . $term . '%'],
                 ['like' => '%' . $term . '%'],
-                ['like' => '% ' . $term . ' %']
+                ['like' => '%' . $term . '%']
             ]
         );
+
+        $this->addExpressionFieldToSelect(
+            'search_rate',
+            '(0
+              + (MATCH (content) AGAINST ("{{content}}")) * 1
+              + (MATCH (content) AGAINST ("{{short_content}}")) * 2
+              + (MATCH (title) AGAINST ("{{title}}")) * 5)',
+            [
+                'content' => $term,
+                'short_content' => $term,
+                'title' => $term
+            ]
+        );
+
         return $this;
     }
 

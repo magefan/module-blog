@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -41,14 +41,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     
     /**
      * Retrieve store config value
-     * @param  string $path
+     * @param string $path
+     * @param null $storeId
      * @return mixed
      */
-    public function getConfig($path)
+    public function getConfig($path, $storeId = null)
     {
         return $this->scopeConfig->getValue(
             $path,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE,
+            $storeId
         );
     }
 }

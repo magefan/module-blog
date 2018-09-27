@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Category model
@@ -26,8 +27,14 @@ use Magefan\Blog\Model\Url;
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
  */
-class Category extends \Magento\Framework\Model\AbstractModel
+class Category extends \Magento\Framework\Model\AbstractModel implements IdentityInterface
 {
+
+    /**
+     * blog cache category
+     */
+    const CACHE_TAG = 'mfb_c';
+
     /**
      * Category's Statuses
      */
@@ -103,6 +110,22 @@ class Category extends \Magento\Framework\Model\AbstractModel
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Category');
         $this->controllerName = URL::CONTROLLER_CATEGORY;
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $identities = [];
+
+        if ($this->getId()) {
+            $identities[] = self::CACHE_TAG . '_' . $this->getId();
+        }
+
+        return $identities;
     }
 
     /**

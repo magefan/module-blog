@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -31,13 +31,18 @@ use Magefan\Blog\Model\Url;
  * @method string getContentHeading()
  * @method $this setContentHeading(string $value)
  */
-class Post extends \Magento\Framework\Model\AbstractModel
+class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
      * Posts's Statuses
      */
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
+
+    /**
+     * blog cache post
+     */
+    const CACHE_TAG = 'mfb_p';
 
     /**
      * Gallery images separator
@@ -199,6 +204,55 @@ class Post extends \Magento\Framework\Model\AbstractModel
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Post');
         $this->controllerName = URL::CONTROLLER_POST;
+    }
+
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $identities = [];
+
+        if ($this->getId()) {
+            $identities[] = self::CACHE_TAG . '_' . $this->getId();
+        }
+
+        $oldCategories = $this->getOrigData('categories');
+        if (!is_array($oldCategories)) {
+            $oldCategories = [];
+        }
+
+        $newCategories = $this->getData('categories');
+        if (!is_array($newCategories)) {
+            $newCategories = [];
+        }
+
+
+        $isChangedCategories = count(array_diff($oldCategories, $newCategories));
+
+        if ($isChangedCategories) {
+            $changedCategories = array_unique(
+                array_merge($oldCategories, $newCategories)
+            );
+            foreach ($changedCategories as $categoryId) {
+                $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
+            }
+        }
+
+
+        return $identities;
+    }
+
+    /**
+     * Retrieve block identifier
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return (string)$this->getData('identifier');
     }
 
     /**
@@ -392,12 +446,13 @@ class Post extends \Magento\Framework\Model\AbstractModel
 
     /**
      * Retrieve short filtered content
-     *
+     * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShortFilteredContent()
+    public function getShortFilteredContent($len = null, $endСharacters = null)
     {
-        $key = 'short_filtered_content';
+        $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
             if ($this->getShortContent()) {
                 $content = $this->filterProvider->getPageFilter()->filter(
@@ -405,40 +460,54 @@ class Post extends \Magento\Framework\Model\AbstractModel
                 );
             } else {
                 $content = $this->getFilteredContent();
-                $pageBraker = '<!-- pagebreak -->';
 
-                $p = mb_strpos($content, $pageBraker);
-                if (!$p) {
-                    $p = (int)$this->scopeConfig->getValue(
-                        'mfblog/post_list/shortcotent_length',
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-                    );
-                }
-
-                if ($p) {
-                    $content = mb_substr($content, 0, $p);
-                    try {
-                        
-                        $previousLoaderState = libxml_disable_entity_loader(true);
-                        $previousErrorState = libxml_use_internal_errors(true);
-                        $dom = new \DOMDocument();
-                        $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                        libxml_disable_entity_loader($previousLoaderState);
-                        libxml_use_internal_errors($previousErrorState);
-
-                        $body = $dom->getElementsByTagName('body');
-                        if ($body && $body->length > 0) {
-                            $body = $body->item(0);
-                            $_content = new \DOMDocument;
-                            foreach ($body->childNodes as $child) {
-                                $_content->appendChild($_content->importNode($child, true));
-                            }
-                            $content = $_content->saveHTML();
-                        }
-                    } catch (\Exception $e) {
+                if (!$len) {
+                    $pageBraker = '<!-- pagebreak -->';
+                    $len = mb_strpos($content, $pageBraker);
+                    if (!$len) {
+                        $len = (int)$this->scopeConfig->getValue(
+                            'mfblog/post_list/shortcotent_length',
+                            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                        );
                     }
                 }
             }
+
+            if ($len) {
+                $content = mb_substr($content, 0, $len);
+                try {
+                    $previousLoaderState = libxml_disable_entity_loader(true);
+                    $previousErrorState = libxml_use_internal_errors(true);
+                    $dom = new \DOMDocument();
+                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
+                    libxml_disable_entity_loader($previousLoaderState);
+                    libxml_use_internal_errors($previousErrorState);
+
+                    $body = $dom->getElementsByTagName('body');
+                    if ($body && $body->length > 0) {
+                        $body = $body->item(0);
+                        $_content = new \DOMDocument;
+                        foreach ($body->childNodes as $child) {
+                            $_content->appendChild($_content->importNode($child, true));
+                        }
+                        $content = $_content->saveHTML();
+                    }
+                } catch (\Exception $e) {
+                }
+            }
+
+            if ($len && $endСharacters) {
+                $trimMask = " \t\n\r\0\x0B,.!?";
+                if ($p = strrpos($content, '</')) {
+                    $content = trim(substr($content, 0, $p), $trimMask)
+                        . $endСharacters
+                        . substr($content, $p);
+                } else {
+                    $content = trim($content, $trimMask)
+                        . $endСharacters;
+                }
+            }
+            
             $this->setData($key, $content);
         }
 
@@ -472,8 +541,8 @@ class Post extends \Magento\Framework\Model\AbstractModel
         }
 
         $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 160) {
-            $desc = mb_substr($desc, 0, 160);
+        if (mb_strlen($desc) > 300) {
+            $desc = mb_substr($desc, 0, 300);
         }
 
         return trim($desc);
@@ -599,6 +668,7 @@ class Post extends \Magento\Framework\Model\AbstractModel
         if (is_null($this->_relatedTags)) {
             $this->_relatedTags = $this->_tagCollectionFactory->create()
                 ->addFieldToFilter('tag_id', ['in' => $this->getTags()])
+                ->addActiveFilter()
                 ->setOrder('title');
         }
 
@@ -665,7 +735,6 @@ class Post extends \Magento\Framework\Model\AbstractModel
             );
             $this->setData('related_posts', $collection);
         }
-
         return $this->getData('related_posts');
     }
 

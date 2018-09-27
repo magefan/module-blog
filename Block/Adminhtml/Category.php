@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -25,5 +25,22 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_headerText = __('Category');
         $this->_addButtonLabel = __('Add New Category');
         parent::_construct();
+    }
+
+    /**
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+
+        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+
+        $this->getToolbar()->addChild(
+            'options_button',
+            \Magento\Backend\Block\Widget\Button::class,
+            ['label' => __('Import Categories'), 'onclick' => $onClick]
+        );
+
+        return parent::_prepareLayout();
     }
 }

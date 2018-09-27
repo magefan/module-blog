@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml;
 
 /**
- * Admin blog post
+ * Admin blog comment
  */
 class Comment extends \Magento\Backend\Block\Widget\Grid\Container
 {
@@ -20,10 +20,27 @@ class Comment extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _construct()
     {
-        $this->_controller = 'adminhtml_Blog';
+        $this->_controller = 'adminhtml_comment';
         $this->_blockGroup = 'Magefan_Blog';
         //$this->_addButtonLabel = __('Add New Comment');
         parent::_construct();
         $this->removeButton('add');
+    }
+
+    /**
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+
+        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+
+        $this->getToolbar()->addChild(
+            'options_button',
+            \Magento\Backend\Block\Widget\Button::class,
+            ['label' => __('Import Comments'), 'onclick' => $onClick]
+        );
+
+        return parent::_prepareLayout();
     }
 }

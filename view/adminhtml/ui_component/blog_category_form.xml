@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -21,12 +21,12 @@
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="buttons" xsi:type="array">
-            <item name="back" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\BackButton</item>
-            <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DeleteButton</item>
-            <item name="reset" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\ResetButton</item>
-            <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\DuplicateButton</item>
-            <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveButton</item>
-            <item name="save_and_continue" xsi:type="string">Magefan\Blog\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+            <item name="back" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\ResetButton</item>
+            <item name="duplicate" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\DuplicateButton</item>
+            <item name="save" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\SaveAndContinueButton</item>
         </item>
     </argument>
     <dataSource name="category_form_data_source">
@@ -188,6 +188,19 @@
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">category</item>
                     <item name="dataScope" xsi:type="string">display_mode</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="posts_sort_by">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\PostsSortBy</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Posts Sort By</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="dataScope" xsi:type="string">posts_sort_by</item>
                     <item name="default" xsi:type="string">0</item>
                 </item>
             </argument>

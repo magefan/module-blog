@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016-2017 Magefan (support@magefan.com). All rights reserved.
+ * Copyright © 2016-Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!

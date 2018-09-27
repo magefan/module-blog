@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -48,13 +48,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         if ($tag = $this->getTag()) {
             $this->_addBreadcrumbs($tag->getTitle(), 'blog_tag');
             $this->pageConfig->addBodyClass('blog-tag-' . $tag->getIdentifier());
-            $this->pageConfig->getTitle()->set($tag->getTitle());
+            $this->pageConfig->getTitle()->set($tag->getMetaTitle());
+            $this->pageConfig->setKeywords($tag->getMetaKeywords());
+            $this->pageConfig->setDescription($tag->getMetaDescription());
             $this->pageConfig->addRemotePageAsset(
                 $tag->getTagUrl(),
                 'canonical',
                 ['attributes' => ['rel' => 'canonical']]
             );
-            $this->pageConfig->setRobots('NOINDEX,FOLLOW');
         }
 
         return parent::_prepareLayout();

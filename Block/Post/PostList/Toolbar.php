@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -71,7 +71,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      */
     public function getLimit()
     {
-        return $this->_scopeConfig->getValue(
+        return $this->getData('limit') ?: $this->_scopeConfig->getValue(
             'mfblog/post_list/posts_per_page',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );

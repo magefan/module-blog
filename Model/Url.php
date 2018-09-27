@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -219,6 +219,7 @@ class Url
                 if ($controllerName == self::CONTROLLER_SEARCH
                     || $controllerName == self::CONTROLLER_AUTHOR
                     || $controllerName == self::CONTROLLER_TAG
+                    || $controllerName == self::CONTROLLER_RSS
                 ) {
                     $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
                 } else {
@@ -265,7 +266,12 @@ class Url
      */
     protected function addUrlSufix($url, $controllerName)
     {
-        if (in_array($controllerName, [self::CONTROLLER_POST, self::CONTROLLER_CATEGORY])) {
+        if (in_array($controllerName, [
+            self::CONTROLLER_POST,
+            self::CONTROLLER_CATEGORY,
+            self::CONTROLLER_AUTHOR,
+            self::CONTROLLER_TAG
+        ])) {
             if ($sufix = $this->getUrlSufix($controllerName)) {
                 $char = false;
                 foreach (['#', '?'] as $ch) {

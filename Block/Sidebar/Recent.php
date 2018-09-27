@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -43,14 +43,5 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         parent::_preparePostCollection();
         $this->_postCollection->addRecentFilter();
-    }
-
-    /**
-     * Retrieve block identities
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Cms\Model\Block::CACHE_TAG . '_blog_recent_posts_widget'  ];
     }
 }

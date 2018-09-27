@@ -106,12 +106,12 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         if ($from = $this->getData('from')) {
             $this->_postCollection
-                ->addFieldToFilter('publish_time', array('gteq' => $from . " 00:00:00"));
+                ->addFieldToFilter('publish_time', ['gteq' => $from . " 00:00:00"]);
         }
 
         if ($to = $this->getData('to')) {
             $this->_postCollection
-                ->addFieldToFilter('publish_time', array('lteq' => $to . " 00:00:00"));
+                ->addFieldToFilter('publish_time', ['lteq' => $to . " 00:00:00"]);
         }
     }
 

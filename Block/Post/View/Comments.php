@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -62,6 +62,16 @@ class Comments extends \Magento\Framework\View\Element\Template
     {
         return $this->_scopeConfig->getValue(
             'mfblog/post_view/comments/type',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function displayPrivacyPolicyCheckbox() {
+        return $this->_scopeConfig->getValue(
+            'mfblog/post_view/comments/display_privacy_policy_checkbox',
             ScopeInterface::SCOPE_STORE
         );
     }

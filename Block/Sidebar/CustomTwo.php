@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2018 Magefan (support@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -8,7 +8,8 @@
 
 namespace Magefan\Blog\Block\Sidebar;
 
-use \Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\ScopeInterface;
+
 /**
  * Blog sidebar custom block
  */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -72,14 +72,5 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
             );
         }
         return $this->getData('product');
-    }
-
-    /**
-     * Get Block Identities
-     * @return Array
-     */
-    public function getIdentities()
-    {
-        return [\Magento\Catalog\Model\Product::CACHE_TAG . '_relatedposts_'.$this->getProduct()->getId()  ];
     }
 }

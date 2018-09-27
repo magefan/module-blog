@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-2017 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -23,7 +23,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
     protected function filterParams($data)
     {
         /* Prepare dates */
-        $dateFilter = $this->_objectManager->create('Magento\Framework\Stdlib\DateTime\Filter\DateTime');
+        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\DateTime::class);
 
         $filterRules = [];
         foreach (['creation_time'] as $dateField) {

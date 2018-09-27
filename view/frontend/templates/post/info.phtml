@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -16,7 +16,7 @@
 
 <?php $_post = $block->getPost() ?>
 
-<div class="post-info clear">
+<div class="post-info">
     <div class="item post-posed-date">
         <span class="label"><?php echo __('Posted:') ?></span>
         <span class="value"><?php echo $_post->getPublishDate('F d, Y') ?></span>
@@ -33,7 +33,7 @@
         <?php } ?>
     </div>
     <?php } ?>
-    <?php if ($this->magefanCommentsEnabled()) { ?>
+    <?php if ($this->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
     <div class="dash">|</div>
     <div class="item post-comments">
         <span class="label"><?php echo __('Comments:') ?></span>
