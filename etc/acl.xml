@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2016 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -13,8 +13,19 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::content">
                     <resource id="Magefan_Blog::elements" title="Blog" sortOrder="10">
-                        <resource id="Magefan_Blog::post" title="Posts" sortOrder="10" />
-                        <resource id="Magefan_Blog::category" title="Categories" sortOrder="20" />
+                        <resource id="Magefan_Blog::post" title="Posts" sortOrder="10">
+                            <resource id="Magefan_Blog::post:read" title="Read" sortOrder="11" />
+                            <resource id="Magefan_Blog::post:create" title="Create" sortOrder="12" />
+                            <resource id="Magefan_Blog::post:update" title="Update" sortOrder="13" />
+                            <resource id="Magefan_Blog::post:delete" title="Delete" sortOrder="14" />
+                        </resource>
+                        <resource id="Magefan_Blog::category" title="Categories" sortOrder="20">
+                            <resource id="Magefan_Blog::category:read" title="Read" sortOrder="21" />
+                            <resource id="Magefan_Blog::category:create" title="Create" sortOrder="22" />
+                            <resource id="Magefan_Blog::category:update" title="Update" sortOrder="23" />
+                            <resource id="Magefan_Blog::category:delete" title="Delete" sortOrder="24" />
+                        </resource>
+                        <resource id="Magefan_Blog::tag" title="Tags" sortOrder="25" />
                         <resource id="Magefan_Blog::comment" title="Comments" sortOrder="30" />
                         <resource id="Magefan_Blog::import" title="Import" sortOrder="40" />
                     </resource>
