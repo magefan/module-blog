@@ -21,11 +21,7 @@
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml">
-                    <action method="setCacheLifetime">
-                        <argument name="time" xsi:type="string">86400</argument>
-                    </action>
-                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml" />
                 <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="sidebar/featured.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
