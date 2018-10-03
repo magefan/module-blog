@@ -14,14 +14,14 @@
                 <resource id="Magento_Backend::content">
                     <resource id="Magefan_Blog::elements" title="Blog" sortOrder="10">
                         <resource id="Magefan_Blog::post" title="Posts" sortOrder="10">
-                            <resource id="Magefan_Blog::post:create" title="Create" sortOrder="11" />
-                            <resource id="Magefan_Blog::post:update" title="Update" sortOrder="12" />
-                            <resource id="Magefan_Blog::post:delete" title="Delete" sortOrder="13" />
+                            <resource id="Magefan_Blog::post_create" title="Create" sortOrder="11" />
+                            <resource id="Magefan_Blog::post_update" title="Update" sortOrder="12" />
+                            <resource id="Magefan_Blog::post_delete" title="Delete" sortOrder="13" />
                         </resource>
                         <resource id="Magefan_Blog::category" title="Categories" sortOrder="20">
-                            <resource id="Magefan_Blog::category:create" title="Create" sortOrder="21" />
-                            <resource id="Magefan_Blog::category:update" title="Update" sortOrder="22" />
-                            <resource id="Magefan_Blog::category:delete" title="Delete" sortOrder="23" />
+                            <resource id="Magefan_Blog::category_create" title="Create" sortOrder="21" />
+                            <resource id="Magefan_Blog::category_update" title="Update" sortOrder="22" />
+                            <resource id="Magefan_Blog::category_delete" title="Delete" sortOrder="23" />
                         </resource>
                         <resource id="Magefan_Blog::tag" title="Tags" sortOrder="25" />
                         <resource id="Magefan_Blog::comment" title="Comments" sortOrder="30" />
