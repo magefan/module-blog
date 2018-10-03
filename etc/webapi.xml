@@ -20,7 +20,7 @@
     <route url="/V1/blog/post" method="POST">
         <service class="Magefan\Blog\Api\PostManagementInterface" method="create"/>
         <resources>
-            <resource ref="Magefan_Blog::post:create"/>
+            <resource ref="Magefan_Blog::post_create"/>
         </resources>
     </route>
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/post/:id" \
@@ -30,7 +30,7 @@
     <route url="/V1/blog/post/:id" method="PUT">
         <service class="Magefan\Blog\Api\PostManagementInterface" method="update"/>
         <resources>
-            <resource ref="Magefan_Blog::post:update"/>
+            <resource ref="Magefan_Blog::post_update"/>
         </resources>
     </route>
     <!-- Example: curl -X DELETE "http://mystore.com/index.php/rest/V1/blog/post/:id" \
@@ -38,7 +38,7 @@
     <route url="/V1/blog/post/:id" method="DELETE">
         <service class="Magefan\Blog\Api\PostManagementInterface" method="delete"/>
         <resources>
-            <resource ref="Magefan_Blog::post:delete"/>
+            <resource ref="Magefan_Blog::post_delete"/>
         </resources>
     </route>
     <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/:id" \
@@ -71,7 +71,7 @@
     <route url="/V1/blog/category" method="POST">
         <service class="Magefan\Blog\Api\CategoryManagementInterface" method="create"/>
         <resources>
-            <resource ref="Magefan_Blog::category:create"/>
+            <resource ref="Magefan_Blog::category_create"/>
         </resources>
     </route>
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/category/:id" \
@@ -81,7 +81,7 @@
     <route url="/V1/blog/category/:id" method="PUT">
         <service class="Magefan\Blog\Api\CategoryManagementInterface" method="update"/>
         <resources>
-            <resource ref="Magefan_Blog::category:update"/>
+            <resource ref="Magefan_Blog::category_update"/>
         </resources>
     </route>
     <!-- Example: curl -X DELETE "http://mystore.com/index.php/rest/V1/blog/category/:id" \
@@ -89,7 +89,7 @@
     <route url="/V1/blog/category/:id" method="DELETE">
         <service class="Magefan\Blog\Api\CategoryManagementInterface" method="delete"/>
         <resources>
-            <resource ref="Magefan_Blog::category:delete"/>
+            <resource ref="Magefan_Blog::category_delete"/>
         </resources>
     </route>
     <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/:id" \
