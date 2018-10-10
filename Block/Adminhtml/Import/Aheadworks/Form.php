@@ -73,6 +73,16 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         );
 
         $fieldset->addField(
+            'notice',
+            'label',
+            [
+                'label' => __('NOTICE'),
+                'name' => 'prefix',
+                'after_element_html' => 'When the import is completed, please copy featured image files to Magento <strong style="color:#105610;">pub/media/magefan_blog</strong> directory.',
+            ]
+        );
+
+        $fieldset->addField(
             'dbname',
             'text',
             [
@@ -140,6 +150,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         /**
          * Check is single store mode
          */
+        /*
         if (!$this->_storeManager->isSingleStoreMode()) {
             $field = $fieldset->addField(
                 'store_id',
@@ -166,6 +177,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
 
             $data['store_id'] = $this->_storeManager->getStore(true)->getId();
         }
+        */
 
         $this->_eventManager->dispatch('magefan_blog_import_aheadworks_prepare_form', ['form' => $form]);
 

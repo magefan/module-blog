@@ -109,6 +109,52 @@ class Aw extends AbstractImport
             }
         }
 
+        /* Import tags */
+        $tags = [];
+        $oldTags = [];
+        $existingTags = [];
+
+        $sql = 'SELECT
+                    t.id as old_id,
+                    t.tag as title
+                FROM '.$_pref.'aw_blog_tags t';
+
+        $result = $this->_mysqliQuery($sql);
+        while ($data = mysqli_fetch_assoc($result)) {
+            /* Prepare tag data */
+            foreach (['title'] as $key) {
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
+            }
+
+            if (!$data['title']) {
+                continue;
+            }
+
+            $data['title'] = trim($data['title']);
+
+
+            try {
+                /* Initial saving */
+                if (!isset($existingTags[$data['title']])) {
+                    $tag = $this->_tagFactory->create();
+                    $tag->setData($data)->save();
+                    $this->_importedTagsCount++;
+                    $tags[$tag->getId()] = $tag;
+                    $oldTags[$tag->getOldId()] = $tag;
+                    $existingTags[$tag->getTitle()] = $tag;
+                } else {
+                    $tag = $existingTags[$data['title']];
+                    $oldTags[$data['old_id']] = $tag;
+                }
+
+
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->_skippedTags[] = $data['title'];
+                $this->_logger->addDebug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());
+            }
+        }
+
+
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog';
         $result = $this->_mysqliQuery($sql);
@@ -145,6 +191,7 @@ class Aw extends AbstractImport
 
             /* Prepare post data */
             $data = [
+                'old_id' => $data['post_id'],
                 'store_ids' => $data['store_ids'],
                 'title' => $data['title'],
                 'meta_keywords' => $data['meta_keywords'],
@@ -152,11 +199,13 @@ class Aw extends AbstractImport
                 'identifier' => $data['identifier'],
                 'content_heading' => '',
                 'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['post_content']),
+                'short_content' => $data['short_content'],
                 'creation_time' => strtotime($data['created_time']),
                 'update_time' => strtotime($data['update_time']),
                 'publish_time' => strtotime($data['created_time']),
                 'is_active' => (int)($data['status'] == 1),
                 'categories' => $postCategories,
+                'featured_img' => !empty($data['featured_image']) ? 'magefan_blog/' . $data['featured_image'] : '',
             ];
             $data['identifier'] = trim(strtolower($data['identifier']));
 
@@ -164,6 +213,46 @@ class Aw extends AbstractImport
             try {
                 /* Post saving */
                 $post->setData($data)->save();
+
+
+                /* find post comment s*/
+                $sql = 'SELECT * FROM '.$_pref.'aw_blog_comment WHERE `post_id` = ' . $post->getOldId();
+                $resultComments = $this->_mysqliQuery($sql);
+
+                while ($comments = mysqli_fetch_assoc($resultComments)) {
+                    $commentParentId = 0;
+
+                    $commentData = [
+                        'parent_id' => $commentParentId,
+                        'post_id' => $post->getPostId(),
+                        'status' => ($comments['status'] == 2) ? \Magefan\Blog\Model\Config\Source\CommentStatus::APPROVED : \Magefan\Blog\Model\Config\Source\CommentStatus::NOT_APPROVED,
+                        'author_type' => \Magefan\Blog\Model\Config\Source\AuthorType::GUEST,
+                        'author_nickname' => $comments['user'],
+                        'author_email' => $comments['email'],
+                        'text' => $comments['comment'],
+                        'creation_time' => $comments['created_time'],
+                    ];
+
+                    foreach (['text'] as $key) {
+                        $commentData[$key] = mb_convert_encoding($commentData[$key], 'HTML-ENTITIES', 'UTF-8');
+                    }
+
+                    if (!$commentData['text']) {
+                        continue;
+                    }
+
+                    $comment = $this->_commentFactory->create($commentData);
+
+                    try {
+                        /* saving */
+                        $comment->setData($commentData)->save();
+                    } catch (\Exception $e) {
+                        unset($comment);
+                    }
+                }
+
+
+
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
