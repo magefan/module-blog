@@ -13,13 +13,13 @@ class BlogPages implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return  [
-            ['value' => 'all', 'label' => __('All Blog Pages')],
-            ['value' => 'index', 'label' => __('Blog Index Page')],
-            ['value' => 'post', 'label' => __('Blog Post Page')],
-            ['value' => 'category', 'label' => __('Blog Category Page')],
-            ['value' => 'author', 'label' => __('Blog Author Page')],
-            ['value' => 'archive', 'label' => __('Blog Archive Page')],
-            ['value' => 'tag', 'label' => __('Blog Tag Page')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ALL, 'label' => __('All Blog Pages')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_INDEX, 'label' => __('Blog Index Page')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_POST, 'label' => __('Blog Post Page')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_CATEGORY, 'label' => __('Blog Category Page')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_AUTHOR, 'label' => __('Blog Author Page')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ARCHIVE, 'label' => __('Blog Archive Page')],
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG, 'label' => __('Blog Tag Page')],
         ];
     }
 
