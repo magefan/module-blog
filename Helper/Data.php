@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Helper;
 
 use Magento\Framework\App\Action\Action;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Magefan Blog Helper
