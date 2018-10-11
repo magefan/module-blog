@@ -96,6 +96,9 @@
                 <search_route>search</search_route>
                 <rss_route>rss</rss_route>
             </permalink>
+            <seo>
+                <use_canonical_meta_tag_for>all</use_canonical_meta_tag_for>
+            </seo>
             <social>
                 <add_this_enabled>1</add_this_enabled>
                 <add_this_pubid>ra-4def63cd3cf37569</add_this_pubid>

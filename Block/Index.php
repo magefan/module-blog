@@ -26,11 +26,14 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         $this->pageConfig->getTitle()->set($this->_getConfigValue('title'));
         $this->pageConfig->setKeywords($this->_getConfigValue('meta_keywords'));
         $this->pageConfig->setDescription($this->_getConfigValue('meta_description'));
-        $this->pageConfig->addRemotePageAsset(
-            $this->_url->getBaseUrl(),
-            'canonical',
-            ['attributes' => ['rel' => 'canonical']]
-        );
+
+        if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_INDEX)) {
+            $this->pageConfig->addRemotePageAsset(
+                $this->_url->getBaseUrl(),
+                'canonical',
+                ['attributes' => ['rel' => 'canonical']]
+            );
+        }
 
         return parent::_prepareLayout();
     }

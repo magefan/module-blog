@@ -49,11 +49,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->_addBreadcrumbs($author->getTitle(), 'blog_author');
             $this->pageConfig->addBodyClass('blog-author-' . $author->getIdentifier());
             $this->pageConfig->getTitle()->set($author->getTitle());
-            $this->pageConfig->addRemotePageAsset(
-                $author->getAuthorUrl(),
-                'canonical',
-                ['attributes' => ['rel' => 'canonical']]
-            );
+
+            if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_AUTHOR)) {
+                $this->pageConfig->addRemotePageAsset(
+                    $author->getAuthorUrl(),
+                    'canonical',
+                    ['attributes' => ['rel' => 'canonical']]
+                );
+            }
             $this->pageConfig->setRobots('NOINDEX,FOLLOW');
         }
 

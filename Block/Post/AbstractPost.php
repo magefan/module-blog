@@ -50,14 +50,19 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     protected $_url;
 
     /**
-     * Construct
-     *
-     * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magento\Cms\Model\Page $post
-     * @param \Magento\Framework\Registry $coreRegistry,
+     * @var \Magefan\Blog\Model\Config
+     */
+    protected $config;
+
+    /**
+     * AbstractPost constructor.
+     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Magefan\Blog\Model\Post $post
+     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magento\Cms\Model\PageFactory $postFactory
+     * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\Url $url
+     * @param \Magefan\Blog\Model\Config $config
      * @param array $data
      */
     public function __construct(
@@ -67,7 +72,8 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\Url $url,
-        array $data = []
+        array $data = [],
+        $config = null
     ) {
         parent::__construct($context, $data);
         $this->_post = $post;
@@ -75,6 +81,11 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         $this->_filterProvider = $filterProvider;
         $this->_postFactory = $postFactory;
         $this->_url = $url;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->config = $config ?: $objectManager->get(
+            \Magefan\Blog\Model\Config::class
+        );
     }
 
     /**
