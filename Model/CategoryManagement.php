@@ -44,6 +44,7 @@ class CategoryManagement extends AbstractManagement
         try {
             $collection = $this->_itemFactory->create()->getCollection();
             $collection
+                ->addActiveFilter()
                 ->addStoreFilter($storeId)
                 ->setCurPage($page)
                 ->setPageSize($limit);
