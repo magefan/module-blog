@@ -107,4 +107,11 @@
             <resource ref="anonymous" />
         </resources>
     </route>
+       <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/list/:type/:term/:store_id/:page/:limit" -->
+    <route url="/V1/blog/category/list/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
 </routes>
