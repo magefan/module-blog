@@ -54,11 +54,14 @@ class View extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($category->getMetaTitle());
             $this->pageConfig->setKeywords($category->getMetaKeywords());
             $this->pageConfig->setDescription($category->getMetaDescription());
-            $this->pageConfig->addRemotePageAsset(
-                $category->getCanonicalUrl(),
-                'canonical',
-                ['attributes' => ['rel' => 'canonical']]
-            );
+
+            if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_CATEGORY)) {
+                $this->pageConfig->addRemotePageAsset(
+                    $category->getCanonicalUrl(),
+                    'canonical',
+                    ['attributes' => ['rel' => 'canonical']]
+                );
+            }
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
             if ($pageMainTitle) {

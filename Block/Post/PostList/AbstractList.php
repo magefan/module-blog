@@ -46,18 +46,23 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
      */
     protected $_url;
 
+    /**
+     * @var \Magefan\Blog\Model\Config
+     */
+    protected $config;
+
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
 
     /**
-     * Construct
-     *
-     * @param \Magento\Framework\View\Element\Context $context
+     * AbstractList constructor.
+     * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
+     * @param null $config
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -65,13 +70,19 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
-        array $data = []
+        array $data = [],
+        $config = null
     ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $coreRegistry;
         $this->_filterProvider = $filterProvider;
         $this->_postCollectionFactory = $postCollectionFactory;
         $this->_url = $url;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->config = $config ?: $objectManager->get(
+            \Magefan\Blog\Model\Config::class
+        );
     }
 
     /**

@@ -412,7 +412,14 @@
                     <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query/</comment>
                 </field>
             </group>
-            <group id="social" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="seo" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Search Engine Optimization</label>
+                <field id="use_canonical_meta_tag_for" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Canonical Link Meta Tag For</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\BlogPages</source_model>
+                </field>
+            </group>
+            <group id="social" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Social</label>
                 <field id="add_this_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>AddThis Enabled</label>
@@ -430,7 +437,7 @@
                     <label>AddThis Language</label>
                 </field>
             </group>
-            <group id="top_menu" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="top_menu" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Category Top Navigation</label>
                 <field id="show_item" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Blog Link</label>

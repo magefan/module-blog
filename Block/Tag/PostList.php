@@ -51,11 +51,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($tag->getMetaTitle());
             $this->pageConfig->setKeywords($tag->getMetaKeywords());
             $this->pageConfig->setDescription($tag->getMetaDescription());
-            $this->pageConfig->addRemotePageAsset(
-                $tag->getTagUrl(),
-                'canonical',
-                ['attributes' => ['rel' => 'canonical']]
-            );
+
+            if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {
+                $this->pageConfig->addRemotePageAsset(
+                    $tag->getTagUrl(),
+                    'canonical',
+                    ['attributes' => ['rel' => 'canonical']]
+                );
+            }
         }
 
         return parent::_prepareLayout();
