@@ -32,9 +32,14 @@ class InstallData implements InstallDataInterface
      *
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      */
-    public function __construct(\Magefan\Blog\Model\PostFactory $postFactory)
-    {
+    public function __construct(
+        \Magefan\Blog\Model\PostFactory $postFactory,
+        \Magento\Framework\App\State $state
+    ) {
         $this->_postFactory = $postFactory;
+        try {
+            $state->setAreaCode('adminhtml');    
+        } catch (\Exception $e) {}
     }
 
     /**
