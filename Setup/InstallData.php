@@ -28,6 +28,13 @@ class InstallData implements InstallDataInterface
     private $_postFactory;
 
     /**
+     * State
+     *
+     * @var \Magento\Framework\App\State
+     */
+    private $state;
+
+    /**
      * Init
      *
      * @param \Magefan\Blog\Model\PostFactory $postFactory
@@ -37,9 +44,7 @@ class InstallData implements InstallDataInterface
         \Magento\Framework\App\State $state
     ) {
         $this->_postFactory = $postFactory;
-        try {
-            $state->setAreaCode('adminhtml');    
-        } catch (\Exception $e) {}
+        $this->state = $state;
     }
 
     /**
@@ -48,6 +53,10 @@ class InstallData implements InstallDataInterface
      */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
+        try {
+            $this->state->setAreaCode('adminhtml');    
+        } catch (\Exception $e) {}
+
         $data = [
             'title' => 'Hello world!',
             'meta_keywords' => 'magento 2 blog',
