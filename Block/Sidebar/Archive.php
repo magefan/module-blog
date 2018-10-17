@@ -91,4 +91,15 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
             \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
         );
     }
+
+    /**
+     * Retrieve empty identities
+     * Fix for varnish error Error 503 Service Unavailable, when have many blog posts
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [];
+    }
 }
