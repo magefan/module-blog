@@ -54,7 +54,8 @@ class Comment extends \Magento\Framework\View\Element\Template implements \Magen
                 $this->repliesCollection[$cId] = $this->getComment()->getChildComments()
                     ->addActiveFilter()
                     /*->setPageSize($this->getNumberOfReplies())*/
-                    ->setOrder('creation_time', 'DESC');
+                    //->setOrder('creation_time', 'DESC'); old sorting
+                      ->setOrder('creation_time', 'ASC');
             }
 
             return $this->repliesCollection[$cId];
