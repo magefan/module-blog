@@ -24,7 +24,7 @@
 <?php if (count($galleryImages)) { ?>
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
-            <a class="gallery-image-hld" href="<?php echo $block->escapeHtml($image) ?>" rel="nofollow">
+            <a class="gallery-image-hld fancybox-thumb" href="<?php echo $block->escapeHtml($image) ?>" rel="fancybox-thumb">
                 <img class="gallery-image" src="<?php echo $block->escapeHtml($image->resize(200)) ?>" alt="" />
             </a>
         <?php } ?>
