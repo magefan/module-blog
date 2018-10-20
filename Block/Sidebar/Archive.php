@@ -35,7 +35,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         parent::_preparePostCollection();
         $this->_postCollection->getSelect()->group(
-            'MONTH(main_table.publish_time)',
+            'CONCAT(YEAR(main_table.publish_time),"-",MONTH(main_table.publish_time))',
             'DESC'
         );
     }
