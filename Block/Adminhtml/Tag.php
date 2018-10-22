@@ -14,6 +14,10 @@ namespace Magefan\Blog\Block\Adminhtml;
 class Tag extends \Magento\Backend\Block\Widget\Grid\Container
 {
     /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::tag_create';
+    /**
      * Constructor
      *
      * @return void

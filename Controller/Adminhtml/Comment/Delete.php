@@ -13,5 +13,5 @@ namespace Magefan\Blog\Controller\Adminhtml\Comment;
  */
 class Delete extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
-
+    protected $_allowedKey      = 'Magefan_Blog::comment_delete';
 }

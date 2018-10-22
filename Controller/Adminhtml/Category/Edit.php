@@ -13,5 +13,15 @@ namespace Magefan\Blog\Controller\Adminhtml\Category;
  */
 class Edit extends \Magefan\Blog\Controller\Adminhtml\Category
 {
+    /**
+     * Allowed Key
+     * @var string
+     */
+    /**
+     * Form session key
+     * @var string
+     */
+    protected $_formSessionKey  = 'Magefan_Blog::category_update';
+//    protected $_formSessionKey  = 'Magefan_Blog::category_create';
 
 }

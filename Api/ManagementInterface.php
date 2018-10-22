@@ -10,6 +10,7 @@ namespace Magefan\Blog\Api;
 
 interface ManagementInterface
 {
+
     /**
      * Create new item.
      *

@@ -14,6 +14,11 @@ namespace Magefan\Blog\Block\Adminhtml;
 class Comment extends \Magento\Backend\Block\Widget\Grid\Container
 {
     /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::comment_update';
+  //  protected $_allowedKey = 'Magefan_Blog::comment_delete';
+    /**
      * Constructor
      *
      * @return void

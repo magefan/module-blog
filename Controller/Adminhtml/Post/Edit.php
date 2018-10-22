@@ -13,5 +13,5 @@ namespace Magefan\Blog\Controller\Adminhtml\Post;
  */
 class Edit extends \Magefan\Blog\Controller\Adminhtml\Post
 {
-
+  
 }

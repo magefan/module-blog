@@ -13,5 +13,6 @@ namespace Magefan\Blog\Controller\Adminhtml\Tag;
  */
 class Edit extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
-
+    protected $_allowedKey      = 'Magefan_Blog::tag_update';
+   // protected $_allowedKey      = 'Magefan_Blog::tag_create';
 }

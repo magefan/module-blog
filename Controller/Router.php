@@ -131,6 +131,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {
+
         $_identifier = trim($request->getPathInfo(), '/');
         $_identifier = urldecode($_identifier);
 

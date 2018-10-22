@@ -13,6 +13,11 @@ namespace Magefan\Blog\Block\Adminhtml;
  */
 class Post extends \Magento\Backend\Block\Widget\Grid\Container
 {
+
+    /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::post_create';
     /**
      * Constructor
      *

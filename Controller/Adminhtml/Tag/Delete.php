@@ -13,5 +13,5 @@ namespace Magefan\Blog\Controller\Adminhtml\Tag;
  */
 class Delete extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
-
+    protected $_allowedKey      = 'Magefan_Blog::tag_delete';
 }

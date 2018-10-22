@@ -10,5 +10,5 @@ namespace Magefan\Blog\Api;
 
 interface CategoryManagementInterface extends ManagementInterface
 {
-
+    
 }
