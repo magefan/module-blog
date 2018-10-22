@@ -13,6 +13,7 @@ class BlogPages implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return  [
+            ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_NONE, 'label' => __('Please select')],
             ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ALL, 'label' => __('All Blog Pages')],
             ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_INDEX, 'label' => __('Blog Index Page')],
             ['value' => \Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_POST, 'label' => __('Blog Post Page')],

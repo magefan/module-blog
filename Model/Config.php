@@ -31,6 +31,7 @@ class Config
     const XML_PATH_TOP_MENU_SHOW_ITEM = 'mfblog/top_menu/show_item';
 
     const XML_PATH_DISPLAY_CANONICAL_TAG_FOR = 'mfblog/seo/use_canonical_meta_tag_for';
+    const CANONICAL_PAGE_TYPE_NONE = 'none';
     const CANONICAL_PAGE_TYPE_ALL = 'all';
     const CANONICAL_PAGE_TYPE_INDEX = 'index';
     const CANONICAL_PAGE_TYPE_POST = 'post';
