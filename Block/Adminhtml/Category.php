@@ -13,10 +13,7 @@ namespace Magefan\Blog\Block\Adminhtml;
  */
 class Category extends \Magento\Backend\Block\Widget\Grid\Container
 {
-    /**
-     * @var string
-     */
-    protected $_allowedKey = 'Magefan_Blog::category_create';
+
     /**
      * Constructor
      *
@@ -29,6 +26,9 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_headerText = __('Category');
         $this->_addButtonLabel = __('Add New Category');
         parent::_construct();
+        if (!$this->_authorization->isAllowed("Magefan_Blog::category_create")) {
+            $this->removeButton('add');
+        }
     }
 
     /**
@@ -36,15 +36,17 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _prepareLayout()
     {
+        if ($this->_authorization->isAllowed("Magefan_Blog::import")) {
+            $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+            $this->getToolbar()->addChild(
+                'options_button',
+                \Magento\Backend\Block\Widget\Button::class,
+                ['label' => __('Import Categories'), 'onclick' => $onClick]
+            );
+        }
 
-        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
-
-        $this->getToolbar()->addChild(
-            'options_button',
-            \Magento\Backend\Block\Widget\Button::class,
-            ['label' => __('Import Categories'), 'onclick' => $onClick]
-        );
 
         return parent::_prepareLayout();
     }
+
 }

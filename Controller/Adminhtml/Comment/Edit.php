@@ -13,5 +13,5 @@ namespace Magefan\Blog\Controller\Adminhtml\Comment;
  */
 class Edit extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
-    protected $_allowedKey      = 'Magefan_Blog::comment_update';
+
 }

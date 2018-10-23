@@ -15,6 +15,21 @@ use Magefan\Blog\Model\Post;
  */
 class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 {
+
+    /**
+     * @return bool return allowed key
+     */
+    protected function _isAllowed()
+    {
+        $id = $this->getRequest()->getParam('post_id');
+        if ($id) {
+            $key = 'Magefan_Blog::post_update';
+        } else {
+            $key = 'Magefan_Blog::post_create';
+        }
+        return $this->_authorization->isAllowed($key);
+    }
+
     /**
      * Before model save
      * @param  \Magefan\Blog\Model\Post $model

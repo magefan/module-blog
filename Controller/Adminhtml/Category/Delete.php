@@ -13,5 +13,8 @@ namespace Magefan\Blog\Controller\Adminhtml\Category;
  */
 class Delete extends \Magefan\Blog\Controller\Adminhtml\Category
 {
-
+    /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::category_delete';
 }

@@ -16,6 +16,13 @@ use Magefan\Blog\Model\Comment;
 class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
     /**
+     * @return bool return allowed key
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Magefan_Blog::comment_update');
+    }
+    /**
      * Filter request params
      * @param  array $data
      * @return array

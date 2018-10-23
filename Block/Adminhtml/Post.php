@@ -31,6 +31,10 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_addButtonLabel = __('Add New Post');
 
         parent::_construct();
+        if (!$this->_authorization->isAllowed("Magefan_Blog::post_create")) {
+            $this->removeButton('add');
+        }
+
     }
 
     /**
@@ -38,15 +42,15 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _prepareLayout()
     {
+        if ($this->_authorization->isAllowed("Magefan_Blog::import")) {
+            $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
 
-        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
-
-        $this->getToolbar()->addChild(
-            'options_button',
-            \Magento\Backend\Block\Widget\Button::class,
-            ['label' => __('Import Posts'), 'onclick' => $onClick]
-        );
-
+            $this->getToolbar()->addChild(
+                'options_button',
+                \Magento\Backend\Block\Widget\Button::class,
+                ['label' => __('Import Posts'), 'onclick' => $onClick]
+            );
+        }
         return parent::_prepareLayout();
     }
 }

@@ -16,7 +16,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * @var string
      */
-    protected $_formSessionKey  = 'Magefan_Blog::post_create';
+    //protected $_formSessionKey  = 'Magefan_Blog::post_create';
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\DateTime
@@ -271,7 +271,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if (!is_numeric($value) && is_null($field)) {
             $field = 'identifier';
         }
-        $this->isAllowed($object);
 
         return parent::load($object, $value, $field);
     }
@@ -442,19 +441,5 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         );
 
         return $adapter->fetchCol($select);
-    }
-    public function isAllowed($object) {
-        if(is_object($object)){
-            if ($object->getId()) {
-                echo "post_update";
-                exit();
-                $this->_formSessionKey =  'Magefan_Blog::post_update';
-            }
-        }
-       else {
-            echo "post_create";
-            $this->_formSessionKey =  'Magefan_Blog::post_create';
-            exit();
-        }
     }
 }

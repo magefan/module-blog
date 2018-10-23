@@ -37,15 +37,15 @@ class Comment extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _prepareLayout()
     {
+        if ($this->_authorization->isAllowed("Magefan_Blog::import")) {
+            $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
 
-        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
-
-        $this->getToolbar()->addChild(
-            'options_button',
-            \Magento\Backend\Block\Widget\Button::class,
-            ['label' => __('Import Comments'), 'onclick' => $onClick]
-        );
-
+            $this->getToolbar()->addChild(
+                'options_button',
+                \Magento\Backend\Block\Widget\Button::class,
+                ['label' => __('Import Comments'), 'onclick' => $onClick]
+            );
+        }
         return parent::_prepareLayout();
     }
 }
