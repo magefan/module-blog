@@ -108,4 +108,14 @@ class View extends \Magefan\Blog\Block\Post\PostList
             ]);
         }
     }
+    
+    /**
+     * Retrieve identities
+     *
+     * @return string
+     */
+    public function getIdentities()
+    {
+        return $this->getCategory()->getIdentities();
+    }
 }
