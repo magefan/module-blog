@@ -50,7 +50,7 @@ class Image extends AbstractHelper
         if ($this->_baseFile) {
             $path = 'blog/cache/' . $width . 'x' . $height;
             $this->_newFile = $path. '/' . $this->_baseFile;
-            if (true || !$this->fileExists($this->_newFile)) {
+            if (!$this->fileExists($this->_newFile)) {
                 $this->resizeBaseFile($width, $height);
             }
         }
