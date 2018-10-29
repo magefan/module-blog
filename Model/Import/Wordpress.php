@@ -28,6 +28,8 @@ class Wordpress extends AbstractImport
             throw new \Exception("Failed connect to wordpress database", 1);
         }
 
+        mysqli_set_charset($con, "utf8");
+
         $_pref = mysqli_real_escape_string($con, $this->getData('prefix'));
 
         $categories = [];

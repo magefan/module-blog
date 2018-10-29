@@ -42,6 +42,8 @@ class Aw extends AbstractImport
             throw new \Exception("Failed connect to magento database", 1);
         }
 
+        mysqli_set_charset($con, "utf8");
+
         $_pref = mysqli_real_escape_string($con, $this->getData('prefix'));
 
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_cat LIMIT 1';
