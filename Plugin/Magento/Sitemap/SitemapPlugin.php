@@ -69,10 +69,10 @@ class SitemapPlugin
      * Deprecated
      * Used for Magento 2.1.x only to create blog_sitemap.xml
      * Add magefan blog actions to allowed list
-     * @param  \Magento\Sitemap\Model\Sitemap $sitemap
+     * @param  \Magento\Framework\Model\AbstractModel $sitemap
      * @return array
      */
-    public function afterGenerateXml(Sitemap $sitemap, $result)
+    public function afterGenerateXml(\Magento\Framework\Model\AbstractModel $sitemap, $result)
     {
         if ($this->isEnabled($sitemap)) {
             if ($this->isMageWorxXmlSitemap($sitemap) || !method_exists($sitemap, 'collectSitemapItems')) {
@@ -99,11 +99,11 @@ class SitemapPlugin
     }
 
     /**
-     * @param Sitemap $sitemap
+     * @param \Magento\Framework\Model\AbstractModel $sitemap
      * @param $result
      * @return mixed
      */
-    public function afterCollectSitemapItems(Sitemap $sitemap, $result)
+    public function afterCollectSitemapItems(\Magento\Framework\Model\AbstractModel $sitemap, $result)
     {
         if ($this->isEnabled($sitemap) && !$this->isMageWorxXmlSitemap($sitemap)) {
             $storeId = $sitemap->getStoreId();
