@@ -225,7 +225,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             'search_rate',
             '(0
               + (MATCH (content) AGAINST ("{{content}}")) * 1
-              + (MATCH (content) AGAINST ("{{short_content}}")) * 2
+              + (MATCH (short_content) AGAINST ("{{short_content}}")) * 2
               + (MATCH (title) AGAINST ("{{title}}")) * 5)',
             [
                 'content' => $term,

@@ -11,6 +11,7 @@ namespace Magefan\Blog\Setup;
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\DB\Adapter\AdapterInterface;
 
 /**
  * Blog schema update
@@ -675,6 +676,23 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $setup->getIdxName($setup->getTable($table), ['is_active']),
                 ['is_active']
             );
+        }
+
+        if (version_compare($version, '2.8.3.1') < 0) {
+            /* Fix issue https://github.com/magefan/module-blog/issues/205 */
+            $table = $setup->getTable('magefan_blog_post');
+            foreach (['title', 'content', 'short_content'] as $field) {
+                $connection->addIndex(
+                    $table,
+                    $setup->getIdxName(
+                        $table,
+                        [$field],
+                        AdapterInterface::INDEX_TYPE_FULLTEXT
+                    ),
+                    [$field],
+                    AdapterInterface::INDEX_TYPE_FULLTEXT
+                );
+            }
         }
 
         $setup->endSetup();
