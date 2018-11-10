@@ -53,6 +53,7 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
 
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
+    const POSTS_SORT_FIELD_BY_TITLE = 'title';
 
     /**
      * AbstractList constructor.

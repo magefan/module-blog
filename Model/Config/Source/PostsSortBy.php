@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015-17 Magefan (support@magefan.com). All rights reserved.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
@@ -17,22 +17,17 @@ class PostsSortBy implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const int
      */
-    const POSTS = 0;
+    const PUBLISH_DATE = 0;
 
     /**
      * @const int
      */
-    const POST_LINKS = 1;
+    const POSITION = 1;
 
     /**
      * @const int
      */
-    const SUBCATEGORIES_LINKS = 2;
-
-    /**
-     * @const int
-     */
-    const POSTS_AND_SUBCATEGORIES_LINKS = 3;
+    const TITLE = 2;
 
     /**
      * Options int
@@ -42,8 +37,9 @@ class PostsSortBy implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return  [
-            ['value' => self::POSTS, 'label' => __('Publish Date (default)')],
-            ['value' => self::POST_LINKS, 'label' => __('Position')],
+            ['value' => self::PUBLISH_DATE, 'label' => __('Publish Date (default)')],
+            ['value' => self::POSITION, 'label' => __('Position')],
+            ['value' => self::TITLE, 'label' => __('Title')],
         ];
     }
 

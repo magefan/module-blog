@@ -8,7 +8,9 @@
 
 namespace Magefan\Blog\Block;
 
+use Magento\Framework\Api\SortOrder;
 use Magento\Store\Model\ScopeInterface;
+use Magefan\Blog\Model\Config\Source\PostsSortBy;
 
 /**
  * Blog index block
@@ -75,11 +77,32 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             ScopeInterface::SCOPE_STORE
         );
 
-        if ($postsSortBy) {
-            return self::POSTS_SORT_FIELD_BY_POSITION;
+        switch ($postsSortBy) {
+            case PostsSortBy::POSITION :
+                return self::POSTS_SORT_FIELD_BY_POSITION;
+            case PostsSortBy::TITLE :
+                return self::POSTS_SORT_FIELD_BY_TITLE;
+            default :
+                return parent::getCollectionOrderField();
         }
+    }
 
-        return parent::getCollectionOrderField();
+    /**
+     * Retrieve collection order direction
+     *
+     * @return string
+     */
+    public function getCollectionOrderDirection()
+    {
+        $postsSortBy = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_POSTS_SORT_BY,
+            ScopeInterface::SCOPE_STORE
+        );
+
+        if (PostsSortBy::TITLE == $postsSortBy) {
+            return SortOrder::SORT_ASC;
+        }
+        return parent::getCollectionOrderDirection();
     }
 
     /**

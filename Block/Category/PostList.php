@@ -10,6 +10,7 @@ namespace Magefan\Blog\Block\Category;
 
 use Magento\Framework\Api\SortOrder;
 use Magefan\Blog\Model\Config\Source\CategoryDisplayMode;
+use Magefan\Blog\Model\Config\Source\PostsSortBy;
 
 /**
  * Blog category posts list
@@ -37,11 +38,30 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getCollectionOrderField()
     {
-        if ($this->getCategory()->getData('posts_sort_by')) {
-            return self::POSTS_SORT_FIELD_BY_POSITION;
-        }
+        $postsSortBy = $this->getCategory()->getData('posts_sort_by');
 
-        return parent::getCollectionOrderField();
+        switch ($postsSortBy) {
+            case PostsSortBy::POSITION :
+                return self::POSTS_SORT_FIELD_BY_POSITION;
+            case PostsSortBy::TITLE :
+                return self::POSTS_SORT_FIELD_BY_TITLE;
+            default :
+                return parent::getCollectionOrderField();
+        }
+    }
+
+    /**
+     * Retrieve collection order direction
+     *
+     * @return string
+     */
+    public function getCollectionOrderDirection()
+    {
+        $postsSortBy = $this->getCategory()->getData('posts_sort_by');
+        if (PostsSortBy::TITLE == $postsSortBy) {
+            return SortOrder::SORT_ASC;
+        }
+        return parent::getCollectionOrderDirection();
     }
 
     /**
