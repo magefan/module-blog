@@ -1,12 +1,15 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
  */
+
 namespace Magefan\Blog\Block\Adminhtml\Post;
+
 /**
  * Class SaveButton
- * @package Magento\Customer\Block\Adminhtml\Edit
  */
 class SaveButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveButton
 {
