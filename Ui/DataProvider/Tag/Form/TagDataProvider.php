@@ -81,12 +81,12 @@ class TagDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->loadedData[$tag->getId()] = $tag->getData();
         }
 
-        $data = $this->dataPersistor->get('current_model');
+        $data = $this->dataPersistor->get('blog_tag_form_data');
         if (!empty($data)) {
             $tag = $this->collection->getNewEmptyItem();
             $tag->setData($data);
             $this->loadedData[$tag->getId()] = $tag->getData();
-            $this->dataPersistor->clear('current_model');
+            $this->dataPersistor->clear('blog_tag_form_data');
         }
 
         return $this->loadedData;
