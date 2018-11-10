@@ -14,17 +14,21 @@
                 <resource id="Magento_Backend::content">
                     <resource id="Magefan_Blog::elements" title="Blog" sortOrder="10">
                         <resource id="Magefan_Blog::post" title="Posts" sortOrder="10">
-                            <resource id="Magefan_Blog::post_create" title="Create" sortOrder="11" />
-                            <resource id="Magefan_Blog::post_update" title="Update" sortOrder="12" />
-                            <resource id="Magefan_Blog::post_delete" title="Delete" sortOrder="13" />
+                            <resource id="Magefan_Blog::post_save" title="Save" sortOrder="11" />
+                            <resource id="Magefan_Blog::post_delete" title="Delete" sortOrder="14" />
                         </resource>
                         <resource id="Magefan_Blog::category" title="Categories" sortOrder="20">
-                            <resource id="Magefan_Blog::category_create" title="Create" sortOrder="21" />
-                            <resource id="Magefan_Blog::category_update" title="Update" sortOrder="22" />
-                            <resource id="Magefan_Blog::category_delete" title="Delete" sortOrder="23" />
+                            <resource id="Magefan_Blog::category_save" title="Save" sortOrder="21" />
+                            <resource id="Magefan_Blog::category_delete" title="Delete" sortOrder="24" />
                         </resource>
-                        <resource id="Magefan_Blog::tag" title="Tags" sortOrder="25" />
-                        <resource id="Magefan_Blog::comment" title="Comments" sortOrder="30" />
+                        <resource id="Magefan_Blog::tag" title="Tags" sortOrder="25">
+                            <resource id="Magefan_Blog::tag_save" title="Save" sortOrder="26" />
+                            <resource id="Magefan_Blog::tag_delete" title="Delete" sortOrder="29" />
+                        </resource>
+                        <resource id="Magefan_Blog::comment" title="Comments" sortOrder="30">
+                            <resource id="Magefan_Blog::comment_save" title="Save" sortOrder="32" />
+                            <resource id="Magefan_Blog::comment_delete" title="Delete" sortOrder="34" />
+                        </resource>
                         <resource id="Magefan_Blog::import" title="Import" sortOrder="40" />
                     </resource>
                 </resource>

@@ -13,5 +13,8 @@ namespace Magefan\Blog\Controller\Adminhtml\Post;
  */
 class Duplicate extends \Magefan\Blog\Controller\Adminhtml\Post
 {
-
+    /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::post_save';
 }

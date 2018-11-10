@@ -14,6 +14,11 @@ namespace Magefan\Blog\Controller\Adminhtml\Category;
 class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 {
     /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::category_save';
+
+    /**
      * After model save
      * @param  \Magefan\Blog\Model\Category $model
      * @param  \Magento\Framework\App\Request\Http $request

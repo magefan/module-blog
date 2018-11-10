@@ -16,6 +16,11 @@ use Magefan\Blog\Model\Comment;
 class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
     /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::comment_save';
+
+    /**
      * Filter request params
      * @param  array $data
      * @return array

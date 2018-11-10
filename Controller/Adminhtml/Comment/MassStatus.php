@@ -13,5 +13,8 @@ namespace Magefan\Blog\Controller\Adminhtml\Comment;
  */
 class MassStatus extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
-
+    /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::comment_save';
 }

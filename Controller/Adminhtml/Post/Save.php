@@ -16,6 +16,11 @@ use Magefan\Blog\Model\Post;
 class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 {
     /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::post_save';
+
+    /**
      * Before model save
      * @param  \Magefan\Blog\Model\Post $model
      * @param  \Magento\Framework\App\Request\Http $request

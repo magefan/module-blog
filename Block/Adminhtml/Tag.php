@@ -26,6 +26,9 @@ class Tag extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_addButtonLabel = __('Add New Tag');
 
         parent::_construct();
+        if (!$this->_authorization->isAllowed("Magefan_Blog::tag_save")) {
+            $this->removeButton('add');
+        }
     }
 
     /**
@@ -33,15 +36,15 @@ class Tag extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _prepareLayout()
     {
+        if ($this->_authorization->isAllowed("Magefan_Blog::import")) {
+            $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
 
-        $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
-
-        $this->getToolbar()->addChild(
-            'options_button',
-            \Magento\Backend\Block\Widget\Button::class,
-            ['label' => __('Import Tags'), 'onclick' => $onClick]
-        );
-
+            $this->getToolbar()->addChild(
+                'options_button',
+                \Magento\Backend\Block\Widget\Button::class,
+                ['label' => __('Import Tags'), 'onclick' => $onClick]
+            );
+        }
         return parent::_prepareLayout();
     }
 }

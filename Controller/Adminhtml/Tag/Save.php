@@ -14,6 +14,11 @@ namespace Magefan\Blog\Controller\Adminhtml\Tag;
 class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
     /**
+     * @var string
+     */
+    protected $_allowedKey = 'Magefan_Blog::tag_save';
+
+    /**
      * Filter request params
      * @param  array $data
      * @return array
@@ -40,4 +45,5 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 
         return $data;
     }
+
 }

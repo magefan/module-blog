@@ -24,11 +24,11 @@
                         <argument name="form_field_name" xsi:type="string">id</argument>
                         <argument name="use_select_all" xsi:type="string">1</argument>
                         <argument name="options" xsi:type="array">
-                            <item name="enable" xsi:type="array">
+                            <item name="status_enable" xsi:type="array">
                                 <item name="label" xsi:type="string" translate="true">Enable</item>
                                 <item name="url" xsi:type="string">*/*/massStatus/status/1/</item>
                             </item>
-                            <item name="disable" xsi:type="array">
+                            <item name="status_disable" xsi:type="array">
                                 <item name="label" xsi:type="string" translate="true">Disable</item>
                                 <item name="url" xsi:type="string">*/*/massStatus/status/0/</item>
                             </item>
@@ -122,11 +122,11 @@
                             <argument name="index" xsi:type="string">is_active</argument>
                             <argument name="type" xsi:type="string">options</argument>
                             <argument name="options" xsi:type="array">
-                                <item name="status_subscribed" xsi:type="array">
+                                <item name="status_enabled" xsi:type="array">
                                     <item name="value" xsi:type="string">1</item>
                                     <item name="label" xsi:type="string" translate="true">Enabled</item>
                                 </item>
-                                <item name="status_not_active" xsi:type="array">
+                                <item name="status_disabled" xsi:type="array">
                                     <item name="value" xsi:type="string">0</item>
                                     <item name="label" xsi:type="string" translate="true">Disabled</item>
                                 </item>
