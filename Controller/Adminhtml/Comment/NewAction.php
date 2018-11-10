@@ -11,7 +11,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Comment;
 /**
  * Blog comment create new controller
  */
-class NewAction extends \Magefan\Blog\Controller\Adminhtml\Post
+class NewAction extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
 
 }

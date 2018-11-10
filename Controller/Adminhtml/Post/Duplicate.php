@@ -16,5 +16,5 @@ class Duplicate extends \Magefan\Blog\Controller\Adminhtml\Post
     /**
      * @var string
      */
-    protected $_allowedKey = 'Magefan_Blog::post_create';
+    protected $_allowedKey = 'Magefan_Blog::post_save';
 }

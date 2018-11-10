@@ -11,7 +11,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Comment;
 /**
  * Blog comment grid controller
  */
-class Grid extends \Magefan\Blog\Controller\Adminhtml\Post
+class Grid extends \Magefan\Blog\Controller\Adminhtml\Comment
 {
 
 }

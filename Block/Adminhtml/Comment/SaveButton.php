@@ -3,7 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magefan\Blog\Block\Adminhtml\Blog\Category;
+namespace Magefan\Blog\Block\Adminhtml\Comment;
 /**
  * Class SaveButton
  * @package Magento\Customer\Block\Adminhtml\Edit
@@ -15,7 +15,7 @@ class SaveButton extends  \Magefan\Community\Block\Adminhtml\Edit\SaveButton
      */
     public function getButtonData()
     {
-        if (!$this->authorization->isAllowed("Magefan_Blog::category_update")) {
+        if (!$this->authorization->isAllowed("Magefan_Blog::comment_save")) {
             return [];
         }
         return parent::getButtonData();

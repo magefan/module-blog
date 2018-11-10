@@ -3,19 +3,18 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magefan\Blog\Block\Adminhtml\Blog\Tag;
-
+namespace Magefan\Blog\Block\Adminhtml\Category;
 /**
- * Class SaveAndContinueButton
+ * Class CreateButton
  */
-class SaveAndContinueButton  extends \Magefan\Community\Block\Adminhtml\Edit\SaveAndContinueButton
+class CreateButton extends  \Magefan\Community\Block\Adminhtml\Edit\CreateButton
 {
     /**
      * @return array|string
      */
     public function getButtonData()
     {
-        if (!$this->authorization->isAllowed("Magefan_Blog::tag_update")) {
+        if (!$this->authorization->isAllowed("Magefan_Blog::category_save")) {
             return [];
         }
         return parent::getButtonData();

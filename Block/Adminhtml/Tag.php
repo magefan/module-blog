@@ -14,10 +14,6 @@ namespace Magefan\Blog\Block\Adminhtml;
 class Tag extends \Magento\Backend\Block\Widget\Grid\Container
 {
     /**
-     * @var string
-     */
-    protected $_allowedKey = 'Magefan_Blog::tag_create';
-    /**
      * Constructor
      *
      * @return void
@@ -30,7 +26,7 @@ class Tag extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_addButtonLabel = __('Add New Tag');
 
         parent::_construct();
-        if (!$this->_authorization->isAllowed("Magefan_Blog::tag_create")) {
+        if (!$this->_authorization->isAllowed("Magefan_Blog::tag_save")) {
             $this->removeButton('add');
         }
     }

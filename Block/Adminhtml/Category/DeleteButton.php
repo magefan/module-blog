@@ -3,7 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magefan\Blog\Block\Adminhtml\Blog\Tag;
+namespace Magefan\Blog\Block\Adminhtml\Category;
 
 /**
  * Class DeleteButton
@@ -15,7 +15,7 @@ class DeleteButton extends \Magefan\Community\Block\Adminhtml\Edit\DeleteButton
      */
     public function getButtonData()
     {
-        if (!$this->authorization->isAllowed("Magefan_Blog::tag_delete")) {
+        if (!$this->authorization->isAllowed("Magefan_Blog::category_delete")) {
             return [];
         }
         return parent::getButtonData();

@@ -22,12 +22,12 @@
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="buttons" xsi:type="array">
             <item name="back" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\BackButton</item>
-            <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Blog\Category\DeleteButton</item>
+            <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\DeleteButton</item>
             <item name="reset" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\ResetButton</item>
-            <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Blog\Category\DuplicateButton</item>
-            <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Blog\Category\SaveButton</item>
+            <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\DuplicateButton</item>
+            <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\SaveButton</item>
             <item name="save_and_continue" xsi:type="string">
-                Magefan\Blog\Block\Adminhtml\Blog\Category\SaveAndContinueButton
+                Magefan\Blog\Block\Adminhtml\Category\SaveAndContinueButton
             </item>
         </item>
     </argument>

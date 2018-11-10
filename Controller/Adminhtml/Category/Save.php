@@ -13,21 +13,10 @@ namespace Magefan\Blog\Controller\Adminhtml\Category;
  */
 class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 {
-
     /**
-     * @return bool return allowed key
+     * @var string
      */
-    protected function _isAllowed()
-    {
-        $id = $this->getRequest()->getParam('category_id');
-        if ($id) {
-            $key = 'Magefan_Blog::category_update';
-        } else {
-            $key = 'Magefan_Blog::category_create';
-        }
-
-        return $this->_authorization->isAllowed($key);
-    }
+    protected $_allowedKey = 'Magefan_Blog::category_save';
 
     /**
      * After model save
@@ -72,5 +61,4 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 
         return $data;
     }
-
 }

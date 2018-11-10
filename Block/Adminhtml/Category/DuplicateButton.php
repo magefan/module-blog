@@ -4,8 +4,7 @@
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
 
-namespace Magefan\Blog\Block\Adminhtml\Blog\Category;
-//use phpDocumentor\Reflection\Types\Parent;
+namespace Magefan\Blog\Block\Adminhtml\Category;
 
 /**
  * Class DuplicateButton
@@ -17,7 +16,7 @@ class DuplicateButton extends \Magefan\Community\Block\Adminhtml\Edit\DuplicateB
      */
     public function getButtonData()
     {
-        if (!$this->authorization->isAllowed("Magefan_Blog::category_create")) {
+        if (!$this->authorization->isAllowed("Magefan_Blog::category_save")) {
             return [];
         }
         return parent::getButtonData();

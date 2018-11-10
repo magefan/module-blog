@@ -3,19 +3,19 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magefan\Blog\Block\Adminhtml\Blog\Tag;
+namespace Magefan\Blog\Block\Adminhtml\Comment;
+
 /**
- * Class SaveButton
- * @package Magento\Customer\Block\Adminhtml\Edit
+ * Class DeleteButton
  */
-class SaveButton extends  \Magefan\Community\Block\Adminhtml\Edit\SaveButton
+class DeleteButton extends \Magefan\Community\Block\Adminhtml\Edit\DeleteButton
 {
     /**
      * @return array|string
      */
     public function getButtonData()
     {
-        if (!$this->authorization->isAllowed("Magefan_Blog::tag_update")) {
+        if (!$this->authorization->isAllowed("Magefan_Blog::comment_delete")) {
             return [];
         }
         return parent::getButtonData();

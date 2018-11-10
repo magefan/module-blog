@@ -14,11 +14,6 @@ namespace Magefan\Blog\Model\ResourceModel;
 class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
-     * @var string
-     */
-    //protected $_formSessionKey  = 'Magefan_Blog::post_create';
-
-    /**
      * @var \Magento\Framework\Stdlib\DateTime\DateTime
      */
     protected $_date;

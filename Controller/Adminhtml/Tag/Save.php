@@ -14,18 +14,9 @@ namespace Magefan\Blog\Controller\Adminhtml\Tag;
 class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
     /**
-     * @return bool return allowed key
+     * @var string
      */
-    protected function _isAllowed()
-    {
-        $id = $this->getRequest()->getParam('tag_id');
-        if ($id) {
-            $key = 'Magefan_Blog::tag_update';
-        } else {
-            $key = 'Magefan_Blog::tag_create';
-        }
-        return $this->_authorization->isAllowed($key);
-    }
+    protected $_allowedKey = 'Magefan_Blog::tag_save';
 
     /**
      * Filter request params
@@ -54,4 +45,5 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 
         return $data;
     }
+
 }

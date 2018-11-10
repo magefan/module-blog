@@ -13,11 +13,6 @@ namespace Magefan\Blog\Block\Adminhtml;
  */
 class Post extends \Magento\Backend\Block\Widget\Grid\Container
 {
-
-    /**
-     * @var string
-     */
-    protected $_allowedKey = 'Magefan_Blog::post_create';
     /**
      * Constructor
      *
@@ -31,7 +26,7 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_addButtonLabel = __('Add New Post');
 
         parent::_construct();
-        if (!$this->_authorization->isAllowed("Magefan_Blog::post_create")) {
+        if (!$this->_authorization->isAllowed("Magefan_Blog::post_save")) {
             $this->removeButton('add');
         }
 

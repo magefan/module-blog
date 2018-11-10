@@ -16,5 +16,5 @@ class Duplicate extends \Magefan\Blog\Controller\Adminhtml\Category
     /**
      * @var string
      */
-    protected $_allowedKey = 'Magefan_Blog::category_create';
+    protected $_allowedKey = 'Magefan_Blog::category_save';
 }

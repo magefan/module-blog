@@ -13,7 +13,6 @@ namespace Magefan\Blog\Block\Adminhtml;
  */
 class Category extends \Magento\Backend\Block\Widget\Grid\Container
 {
-
     /**
      * Constructor
      *
@@ -26,7 +25,7 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_headerText = __('Category');
         $this->_addButtonLabel = __('Add New Category');
         parent::_construct();
-        if (!$this->_authorization->isAllowed("Magefan_Blog::category_create")) {
+        if (!$this->_authorization->isAllowed("Magefan_Blog::category_save")) {
             $this->removeButton('add');
         }
     }
@@ -44,8 +43,6 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
                 ['label' => __('Import Categories'), 'onclick' => $onClick]
             );
         }
-
-
         return parent::_prepareLayout();
     }
 
