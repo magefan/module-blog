@@ -312,7 +312,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getUrl()
     {
-        return $this->_url->getUrlPath($this->getIdentifier(), $this->controllerName);
+        return $this->_url->getUrlPath($this, $this->controllerName);
     }
 
     /**

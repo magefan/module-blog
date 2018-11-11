@@ -192,7 +192,7 @@ class Url
             }
         }
 
-        $url = $this->getUrl($object->getIdentifier(), $object->getControllerName());
+        $url = $this->getUrl($object, $object->getControllerName());
 
         if ($storeChanged) {
             $this->_url->setScope($origStore);
