@@ -6,8 +6,8 @@
 This Magento 2 Blog module allows you to create a full-fledged blog on your [Magento 2](http://magento.com/) Store.
 
 ## Requirements
-  * Magento Community Edition 2.1.x-2.2.x or Magento Enterprise Edition 2.1.x-2.2.x
-  * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.1 . Please install this extension first if you use installation via FTP.
+  * Magento Community Edition 2.2.x or Magento Enterprise Edition 2.2.x
+  * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.3 . Please install this extension first if you use installation via FTP.
 
 ## Features
   * Unlimited blog posts, multi-level categories, and tags
