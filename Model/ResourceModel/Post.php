@@ -146,7 +146,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $oldIds = $this->lookupStoreIds($object->getId());
         $newIds = (array)$object->getStoreIds();
-        if (!$newIds) {
+        if (!$newIds || in_array(0, $newIds)) {
             $newIds = [0];
         }
 
