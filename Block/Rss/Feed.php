@@ -65,7 +65,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         $content = $post->getFilteredContent();
         /* Remove iframes */
-        $content = preg_replace('/<iframe.*?\/iframe>/i','', $content);
+        $content = preg_replace('/<iframe.*?\/iframe>/i', '', $content);
 
         /* Remove style tags */
         $content = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $content);

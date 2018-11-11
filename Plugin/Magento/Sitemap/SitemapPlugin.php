@@ -93,7 +93,6 @@ class SitemapPlugin
 
                 $blogSitemap->generateXml();
             }
-
         }
         return $result;
     }

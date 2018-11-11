@@ -41,11 +41,11 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $postsSortBy = $this->getCategory()->getData('posts_sort_by');
 
         switch ($postsSortBy) {
-            case PostsSortBy::POSITION :
+            case PostsSortBy::POSITION:
                 return self::POSTS_SORT_FIELD_BY_POSITION;
-            case PostsSortBy::TITLE :
+            case PostsSortBy::TITLE:
                 return self::POSTS_SORT_FIELD_BY_TITLE;
-            default :
+            default:
                 return parent::getCollectionOrderField();
         }
     }

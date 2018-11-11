@@ -78,11 +78,11 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         );
 
         switch ($postsSortBy) {
-            case PostsSortBy::POSITION :
+            case PostsSortBy::POSITION:
                 return self::POSTS_SORT_FIELD_BY_POSITION;
-            case PostsSortBy::TITLE :
+            case PostsSortBy::TITLE:
                 return self::POSTS_SORT_FIELD_BY_TITLE;
-            default :
+            default:
                 return parent::getCollectionOrderField();
         }
     }

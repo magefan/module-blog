@@ -30,15 +30,15 @@ class CategoryManagement extends AbstractManagement
     }
     
      /**
-     * Retrieve list of category by page type, term, store, etc
-     *
-     * @param  string $type
-     * @param  string $term
-     * @param  int $storeId
-     * @param  int $page
-     * @param  int $limit
-     * @return string
-     */
+      * Retrieve list of category by page type, term, store, etc
+      *
+      * @param  string $type
+      * @param  string $term
+      * @param  int $storeId
+      * @param  int $page
+      * @param  int $limit
+      * @return string
+      */
     public function getList($type, $term, $storeId, $page, $limit)
     {
         try {

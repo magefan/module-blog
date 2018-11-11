@@ -148,8 +148,6 @@ class Aw extends AbstractImport
                     $tag = $existingTags[$data['title']];
                     $oldTags[$data['old_id']] = $tag;
                 }
-
-
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedTags[] = $data['title'];
                 $this->_logger->addDebug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());

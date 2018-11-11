@@ -29,7 +29,6 @@ class Post extends \Magento\Backend\Block\Widget\Grid\Container
         if (!$this->_authorization->isAllowed("Magefan_Blog::post_save")) {
             $this->removeButton('add');
         }
-
     }
 
     /**

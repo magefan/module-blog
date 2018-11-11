@@ -54,8 +54,9 @@ class InstallData implements InstallDataInterface
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         try {
-            $this->state->setAreaCode('adminhtml');    
-        } catch (\Exception $e) {}
+            $this->state->setAreaCode('adminhtml');
+        } catch (\Exception $e) {
+        }
 
         $data = [
             'title' => 'Hello world!',

@@ -11,7 +11,7 @@ namespace Magefan\Blog\Block\Adminhtml\Tag;
 /**
  * Class CreateButton
  */
-class CreateButton extends  \Magefan\Community\Block\Adminhtml\Edit\SaveButton
+class CreateButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveButton
 {
     /**
      * @return array|string

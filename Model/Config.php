@@ -14,7 +14,7 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Magefan Blog Config Model
  */
-class Config 
+class Config
 {
     /**
      * Extension enabled config path
@@ -151,11 +151,11 @@ class Config
      * @param $pageType
      * @return bool
      */
-    public function getDisplayCanonicalTag($pageType) {
+    public function getDisplayCanonicalTag($pageType)
+    {
 
         $displayFor = explode(',', $this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
 
-        return in_array($pageType, $displayFor) ||  in_array(self::CANONICAL_PAGE_TYPE_ALL, $displayFor) ? true : false;
-
+        return in_array($pageType, $displayFor) || in_array(self::CANONICAL_PAGE_TYPE_ALL, $displayFor) ? true : false;
     }
 }

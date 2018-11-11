@@ -11,7 +11,7 @@ namespace Magefan\Blog\Block\Adminhtml\Tag;
 /**
  * Class SaveAndContinueButton
  */
-class SaveAndContinueButton  extends \Magefan\Community\Block\Adminhtml\Edit\SaveAndContinueButton
+class SaveAndContinueButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveAndContinueButton
 {
     /**
      * @return array|string

@@ -2,7 +2,6 @@
 
 namespace Magefan\Blog\Model\Config\Source;
 
-
 class BlogPages implements \Magento\Framework\Option\ArrayInterface
 {
     /**

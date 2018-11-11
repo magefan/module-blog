@@ -11,7 +11,7 @@ namespace Magefan\Blog\Block\Adminhtml\Category;
 /**
  * Class SaveButton
  */
-class SaveButton extends  \Magefan\Community\Block\Adminhtml\Edit\SaveButton
+class SaveButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveButton
 {
     /**
      * @return array|string

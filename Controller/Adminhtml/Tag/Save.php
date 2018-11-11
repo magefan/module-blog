@@ -45,5 +45,4 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 
         return $data;
     }
-
 }

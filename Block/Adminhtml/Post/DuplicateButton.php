@@ -23,6 +23,4 @@ class DuplicateButton extends \Magefan\Community\Block\Adminhtml\Edit\DuplicateB
         }
         return parent::getButtonData();
     }
-
-
 }
