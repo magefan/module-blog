@@ -104,7 +104,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $oldStoreIds = $this->lookupStoreIds($object->getId());
         $newStoreIds = (array)$object->getStoreIds();
-        if (!$newStoreIds) {
+        if (!$newStoreIds || in_array(0, $newStoreIds)) {
             $newStoreIds = [0];
         }
 
