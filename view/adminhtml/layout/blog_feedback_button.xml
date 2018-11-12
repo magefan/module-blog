@@ -8,13 +8,10 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="formkey"/>
-    <update handle="blog_update_info"/>
-    <update handle="blog_category_grid_block"/>
-    <update handle="blog_feedback_button"/>
     <body>
-        <referenceContainer name="content">
-            <block class="Magefan\Blog\Block\Adminhtml\Category" name="blog.category.container"/>
+        <referenceContainer name="header.inner.left">
+            <block class="Magento\Backend\Block\Template" name="feedback.button" as="feedback" before="user"
+                   template="Magefan_Blog::feedback_button.phtml"/>
         </referenceContainer>
     </body>
 </page>

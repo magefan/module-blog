@@ -11,6 +11,7 @@
     <update handle="styles"/>
     <update handle="editor"/>
     <update handle="blog_update_info"/>
+    <update handle="blog_feedback_button"/>
     <body>
         <referenceContainer name="content">
             <uiComponent name="blog_comment_form"/>

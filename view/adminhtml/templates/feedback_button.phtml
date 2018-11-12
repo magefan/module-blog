@@ -1,0 +1,52 @@
+<?php
+?>
+<a id="btn-review" class="feedback-button"  href="https://magefan.com/review/product/list/id/1797/">
+    <img id="btn-suggest" class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/question.svg')) ?>" />
+    Leave a review about blog module
+</a>
+
+
+<a id="btn-suggest" class="feedback-button" href="https://magefan.com/contact">
+    <img id="btn-review" class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/feedback.svg')) ?>" />
+    Suggest a new blog feature
+</a>
+
+
+
+<style>
+
+    #btn-review {
+        height: 25px;
+        width: 25px;
+
+    }
+
+    #btn-suggest {
+
+        height: 25px;
+        width: 25px;
+    }
+    #btn-review:hover {
+
+    }
+    #btn-suggest:hover {
+
+    }
+
+</style>
+
+<script>
+
+    require(['jquery', 'jquery/ui'], function($){
+        $(document).ready( function() {
+            var randomTime = 2000;
+            for (var i = 0; i < 2; i++){
+                randomTime = Math.floor(Math.random() * 20) * 1000;
+                setTimeout(function () {
+                    $('.feedback-button').animate({ opacity: "0.2" }, 300).animate({ opacity: "1" }, 1000);
+                }, randomTime);
+            }
+        });
+    });
+
+</script>

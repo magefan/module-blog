@@ -11,6 +11,7 @@
     <update handle="formkey"/>
     <update handle="blog_update_info"/>
     <update handle="blog_comment_grid_block"/>
+    <update handle="blog_feedback_button"/>
     <body>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Adminhtml\Comment" name="blog.comment.container"/>
