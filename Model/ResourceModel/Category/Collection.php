@@ -196,6 +196,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ['store_table' => $this->getTable('magefan_blog_category_store')],
                 'main_table.category_id = store_table.category_id',
                 []
+            )->group(
+                'main_table.category_id'
             );
         }
         parent::_renderFiltersBefore();

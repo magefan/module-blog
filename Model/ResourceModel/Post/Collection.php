@@ -400,6 +400,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],
                     'main_table.post_id = '.$key.'_table.post_id',
                     []
+                )->group(
+                    'main_table.post_id'
                 );
             }
         }
