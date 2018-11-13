@@ -124,10 +124,12 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             'imported_categories_count' => $this->_importedCategoriesCount,
             'skipped_posts'             => $this->_skippedPosts,
             'skipped_categories'        => $this->_skippedCategories,
-            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount + $this->_importedTagsCount,
-            'skipped_count'             => count($this->_skippedPosts) + count($this->_skippedCategories) + count($this->_skippedTags),
+            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount + $this->_importedTagsCount + $this->_importedCommentsCount,
+            'skipped_count'             => count($this->_skippedPosts) + count($this->_skippedCategories) + count($this->_skippedTags) + count($this->_skippedComments),
             'imported_tags_count'       => $this->_importedTagsCount,
+            'imported_comments_count'    => $this->_importedCommentsCount,
             'skipped_tags'              => $this->_skippedTags,
+            'skipped_comments'           => $this->_skippedComments,
         ]);
     }
 

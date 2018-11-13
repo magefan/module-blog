@@ -46,23 +46,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>'">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
-                            <br/>
-                            <span class="lable">Import from Mageplaza "Better Blog" <br/><br/></span>
-                        </div>
-                    </td>
-                <tr>
-            </table>
-        </td>
-        <td class="item">
-            <table>
-                <tr>
-                    <td>
                         <div class="itm-hld" onclick="goToMgImport();">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
+                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/mageplaza.png')) ?>" />
                             <br/>
-                            <span class="lable">Import from Mageplaza "Better Blog"</br> Blog Extension</span>
+                            <span class="lable">Import from Mageplaza<br/><br/></span>
                             <form id="start_mg_import" action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>" method="post">
                                 <input type="hidden" name="type" value="mageplaza" />
                                 <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
@@ -158,7 +145,7 @@
 <script type="text/javascript">
     function goToMgImport()
     {
-        if (confirm('Are you sure you want to start import from aheadWorks blog? Attention! Do not run this import again.')) {
+        if (confirm('Are you sure you want to start import from Mageplaza Blog? Attention! Do not run this import again.')) {
             document.getElementById('start_mg_import').submit();
         }
     }

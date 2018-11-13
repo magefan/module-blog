@@ -14,6 +14,7 @@ use Magento\Framework\Config\ConfigOptionsListConstants;
  */
 class Mageplaza extends AbstractImport
 {
+
     public function execute()
     {
         $config = \Magento\Framework\App\ObjectManager::getInstance()
@@ -60,7 +61,6 @@ class Mageplaza extends AbstractImport
         );
 
 
-        /////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -71,7 +71,7 @@ class Mageplaza extends AbstractImport
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
-        $storeIds = array_keys($this->_storeManager->getStores(true));
+
         $categories = [];
         $oldCategories = [];
         /* Import categories */
@@ -85,36 +85,15 @@ class Mageplaza extends AbstractImport
                     t.description as content,
                     t.parent_id as path,
                     t.enabled as is_active,
-                    t.store_ids as store_ids_old
+                    t.store_ids as store_ids
 
 
                 FROM '.$_pref.'mageplaza_blog_category t';
         $result = $this->_mysqliQuery($sql);
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare category data */
-            /* Find store ids */
 
-//            $s_sql = 'SELECT post_id FROM '.$_pref.'mageplaza_blog_post_category WHERE category_id = "'.$data['old_id'].'"';
-//            $s_result = $this->_mysqliQuery($s_sql);
-//            while ($s_data = mysqli_fetch_assoc($s_result)) {
-//                 $data['post_id'][] = $s_data['post_id'];
-//            }
-
-
-            $data['store_ids'] = [];
-
-
-            foreach ($data as $key => $value) {
-                if ($key == $data['store_ids_old']) {
-                    $storeData = explode(',', $value);
-                    foreach ($storeData as  $valueStore) {
-                        $data['store_ids'][] = $valueStore;
-                    }
-                }
-            }
-
-            unset($data['store_ids_old']);
-
+            $data['store_ids'] = explode(',', $data['store_ids']);
             $data['identifier'] = trim(strtolower($data['identifier']));
             if (strlen($data['identifier']) == 1) {
                 $data['identifier'] .= $data['identifier'];
@@ -132,46 +111,165 @@ class Mageplaza extends AbstractImport
                 $this->_logger->addDebug('Blog Category Import [' . $data['title'] . ']: '. $e->getMessage());
             }
         }
+
+        /* Import tags */
+        $tags = [];
+        $oldTags = [];
+        $existingTags = [];
+
+        $sql = 'SELECT
+                    t.tag_id as old_id,
+                    t.name as title,
+                    t.url_key as identifier, 
+                    t.description as content, 
+                    t.enabled as is_active
+                FROM '.$_pref.'mageplaza_blog_tag t';
+
+        $result = $this->_mysqliQuery($sql);
+        while ($data = mysqli_fetch_assoc($result)) {
+            /* Prepare tag data */
+            foreach (['title'] as $key) {
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
+            }
+
+            if (!$data['title']) {
+                continue;
+            }
+
+            $data['title'] = trim($data['title']);
+
+
+            try {
+                /* Initial saving */
+                if (!isset($existingTags[$data['title']])) {
+                    $tag = $this->_tagFactory->create();
+                    $tag->setData($data)->save();
+                    $this->_importedTagsCount++;
+                    $tags[$tag->getId()] = $tag;
+                    $oldTags[$tag->getOldId()] = $tag;
+                    $existingTags[$tag->getTitle()] = $tag;
+                } else {
+                    $tag = $existingTags[$data['title']];
+                    $oldTags[$data['old_id']] = $tag;
+                }
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->_skippedTags[] = $data['title'];
+                $this->_logger->addDebug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());
+            }
+        }
+
+
+
+
         /* Import posts */
+        $postCategories = [];
+        $data['store_ids'] = [];
         $sql = 'SELECT * FROM '.$_pref.'mageplaza_blog_post';
         $result = $this->_mysqliQuery($sql);
         while ($data = mysqli_fetch_assoc($result)) {
-
-
-
-            $c_sql = 'SELECT  category_id FROM '.$_pref.'mageplaza_blog_post_category WHERE post_id = "'.$data['post_id'].'"';
+            /* Find post categories*/
+            $c_sql = 'SELECT category_id FROM '.$_pref.'mageplaza_blog_post_category WHERE post_id = "'.$data['post_id'].'"';
 
             $c_result = $this->_mysqliQuery($c_sql);
+
             while ($c_data = mysqli_fetch_assoc($c_result)) {
+
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
+
                     $id = $oldCategories[$oldId]->getId();
                     $postCategories[$id] = $id;
                 }
             }
 
 
+            /* find post tags*/
+            $postTags = [];
+            $t_sql = 'SELECT tag_id FROM '.$_pref.'mageplaza_blog_post_tag WHERE post_id = "'.$data['post_id'].'"';
 
+            $t_result = $this->_mysqliQuery($t_sql);
+
+            while ($t_data = mysqli_fetch_assoc($t_result)) {
+
+                $oldId = $t_data['tag_id'];
+                if (isset($oldTags[$oldId])) {
+
+                    $id = $oldTags[$oldId]->getId();
+                    $postTags[$id] = $id;
+                }
+            }
+
+
+
+            $data['store_ids'] = explode(',', $data['store_ids']);
+
+            /* Prepare post data */
             $data = [
-              //  'store_ids'         => $data['store_ids'],
+                'old_id'            => $data['post_id'],
+                'store_ids'         => $data['store_ids'],
                 'title'             => $data['name'],
                 'meta_keywords'     => $data['meta_keywords'],
                 'meta_description'  => $data['meta_description'],
-                'identifier'        => $data['post_content'],
-                'content'           => str_replace('<!--more-->', '<!-- pagebreak -->', $data['post_content']),
+                'identifier'        => $data['url_key'],
+                'content_heading'   => $data['name'],
+                'content'           => $data['post_content'],
+                'short_content'     => $data['short_description'],
                 'creation_time'     => strtotime($data['created_at']),
                 'update_time'       => strtotime($data['updated_at']),
                 'publish_time'      => strtotime($data['publish_date']),
-                'is_active'         => (int)($data['enabled']),
-                'featured_img'      => $data['image'],
-                'media_gallery'     => $data['image'],
-                'categories' => $postCategories
+                'is_active'         => $data['enabled'],
+                'categories'        => $postCategories,
+                'featured_img'      => !empty($data['image']) ? 'magefan_blog/' . $data['image'] : '',
+                'media_gallery'     => !empty($data['image']) ? 'magefan_blog/' . $data['image'] : '',
+                'tags' => $postTags
+
             ];
-            $data['identifier'] = trim(strtolower($data['identifier']));
+
+
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
                 $post->setData($data)->save();
+
+
+                /* find post comment s*/
+                $sql = 'SELECT * FROM '.$_pref.'mageplaza_blog_comment WHERE `post_id` = ' . $post->getOldId();
+                $resultComments = $this->_mysqliQuery($sql);
+
+                while ($comments = mysqli_fetch_assoc($resultComments)) {
+
+
+                    $commentData = [
+                        'parent_id' => 0,
+                        'post_id' => $post->getPostId(),
+                        'status' => ($comments['status'] == 3) ? \Magefan\Blog\Model\Config\Source\CommentStatus::PENDING : $comments['status'],
+                        'author_type' => \Magefan\Blog\Model\Config\Source\AuthorType::GUEST,
+                        'author_nickname' => $comments['user_name'],
+                        'author_email' => $comments['user_email'],
+                        'text' => $comments['content'],
+                        'creation_time' => $comments['created_at'],
+                    ];
+
+                    foreach (['text'] as $key) {
+                        $commentData[$key] = mb_convert_encoding($commentData[$key], 'HTML-ENTITIES', 'UTF-8');
+                    }
+
+                    if (!$commentData['text']) {
+                        continue;
+                    }
+
+                    $comment = $this->_commentFactory->create($commentData);
+
+                    try {
+                        /* saving */
+                        $comment->setData($commentData)->save();
+                        $this->_importedCommentsCount++;
+                    } catch (\Exception $e) {
+                        $this->_skippedComments[] = $data['title'];
+                        unset($comment);
+                    }
+                }
+
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
