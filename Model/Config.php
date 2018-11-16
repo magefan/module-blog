@@ -83,6 +83,13 @@ class Config
     const XML_RELATED_PRODUCTS_NUMBER = 'mfblog/post_view/related_products/number_of_products';
 
 
+    const XML_TAG_ROBOTS = 'mfblog/tag/robots';
+    const XML_SEARCH_ROBOTS = 'mfblog/search/robots';
+    const XML_AUTHOR_ROBOTS = 'mfblog/author/robots';
+
+
+
+
     /**
      * Config constructor.
      * @param ScopeConfigInterface $scopeConfig
@@ -92,6 +99,33 @@ class Config
     ) {
         $this->scopeConfig = $scopeConfig;
     }
+
+
+
+    public function getAuthorRobots($storeId = null)
+    {
+        return $this->getConfig(
+                self::XML_AUTHOR_ROBOTS,
+                $storeId
+            );
+    }
+
+    public function getTagRobots($storeId = null)
+    {
+        return $this->getConfig(
+                self::XML_TAG_ROBOTS,
+                $storeId
+            );
+    }
+
+    public function getSearchRobots($storeId = null)
+    {
+        return $this->getConfig(
+                self::XML_SEARCH_ROBOTS,
+                $storeId
+            );
+    }
+
 
     /**
      * Retrieve true if blog module is enabled

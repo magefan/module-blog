@@ -607,6 +607,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
 
+
             $connection->addColumn(
                 $setup->getTable($table),
                 'layout_update_xml',
@@ -693,6 +694,20 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     AdapterInterface::INDEX_TYPE_FULLTEXT
                 );
             }
+        }
+        if (version_compare($version, '2.8.4.1') < 0) {
+            $table = $setup->getTable('magefan_blog_tag');
+            $connection->addColumn(
+                $setup->getTable($table),
+                'meta_robots',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Degault Robots',
+                    'after' => 'title'
+                ]
+            );
         }
 
         $setup->endSetup();

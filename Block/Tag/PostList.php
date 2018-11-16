@@ -52,6 +52,21 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setKeywords($tag->getMetaKeywords());
             $this->pageConfig->setDescription($tag->getMetaDescription());
 
+
+            $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
+            if ($page < 2) {
+                $robots = $tag->getData('meta_robots');
+                if ($robots) {
+                    $this->pageConfig->setRobots($robots);
+                } else {
+                    $robots = $this->_scopeConfig->getValue(
+                        'mfblog/tag/robots',
+                        ScopeInterface::SCOPE_STORE);
+                    $this->pageConfig->setRobots($robots);
+                }
+            }
+
+
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {
                 $this->pageConfig->addRemotePageAsset(
                     $tag->getTagUrl(),

@@ -57,7 +57,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     ['attributes' => ['rel' => 'canonical']]
                 );
             }
-            $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+            $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
+            if ($page < 2) {
+                $robots = $this->_scopeConfig->getValue(
+                    'mfblog/author/robots',
+                    ScopeInterface::SCOPE_STORE);
+                $this->pageConfig->setRobots($robots);
+            }
         }
 
         return parent::_prepareLayout();

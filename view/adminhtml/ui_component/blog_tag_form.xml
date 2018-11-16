@@ -166,6 +166,18 @@
                 </item>
             </argument>
         </field>
+        <field name="tag_robots_edit">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\TagRobots</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Meta Robots</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="dataScope" xsi:type="string">meta_robots</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="design">
         <argument name="data" xsi:type="array">
@@ -239,7 +251,6 @@
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">tag</item>
                     <item name="dataScope" xsi:type="string">custom_theme</item>
-                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
                 </item>
             </argument>
         </field>
