@@ -85,8 +85,9 @@ Try out our open demo and if you like our extension **please give us some star o
 
 
 ## Add-ons
-  * [Blog Media Gallery for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-m22)
+  * [Blog Graph Gl for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
+  * [Blog Media Gallery for Magneto 2.2.x by Magefan DEPRECATED](https://github.com/magefan/module-blog-m22)
 
 
 ## Online Documentation
