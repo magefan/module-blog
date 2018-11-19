@@ -224,13 +224,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->addExpressionFieldToSelect(
             'search_rate',
             '(0
-              + (MATCH (content) AGAINST ("{{content}}")) * 1
-              + (MATCH (short_content) AGAINST ("{{short_content}}")) * 2
-              + (MATCH (title) AGAINST ("{{title}}")) * 5)',
+              + (MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}")) * 1)',
             [
-                'content' => $term,
-                'short_content' => $term,
-                'title' => $term
+                'term' => $term,
             ]
         );
 

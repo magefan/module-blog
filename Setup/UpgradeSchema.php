@@ -679,8 +679,9 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        /* remove multi-fulltext, it does not supported in some DB
         if (version_compare($version, '2.8.3.1') < 0) {
-            /* Fix issue https://github.com/magefan/module-blog/issues/205 */
+            // Fix issue https://github.com/magefan/module-blog/issues/205
             $table = $setup->getTable('magefan_blog_post');
             foreach (['title', 'content', 'short_content'] as $field) {
                 $connection->addIndex(
@@ -695,6 +696,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 );
             }
         }
+        */
+
         if (version_compare($version, '2.8.4.1') < 0) {
             $table = $setup->getTable('magefan_blog_tag');
             $connection->addColumn(
