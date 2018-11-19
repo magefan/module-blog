@@ -10,8 +10,15 @@ namespace Magefan\Blog\Model\Config\Source;
 
 use Magento\Config\Model\Config\Source\Design\Robots;
 
+/**
+ * Class TagRobots
+ * @package Magefan\Blog\Model\Config\Source
+ */
 class TagRobots extends Robots
 {
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         $options = parent::toOptionArray();

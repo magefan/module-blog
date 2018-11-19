@@ -87,9 +87,6 @@ class Config
     const XML_SEARCH_ROBOTS = 'mfblog/search/robots';
     const XML_AUTHOR_ROBOTS = 'mfblog/author/robots';
 
-
-
-
     /**
      * Config constructor.
      * @param ScopeConfigInterface $scopeConfig
@@ -100,8 +97,11 @@ class Config
         $this->scopeConfig = $scopeConfig;
     }
 
-
-
+    /**
+     * Retrieve author page robots
+     *
+     * @return string
+     */
     public function getAuthorRobots($storeId = null)
     {
         return $this->getConfig(
@@ -110,6 +110,11 @@ class Config
             );
     }
 
+    /**
+     * Retrieve tag page robots
+     *
+     * @return string
+     */
     public function getTagRobots($storeId = null)
     {
         return $this->getConfig(
@@ -118,6 +123,11 @@ class Config
             );
     }
 
+    /**
+     * Retrieve search page robots
+     *
+     * @return string
+     */
     public function getSearchRobots($storeId = null)
     {
         return $this->getConfig(
@@ -125,7 +135,6 @@ class Config
                 $storeId
             );
     }
-
 
     /**
      * Retrieve true if blog module is enabled

@@ -251,6 +251,7 @@
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">tag</item>
                     <item name="dataScope" xsi:type="string">custom_theme</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
                 </item>
             </argument>
         </field>
