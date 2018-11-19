@@ -59,11 +59,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 if ($robots) {
                     $this->pageConfig->setRobots($robots);
                 } else {
-                    $robots = $this->_scopeConfig->getValue(
-                        'mfblog/tag/robots',
-                        ScopeInterface::SCOPE_STORE);
+                    $robots = $this->config->getTagRobots();
                     $this->pageConfig->setRobots($robots);
                 }
+
             }
 
 

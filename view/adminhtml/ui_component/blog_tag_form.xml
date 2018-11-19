@@ -166,7 +166,7 @@
                 </item>
             </argument>
         </field>
-        <field name="tag_robots_edit">
+        <field name="meta_robots">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\TagRobots</item>
                 <item name="config" xsi:type="array">

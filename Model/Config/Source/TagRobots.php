@@ -14,7 +14,7 @@ class TagRobots extends Robots
 {
     public function toOptionArray()
     {
-        $options = paremt::toOptionArray();
+        $options = parent::toOptionArray();
         array_unshift($options,  ['value' => '', 'label' => 'Use config settings']);
         return $options;
     }
