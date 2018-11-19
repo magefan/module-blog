@@ -188,6 +188,10 @@
                 </field>
             </group>
 
+
+
+
+
             <group id="author" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Author</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -202,7 +206,34 @@
                     </depends>
                     <comment>If set to "Yes". author page with post list will be available.</comment>
                 </field>
+                <field id="robots" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" default="0">
+                    <label>Default Robots</label>
+                    <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
+                    <comment>This will be included before head closing tag in page HTML.</comment>
+                </field>
+
             </group>
+            <group id="tag" translate="label" type="text" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Tag</label>
+                <field id="robots" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"  default="0">
+                    <label>Default Robots</label>
+                    <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
+                    <comment>This will be included before head closing tag in page HTML.</comment>
+                </field>
+            </group>
+            <group id="search" translate="label" type="text" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Search</label>
+                <field id="robots" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1"  default="0">
+                    <label>Default Robots</label>
+                    <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
+                    <comment>This will be included before head closing tag in page HTML.</comment>
+                </field>
+            </group>
+
+
+
+
+
 
             <group id="sidebar" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Sidebar</label>

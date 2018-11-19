@@ -61,7 +61,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $title = $this->_getTitle();
         $this->_addBreadcrumbs($title, 'blog_search');
         $this->pageConfig->getTitle()->set($title);
-        $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+
+        $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
+        if ($page < 2) {
+            $robots = $this->config->getSearchRobots();
+            $this->pageConfig->setRobots($robots);
+        }
 
         return parent::_prepareLayout();
     }
