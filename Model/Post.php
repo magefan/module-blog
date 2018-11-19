@@ -474,6 +474,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
 
             if ($len) {
+                while ($content[$len] != ' ' && $len <= strlen($content))  {
+                    $len++;
+                }
                 $content = mb_substr($content, 0, $len);
                 try {
                     $previousLoaderState = libxml_disable_entity_loader(true);
