@@ -27,13 +27,6 @@
                         <item name="componentType" xsi:type="string">fieldset</item>
                     </argument>
                 </arguments>
-                <block class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content" as="content">
-                    <arguments>
-                        <argument name="config" xsi:type="array">
-                            <item name="parentComponent" xsi:type="string">blog_post_form.blog_post_form.block_gallery.block_gallery</item>
-                        </argument>
-                    </arguments>
-                </block>
             </block>
         </referenceContainer>
     </body>
