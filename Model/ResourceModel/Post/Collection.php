@@ -224,7 +224,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->addExpressionFieldToSelect(
             'search_rate',
             '(0
-              + (MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}")) * 1)',
+              + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
             [
                 'term' => $term,
             ]
