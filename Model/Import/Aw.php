@@ -161,6 +161,7 @@ class Aw extends AbstractImport
 
         while ($data = mysqli_fetch_assoc($result)) {
             /* Find post categories*/
+            $postCategories = [];
             $c_sql = 'SELECT cat_id as category_id FROM '.$_pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
             $c_result = $this->_mysqliQuery($c_sql);
             while ($c_data = mysqli_fetch_assoc($c_result)) {
