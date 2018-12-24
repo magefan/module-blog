@@ -15,26 +15,5 @@
         <referenceContainer name="content">
             <uiComponent name="blog_post_form"/>
         </referenceContainer>
-        <referenceContainer name="blog_post_form">
-            <block name="gallery" class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery">
-                <arguments>
-                    <argument name="config" xsi:type="array">
-                        <item name="label" xsi:type="string" translate="true">Media Gallery</item>
-                        <item name="collapsible" xsi:type="boolean">true</item>
-                        <item name="opened" xsi:type="boolean">false</item>
-                        <item name="sortOrder" xsi:type="string">22</item>
-                        <item name="canShow" xsi:type="boolean">true</item>
-                        <item name="componentType" xsi:type="string">fieldset</item>
-                    </argument>
-                </arguments>
-                <block class="Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content" as="content">
-                    <arguments>
-                        <argument name="config" xsi:type="array">
-                            <item name="parentComponent" xsi:type="string">blog_post_form.blog_post_form.block_gallery.block_gallery</item>
-                        </argument>
-                    </arguments>
-                </block>
-            </block>
-        </referenceContainer>
     </body>
 </page>
