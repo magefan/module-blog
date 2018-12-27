@@ -3,7 +3,7 @@
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
 
-This Magento 2 Blog module allows you to create a full-fledged blog on your [Magento 2](http://magento.com/) Store.
+This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows you to create a full-fledged blog on your [Magento 2](http://magento.com/) Store.
 
 ## Requirements
   * Magento Community Edition 2.2.x-2.3.x or Magento Enterprise Edition 2.2.x-2.3.x
