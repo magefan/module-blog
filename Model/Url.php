@@ -169,7 +169,7 @@ class Url
         if (is_array($storeIds)) {
             if (0 == array_values($storeIds)[0]) {
                 $useDefaultStore = true;
-            } elseif (count($storeIds > 1)) {
+            } elseif (count($storeIds) > 1) {
                 foreach ($storeIds as $storeId) {
                     if ($storeId != $currentStore->getId()) {
                         $store = $this->_storeManager->getStore($storeId);
