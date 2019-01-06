@@ -247,7 +247,9 @@ class Aw extends AbstractImport
                     try {
                         /* saving */
                         $comment->setData($commentData)->save();
+                        $this->_importedCommentsCount++;
                     } catch (\Exception $e) {
+                        $this->_skippedComments[] = $commentData['title'];
                         unset($comment);
                     }
                 }

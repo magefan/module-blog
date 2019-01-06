@@ -9,8 +9,9 @@
 namespace Magefan\Blog\Model\Import;
 
 use Magento\Framework\Config\ConfigOptionsListConstants;
+
 /**
- * Aw import model
+ * Mageplaza import model
  */
 class Mageplaza extends AbstractImport
 {
@@ -51,6 +52,7 @@ class Mageplaza extends AbstractImport
                 $this->getData('dbname')
             );
         }
+
         if (mysqli_connect_errno()) {
             throw new \Exception("Failed connect to magento database", 1);
         }
@@ -60,12 +62,7 @@ class Mageplaza extends AbstractImport
             $config->get('db/table_prefix')
         );
 
-
-
-
-
-        $sql = 'SELECT * FROM '.$_pref.'mageplaza_blog_category LIMIT 1';
-
+        $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_category LIMIT 1';
         try {
             $this->_mysqliQuery($sql);
         } catch (\Exception $e) {
@@ -74,30 +71,34 @@ class Mageplaza extends AbstractImport
 
         $categories = [];
         $oldCategories = [];
+
         /* Import categories */
         $sql = 'SELECT
                     t.category_id as old_id,
                     t.name as title,
                     t.url_key as identifier,
                     t.position as position,
+                    t.meta_title as meta_title,
                     t.meta_keywords as meta_keywords,
                     t.meta_description as meta_description,
                     t.description as content,
-                    t.parent_id as path,
+                    t.parent_id as parent_id,
+                    t.position as position,
                     t.enabled as is_active,
                     t.store_ids as store_ids
-
-
-                FROM '.$_pref.'mageplaza_blog_category t';
+                FROM ' . $_pref . 'mageplaza_blog_category t';
         $result = $this->_mysqliQuery($sql);
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare category data */
 
             $data['store_ids'] = explode(',', $data['store_ids']);
+            $data['path'] = 0;
+            /*
             $data['identifier'] = trim(strtolower($data['identifier']));
             if (strlen($data['identifier']) == 1) {
                 $data['identifier'] .= $data['identifier'];
             }
+            */
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
@@ -112,6 +113,41 @@ class Mageplaza extends AbstractImport
             }
         }
 
+        /* Reindexing parent categories */
+        foreach ($categories as $ct) {
+            if ($oldParentId = $ct->getData('parent_id')) {
+                if (isset($oldCategories[$oldParentId])) {
+                    $ct->setPath(
+                        $parentId = $oldCategories[$oldParentId]->getId()
+                    );
+                }
+            }
+        }
+
+        for ($i = 0; $i < 4; $i++) {
+            $changed = false;
+            foreach ($categories as $ct) {
+                if ($ct->getPath()) {
+                    $parentId = explode('/', $ct->getPath())[0];
+                    $pt = $categories[$parentId];
+                    if ($pt->getPath()) {
+                        $ct->setPath($pt->getPath() . '/'. $ct->getPath());
+                        $changed = true;
+                    }
+                }
+            }
+
+            if (!$changed) {
+                break;
+            }
+        }
+        /* end*/
+
+        foreach ($categories as $ct) {
+            /* Final saving */
+            $ct->save();
+        }
+
         /* Import tags */
         $tags = [];
         $oldTags = [];
@@ -121,16 +157,21 @@ class Mageplaza extends AbstractImport
                     t.tag_id as old_id,
                     t.name as title,
                     t.url_key as identifier, 
-                    t.description as content, 
+                    t.description as content,
+                    t.meta_title as meta_title,
+                    t.meta_description as meta_description,  
+                    t.meta_keywords as meta_keywords,    
                     t.enabled as is_active
-                FROM '.$_pref.'mageplaza_blog_tag t';
+                FROM ' . $_pref . 'mageplaza_blog_tag t';
 
         $result = $this->_mysqliQuery($sql);
         while ($data = mysqli_fetch_assoc($result)) {
             /* Prepare tag data */
+            /*
             foreach (['title'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
+            */
 
             if (!$data['title']) {
                 continue;
@@ -159,33 +200,25 @@ class Mageplaza extends AbstractImport
         }
 
 
-
-
         /* Import posts */
-        $postCategories = [];
-        $data['store_ids'] = [];
-        $sql = 'SELECT * FROM '.$_pref.'mageplaza_blog_post';
+        $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_post';
         $result = $this->_mysqliQuery($sql);
         while ($data = mysqli_fetch_assoc($result)) {
             /* Find post categories*/
-            $c_sql = 'SELECT category_id FROM '.$_pref.'mageplaza_blog_post_category WHERE post_id = "'.$data['post_id'].'"';
-
+            $postCategories = [];
+            $c_sql = 'SELECT category_id FROM ' . $_pref . 'mageplaza_blog_post_category WHERE post_id = "'.$data['post_id'].'"';
             $c_result = $this->_mysqliQuery($c_sql);
-
             while ($c_data = mysqli_fetch_assoc($c_result)) {
-
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
-
                     $id = $oldCategories[$oldId]->getId();
                     $postCategories[$id] = $id;
                 }
             }
 
-
-            /* find post tags*/
+            /* Find post tags*/
             $postTags = [];
-            $t_sql = 'SELECT tag_id FROM '.$_pref.'mageplaza_blog_post_tag WHERE post_id = "'.$data['post_id'].'"';
+            $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mageplaza_blog_post_tag WHERE post_id = "'.$data['post_id'].'"';
 
             $t_result = $this->_mysqliQuery($t_sql);
 
@@ -199,19 +232,20 @@ class Mageplaza extends AbstractImport
                 }
             }
 
-
-
+            /* Find store ids */
             $data['store_ids'] = explode(',', $data['store_ids']);
+
 
             /* Prepare post data */
             $data = [
                 'old_id'            => $data['post_id'],
                 'store_ids'         => $data['store_ids'],
                 'title'             => $data['name'],
+                'meta_title'        => $data['meta_title'],
                 'meta_keywords'     => $data['meta_keywords'],
                 'meta_description'  => $data['meta_description'],
                 'identifier'        => $data['url_key'],
-                'content_heading'   => $data['name'],
+                'content_heading'   => '',
                 'content'           => $data['post_content'],
                 'short_content'     => $data['short_description'],
                 'creation_time'     => strtotime($data['created_at']),
@@ -219,10 +253,9 @@ class Mageplaza extends AbstractImport
                 'publish_time'      => strtotime($data['publish_date']),
                 'is_active'         => $data['enabled'],
                 'categories'        => $postCategories,
+                'tags'              => $postTags,
                 'featured_img'      => !empty($data['image']) ? 'magefan_blog/' . $data['image'] : '',
-                'media_gallery'     => !empty($data['image']) ? 'magefan_blog/' . $data['image'] : '',
-                'tags' => $postTags
-
+                'author_id'         => '',
             ];
 
 
@@ -233,7 +266,7 @@ class Mageplaza extends AbstractImport
 
 
                 /* find post comment s*/
-                $sql = 'SELECT * FROM '.$_pref.'mageplaza_blog_comment WHERE `post_id` = ' . $post->getOldId();
+                $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_comment WHERE `post_id` = ' . $post->getOldId();
                 $resultComments = $this->_mysqliQuery($sql);
 
                 while ($comments = mysqli_fetch_assoc($resultComments)) {
@@ -249,10 +282,11 @@ class Mageplaza extends AbstractImport
                         'text' => $comments['content'],
                         'creation_time' => $comments['created_at'],
                     ];
-
+                    /*
                     foreach (['text'] as $key) {
                         $commentData[$key] = mb_convert_encoding($commentData[$key], 'HTML-ENTITIES', 'UTF-8');
                     }
+                    */
 
                     if (!$commentData['text']) {
                         continue;
@@ -265,7 +299,7 @@ class Mageplaza extends AbstractImport
                         $comment->setData($commentData)->save();
                         $this->_importedCommentsCount++;
                     } catch (\Exception $e) {
-                        $this->_skippedComments[] = $data['title'];
+                        $this->_skippedComments[] = $commentData['title'];
                         unset($comment);
                     }
                 }

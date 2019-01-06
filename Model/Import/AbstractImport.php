@@ -59,6 +59,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_importedTagsCount = 0;
 
     /**
+     * @var integer
+     */
+    protected $_importedCommentsCount = 0;
+
+    /**
      * @var array
      */
     protected $_skippedPosts = [];
@@ -72,6 +77,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @var array
      */
     protected $_skippedTags = [];
+
+    /**
+     * @var array
+     */
+    protected $_skippedComments = [];
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -122,14 +132,15 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         return new \Magento\Framework\DataObject([
             'imported_posts_count'      => $this->_importedPostsCount,
             'imported_categories_count' => $this->_importedCategoriesCount,
+            'imported_tags_count'       => $this->_importedTagsCount,
+            'imported_comments_count'   => $this->_importedCommentsCount,
+            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount + $this->_importedTagsCount + $this->_importedCommentsCount,
+
             'skipped_posts'             => $this->_skippedPosts,
             'skipped_categories'        => $this->_skippedCategories,
-            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount + $this->_importedTagsCount + $this->_importedCommentsCount,
-            'skipped_count'             => count($this->_skippedPosts) + count($this->_skippedCategories) + count($this->_skippedTags) + count($this->_skippedComments),
-            'imported_tags_count'       => $this->_importedTagsCount,
-            'imported_comments_count'    => $this->_importedCommentsCount,
             'skipped_tags'              => $this->_skippedTags,
-            'skipped_comments'           => $this->_skippedComments,
+            'skipped_comments'          => $this->_skippedComments,
+            'skipped_count'             => count($this->_skippedPosts) + count($this->_skippedCategories) + count($this->_skippedTags) + count($this->_skippedComments),
         ]);
     }
 
@@ -137,6 +148,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * Prepare import data
      * @param  array $data
      * @return $this
+     * @throws \Exception
      */
     public function prepareData($data)
     {
@@ -149,12 +161,6 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
                 throw new \Exception(__('Parameter %1 is required', $field), 1);
             }
         }
-
-//        foreach ($data as $field => $value) {
-//            if (!in_array($field, $this->_requiredFields)) {
-//                unset($data[$field]);
-//            }
-//        }
 
         $this->setData($data);
 

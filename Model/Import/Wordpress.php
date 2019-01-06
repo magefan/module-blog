@@ -285,8 +285,10 @@ class Wordpress extends AbstractImport
                     try {
                         /* Initial saving */
                         $comment->setData($commentData)->save();
+                        $this->_importedCommentsCount++;
                         $commentParents[$comments["comment_ID"]] = $comment->getCommentId();
                     } catch (\Exception $e) {
+                        $this->_skippedComments[] = $commentData['title'];
                         unset($comment);
                     }
                 }
