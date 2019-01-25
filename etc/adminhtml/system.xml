@@ -374,6 +374,11 @@
                     <label>Blog Route</label>
                     <comment>E.g.: "blog" will make the blog accessible from mystore.com/blog/</comment>
                 </field>
+                <field id="redirect_to_no_slash" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto-redirect to No-Slash URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[I.e. redirect from <b>http://example.com/blog/</b> to <b>http://example.com/blog</b>]]></comment>
+                </field>
                 <field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Permalink Type</label>
                      <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>

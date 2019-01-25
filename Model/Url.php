@@ -137,7 +137,9 @@ class Url
      */
     public function getBaseUrl()
     {
-        return $this->_url->getUrl($this->getRoute());
+        $url = $this->_url->getUrl($this->getRoute());
+        $url = $this->trimSlash($url);
+        return $url;
     }
 
     /**
@@ -183,6 +185,7 @@ class Url
         }
 
         $storeChanged = false;
+
         if ($useDefaultStore) {
             $newStore = $currentStore->getGroup()->getDefaultStore();
             $origStore = $this->_url->getScope();
@@ -229,6 +232,7 @@ class Url
         }
 
         $path = $this->addUrlSufix($path, $controllerName);
+        $path = $this->trimSlash($path);
 
         return $path;
     }
@@ -289,6 +293,19 @@ class Url
             }
         }
 
+        return $url;
+    }
+
+    /**
+     * Remove slash from the end of URL
+     * @param $url
+     * @return string
+     */
+    protected function trimSlash($url)
+    {
+        if ($this->_getConfig('redirect_to_no_slash')) {
+            $url = trim($url, '/');
+        }
         return $url;
     }
 
