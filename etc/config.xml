@@ -94,6 +94,7 @@
             </product_page>
             <permalink>
                 <route>blog</route>
+                <redirect_to_no_slash>1</redirect_to_no_slash>
                 <type>default</type>
                 <post_route>post</post_route>
                 <category_route>category</category_route>

@@ -8,6 +8,9 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch_blog">
+        <observer name="magefan_blog_controller_action_predispatch" instance="Magefan\Blog\Observer\PredispathFrontendBlogActionControllerObserver" />
+    </event>
     <event name="page_block_html_topmenu_gethtml_before">
         <observer name="magefan_blog_topmenu_observer" instance="Magefan\Blog\Observer\PageBlockHtmlTopmenuBethtmlBeforeObserver" />
     </event>
