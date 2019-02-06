@@ -1,15 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: dev4
- * Date: 06.02.19
- * Time: 9:52
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
  */
 
 namespace Magefan\Blog\Model\Sitemap;
 
+use Magefan\Blog\Api\SitemapConfigInterface;
 
-class SitemapConfig implements SitepamManagent
+class SitemapConfig implements SitemapConfigInterface
 {
 
     /**
@@ -28,13 +29,13 @@ class SitemapConfig implements SitepamManagent
     public function getFrequency($page)
     {
         switch ($page) {
-            case 'index_page':
+            case 'index':
                 $frequency = 'Dailly';
                 break;
-            case 'categories_pages':
+            case 'category':
                 $frequency = 'Dailly';
                 break;
-            case 'posts_pages':
+            case 'post':
                 $frequency = 'Dailly';
                 break;
             default:
@@ -51,13 +52,13 @@ class SitemapConfig implements SitepamManagent
     {
 
         switch ($page) {
-            case 'index_page':
+            case 'index':
                 $priority = 1;
                 break;
-            case 'categories_pages':
+            case 'category':
                 $priority = 0.75;
                 break;
-            case 'posts_pages':
+            case 'post':
                 $priority = 0.5;
                 break;
             default:

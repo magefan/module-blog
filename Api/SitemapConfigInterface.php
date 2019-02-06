@@ -6,11 +6,13 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Model\Sitemap;
+namespace Magefan\Blog\Api;
 
-
-interface SitepamManagent
+interface SitemapConfigInterface
 {
+    const HOME_PAGE = 'index';
+    const CATEGORIES_PAGE = 'category';
+    const POSTS_PAGE = 'post';
     /**
      * @param $page
      * @return bool

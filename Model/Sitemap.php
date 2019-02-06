@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magento\Framework\App\ProductMetadataInterface;
-use Magefan\Blog\Model\Sitemap\SitepamManagent;
+use Magefan\Blog\Api\SitemapConfigInterface;
 
 /**
  * Deprecated
@@ -26,27 +26,28 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
     protected function _initSitemapItems()
     {
 
+
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
         $megento = $objectManager->create(ProductMetadataInterface::class);
-        $sitemapManagent = $objectManager->create(SitepamManagent::class);
+        $sitemapConfig = $objectManager->create(SitemapConfigInterface::class);
 
 
         parent::_initSitemapItems();
 
         $sitemapItems = [];
-        if ($sitemapManagent->isEnabledSitemap('index_page')) {
+        if ($sitemapConfig->isEnabledSitemap('index_page')) {
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
-                    'changefreq' => $sitemapManagent->getFrequency('index_page'),
-                    'priority' => $sitemapManagent->getPriority('index_page'),
+                    'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::HOME_PAGE),
+                    'priority' => $sitemapConfig->getPriority(SitemapConfigInterface::HOME_PAGE),
                     'collection' => \Magento\Framework\App\ObjectManager::getInstance()->create(
                         \Magento\Framework\Data\Collection::class
                     )->addItem(
                         \Magento\Framework\App\ObjectManager::getInstance()->create(
                             \Magento\Framework\DataObject::class
                         )->setData([
-                            'updatedAt' => '2019-20-16',
+                            'updated_at' => '',
                             'url' => '',
                         ])
                     )
@@ -54,11 +55,11 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
             );
         }
 
-        if ($sitemapManagent->isEnabledSitemap('categories_pages')) {
+        if ($sitemapConfig->isEnabledSitemap('categories_pages')) {
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
-                    'changefreq' => $sitemapManagent->getFrequency('categories_pages'),
-                    'priority' => $sitemapManagent->getPriority('categories_pages'),
+                    'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::CATEGORIES_PAGE),
+                    'priority' => $sitemapConfig->getPriority(SitemapConfigInterface::CATEGORIES_PAGE),
                     'collection' => \Magento\Framework\App\ObjectManager::getInstance()->create(
                         \Magefan\Blog\Model\Category::class
                     )->getCollection($this->getStoreId())
@@ -68,11 +69,11 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
             );
         }
 
-        if ($sitemapManagent->isEnabledSitemap('posts_pages')) {
+        if ($sitemapConfig->isEnabledSitemap('posts_pages')) {
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
-                    'changefreq' => $sitemapManagent->getFrequency('posts_pages'),
-                    'priority' => $sitemapManagent->getPriority('posts_pages'),
+                    'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE),
+                    'priority' => $sitemapConfig->getPriority(SitemapConfigInterface::POSTS_PAGE),
                     'collection' => \Magento\Framework\App\ObjectManager::getInstance()->create(
                         \Magefan\Blog\Model\Post::class
                     )->getCollection($this->getStoreId())
