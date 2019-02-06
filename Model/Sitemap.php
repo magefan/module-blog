@@ -12,6 +12,8 @@ use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostFactory;
 use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory as CategoryFactory;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
 use Magento\Sitemap\Model\SitemapConfigReaderInterface;
+use Magento\Framework\App\ProductMetadataInterface;
+use Magefan\Blog\Model\Sitemap\SitepamManagent;
 
 /**
  * Deprecated
@@ -43,13 +45,15 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
         \Magento\Sitemap\Model\SitemapItemInterfaceFactory $sitemapItemFactory = null,
         PostFactory $postCollectionFactory,
         CategoryFactory $categoryCollectionFactory,
-        \Magento\Framework\App\ProductMetadataInterface $megento
+        ProductMetadataInterface $megento,
+        SitepamManagent $sitemapManagent
     )
     {
         parent::__construct($context, $registry, $escaper, $sitemapData, $filesystem, $categoryFactory, $productFactory, $cmsFactory, $modelDate, $storeManager, $request, $dateTime, $resource, $resourceCollection, $data, $documentRoot, $itemProvider, $configReader, $sitemapItemFactory);
         $this->postCollectionFactory = $postCollectionFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->megento = $megento;
+        $this->sitemapManagent = $sitemapManagent;
 
     }
 
@@ -67,63 +71,74 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
 
         $magentoVersion = $this->megento->getVersion();
         if ($magentoVersion == '2.3.0') {
-            $this->_sitemapItems[] = new \Magento\Framework\DataObject(
-                [
-                    'url' =>  $magentoVersion,
-                    'changefreq' => 'dayily',
-                    'priority' => '1'
-                ]
-            );
-
-
-            $categories = $this->categoryCollectionFactory->create();
-            foreach ($categories as $category) {
+            if ($this->sitemapManagent->isEnabledSitemap('index_page')) {
                 $this->_sitemapItems[] = new \Magento\Framework\DataObject(
                     [
-                        'url' =>  $category->getUrl(),
-                        'changeFrequency' => 'weekly',
-                        'priority' => '0.25',
+                        'url' =>  '',
+                        'updatedAt' => '2019-20-16',
+                        'priority' =>  $this->sitemapManagent->getPriority('index_page'),
+                        'changeFrequency' => $this->sitemapManagent->getFrequency('index_page'),
                     ]
                 );
             }
 
-            $products = $this->postCollectionFactory->create();
-            foreach ($products as $product) {
-                $this->_sitemapItems[] = new \Magento\Framework\DataObject(
-                    [
-                        'url' => $product->getUrl(),
-                        'changeFrequency' => 'weekly',
-                        'priority' => '0.25',
-                    ]
-                );
+            if ($this->sitemapManagent->isEnabledSitemap('categories_pages')) {
+                $categories = $this->categoryCollectionFactory->create();
+                foreach ($categories as $category) {
+                    $this->_sitemapItems[] = new \Magento\Framework\DataObject(
+                        [
+                            'url' => $category->getUrl(),
+                            'updatedAt' => '2019-20-16',
+                            'priority' => $this->sitemapManagent->getPriority('categories_pages'),
+                            'changeFrequency' => $this->sitemapManagent->getFrequency('categories_pages'),
+
+                        ]
+                    );
+                }
+            }
+
+            if ($this->sitemapManagent->isEnabledSitemap('posts_pages')) {
+                $products = $this->postCollectionFactory->create();
+                foreach ($products as $product) {
+                    $this->_sitemapItems[] = new \Magento\Framework\DataObject(
+                        [
+                            'url' => $product->getUrl(),
+                            'updatedAt' => '2019-20-16',
+                            'priority' => $this->sitemapManagent->getPriority('posts_pages'),
+                            'changeFrequency' => 'dailly', //$this->sitemapManagent->getFrequency('posts_pages'),
+
+                        ]
+                    );
+                }
             }
         } else {
-            $this->_sitemapItems[] = new \Magento\Framework\DataObject(
-                [
-                    'changefreq' => 'weekly',
-                    'priority' => '0.25',
-                    'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
-                        \Magefan\Blog\Model\Category::class
-                    )->getCollection($this->getStoreId())
-                        ->addStoreFilter($this->getStoreId())
-                        ->addActiveFilter(),
-                ]
-            );
-
-            $this->_sitemapItems[] = new \Magento\Framework\DataObject(
-                [
-                    'changefreq' => 'weekly',
-                    'priority' => '0.25',
-                    'collection' =>  \Magento\Framework\App\ObjectManager::getInstance()->create(
-                        \Magefan\Blog\Model\Post::class
-                    )->getCollection($this->getStoreId())
-                        ->addStoreFilter($this->getStoreId())
-                        ->addActiveFilter(),
-                ]
-            );
+            if ($this->sitemapManagent->isEnabledSitemap('categories_pages')) {
+                $this->_sitemapItems[] = new \Magento\Framework\DataObject(
+                    [
+                        'changefreq' => $this->sitemapManagent->getFrequency('categories_pages'),
+                        'priority' => $this->sitemapManagent->getPriority('categories_pages'),
+                        'collection' => \Magento\Framework\App\ObjectManager::getInstance()->create(
+                            \Magefan\Blog\Model\Category::class
+                        )->getCollection($this->getStoreId())
+                            ->addStoreFilter($this->getStoreId())
+                            ->addActiveFilter(),
+                    ]
+                );
+            }
+            if ($this->sitemapManagent->isEnabledSitemap('posts_pages')) {
+                $this->_sitemapItems[] = new \Magento\Framework\DataObject(
+                    [
+                        'changefreq' => $this->sitemapManagent->getFrequency('posts_pages'),
+                        'priority' => $this->sitemapManagent->getPriority('posts_pages'),
+                        'collection' => \Magento\Framework\App\ObjectManager::getInstance()->create(
+                            \Magefan\Blog\Model\Post::class
+                        )->getCollection($this->getStoreId())
+                            ->addStoreFilter($this->getStoreId())
+                            ->addActiveFilter(),
+                    ]
+                );
+            }
         }
-
-
     }
 
     /**
