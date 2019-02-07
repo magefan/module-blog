@@ -52,17 +52,19 @@ class NoSlashUrlRedirect
     {
         $moduleEnabled = $this->scopeConfig->getValue(Config::XML_PATH_EXTENSION_ENABLED, ScopeInterface::SCOPE_STORE);
 
-        if ($moduleEnabled)
-        {
+        if ($moduleEnabled) {
             $currentUrl = $this->urlInterface->getCurrentUrl();
             $result = explode('?', $currentUrl);
             $result[0] = trim($result[0], '/');
             $urlNoSlash = implode($result, '?');
 
             if ($urlNoSlash != $currentUrl) {
-                $response = $observer->getEvent()->getData('controller_action')->getResponse();
+                $controller = $observer->getEvent()->getData('controller_action');
+                if ($controller->getRequest()->isXmlHttpRequest()) {
+                    return;
+                }
                 $this->actionFlag->set('', \Magento\Framework\App\ActionInterface::FLAG_NO_DISPATCH, true);
-                $response->setRedirect($urlNoSlash, 301)->sendResponse();
+                $controller->getResponse()->setRedirect($urlNoSlash, 301)->sendResponse();
             }
         }
     }
