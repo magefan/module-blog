@@ -36,7 +36,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
         parent::_initSitemapItems();
 
         $sitemapItems = [];
-        if ($sitemapConfig->isEnabledSitemap('index_page')) {
+        if ($sitemapConfig->isEnabledSitemap(SitemapConfigInterface::HOME_PAGE)) {
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
                     'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::HOME_PAGE),
@@ -55,7 +55,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
             );
         }
 
-        if ($sitemapConfig->isEnabledSitemap('categories_pages')) {
+        if ($sitemapConfig->isEnabledSitemap(SitemapConfigInterface::CATEGORIES_PAGE)) {
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
                     'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::CATEGORIES_PAGE),
@@ -69,7 +69,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
             );
         }
 
-        if ($sitemapConfig->isEnabledSitemap('posts_pages')) {
+        if ($sitemapConfig->isEnabledSitemap(SitemapConfigInterface::POSTS_PAGE)) {
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
                     'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE),
