@@ -75,7 +75,7 @@ class SitemapPlugin
     public function afterGenerateXml(\Magento\Framework\Model\AbstractModel $sitemap, $result)
     {
         if ($this->isEnabled($sitemap)) {
-            if ($this->isMageWorxXmlSitemap($sitemap) || !method_exists($sitemap, 'collectSitemapItems')) {
+            /* if ($this->isMageWorxXmlSitemap($sitemap) || !method_exists($sitemap, 'collectSitemapItems')) { */
                 $sitemapId = $sitemap->getId() ?: 0;
                 if (in_array($sitemapId, $this->generated)) {
                     return $result;
@@ -92,7 +92,7 @@ class SitemapPlugin
                 );
 
                 $blogSitemap->generateXml();
-            }
+            /*}*/
         }
         return $result;
     }
@@ -102,6 +102,7 @@ class SitemapPlugin
      * @param $result
      * @return mixed
      */
+    /* Deprecated
     public function afterCollectSitemapItems(\Magento\Framework\Model\AbstractModel $sitemap, $result)
     {
         if ($this->isEnabled($sitemap) && !$this->isMageWorxXmlSitemap($sitemap)) {
@@ -132,6 +133,7 @@ class SitemapPlugin
 
         return $result;
     }
+    */
 
     /**
      * @param $sitemap
