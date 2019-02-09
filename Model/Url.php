@@ -137,7 +137,7 @@ class Url
      */
     public function getBaseUrl()
     {
-        $url = $this->_url->getUrl($this->getRoute());
+        $url = $this->_url->getUrl($this->getBasePath());
         $url = $this->trimSlash($url);
         return $url;
     }
@@ -204,6 +204,14 @@ class Url
         return $url;
     }
 
+    /**
+     * Retrieve blog base path
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return $this->getRoute();
+    }
 
     /**
      * Retrieve blog url path

@@ -8,25 +8,30 @@
 
 namespace Magefan\Blog\Api;
 
+/**
+ * Interface SitemapConfigInterface
+ * @package Magefan\Blog\Api
+ */
 interface SitemapConfigInterface
 {
     const HOME_PAGE = 'index';
     const CATEGORIES_PAGE = 'category';
     const POSTS_PAGE = 'post';
+
     /**
-     * @param $page
+     * @param string $page
      * @return bool
      */
     public function isEnabledSitemap($page);
 
     /**
-     * @param $page
+     * @param string $page
      * @return string
      */
     public function getFrequency($page);
 
     /**
-     * @param $page
+     * @param string $page
      * @return float
      */
     public function getPriority($page);

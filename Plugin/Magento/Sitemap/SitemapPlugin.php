@@ -92,19 +92,21 @@ class SitemapPlugin
                 );
 
                 $blogSitemap->generateXml();
-            /*}*/
+            /* } */
         }
         return $result;
     }
 
     /**
+     * Deprecated
      * @param \Magento\Framework\Model\AbstractModel $sitemap
      * @param $result
      * @return mixed
      */
-    /* Deprecated
     public function afterCollectSitemapItems(\Magento\Framework\Model\AbstractModel $sitemap, $result)
     {
+        return $result;
+        /*
         if ($this->isEnabled($sitemap) && !$this->isMageWorxXmlSitemap($sitemap)) {
             $storeId = $sitemap->getStoreId();
 
@@ -132,8 +134,8 @@ class SitemapPlugin
         }
 
         return $result;
+        */
     }
-    */
 
     /**
      * @param $sitemap
@@ -147,6 +149,7 @@ class SitemapPlugin
     }
 
     /**
+     * Deprecated
      * @param $sitemap
      * @return mixed
      */

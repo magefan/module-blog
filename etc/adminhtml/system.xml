@@ -372,12 +372,12 @@
                 <label>Permalink Settings</label>
                 <field id="route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Blog Route</label>
-                    <comment>E.g.: "blog" will make the blog accessible from mystore.com/blog/</comment>
+                    <comment>E.g.: "blog" will make the blog accessible from mystore.com/blog</comment>
                 </field>
                 <field id="redirect_to_no_slash" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Auto-redirect to No-Slash URL</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[I.e. redirect from <b>http://example.com/blog/</b> to <b>http://example.com/blog</b>]]></comment>
+                    <comment><![CDATA[E.g. auto 301 redirect from <b>http://example.com/blog/</b> to <b>http://example.com/blog</b>]]></comment>
                 </field>
                 <field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Permalink Type</label>
@@ -389,7 +389,7 @@
                     <depends>
                         <field id="type">default</field>
                     </depends>
-                    <comment>E.g.: "post" will make the blog post accessible from mystore.com/{blog_route}/post/post-identifier/</comment>
+                    <comment>E.g.: "post" will make the blog post accessible from mystore.com/{blog_route}/post/post-identifier</comment>
                 </field>
                 <field id="post_sufix" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Post URL Suffix</label>
@@ -404,7 +404,7 @@
                     <depends>
                         <field id="type">default</field>
                     </depends>
-                    <comment>E.g.: "category" will make the blog category accessible from mystore.com/{blog_route}/category/category-identifier/</comment>
+                    <comment>E.g.: "category" will make the blog category accessible from mystore.com/{blog_route}/category/category-identifier</comment>
                 </field>
                 <field id="category_sufix" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Category URL Suffix</label>
@@ -419,11 +419,11 @@
                     <depends>
                         <field id="type">default</field>
                     </depends>
-                    <comment>E.g.: "archive" will make the blog archive accessible from mystore.com/{blog_route}/archive/2016-02/</comment>
+                    <comment>E.g.: "archive" will make the blog archive accessible from mystore.com/{blog_route}/archive/2016-02</comment>
                 </field>
                 <field id="tag_route" translate="label comment" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Tag Route</label>
-                    <comment>E.g.: "tag" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name/</comment>
+                    <comment>E.g.: "tag" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name</comment>
                 </field>
                 <field id="tag_sufix" translate="label comment" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Tag URL Suffix</label>
@@ -431,7 +431,7 @@
                 </field>
                 <field id="author_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Author Route</label>
-                    <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name/</comment>
+                    <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name</comment>
                 </field>
                 <field id="author_sufix" translate="label comment" type="text" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Author URL Suffix</label>
@@ -439,7 +439,7 @@
                 </field>
                 <field id="search_route" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Route</label>
-                    <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query/</comment>
+                    <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query</comment>
                 </field>
             </group>
             <group id="seo" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">

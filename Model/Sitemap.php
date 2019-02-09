@@ -25,15 +25,10 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
      */
     protected function _initSitemapItems()
     {
-
+        parent::_initSitemapItems();
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-        $megento = $objectManager->create(ProductMetadataInterface::class);
-        $sitemapConfig = $objectManager->create(SitemapConfigInterface::class);
-
-
-        parent::_initSitemapItems();
+        $sitemapConfig = $objectManager->get(SitemapConfigInterface::class);
 
         $sitemapItems = [];
         if ($sitemapConfig->isEnabledSitemap(SitemapConfigInterface::HOME_PAGE)) {
@@ -48,7 +43,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                             \Magento\Framework\DataObject::class
                         )->setData([
                             'updated_at' => '',
-                            'url' => '',
+                            'url' => $objectManager->get(\Magefan\Blog\Model\Url::class)->getBasePath(),
                         ])
                     )
                 ]
@@ -83,7 +78,8 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
             );
         }
 
-        if (version_compare($megento->getVersion(), '2.3.0', '<')) {
+        $productMetadata = $objectManager->get(ProductMetadataInterface::class);
+        if (version_compare($productMetadata->getVersion(), '2.3.0', '<')) {
             $this->_sitemapItems = $sitemapItems;
         } else {
             $this->_sitemapItems = [];
@@ -92,7 +88,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                     $this->_sitemapItems[] = new \Magento\Framework\DataObject(
                         [
                             'url' => $item->getUrl(),
-                            'updated_at' => '',
+                            'updated_at' => $item->getData('update_time'),
                             'priority' => $sitemapItem->getData('priority'),
                             'change_frequency' =>  $sitemapItem->getData('changefreq'),
                         ]

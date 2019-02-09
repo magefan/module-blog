@@ -926,4 +926,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         return $this->getData('secret');
     }
+
+    /**
+     * Retrieve updated at time
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->getData('update_time');
+    }
 }
