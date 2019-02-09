@@ -9,6 +9,9 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <referenceContainer name="header.inner.left">
+            <block class="Magento\Backend\Block\Template" name="blog.feedback.button" after="-" template="Magefan_Blog::feedback_button.phtml"/>
+        </referenceContainer>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo" name="blog.update.info" template="Magefan_Blog::updateinfo.phtml"/>
         </referenceContainer>
