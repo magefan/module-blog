@@ -143,6 +143,11 @@
                     </item>
                     <item name="dataType" xsi:type="string">datetime</item>
                     <item name="formElement" xsi:type="string">date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                     <item name="source" xsi:type="string">page</item>
                     <item name="dataScope" xsi:type="string">creation_time</item>
                 </item>

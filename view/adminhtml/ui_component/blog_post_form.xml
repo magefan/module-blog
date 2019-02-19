@@ -241,6 +241,11 @@
                     <item name="label" xsi:type="string" translate="true">Publish Date</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">publish_time</item>
                     <item name="sortOrder" xsi:type="number">20</item>
@@ -955,6 +960,11 @@
                     <item name="label" xsi:type="string" translate="true">From</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">custom_theme_from</item>
                 </item>
@@ -966,6 +976,11 @@
                     <item name="label" xsi:type="string" translate="true">To</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">custom_theme_to</item>
                 </item>
