@@ -364,9 +364,16 @@
                 <item name="sortOrder" xsi:type="number">22</item>
             </item>
         </argument>
-        <htmlContent name="gallery" sortOrder="22">
-            <argument name="block" xsi:type="object">Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery</argument>
-        </htmlContent>
+        <container name="gallery" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <htmlContent name="gallery">
+                <argument name="block" xsi:type="object">Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery</argument>
+            </htmlContent>
+        </container>
     </fieldset>
     <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">
