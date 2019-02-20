@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\ResourceModel;
 
 /**
- * Blog category resource model
+ * Blog post resource model
  */
 class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
