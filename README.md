@@ -91,11 +91,11 @@ Try out our open demo and if you like our extension **please give us some star o
 
 
 ## Online Documentation
-http://magefan.com/docs/magento-2-blog/
+https://magefan.com/blog/documentation
 
 
 ## Installation Instruction
-https://magefan.com/blog/magneto2-blog-extension-installation/
+https://magefan.com/blog/magento2-blog-extension-installation
 
 
 ## Support
