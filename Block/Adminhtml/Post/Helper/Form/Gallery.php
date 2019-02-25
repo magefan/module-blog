@@ -118,7 +118,20 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
      */
     public function getContentHtml()
     {
-        $content = $this->getChildBlock('content')
+        $content = $this->getChildBlock('content');
+        if (!$content) {
+            $content = $this->getLayout()->createBlock(
+                \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content::class,
+                '',
+                [
+                    'config' => [
+                        'parentComponent' => 'blog_post_form.blog_post_form.block_gallery.block_gallery'
+                    ]
+                ]
+            );
+        }
+
+        $content
             ->setId($this->getHtmlId() . '_content')
             ->setElement($this)
             ->setFormName($this->formName);

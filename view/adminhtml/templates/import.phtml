@@ -46,6 +46,23 @@
             <table>
                 <tr>
                     <td>
+                        <div class="itm-hld" onclick="goToMgImport();">
+                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/mageplaza.png')) ?>" />
+                            <br/>
+                            <span class="lable">Import from Mageplaza<br/><br/></span>
+                            <form id="start_mg_import" action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>" method="post">
+                                <input type="hidden" name="type" value="mageplaza" />
+                                <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
+                            </form>
+                        </div>
+                    </td>
+                <tr>
+            </table>
+        </td>
+        <td class="item">
+            <table>
+                <tr>
+                    <td>
                         <div class="itm-hld" onclick="window.open('https://magefan.com/migrate-joomla-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
                             <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/joomla.jpg')) ?>" />
                             <br/>
@@ -125,3 +142,11 @@
         <td class="item"></td>
     </tr>
 </table>
+<script type="text/javascript">
+    function goToMgImport()
+    {
+        if (confirm('Are you sure you want to start import from Mageplaza Blog? Attention! Do not run this import again.')) {
+            document.getElementById('start_mg_import').submit();
+        }
+    }
+</script>

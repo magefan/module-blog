@@ -13,6 +13,7 @@
         <css src="Magefan_Blog::css/import.css"/>
     </head>
     <update handle="editor"/>
+    <update handle="blog_update_info"/>
     <body>
         <referenceContainer name="content">
             <block class="Magento\Backend\Block\Template" name="blog.import" template="Magefan_Blog::import.phtml" />

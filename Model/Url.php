@@ -137,7 +137,9 @@ class Url
      */
     public function getBaseUrl()
     {
-        return $this->_url->getUrl($this->getRoute());
+        $url = $this->_url->getUrl($this->getBasePath());
+        $url = $this->trimSlash($url);
+        return $url;
     }
 
     /**
@@ -169,7 +171,7 @@ class Url
         if (is_array($storeIds)) {
             if (0 == array_values($storeIds)[0]) {
                 $useDefaultStore = true;
-            } elseif (count($storeIds > 1)) {
+            } elseif (count($storeIds) > 1) {
                 foreach ($storeIds as $storeId) {
                     if ($storeId != $currentStore->getId()) {
                         $store = $this->_storeManager->getStore($storeId);
@@ -183,6 +185,7 @@ class Url
         }
 
         $storeChanged = false;
+
         if ($useDefaultStore) {
             $newStore = $currentStore->getGroup()->getDefaultStore();
             $origStore = $this->_url->getScope();
@@ -201,6 +204,14 @@ class Url
         return $url;
     }
 
+    /**
+     * Retrieve blog base path
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return $this->getRoute();
+    }
 
     /**
      * Retrieve blog url path
@@ -229,6 +240,7 @@ class Url
         }
 
         $path = $this->addUrlSufix($path, $controllerName);
+        $path = $this->trimSlash($path);
 
         return $path;
     }
@@ -289,6 +301,19 @@ class Url
             }
         }
 
+        return $url;
+    }
+
+    /**
+     * Remove slash from the end of URL
+     * @param $url
+     * @return string
+     */
+    protected function trimSlash($url)
+    {
+        if ($this->_getConfig('redirect_to_no_slash')) {
+            $url = trim($url, '/');
+        }
         return $url;
     }
 

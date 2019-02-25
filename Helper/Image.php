@@ -48,10 +48,15 @@ class Image extends AbstractHelper
     public function resize($width, $height = null)
     {
         if ($this->_baseFile) {
-            $path = 'blog/cache/' . $width . 'x' . $height;
-            $this->_newFile = $path. '/' . $this->_baseFile;
-            if (!$this->fileExists($this->_newFile)) {
-                $this->resizeBaseFile($width, $height);
+            $pathinfo = pathinfo(($this->_baseFile));
+            if (isset($pathinfo) && $pathinfo['extension'] == 'webp') {
+                $this->_newFile = $this->_baseFile;
+            } else {
+                $path = 'blog/cache/' . $width . 'x' . $height;
+                $this->_newFile = $path . '/' . $this->_baseFile;
+                if (!$this->fileExists($this->_newFile)) {
+                    $this->resizeBaseFile($width, $height);
+                }
             }
         }
         return $this;

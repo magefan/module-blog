@@ -141,6 +141,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         if ($pathInfo[0] != $blogRoute) {
             return;
         }
+
         unset($pathInfo[0]);
 
         if (!count($pathInfo)) {

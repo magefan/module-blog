@@ -1,0 +1,53 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog feedback button
+ *
+ * @var $block \Magento\Backend\Block\Template
+ */
+?>
+<div id="blog-feedback-block">
+    <div class="blog-leave-feedback blog-leave-review">
+        <img  src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
+        <a target="_blank"  href="https://magefan.com/review/product/list/id/1797/?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular">
+            <?= __('Leave a review about the blog extension') ?>
+        </a>
+    </div>
+    <div class="blog-leave-feedback blog-leave-suggest">
+        <img  src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/add-feature-ico.png')) ?>" />
+        <a target="_blank"  href="https://magefan.com/contact?utm_source=m2admin_blog_leave_suggest&utm_medium=link&utm_campaign=regular">
+            <?= __('Suggest a new blog feature') ?>
+        </a>
+    </div>
+</div>
+
+<style>
+    .blog-leave-feedback {display:inline-block;padding: 15px 15px 0 0}
+    .blog-leave-feedback a {color:#000;text-decoration:underline}
+    .blog-leave-feedback img {float:left; margin-right: 10px; height:20px}
+</style>
+
+<script>
+    require(['jquery', 'jquery/ui', 'domReady!'], function($){
+        $(document).ready( function() {
+            if (Math.floor(Math.random() * 10) == 1) {
+                var s = 1000;
+                var d = 2000;
+                for(var i=0;i<3;i++) {
+                    setTimeout(function () {
+                        $('#blog-feedback-block').animate({opacity: "0.2"}, parseInt(d/2)).animate({opacity: "1"}, d);
+                    }, s);
+                    s+=d;
+                }
+
+            }
+        });
+    });
+</script>

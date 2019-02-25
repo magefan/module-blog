@@ -12,6 +12,7 @@
         <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
     </head>
     <update handle="editor"/>
+    <update handle="blog_update_info"/>
     <body>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Adminhtml\Import\Wordpress" name="blog.import.wordpress" />

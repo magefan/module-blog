@@ -66,6 +66,21 @@ class Config
     const XML_PATH_TOP_MENU_ITEM_TEXT = 'mfblog/top_menu/item_text';
 
     /**
+     * Redirect to no slash config path
+     */
+    const XML_PATH_REDIRECT_TO_NO_SLASH = 'mfblog/permalink/redirect_to_no_slash';
+
+    /**
+     * Redirect to no slash config path (blog+)
+     */
+    const XML_PATH_REDIRECT_TO_NO_SLASH_BLOG_PLUS = 'mfblog/advanced_permalink/redirect_to_no_slash';
+
+    /**
+     * Enabled advanced permalink
+     */
+    const XML_PATH_ADVANCED_PERMALINK_ENABLED = 'mfblog/advanced_permalink/enabled';
+
+    /**
      * Top menu include categories config path
      */
     const XML_PATH_TOP_MENU_INCLUDE_CATEGORIES = 'mfblog/top_menu/include_categories';

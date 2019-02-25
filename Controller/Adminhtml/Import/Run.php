@@ -40,20 +40,23 @@ class Run extends \Magento\Backend\App\Action
             if ($stats->getData('imported_count')) {
                 if (!$stats->getData('skipped_count')) {
                     $this->messageManager->addSuccess(__(
-                        'The import process was completed successfully. %1 posts, %2 categories and %3 tags where imported.',
-                        $stats->getData('imported_posts_count'),
-                        $stats->getData('imported_categories_count'),
-                        $stats->getData('imported_tags_count')
-                    ));
-                } else {
-                    $this->messageManager->addNotice(__(
-                        'The import process completed. %1 posts, %2 categories and %3 tags where imported. Some posts or categories or tags where skipped. %4 %5 %6',
+                        'The import process was completed successfully. %1 posts, %2 categories, %3 tags and %4 comments where imported.',
                         $stats->getData('imported_posts_count'),
                         $stats->getData('imported_categories_count'),
                         $stats->getData('imported_tags_count'),
+                        $stats->getData('imported_comments_count')
+                    ));
+                } else {
+                    $this->messageManager->addNotice(__(
+                        'The import process completed. %1 posts, %2 categories, %3 tags and %4 comments where imported. Some posts or categories or tags or comments where skipped. %5 %6 %7 %8',
+                        $stats->getData('imported_posts_count'),
+                        $stats->getData('imported_categories_count'),
+                        $stats->getData('imported_tags_count'),
+                        $stats->getData('imported_comments_count'),
                         $stats->getData('skipped_posts') ? (__('Skipped Posts') . ': '. implode(', ', $stats->getData('skipped_posts')) . '. ') : '',
                         $stats->getData('skipped_categories') ? (__('Skipped Categories') . ': '. implode(', ', $stats->getData('skipped_categories')) . '. ') : '',
-                        $stats->getData('skipped_tags') ? (__('Skipped Tags') . ': '. implode(', ', $stats->getData('skipped_tags')) . '. ') : ''
+                        $stats->getData('skipped_tags') ? (__('Skipped Tags') . ': '. implode(', ', $stats->getData('skipped_tags')) . '. ') : '',
+                        $stats->getData('skipped_comments') ? (__('Skipped Comments') . ': '. implode(', ', $stats->getData('skipped_comments')) . '. ') : ''
                     ));
                 }
             } else {
