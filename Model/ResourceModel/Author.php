@@ -8,10 +8,14 @@
 
 namespace Magefan\Blog\Model\ResourceModel;
 
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magefan\Blog\Api\AuthorInterface;
+
+
 /**
  * Blog author resource model
  */
-class Author extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Author extends AbstractDb implements AuthorInterface
 {
     /**
      * Initialize resource model

@@ -51,7 +51,7 @@ class Router implements \Magento\Framework\App\RouterInterface
     /**
      * Author factory
      *
-     * @var \Magefan\Blog\Model\AuthorFactory
+     * @var   \Magefan\Blog\Api\AuthorInterfaceFactory
      */
     protected $_authorFactory;
 
@@ -94,7 +94,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @param \Magento\Framework\UrlInterface $url
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
-     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
+     * @param \Magefan\Blog\Api\AuthorInterfaceFactory  $authorFactory
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -106,7 +106,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         Url $url,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
-        \Magefan\Blog\Model\AuthorFactory $authorFactory,
+        \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory,
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response

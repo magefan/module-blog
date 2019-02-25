@@ -27,11 +27,11 @@ class Author implements \Magento\Framework\Option\ArrayInterface
     /**
      * Initialize dependencies.
      *
-     * @param \Magento\User\Model\ResourceModel\User\CollectionFactory $authorCollectionFactory
+     * @param \Magefan\Blog\Api\AuthorCollectionInterfaceFactory $authorCollectionFactory
      * @param void
      */
     public function __construct(
-        \Magento\User\Model\ResourceModel\User\CollectionFactory $authorCollectionFactory
+        \Magefan\Blog\Api\AuthorCollectionInterfaceFactory  $authorCollectionFactory
     ) {
         $this->authorCollectionFactory = $authorCollectionFactory;
     }
