@@ -240,7 +240,9 @@ class Url
         }
 
         $path = $this->addUrlSufix($path, $controllerName);
-        $path = $this->trimSlash($path);
+        if (self::CONTROLLER_SEARCH != $controllerName) {
+            $path = $this->trimSlash($path);
+        }
 
         return $path;
     }
