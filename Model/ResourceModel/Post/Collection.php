@@ -226,7 +226,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             '(0
               + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
             [
-                'term' => $term,
+                'term' => $this->getConnection()->quote($term),
             ]
         );
 
