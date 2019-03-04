@@ -7,7 +7,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
     <!-- Login Example to get Bearer: curl -X POST "http://mystore.com/index.php/rest/V1/integration/admin/token" \
      -H "Content-Type:application/json" \
