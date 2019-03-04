@@ -7,7 +7,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
     <widget id="magefan_blog_recent" class="Magefan\Blog\Block\Widget\Recent">
         <label translate="true">Recent Blog Posts</label>
         <description>Display recent blog posts</description>
