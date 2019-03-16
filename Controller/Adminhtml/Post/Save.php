@@ -94,7 +94,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                 if (empty($image['removed'])) {
                     if (!empty($image['value_id'])) {
                         $gallery[] = $image['value_id'];
-                    } else {
+                    } elseif (!empty($image['file'])) {
                         $imageUploader = $this->_objectManager->get(
                             \Magefan\Blog\ImageUpload::class
                         );
