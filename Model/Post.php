@@ -385,10 +385,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         if (!$this->hasData('gallery_images')) {
             $images = [];
-            $gallery = explode(
-                self::GALLERY_IMAGES_SEPARATOR,
-                $this->getData('media_gallery')
-            );
+            $gallery = $this->getData('media_gallery');
+            if ($gallery && !is_array($gallery)) {
+                $gallery = explode(
+                    self::GALLERY_IMAGES_SEPARATOR,
+                    $gallery
+                );
+            }
             if (!empty($gallery)) {
                 foreach ($gallery as $file) {
                     if ($file) {
