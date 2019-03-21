@@ -87,6 +87,12 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         if (!empty($data['media_gallery']['images'])) {
             $images = $data['media_gallery']['images'];
             usort($images, function ($imageA, $imageB) {
+                if (!isset($imageA['position'])) {
+                    $imageA['position'] = 0;
+                }
+                if (!isset($imageB['position'])) {
+                    $imageB['position'] = 0;
+                }
                 return ($imageA['position'] < $imageB['position']) ? -1 : 1;
             });
             $gallery = [];
