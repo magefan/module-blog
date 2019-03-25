@@ -212,9 +212,22 @@
 }
 
 .blog-widget-recent .post-holder {
-    width: 29%;
+    width: 31.2%;
     float: left;
-    margin: 5px;
+    margin: 1%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+@media (max-width: 1024px) {
+   .blog-widget-recent .post-holder {
+      width: 48%;
+   }
+}
+@media (max-width: 768px) {
+   .blog-widget-recent .post-holder {
+      width: 98%;
+   }
 }
 
 .blog-widget-recent .post-description .post-text-hld {
