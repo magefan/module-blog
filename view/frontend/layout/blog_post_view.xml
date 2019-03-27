@@ -35,6 +35,7 @@
                                     </item>
                                 </argument>
                             </arguments>
+                            <container name="blog.post.comments.magefan.additional" label="Comments Recaptcha" />
                         </block>
                         <block class="Magefan\Blog\Block\Post\View\Comments\Facebook" name="blog.post.comments.facebook" template="post/view/comments/facebook.phtml" />
                         <block class="Magefan\Blog\Block\Post\View\Comments\Disqus" name="blog.post.comments.disqus" template="post/view/comments/disqus.phtml" />

@@ -56,7 +56,7 @@
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
                     <?php } ?>
                     <div class="clearfix"></div>
-
+                    <?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?>
                 </div>
             </form>
         </div>
