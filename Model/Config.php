@@ -120,9 +120,9 @@ class Config
     public function getAuthorRobots($storeId = null)
     {
         return $this->getConfig(
-                self::XML_AUTHOR_ROBOTS,
-                $storeId
-            );
+            self::XML_AUTHOR_ROBOTS,
+            $storeId
+        );
     }
 
     /**
@@ -133,9 +133,9 @@ class Config
     public function getTagRobots($storeId = null)
     {
         return $this->getConfig(
-                self::XML_TAG_ROBOTS,
-                $storeId
-            );
+            self::XML_TAG_ROBOTS,
+            $storeId
+        );
     }
 
     /**
@@ -146,9 +146,9 @@ class Config
     public function getSearchRobots($storeId = null)
     {
         return $this->getConfig(
-                self::XML_SEARCH_ROBOTS,
-                $storeId
-            );
+            self::XML_SEARCH_ROBOTS,
+            $storeId
+        );
     }
 
     /**

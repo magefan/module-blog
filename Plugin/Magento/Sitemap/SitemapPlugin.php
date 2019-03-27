@@ -77,9 +77,9 @@ class SitemapPlugin
         if ($this->isEnabled($sitemap)) {
             /* if ($this->isMageWorxXmlSitemap($sitemap) || !method_exists($sitemap, 'collectSitemapItems')) { */
                 $sitemapId = $sitemap->getId() ?: 0;
-                if (in_array($sitemapId, $this->generated)) {
-                    return $result;
-                }
+            if (in_array($sitemapId, $this->generated)) {
+                return $result;
+            }
                 $this->generated[] = $sitemapId;
 
                 $blogSitemap = $this->sitemapFactory->create();

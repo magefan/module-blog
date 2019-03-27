@@ -49,7 +49,8 @@ class Content extends \Magento\Backend\Block\Widget
             /* Try for old magento version where ImageUploadConfigDataProvider does not exist */
             $this->imageUploadConfigDataProvider = $imageUploadConfigDataProvider
                 ?: ObjectManager::getInstance()->get(\Magento\Backend\Block\DataProviders\ImageUploadConfig::class);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 
     /**

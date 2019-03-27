@@ -61,7 +61,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     $robots = $this->config->getTagRobots();
                     $this->pageConfig->setRobots($robots);
                 }
-
             }
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {

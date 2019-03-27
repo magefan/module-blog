@@ -223,10 +223,8 @@ class Mageplaza extends AbstractImport
             $t_result = $this->_mysqliQuery($t_sql);
 
             while ($t_data = mysqli_fetch_assoc($t_result)) {
-
                 $oldId = $t_data['tag_id'];
                 if (isset($oldTags[$oldId])) {
-
                     $id = $oldTags[$oldId]->getId();
                     $postTags[$id] = $id;
                 }
@@ -270,8 +268,6 @@ class Mageplaza extends AbstractImport
                 $resultComments = $this->_mysqliQuery($sql);
 
                 while ($comments = mysqli_fetch_assoc($resultComments)) {
-
-
                     $commentData = [
                         'parent_id' => 0,
                         'post_id' => $post->getPostId(),

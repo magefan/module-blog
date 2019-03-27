@@ -32,7 +32,7 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         NoSlashUrlRedirect $noSlashUrlRedirect
-    ){
+    ) {
         $this->scopeConfig = $scopeConfig;
         $this->noSlashUrlRedirect = $noSlashUrlRedirect;
     }
@@ -50,6 +50,5 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
         if ($redirectToNoSlash && !$advancedPermalinkEnabled) {
             $this->noSlashUrlRedirect->execute($observer);
         }
-
     }
 }

@@ -34,11 +34,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $category;
 
     /**
-     * @var \Magento\Framework\Event\ManagerInterface
-     */
-    protected $eventManager;
-
-    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -59,7 +54,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
-        $this->eventManager = $eventManager;
         $this->_date = $date;
         $this->_storeManager = $storeManager;
     }
@@ -393,16 +387,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      *
      * @return void
      */
-    protected function _renderFiltersBefore() {
+    protected function _renderFiltersBefore()
+    {
         foreach (['store', 'category', 'tag'] as $key) {
             if ($this->getFilter($key)) {
-
                 $joinOptions = new \Magento\Framework\DataObject;
                 $joinOptions->setData([
                     'key' => $key,
                     'fields' => [],
                 ]);
-                $this->eventManager->dispatch('mfblog_post_collection_render_filter_join', ['join_options' => $joinOptions]);
+                $this->_eventManager->dispatch('mfblog_post_collection_render_filter_join', ['join_options' => $joinOptions]);
                 $this->getSelect()->join(
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],
                     'main_table.post_id = '.$key.'_table.post_id',

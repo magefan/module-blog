@@ -35,5 +35,4 @@ interface SitemapConfigInterface
      * @return float
      */
     public function getPriority($page);
-
 }

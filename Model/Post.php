@@ -475,7 +475,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
 
             if ($len) {
-
                 /* Do not cut words */
                 while ($len < strlen($content)
                     && !in_array($content{$len}, [' ', '<', "\t", "\r", "\n"]) ) {

@@ -71,7 +71,7 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
             $i++;
             $p = mb_strrpos($originalImageName, '.');
             if (false !== $p) {
-                $imageName = mb_substr($originalImageName, 0, $p) . $i .  mb_substr($originalImageName,  $p);
+                $imageName = mb_substr($originalImageName, 0, $p) . $i .  mb_substr($originalImageName, $p);
             } else {
                 $imageName = $originalImageName . $i;
             }
