@@ -105,6 +105,13 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             foreach ($collection as $item) {
                     $itemData = $item->getData();
                     $itemData['id'] = $item->getId();
+                    /* Fix for big request data array */
+                    foreach (['content', 'short_content', 'meta_description'] as $field) {
+                        if (isset($itemData[$field])) {
+                            unset($itemData[$field]);
+                        }
+                    }
+                    /* End */
                     $items[] = $itemData;
             }
             $data['data']['links']['post'] = $items;
@@ -115,6 +122,14 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             foreach ($collection as $item) {
                 $itemData = $item->getData();
                 $itemData['id'] = $item->getId();
+                /* Fix for big request data array */
+                foreach (['description', 'short_description', 'meta_description'] as $field) {
+                    if (isset($itemData[$field])) {
+                        unset($itemData[$field]);
+                    }
+                }
+                /* End */
+
                 $items[] = $itemData;
             }
             $data['data']['links']['product'] = $items;
