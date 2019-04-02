@@ -50,6 +50,10 @@ class Content extends \Magento\Backend\Block\Widget
             $this->imageUploadConfigDataProvider = $imageUploadConfigDataProvider
                 ?: ObjectManager::getInstance()->get(\Magento\Backend\Block\DataProviders\ImageUploadConfig::class);
         } catch (\Exception $e) {
+            try {
+                /* Workaround for Magento 2.2.8 */
+                $this->imageUploadConfigDataProvider = ObjectManager::getInstance()->get(\Magento\Backend\Block\DataProviders\UploadConfig::class);
+            } catch (\Exception $e) {}
         }
     }
 
