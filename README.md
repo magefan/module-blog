@@ -9,6 +9,16 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
   * Magento Community Edition 2.1.0-2.3.x or Magento Enterprise Edition 2.1.0-2.3.x
   * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.4 . Please install this extension first if you use installation via FTP.
 
+## What you should know about reviews on our competitor websites?
+  - Yep, we so good that your competitor use our reviews :-) [Please check](https://magefan.com/blog/what-you-should-know-about-reviews-at-mageplaza-website).
+<a href="https://magefan.com/blog/what-you-should-know-about-reviews-at-mageplaza-website">
+          <img
+            src="https://magefan.com/media/wysiwyg/Blog/mpl3.png"
+            alt="What you should know about reviews at mageplaza.com?"
+            height="430"
+          >
+        </a>
+        
 ## Features
   * Unlimited blog posts, multi-level categories, and tags
   * Multilanguage and Multiple Websites Support
