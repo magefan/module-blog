@@ -11,7 +11,7 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
 
 ## What you should know about reviews on our competitor websites?
 
-  Yep!!! We so good that our competitor use our reviews :-) [Please check](https://www.youtube.com/watch?v=rnqz5t6Kc5k).
+  Yep!!! We're so good that our competitor use our reviews :-) [Please check](https://www.youtube.com/watch?v=rnqz5t6Kc5k).
   
   
 <a href="https://www.youtube.com/watch?v=rnqz5t6Kc5k">
