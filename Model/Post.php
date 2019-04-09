@@ -895,6 +895,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $object = clone $this;
         $object
             ->unsetData('post_id')
+            ->unsetData('creation_time')
+            ->unsetData('update_time')
+            ->unsetData('publish_time')
             ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
             ->setData('is_active', 0);
 
