@@ -150,10 +150,12 @@ class Router implements \Magento\Framework\App\RouterInterface
                 ->setControllerName('index')
                 ->setActionName('index');
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_RSS)) {
-            $request
-                ->setRouteName('blog')
-                ->setControllerName(Url::CONTROLLER_RSS)
-                ->setActionName(isset($pathInfo[2]) ? $pathInfo[2] : 'feed');
+            if (!isset($pathInfo[2]) || in_array($pathInfo[2], ['index', 'feed'])) {
+                $request
+                    ->setRouteName('blog')
+                    ->setControllerName(Url::CONTROLLER_RSS)
+                    ->setActionName('feed');
+            }
         } elseif ($pathInfo[1] == $this->_url->getRoute(Url::CONTROLLER_SEARCH)
             && !empty($pathInfo[2])
         ) {
