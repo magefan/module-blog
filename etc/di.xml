@@ -12,6 +12,8 @@
     <preference for="Magefan\Blog\Api\SitemapConfigInterface" type="Magefan\Blog\Model\Sitemap\SitemapConfig" />
     <preference for="Magefan\Blog\Api\PostManagementInterface" type="Magefan\Blog\Model\PostManagement" />
     <preference for="Magefan\Blog\Api\CategoryManagementInterface" type="Magefan\Blog\Model\CategoryManagement" />
+    <preference for="Magefan\Blog\Api\PostRepositoryInterface" type="Magefan\Blog\Model\PostRepository" />
+    <preference for="Magefan\Blog\Api\CategoryRepositoryInterface" type="Magefan\Blog\Model\CategoryRepository" />
     <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
     <virtualType name="Magefan\Blog\ImageUpload" type="Magefan\Blog\Model\ImageUploader">
         <arguments>
