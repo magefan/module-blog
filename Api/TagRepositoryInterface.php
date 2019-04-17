@@ -8,28 +8,28 @@
 
 namespace Magefan\Blog\Api;
 
-use Magefan\Blog\Model\Post;
+use Magefan\Blog\Model\Tag;
 
 /**
- * Interface PostRepositoryInterface
+ * Interface TagRepositoryInterface
  * @package Magefan\Blog\Api
  */
-interface PostRepositoryInterface
+interface TagRepositoryInterface
 {
     /**
-     * @param Post $post
+     * @param Tag $tag
      * @return mixed
      */
-    public function save(Post $post);
+    public function save(Tag $tag);
 
     /**
-     * @param $postId
+     * @param $tagId
      * @return mixed
      */
-    public function getById($postId);
+    public function getById($tagId);
 
     /**
-     * Retrieve Post matching the specified criteria.
+     * Retrieve Tag matching the specified criteria.
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface
     $searchCriteria
@@ -39,18 +39,18 @@ interface PostRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
-     * @param Post $post
+     * @param Tag $tag
      * @return mixed
      */
-    public function delete(Post $post);
+    public function delete(Tag $tag);
 
     /**
-     * Delete Post by ID.
+     * Delete Tag by ID.
      *
-     * @param int $postId
+     * @param int $tagId
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function deleteById($postId);
+    public function deleteById($tagId);
 }

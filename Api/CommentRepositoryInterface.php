@@ -8,28 +8,28 @@
 
 namespace Magefan\Blog\Api;
 
-use Magefan\Blog\Model\Post;
+use Magefan\Blog\Model\Comment;
 
 /**
- * Interface PostRepositoryInterface
+ * Interface CommentRepositoryInterface
  * @package Magefan\Blog\Api
  */
-interface PostRepositoryInterface
+interface CommentRepositoryInterface
 {
     /**
-     * @param Post $post
+     * @param Comment $comment
      * @return mixed
      */
-    public function save(Post $post);
+    public function save(Comment $comment);
 
     /**
-     * @param $postId
+     * @param $commentId
      * @return mixed
      */
-    public function getById($postId);
+    public function getById($commentId);
 
     /**
-     * Retrieve Post matching the specified criteria.
+     * Retrieve Comment matching the specified criteria.
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface
     $searchCriteria
@@ -39,18 +39,18 @@ interface PostRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
-     * @param Post $post
+     * @param Comment $comment
      * @return mixed
      */
-    public function delete(Post $post);
+    public function delete(Comment $comment);
 
     /**
-     * Delete Post by ID.
+     * Delete Comment by ID.
      *
-     * @param int $postId
+     * @param int $commentId
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function deleteById($postId);
+    public function deleteById($commentId);
 }

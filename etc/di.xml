@@ -14,6 +14,9 @@
     <preference for="Magefan\Blog\Api\CategoryManagementInterface" type="Magefan\Blog\Model\CategoryManagement" />
     <preference for="Magefan\Blog\Api\PostRepositoryInterface" type="Magefan\Blog\Model\PostRepository" />
     <preference for="Magefan\Blog\Api\CategoryRepositoryInterface" type="Magefan\Blog\Model\CategoryRepository" />
+    <preference for="Magefan\Blog\Api\TagRepositoryInterface" type="Magefan\Blog\Model\TagRepository" />
+    <preference for="Magefan\Blog\Api\AuthorRepositoryInterface" type="Magefan\Blog\Model\AuthorRepository" />
+    <preference for="Magefan\Blog\Api\CommentRepositoryInterface" type="Magefan\Blog\Model\CommentRepository" />
     <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
     <virtualType name="Magefan\Blog\ImageUpload" type="Magefan\Blog\Model\ImageUploader">
         <arguments>

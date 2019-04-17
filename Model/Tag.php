@@ -17,7 +17,6 @@ use Magefan\Blog\Model\Url;
  * @method \Magefan\Blog\Model\ResourceModel\Tag getResource()
  * @method string getTitle()
  * @method $this setTitle(string $value)
- * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
  */
 class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
