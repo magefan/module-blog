@@ -438,7 +438,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $key = 'filtered_content';
         if (!$this->hasData($key)) {
             $content = $this->filterProvider->getPageFilter()->filter(
-                $this->getContent()
+                $this->getContent() ?: ''
             );
             $this->setData($key, $content);
         }
@@ -457,7 +457,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->hasData($key)) {
             if ($this->getShortContent()) {
                 $content = $this->filterProvider->getPageFilter()->filter(
-                    $this->getShortContent()
+                    $this->getShortContent() ?: ''
                 );
             } else {
                 $content = $this->getFilteredContent();
