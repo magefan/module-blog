@@ -86,6 +86,18 @@
                             <argument name="header_css_class" xsi:type="string">col-categories</argument>
                         </arguments>
                     </block>
+                    <block class="Magefan\Blog\Block\Adminhtml\Grid\Column\Author" as="author_id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Author</argument>
+                            <argument name="index" xsi:type="string">author_id</argument>
+                            <argument name="type" xsi:type="string">author</argument>
+                            <argument name="store_all" xsi:type="string">1</argument>
+                            <argument name="store_view" xsi:type="string">1</argument>
+                            <argument name="sortable" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-author</argument>
+                            <argument name="header_css_class" xsi:type="string">col-author</argument>
+                        </arguments>
+                    </block>
                     <block class="Magento\Backend\Block\Widget\Grid\Column\Multistore" as="store_ids">
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Store View</argument>
