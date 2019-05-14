@@ -72,7 +72,7 @@ abstract class AbstractTag extends \Magento\Framework\View\Element\Template impl
         $key = 'filtered_content';
         if (!$tag->hasData($key)) {
             $cotent = $this->_filterProvider->getPageFilter()->filter(
-                $tag->getContent() ?: ''
+                (string) $tag->getContent() ?: ''
             );
             $tag->setData($key, $cotent);
         }
