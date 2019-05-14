@@ -71,10 +71,10 @@ abstract class AbstractCategory extends \Magento\Framework\View\Element\Template
         $category = $this->getCategory();
         $key = 'filtered_content';
         if (!$category->hasData($key)) {
-            $cotent = $this->_filterProvider->getPageFilter()->filter(
-                $category->getContent() ?: ''
+            $content = $this->_filterProvider->getPageFilter()->filter(
+                (string) $category->getContent() ?: ''
             );
-            $category->setData($key, $cotent);
+            $category->setData($key, $content);
         }
         return $category->getData($key);
     }
