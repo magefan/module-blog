@@ -801,7 +801,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         return $this->getIsActive()
             && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
-            && array_intersect([0, $storeId], $this->getStoreIds());
+            && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
     }
 
     /**

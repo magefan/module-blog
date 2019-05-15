@@ -395,7 +395,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     public function isVisibleOnStore($storeId)
     {
-        return $this->getIsActive() && array_intersect([0, $storeId], $this->getStoreIds());
+        return $this->getIsActive()
+            && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
     }
 
     /**
