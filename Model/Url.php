@@ -360,6 +360,24 @@ class Url
         return $this->_storeManager->getStore()
             ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
     }
+    
+    /**
+     * @return int|null
+     */
+    public function getStoreId()
+    {
+        return $this->storeId;
+    }
+
+    /**
+     * @param $storeId
+     * @return $this
+     */
+    public function setStoreId($storeId)
+    {
+        $this->storeId = $storeId;
+        return $this;
+    }
 
     /**
      * Retrieve blog permalink config value
