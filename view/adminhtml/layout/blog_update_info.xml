@@ -14,6 +14,7 @@
         </referenceContainer>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo" name="blog.update.info" template="Magefan_Blog::updateinfo.phtml"/>
+            <block class="Magefan\Blog\Block\Adminhtml\System\Config\Form\CheckEnableInfo" name="blog.check.enable.info" template="Magefan_Blog::checkenableinfo.phtml"/>
         </referenceContainer>
     </body>
 </page>

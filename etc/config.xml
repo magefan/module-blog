@@ -11,7 +11,9 @@
     <default>
         <mfblog>
             <general>
-                <enabled>1</enabled>
+                <enabled>0</enabled>
+                <mfmodule>Blog</mfmodule>
+                <mftype>1</mftype>
             </general>
             <index_page>
                 <title>Blog</title>
