@@ -27,6 +27,12 @@
                     <label>Enable Extension</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="key" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Key</label>
+                    <comment><![CDATA[
+                            You can find product key in your <a href="https://magefan.com/downloadable/customer/products/" target="_blank">Magefan account</a>.
+                        ]]></comment>
+                </field>
             </group>
             <group id="index_page" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Blog Index Page</label>
