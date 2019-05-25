@@ -191,7 +191,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             $data['dbhost'] = 'localhost';
         }
 
-        $data['type'] = 'aw';
+        $data['type'] = $this->getRequest()->getActionName();
 
         $form->setValues($data);
 
