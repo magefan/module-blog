@@ -125,7 +125,7 @@ Please contact us to get a quote
 https://magefan.com/contact
 
 ## License
-The code is licensed under [Open Software License ("OSL") v. 3.0](http://opensource.org/licenses/osl-3.0.php).
+The code is licensed under [EULA](https://magefan.com/end-user-license-agreement).
 
 ## Other Magefan Extensions That Can Be Installed Via Composer
   * [Magento 2 Auto Currency Switcher Extension](https://magefan.com/magento-2-currency-switcher-auto-currency-by-country)
