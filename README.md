@@ -105,7 +105,7 @@ Try out our open demo and if you like our extension **please give us some star o
 
 
 ## Online Documentation
-https://magefan.com/blog/documentation
+https://magefan.com/blog/magento-2-blog-extension-documentation
 
 
 ## Installation Instruction
