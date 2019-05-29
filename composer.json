@@ -2,14 +2,10 @@
     "name": "magefan/module-blog",
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
-        "magefan/module-community" : ">=2.0.4"
+        "magefan/module-community" : ">=2.0.5"
     },
     "type": "magento2-module",
-    "version": "2.8.9.1",
-    "license": [
-        "OSL-3.0",
-        "AFL-3.0"
-    ],
+    "version": "2.8.10",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
