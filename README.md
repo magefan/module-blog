@@ -65,7 +65,7 @@ Try out our open demo and if you like our extension **please give us some star o
       <td align="center" valign="middle">
         <a href="http://blog.demo.magefan.com/blog/">
           <img
-            src="https://magefan.com/static/version1520969775/frontend/Magefan/default/en_US/images/product-tab-demo-1.jpg"
+            src="https://magefan.com/static/version1520969775/frontend/Magefan/new/en_US/images/product-tab-demo-1.jpg"
             alt="Magneto 2 Blog Extension Storefront Demo"
             height="220"
           >
@@ -74,7 +74,7 @@ Try out our open demo and if you like our extension **please give us some star o
       <td align="center" valign="middle">
         <a href="http://blog.demo.magefan.com/admin/">
           <img
-            src="https://magefan.com/static/version1520969775/frontend/Magefan/default/en_US/images/product-tab-demo-2.jpg"
+            src="https://magefan.com/static/version1520969775/frontend/Magefan/new/en_US/images/product-tab-demo-2.jpg"
             alt="Magneto 2 Blog Extension Admin Panel Demo"
             height="220"
           >
