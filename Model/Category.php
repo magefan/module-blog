@@ -22,7 +22,6 @@ use Magento\Framework\DataObject\IdentityInterface;
  * @method $this setTitle(string $value)
  * @method string getMetaKeywords()
  * @method $this setMetaKeywords(string $value)
- * @method string getMetaDescription()
  * @method $this setMetaDescription(string $value)
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
