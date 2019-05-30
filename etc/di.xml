@@ -9,6 +9,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <preference for="Magefan\Blog\Api\AuthorInterface" type="Magefan\Blog\Model\Author" />
+    <preference for="Magefan\Blog\Api\AuthorCollectionInterface" type="Magefan\Blog\Model\ResourceModel\Author\Collection" />
     <preference for="Magefan\Blog\Api\SitemapConfigInterface" type="Magefan\Blog\Model\Sitemap\SitemapConfig" />
     <preference for="Magefan\Blog\Api\PostManagementInterface" type="Magefan\Blog\Model\PostManagement" />
     <preference for="Magefan\Blog\Api\CategoryManagementInterface" type="Magefan\Blog\Model\CategoryManagement" />

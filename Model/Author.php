@@ -49,6 +49,7 @@ class Author extends \Magento\Framework\Model\AbstractModel
     protected function _construct()
     {
         $this->_init('Magefan\Blog\Model\ResourceModel\Author');
+        $this->_collectionName = \Magefan\Blog\Api\AuthorCollectionInterface::class;
     }
 
     /**
