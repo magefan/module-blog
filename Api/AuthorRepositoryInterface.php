@@ -8,8 +8,6 @@
 
 namespace Magefan\Blog\Api;
 
-use Magefan\Blog\Model\Author;
-
 /**
  * Interface AuthorRepositoryInterface
  * @package Magefan\Blog\Api
@@ -17,10 +15,10 @@ use Magefan\Blog\Model\Author;
 interface AuthorRepositoryInterface
 {
     /**
-     * @param Author $author
+     * @param AuthorInterface $author
      * @return mixed
      */
-    public function save(Author $author);
+    public function save(AuthorInterface $author);
 
     /**
      * @param $authorId
@@ -39,10 +37,10 @@ interface AuthorRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
-     * @param Author $author
+     * @param AuthorInterface $author
      * @return mixed
      */
-    public function delete(Author $author);
+    public function delete(AuthorInterface $author);
 
     /**
      * Delete Author by ID.

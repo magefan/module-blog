@@ -6,9 +6,9 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\AuthorRepositoryInterface;
-use Magefan\Blog\Model\AuthorFactory;
+use Magefan\Blog\Api\AuthorInterface;
 use Magefan\Blog\Model\ResourceModel\Author as AuthorResourceModel;
-use Magefan\Blog\Model\ResourceModel\Author\CollectionFactory;
+use Magefan\Blog\Api\AuthorCollectionInterfaceFactory;
 use Magento\Framework\Api\SearchResultsFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\DB\Adapter\ConnectionException;
@@ -25,7 +25,7 @@ use Magento\Framework\Exception\StateException;
 class AuthorRepository implements AuthorRepositoryInterface
 {
     /**
-     * @var AuthorFactory
+     * @var AuthorInterface
      */
     private $authorFactory;
     /**
@@ -33,7 +33,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      */
     private $authorResourceModel;
     /**
-     * @var CollectionFactory
+     * @var AuthorCollectionInterfaceFactory
      */
     private $collectionFactory;
     /**
@@ -43,15 +43,15 @@ class AuthorRepository implements AuthorRepositoryInterface
 
     /**
      * AuthorRepository constructor.
-     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
+     * @param AuthorInterface $authorFactory
      * @param AuthorResourceModel $authorResourceModel
-     * @param CollectionFactory $collectionFactory
+     * @param AuthorCollectionInterfaceFactory $collectionFactory
      * @param SearchResultsFactory $searchResultsFactory
      */
     public function __construct(
-        AuthorFactory $authorFactory,
+        AuthorInterface $authorFactory,
         AuthorResourceModel $authorResourceModel,
-        CollectionFactory $collectionFactory,
+        AuthorCollectionInterfaceFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory
     ) {
         $this->authorFactory = $authorFactory;
@@ -61,13 +61,13 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
-     * @param Author $author
-     * @return bool|mixed
+     * @param AuthorInterface $author
+     * @return bool|Author|mixed
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
-    public function save(Author $author)
+    public function save(AuthorInterface $author)
     {
         if ($author) {
             try {
@@ -107,12 +107,12 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
-     * @param Author $author
+     * @param AuthorInterface $author
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Author $author)
+    public function delete(AuthorInterface $author)
     {
         try {
             $this->authorResourceModel->delete($author);

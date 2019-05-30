@@ -41,7 +41,7 @@ use Magento\Framework\Model\AbstractModel;
 class Comment extends AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
     /**
-     * @var \Magefan\Blog\Model\AuthorFactory
+     * @var PostFactory
      */
     protected $postFactory;
 
@@ -51,7 +51,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     protected $customerFactory;
 
     /**
-     * @var \Magento\User\Model\UserFactory
+     * @var \Magefan\Blog\Api\AuthorInterfaceFactory
      */
     protected $userFactory;
 
@@ -81,7 +81,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * @param \Magento\Framework\Registry                                  $registry
      * @param \Magefan\Blog\Model\PostFactory                              $postFactory
      * @param \Magento\Customer\Model\CustomerFactory                      $customerFactory,
-     * @param \Magento\User\Model\Useractory                               $userFactory,
+     * @param \Magefan\Blog\Api\AuthorInterfaceFactory                     $userFactory,
      * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory  $commentCollectionFactory
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
@@ -92,7 +92,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         \Magento\Framework\Registry $registry,
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magento\Customer\Model\CustomerFactory $customerFactory,
-        \Magento\User\Model\UserFactory $userFactory,
+        \Magefan\Blog\Api\AuthorInterfaceFactory $userFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
@@ -200,7 +200,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
                     $admin = $this->userFactory->create();
                     $admin->load($this->getAdminId());
                     $this->author->setData([
-                        'nickname' => $customer->getName(),
+                        'nickname' => $admin->getName(),
                         'email' => $this->getEmail(),
                         'admin' => $admin,
                     ]);
