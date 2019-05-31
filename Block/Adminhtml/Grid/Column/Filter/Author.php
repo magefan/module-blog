@@ -14,20 +14,21 @@ namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Filter;
 class Author extends \Magento\Backend\Block\Widget\Grid\Column\Filter\Select
 {
     /**
-     * @var \Magefan\Blog\Model\ResourceModel\Author\CollectionFactory
+     * @var \Magefan\Blog\Api\AuthorCollectionInterfaceFactory
      */
     protected $collectionFactory;
 
     /**
+     * Author constructor.
      * @param \Magento\Backend\Block\Context $context
      * @param \Magento\Framework\DB\Helper $resourceHelper
-     * @param \Magefan\Blog\Model\ResourceModel\Author\CollectionFactory $collectionFactory
+     * @param \Magefan\Blog\Api\AuthorCollectionInterfaceFactory $collectionFactory
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Context $context,
         \Magento\Framework\DB\Helper $resourceHelper,
-        \Magefan\Blog\Model\ResourceModel\Author\CollectionFactory $collectionFactory,
+        \Magefan\Blog\Api\AuthorCollectionInterfaceFactory $collectionFactory,
         array $data = []
     ) {
         $this->collectionFactory = $collectionFactory;

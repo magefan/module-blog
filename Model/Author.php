@@ -8,12 +8,13 @@
 
 namespace Magefan\Blog\Model;
 
-use Magefan\Blog\Model\Url;
+use Magefan\Blog\Api\AuthorInterface;
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Blog author model
  */
-class Author extends \Magento\Framework\Model\AbstractModel
+class Author extends AbstractModel implements AuthorInterface
 {
     /**
      * Initialize dependencies.
@@ -48,7 +49,8 @@ class Author extends \Magento\Framework\Model\AbstractModel
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Author');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Author::class);
+        $this->_collectionName = \Magefan\Blog\Model\ResourceModel\Author\Collection::class;
     }
 
     /**

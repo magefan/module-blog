@@ -14,9 +14,9 @@ namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Render;
 class Author extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer
 {
     /**
-     * @var \Magefan\Blog\Model\AuthorFactory
+     * @var \Magefan\Blog\Api\AuthorInterfaceFactory
      */
-    protected $authoryFactory;
+    protected $authorFactory;
 
     /**
      * @var array
@@ -24,13 +24,14 @@ class Author extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstract
     static protected $authors = [];
 
     /**
+     * Author constructor.
      * @param \Magento\Backend\Block\Context $context
-     * @param \Magefan\Blog\Model\AuthorFactory $localeLists
+     * @param \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Context $context,
-        \Magefan\Blog\Model\AuthorFactory $authorFactory,
+        \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);

@@ -173,18 +173,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             }
         }
 
-        /* Save tags links */
-        $newIds = (array)$object->getTags();
-        foreach ($newIds as $key => $id) {
-            if (!$id) { // e.g.: zero
-                unset($newIds[$key]);
-            }
-        }
-        if (is_array($newIds)) {
-            $oldIds = $this->lookupTagIds($object->getId());
-            $this->_updateLinks($object, $newIds, $oldIds, 'magefan_blog_post_tag', 'tag_id');
-        }
-
         /* Save related post & product links */
         if ($links = $object->getData('links')) {
             if (is_array($links)) {
@@ -228,6 +216,13 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $rowData = []
     ) {
         $table = $this->getTable($tableName);
+
+        if ($object->getId() && empty($rowData)) {
+            $currentData = $this->_lookupAll($object->getId(), $tableName, '*');
+            foreach ($currentData as $item) {
+                $rowData[$item[$field]] = $item;
+            }
+        }
 
         $insert = $newRelatedIds;
         $delete = $oldRelatedIds;
@@ -436,5 +431,27 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         );
 
         return $adapter->fetchCol($select);
+    }
+
+    /**
+     * Get rows to which specified item is assigned
+     * @param  int $postId
+     * @param  string $tableName
+     * @param  string $field
+     * @return array
+     */
+    protected function _lookupAll($postId, $tableName, $field)
+    {
+        $adapter = $this->getConnection();
+
+        $select = $adapter->select()->from(
+            $this->getTable($tableName),
+            $field
+        )->where(
+            'post_id = ?',
+            (int)$postId
+        );
+
+        return $adapter->fetchAll($select);
     }
 }

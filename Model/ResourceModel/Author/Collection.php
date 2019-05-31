@@ -8,10 +8,13 @@
 
 namespace Magefan\Blog\Model\ResourceModel\Author;
 
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Magefan\Blog\Api\AuthorCollectionInterface;
+
 /**
  * Blog author collection
  */
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+class Collection extends AbstractCollection implements AuthorCollectionInterface
 {
     /**
      * Constructor
@@ -22,6 +25,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _construct()
     {
         parent::_construct();
-        $this->_init('Magefan\Blog\Model\Author', 'Magefan\Blog\Model\ResourceModel\Author');
+        $this->_init(\Magefan\Blog\Model\Author::class, \Magefan\Blog\Model\ResourceModel\Author::class);
     }
 }

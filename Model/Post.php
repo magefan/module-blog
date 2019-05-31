@@ -89,7 +89,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $_url;
 
     /**
-     * @var \Magefan\Blog\Model\AuthorFactory
+     * @var \Magefan\Blog\Api\AuthorInterfaceFactory
      */
     protected $_authorFactory;
 
@@ -152,7 +152,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magefan\Blog\Model\AuthorFactory $authorFactory
+     * @param \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory
      * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
      * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory
@@ -169,7 +169,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         Url $url,
         \Magefan\Blog\Model\ImageFactory $imageFactory,
-        \Magefan\Blog\Model\AuthorFactory $authorFactory,
+        \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory,
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
@@ -775,7 +775,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post author
-     * @return \Magefan\Blog\Model\Author | false
+     * @return \Magefan\Blog\Api\AuthorInterface | false
      */
     public function getAuthor()
     {
