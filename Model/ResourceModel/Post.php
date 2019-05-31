@@ -434,7 +434,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Get ids to which specified item is assigned
+     * Get rows to which specified item is assigned
      * @param  int $postId
      * @param  string $tableName
      * @param  string $field
