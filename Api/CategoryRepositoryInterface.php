@@ -31,8 +31,7 @@ interface CategoryRepositoryInterface
     /**
      * Retrieve Category matching the specified criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface
-    $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Magento\Framework\Api\SearchResults
      * @throws \Magento\Framework\Exception\LocalizedException
      */
