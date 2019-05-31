@@ -25,6 +25,6 @@ class Collection extends AbstractCollection implements AuthorCollectionInterface
     protected function _construct()
     {
         parent::_construct();
-        $this->_init('Magefan\Blog\Model\Author', 'Magefan\Blog\Model\ResourceModel\Author');
+        $this->_init(\Magefan\Blog\Model\Author::class, \Magefan\Blog\Model\ResourceModel\Author::class);
     }
 }

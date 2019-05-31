@@ -7,7 +7,8 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\AuthorRepositoryInterface;
 use Magefan\Blog\Api\AuthorInterface;
-use Magefan\Blog\Model\ResourceModel\Author as AuthorResourceModel;
+use Magefan\Blog\Api\AuthorInterfaceFactory;
+use Magefan\Blog\Api\AuthorResourceModelInterface as AuthorResourceModel;
 use Magefan\Blog\Api\AuthorCollectionInterfaceFactory;
 use Magento\Framework\Api\SearchResultsFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
@@ -25,7 +26,7 @@ use Magento\Framework\Exception\StateException;
 class AuthorRepository implements AuthorRepositoryInterface
 {
     /**
-     * @var AuthorInterface
+     * @var AuthorInterfaceFactory
      */
     private $authorFactory;
     /**
@@ -49,7 +50,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @param SearchResultsFactory $searchResultsFactory
      */
     public function __construct(
-        AuthorInterface $authorFactory,
+        AuthorInterfaceFactory $authorFactory,
         AuthorResourceModel $authorResourceModel,
         AuthorCollectionInterfaceFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory

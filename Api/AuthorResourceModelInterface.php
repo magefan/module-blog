@@ -8,7 +8,7 @@
 
 namespace Magefan\Blog\Api;
 
-interface AuthorInterface
+interface AuthorResourceModelInterface
 {
 
 }
