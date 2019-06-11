@@ -13,20 +13,23 @@
 
 .post-holder {
     padding-bottom: 20px;
-    margin-bottom: 20px;
-    background: #F5F5F5;
+    margin-bottom: 40px;
+    /*background: #F5F5F5;*/
     padding: 20px;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
 }
-
+/*
 .post-holder:hover {
     box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 2;
 }
+*/
 
 .post-holder .post-header {position:relative;}
 
-.post-holder .post-header .post-info {padding: 0 0 10px 0;}
+.post-holder .post-header .post-info {padding: 0 0 20px 0;}
 .post-holder .post-header .post-info .item,
 .post-holder .post-header .post-info .dash {display: inline-block;}
 .post-holder .post-header .post-info .label {font-weight: 700;}
@@ -34,7 +37,7 @@
 
 
 .post-list {
-    margin-top: 20px;
+    margin-top: 0px;
     margin-bottom: 20px;
     list-style: none;
 }
