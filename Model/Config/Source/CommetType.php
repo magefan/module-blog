@@ -50,7 +50,7 @@ class CommetType implements \Magento\Framework\Option\ArrayInterface
             ['value' => self::MAGEFAN, 'label' => __('Use Magefan Blog Comments')],
             ['value' => self::FACEBOOK, 'label' => __('Use Facebook Comments')],
             ['value' => self::DISQUS, 'label' => __('Use Disqus Comments')],
-            ['value' => self::GOOGLE, 'label' => __('Use Google Comments')],
+            /*['value' => self::GOOGLE, 'label' => __('Use Google Comments')],*/
         ];
     }
 
