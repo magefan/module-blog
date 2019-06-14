@@ -165,29 +165,29 @@ class Url
     public function getCanonicalUrl(\Magento\Framework\Model\AbstractModel $object)
     {
         $storeIds = $object->getStoreIds();
-        $useDefaultStore = false;
+        $useOtherStore = false;
         $currentStore = $this->_storeManager->getStore($object->getStoreId());
 
         if (is_array($storeIds)) {
             if (0 == array_values($storeIds)[0]) {
-                $useDefaultStore = true;
+                $useOtherStore = true;
+                $newStore = $currentStore->getGroup()->getDefaultStore();
             } elseif (count($storeIds) > 1) {
                 foreach ($storeIds as $storeId) {
-                    if ($storeId != $currentStore->getId()) {
+                    //if ($storeId != $currentStore->getId()) {
                         $store = $this->_storeManager->getStore($storeId);
-                        if ($store->getGroupId() == $currentStore->getGroupId()) {
-                            $useDefaultStore = true;
+                        //if ($store->getGroupId() == $currentStore->getGroupId()) {
+                            $useOtherStore = true;
+                            $newStore = $store;
                             break;
-                        }
-                    }
+                        //}
+                    //}
                 }
             }
         }
 
         $storeChanged = false;
-
-        if ($useDefaultStore) {
-            $newStore = $currentStore->getGroup()->getDefaultStore();
+        if ($useOtherStore) {
             $origStore = $this->_url->getScope();
             if ($newStore->getId() != $origStore->getId()) {
                 $this->_url->setScope($newStore);
