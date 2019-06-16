@@ -205,6 +205,9 @@
     top: 7px;
 }
 
+/* MSP recaptcha */
+#post-comments .c-replyform .c-btn-hld #msp-recaptcha-container {margin-top: 20px;}
+
 @media screen and (max-width: 450px) {
     .c-img {width: 38px;}
     .c-post {font-size: 13px;}
@@ -218,3 +221,4 @@
     .c-replyform .left-hld,
     .c-replyform .right-hld {float:none; width: 100%; padding: 0 0 5px 0}
 }
+
