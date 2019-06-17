@@ -281,8 +281,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addActiveFilter()
     {
         return $this
-            ->addFieldToFilter('is_active', 1)
-            ->addFieldToFilter('publish_time', ['lteq' => $this->_date->gmtDate()]);
+            ->addFieldToFilter('main_table.is_active', 1)
+            ->addFieldToFilter('main_table.publish_time', ['lteq' => $this->_date->gmtDate()]);
     }
 
     /**
