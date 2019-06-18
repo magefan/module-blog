@@ -9,6 +9,15 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
   * Magento Community Edition 2.1.0-2.3.x or Magento Enterprise Edition 2.1.0-2.3.x
   * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.4 . Please install this extension first if you use installation via FTP.
 
+## Magento 2 Blog Editions & Pricing
+  
+  <a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://magefan.com/media/wysiwyg/products/magento2-blog-plans-min.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+
+
 ## What you should know about reviews on our competitor websites?
 
   Yep!!! We're so good that our competitor copy-pastes our reviews :-) [Please check](https://www.youtube.com/watch?v=rnqz5t6Kc5k).
