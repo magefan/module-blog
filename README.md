@@ -13,20 +13,6 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
             src="https://magefan.com/media/wysiwyg/products/magento2-blog-plans-min.png"
             alt="Magento 2 Blog Editions & Pricing" />
         </a>
-
-
-## What you should know about reviews on our competitor websites?
-
-  Yep!!! We're so good that our competitor copy-pastes our reviews :-) [Please check](https://www.youtube.com/watch?v=rnqz5t6Kc5k).
-  
-  
-<a href="https://www.youtube.com/watch?v=rnqz5t6Kc5k">
-          <img
-            src="https://magefan.com/media/wysiwyg/Blog/mpl3.png"
-            alt="What you should know about reviews at mageplaza.com?"
-            height="430"
-          >
-        </a>
         
 ## Features
   * Unlimited blog posts, multi-level categories, and tags
