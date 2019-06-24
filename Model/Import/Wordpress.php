@@ -215,6 +215,29 @@ class Wordpress extends AbstractImport
                 }
             }
 
+            /* Find Meta Data */
+            $sql = 'SELECT * FROM `'.$_pref.'postmeta` WHERE `post_id` = ' . ((int)$data['ID']);
+            $metaResult = $this->_mysqliQuery($sql);
+            while ($metaData = mysqli_fetch_assoc($metaResult)) {
+
+                $metaValue = trim($metaData['meta_value']);
+                if (!$metaValue) {
+                    continue;
+                }
+
+                switch ($metaData['meta_key']) {
+                    case 'wpcf-meta-description' :
+                        $data['short_content'] = $metaValue;
+                        break;
+                    case '_yoast_wpseo_title' :
+                        $data['meta_title'] = $metaValue;
+                        break;
+                    case '_yoast_wpseo_metadesc' :
+                        $data['meta_description'] = $metaValue;
+                        break;
+                }  
+            } 
+
             /* Prepare post data */
             foreach (['post_title', 'post_name', 'post_content'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
@@ -234,11 +257,13 @@ class Wordpress extends AbstractImport
             $data = [
                 'store_ids' => [$this->getStoreId()],
                 'title' => $data['post_title'],
+                'meta_title' => isset($data['meta_title']) ? $data['meta_title'] : '',
+                'meta_description' => isset($data['meta_description']) ? $data['meta_description'] : '',
                 'meta_keywords' => '',
-                'meta_description' => '',
                 'identifier' => $data['post_name'],
                 'content_heading' => '',
                 'content' => $content,
+                'short_content' => isset($data['short_content']) ? $data['short_content'] : '',
                 'creation_time' => $creationTime,
                 'update_time' => strtotime($data['post_modified_gmt']),
                 'publish_time' => $creationTime,
