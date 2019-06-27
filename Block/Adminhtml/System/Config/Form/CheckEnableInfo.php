@@ -30,11 +30,6 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     protected $config;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
      * @var \Magento\Framework\Module\ModuleListInterface
      */
     protected $moduleList;
@@ -56,14 +51,12 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magefan\Blog\Model\Config $config,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Module\ModuleListInterface $moduleList,
         \Magento\Framework\App\ProductMetadataInterface $metadata,
         array $data = []
     ) {
         $this->config = $config;
-        $this->_storeManager = $storeManager;
-        $this->moduleList       = $moduleList;
+        $this->moduleList  = $moduleList;
         $this->metadata = $metadata;
         parent::__construct($context, $data);
     }
