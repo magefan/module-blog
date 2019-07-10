@@ -13,10 +13,10 @@
  * @var $block \Magefan\Blog\Block\Sidebar\Search
  */
 ?>
-<?php $conetnt = $block->getContent() ?>
-<?php if ($conetnt) { ?>
+<?php $content = $block->getContent() ?>
+<?php if ($content) { ?>
     <div class="widget block blog-custom" >
         <?php /* without html encode */ ?>
-        <?= $conetnt ?>
+        <?= $content ?>
     </div>
 <?php } ?>
