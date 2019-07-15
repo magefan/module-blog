@@ -167,4 +167,18 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             ]);
         }
     }
+    
+    /**
+     * Retrieve identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        if ($this->canDisplay()) {
+            return parent::getIdentities();
+        }
+
+        return [];
+    }
 }
