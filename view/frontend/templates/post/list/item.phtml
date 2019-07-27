@@ -14,7 +14,7 @@
  */
 ?>
 <?php
-    $_post = $this->getPost();
+    $_post = $block->getPost();
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null, true);
 ?>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <?php echo $this->getInfoHtml() ?>
+        <?php echo $block->getInfoHtml() ?>
     </div>
 
     <div class="post-content">

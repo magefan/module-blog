@@ -14,9 +14,9 @@
  */
 ?>
 <?php
-    $_post = $this->getPost();
+    $_post = $block->getPost();
     $_postUrl = $_post->getPostUrl();
-    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+    $_postName = $block->escapeHtml($_post->getTitle(), null);
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
@@ -27,7 +27,7 @@
                 <a class="addthis_button_email"></a>
                 <a class="addthis_button_compact"></a>
             </div>
-            <?php echo $this->getInfoHtml() ?>
+            <?php echo $block->getInfoHtml() ?>
         </div>
 
         <div class="post-content">
@@ -45,7 +45,7 @@
         </div>
 
         <div class="post-bottom">
-            <?php echo $this->getChildHtml('blog.post.bottom') ?>
+            <?php echo $block->getChildHtml('blog.post.bottom') ?>
         </div>
     </div>
 </div>

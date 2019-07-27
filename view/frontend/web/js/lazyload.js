@@ -98,7 +98,7 @@
                 startLoading();
             });
         }
-    }
+    };
 
     return function (options) {
         new Lazyload(options)

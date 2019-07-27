@@ -15,7 +15,7 @@
 ?>
 
 <?php
-if ($exist = $block->getItems()->getSize() && $this->displayProducts()) {
+if ($exist = $block->getItems()->getSize() && $block->displayProducts()) {
     $type = 'related';
     $class = $type;
 

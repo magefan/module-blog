@@ -16,8 +16,8 @@
 
 <?php if ($block->displayLinks()) { ?>
     <?php
-        $prevPost = $this->getPrevPost();
-        $nextPost = $this->getNextPost();
+        $prevPost = $block->getPrevPost();
+        $nextPost = $block->getNextPost();
     ?>
     <?php if ($prevPost || $nextPost) { ?>
         <div class="post-nextprev-hld clearfix">

@@ -519,7 +519,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         }
 
         return $this->getData($key);
-        ;
     }
 
     /**

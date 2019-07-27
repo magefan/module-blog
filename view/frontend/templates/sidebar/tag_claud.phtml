@@ -13,10 +13,10 @@
  * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
  */
 ?>
-<?php $tags = $this->getTags(); ?>
+<?php $tags = $block->getTags(); ?>
 
 <?php if (count($tags)) { ?>
-<?php $maxCount = $this->getMaxCount() ?>
+<?php $maxCount = $block->getMaxCount() ?>
 
 <div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
     <div class="block-title">
@@ -26,7 +26,7 @@
     <div class="tagclaud-hld">
     <?php foreach ($tags as $tag) { ?>
         <?php $title = $block->escapeHtml($tag->getTitle()) ?>
-        <span class="<?php echo $this->getTagClass($tag) ?>">
+        <span class="<?php echo $block->getTagClass($tag) ?>">
             <a href="<?php echo $tag->getTagUrl() ?>" title="<?php echo $title ?>">
                 <?php echo $title ?>
             </a>

@@ -25,7 +25,7 @@ define(
                     + '<div>' + msg + '</div>'
                 +'</div>';
                 return $(h);
-            }
+            };
 
             var processError = function ($form, msg) {
                 $form.find('[type=submit]').removeAttr('disabled');
@@ -34,7 +34,7 @@ define(
                 setTimeout(function () {
                     $h.remove();
                 }, msgLifetime);
-            }
+            };
 
             var processSuccess = function ($form, msg) {
                 $form.find('[type=submit]').removeAttr('disabled');
@@ -44,7 +44,7 @@ define(
                 setTimeout(function () {
                     $h.remove();
                 }, msgLifetime);
-            }
+            };
 
             $hd.find('form').submit(function () {
                 var $form = $(this);
