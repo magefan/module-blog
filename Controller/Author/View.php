@@ -37,8 +37,9 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $this->_objectManager->get(\Magento\Framework\Registry::class)->register('current_blog_author', $author);
 
-        $this->_view->loadLayout();
-        $this->_view->renderLayout();
+        $resultPage = $this->_objectManager->get(\Magefan\Blog\Helper\Page::class)
+            ->prepareResultPage($this, $author);
+        return $resultPage;
     }
 
     /**

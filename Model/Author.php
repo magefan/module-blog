@@ -63,6 +63,39 @@ class Author extends AbstractModel implements AuthorInterface
     }
 
     /**
+     * Retrieve meta title
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        $title = $this->getData('meta_title');
+        if (!$title) {
+            $title = $this->getTitle();
+        }
+
+        return trim($title);
+    }
+
+    /**
+     * Retrieve meta description
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        $desc = $this->getData('meta_description');
+        if (!$desc) {
+            $desc = $this->getData('content');
+        }
+
+        $desc = strip_tags($desc);
+        if (mb_strlen($desc) > 300) {
+            $desc = mb_substr($desc, 0, 300);
+        }
+
+        return trim($desc);
+    }
+
+    /**
      * Retrieve author identifier
      * @return string | null
      */
