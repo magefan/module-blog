@@ -3,10 +3,10 @@
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
         "magefan/module-community" : ">=2.0.6",
-        "magefan/module-wysiwyg-advanced" : ">=2.0.3"
+        "magefan/module-wysiwyg-advanced" : ">=2.0.4"
     },
     "type": "magento2-module",
-    "version": "2.9.0",
+    "version": "2.9.0.1",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
