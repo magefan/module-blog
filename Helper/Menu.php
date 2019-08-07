@@ -20,7 +20,7 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @var \Magefan\Blog\Model\Url
      */
-    protected $_url;
+    protected $url;
 
     /**
      * @param \Magento\Framework\Registry $registry,
