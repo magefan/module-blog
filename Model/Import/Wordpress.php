@@ -67,6 +67,9 @@ class Wordpress extends AbstractImport
                 $oldCategories[$category->getOldId()] = $category;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 unset($category);
+                if (!isset($data['title'])) {
+                    $data['title'] = 'Undefined';
+                }
                 $this->_skippedCategories[] = $data['title'];
                 $this->_logger->addDebug('Blog Category Import [' . $data['title'] . ']: '. $e->getMessage());
             }
@@ -127,7 +130,7 @@ class Wordpress extends AbstractImport
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
 
-            if ($data['title']{0} == '?') {
+            if (isset($data['title']) && $data['title']{0} == '?') {
                 /* fix for ???? titles */
                 $data['title'] = $data['identifier'];
             }
@@ -143,6 +146,9 @@ class Wordpress extends AbstractImport
                 $oldTags[$tag->getOldId()] = $tag;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 unset($tag);
+                if (!isset($data['title'])) {
+                    $data['title'] = 'Undefined';
+                }
                 $this->_skippedTags[] = $data['title'];
                 $this->_logger->addDebug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());
             }
@@ -316,12 +322,18 @@ class Wordpress extends AbstractImport
                         $this->_importedCommentsCount++;
                         $commentParents[$comments["comment_ID"]] = $comment->getCommentId();
                     } catch (\Exception $e) {
+                        if (!isset($commentData['title'])) {
+                            $commentData['title'] = 'Undefined';
+                        }
                         $this->_skippedComments[] = $commentData['title'];
                         unset($comment);
                     }
                 }
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                if (!isset($data['title'])) {
+                    $data['title'] = 'Undefined';
+                }
                 $this->_skippedPosts[] = $data['title'];
                 $this->_logger->addDebug('Blog Post Import [' . $data['title'] . ']: '. $e->getMessage());
             }
