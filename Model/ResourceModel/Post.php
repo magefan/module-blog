@@ -244,6 +244,22 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 );
             }
 
+            /* Fix if some rows have extra data */
+            $allFields = [];
+            foreach ($data as $i => $row) {
+                foreach ($row as $key => $value) {
+                    $allFields[$key] = $key;
+                }
+            }
+            foreach ($data as $i => $row) {
+                foreach ($allFields as $key) {
+                    if (!array_key_exists($key, $row)) {
+                        $data[$i][$key] = null;
+                    }
+                }
+            }
+            /* End fix */
+
             $this->getConnection()->insertMultiple($table, $data);
         }
     }
