@@ -15,6 +15,7 @@
         <add id="Magefan_Blog::tag" title="Tags" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="25" action="blog/tag" resource="Magefan_Blog::tag"/>
         <add id="Magefan_Blog::comment" title="Comments" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="30" action="blog/comment" resource="Magefan_Blog::comment"/>
         <add id="Magefan_Blog::import" title="Import" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="40" action="blog/import" resource="Magefan_Blog::import"/>
+        <add id="Magefan_Blog::widget" title="Add Blog Blocks via Widgets" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="45" action="adminhtml/widget_instance" resource="Magento_Widget::widget_instance"/>
         <add id="Magefan_Blog::config_blog" title="Configuration" module="Magefan_Blog" parent="Magefan_Blog::elements" sortOrder="50" action="adminhtml/system_config/edit/section/mfblog" resource="Magefan_Blog::config_blog"/>
     </menu>
 </config>
