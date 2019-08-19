@@ -72,7 +72,7 @@ class Run extends \Magento\Backend\App\Action
         } catch (\Exception $e) {
             $this->messageManager->addException($e, __('Something went wrong: ').' '.$e->getMessage());
             $this->_getSession()->setData('import_'.$type.'_form_data', $data);
-            $this->_redirect('*/*/'.$type);
+            $this->_redirect('*/*/' . (in_array($type, ['mageplaza', 'mirasvit']) ? '' : $type));
         }
     }
 

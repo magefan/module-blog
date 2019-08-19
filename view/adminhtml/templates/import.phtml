@@ -76,10 +76,14 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.open('https://magefan.com/migrate-joomla-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/joomla.jpg')) ?>" />
+                        <div class="itm-hld" onclick="goToMstImport();">
+                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/mirasvit.png')) ?>" />
                             <br/>
-                            <span class="lable">Import from Joomla<br/><br/></span>
+                            <span class="lable">Import from Mirasvit<br/><br/></span>
+                            <form id="start_mst_import" action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>" method="post">
+                                <input type="hidden" name="type" value="mirasvit" />
+                                <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
+                            </form>
                         </div>
                     </td>
                 <tr>
@@ -120,7 +124,7 @@
                         <div class="itm-hld" onclick="window.open('https://magefan.com/import-xml-csv-to-magento2-blog?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
                             <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/csv.jpg')) ?>" />
                             <br/>
-                            <span class="lable">Import from CSV File<br/><br/></span>
+                            <span class="lable">Import from CSV/XML File<br/><br/></span>
                         </div>
                     </td>
                 <tr>
@@ -130,10 +134,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.open('https://magefan.com/import-xml-csv-to-magento2-blog?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/xml.jpg')) ?>" />
+                        <div class="itm-hld" onclick="window.open('https://magefan.com/migrate-joomla-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
+                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/joomla.jpg')) ?>" />
                             <br/>
-                            <span class="lable">Import from XML File<br/><br/></span>
+                            <span class="lable">Import from Joomla<br/><br/></span>
                         </div>
                     </td>
                 <tr>
@@ -158,8 +162,15 @@
 <script type="text/javascript">
     function goToMgImport()
     {
-        if (confirm('Are you sure you want to start import from Mageplaza Blog? Attention! Do not run this import again.')) {
+        if (confirm('Are you sure you want to start import Blog? Attention! Do not run this import again.')) {
             document.getElementById('start_mg_import').submit();
         }
     }
+    function goToMstImport()
+    {
+        if (confirm('Are you sure you want to start import Blog? Attention! Do not run this import again.')) {
+            document.getElementById('start_mst_import').submit();
+        }
+    }
+
 </script>
