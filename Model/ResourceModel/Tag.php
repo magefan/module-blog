@@ -119,6 +119,6 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^([^?#<>@!&*()$%^\\/+=,{}]+)?$/', $object->getData('identifier'));
+        return preg_match('/^([^?#<>@!&*()$%^\\+=,{}]+)?$/', $object->getData('identifier'));
     }
 }
