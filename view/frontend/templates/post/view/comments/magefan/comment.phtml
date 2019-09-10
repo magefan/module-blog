@@ -28,7 +28,7 @@
         <div class="p-text"><?php echo nl2br($block->escapeHtml($comment->getText())) ?></div>
         <div class="p-actions">
             <a href="#" class="reply-action" data-comment="<?php echo $comment->isReply() ? $comment->getParentId() : $comment->getId() ?>" title="<?php echo __('Reply') ?>"><?php echo __('Reply') ?></a>
-            <span class="publish-date"><?php echo $block->escapeHtml($comment->getPublishDate('M d, Y H:i')) ?></span>
+            <span class="publish-date"><?php echo $block->escapeHtml($block->getPublishDate()) ?></span>
         </div>
         <?php
             $replies = $block->getRepliesCollection();

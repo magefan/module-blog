@@ -711,14 +711,19 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getCommentsCount()
     {
-        if (!$this->hasData('comments_count')) {
-            $comments = $this->_commentCollectionFactory->create()
-                ->addFieldToFilter('post_id', $this->getId())
-                ->addActiveFilter()
-                ->addFieldToFilter('parent_id', 0);
-            $this->setData('comments_count', (int)$comments->getSize());
+        $enableComments = $this->getEnableComments();
+        if ($enableComments || $enableComments === null) {
+            if (!$this->hasData('comments_count')) {
+                $comments = $this->_commentCollectionFactory->create()
+                    ->addFieldToFilter('post_id', $this->getId())
+                    ->addActiveFilter()
+                    ->addFieldToFilter('parent_id', 0);
+                $this->setData('comments_count', (int)$comments->getSize());
+            }
+            return $this->getData('comments_count');
+        } else {
+            return 0;
         }
-        return $this->getData('comments_count');
     }
 
     /**

@@ -67,4 +67,17 @@ class Info extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPublishDate()
+    {
+        $dateFormat = $this->_scopeConfig->getValue(
+            'mfblog/design/format_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        return $this->getPost()->getPublishDate($dateFormat);
+    }
 }

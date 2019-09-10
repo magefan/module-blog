@@ -18,11 +18,13 @@
     <?php $_postCollection = $block->getPostCollection(); ?>
     <?php if ($_postCollection->count()) { ?>
     <div class="block related">
+        <?php /*
         <div class="block-title title">
             <strong id="block-relatedposts-heading" role="heading" aria-level="2">
-                <?php echo __('Related posts') ?>
+                <?php echo __('Related Posts') ?>
             </strong>
         </div>
+        */ ?>
         <ol class="block-content">
             <?php foreach ($_postCollection as $_post) { ?>
                 <li class="item">

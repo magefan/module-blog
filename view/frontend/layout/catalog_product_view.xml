@@ -9,8 +9,21 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-    	<referenceContainer name="content.aside">
+        <!--
+        <referenceContainer name="content.aside">
             <block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="product.info.blog.relatedposts" as="relatedposts" before='-'  template="Magefan_Blog::catalog/product/relatedposts.phtml" />
         </referenceContainer>
+        -->
+        <referenceBlock name="product.info.details">
+            <block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="product.info.blog.relatedposts.tab" as="relatedposts.tab"  template="Magefan_Blog::catalog/product/relatedposts.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Related Posts</argument>
+                    <argument name="at_call" xsi:type="string">getRelatedposts</argument>
+                    <argument name="at_code" xsi:type="string">relatedposts</argument>
+                    <argument name="css_class" xsi:type="string">relatedposts</argument>
+                    <argument name="sort_order" xsi:type="string">50</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
     </body>
 </page>

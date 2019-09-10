@@ -17,4 +17,7 @@
     <event name="layout_load_before">
         <observer name="magefan_blog_layout_load_before" instance="Magefan\Blog\Observer\LayoutLoadBeforeObserver" />
     </event>
+    <event name="magefan_blog_page_render_before">
+        <observer name="magefan_blogplus_page_render_before" instance="Magefan\BlogPlus\Observer\PageRenderBefore" />
+    </event>
 </config>
