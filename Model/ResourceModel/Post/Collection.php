@@ -211,23 +211,68 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addSearchFilter($term)
     {
-        $this->addFieldToFilter(
-            ['title', 'short_content', 'content'],
-            [
-                ['like' => '%' . $term . '%'],
-                ['like' => '%' . $term . '%'],
-                ['like' => '%' . $term . '%']
-            ]
-        );
+        $tagPostIds = [];
+        $connection = $this->getConnection();
+        $select = $connection->select()
+            ->from(
+                ['p' => $this->getTable('magefan_blog_post')],
+                ['post_id']
+            )->joinInner(
+                ['pt' => $this->getTable('magefan_blog_post_tag')],
+                'p.post_id = pt.post_id',
+                ['']
+            )->joinInner(
+                ['t' => $this->getTable('magefan_blog_tag')],
+                't.tag_id = pt.tag_id',
+                ['tag_title' => 'title']
+            )->where('t.title LIKE ?', '%' . $term . '%' );
 
-        $this->addExpressionFieldToSelect(
-            'search_rate',
-            '(0
-              + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
-            [
-                'term' => $this->getConnection()->quote($term),
-            ]
-        );
+        foreach ($connection->fetchAll($select) as $item) {
+            $tagPostIds[] = (int)$item['post_id'];
+        }
+
+        $tagPostIds = array_unique($tagPostIds);
+
+        if (count($tagPostIds)) {
+            $this->addFieldToFilter(
+                ['title', 'short_content', 'content', 'post_id'],
+                [
+                    ['like' => '%' . $term . '%'],
+                    ['like' => '%' . $term . '%'],
+                    ['like' => '%' . $term . '%'],
+                    ['in' => $tagPostIds]
+                ]
+            );
+
+            $this->addExpressionFieldToSelect(
+                'search_rate',
+                '(0
+                  + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) 
+                  + IF(main_table.post_id IN ({{tagPostIds}}), "1", "0"))',
+                [
+                    'term' => $this->getConnection()->quote($term),
+                    'tagPostIds' => $this->getConnection()->quote($tagPostIds)
+                ]
+            );
+        } else {
+            $this->addFieldToFilter(
+                ['title', 'short_content', 'content'],
+                [
+                    ['like' => '%' . $term . '%'],
+                    ['like' => '%' . $term . '%'],
+                    ['like' => '%' . $term . '%']
+                ]
+            );
+
+            $this->addExpressionFieldToSelect(
+                'search_rate',
+                '(0
+                  + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
+                [
+                    'term' => $this->getConnection()->quote($term)
+                ]
+            );
+        }
 
         return $this;
     }

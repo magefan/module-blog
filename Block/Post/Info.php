@@ -80,4 +80,15 @@ class Info extends \Magento\Framework\View\Element\Template
 
         return $this->getPost()->getPublishDate($dateFormat);
     }
+
+    /**
+     * @return bool
+     */
+    public function isPublicationDateEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/design/publication_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 }
