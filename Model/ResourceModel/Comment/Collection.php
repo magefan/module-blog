@@ -86,4 +86,25 @@ class Collection extends AbstractCollection
         }
         return $this;
     }
+
+
+    /**
+     * Join store relation table if there is store filter
+     *
+     * @return void
+     */
+    protected function _renderFiltersBefore()
+    {
+        if ($this->getFilter('store') && !$this->getFlag('store_filtered')) {
+            $this->getSelect()->join(
+                ['store_table' => $this->getTable('magefan_blog_post_store')],
+                'main_table.post_id = store_table.post_id',
+                []
+            )->group(
+                'main_table.comment_id'
+            );
+            $this->setFlag('store_filtered', true);
+        }
+        parent::_renderFiltersBefore();
+    }
 }
