@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog tag claud sidebar template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
+ */
+?>
+<?php $tags = $block->getTags(); ?>
+
+<?php if (count($tags)) { ?>
+<?php $maxCount = $block->getMaxCount() ?>
+
+<div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
+    <div class="block-title">
+        <strong><?php echo __('Tags') ?></strong>
+    </div>
+
+    <div id="cloudCanvasContainer">
+        <canvas style="width:100%" height="<?php echo $block->getConfigValue($block::CLOUD_HEIGHT) ?>" id="cloudCanvas">
+            <div class="tagclaud-hld">
+                <?php foreach ($tags as $tag) { ?>
+                    <?php $title = $block->escapeHtml($tag->getTitle()) ?>
+                    <span class="<?php echo $block->getTagClass($tag) ?>">
+                        <a href="<?php echo $tag->getTagUrl() ?>" title="<?php echo $title ?>">
+                            <?php echo $title ?>
+                         </a>
+                    </span>
+                <?php } ?>
+            </div>
+        </canvas>
+    </div>
+</div>
+
+<script>
+    require(['jquery', 'Magefan_Blog/js/jquery.tagcanvas.min', 'domReady!'], function($){
+        if(  ! $('#cloudCanvas').tagcanvas({
+            textColour : null,
+            outlineThickness : 1,
+            outlineColour : '<?php echo '#'.$block->getConfigValue($block::HIGHLIGHT_COLOR) ?>',
+            maxSpeed : 0.03,
+            depth : 0.75,
+            weightMode : 'both',
+            weight : true,
+            initial : [0, 1],
+            weightGradient : <?php echo $block->getConfigValue($block::TEXT_COLOR_GRADIENT) ?>
+        })) {
+            $('#cloudCanvasContainer').hide();
+        }
+    });
+</script>
+<?php } ?>
+
+

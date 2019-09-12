@@ -316,7 +316,33 @@
                     <!-- <field id="max_tags_number" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Max. Tags Number</label>
                     </field> -->
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <field id="animated" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable 3D Animation</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="text_color_gradient" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Text Color Gradient</label>
+                        <comment><![CDATA[
+                            For more information about text color gradient see <a href="http://www.goat1000.com/tagcanvas-weighted.php" target="_blank">TagCanvas Documentation</a>.
+                        ]]></comment>
+                        <depends>
+                            <field id="animated">1</field>
+                        </depends>
+                    </field>
+                    <field id="highlight_color" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Highlight Color</label>
+                        <frontend_model>Magefan\Blog\Block\ColorPicker</frontend_model>
+                        <depends>
+                            <field id="animated">1</field>
+                        </depends>
+                    </field>
+                    <field id="cloud_height" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Cloud Height</label>
+                        <depends>
+                            <field id="animated">1</field>
+                        </depends>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
