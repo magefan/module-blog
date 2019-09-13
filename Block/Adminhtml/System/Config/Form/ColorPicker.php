@@ -6,25 +6,28 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Block;
+namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
  * Class ColorPicker
- * @package Magefan\Blog\Block
+ * @package Magefan\Blog\Block\Adminhtml\System\Config\Form
  */
 class ColorPicker extends Field
 {
+    /**
+     * @param AbstractElement $element
+     * @return string
+     */
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = $element->getElementHtml();
         $value = $element->getData('value');
 
         $html .= '<script>
-            require(["jquery"], function ($) {
-                $(document).ready(function (e) {
+            require(["jquery", "domReady!"], function ($) {
                     $("#'.$element->getHtmlId().'").css("background-color","#'.$value.'");
                     $("#'.$element->getHtmlId().'").colpick({
                         layout:"hex",
@@ -38,7 +41,6 @@ class ColorPicker extends Field
                     }).keyup(function(){
                         $(this).colpickSetColor(this.value);
                     });
-                });
             });
             </script>';
 

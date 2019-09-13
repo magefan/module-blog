@@ -41,17 +41,7 @@
 
 <script>
     require(['jquery', 'Magefan_Blog/js/jquery.tagcanvas.min', 'domReady!'], function($){
-        if(  ! $('#cloudCanvas').tagcanvas({
-            textColour : null,
-            outlineThickness : 1,
-            outlineColour : '<?php echo '#'.$block->getConfigValue($block::HIGHLIGHT_COLOR) ?>',
-            maxSpeed : 0.03,
-            depth : 0.75,
-            weightMode : 'both',
-            weight : true,
-            initial : [0, 1],
-            weightGradient : <?php echo $block->getConfigValue($block::TEXT_COLOR_GRADIENT) ?>
-        })) {
+        if (  ! $('#cloudCanvas').tagcanvas(<?= $block->getAnimationConfig() ?>)) {
             $('#cloudCanvasContainer').hide();
         }
     });

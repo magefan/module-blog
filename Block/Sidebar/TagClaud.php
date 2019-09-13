@@ -21,8 +21,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
      * Path to tag cloud 3D animation configuration
      */
     const ANIMATED_ENABLED = 'mfblog/sidebar/tag_claud/animated';
-    const TEXT_COLOR_GRADIENT = 'mfblog/sidebar/tag_claud/text_color_gradient';
-    const HIGHLIGHT_COLOR = 'mfblog/sidebar/tag_claud/highlight_color';
+    const TEXT_HIGHLIGHT_COLOR = 'mfblog/sidebar/tag_claud/text_highlight_color';
     const CLOUD_HEIGHT = 'mfblog/sidebar/tag_claud/cloud_height';
 
     /**
@@ -161,5 +160,31 @@ class TagClaud extends \Magento\Framework\View\Element\Template
         }
 
         return $this;
+    }
+
+    /**
+     * @return false|string
+     */
+    public function getAnimationConfig()
+    {
+        $color = $this->getConfigValue(self::TEXT_HIGHLIGHT_COLOR);
+        $color = '#' . $this->escapeHtml(trim($color, '#'));
+        $data = [
+            'textColour' => $color,
+            'outlineColour' => $color,
+            'maxSpeed' => 0.03,
+            'depth' => 0.75,
+            'weight' => true,
+            'initial' => [0, 1]
+        ];
+
+        foreach ($this->getData() as $key => $value) {
+            if (strpos($key, 'animation_') === 0) {
+                $key = str_replace('animation_', '', $key);
+                $data[$key] = $value;
+            }
+        }
+
+        return json_encode($data);
     }
 }
