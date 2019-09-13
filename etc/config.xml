@@ -84,8 +84,9 @@
                     <enabled>1</enabled>
                     <!-- <max_tags_number>10</max_tags_number> -->
                     <animated>1</animated>
-                    <text_highlight_color>006bb4</text_highlight_color>
-                    <cloud_height>250</cloud_height>
+                    <cloud_height>300</cloud_height>
+                    <text_color_gradient>{0:'#f00', 0.33:'#ff0', 0.66:'#0f0', 1:'#00f'}</text_color_gradient>
+                    <highlight_color>#111111</highlight_color>
                     <sort_order>45</sort_order>
                 </tag_claud>
                 <rss_feed>
