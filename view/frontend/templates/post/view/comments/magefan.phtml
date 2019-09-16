@@ -30,7 +30,7 @@
         </div>
         <?php } ?>
         <div class="c-replyform <?php if ($canPost)  echo 'no-active' ?>">
-            <form action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
+            <form class="comment-form-blog-recaptcha" action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
                 <?php echo $block->getBlockHtml('formkey') ?>
                 <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
                 <textarea name="text" placeholder="<?php echo $canPost ? __('Add a comment...') : __('Sign in to add a comment...') ?>" <?php if (!$canPost) {?>disabled="disabled"<?php } ?> data-validate="{required:true}"></textarea>
@@ -56,7 +56,7 @@
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
                     <?php } ?>
                     <div class="clearfix"></div>
-                    <?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?>
+                   <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
                 </div>
             </form>
         </div>
@@ -82,7 +82,7 @@
 
     <!-- reply comment form -->
     <div id="c-replyform-comment" class="c-replyform c-replyform-comment" style="display:none">
-        <form action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
+        <form class="reply-form-blog-recaptcha" action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
             <?php echo $block->getBlockHtml('formkey') ?>
             <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
             <input type="hidden" name="parent_id" value="" />
@@ -112,6 +112,7 @@
                     <button type="button" onclick="window.location='<?php echo $block->getCustomerUrl()->getLoginUrl() ?>';"><?php echo __('Sign In') ?></button>
                 <?php } ?>
                 <div class="clearfix"></div>
+                <div id="recaptcha-reply-append-to"></div>
             </div>
         </form>
     </div>
