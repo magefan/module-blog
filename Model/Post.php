@@ -625,7 +625,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getParentCategories()
     {
-        if (is_null($this->_parentCategories)) {
+        if (null === $this->_parentCategories) {
             $this->_parentCategories = $this->_categoryCollectionFactory->create()
                 ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
                 ->addStoreFilter($this->getStoreId())
@@ -671,7 +671,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getRelatedTags()
     {
-        if (is_null($this->_relatedTags)) {
+        if (null === $this->_relatedTags) {
             $this->_relatedTags = $this->_tagCollectionFactory->create()
                 ->addFieldToFilter('tag_id', ['in' => $this->getTags()])
                 ->addActiveFilter()

@@ -238,7 +238,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      */
     public function getChildComments()
     {
-        if (is_null($this->comments)) {
+        if (null === $this->comments) {
             $this->comments = $this->commentCollectionFactory->create()
                 ->addFieldToFilter('parent_id', $this->getId());
         }

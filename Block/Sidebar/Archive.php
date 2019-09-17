@@ -46,7 +46,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getMonths()
     {
-        if (is_null($this->_months)) {
+        if (null === $this->_months) {
             $this->_months = [];
             $this->_preparePostCollection();
             foreach ($this->_postCollection as $post) {
