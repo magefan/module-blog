@@ -56,6 +56,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
+        $object->validate();
         $gmtDate = $this->date->gmtDate();
 
         if ($object->isObjectNew() && !$object->getCreationTime()) {
@@ -65,5 +66,34 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $object->setUpdateTime($gmtDate);
 
         return parent::_beforeSave($object);
+    }
+
+    /**
+     * Assign post to store views, categories, related posts, etc.
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return $this
+     */
+    protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $result =  parent::_afterSave($object);
+        $postId = $object->getDataByKey('post_id');
+        $connection = $this->getConnection();
+        $commentsTable = $this->getTable('magefan_blog_comment');
+        $select = $connection->select()
+                ->from(['mbc' => $commentsTable])
+                ->where('mbc.post_id IN (?)', $postId);
+
+        $commentsCount = ['comments_count' => 0];
+        foreach ($select as $item) {
+            if ($item['status']) {
+                $commentsCount['comments_count'] += 1;
+            }
+        }
+
+        $postTable = $this->getTable('magefan_blog_post');
+        $this->getConnection()->insert($postTable, $commentsCount);
+
+        return $result;
     }
 }
