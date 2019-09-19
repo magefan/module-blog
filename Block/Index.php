@@ -37,6 +37,12 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             );
         }
 
+        $configMetaTitle = $this->_getConfigValue('meta_title');
+
+        if ($configMetaTitle) {
+            $this->pageConfig->getTitle()->set($configMetaTitle);
+        }
+
         return parent::_prepareLayout();
     }
 
