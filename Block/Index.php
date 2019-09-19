@@ -25,7 +25,9 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     protected function _prepareLayout()
     {
         $this->_addBreadcrumbs();
-        $this->pageConfig->getTitle()->set($this->_getConfigValue('title'));
+        $this->pageConfig->getTitle()->set(
+            $this->_getConfigValue('meta_title') ?: $this->_getConfigValue('title')
+        );
         $this->pageConfig->setKeywords($this->_getConfigValue('meta_keywords'));
         $this->pageConfig->setDescription($this->_getConfigValue('meta_description'));
 
@@ -37,10 +39,11 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             );
         }
 
-        $configMetaTitle = $this->_getConfigValue('meta_title');
-
-        if ($configMetaTitle) {
-            $this->pageConfig->getTitle()->set($configMetaTitle);
+        $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+        if ($pageMainTitle) {
+            $pageMainTitle->setPageTitle(
+                $this->escapeHtml($this->_getConfigValue('title'))
+            );
         }
 
         return parent::_prepareLayout();
