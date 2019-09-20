@@ -80,26 +80,30 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $postId = $object->getDataByKey('post_id');
 
         if ($postId) {
-            $connection = $this->getConnection();
-
-            $select = $connection->select()
-                ->from(
-                    [$this->getTable('magefan_blog_comment')],
-                    ['count' => 'count(*)']
-                )
-                ->where('post_id = ?', $postId)
-                ->where('status = ?', 1);
-
-            $count = (int)$connection->fetchOne($select);
-
-            $this->getConnection()->update(
-                $this->getTable('magefan_blog_post'),
-                ['comments_count' => $count],
-                ['post_id = ' . ((int)$postId)]
-            );
+            $this->updataPostComentsCount($postId);
         }
 
         return $result;
     }
 
+    protected function updataPostComentsCount($postId)
+    {
+        $connection = $this->getConnection();
+
+        $select = $connection->select()
+            ->from(
+                [$this->getTable('magefan_blog_comment')],
+                ['count' => 'count(*)']
+            )
+            ->where('post_id = ?', $postId)
+            ->where('status = ?', 1);
+
+        $count = (int)$connection->fetchOne($select);
+
+        $this->getConnection()->update(
+            $this->getTable('magefan_blog_post'),
+            ['comments_count' => $count],
+            ['post_id = ' . ((int)$postId)]
+        );
+    }
 }
