@@ -86,7 +86,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $result;
     }
 
-    protected function updataPostComentsCount($postId)
+    public function updatePostCommentCount($postId)
     {
         $connection = $this->getConnection();
 
