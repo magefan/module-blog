@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @var \Magefan\Blog\Block\ViewCounter $block
+ */
+?>
+<script>
+    require(['jquery', 'domReady!'], function($){
+        //alert('Test');
+        window.location.replace("counter?id=<?= $block->getRequest()->getParam('id'); ?>")
+        // $.ajax({
+        //     url:"blog/post/counter",
+        //     type:get
+        // })
+    });
+</script>
+
+
