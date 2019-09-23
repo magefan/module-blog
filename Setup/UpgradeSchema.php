@@ -713,7 +713,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-        if(version_compare($version,'2.9.1.3') < 0) {
+        if(version_compare($version,'2.9.1.4') < 0) {
             $table =$setup->getTable('magefan_blog_post');
             $connection->addColumn(
                 $setup->getTable($table),

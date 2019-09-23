@@ -102,7 +102,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $this->getConnection()->update(
             $this->getTable('magefan_blog_post'),
-            ['comments_count' => $count],
+            ['сomments_сount' => $count],
             ['post_id = ' . ((int)$postId)]
         );
     }
