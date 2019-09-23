@@ -10,15 +10,16 @@
 /**
  * Blog sidebar recent posts template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\Recent
+ * @var $block \Magefan\Blog\Block\Sidebar\Popular
  */
 ?>
 
 <?php
 $_postCollection = $block->getPostCollection();
+var_dump($_postCollection, 'Test');exit();
 ?>
 <?php if ($_postCollection->count()) { ?>
-    <div class="widget block block-recent-posts" data-bind="scope: 'popular-posts'">
+    <div class="widget block block-popular-posts" data-bind="scope: 'popular-posts'">
         <div class="block-title">
             <strong><?php echo __('Popular') ?></strong>
         </div>

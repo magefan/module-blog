@@ -34,7 +34,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
         return parent::_construct();
     }
 
-    /*
+    /**
      * Prepare posts collection
      *
      * @return void
@@ -42,6 +42,6 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected function _preparePostCollection()
     {
         parent::_preparePostCollection();
-        $this->_postCollection->setOrder('views_count', 'DESC');
+        $this->_postCollection->setOrder('views_count', $this->getCollectionOrderDirection());
     }
 }
