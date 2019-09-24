@@ -8,32 +8,25 @@
 
 namespace Magefan\Blog\Controller\Post;
 
-
+/**
+ * Class Counter
+ */
 class Counter extends \Magefan\Blog\Controller\Post\View
 {
 
-    protected $_postResource;
-
-    public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
-    )
-    {
-        parent::__construct(
-            $context,
-            $storeManager
-        );
-    }
-
+    /**
+     * @return $this|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     */
     public function execute()
     {
         $post = parent::_initPost();
-        $viewCounts = $post->getData('views_count');
-        if($viewCounts){
-            $viewCounts += 1;
-            $post->setData('views_count',$viewCounts);
-            $post->save();
-        }
-        var_dump( $post->getData('views_count'));exit();
+        $viewCounts = (int) $post->getData('views_count');
+
+        $viewCounts += 1;
+        $post->setData('views_count',$viewCounts);
+        $post->getResource()->save($post);
+
+        return $this;
     }
 }

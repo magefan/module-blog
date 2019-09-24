@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
 
 /**
  * @var \Magefan\Blog\Block\ViewCounter $block
@@ -6,12 +12,15 @@
 ?>
 <script>
     require(['jquery', 'domReady!'], function($){
-        //alert('Test');
-        window.location.replace("counter?id=<?= $block->getRequest()->getParam('id'); ?>")
-        // $.ajax({
-        //     url:"blog/post/counter",
-        //     type:get
-        // })
+        setTimeout(function(){
+            $.ajax({
+                url:"<?= $block->getUrl('blog/post/counter');?>",
+                type:'POST',
+                data: {id: <?= (int)$block->getRequest()->getParam('id'); ?> },
+                dataType: 'json',
+                success: function(response) { }
+            })
+        }, 5000);
     });
 </script>
 

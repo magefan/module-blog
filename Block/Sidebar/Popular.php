@@ -36,7 +36,6 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Prepare posts collection
-     *
      * @return void
      */
     protected function _preparePostCollection()
