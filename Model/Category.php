@@ -69,7 +69,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * @var array
      */
-    static private $loadedCategoriesRepository = [];
+    private static $loadedCategoriesRepository = [];
 
     /**
      * @var string

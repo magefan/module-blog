@@ -21,7 +21,7 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstra
     /**
      * @var array
      */
-    static protected $categories = [];
+    protected static $categories = [];
 
     /**
      * @param \Magento\Backend\Block\Context $context

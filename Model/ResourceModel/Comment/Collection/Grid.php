@@ -58,6 +58,8 @@ class Grid extends Collection
             );
 
         return $this;
+        var_dump($this);
+        die;
     }
 
     /**

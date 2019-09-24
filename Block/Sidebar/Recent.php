@@ -34,7 +34,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
         return parent::_construct();
     }
 
-    /*
+    /**
      * Prepare posts collection
      *
      * @return void

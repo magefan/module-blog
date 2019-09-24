@@ -24,7 +24,7 @@ class Counter extends \Magefan\Blog\Controller\Post\View
         $viewCounts = (int) $post->getData('views_count');
 
         $viewCounts += 1;
-        $post->setData('views_count',$viewCounts);
+        $post->setData('views_count', $viewCounts);
         $post->getResource()->save($post);
 
         return $this;

@@ -23,40 +23,40 @@
         <strong><?php echo __('Categories') ?></strong>
     </div>
 
-	<ul class="accordion"  id="accordion-2">
-	<?php
-		$level = 0;
-		$first = true;
-		foreach($items as $item) {
-			$newLevel = $item->getLevel();
+    <ul class="accordion"  id="accordion-2">
+    <?php
+        $level = 0;
+        $first = true;
+    foreach ($items as $item) {
+        $newLevel = $item->getLevel();
 
-			if ($level == $newLevel && !$first) {
-				echo '</li>';
-			}
+        if ($level == $newLevel && !$first) {
+            echo '</li>';
+        }
 
-			if ($level < $newLevel) {
-				echo '<ul>';
-			}
+        if ($level < $newLevel) {
+            echo '<ul>';
+        }
 
-			if ($level > $newLevel) {
-				for ($i = $level; $i > $newLevel; $i--){
-					echo '</ul></li>';
-				}
-			}
+        if ($level > $newLevel) {
+            for ($i = $level; $i > $newLevel; $i--) {
+                echo '</ul></li>';
+            }
+        }
 
-			?>
-				<li>
-					<a href="<?php echo $item->getCategoryUrl() ?>">
-						<?php echo $block->escapeHtml($item->getTitle()) ?>
-					</a>
-					<?php if ($block->showPostsCount()) { ?>
-					(<?php echo $block->escapeHtml($item->getPostsCount()) ?>)
-					<?php } ?>
-			<?php
-			$level = $newLevel;
-			$first = false;
-		}
-	?>
-	</ul>
+        ?>
+                <li>
+                    <a href="<?php echo $item->getCategoryUrl() ?>">
+                    <?php echo $block->escapeHtml($item->getTitle()) ?>
+                    </a>
+                <?php if ($block->showPostsCount()) { ?>
+                    (<?php echo $block->escapeHtml($item->getPostsCount()) ?>)
+                    <?php } ?>
+            <?php
+            $level = $newLevel;
+            $first = false;
+    }
+    ?>
+    </ul>
 </div>
 <?php } ?>

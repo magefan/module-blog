@@ -178,7 +178,6 @@ class Post extends \Magefan\Blog\App\Action\Action
         if (!$post->getIsActive()) {
             return false;
         }
-
         return $post;
     }
 

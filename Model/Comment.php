@@ -256,16 +256,6 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
-     * Save the comment
-     * @return this
-     */
-    public function save()
-    {
-        $this->validate();
-        return parent::save();
-    }
-
-    /**
      * Validate comment
      * @return void
      */

@@ -51,7 +51,7 @@ class View extends \Magefan\Blog\App\Action\Action
     {
         $id = $this->getRequest()->getParam('id');
 
-        $author = $this->_objectManager->create(  \Magefan\Blog\Api\AuthorInterface::class)->load($id);
+        $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
         if (!$author->getId()) {
             return false;

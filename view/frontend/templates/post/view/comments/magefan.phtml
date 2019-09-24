@@ -29,7 +29,7 @@
             <img src="<?php echo $image ?>" alt="<?php echo $block->escapeHtml($block->getCustomerName()) ?>">
         </div>
         <?php } ?>
-        <div class="c-replyform <?php if ($canPost)  echo 'no-active' ?>">
+        <div class="c-replyform <?php if ($canPost) {  echo 'no-active'; } ?>">
             <form class="comment-form-blog-recaptcha" action="<?php echo $block->getFormUrl() ?>" method="post" data-mage-init='{"validation":{}}'>
                 <?php echo $block->getBlockHtml('formkey') ?>
                 <input type="hidden" name="post_id" value="<?php echo $block->getPost()->getId() ?>" />
@@ -63,12 +63,12 @@
     </div>
 <?php
     $commentsCount = count($comments);
-    if ($commentsCount) {
-?>
+if ($commentsCount) {
+    ?>
     <!-- comments list -->
     <div class="c-comments" >
-        <?php $i = 0 ?>
-        <?php foreach ($comments as $comment) { ?>
+    <?php $i = 0 ?>
+    <?php foreach ($comments as $comment) { ?>
             <?php
                 $i++;
                 $comment->setIsHidden($i > $numberOfCommentsToDisplay);
@@ -89,7 +89,7 @@
             <textarea class="refresh-value" name="text" placeholder="<?php echo $canPost ? __('Add a reply...') : __('Sign in to add a comment...') ?>" <?php if (!$canPost) {?>disabled="disabled"<?php } ?> data-validate="{required:true}"></textarea>
             <div class="c-btn-hld">
 
-                <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
+            <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
                 <div class="lr-hld">
                     <div class="left-hld">
                         <input type="text" name="author_nickname" value="" placeholder="<?php echo __('Full Name') ?>" class="input-text required-entry refresh-value" data-validate="{required:true}" autocomplete="off" aria-required="true">
@@ -100,7 +100,7 @@
                 </div>
                 <?php } ?>
                 <button type="button" class="cancel reply-cancel-action" ><?php echo __('Cancel') ?></button>
-                <?php if ($canPost) { ?>
+            <?php if ($canPost) { ?>
                     <button type="submit"><?php echo __('Submit') ?></button>
                     <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>

@@ -17,7 +17,7 @@
     $comment = $block->getComment();
     $numberOfCommentsToDisplay = $block->getNumberOfReplies();
 ?>
-<div class="c-comment c-comment-parent-<?php echo (int)$comment->getParentId() ?>" <?php if ($comment->getIsHidden()) echo 'style="display:none"' ?>>
+<div class="c-comment c-comment-parent-<?php echo (int)$comment->getParentId() ?>" <?php if ($comment->getIsHidden()) { echo 'style="display:none"'; } ?>>
     <?php if ($authorImage = $comment->getAuthorImage()) { ?>
     <div class="c-img">
         <img src="<?php echo $authorImage ?>" alt="<?php echo $block->escapeHtml($comment->getAuthorName()) ?>">
@@ -33,11 +33,11 @@
         <?php
             $replies = $block->getRepliesCollection();
             $commentsCount = count($replies);
-            if ($commentsCount) {
-        ?>
+        if ($commentsCount) {
+            ?>
             <div class="p-replies">
-                <?php $i = 0 ?>
-                <?php foreach ($replies as $reply) { ?>
+            <?php $i = 0 ?>
+            <?php foreach ($replies as $reply) { ?>
                     <?php
                         $i++;
                         $reply->setIsHidden($i > $numberOfCommentsToDisplay);
