@@ -154,7 +154,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     {
         if (!isset(self::$loadedCategoriesRepository[$categoryId])) {
             $category = clone $this;
+            $category->unsetData();
             $category->load($categoryId);
+            $categoryId = $category->getId();
         }
 
         return self::$loadedCategoriesRepository[$categoryId];
