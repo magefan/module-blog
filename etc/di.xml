@@ -48,4 +48,13 @@
             <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
         </arguments>
     </type>
+    <type name="Magento\Sitemap\Model\Sitemap">
+        <plugin name="magento_sitemap_model_sitemap_magefan_blog"
+                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
+    </type>
+
+    <type name="MageWorx\XmlSitemap\Model\Sitemap">
+        <plugin name="mageworks_sitemap_model_sitemap_magefan_blog"
+                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
+    </type>
 </config>
