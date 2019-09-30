@@ -221,6 +221,44 @@ class Wordpress extends AbstractImport
                 }
             }
 
+            if (empty($data['featured_img'])) {
+
+                $sql = 'SELECT wm1.meta_value as featured_img
+                    FROM
+                        '.$_pref.'posts p1
+                    LEFT JOIN
+                        '.$_pref.'postmeta wm1
+                        ON (
+                            wm1.post_id = p1.id
+                            AND wm1.meta_value IS NOT NULL
+                            AND wm1.meta_key = "dfiFeatured"
+                        )
+                    WHERE
+                        p1.ID="'.$data['ID'].'"
+                        AND p1.post_type="post"
+                    ORDER BY
+                        p1.post_date DESC';
+
+                $result2 = $this->_mysqliQuery($sql);
+                if ($data2 = mysqli_fetch_assoc($result2)) {
+                    if ($data2['featured_img']) {
+                        $tmpArr = @unserialize($data2['featured_img']);
+                        if (is_array($tmpArr)) {
+                            foreach ($tmpArr as $item) {
+                                $item = trim($item);
+                                $item = explode(',' , $item);
+                                $item = $item[count($item) - 1];
+                                if ($item) {
+                                    $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $item;
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
             /* Find Meta Data */
             $sql = 'SELECT * FROM `'.$_pref.'postmeta` WHERE `post_id` = ' . ((int)$data['ID']);
             $metaResult = $this->_mysqliQuery($sql);
@@ -241,8 +279,8 @@ class Wordpress extends AbstractImport
                     case '_yoast_wpseo_metadesc' :
                         $data['meta_description'] = $metaValue;
                         break;
-                }  
-            } 
+                }
+            }
 
             /* Prepare post data */
             foreach (['post_title', 'post_name', 'post_content'] as $key) {

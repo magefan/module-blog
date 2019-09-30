@@ -40,6 +40,9 @@
                 <field id="title" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
+                <field id="meta_title" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Meta Title</label>
+                </field>
                 <field id="display_mode" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Mode</label>
                     <source_model>Magefan\Blog\Model\Config\Source\DisplayMode</source_model>
