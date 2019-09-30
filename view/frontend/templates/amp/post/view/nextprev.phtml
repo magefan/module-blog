@@ -23,13 +23,13 @@
         <div class="post-nextprev-hld clearfix">
             <?php if ($prevPost) { ?>
                 <?php $title = $block->escapeHtml($prevPost->getTitle()) ?>
-                <a class="nextprev-link prev-link" href="<?php echo $prevPost->getPostUrl() ?>" title="<?php echo __('Read %1',$title) ?>">
+                <a class="nextprev-link prev-link" href="<?php echo $prevPost->getPostUrl() ?>" title="<?php echo __('Read %1', $title) ?>">
                     <?php echo __('&larr; Previous') ?>
                 </a>
             <?php } ?>
             <?php if ($nextPost) { ?>
                 <?php $title = $block->escapeHtml($nextPost->getTitle()) ?>
-                <a class="nextprev-link next-link" href="<?php echo $nextPost->getPostUrl() ?>" title="<?php echo __('Read %1',$title) ?>">
+                <a class="nextprev-link next-link" href="<?php echo $nextPost->getPostUrl() ?>" title="<?php echo __('Read %1', $title) ?>">
                     <?php echo __('Next &rarr;') ?>
                 </a>
             <?php } ?>

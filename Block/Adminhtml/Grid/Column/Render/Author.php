@@ -21,7 +21,7 @@ class Author extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstract
     /**
      * @var array
      */
-    static protected $authors = [];
+    protected static $authors = [];
 
     /**
      * Author constructor.

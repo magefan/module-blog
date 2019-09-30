@@ -22,20 +22,20 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
    <atom:link href="<?= $block->getLink() ?>" rel="self" type="application/rss+xml"/>
    <link><?= $block->getLink() ?></link>
    <description><?= $block->escapeHtml($block->getDescription()) ?></description>
-   <?php foreach($_postCollection as $_post) { ?>
+    <?php foreach ($_postCollection as $_post) { ?>
    <item>
       <title><?= $block->escapeHtml($_post->getTitle(), null, true) ?></title>
       <link><?= $_post->getPostUrl() ?></link>
       <guid><?= $_post->getPostUrl() ?></guid>
       <description><![CDATA[<?= $block->getPostContent($_post) ?>]]></description>
-      <?php /*if ($featuredImage = $_post->getFeaturedImage()) { ?>
+        <?php /*if ($featuredImage = $_post->getFeaturedImage()) { ?>
          <image><?= $featuredImage ?></image>
       <?php }*/ ?>
       <pubDate><?= $block->escapeHtml($_post->getPublishDate('r')) ?></pubDate>
-      <?php foreach($_post->getParentCategories() as $category) { ?>
+        <?php foreach ($_post->getParentCategories() as $category) { ?>
       <category><![CDATA[<?= $block->escapeHtml($category->getTitle()) ?>]]></category>
-      <?php } ?>
+        <?php } ?>
    </item>
-   <?php } ?>
+    <?php } ?>
 </channel>
 </rss>

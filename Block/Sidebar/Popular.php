@@ -11,14 +11,14 @@ namespace Magefan\Blog\Block\Sidebar;
 /**
  * Blog sidebar categories block
  */
-class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
+class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
 {
     use Widget;
 
     /**
      * @var string
      */
-    protected $_widgetKey = 'recent_posts';
+    protected $_widgetKey = 'popular_posts';
 
     /**
      * @return $this
@@ -36,12 +36,13 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Prepare posts collection
-     *
      * @return void
      */
     protected function _preparePostCollection()
     {
-        parent::_preparePostCollection();
-        $this->_postCollection->addRecentFilter();
+        $this->_postCollection = $this->_postCollectionFactory->create()
+        ->addActiveFilter()
+        ->addStoreFilter($this->_storeManager->getStore()->getId())
+        ->setOrder('views_count', $this->getCollectionOrderDirection());
     }
 }

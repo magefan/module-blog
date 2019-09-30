@@ -48,10 +48,11 @@
                         <div class="dash">|</div>
                         <div class="item post-categories">
                             <span class="label"><?php echo __('Categories:') ?></span>
-                            <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
+                            <?php $n = 0;
+                            foreach ($_post->getParentCategories() as $ct) { $n++; ?>
                                 <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>"><?php echo $block->escapeHtml($ct->getTitle()) ?></a>
-                                <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
-                            <?php } ?>
+                                                            <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+                                                        <?php } ?>
                         </div>
                         <?php } ?>
                     </div>
@@ -96,7 +97,7 @@ function( require, $, Masonry ) {
         })
     });
 });
-<?php /* more info http://masonry.desandro.com/extras.html */ ?>
+    <?php /* more info http://masonry.desandro.com/extras.html */ ?>
 </script>
 
 <?php } ?>

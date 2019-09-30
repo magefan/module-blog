@@ -25,12 +25,13 @@
     <div class="dash">|</div>
     <div class="item post-categories">
         <span class="label"><?php echo __('Categories:') ?></span>
-        <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
+        <?php $n = 0;
+        foreach ($_post->getParentCategories() as $ct) { $n++; ?>
             <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>">
-                <?php echo $block->escapeHtml($ct->getTitle()) ?>
+                        <?php echo $block->escapeHtml($ct->getTitle()) ?>
             </a>
-            <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
-        <?php } ?>
+                    <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+                <?php } ?>
     </div>
     <?php } ?>
     <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
@@ -46,12 +47,13 @@
     <div class="dash">|</div>
     <div class="item post-categories">
         <span class="label"><?php echo __('Tags:') ?></span>
-        <?php $n = 0; foreach($_post->getRelatedTags() as $tag) { $n++; ?>
+        <?php $n = 0;
+        foreach ($_post->getRelatedTags() as $tag) { $n++; ?>
             <a title="<?php echo $block->escapeHtml($tag->getTitle()) ?>" href="<?php echo $tag->getTagUrl() ?>">
-                <?php echo $block->escapeHtml($tag->getTitle()) ?>
+                        <?php echo $block->escapeHtml($tag->getTitle()) ?>
             </a>
-            <?php if ($n != $_tagsCount) { ?>, <?php } ?>
-        <?php } ?>
+                    <?php if ($n != $_tagsCount) { ?>, <?php } ?>
+                <?php } ?>
     </div>
     <?php } ?>
     <?php if ($block->authorEnabled()) { ?>
@@ -71,4 +73,17 @@
         </div>
         <?php } ?>
     <?php } ?>
+
+    <?php if ($block->getViewsCount()) { ?>
+        <?php if ($_views = $_post->getViewsCount()) { ?>
+            <div class="dash">|</div>
+            <div class="item post-views">
+                <span class="label"><?php echo __('Views:') ?></span>
+                <span class="value">
+                <?= $_post->getViewsCount()?>
+                </span>
+                </div>
+        <?php } ?>
+    <?php } ?>
+
 </div>
