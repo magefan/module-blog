@@ -235,6 +235,18 @@
                 </item>
             </argument>
         </field>
+        <field name="featured_img_alt">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Featured Image Alt</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">featured_img_alt</item>
+                    <item name="sortOrder" xsi:type="number">15</item>
+                </item>
+            </argument>
+        </field>
         <field name="publish_time">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

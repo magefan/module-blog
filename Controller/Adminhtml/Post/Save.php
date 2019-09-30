@@ -56,7 +56,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         /* Prepare images */
         $data = $model->getData();
-        foreach (['featured_img', 'og_img'] as $key) {
+        foreach (['featured_img', 'featured_list_img', 'og_img'] as $key) {
             if (isset($data[$key]) && is_array($data[$key])) {
                 if (!empty($data[$key]['delete'])) {
                     $model->setData($key, null);

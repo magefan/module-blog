@@ -355,6 +355,24 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve featured link image url
+     * @return mixed
+     */
+    public function getFeaturedListImage()
+    {
+        if (!$this->hasData('featured_list_image')) {
+            if ($file = $this->getData('featured_list_img')) {
+                $image = $this->_url->getMediaUrl($file);
+            } else {
+                $image = false;
+            }
+            $this->setData('featured_list_image', $image);
+        }
+
+        return $this->getData('featured_list_image');
+    }
+
+    /**
      * Set media gallery images url
      *
      * @param array $images
