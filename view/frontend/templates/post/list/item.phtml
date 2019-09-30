@@ -48,11 +48,11 @@
 
     <div class="post-content">
         <div class="post-description clearfix">
-            <?php $featuredImage = $_post->getFeaturedListImage() ? $_post->getFeaturedListImage() : $_post->getFeaturedImage(); ?>
+            <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
             <?php if ($featuredImage) { ?>
             <div class="post-ftimg-hld">
                 <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
-                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $featuredImgAlt ? $featuredImgAlt : $_postName ?>" />
+                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $featuredImgAlt ?: $_postName ?>" />
                 </a>
             </div>
             <?php } ?>
