@@ -25,6 +25,11 @@ use Magento\Framework\DataObject\IdentityInterface;
  * @method $this setMetaDescription(string $value)
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
+ * @method $this setUrlKey(string $value)
+ * @method string getUrlKey()
+ * @method $this setMetaTitle(string $value)
+ * @method string getPath()
+ * @method $this setPath($value)
  */
 class Category extends \Magento\Framework\Model\AbstractModel implements IdentityInterface
 {
