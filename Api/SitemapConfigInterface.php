@@ -10,7 +10,6 @@ namespace Magefan\Blog\Api;
 
 /**
  * Interface SitemapConfigInterface
- * @package Magefan\Blog\Api
  */
 interface SitemapConfigInterface
 {

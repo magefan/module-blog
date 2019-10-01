@@ -16,13 +16,13 @@
 <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = "<?php echo $block->getPost()->getPostUrl() ?>";
-        this.page.identifier = "<?php echo $block->getPost()->getUrl() ?>"
+        this.page.url = "<?= $block->escapeUrl($block->getPost()->getPostUrl()) ?>";
+        this.page.identifier = "<?= $block->escapeHtml($block->getPost()->getUrl()) ?>"
     };
 
     (function() {
         var d = document, s = d.createElement('script');
-        s.src = '<?php echo '/' . '/' . $block->getDisqusShortname() ?>.disqus.com/embed.js';
+        s.src = '<?= $block->escapeHtml('/' . '/' .  $block->getDisqusShortname()) ?>.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

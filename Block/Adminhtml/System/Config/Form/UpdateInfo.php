@@ -12,8 +12,7 @@ use Magento\Framework\Module\ModuleListInterface;
 use Magefan\Blog\Model\AdminNotificationFeed;
 
 /**
- * Class UpdateInfo
- * @package Magefan\Blog\Block\Adminhtml\System\Config\Form
+ * Class UpdateInfo block
  */
 class UpdateInfo extends \Magento\Backend\Block\Template
 {
@@ -97,7 +96,10 @@ class UpdateInfo extends \Magento\Backend\Block\Template
             $latestVersions = $this->cacheManager->load(self::LATESTS_VERSION_CACHE_KEY);
             if (false === $latestVersions) {
                 try {
-                    $this->curlClient->get('https://m'.'a'.'g'.'e'.'f'.'a'.'n'.'.'.'c'.'o'.'m/media/product-versions.json', []);
+                    $this->curlClient->get(
+                        'https://m'.'a'.'g'.'e'.'f'.'a'.'n'.'.'.'c'.'o'.'m/media/product-versions.json',
+                        []
+                    );
                     $latestVersions = (string)$this->curlClient->getBody();
                 } catch (\Exception $e) {
                     $latestVersions = '';

@@ -20,8 +20,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 
 /**
- * Class AuthorRepository
- * @package Magefan\Blog\Model
+ * Class AuthorRepository model
  */
 class AuthorRepository implements AuthorRepositoryInterface
 {

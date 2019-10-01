@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\ResourceModel;
 
 /**
- * Page identifier generator
+ * Page identifier generator model
  */
 class PageIdentifierGenerator
 {

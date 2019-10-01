@@ -71,12 +71,21 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             if ($hasChildren) {
                 $html .= '<div class="open-children-toggle"></div>';
             }
-                $html .= '<a href="' . $blogNode->getUrl() . '" class="level-top"><span>' . $this->escapeHtml($blogNode->getName()) . '</span></a>';
+                $html .= '<a href="' . $blogNode->getUrl() . '" class="level-top">
+                            <span>' . $this->escapeHtml($blogNode->getName()) . '</span>
+                          </a>';
 
             if ($hasChildren) {
                 $html .= '<div class="level0 submenu"'.$custom_style.'>';
                     $html .= '<div class="row">';
-                        $html .= $this->getSubmenuItemsHtml($children, 1, $max_level, 12, $menu_type, $sw_menu_cat_columns);
+                        $html .= $this->getSubmenuItemsHtml(
+                            $children,
+                            1,
+                            $max_level,
+                            12,
+                            $menu_type,
+                            $sw_menu_cat_columns
+                        );
                     $html .= '</div>';
                 $html .= '</div>';
             }
@@ -87,8 +96,14 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         return $html;
     }
 
-    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0, $column_width = 12, $menu_type = 'fullwidth', $columns = null)
-    {
+    public function getSubmenuItemsHtml(
+        $children,
+        $level = 1,
+        $max_level = 0,
+        $column_width = 12,
+        $menu_type = 'fullwidth',
+        $columns = null
+    ) {
         $html = '';
 
         if (!$max_level || ($max_level && $max_level == 0) || ($max_level && $max_level > 0 && $max_level-1 >= $level)) {

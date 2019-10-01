@@ -55,7 +55,6 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
             }
         }
 
-
         return $this->_months;
     }
 

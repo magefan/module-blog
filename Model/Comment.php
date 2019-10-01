@@ -119,7 +119,6 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         ];
     }
 
-
     /**
      * Initialize resource model
      *

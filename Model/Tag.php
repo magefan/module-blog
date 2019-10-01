@@ -103,7 +103,6 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
         return $plural ? 'Tags' : 'Tag';
     }
 
-
     /**
      * Check if tag identifier exist for specific store
      * return tag id if tag exists

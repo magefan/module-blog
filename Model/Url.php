@@ -30,7 +30,6 @@ class Url
     const CONTROLLER_RSS = 'rss';
     const CONTROLLER_TAG = 'tag';
 
-
     /**
      * @var \Magento\Framework\Registry
      */
@@ -224,7 +223,9 @@ class Url
         $identifier = $this->getExpandedItentifier($identifier);
         switch ($this->getPermalinkType()) {
             case self::PERMALINK_TYPE_DEFAULT:
-                $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
+                $path = $this->getRoute() .
+                    '/' . $this->getRoute($controllerName) .
+                    '/' . $identifier . ( $identifier ? '/' : '');
                 break;
             case self::PERMALINK_TYPE_SHORT:
                 if ($controllerName == self::CONTROLLER_SEARCH
@@ -232,7 +233,9 @@ class Url
                     || $controllerName == self::CONTROLLER_TAG
                     || $controllerName == self::CONTROLLER_RSS
                 ) {
-                    $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
+                    $path = $this->getRoute() .
+                        '/' . $this->getRoute($controllerName) .
+                        '/' . $identifier . ( $identifier ? '/' : '');
                 } else {
                     $path = $this->getRoute() . '/' . $identifier . ( $identifier ? '/' : '');
                 }

@@ -9,13 +9,12 @@
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 /**
- * Class CheckEnableInfo
- * @package Magefan\Blog\Block\Adminhtml\System\Config\Form
+ * Class CheckEnableInfo block
  */
 class CheckEnableInfo extends \Magento\Backend\Block\Template
 {
     /**
-     * Magefan Blog Plus
+     * Magefan Blog Plus module
      */
     const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
 

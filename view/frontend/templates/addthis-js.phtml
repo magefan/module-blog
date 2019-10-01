@@ -11,8 +11,9 @@
 ?>
 <script type="text/javascript">
     var addthis_config = {
-        "ui_language": '<?php echo $block->getAddThisLanguage() ?>',
+        "ui_language": '<?= $block->getAddThisLanguage() ?>',
         "data_track_clickback":false
     }
 </script>
-<script type="text/javascript" async src="<?php echo '/' . '/' ?>s7.addthis.com/js/250/addthis_widget.js#pubid=<?php echo $block->getAddThisPubId() ?>"></script>
+<script type="text/javascript" async
+        src="<?= '/' . '/' ?>s7.addthis.com/js/250/addthis_widget.js#pubid=<?= $block->getAddThisPubId() ?>"></script>

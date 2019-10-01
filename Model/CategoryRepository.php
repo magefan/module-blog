@@ -19,8 +19,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 
 /**
- * Class CategoryRepository
- * @package Magefan\Blog\Model
+ * Class CategoryRepository model
  */
 class CategoryRepository implements CategoryRepositoryInterface
 {

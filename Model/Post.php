@@ -227,7 +227,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $newCategories = [];
         }
 
-
         $isChangedCategories = count(array_diff($oldCategories, $newCategories));
 
         if ($isChangedCategories) {
@@ -238,7 +237,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
             }
         }
-
 
         return $identities;
     }
@@ -518,6 +516,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         $content = $_content->saveHTML();
                     }
                 } catch (\Exception $e) {
+                    echo $e->getMessage();
                 }
             }
 

@@ -12,7 +12,6 @@ use Magefan\Blog\Model\Post;
 
 /**
  * Interface PostRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface PostRepositoryInterface
 {

@@ -17,6 +17,6 @@
 <?php if ($content) { ?>
     <div class="widget block blog-custom" >
         <?php /* without html encode */ ?>
-        <?= $content ?>
+        <?= $block->escapeHtml($content) ?>
     </div>
 <?php } ?>

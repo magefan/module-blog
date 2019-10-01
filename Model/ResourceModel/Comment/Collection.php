@@ -87,7 +87,6 @@ class Collection extends AbstractCollection
         return $this;
     }
 
-
     /**
      * Join store relation table if there is store filter
      *

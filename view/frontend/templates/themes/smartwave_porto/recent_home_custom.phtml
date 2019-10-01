@@ -21,9 +21,14 @@
 <?php if ($_postCollection->count()) { ?>
 <div class="latest-blog" style="background-color: #f4f4f4; padding-bottom: 50px;">
    <div class="container">
-      <h2 class="filterproduct-title" style="margin-top: 40px; padding-bottom: 5px;"><span class="content"><strong><?= $block->escapeHtml($block->getTitle()) ?></strong></span></h2>
+      <h2 class="filterproduct-title"
+          style="margin-top: 40px; padding-bottom: 5px;">
+          <span class="content">
+              <strong><?= $block->escapeHtml($block->getTitle()) ?></strong>
+          </span>
+      </h2>
       <div id="latest_news" class="owl-top-narrow">
-         <div class="recent-posts recent-posts-<?= $id ?>">
+         <div class="recent-posts recent-posts-<?= $block->escapeHtml($id) ?>">
             <div class="owl-carousel">
                <?php foreach ($_postCollection as $_post) { ?>
                     <?php
@@ -38,19 +43,26 @@
                                 <img src="<?= $post_image; ?>" alt="" />
                                 <?php } ?>
                               <div class="post-date">
-                                <span class="day"><?php echo date("j", strtotime($postDate)); ?></span> 
-                                <span class="month"><?php echo date("M", strtotime($postDate)); ?></span>
+                                <span class="day"><?= $block->escapeHtml(date("j", strtotime($postDate))); ?></span>
+                                <span class="month"><?= $block->escapeHtml(date("M", strtotime($postDate))); ?></span>
                               </div>
                            </div>
                         </div>
                         <div class="col-sm-7">
                            <div class="postTitle">
-                              <h2><a href="<?php echo $_post->getPostUrl() ?>"><?php echo $block->escapeHtml($_post->getTitle()) ?></a></h2>
+                              <h2>
+                                  <a href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
+                                      <?= $block->escapeHtml($_post->getTitle()) ?>
+                                  </a>
+                              </h2>
                            </div>
                            <div class="postContent">
-                              <p><?= $_post->getShortFilteredContent() ?></p>
+                              <p><?= $block->escapeHtml($_post->getShortFilteredContent()) ?></p>
                            </div>
-                           <a class="readmore btn btn-default" href="<?php echo $_post->getPostUrl() ?>"><?php echo __("Read more >");?></a>
+                           <a class="readmore btn btn-default"
+                              href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
+                               <?= $block->escapeHtml(__("Read more >"));?>
+                           </a>
                         </div>
                      </div>
                   </div>
@@ -63,7 +75,7 @@
               'jquery',
               'owl.carousel/owl.carousel.min'
             ], function ($) {
-              $(".recent-posts-<?= $id ?> .owl-carousel").owlCarousel({
+              $(".recent-posts-<?= $block->escapeHtml($id) ?> .owl-carousel").owlCarousel({
                 loop: false,
                 margin: 20,
                 nav: false,

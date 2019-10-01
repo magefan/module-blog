@@ -245,8 +245,6 @@ class Router implements \Magento\Framework\App\RouterInterface
                         $first = false;
                     }
                 }
-
-
                 if ($pathExist) {
                     if ($postId) {
                         $request

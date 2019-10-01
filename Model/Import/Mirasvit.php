@@ -22,7 +22,7 @@ class Mirasvit extends AbstractImport
     public function execute()
     {
         $config = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get('Magento\Framework\App\DeploymentConfig');
+            ->get(Magento\Framework\App\DeploymentConfig::class);
         $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
         $this->setData(
             'dbhost',
@@ -153,8 +153,6 @@ class Mirasvit extends AbstractImport
             $ct->save();
         }
 
-
-
         /* Import tags */
         $tags = [];
         $oldTags = [];
@@ -182,7 +180,6 @@ class Mirasvit extends AbstractImport
 
             $data['title'] = trim($data['title']);
 
-
             try {
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
@@ -202,7 +199,6 @@ class Mirasvit extends AbstractImport
             }
         }
 
-
         /* Import posts */
         $sql = 'SELECT
                     t.entity_id as old_id,
@@ -214,7 +210,6 @@ class Mirasvit extends AbstractImport
 
         $result = $this->_mysqliQuery($sql);
         while ($data = mysqli_fetch_assoc($result)) {
-
 
             $map = [
                 // mirasvit ->  blog magefan_blog
@@ -245,7 +240,6 @@ class Mirasvit extends AbstractImport
             if ($data['featured_img']) {
                 $data['featured_img'] = 'magefan_blog/' . $data['featured_img'];
             }
-
 
             /* Find post categories*/
             $postCategories = [];
@@ -300,7 +294,6 @@ class Mirasvit extends AbstractImport
             }
             $data['store_ids'] = $storeIds;
 
-
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
@@ -315,7 +308,6 @@ class Mirasvit extends AbstractImport
         /* end */
         mysqli_close($con);
     }
-
 
     protected function getAttributValue($entitytTypeCode, $entitytId, $attributeCode)
     {
@@ -357,7 +349,6 @@ class Mirasvit extends AbstractImport
         }
 
         $attribute = $this->entityTypeAttributes[$entitytTypeCode][$attributeCode];
-
 
         $sql = 'SELECT
                     value

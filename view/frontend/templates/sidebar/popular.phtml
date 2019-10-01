@@ -20,14 +20,14 @@ $_postCollection = $block->getPostCollection();
 <?php if ($_postCollection->count()) { ?>
     <div class="widget block block-popular-posts" data-bind="scope: 'popular-posts'">
         <div class="block-title">
-            <strong><?php echo __('Popular') ?></strong>
+            <strong><?= $block->escapeHtml(__('Popular')) ?></strong>
         </div>
         <div class="block-content">
             <?php foreach ($_postCollection as $_post) { ?>
                 <div class="item">
                     <a class="post-item-link"
-                       href="<?php echo $_post->getPostUrl() ?>">
-                        <?php echo $block->escapeHtml($_post->getTitle()) ?>
+                       href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
+                        <?= $block->escapeHtml($_post->getTitle()) ?>
                     </a>
                 </div>
             <?php } ?>

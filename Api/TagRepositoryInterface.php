@@ -12,7 +12,6 @@ use Magefan\Blog\Model\Tag;
 
 /**
  * Interface TagRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface TagRepositoryInterface
 {

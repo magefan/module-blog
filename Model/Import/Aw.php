@@ -134,7 +134,6 @@ class Aw extends AbstractImport
 
             $data['title'] = trim($data['title']);
 
-
             try {
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
@@ -154,7 +153,6 @@ class Aw extends AbstractImport
             }
         }
 
-
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog';
         $result = $this->_mysqliQuery($sql);
@@ -162,7 +160,8 @@ class Aw extends AbstractImport
         while ($data = mysqli_fetch_assoc($result)) {
             /* Find post categories*/
             $postCategories = [];
-            $c_sql = 'SELECT cat_id as category_id FROM '.$_pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
+            $c_sql = 'SELECT cat_id as category_id FROM '.
+                      _pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
             $c_result = $this->_mysqliQuery($c_sql);
             while ($c_data = mysqli_fetch_assoc($c_result)) {
                 $oldId = $c_data['category_id'];
@@ -215,7 +214,6 @@ class Aw extends AbstractImport
                 /* Post saving */
                 $post->setData($data)->save();
 
-
                 /* find post comment s*/
                 $sql = 'SELECT * FROM '.$_pref.'aw_blog_comment WHERE `post_id` = ' . $post->getOldId();
                 $resultComments = $this->_mysqliQuery($sql);
@@ -226,7 +224,9 @@ class Aw extends AbstractImport
                     $commentData = [
                         'parent_id' => $commentParentId,
                         'post_id' => $post->getPostId(),
-                        'status' => ($comments['status'] == 2) ? \Magefan\Blog\Model\Config\Source\CommentStatus::APPROVED : \Magefan\Blog\Model\Config\Source\CommentStatus::NOT_APPROVED,
+                        'status' => ($comments['status'] == 2) ?
+                            \Magefan\Blog\Model\Config\Source\CommentStatus::APPROVED :
+                            \Magefan\Blog\Model\Config\Source\CommentStatus::NOT_APPROVED,
                         'author_type' => \Magefan\Blog\Model\Config\Source\AuthorType::GUEST,
                         'author_nickname' => $comments['user'],
                         'author_email' => $comments['email'],
@@ -256,8 +256,6 @@ class Aw extends AbstractImport
                         unset($comment);
                     }
                 }
-
-
 
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {

@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Category;
 
 /**
- * Class CreateButton
+ * Class CreateButton block
  */
 class CreateButton extends \Magefan\Community\Block\Adminhtml\Edit\CreateButton
 {

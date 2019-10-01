@@ -19,8 +19,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 
 /**
- * Class CommentRepository
- * @package Magefan\Blog\Model
+ * Class CommentRepository model
  */
 class CommentRepository implements CommentRepositoryInterface
 {

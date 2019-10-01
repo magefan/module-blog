@@ -19,8 +19,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 
 /**
- * Class PostRepository
- * @package Magefan\Blog\Model
+ * Class PostRepository model
  */
 class PostRepository implements PostRepositoryInterface
 {

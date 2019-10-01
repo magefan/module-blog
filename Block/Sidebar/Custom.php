@@ -52,7 +52,10 @@ class Custom extends \Magento\Framework\View\Element\Template
     {
         $key = 'content';
         if (!$this->hasData($key)) {
-            $content = $this->_scopeConfig->getValue('mfblog/sidebar/'.$this->_widgetKey.'/html', ScopeInterface::SCOPE_STORE);
+            $content = $this->_scopeConfig->getValue(
+                'mfblog/sidebar/'.$this->_widgetKey.'/html',
+                ScopeInterface::SCOPE_STORE
+            );
             $content = $this->filterProvider->getPageFilter()->filter(
                 (string) $content ?: ''
             );

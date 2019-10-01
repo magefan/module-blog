@@ -9,8 +9,7 @@
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
- * Class PostsSortBy
- * @package Magefan\Blog\Model\Config\Source
+ * Class PostsSortBy model
  */
 class PostsSortBy implements \Magento\Framework\Option\ArrayInterface
 {

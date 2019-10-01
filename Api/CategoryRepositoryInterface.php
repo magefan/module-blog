@@ -12,7 +12,6 @@ use Magefan\Blog\Model\Category;
 
 /**
  * Interface PostRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface CategoryRepositoryInterface
 {

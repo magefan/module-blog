@@ -11,55 +11,55 @@
 $elementName = $block->getElement()->getName() . '[images]';
 $formName = $block->getFormName();
 ?>
-<div id="<?php echo $block->getHtmlId() ?>"
+<div id="<?= $block->getHtmlId() ?>"
      class="gallery"
-     data-mage-init='{"Magefan_Blog/js/post-gallery":{"template":"#<?php echo $block->getHtmlId() ?>-template"}}'
-     data-parent-component="<?php echo $block->escapeHtml($block->getData('config/parentComponent')) ?>"
-     data-images="<?php echo $block->escapeHtml($block->getImagesJson()) ?>"
+     data-mage-init='{"Magefan_Blog/js/post-gallery":{"template":"#<?= $block->getHtmlId() ?>-template"}}'
+     data-parent-component="<?= $block->escapeHtml($block->getData('config/parentComponent')) ?>"
+     data-images="<?= $block->escapeHtml($block->getImagesJson()) ?>"
      data-types="{}"
     >
     <?php if (!$block->getElement()->getReadonly()) {?>
         <div class="image image-placeholder">
-            <?php echo $block->getUploaderHtml(); ?>
+            <?= $block->getUploaderHtml(); ?>
             <div class="product-image-wrapper">
                 <p class="image-placeholder-text">
-                    <?php /* @escapeNotVerified */ echo __('Browse to find or drag image here'); ?>
+                    <?= /* @escapeNotVerified */  $block->escapeHtml(__('Browse to find or drag image here')); ?>
                 </p>
             </div>
         </div>
     <?php } ?>
 
-    <script id="<?php echo $block->getHtmlId() ?>-template" type="text/x-magento-template">
+    <script id="<?= $block->getHtmlId() ?>-template" type="text/x-magento-template">
         <div class="image item<% if (data.disabled == 1) { %> hidden-for-front<% } %>"
              data-role="image">
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][position]"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][position]"
                    value="<%- data.position %>"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    class="position"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][file]"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][file]"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.file %>"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][value_id]"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][value_id]"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.value_id %>"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][label]"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][label]"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.label %>"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][disabled]"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][disabled]"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.disabled %>"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][media_type]"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][media_type]"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="image"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */ echo $elementName ?>[<%- data.file_id %>][removed]"
-                   data-form-part="<?php /* @escapeNotVerified */ echo $formName ?>"
+                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][removed]"
+                   data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value=""
                    class="is-removed"/>
 
@@ -73,14 +73,16 @@ $formName = $block->getFormName();
                     <button type="button"
                             class="action-remove"
                             data-role="delete-button"
-                            title="<?php /* @escapeNotVerified */ echo __('Delete image') ?>">
+                            title="<?= /* @escapeNotVerified */  $block->escapeHtml(__('Delete image')) ?>">
                     <span>
-                        <?php /* @escapeNotVerified */ echo __('Delete image') ?>
+                        <?= /* @escapeNotVerified */ $block->escapeHtml(__('Delete image')) ?>
                     </span>
                     </button>
                     <div class="draggable-handle"></div>
                 </div>
-                <div class="image-fade"><span><?php /* @escapeNotVerified */ echo __('Hidden') ?></span></div>
+                <div class="image-fade">
+                    <span><?= /* @escapeNotVerified */ $block->escapeHtml(__('Hidden')) ?></span>
+                </div>
             </div>
 
             <div class="item-description">

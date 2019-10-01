@@ -395,8 +395,12 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $joinOptions->setData([
                     'key' => $key,
                     'fields' => [],
+                    'fields' => [],
                 ]);
-                $this->_eventManager->dispatch('mfblog_post_collection_render_filter_join', ['join_options' => $joinOptions]);
+                $this->_eventManager->dispatch(
+                    'mfblog_post_collection_render_filter_join',
+                    ['join_options' => $joinOptions]
+                );
                 $this->getSelect()->join(
                     [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],
                     'main_table.post_id = '.$key.'_table.post_id',

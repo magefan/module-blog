@@ -14,23 +14,22 @@ namespace Magefan\Blog\Model;
 class PreviewUrl extends Url
 {
 
-    /**
-     * Initialize dependencies.
-     *
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\Url $url
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     */
-    public function __construct(
-        \Magento\Framework\Registry $registry,
-        \Magento\Framework\Url $url,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    ) {
-        parent::__construct($registry, $url, $storeManager, $scopeConfig);
-    }
-
+//    /**
+//     * Initialize dependencies.
+//     *
+//     * @param \Magento\Framework\Registry $registry
+//     * @param \Magento\Framework\Url $url
+//     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+//     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+//     */
+//    public function __construct(
+//        \Magento\Framework\Registry $registry,
+//        \Magento\Framework\Url $url,
+//        \Magento\Store\Model\StoreManagerInterface $storeManager,
+//        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+//    ) {
+//        parent::__construct($registry, $url, $storeManager, $scopeConfig);
+//    }
 
     /**
      * Retrieve blog page preview url

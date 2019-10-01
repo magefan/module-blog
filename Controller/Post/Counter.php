@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Controller\Post;
 
 /**
- * Class Counter
+ * Class Counter increment views_count value
  */
 class Counter extends \Magefan\Blog\Controller\Post\View
 {
@@ -23,7 +23,7 @@ class Counter extends \Magefan\Blog\Controller\Post\View
         $post = parent::_initPost();
         $viewCounts = (int) $post->getData('views_count');
 
-        $viewCounts += 1;
+        $viewCounts ++ ;
         $post->setData('views_count', $viewCounts);
         $post->getResource()->save($post);
 

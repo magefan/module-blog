@@ -15,19 +15,17 @@ class UpgradeData implements UpgradeDataInterface
 
     public function __construct(
         Comment $commentResource
-    )
-    {
+    ) {
         $this->commentResource = $commentResource;
     }
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(),'2.9.1.4') < 0)  {
-
+        if (version_compare($context->getVersion(), '2.9.1.4') < 0) {
             $connection = $this->commentResource->getConnection();
             $postSelect = $connection->select()->from(
                 [$this->commentResource->getTable('magefan_blog_post')]
-                )
+            )
                 ->where('is_active = ?', 1);
             $posts = $connection->fetchAll($postSelect);
             foreach ($posts as $post) {
@@ -39,8 +37,8 @@ class UpgradeData implements UpgradeDataInterface
                 $comments = $connection->fetchAll($commentSelect);
                 $commentsIds = [];
                 foreach ($comments as $comment) {
-                    if (!in_array($comment['comment_id'], $commentsIds) ) {
-                        array_push($commentsIds, $comment['comment_id'] );
+                    if (!in_array($comment['comment_id'], $commentsIds)) {
+                        array_push($commentsIds, $comment['comment_id']);
                         $this->commentResource->updatePostCommentCount($post['post_id']);
                     }
                 }

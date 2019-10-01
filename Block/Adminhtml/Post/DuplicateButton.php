@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Post;
 
 /**
- * Class DuplicateButton
+ * Class DuplicateButton block
  */
 class DuplicateButton extends \Magefan\Community\Block\Adminhtml\Edit\DuplicateButton
 {

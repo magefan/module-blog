@@ -246,7 +246,7 @@ class Wordpress extends AbstractImport
                         if (is_array($tmpArr)) {
                             foreach ($tmpArr as $item) {
                                 $item = trim($item);
-                                $item = explode(',' , $item);
+                                $item = explode(',', $item);
                                 $item = $item[count($item) - 1];
                                 if ($item) {
                                     $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $item;
@@ -382,7 +382,6 @@ class Wordpress extends AbstractImport
 
         mysqli_close($con);
     }
-
 
     protected function wordpressOutoutWrap($pee, $br = true)
     {

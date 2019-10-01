@@ -29,7 +29,6 @@ class Comment extends \Magento\Framework\View\Element\Template implements \Magen
      */
     protected $_template = 'Magefan_Blog::post/view/comments/magefan/comment.phtml';
 
-
     /**
      * Retrieve identities
      *

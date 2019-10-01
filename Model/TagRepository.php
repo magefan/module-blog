@@ -19,8 +19,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 
 /**
- * Class TagRepository
- * @package Magefan\Blog\Model
+ * Class TagRepository model
  */
 class TagRepository implements TagRepositoryInterface
 {

@@ -152,7 +152,6 @@ class InstallSchema implements InstallSchemaInterface
         );
         $installer->getConnection()->createTable($table);
 
-
         $table = $installer->getConnection()->newTable(
             $installer->getTable('magefan_blog_category')
         )->addColumn(
@@ -268,7 +267,6 @@ class InstallSchema implements InstallSchemaInterface
         );
         $installer->getConnection()->createTable($table);
 
-
         /**
          * Create table 'magefan_blog_post_category'
          */
@@ -305,7 +303,6 @@ class InstallSchema implements InstallSchemaInterface
             'Magefan Blog Post To Category Linkage Table'
         );
         $installer->getConnection()->createTable($table);
-        
 
         /**
          * Create table 'magefan_blog_post_relatedproduct'
@@ -325,16 +322,29 @@ class InstallSchema implements InstallSchemaInterface
             ['unsigned' => true, 'nullable' => false, 'primary' => true],
             'Related Product ID'
         )->addIndex(
-            $installer->getIdxName('magefan_blog_post_relatedproduct', ['related_id']),
+            $installer->getIdxName(
+                'magefan_blog_post_relatedproduct',
+                ['related_id']
+            ),
             ['related_id']
         )->addForeignKey(
-            $installer->getFkName('magefan_blog_post_relatedproduct', 'post_id', 'magefan_blog_post', 'post_id'),
+            $installer->getFkName(
+                'magefan_blog_post_relatedproduct',
+                'post_id',
+                'magefan_blog_post',
+                'post_id'
+            ),
             'post_id',
             $installer->getTable('magefan_blog_post'),
             'post_id',
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         )->addForeignKey(
-            $installer->getFkName('magefan_blog_post_relatedproduct', 'related_id', 'catalog_product_entity', 'entity_id'),
+            $installer->getFkName(
+                'magefan_blog_post_relatedproduct',
+                'related_id',
+                'catalog_product_entity',
+                'entity_id'
+            ),
             'related_id',
             $installer->getTable('catalog_product_entity'),
             'entity_id',
@@ -343,7 +353,6 @@ class InstallSchema implements InstallSchemaInterface
             'Magefan Blog Post To Product Linkage Table'
         );
         $installer->getConnection()->createTable($table);
-
 
         /**
          * Create table 'magefan_blog_post_relatedproduct'
