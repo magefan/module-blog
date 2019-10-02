@@ -21,7 +21,7 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\Comment', 'Magefan\Blog\Model\ResourceModel\Comment');
+        $this->_init(\Magefan\Blog\Model\Comment::class, \Magefan\Blog\Model\ResourceModel\Comment::class);
         $this->_map['fields']['store'] = 'store_table.store_id';
     }
 

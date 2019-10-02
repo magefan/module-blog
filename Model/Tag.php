@@ -81,7 +81,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Tag');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Tag::class);
     }
 
     /**

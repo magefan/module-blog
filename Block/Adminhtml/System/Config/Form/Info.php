@@ -16,7 +16,7 @@ use Magento\Store\Model\ScopeInterface;
 class Info extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
-     * Magefan Blog Plus
+     * Magefan Blog Plus constant
      */
     const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
 

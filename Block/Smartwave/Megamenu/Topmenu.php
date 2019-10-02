@@ -106,7 +106,10 @@ class Topmenu extends \Magento\Framework\View\Element\Text
     ) {
         $html = '';
 
-        if (!$max_level || ($max_level && $max_level == 0) || ($max_level && $max_level > 0 && $max_level-1 >= $level)) {
+        if (!$max_level ||
+            ($max_level && $max_level == 0) ||
+            ($max_level && $max_level > 0 && $max_level-1 >= $level)
+        ) {
             $column_class = "";
             if ($level == 1 && $columns && ($menu_type == 'fullwidth' || $menu_type == 'staticwidth')) {
                 $column_class = "col-sm-".$column_width." ";

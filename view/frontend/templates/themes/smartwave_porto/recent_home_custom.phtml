@@ -40,7 +40,7 @@
                         <div class="col-sm-5">
                            <div class="post-image">
                               <?php if ($post_image = $_post->getFeaturedImage()) { ?>
-                                <img src="<?= $post_image; ?>" alt="" />
+                                <img src="<?= $block->escapeUrl($post_image); ?>" alt="" />
                                 <?php } ?>
                               <div class="post-date">
                                 <span class="day"><?= $block->escapeHtml(date("j", strtotime($postDate))); ?></span>

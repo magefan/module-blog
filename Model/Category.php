@@ -112,7 +112,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Category');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Category::class);
         $this->controllerName = URL::CONTROLLER_CATEGORY;
     }
 

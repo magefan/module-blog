@@ -23,6 +23,6 @@ class Facebook extends \Magefan\Blog\Block\Post\View\Comments
             $this->getLocaleCode() . '/sdk.js#xfbml=1&version=v3.3&appId=' .
             $this->getFacebookAppId() . '&autoLogAppEvents=1';
 
-        return str_replace('amp;','', $url);
+        return str_replace('amp;', '', $url);
     }
 }

@@ -27,7 +27,7 @@
                 $_postName = $block->escapeHtml($_post->getTitle(), null, true);
                 $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
             ?>
-            <li class="post-holder post-holder-<?= $block->escapeHtml($_post->getId()) ?>">
+            <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
                 <div class="post-header">
 
                     <div class="post-title-holder clearfix">

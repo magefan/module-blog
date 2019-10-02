@@ -29,7 +29,7 @@ class Comment extends Actions
      * Model class name
      * @var string
      */
-    protected $_modelClass      = 'Magefan\Blog\Model\Comment';
+    protected $_modelClass      = \Magefan\Blog\Model\Comment::class;
 
     /**
      * Active menu key

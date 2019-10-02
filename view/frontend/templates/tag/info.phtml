@@ -15,5 +15,5 @@
 ?>
 
 <?php if ($content = $block->getContent()): ?>
-    <div class="tag-content"><?= $content ?></div>
+    <div class="tag-content"><?= /*@noEscape*/ $content ?></div>
 <?php endif ?>

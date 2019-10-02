@@ -19,7 +19,7 @@ class Author extends \Magento\Backend\Block\Widget\Grid\Column
     public function _construct()
     {
         parent::_construct();
-        $this->_rendererTypes['author'] = 'Magefan\Blog\Block\Adminhtml\Grid\Column\Render\Author';
-        $this->_filterTypes['author'] = 'Magefan\Blog\Block\Adminhtml\Grid\Column\Filter\Author';
+        $this->_rendererTypes['author'] = \Magefan\Blog\Block\Adminhtml\Grid\Column\Render\Author::class;
+        $this->_filterTypes['author'] = \Magefan\Blog\Block\Adminhtml\Grid\Column\Filter\Author::class;
     }
 }

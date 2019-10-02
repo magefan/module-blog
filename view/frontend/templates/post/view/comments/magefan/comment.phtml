@@ -24,15 +24,15 @@
         <img src="<?= $block->escapeHtml($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
-    <div class="c-post c-post-<?= $block->escapeHtml($comment->getId()) ?>"
-         id="c-post-<?= $block->escapeHtml($comment->getId()) ?>">
+    <div class="c-post c-post-<?= (int)$comment->getId() ?>"
+         id="c-post-<?= (int)$comment->getId() ?>">
         <div class="p-name"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
         <div class="p-text"><?= $block->escapeHtml(nl2br($block->escapeHtml($comment->getText()))) ?></div>
         <div class="p-actions">
             <a href="#" class="reply-action"
                data-comment="<?= $comment->isReply() ?
-                   $block->escapeHtml($comment->getParentId()) :
-                   $block->escapeHtml($comment->getId()) ?>"
+                   (int)$comment->getParentId() :
+                   (int)$comment->getId() ?>"
                title="<?= $block->escapeHtml(__('Reply')) ?>"><?= $block->escapeHtml(__('Reply')) ?></a>
             <span class="publish-date"><?= $block->escapeHtml($comment->getPublishDate('M d, Y H:i')) ?></span>
         </div>
@@ -52,7 +52,7 @@
                 <?php } ?>
 
                 <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
-                <div class="c-more more-comments-action" data-comment="<?= $block->escapeHtml($comment->getId()) ?>">
+                <div class="c-more more-comments-action" data-comment="<?= (int)$comment->getId() ?>">
                     <a href="#" ><?= $block->escapeHtml(__('Show more replies in this thread')) ?><i></i></a>
                 </div>
                 <?php } ?>

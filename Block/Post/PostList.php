@@ -19,7 +19,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Block template file
      * @var string
      */
-    protected $_defaultToolbarBlock = 'Magefan\Blog\Block\Post\PostList\Toolbar';
+    protected $_defaultToolbarBlock = \Magefan\Blog\Block\Post\PostList\Toolbar::class;
 
     /**
      * Preparing global layout

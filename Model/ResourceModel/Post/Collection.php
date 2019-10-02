@@ -67,7 +67,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _construct()
     {
         parent::_construct();
-        $this->_init('Magefan\Blog\Model\Post', 'Magefan\Blog\Model\ResourceModel\Post');
+        $this->_init(\Magefan\Blog\Model\Post::class, \Magefan\Blog\Model\ResourceModel\Post::class);
         $this->_map['fields']['post_id'] = 'main_table.post_id';
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';

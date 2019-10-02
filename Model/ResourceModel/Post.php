@@ -106,7 +106,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
-                ->create('Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator');
+                ->create(\Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator::class);
         $identifierGenerator->generate($object);
 
         if (!$this->isValidPageIdentifier($object)) {

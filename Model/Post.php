@@ -43,7 +43,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     const CACHE_TAG = 'mfb_p';
 
     /**
-     * Gallery images separator
+     * Gallery images separator constant
      */
     const GALLERY_IMAGES_SEPARATOR = ';';
 
@@ -200,7 +200,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Post');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Post::class);
         $this->controllerName = URL::CONTROLLER_POST;
     }
 

@@ -174,21 +174,6 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Execute mysql query
-     */
-    protected function _mysqliQuery($sql)
-    {
-        $result = mysqli_query($this->_connect, $sql);
-        if (!$result) {
-            throw new \Exception(
-                __('Mysql error: %1.', mysqli_error($this->_connect))
-            );
-        }
-
-        return $result;
-    }
-
-    /**
      * Prepare import identifier
      * @param  string $identifier
      * @return string
