@@ -37,37 +37,19 @@ class Mirasvit extends AbstractImport
             'dbname',
             $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
         );
-        $host = $this->getData('dbhost') ?: $this->getData('host');
-        if (false !== strpos($host, '.sock')) {
-            $con = $this->_connect = mysqli_connect(
-                'localhost',
-                $this->getData('uname'),
-                $this->getData('pwd'),
-                $this->getData('dbname'),
-                null,
-                $host
-            );
-        } else {
-            $con = $this->_connect = mysqli_connect(
-                $host,
-                $this->getData('uname'),
-                $this->getData('pwd'),
-                $this->getData('dbname')
-            );
+
+        $adapter = $this->createAdapter();
+
+        if (!$adapter) {
+            throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
-        if (mysqli_connect_errno()) {
-            throw new \Exception("Failed connect to magento database", 1);
+        if ($this->getData('prefix')) {
+            $_pref = $adapter->getPlatform()->quoteValue($config->get('db/table_prefix'));
         }
-
-        $this->pref = $_pref = mysqli_real_escape_string(
-            $con,
-            $config->get('db/table_prefix')
-        );
-
         $sql = 'SELECT * FROM ' . $_pref . 'mst_blog_post_entity LIMIT 1';
         try {
-            $this->_mysqliQuery($sql);
+            $adapter->query($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('Mirasvit Blog Extension not detected.'), 1);
         }
@@ -81,8 +63,8 @@ class Mirasvit extends AbstractImport
                     t.position as position,
                     t.parent_id as parent_id
                 FROM ' . $_pref . 'mst_blog_category_entity t';
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Prepare category data */
 
             /* Get Stores */
@@ -165,8 +147,8 @@ class Mirasvit extends AbstractImport
                     1 as is_active
                 FROM ' . $_pref . 'mst_blog_tag t';
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Prepare tag data */
             /*
             foreach (['title'] as $key) {
@@ -208,8 +190,8 @@ class Mirasvit extends AbstractImport
                     t.updated_at as update_time  
                 FROM ' . $_pref . 'mst_blog_post_entity t WHERE type="post"';
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
 
             $map = [
                 // mirasvit ->  blog magefan_blog
@@ -243,9 +225,14 @@ class Mirasvit extends AbstractImport
 
             /* Find post categories*/
             $postCategories = [];
-            $c_sql = 'SELECT category_id FROM ' . $_pref . 'mst_blog_category_post WHERE post_id = "'.$data['old_id'].'"';
-            $c_result = $this->_mysqliQuery($c_sql);
-            while ($c_data = mysqli_fetch_assoc($c_result)) {
+            $c_sql = 'SELECT 
+                          category_id 
+                      FROM 
+                          ' . $_pref . 'mst_blog_category_post 
+                      WHERE 
+                          post_id = "'.$data['old_id'].'"';
+            $c_result = $adapter->query($c_sql)->execute();
+            foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
                     $id = $oldCategories[$oldId]->getId();
@@ -258,9 +245,9 @@ class Mirasvit extends AbstractImport
             $postTags = [];
             $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mst_blog_tag_post WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $this->_mysqliQuery($t_sql);
+            $t_result = $adapter->query($t_sql)->execute();
 
-            while ($t_data = mysqli_fetch_assoc($t_result)) {
+            foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
                 if (isset($oldTags[$oldId])) {
                     $id = $oldTags[$oldId]->getId();
@@ -274,9 +261,9 @@ class Mirasvit extends AbstractImport
             $postProducts = [];
             $t_sql = 'SELECT product_id FROM ' . $_pref . 'mst_blog_post_product WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $this->_mysqliQuery($t_sql);
+            $t_result = $adapter->query($t_sql)->execute();
 
-            while ($t_data = mysqli_fetch_assoc($t_result)) {
+            foreach ($t_result as $t_data) {
                 $id = $t_data['product_id'];
                 $postProducts[$id] = $id;
             }
@@ -288,8 +275,8 @@ class Mirasvit extends AbstractImport
             /* Find store ids */
             $storeIds = [];
             $sql2 = 'SELECT store_id FROM  ' . $_pref . 'mst_blog_store_post WHERE post_id=' . $data['old_id'];
-            $result2 = $this->_mysqliQuery($sql2);
-            while ($data2 = mysqli_fetch_assoc($result2)) {
+            $result2 = $adapter->query($sql2)->execute();
+            foreach ($result2 as $data2) {
                 $storeIds[] = $data2['store_id'];
             }
             $data['store_ids'] = $storeIds;
@@ -306,20 +293,21 @@ class Mirasvit extends AbstractImport
             unset($post);
         }
         /* end */
-        mysqli_close($con);
+        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     protected function getAttributValue($entitytTypeCode, $entitytId, $attributeCode)
     {
         $_pref = $this->pref;
 
+        $adapter = $this->createAdapter();
         if (!isset($this->entityTypeId[$entitytTypeCode])) {
             $sql = 'SELECT
                     entity_type_id
                 FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code="' . $entitytTypeCode . '"';
 
-            $result = $this->_mysqliQuery($sql);
-            $data = mysqli_fetch_assoc($result);
+            $result = $adapter->query($sql)->execute();
+            $data = $result;
             if ($data) {
                 $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
             } else {
@@ -338,8 +326,8 @@ class Mirasvit extends AbstractImport
             $sql = 'SELECT
                     *
                 FROM ' . $_pref . 'eav_attribute WHERE entity_type_id=' . $entityTypeId;
-            $result = $this->_mysqliQuery($sql);
-            while ($data = mysqli_fetch_assoc($result)) {
+            $result = $adapter->query($sql)->execute();
+            foreach ($result as $data) {
                 $this->entityTypeAttributes[$entitytTypeCode][$data['attribute_code']] = $data;
             }
         }
@@ -355,13 +343,25 @@ class Mirasvit extends AbstractImport
                 FROM ' . $_pref . 'mst_'.$entitytTypeCode.'_entity_' . $attribute['backend_type'] . ' WHERE store_id = 0
                    AND attribute_id = ' . $attribute['attribute_id'] . '
                    AND entity_id=' . $entitytId;
-        $result = $this->_mysqliQuery($sql);
-        $data = mysqli_fetch_assoc($result);
+        $result = $adapter->query($sql)->execute();
+        $data = $result;
 
         if ($data) {
             return $data['value'];
         } else {
             return null;
         }
+    }
+
+    protected function createAdapter()
+    {
+        $connectionConf = [
+            'driver'   => 'Pdo_Mysql',
+            'database' => $this->getData('dbname'),
+            'username' => $this->getData('uname'),
+            'password' => $this->getData('pwd'),
+            'charset'  => 'utf8',
+        ];
+        return $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
     }
 }

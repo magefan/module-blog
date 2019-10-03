@@ -34,37 +34,27 @@ class Mageplaza extends AbstractImport
             'dbname',
             $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
         );
-        $host = $this->getData('dbhost') ?: $this->getData('host');
-        if (false !== strpos($host, '.sock')) {
-            $con = $this->_connect = mysqli_connect(
-                'localhost',
-                $this->getData('uname'),
-                $this->getData('pwd'),
-                $this->getData('dbname'),
-                null,
-                $host
-            );
-        } else {
-            $con = $this->_connect = mysqli_connect(
-                $host,
-                $this->getData('uname'),
-                $this->getData('pwd'),
-                $this->getData('dbname')
-            );
+
+        $connectionConf = [
+            'driver'   => 'Pdo_Mysql',
+            'database' => $this->getData('dbname'),
+            'username' => $this->getData('uname'),
+            'password' => $this->getData('pwd'),
+            'charset'  => 'utf8',
+        ];
+        $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
+
+        if (!$adapter) {
+            throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
-        if (mysqli_connect_errno()) {
-            throw new \Exception("Failed connect to magento database", 1);
+        if ($this->getData('prefix')) {
+            $_pref = $adapter->getPlatform()->quoteValue($config->get('db/table_prefix'));
         }
-
-        $_pref = mysqli_real_escape_string(
-            $con,
-            $config->get('db/table_prefix')
-        );
 
         $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_category LIMIT 1';
         try {
-            $this->_mysqliQuery($sql);
+            $this->query($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
@@ -87,8 +77,8 @@ class Mageplaza extends AbstractImport
                     t.enabled as is_active,
                     t.store_ids as store_ids
                 FROM ' . $_pref . 'mageplaza_blog_category t';
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Prepare category data */
 
             $data['store_ids'] = explode(',', $data['store_ids']);
@@ -164,8 +154,8 @@ class Mageplaza extends AbstractImport
                     t.enabled as is_active
                 FROM ' . $_pref . 'mageplaza_blog_tag t';
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Prepare tag data */
             /*
             foreach (['title'] as $key) {
@@ -200,14 +190,14 @@ class Mageplaza extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_post';
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT category_id FROM ' . $_pref .
                      'mageplaza_blog_post_category WHERE post_id = "'.$data['post_id'].'"';
-            $c_result = $this->_mysqliQuery($c_sql);
-            while ($c_data = mysqli_fetch_assoc($c_result)) {
+            $c_result = $adapter->query($c_sql)->execute();
+            foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
                     $id = $oldCategories[$oldId]->getId();
@@ -219,9 +209,9 @@ class Mageplaza extends AbstractImport
             $postTags = [];
             $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mageplaza_blog_post_tag WHERE post_id = "'.$data['post_id'].'"';
 
-            $t_result = $this->_mysqliQuery($t_sql);
+            $t_result = $adapter->query($t_sql)->execute();
 
-            while ($t_data = mysqli_fetch_assoc($t_result)) {
+            foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
                 if (isset($oldTags[$oldId])) {
                     $id = $oldTags[$oldId]->getId();
@@ -262,9 +252,9 @@ class Mageplaza extends AbstractImport
                 /* find post comment s*/
                 $sql = 'SELECT * FROM ' . $_pref .
                        'mageplaza_blog_comment WHERE `post_id` = ' . $post->getOldId();
-                $resultComments = $this->_mysqliQuery($sql);
+                $resultComments = $adapter->query($sql)->execute();
 
-                while ($comments = mysqli_fetch_assoc($resultComments)) {
+                foreach ($resultComments as $comments) {
                     $commentData = [
                         'parent_id' => 0,
                         'post_id' => $post->getPostId(),
@@ -310,6 +300,6 @@ class Mageplaza extends AbstractImport
             unset($post);
         }
         /* end */
-        mysqli_close($con);
+        $adapter->getDriver()->getConnection()->disconnect();
     }
 }

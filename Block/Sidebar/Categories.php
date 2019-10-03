@@ -9,11 +9,13 @@
 namespace Magefan\Blog\Block\Sidebar;
 
 use Magento\Store\Model\ScopeInterface;
+use \Magento\Framework\View\Element\Template;
+use \Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Blog sidebar categories block
  */
-class Categories extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
+class Categories extends Template implements IdentityInterface
 {
     use Widget;
 

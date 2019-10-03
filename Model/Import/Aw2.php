@@ -216,6 +216,6 @@ class Aw2 extends AbstractImport
             unset($post);
         }
         /* end */
-//        mysqli_close($con);
+        $adapter->getDriver()->getConnection()->disconnect();
     }
 }

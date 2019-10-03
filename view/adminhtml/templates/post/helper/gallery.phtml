@@ -33,32 +33,32 @@ $formName = $block->getFormName();
         <div class="image item<% if (data.disabled == 1) { %> hidden-for-front<% } %>"
              data-role="image">
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][position]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][position]"
                    value="<%- data.position %>"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    class="position"/>
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][file]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][file]"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.file %>"/>
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][value_id]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][value_id]"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.value_id %>"/>
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][label]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][label]"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.label %>"/>
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][disabled]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][disabled]"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="<%- data.disabled %>"/>
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][media_type]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][media_type]"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value="image"/>
             <input type="hidden"
-                   name="<?= /*@escapeNotVerified*/ $block->escapeHtml($elementName) ?>[<%- data.file_id %>][removed]"
+                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][removed]"
                    data-form-part="<?= /* @escapeNotVerified */ $block->escapeHtml($formName) ?>"
                    value=""
                    class="is-removed"/>

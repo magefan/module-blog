@@ -8,10 +8,13 @@
 
 namespace Magefan\Blog\Block\Tag;
 
+use \Magento\Framework\View\Element\Template;
+use \Magento\Framework\DataObject\IdentityInterface;
+
 /**
  * Blog tag abstract block
  */
-abstract class AbstractTag extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
+abstract class AbstractTag extends Template implements IdentityInterface
 {
     /**
      * @var \Magento\Cms\Model\Template\FilterProvider

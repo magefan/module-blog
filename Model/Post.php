@@ -516,7 +516,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         $content = $_content->saveHTML();
                     }
                 } catch (\Exception $e) {
-                    echo $e->getMessage();
+                    $messageManager = \Magento\Framework\App\ObjectManager::getInstance()
+                    ->create(\Magento\Framework\Message\ManagerInterface::class);
+                    $messageManager->addError($e->getMessage());
                 }
             }
 

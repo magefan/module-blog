@@ -17,20 +17,22 @@ class Wordpress extends AbstractImport
 
     public function execute()
     {
-        $con = $this->_connect = mysqli_connect(
-            $this->getData('dbhost'),
-            $this->getData('uname'),
-            $this->getData('pwd'),
-            $this->getData('dbname')
-        );
+        $connectionConf = [
+            'driver'   => 'Pdo_Mysql',
+            'database' => $this->getData('dbname'),
+            'username' => $this->getData('uname'),
+            'password' => $this->getData('pwd'),
+            'charset'  => 'utf8',
+        ];
+        $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
 
-        if (mysqli_connect_errno()) {
-            throw new \Exception("Failed connect to wordpress database", 1);
+        if (!$adapter) {
+            throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
-        mysqli_set_charset($con, "utf8");
-
-        $_pref = mysqli_real_escape_string($con, $this->getData('prefix'));
+        if ($this->getData('prefix')) {
+            $_pref = $adapter->getPlatform()->quoteValue($this->getData('prefix'));
+        }
 
         $categories = [];
         $oldCategories = [];
@@ -45,8 +47,8 @@ class Wordpress extends AbstractImport
                 LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
                 WHERE tt.taxonomy = "category" AND t.slug <> "uncategorized"';
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Prepare category data */
             foreach (['title', 'identifier'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
@@ -123,8 +125,8 @@ class Wordpress extends AbstractImport
                 LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
                 WHERE tt.taxonomy = "post_tag" AND t.slug <> "uncategorized"';
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
             /* Prepare tag data */
             foreach (['title', 'identifier'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
@@ -156,9 +158,9 @@ class Wordpress extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'posts WHERE `post_type` = "post"';
-        $result = $this->_mysqliQuery($sql);
+        $result = $adapter->query($sql)->execute();
 
-        while ($data = mysqli_fetch_assoc($result)) {
+        foreach ($result as $data) {
             /* find post categories*/
             $postCategories = [];
 
@@ -166,8 +168,8 @@ class Wordpress extends AbstractImport
                     LEFT JOIN '.$_pref.'term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
                     WHERE tr.`object_id` = "'.$data['ID'].'" AND tt.taxonomy = "category"';
 
-            $result2 = $this->_mysqliQuery($sql);
-            while ($data2 = mysqli_fetch_assoc($result2)) {
+            $result2 = $adapter->query($sql)->execute();
+            foreach ($result2 as $data2) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldCategories[$oldTermId])) {
                     $postCategories[] = $oldCategories[$oldTermId]->getId();
@@ -181,8 +183,8 @@ class Wordpress extends AbstractImport
                     LEFT JOIN '.$_pref.'term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
                     WHERE tr.`object_id` = "'.$data['ID'].'" AND tt.taxonomy = "post_tag"';
 
-            $result2 = $this->_mysqliQuery($sql);
-            while ($data2 = mysqli_fetch_assoc($result2)) {
+            $result2 = $adapter->query($sql)->execute();
+            foreach ($result2 as $data2) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldTags[$oldTermId])) {
                     $postTags[] = $oldTags[$oldTermId]->getId();
@@ -214,8 +216,8 @@ class Wordpress extends AbstractImport
                 ORDER BY
                     p1.post_date DESC';
 
-            $result2 = $this->_mysqliQuery($sql);
-            if ($data2 = mysqli_fetch_assoc($result2)) {
+            $result2 = $adapter->query($sql)->execute();
+            if ($data2 = $result2) {
                 if ($data2['featured_img']) {
                     $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $data2['featured_img'];
                 }
@@ -239,10 +241,12 @@ class Wordpress extends AbstractImport
                     ORDER BY
                         p1.post_date DESC';
 
-                $result2 = $this->_mysqliQuery($sql);
-                if ($data2 = mysqli_fetch_assoc($result2)) {
+                $result2 = $adapter->query($sql)->execute();
+                if ($data2 = $result2) {
                     if ($data2['featured_img']) {
-                        $tmpArr = @unserialize($data2['featured_img']);
+                        $serializeInterface = \Magento\Framework\App\ObjectManager::getInstance()
+                        ->create(\Magento\Framework\Serialize\SerializerInterface::class);
+                        $tmpArr = $serializeInterface->unserialize($data2['featured_img']);
                         if (is_array($tmpArr)) {
                             foreach ($tmpArr as $item) {
                                 $item = trim($item);
@@ -261,8 +265,8 @@ class Wordpress extends AbstractImport
 
             /* Find Meta Data */
             $sql = 'SELECT * FROM `'.$_pref.'postmeta` WHERE `post_id` = ' . ((int)$data['ID']);
-            $metaResult = $this->_mysqliQuery($sql);
-            while ($metaData = mysqli_fetch_assoc($metaResult)) {
+            $metaResult = $adapter->query($sql)->execute();
+            foreach ($metaResult as $metaData) {
 
                 $metaValue = trim($metaData['meta_value']);
                 if (!$metaValue) {
@@ -328,11 +332,18 @@ class Wordpress extends AbstractImport
                 $post->setData($data)->save();
 
                 /* find post comment s*/
-                $sql = 'SELECT * FROM '.$_pref.'comments WHERE `comment_approved`=1 AND `comment_post_ID` = ' . $wordpressPostId;
-                $resultComments = $this->_mysqliQuery($sql);
+                $sql = 'SELECT 
+                            * 
+                        FROM 
+                            '.$_pref.'comments 
+                        WHERE 
+                            `comment_approved`=1 
+                        AND 
+                            `comment_post_ID` = ' . $wordpressPostId;
+                $resultComments = $adapter->query($sql)->execute();
                 $commentParents = [];
 
-                while ($comments = mysqli_fetch_assoc($resultComments)) {
+                foreach ($resultComments as $comments) {
                     $commentParentId = 0;
                     if (!($comments['comment_parent'] == 0) && isset($commentParents[$comments["comment_parent"]])) {
                         $commentParentId = $commentParents[$comments["comment_parent"]];
@@ -380,7 +391,7 @@ class Wordpress extends AbstractImport
         }
         /* end */
 
-        mysqli_close($con);
+        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     protected function wordpressOutoutWrap($pee, $br = true)
@@ -507,7 +518,7 @@ class Wordpress extends AbstractImport
         // Optionally insert line breaks.
         if ($br) {
             // Replace newlines that shouldn't be touched with a placeholder.
-            $pee = @preg_replace_callback('/<(script|style).*?<\/\\1>/s', '_autop_newline_preservation_helper', $pee);
+            $pee = preg_replace_callback('/<(script|style).*?<\/\\1>/s', '_autop_newline_preservation_helper', $pee);
 
             // Normalize <br>
             $pee = str_replace([ '<br>', '<br/>' ], '<br />', $pee);

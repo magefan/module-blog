@@ -90,13 +90,11 @@ class Config
      */
     const XML_PATH_TOP_MENU_MAX_DEPTH = 'mfblog/top_menu/max_depth';
 
-
     const XML_RELATED_POSTS_ENABLED = 'mfblog/post_view/related_posts/enabled';
     const XML_RELATED_POSTS_NUMBER = 'mfblog/post_view/related_posts/number_of_posts';
 
     const XML_RELATED_PRODUCTS_ENABLED = 'mfblog/post_view/related_products/enabled';
     const XML_RELATED_PRODUCTS_NUMBER = 'mfblog/post_view/related_products/number_of_products';
-
 
     const XML_TAG_ROBOTS = 'mfblog/tag/robots';
     const XML_SEARCH_ROBOTS = 'mfblog/search/robots';

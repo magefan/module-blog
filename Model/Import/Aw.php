@@ -255,7 +255,6 @@ class Aw extends AbstractImport
             unset($post);
         }
         /* end */
-
-        mysqli_close($con);
+        $adapter->getDriver()->getConnection()->disconnect();
     }
 }

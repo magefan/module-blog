@@ -81,7 +81,8 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             [
                 'label' => __('NOTICE'),
                 'name' => 'prefix',
-                'after_element_html' => 'When the import is completed successfully, please copy image files from WordPress 
+                'after_element_html' => 'When the import is completed successfully, 
+                                        please copy image files from WordPress 
                                         <strong style="color:#bd1616;">wp-content/uploads</strong> 
                                         directory to Magento 
                                         <strong style="color:#105610;">pub/media/magefan_blog</strong> 
