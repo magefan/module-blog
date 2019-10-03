@@ -155,4 +155,35 @@ class Author extends AbstractModel implements AuthorInterface
     {
         return $this->getFirstname() . $separator . $this->getLastname();
     }
+
+    /**
+     * Prepare all additional data
+     * @return array
+     */
+    public function getDynamicData()
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'meta_description',
+            'meta_title',
+            'author_url',
+            'name',
+            'title',
+            'identifier',
+        ];
+
+        $data['author_id'] = $this->getId();
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+            $data[$key] = $this->$method();
+        }
+
+        return $data;
+    }
 }

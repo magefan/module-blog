@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Api;
 
 use Magefan\Blog\Model\Category;
+use Magefan\Blog\Model\CategoryFactory;
 
 /**
  * Interface PostRepositoryInterface
@@ -16,6 +17,11 @@ use Magefan\Blog\Model\Category;
  */
 interface CategoryRepositoryInterface
 {
+    /**
+     * @return CategoryFactory
+     */
+    public function getFactory();
+
     /**
      * @param Category $category
      * @return mixed

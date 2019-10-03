@@ -83,12 +83,40 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addFieldToFilter($field, $condition = null)
     {
+        /* NEED TO IMPROVE THIS CODE */
+        if (is_array($field) && count($field) > 1) {
+            return parent::addFieldToFilter($field, $condition);
+        }
+
+        if (is_array($field) && count($field) == 1) {
+            $field = $field[0];
+            if (isset($condition[0])) {
+                $condition = $condition[0];
+            }
+        }
+        /* END NEED TO IMPROVE */
+
         if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition);
         }
 
-        if ($field === 'category' || $field === 'categories') {
+        if ($field === 'category' || $field === 'category_id') {
             return $this->addCategoryFilter($condition);
+        }
+
+        if ($field === 'tag' || $field === 'tag_id') {
+            return $this->addTagFilter($condition);
+        }
+
+        if ($field === 'author' || $field === 'author_id') {
+            return $this->addAuthorFilter($condition);
+        }
+
+        if ($field === 'search') {
+            if (is_array($condition)) {
+                $condition = array_shift($condition);
+            }
+            return $this->addSearchFilter($condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -126,6 +154,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             }
 
             $this->addFilter('store', ['in' => $store], 'public');
+            $this->setFlag('store_filter_added', 1);
         }
         return $this;
     }
@@ -185,7 +214,25 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 }
             }
 
+            $connection = $this->getConnection();
+            $tableName = $this->getTable('magefan_blog_category');
+            foreach ($categories as $k => $id) {
+                if (!is_numeric($id)) {
+                    $select = $connection->select()
+                        ->from(['t' => $tableName], 'category_id')
+                        ->where('t.identifier = ?', $id);
+
+                    $id = $connection->fetchOne($select);
+                    if (!$id) {
+                        $id = 0;
+                    }
+
+                    $categories[$k] = $id;
+                }
+            }
+
             $this->addFilter('category', ['in' => $categories], 'public');
+            $this->setFlag('category_filter_added', 1);
         }
         return $this;
     }
@@ -279,7 +326,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add tag filter to collection
-     * @param array|int|\Magefan\Blog\Model\Tag  $tag
+     * @param array|int|string|\Magefan\Blog\Model\Tag  $tag
      * @return $this
      */
     public function addTagFilter($tag)
@@ -293,10 +340,29 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $tag = [$tag];
             }
 
+            $connection = $this->getConnection();
+            $tableName = $this->getTable('magefan_blog_tag');
+            foreach ($tag as $k => $id) {
+                if (!is_numeric($id)) {
+                    $select = $connection->select()
+                        ->from(['t' => $tableName], 'tag_id')
+                        ->where('t.identifier = ?', $id);
+
+                    $id = $connection->fetchOne($select);
+                    if (!$id) {
+                        $id = 0;
+                    }
+
+                    $tag[$k] = $id;
+                }
+            }
+
             $this->addFilter('tag', ['in' => $tag], 'public');
+            $this->setFlag('tag_filter_added', 1);
         }
         return $this;
     }
+
 
     /**
      * Add author filter to collection
@@ -314,7 +380,22 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $author = [$author];
             }
 
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $authorModel = $objectManager->get(\Magefan\Blog\Api\AuthorInterface::class);
+
+            foreach ($author as $k => $id) {
+                if (!is_numeric($id)) {
+                    $id = $authorModel->checkIdentifier($id);
+
+                    if (!$id) {
+                        $id = 0;
+                    }
+                    $author[$k] = $id;
+                }
+            }
+
             $this->addFilter('author_id', ['in' => $author], 'public');
+            $this->setFlag('author_filter_added', 1);
         }
         return $this;
     }
@@ -434,8 +515,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _renderFiltersBefore()
     {
-        foreach (['store', 'category', 'tag'] as $key) {
+        foreach (['store', 'category', 'tag', 'author'] as $key) {
+
             if ($this->getFilter($key)) {
+
                 $joinOptions = new \Magento\Framework\DataObject;
                 $joinOptions->setData([
                     'key' => $key,

@@ -17,6 +17,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
  * Class TagRepository
@@ -42,22 +43,40 @@ class TagRepository implements TagRepositoryInterface
     private $searchResultsFactory;
 
     /**
+     * @var CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+    /**
      * TagRepository constructor.
-     * @param \Magefan\Blog\Model\TagFactory $tagFactory
+     * @param TagFactory $tagFactory
      * @param TagResourceModel $tagResourceModel
      * @param CollectionFactory $collectionFactory
      * @param SearchResultsFactory $searchResultsFactory
+     * @param CollectionProcessorInterface|null $collectionProcessor
      */
     public function __construct(
         TagFactory $tagFactory,
         TagResourceModel $tagResourceModel,
         CollectionFactory $collectionFactory,
-        SearchResultsFactory $searchResultsFactory
+        SearchResultsFactory $searchResultsFactory,
+        CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->tagFactory = $tagFactory;
         $this->tagResourceModel = $tagResourceModel;
         $this->collectionFactory = $collectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
+        $this->collectionProcessor = $collectionProcessor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface::class
+        );
+    }
+
+    /**
+     * @return TagFactory
+     */
+    public function getFactory()
+    {
+        return $this->tagFactory;
     }
 
     /**
@@ -100,6 +119,7 @@ class TagRepository implements TagRepositoryInterface
     {
         $tag = $this->tagFactory->create();
         $this->tagResourceModel->load($tag, $tagId);
+
         if (!$tag->getId()) {
             throw new NoSuchEntityException(__('Requested item doesn\'t exist'));
         }
@@ -146,12 +166,7 @@ class TagRepository implements TagRepositoryInterface
         /** @var \Magefan\Blog\Model\ResourceModel\Tag\Collection $collection */
         $collection = $this->collectionFactory->create();
 
-        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-            foreach ($filterGroup->getFilters() as $filter) {
-                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
-            }
-        }
+        $this->collectionProcessor->process($searchCriteria, $collection);
 
         /** @var \Magento\Framework\Api\searchResultsInterface $searchResult */
         $searchResult = $this->searchResultsFactory->create();

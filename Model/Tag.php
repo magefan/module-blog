@@ -131,7 +131,13 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     public function getTagUrl()
     {
-        return $this->_url->getUrl($this, URL::CONTROLLER_TAG);
+        $url = $this->getData('tag_url');
+        if (!$url) {
+            $url = $this->_url->getUrl($this, URL::CONTROLLER_TAG);
+            $this->setData('tag_url', $url);
+        }
+
+        return $url;
     }
 
     /**
@@ -185,5 +191,31 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     public function getIdentifier()
     {
         return (string)$this->getData('identifier');
+    }
+
+    /**
+     * Return all additional data
+     * @return array
+     */
+    public function getDynamicData()
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'meta_description',
+            'meta_title',
+            'tag_url',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+            $data[$key] = $this->$method();
+        }
+
+        return $data;
     }
 }

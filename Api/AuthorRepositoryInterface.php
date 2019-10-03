@@ -15,6 +15,11 @@ namespace Magefan\Blog\Api;
 interface AuthorRepositoryInterface
 {
     /**
+     * @return AuthorInterfaceFactory
+     */
+    public function getFactory();
+
+    /**
      * @param AuthorInterface $author
      * @return mixed
      */

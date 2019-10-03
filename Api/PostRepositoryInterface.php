@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Api;
 
 use Magefan\Blog\Model\Post;
+use Magefan\Blog\Model\PostFactory;
 
 /**
  * Interface PostRepositoryInterface
@@ -16,6 +17,11 @@ use Magefan\Blog\Model\Post;
  */
 interface PostRepositoryInterface
 {
+    /**
+     * @return PostFactory
+     */
+    public function getFactory();
+
     /**
      * @param Post $post
      * @return mixed
