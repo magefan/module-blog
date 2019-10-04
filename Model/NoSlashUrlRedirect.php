@@ -65,7 +65,9 @@ class NoSlashUrlRedirect
 
             if ($urlNoSlash != $currentUrl) {
                 $controller = $observer->getEvent()->getData('controller_action');
-                if ($controller->getRequest()->isXmlHttpRequest()) {
+                if ($controller->getRequest()->isXmlHttpRequest()
+                    || $controller->getRequest()->isPost()
+                ) {
                     return;
                 }
                 $this->actionFlag->set('', \Magento\Framework\App\ActionInterface::FLAG_NO_DISPATCH, true);
