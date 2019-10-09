@@ -112,6 +112,33 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
             $model->setGalleryImages($gallery);
         }
+
+        /* Prepare Tags */
+        $tagInput = trim($request->getPost('tag_input'));
+        if ($tagInput) {
+            $tagInput = explode(',', $tagInput);
+
+            $tagsCollection = $this->_objectManager->create(\Magefan\Blog\Model\ResourceModel\Tag\Collection::class);
+            $allTags = [];
+            foreach ($tagsCollection as $item) {
+                $allTags[strtolower($item->getTitle())] = $item->getId();
+            }
+
+            $tags = [];
+            foreach ($tagInput as $tagTitle) {
+                if (empty($allTags[strtolower($tagTitle)])) {
+                    $tagModel = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class);
+                    $tagModel->setData('title', $tagTitle);
+                    $tagModel->setData('is_active', 1);
+                    $tagModel->save();
+
+                    $tags[] = $tagModel->getId();
+                } else {
+                    $tags[] = $allTags[$tagTitle];
+                }
+            }
+            $model->setData('tags', $tags);
+        }
     }
 
     /**
