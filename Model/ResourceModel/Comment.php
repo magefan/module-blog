@@ -80,13 +80,13 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $postId = $object->getDataByKey('post_id');
 
         if ($postId) {
-            $this->updataPostComentsCount($postId);
+            $this->updatePostCommentsCount($postId);
         }
 
         return $result;
     }
 
-    public function updatePostCommentCount($postId)
+    public function updatePostCommentsCount($postId)
     {
         $connection = $this->getConnection();
 
