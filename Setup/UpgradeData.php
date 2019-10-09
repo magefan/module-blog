@@ -41,7 +41,7 @@ class UpgradeData implements UpgradeDataInterface
                 foreach ($comments as $comment) {
                     if (!in_array($comment['comment_id'], $commentsIds) ) {
                         array_push($commentsIds, $comment['comment_id'] );
-                        $this->commentResource->updatePostCommentCount($post['post_id']);
+                        $this->commentResource->updatePostCommentsCount($post['post_id']);
                     }
                 }
             }
