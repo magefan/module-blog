@@ -68,7 +68,7 @@ class InstallData implements InstallDataInterface
 <p><!-- pagebreak --></p>
 <p>Please also read&nbsp;<a title="Magento 2 Blog online documentation" href="https://magefan.com/blog/magento-2-blog-extension-documentation" target="_blank">Online documentation</a>&nbsp;and&nbsp;<a href="https://magefan.com/blog/add-read-more-tag-to-blog-post-content" target="_blank">How to add "read more" tag to post content</a></p>
 <p>Follow Magefan on:</p>
-<p><a title="Blog Extension for Magento 2 code" href="https://github.com/magefan/module-blog" target="_blank">GitHub</a>&nbsp;|&nbsp;<a href="https://twitter.com/magento2fan" target="_blank">Twitter</a>&nbsp;|&nbsp;<a href="https://www.facebook.com/magefan/" target="_blank">Facebook</a></p>',
+<p><a title="Blog Extension for Magento 2" href="https://github.com/magefan/module-blog" target="_blank">GitHub</a>&nbsp;|&nbsp;<a href="https://twitter.com/magento2fan" target="_blank">Twitter</a>&nbsp;|&nbsp;<a href="https://www.facebook.com/magefan/" target="_blank">Facebook</a></p>',
             'store_ids' => [0]
         ];
 
