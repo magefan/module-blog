@@ -26,9 +26,9 @@
          <div class="recent-posts recent-posts-<?= $id ?>">
             <div class="owl-carousel">
                <?php foreach ($_postCollection as $_post) { ?>
-                <?php
+                    <?php
                     $postDate = $_post->getData("publish_time");
-                ?>
+                    ?>
                <div class="item">
                   <div class="recent-inner">
                      <div class="row">
@@ -36,7 +36,7 @@
                            <div class="post-image">
                               <?php if ($post_image = $_post->getFeaturedImage()) { ?>
                                 <img src="<?= $post_image; ?>" alt="" />
-                              <?php } ?>
+                                <?php } ?>
                               <div class="post-date">
                                 <span class="day"><?php echo date("j", strtotime($postDate)); ?></span> 
                                 <span class="month"><?php echo date("M", strtotime($postDate)); ?></span>
@@ -55,7 +55,7 @@
                      </div>
                   </div>
                </div>
-               <?php } ?>
+                <?php } ?>
             </div>
          </div>
          <script type="text/javascript" xml="space">// 

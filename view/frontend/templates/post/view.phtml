@@ -17,6 +17,7 @@
     $_post = $block->getPost();
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null);
+    $featuredImgAlt = $_post->getData('featured_img_alt');
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
@@ -34,7 +35,7 @@
             <div class="post-description clearfix">
                 <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
                 <div class="post-ftimg-hld">
-                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $featuredImgAlt ? $featuredImgAlt : $_postName ?>" />
                 </div>
                 <?php } ?>
                 <div class="post-text-hld">

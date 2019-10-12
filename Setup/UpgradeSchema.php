@@ -713,6 +713,37 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+
+        if (version_compare($version, '2.9.1.1') < 0) {
+            $table = $setup->getTable('magefan_blog_post');
+            $connection->addColumn(
+                $setup->getTable($table),
+                'featured_img_alt',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Featured Image Alt',
+                    'after' => 'featured_img'
+                ]
+            );
+        }
+      
+        if (version_compare($version,'2.9.1.4') < 0) {
+            $table =$setup->getTable('magefan_blog_post');
+            $connection->addColumn(
+                $setup->getTable($table),
+                'сomments_сount',
+                [
+                    'type' =>\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => null,
+                    'nullable' => true,
+                    'comment' => 'Post Comment Counts'
+
+                ]
+            );
+        }      
+
         $setup->endSetup();
     }
 }

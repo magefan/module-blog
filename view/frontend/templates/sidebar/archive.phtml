@@ -15,7 +15,7 @@
 ?>
 
 <?php
-	$_months = $block->getMonths();
+    $_months = $block->getMonths();
 ?>
 <?php if (count($_months)) { ?>
 <div class="widget block block-archive" data-bind="scope: 'blog-archive'">
@@ -23,7 +23,7 @@
         <strong><?php echo __('Archive') ?></strong>
     </div>
     <div class="block-content">
-    	<?php foreach ($_months as $time) { ?>
+        <?php foreach ($_months as $time) { ?>
             <?php
                 $title = $block->getTranslatedDate($time);
                 $title = $block->escapeHtml($title, null, true);

@@ -355,6 +355,24 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve featured link image url
+     * @return mixed
+     */
+    public function getFeaturedListImage()
+    {
+        if (!$this->hasData('featured_list_image')) {
+            if ($file = $this->getData('featured_list_img')) {
+                $image = $this->_url->getMediaUrl($file);
+            } else {
+                $image = false;
+            }
+            $this->setData('featured_list_image', $image);
+        }
+
+        return $this->getData('featured_list_image');
+    }
+
+    /**
      * Set media gallery images url
      *
      * @param array $images
@@ -625,7 +643,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getParentCategories()
     {
-        if (is_null($this->_parentCategories)) {
+        if (null === $this->_parentCategories) {
             $this->_parentCategories = $this->_categoryCollectionFactory->create()
                 ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
                 ->addStoreFilter($this->getStoreId())
@@ -671,7 +689,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getRelatedTags()
     {
-        if (is_null($this->_relatedTags)) {
+        if (null === $this->_relatedTags) {
             $this->_relatedTags = $this->_tagCollectionFactory->create()
                 ->addFieldToFilter('tag_id', ['in' => $this->getTags()])
                 ->addActiveFilter()
@@ -713,6 +731,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         $enableComments = $this->getEnableComments();
         if ($enableComments || $enableComments === null) {
+            /*
             if (!$this->hasData('comments_count')) {
                 $comments = $this->_commentCollectionFactory->create()
                     ->addFieldToFilter('post_id', $this->getId())
@@ -720,6 +739,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     ->addFieldToFilter('parent_id', 0);
                 $this->setData('comments_count', (int)$comments->getSize());
             }
+            */
             return $this->getData('comments_count');
         } else {
             return 0;

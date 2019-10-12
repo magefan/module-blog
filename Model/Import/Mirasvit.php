@@ -237,7 +237,7 @@ class Mirasvit extends AbstractImport
             }
 
             if ($data['is_active'] == 2) {
-                $data['is_active'] = 1; 
+                $data['is_active'] = 1;
             } else {
                 $data['is_active'] = 0;
             }
@@ -332,7 +332,7 @@ class Mirasvit extends AbstractImport
                 $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
             } else {
                 $this->entityTypeId[$entitytTypeCode] = false;
-            } 
+            }
         }
 
         $entityTypeId = $this->entityTypeId[$entitytTypeCode];
@@ -372,6 +372,5 @@ class Mirasvit extends AbstractImport
         } else {
             return null;
         }
-
     }
 }

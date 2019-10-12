@@ -25,6 +25,11 @@ use Magento\Framework\DataObject\IdentityInterface;
  * @method $this setMetaDescription(string $value)
  * @method string getIdentifier()
  * @method $this setIdentifier(string $value)
+ * @method $this setUrlKey(string $value)
+ * @method string getUrlKey()
+ * @method $this setMetaTitle(string $value)
+ * @method string getPath()
+ * @method $this setPath($value)
  */
 class Category extends \Magento\Framework\Model\AbstractModel implements IdentityInterface
 {
@@ -69,7 +74,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * @var array
      */
-    static private $loadedCategoriesRepository = [];
+    private static $loadedCategoriesRepository = [];
 
     /**
      * @var string
@@ -154,7 +159,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     {
         if (!isset(self::$loadedCategoriesRepository[$categoryId])) {
             $category = clone $this;
+            $category->unsetData();
             $category->load($categoryId);
+            $categoryId = $category->getId();
         }
 
         return self::$loadedCategoriesRepository[$categoryId];

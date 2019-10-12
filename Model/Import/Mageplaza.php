@@ -295,6 +295,9 @@ class Mageplaza extends AbstractImport
                         $comment->setData($commentData)->save();
                         $this->_importedCommentsCount++;
                     } catch (\Exception $e) {
+                        if (!isset($commentData['title'])) {
+                            $commentData['title'] = 'Undefined';
+                        }
                         $this->_skippedComments[] = $commentData['title'];
                         unset($comment);
                     }

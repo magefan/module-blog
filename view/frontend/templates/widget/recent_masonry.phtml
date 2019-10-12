@@ -25,6 +25,7 @@
             <?php
                 $_postUrl = $_post->getPostUrl();
                 $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+                $featuredImgAlt = $_post->getData('featured_img_alt');
             ?>
             <li class="post-holder post-holder-<?php echo $_post->getId() ?>">
                 <div class="post-header">
@@ -47,10 +48,11 @@
                         <div class="dash">|</div>
                         <div class="item post-categories">
                             <span class="label"><?php echo __('Categories:') ?></span>
-                            <?php $n = 0; foreach($_post->getParentCategories() as $ct) { $n++; ?>
+                            <?php $n = 0;
+                            foreach ($_post->getParentCategories() as $ct) { $n++; ?>
                                 <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>"><?php echo $block->escapeHtml($ct->getTitle()) ?></a>
-                                <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
-                            <?php } ?>
+                                                            <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+                                                        <?php } ?>
                         </div>
                         <?php } ?>
                     </div>
@@ -61,7 +63,7 @@
                         <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
                         <div class="post-ftimg-hld">
                             <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
-                                <img src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                                <img src="<?php echo $featuredImage ?>" alt="<?php echo $featuredImgAlt ? $featuredImgAlt : $_postName ?>" />
                             </a>
                         </div>
                         <?php } ?>
@@ -95,7 +97,7 @@ function( require, $, Masonry ) {
         })
     });
 });
-<?php /* more info http://masonry.desandro.com/extras.html */ ?>
+    <?php /* more info http://masonry.desandro.com/extras.html */ ?>
 </script>
 
 <?php } ?>

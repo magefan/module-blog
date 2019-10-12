@@ -51,14 +51,14 @@ if ($exist = $block->getItems()->getSize() && $this->displayProducts()) {
             <?php /*<ol class="products list items product-items">*/ ?>
                 <?php $iterator = 1; ?>
                 <?php foreach ($items as $_item): ?>
-                <?php $available = ''; ?>
-                <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
-                    <?php if (!$_item->getRequiredOptions()): ?>
-                        <?php $available = 'related-available'; ?>
+                    <?php $available = ''; ?>
+                    <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
+                        <?php if (!$_item->getRequiredOptions()): ?>
+                            <?php $available = 'related-available'; ?>
                     <?php endif; ?>
                 <?php endif; ?>
-                <?php if ($type == 'related' || $type == 'upsell'): ?>
-                    <?php echo($iterator++ == 1) ? '<div class="item product product-item" style="display: none;">' : '</div><div class="item product product-item" style="display: none;">' ?>
+                    <?php if ($type == 'related' || $type == 'upsell'): ?>
+                        <?php echo($iterator++ == 1) ? '<div class="item product product-item" style="display: none;">' : '</div><div class="item product product-item" style="display: none;">' ?>
                 <?php else: ?>
                     <?php echo($iterator++ == 1) ? '<div class="item product product-item">' : '</div><div class="item product product-item">' ?>
                 <?php endif; ?>

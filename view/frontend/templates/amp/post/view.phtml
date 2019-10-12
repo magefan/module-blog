@@ -17,6 +17,7 @@
     $_post = $this->getPost();
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+    $featuredImgAlt = $_post->getData('featured_img_alt');
 
     $imageHelper = $this->helper('Magefan\Blog\Helper\Image');
     $imageWidth = 500;
@@ -28,7 +29,7 @@
             <div class="post-description clearfix">
                 <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
                 <div class="post-ftimg-hld">
-                    <amp-img layout="responsive" width="<?php echo $imageWidth ?>" height="<?php echo $imageHeight ?>" src="<?php echo $this->helper('Magefan\Blog\Helper\Image')->init($_post->getFeaturedImg())->resize($imageWidth, $imageHeight) ?>" alt="<?php echo $_postName ?>"></amp-img>
+                    <amp-img layout="responsive" width="<?php echo $imageWidth ?>" height="<?php echo $imageHeight ?>" src="<?php echo $this->helper('Magefan\Blog\Helper\Image')->init($_post->getFeaturedImg())->resize($imageWidth, $imageHeight) ?>" alt="<?php echo $featuredImgAlt ? $featuredImgAlt : $_postName ?>"></amp-img>
                 </div>
                 <?php } ?>
                 <div class="post-text-hld">

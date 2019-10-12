@@ -36,4 +36,17 @@ class PostLinks extends \Magefan\Blog\Block\Category\PostList
         return ($displayMode == CategoryDisplayMode::POSTS_AND_SUBCATEGORIES_LINKS ||
             $displayMode == CategoryDisplayMode::POST_LINKS);
     }
+    
+    /**
+     * Prepare breadcrumbs
+     *
+     * @param  string $title
+     * @param  string $key
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return void
+     */
+    protected function _addBreadcrumbs($title = null, $key = null)
+    {
+        return null;
+    }
 }

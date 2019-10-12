@@ -84,6 +84,7 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             /* Prepare Featured Image */
             $map = [
                 'featured_img' => 'getFeaturedImage',
+                'featured_list_img' => 'getFeaturedListImage',
                 'og_img' => 'getOgImage'
             ];
             foreach ($map as $key => $method) {
@@ -106,11 +107,11 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                     $itemData = $item->getData();
                     $itemData['id'] = $item->getId();
                     /* Fix for big request data array */
-                    foreach (['content', 'short_content', 'meta_description'] as $field) {
-                        if (isset($itemData[$field])) {
-                            unset($itemData[$field]);
-                        }
+                foreach (['content', 'short_content', 'meta_description'] as $field) {
+                    if (isset($itemData[$field])) {
+                        unset($itemData[$field]);
                     }
+                }
                     /* End */
                     $items[] = $itemData;
             }

@@ -5,15 +5,15 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-?>
-<?php
-/**
- * Blog tag info template
- *
- * @var $block \Magefan\Blog\Block\Tag\Info
- */
-?>
 
-<?php if ($content = $block->getContent()): ?>
-    <div class="tag-content"><?php echo $content ?></div>
-<?php endif ?>
+namespace Magefan\Blog\Block;
+
+use \Magento\Framework\View\Element\Template;
+
+/**
+ * Class ViewCounter
+ */
+class ViewCounter extends Template
+{
+
+}

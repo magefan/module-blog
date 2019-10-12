@@ -40,6 +40,9 @@
                 <field id="title" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
+                <field id="meta_title" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Meta Title</label>
+                </field>
                 <field id="display_mode" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Mode</label>
                     <source_model>Magefan\Blog\Model\Config\Source\DisplayMode</source_model>
@@ -167,7 +170,7 @@
                 </group>
 
                 <group id="nextprev" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Preview and Next Post</label>
+                    <label>Previous and Next Post</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Display Prev. &amp; Next Post Links</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -334,6 +337,19 @@
                         </depends>
                     </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                    </field>
+                </group>
+                <group id="popular_posts" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popular Posts Widget</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="posts_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Posts Number</label>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>

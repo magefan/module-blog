@@ -141,7 +141,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     public function load(\Magento\Framework\Model\AbstractModel $object, $value, $field = null)
     {
-        if (!is_numeric($value) && is_null($field)) {
+        if (!is_numeric($value) && null === $field) {
             $field = 'identifier';
         }
 
@@ -210,7 +210,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^([^?#<>@!&*()$%^\\/+=,{}]+)?$/', $object->getData('identifier'));
+        return preg_match('/^([^?#<>@!&*()$%^\\+=,{}]+)?$/', $object->getData('identifier'));
     }
 
     /**

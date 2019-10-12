@@ -104,7 +104,7 @@ class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct imp
      */
     public function getItems()
     {
-        if (is_null($this->_itemCollection)) {
+        if (null === $this->_itemCollection) {
             $this->_prepareCollection();
         }
         return $this->_itemCollection;
