@@ -729,16 +729,21 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getCommentsCount()
     {
-        /*
-        if (!$this->hasData('comments_count')) {
-            $comments = $this->_commentCollectionFactory->create()
-                ->addFieldToFilter('post_id', $this->getId())
-                ->addActiveFilter()
-                ->addFieldToFilter('parent_id', 0);
-            $this->setData('comments_count', (int)$comments->getSize());
+        $enableComments = $this->getEnableComments();
+        if ($enableComments || $enableComments === null) {
+            /*
+            if (!$this->hasData('comments_count')) {
+                $comments = $this->_commentCollectionFactory->create()
+                    ->addFieldToFilter('post_id', $this->getId())
+                    ->addActiveFilter()
+                    ->addFieldToFilter('parent_id', 0);
+                $this->setData('comments_count', (int)$comments->getSize());
+            }
+            */
+            return $this->getData('comments_count');
+        } else {
+            return 0;
         }
-        */
-        return $this->getData('comments_count');
     }
 
     /**
@@ -876,6 +881,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Prepare all additional data
      * @param  string $format
      * @return self
+     * @deprecated replaced with getDynamicData
      */
     public function initDinamicData()
     {
@@ -895,14 +901,64 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
             $this->$method();
         }
 
         return $this;
+    }
+
+    /**
+     * Prepare all additional data
+     * @return array
+     */
+    public function getDynamicData()
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'og_image',
+            'og_type',
+            'og_description',
+            'og_title',
+            'meta_description',
+            'meta_title',
+            'short_filtered_content',
+            'filtered_content',
+            'first_image',
+            'featured_image',
+            'post_url',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+            $data[$key] = $this->$method();
+        }
+
+        $tags = [];
+        foreach ($this->getRelatedTags() as $tag) {
+            $tags[] = $tag->getDynamicData();
+        }
+        $data['tags'] = $tags;
+
+        $categories = [];
+        foreach ($this->getParentCategories() as $category) {
+            $categories[] = $category->getDynamicData();
+        }
+        $data['categories'] = $categories;
+
+        if ($author = $this->getAuthor()) {
+            $data['author'] = $author->getDynamicData();
+        }
+
+        return $data;
     }
 
     /**

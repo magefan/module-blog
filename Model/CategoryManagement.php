@@ -59,8 +59,7 @@ class CategoryManagement extends AbstractManagement
 
             $categories = [];
             foreach ($collection as $item) {
-                $item->initDinamicData();
-                $categories[] = $item->getData();
+                $categories[] = $item->getDynamicData();
             }
 
             $result = [

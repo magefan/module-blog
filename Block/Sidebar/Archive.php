@@ -102,4 +102,18 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return [];
     }
+
+    /**
+     * @param $time
+     * @return string
+     */
+    public function getTranslatedDate($time)
+    {
+        $format = $this->_scopeConfig->getValue(
+            'mfblog/sidebar/archive/format_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        return \Magefan\Blog\Helper\Data::getTranslatedDate($format, $time);
+    }
 }

@@ -437,7 +437,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _lookupIds($postId, $tableName, $field)
     {
         $adapter = $this->getConnection();
-
         $select = $adapter->select()->from(
             $this->getTable($tableName),
             $field

@@ -8,12 +8,21 @@
 
 namespace Magefan\Blog\Block\Sidebar;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
+
 /**
  * Blog tag claud sidebar block
  */
 class TagClaud extends \Magento\Framework\View\Element\Template
 {
     use Widget;
+
+    /**
+     * Path to tag cloud 3D animation configuration
+     */
+    const ANIMATED_ENABLED = 'mfblog/sidebar/tag_claud/animated';
+    const TEXT_HIGHLIGHT_COLOR = 'mfblog/sidebar/tag_claud/text_highlight_color';
+    const CLOUD_HEIGHT = 'mfblog/sidebar/tag_claud/cloud_height';
 
     /**
      * @var string
@@ -128,5 +137,54 @@ class TagClaud extends \Magento\Framework\View\Element\Template
             return 'large';
         }
         return 'largest';
+    }
+
+    /**
+     * @param $path
+     * @return mixed
+     */
+    public function getConfigValue($path)
+    {
+        return $this->_scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * @return $this|\Magento\Framework\View\Element\Template
+     */
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+
+        if ($this->getConfigValue(self::ANIMATED_ENABLED)) {
+            $this->setTemplate('Magefan_Blog::sidebar/tag_claud_animated.phtml');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return false|string
+     */
+    public function getAnimationConfig()
+    {
+        $color = $this->getConfigValue(self::TEXT_HIGHLIGHT_COLOR);
+        $color = '#' . $this->escapeHtml(trim($color, '#'));
+        $data = [
+            'textColour' => $color,
+            'outlineColour' => $color,
+            'maxSpeed' => 0.03,
+            'depth' => 0.75,
+            'weight' => true,
+            'initial' => [0, 1]
+        ];
+
+        foreach ($this->getData() as $key => $value) {
+            if (strpos($key, 'animation_') === 0) {
+                $key = str_replace('animation_', '', $key);
+                $data[$key] = $value;
+            }
+        }
+
+        return json_encode($data);
     }
 }

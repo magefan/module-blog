@@ -76,4 +76,17 @@ class Comment extends \Magento\Framework\View\Element\Template implements \Magen
             ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPublishDate()
+    {
+        $dateFormat = $this->_scopeConfig->getValue(
+            'mfblog/post_view/comments/format_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        return $this->getComment()->getPublishDate($dateFormat);
+    }
 }

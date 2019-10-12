@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Api;
 
 use Magefan\Blog\Model\Tag;
+use Magefan\Blog\Model\TagFactory;
 
 /**
  * Interface TagRepositoryInterface
@@ -16,6 +17,11 @@ use Magefan\Blog\Model\Tag;
  */
 interface TagRepositoryInterface
 {
+    /**
+     * @return TagFactory
+     */
+    public function getFactory();
+
     /**
      * @param Tag $tag
      * @return mixed

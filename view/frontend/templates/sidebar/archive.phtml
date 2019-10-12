@@ -25,7 +25,7 @@
     <div class="block-content">
         <?php foreach ($_months as $time) { ?>
             <?php
-                $title = __($block->getMonth($time)) . ' ' . $block->getYear($time);
+                $title = $block->getTranslatedDate($time);
                 $title = $block->escapeHtml($title, null, true);
             ?>
             <div class="item">

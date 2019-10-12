@@ -68,6 +68,32 @@ class Info extends \Magento\Framework\View\Element\Template
         ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPublishDate()
+    {
+        $dateFormat = $this->_scopeConfig->getValue(
+            'mfblog/design/format_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        return $this->getPost()->getPublishDate($dateFormat);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublicationDateEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/design/publication_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+    );
+
+    /**
+     * @return bool
+     */    
     public function getViewsCount()
     {
         return true;

@@ -83,6 +83,7 @@ class Collection extends AbstractCollection
             }
 
             $this->addFilter('store', ['in' => $store], 'public');
+            $this->setFlag('store_filter_added', 1);
         }
         return $this;
     }

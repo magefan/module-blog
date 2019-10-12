@@ -87,8 +87,7 @@ class PostManagement extends AbstractManagement
 
             $posts = [];
             foreach ($collection as $item) {
-                $item->initDinamicData();
-                $posts[] = $item->getData();
+                $posts[] = $item->getDynamicData();
             }
 
             $result = [

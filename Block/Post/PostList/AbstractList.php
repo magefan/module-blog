@@ -168,4 +168,18 @@ abstract class AbstractList extends \Magento\Framework\View\Element\Template imp
 
         return array_unique($identities);
     }
+
+    /**
+     * @param $post
+     * @return mixed
+     */
+    public function getPublishDate($post)
+    {
+        $dateFormat = $this->_scopeConfig->getValue(
+            'mfblog/sidebar/recent_posts/format_date',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        return $post->getPublishDate($dateFormat);
+    }
 }

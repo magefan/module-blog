@@ -350,7 +350,13 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     public function getCategoryUrl()
     {
-        return $this->_url->getUrl($this, $this->controllerName);
+        $category = $this->getData('category_url');
+        if (!$category) {
+            $category = $this->_url->getUrl($this, $this->controllerName);
+            $this->setData('category_url', $category);
+        }
+
+        return $category;
     }
 
     /**
@@ -429,12 +435,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Prepare all additional data
      * @param  string $format
      * @return self
+     * @deprecated replaced with getDynamicData
      */
     public function initDinamicData()
     {
         $keys = [
             'meta_description',
             'meta_title',
+            'category_url',
         ];
 
         foreach ($keys as $key) {
@@ -447,6 +455,32 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         }
 
         return $this;
+    }
+
+    /**
+     * Prepare all additional data
+     * @return array
+     */
+    public function getDynamicData()
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'meta_description',
+            'meta_title',
+            'category_url',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+            $data[$key] = $this->$method();
+        }
+
+        return $data;
     }
 
     /**

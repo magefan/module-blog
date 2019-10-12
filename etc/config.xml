@@ -83,6 +83,9 @@
                 <tag_claud>
                     <enabled>1</enabled>
                     <!-- <max_tags_number>10</max_tags_number> -->
+                    <animated>1</animated>
+                    <text_highlight_color>006bb4</text_highlight_color>
+                    <cloud_height>250</cloud_height>
                     <sort_order>45</sort_order>
                 </tag_claud>
                 <rss_feed>

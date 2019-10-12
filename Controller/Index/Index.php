@@ -23,7 +23,8 @@ class Index extends \Magefan\Blog\App\Action\Action
             return $this->_forwardNoroute();
         }
 
-        $this->_view->loadLayout();
-        $this->_view->renderLayout();
+        $resultPage = $this->_objectManager->get(\Magefan\Blog\Helper\Page::class)
+            ->prepareResultPage($this, new \Magento\Framework\DataObject());
+        return $resultPage;
     }
 }

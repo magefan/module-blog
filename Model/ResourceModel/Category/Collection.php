@@ -107,6 +107,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             }
 
             $this->addFilter('store', ['in' => $store], 'public');
+            $this->setFlag('store_filter_added', 1);
         }
         return $this;
     }

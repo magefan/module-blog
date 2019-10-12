@@ -17,6 +17,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
  * Class CommentRepository
@@ -42,22 +43,40 @@ class CommentRepository implements CommentRepositoryInterface
     private $searchResultsFactory;
 
     /**
+     * @var CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+    /**
      * CommentRepository constructor.
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
      * @param CommentResourceModel $commentResourceModel
      * @param CollectionFactory $collectionFactory
      * @param SearchResultsFactory $searchResultsFactory
+     * @param CollectionProcessorInterface|null $collectionProcessor
      */
     public function __construct(
         CommentFactory $commentFactory,
         CommentResourceModel $commentResourceModel,
         CollectionFactory $collectionFactory,
-        SearchResultsFactory $searchResultsFactory
+        SearchResultsFactory $searchResultsFactory,
+        CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->commentFactory = $commentFactory;
         $this->commentResourceModel = $commentResourceModel;
         $this->collectionFactory = $collectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
+        $this->collectionProcessor = $collectionProcessor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface::class
+        );
+    }
+
+    /**
+     * @return CommentFactory
+     */
+    public function getFactory()
+    {
+        return $this->commentFactory;
     }
 
     /**
@@ -146,12 +165,7 @@ class CommentRepository implements CommentRepositoryInterface
         /** @var \Magefan\Blog\Model\ResourceModel\Comment\Collection $collection */
         $collection = $this->collectionFactory->create();
 
-        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-            foreach ($filterGroup->getFilters() as $filter) {
-                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
-            }
-        }
+        $this->collectionProcessor->process($searchCriteria, $collection);
 
         /** @var \Magento\Framework\Api\searchResultsInterface $searchResult */
         $searchResult = $this->searchResultsFactory->create();
