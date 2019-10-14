@@ -42,7 +42,7 @@ class Autocomplete extends Template
         $post = $this->registry->registry('current_model');
         if ($post) {
             $tagsCollection = $post->getRelatedTags();
-            $tagsTitles = array();
+            $tagsTitles = [];
             foreach ($tagsCollection as $tag) {
                 $tagsTitles[] = $tag->getData('title');
             }
