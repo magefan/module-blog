@@ -48,15 +48,6 @@
             <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
         </arguments>
     </type>
-    <type name="Plumrocket\Amp\Helper\Data">
-        <plugin name="plumrocket_amp_helper_data_magefan_blog"
-                type="Magefan\Blog\Plugin\Plumrocket\Amp\HelperDataPlugin" sortOrder="10"/>
-    </type>
-
-    <type name="Plumrocket\Amp\Model\System\Config\Source\Page">
-        <plugin name="plumrocket_amp_source_page_magefan_blog"
-                type="Magefan\Blog\Plugin\Plumrocket\Amp\SourcePagePlugin" sortOrder="10"/>
-    </type>
 
     <type name="Magento\Sitemap\Model\Sitemap">
         <plugin name="magento_sitemap_model_sitemap_magefan_blog"

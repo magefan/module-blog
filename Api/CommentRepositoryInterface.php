@@ -13,7 +13,6 @@ use Magefan\Blog\Model\CommentFactory;
 
 /**
  * Interface CommentRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface CommentRepositoryInterface
 {

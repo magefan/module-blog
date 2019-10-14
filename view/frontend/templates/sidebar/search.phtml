@@ -16,18 +16,32 @@
 
 <div class="widget block blog-search" data-bind="scope: 'blog-search'">
     <div class="block-content">
-        <form class="form" id="blog_search_mini_form" action="<?php echo $block->getFormUrl() ?>" method="get">
+        <form class="form" id="blog_search_mini_form"
+              action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+              method="get">
             <div class="field search">
                 <label class="label" for="blog_search">
-                    <span><?php echo __('Search') ?></span>
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
                 </label>
                 <div class="control">
-                    <input id="blog_search" type="text" name="q" value="<?php echo $block->escapeHtml($block->getQuery()) ?>" placeholder="<?php echo __('Search posts here...') ?>" class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off">
+                    <input id="blog_search"
+                           type="text"
+                           name="q"
+                           value="<?= $block->escapeHtml($block->getQuery()) ?>"
+                           placeholder="<?= $block->escapeHtml(__('Search posts here...')) ?>"
+                           class="input-text"
+                           maxlength="128" role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off">
                 </div>
             </div>
             <div class="actions">
-                <button type="submit" onclick="return goBlogSearch(this);" title="<?php echo __('Search') ?>" class="action search">
-                    <span><?php echo __('Search') ?></span>
+                <button type="submit"
+                        onclick="return goBlogSearch(this);"
+                        title="<?= $block->escapeHtml(__('Search')) ?>"
+                        class="action search">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
                 </button>
             </div>
         </form>

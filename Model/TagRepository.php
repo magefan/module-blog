@@ -20,8 +20,7 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
- * Class TagRepository
- * @package Magefan\Blog\Model
+ * Class TagRepository model
  */
 class TagRepository implements TagRepositoryInterface
 {

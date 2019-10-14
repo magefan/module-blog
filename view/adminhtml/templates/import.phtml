@@ -20,8 +20,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/wordpress')) ?>'">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/wordpress.png')) ?>" />
+                        <div class="itm-hld"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/wordpress')) ?>'">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/wordpress.png')) ?>" />
                             <br/>
                             <span class="lable">Import from WordPress<br/><br/></span>
                         </div>
@@ -33,8 +35,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw')) ?>'">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
+                        <div class="itm-hld"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw')) ?>'">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
                             <br/>
                             <span class="lable">Import from AheadWorks<br/><br/></span>
                         </div>
@@ -46,8 +50,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw2')) ?>'">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/aw2_blog.png')) ?>" />
+                        <div class="itm-hld"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw2')) ?>'">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/aw2_blog.png')) ?>" />
                             <br/>
                             <span class="lable">Import from AheadWorks<br/><br/></span>
                         </div>
@@ -60,10 +66,13 @@
                 <tr>
                     <td>
                         <div class="itm-hld" onclick="goToMgImport();">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/mageplaza.png')) ?>" />
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mageplaza.png')) ?>" />
                             <br/>
                             <span class="lable">Import from Mageplaza<br/><br/></span>
-                            <form id="start_mg_import" action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>" method="post">
+                            <form id="start_mg_import"
+                                  action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>"
+                                  method="post">
                                 <input type="hidden" name="type" value="mageplaza" />
                                 <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
                             </form>
@@ -76,11 +85,15 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="goToMstImport();">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/mirasvit.png')) ?>" />
+                        <div class="itm-hld"
+                             onclick="goToMstImport();">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mirasvit.png')) ?>" />
                             <br/>
                             <span class="lable">Import from Mirasvit<br/><br/></span>
-                            <form id="start_mst_import" action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>" method="post">
+                            <form id="start_mst_import"
+                                  action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>"
+                                  method="post">
                                 <input type="hidden" name="type" value="mirasvit" />
                                 <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
                             </form>
@@ -94,8 +107,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.open('https://magefan.com/migrate-blogger-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/bloger.jpg')) ?>" />
+                        <div class="itm-hld"
+                             onclick="window.open('https://magefan.com/migrate-blogger-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/bloger.jpg')) ?>" />
                             <br/>
                             <span class="lable">Import from Blogger.com<br/><br/></span>
                         </div>
@@ -108,8 +123,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.open('https://magefan.com/migrate-drupal-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/drupal.jpg')) ?>" />
+                        <div class="itm-hld"
+                             onclick="window.open('https://magefan.com/migrate-drupal-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/drupal.jpg')) ?>" />
                             <br/>
                             <span class="lable">Import from Drupal<br/><br/></span>
                         </div>
@@ -121,8 +138,10 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.open('https://magefan.com/import-xml-csv-to-magento2-blog?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/csv.jpg')) ?>" />
+                        <div class="itm-hld"
+                             onclick="window.open('https://magefan.com/import-xml-csv-to-magento2-blog?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/csv.jpg')) ?>" />
                             <br/>
                             <span class="lable">Import from CSV/XML File<br/><br/></span>
                         </div>
@@ -135,7 +154,8 @@
                 <tr>
                     <td>
                         <div class="itm-hld" onclick="window.open('https://magefan.com/migrate-joomla-to-magento2?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
-                            <img class="img" src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/joomla.jpg')) ?>" />
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/joomla.jpg')) ?>" />
                             <br/>
                             <span class="lable">Import from Joomla<br/><br/></span>
                         </div>
@@ -147,7 +167,8 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="window.open('http://magefan.com/contact?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
+                        <div class="itm-hld"
+                             onclick="window.open('http://magefan.com/contact?utm_source=m2admin_blog_import&utm_medium=link&utm_campaign=regular')">
                             <h2 class="img more">Need More?<br/><br/>Other CMS or Extension</h2>
                             <span class="lable">Contact Magefan Team<br/><br/></span>
                         </div>

@@ -43,7 +43,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     const CACHE_TAG = 'mfb_p';
 
     /**
-     * Gallery images separator
+     * Gallery images separator constant
      */
     const GALLERY_IMAGES_SEPARATOR = ';';
 
@@ -200,7 +200,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Post');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Post::class);
         $this->controllerName = URL::CONTROLLER_POST;
     }
 
@@ -227,7 +227,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $newCategories = [];
         }
 
-
         $isChangedCategories = count(array_diff($oldCategories, $newCategories));
 
         if ($isChangedCategories) {
@@ -238,7 +237,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
             }
         }
-
 
         return $identities;
     }
@@ -518,6 +516,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         $content = $_content->saveHTML();
                     }
                 } catch (\Exception $e) {
+                    $messageManager = \Magento\Framework\App\ObjectManager::getInstance()
+                    ->create(\Magento\Framework\Message\ManagerInterface::class);
+                    $messageManager->addError($e->getMessage());
                 }
             }
 

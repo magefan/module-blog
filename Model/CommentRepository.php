@@ -20,8 +20,7 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
- * Class CommentRepository
- * @package Magefan\Blog\Model
+ * Class CommentRepository model
  */
 class CommentRepository implements CommentRepositoryInterface
 {

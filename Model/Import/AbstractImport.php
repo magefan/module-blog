@@ -134,13 +134,19 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             'imported_categories_count' => $this->_importedCategoriesCount,
             'imported_tags_count'       => $this->_importedTagsCount,
             'imported_comments_count'   => $this->_importedCommentsCount,
-            'imported_count'            => $this->_importedPostsCount + $this->_importedCategoriesCount + $this->_importedTagsCount + $this->_importedCommentsCount,
+            'imported_count'            => $this->_importedPostsCount +
+                                            $this->_importedCategoriesCount +
+                                            $this->_importedTagsCount +
+                                            $this->_importedCommentsCount,
 
             'skipped_posts'             => $this->_skippedPosts,
             'skipped_categories'        => $this->_skippedCategories,
             'skipped_tags'              => $this->_skippedTags,
             'skipped_comments'          => $this->_skippedComments,
-            'skipped_count'             => count($this->_skippedPosts) + count($this->_skippedCategories) + count($this->_skippedTags) + count($this->_skippedComments),
+            'skipped_count'             => count($this->_skippedPosts) +
+                                            count($this->_skippedCategories) +
+                                            count($this->_skippedTags) +
+                                            count($this->_skippedComments),
         ]);
     }
 
@@ -165,21 +171,6 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->setData($data);
 
         return $this;
-    }
-
-    /**
-     * Execute mysql query
-     */
-    protected function _mysqliQuery($sql)
-    {
-        $result = mysqli_query($this->_connect, $sql);
-        if (!$result) {
-            throw new \Exception(
-                __('Mysql error: %1.', mysqli_error($this->_connect))
-            );
-        }
-
-        return $result;
     }
 
     /**

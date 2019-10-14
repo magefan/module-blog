@@ -20,7 +20,7 @@
 <?php if (count($_months)) { ?>
 <div class="widget block block-archive" data-bind="scope: 'blog-archive'">
     <div class="block-title">
-        <strong><?php echo __('Archive') ?></strong>
+        <strong><?= $block->escapeHtml(__('Archive')) ?></strong>
     </div>
     <div class="block-content">
         <?php foreach ($_months as $time) { ?>
@@ -29,8 +29,10 @@
                 $title = $block->escapeHtml($title, null, true);
             ?>
             <div class="item">
-                <a title="<?php echo __('Archive %1', $title) ?>" class="archive-item-link" href="<?php echo $block->getTimeUrl($time) ?>">
-                    <?php echo $title; ?>
+                <a title="<?= $block->escapeHtml(__('Archive %1', $title)) ?>"
+                   class="archive-item-link"
+                   href="<?= $block->escapeUrl($block->getTimeUrl($time)) ?>">
+                    <?= $block->escapeHtml($title); ?>
                 </a>
             </div>
 

@@ -21,7 +21,7 @@
         <?php /*
         <div class="block-title title">
             <strong id="block-relatedposts-heading" role="heading" aria-level="2">
-                <?php echo __('Related Posts') ?>
+                <?= $block->escapeHtml(__('Related posts')) ?>
             </strong>
         </div>
         */ ?>
@@ -29,8 +29,8 @@
             <?php foreach ($_postCollection as $_post) { ?>
                 <li class="item">
                     <a class="post-item-link"
-                       href="<?php echo $_post->getPostUrl() ?>">
-                        <?php echo $block->escapeHtml($_post->getTitle()); ?>
+                       href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
+                        <?= $block->escapeHtml($_post->getTitle()); ?>
                     </a>
                 </li>
             <?php } ?>

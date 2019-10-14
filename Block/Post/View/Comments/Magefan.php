@@ -29,7 +29,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     /**
      * @var string
      */
-    protected $defaultCommentBlock = 'Magefan\Blog\Block\Post\View\Comments\Magefan\Comment';
+    protected $defaultCommentBlock = \Magefan\Blog\Block\Post\View\Comments\Magefan\Comment::class;
 
     /**
      * @var \Magento\Customer\Model\Session

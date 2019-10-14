@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Tag;
 
 /**
- * Class CreateButton
+ * Class CreateButton block
  */
 class CreateButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveButton
 {

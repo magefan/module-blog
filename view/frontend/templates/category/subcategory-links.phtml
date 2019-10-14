@@ -15,7 +15,7 @@
 ?>
 
 <?php
-    $subCategoriesCollection = $block->getSubCategories();
+$subCategoriesCollection = $block->getSubCategories();
 ?>
 <?php if ($subCategoriesCollection->count()) { ?>
     <div class="subcategory-links-wrapper">
@@ -23,8 +23,9 @@
             <?php foreach ($subCategoriesCollection as $category) { ?>
                 <li>
                     <?php $categoryTitle = $block->escapeHtml($category->getTitle()) ?>
-                    <a href="<?= $category->getCategoryUrl() ?>" title="<?= $categoryTitle ?>">
-                        <?= $categoryTitle ?>
+                    <a href="<?= $block->escapeUrl($category->getCategoryUrl()) ?>"
+                       title="<?= $block->escapeHtml($categoryTitle) ?>">
+                        <?= $block->escapeHtml($categoryTitle) ?>
                     </a>
                 </li>
             <?php } ?>

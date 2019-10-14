@@ -29,7 +29,7 @@ class Tag extends Actions
      * Model class name
      * @var string
      */
-    protected $_modelClass      = 'Magefan\Blog\Model\Tag';
+    protected $_modelClass      = \Magefan\Blog\Model\Tag::class;
 
     /**
      * Active menu key

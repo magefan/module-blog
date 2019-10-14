@@ -37,7 +37,6 @@ class View extends \Magefan\Blog\App\Action\Action
         $registry->register('current_blog_archive_year', (int)$date[0]);
         $registry->register('current_blog_archive_month', (int)$date[1]);
 
-
         $this->_view->loadLayout();
         $this->_view->renderLayout();
     }

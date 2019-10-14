@@ -17,9 +17,18 @@
     <div class="messages">
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
-               <?php $html = __('Magefan Blog is disabled, to enable the extension please navigate to <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.', $block->getUrl('adminhtml/system_config/edit', ['section' => 'mfblog']));
+               <?php $html = $block->escapeHtml(
+                   __(
+                       'Magefan Blog is disabled, to enable the extension please navigate to
+                        <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.',
+                       $block->getUrl(
+                           'adminhtml/system_config/edit',
+                           ['section' => 'mfblog']
+                       )
+                   )
+               );
                 ?>
-                <?= $html ?>
+                <?= $block->escapeHtml($html) ?>
             </div>
         </div>
     </div>
@@ -27,9 +36,19 @@
     <div class="messages">
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
-                <?php $html = __('Magefan Blog <strong>Product Key</strong> is missing. Blog Extension will be automatically disabled soon. Please specify the product key in <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.', $block->getUrl('adminhtml/system_config/edit', ['section' => 'mfblog']));
+                <?php $html = $block->escapeHtml(
+                    __(
+                        'Magefan Blog <strong>Product Key</strong> is missing. 
+                        Blog Extension will be automatically disabled soon. Please specify the product key in 
+                        <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.',
+                        $block->getUrl(
+                            'adminhtml/system_config/edit',
+                            ['section' => 'mfblog']
+                        )
+                    )
+                );
                 ?>
-                <?= $html ?>
+                <?= $block->escapeHtml($html) ?>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Framework\App\RequestInterface;
 
 /**
- * Class PostDataProvider
+ * Class PostDataProvider get post data
  */
 class PostDataProvider extends AbstractDataProvider
 {

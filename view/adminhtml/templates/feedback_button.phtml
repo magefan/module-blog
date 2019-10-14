@@ -13,17 +13,25 @@
  * @var $block \Magento\Backend\Block\Template
  */
 ?>
+<?php
+$reviewProductUrl = 'https://magefan.com/review/product/list/id/1797/
+                     ?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular';
+$contactUrl = 'https://magefan.com/review/product/list/id/1797/
+               ?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular';
+?>
 <div id="blog-feedback-block">
     <div class="blog-leave-feedback blog-leave-review">
-        <img  src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
-        <a target="_blank"  href="https://magefan.com/review/product/list/id/1797/?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular">
-            <?= __('Leave a review about the blog extension') ?>
+        <img  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
+        <a target="_blank"
+           href="<?php $reviewProductUrl; ?>">
+            <?= $block->escapeHtml(__('Leave a review about the blog extension')) ?>
         </a>
     </div>
     <div class="blog-leave-feedback blog-leave-suggest">
-        <img  src="<?= $block->escapeUrl($this->getViewFileUrl('Magefan_Blog::images/add-feature-ico.png')) ?>" />
-        <a target="_blank"  href="https://magefan.com/contact?utm_source=m2admin_blog_leave_suggest&utm_medium=link&utm_campaign=regular">
-            <?= __('Nead a new blog feature?') ?>
+        <img  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/add-feature-ico.png')) ?>" />
+        <a target="_blank"
+           href="<?= $block->escapeUrl($contactUrl); ?>">
+            <?= $block->escapeHtml(__('Nead a new blog feature?')) ?>
         </a>
     </div>
 </div>

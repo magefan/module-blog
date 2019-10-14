@@ -57,7 +57,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         }
         $isElementDisabled = false;
 
-
         $form->setHtmlIdPrefix('import_');
 
         $fieldset = $form->addFieldset('base_fieldset', ['legend' => '']);
@@ -78,7 +77,9 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             [
                 'label' => __('NOTICE'),
                 'name' => 'prefix',
-                'after_element_html' => 'When the import is completed, please copy featured image files to Magento <strong style="color:#105610;">pub/media/magefan_blog</strong> directory.',
+                'after_element_html' => 'When the import is completed, please copy featured image files to Magento 
+                                         <strong style="color:#105610;">pub/media/magefan_blog</strong> 
+                                         directory.',
             ]
         );
 

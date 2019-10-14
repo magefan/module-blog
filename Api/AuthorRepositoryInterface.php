@@ -10,7 +10,6 @@ namespace Magefan\Blog\Api;
 
 /**
  * Interface AuthorRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface AuthorRepositoryInterface
 {

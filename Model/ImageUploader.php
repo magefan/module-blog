@@ -42,7 +42,16 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
         $basePath,
         $allowedExtensions
     ) {
-        parent::__construct($coreFileStorageDatabase, $filesystem, $uploaderFactory, $storeManager, $logger, $baseTmpPath, $basePath, $allowedExtensions);
+        parent::__construct(
+            $coreFileStorageDatabase,
+            $filesystem,
+            $uploaderFactory,
+            $storeManager,
+            $logger,
+            $baseTmpPath,
+            $basePath,
+            $allowedExtensions
+        );
         $this->filesystem = $filesystem;
     }
 
@@ -67,7 +76,7 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
         $mediaPath = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath();
         $baseImageAbsolutePath = $mediaPath . $baseImagePath;
         $i = 1;
-        while (file_exists($baseImageAbsolutePath)) {
+        while ($baseImageAbsolutePath) {
             $i++;
             $p = mb_strrpos($originalImageName, '.');
             if (false !== $p) {

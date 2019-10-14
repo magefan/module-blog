@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block\Adminhtml\Comment;
 
 /**
- * Class SaveAndContinueButton
+ * Class SaveAndContinueButton block
  */
 class SaveAndContinueButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveAndContinueButton
 {

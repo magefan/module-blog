@@ -13,8 +13,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Class NoSlashUrlRedirect
- * @package Magefan\Blog\Model\Config\Source
+ * Class NoSlashUrlRedirect model
  */
 class NoSlashUrlRedirect
 {

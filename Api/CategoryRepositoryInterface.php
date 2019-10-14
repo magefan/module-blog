@@ -13,7 +13,6 @@ use Magefan\Blog\Model\CategoryFactory;
 
 /**
  * Interface PostRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface CategoryRepositoryInterface
 {

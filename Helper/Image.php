@@ -103,7 +103,7 @@ class Image extends AbstractHelper
     public function resize($width, $height = null)
     {
         if ($this->_baseFile) {
-            $pathinfo = pathinfo(($this->_baseFile));
+            $pathinfo = Magento\Framework\Filesystem\Io\File::getPathInfo(($this->_baseFile));
             if (isset($pathinfo) && $pathinfo['extension'] == 'webp') {
                 $this->_newFile = $this->_baseFile;
             } else {

@@ -13,7 +13,6 @@ use Magefan\Blog\Model\PostFactory;
 
 /**
  * Interface PostRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface PostRepositoryInterface
 {

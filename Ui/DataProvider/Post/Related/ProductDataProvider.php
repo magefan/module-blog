@@ -20,7 +20,7 @@ use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 
 /**
- * Class ProductDataProvider
+ * Class ProductDataProvider get product data
  */
 class ProductDataProvider extends DataProvider
 {

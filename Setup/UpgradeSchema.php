@@ -83,7 +83,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-
         if (version_compare($version, '2.2.5') < 0) {
             /* Add layout field to posts and category table */
             foreach (['magefan_blog_post', 'magefan_blog_category'] as $table) {
@@ -489,7 +488,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-
         if (version_compare($version, '2.6.3.1') < 0) {
             /* Add include in recent posts into post table */
             $connection->addColumn(
@@ -607,7 +605,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
 
-
             $connection->addColumn(
                 $setup->getTable($table),
                 'layout_update_xml',
@@ -713,7 +710,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-
         if (version_compare($version, '2.9.1.1') < 0) {
             $table = $setup->getTable('magefan_blog_post');
             $connection->addColumn(
@@ -729,7 +725,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
       
-        if (version_compare($version,'2.9.1.4') < 0) {
+        if (version_compare($version, '2.9.1.4') < 0) {
             $table =$setup->getTable('magefan_blog_post');
             $connection->addColumn(
                 $setup->getTable($table),
@@ -742,8 +738,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
                 ]
             );
-        }      
-
+        }
         $setup->endSetup();
     }
 }

@@ -119,7 +119,6 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         ];
     }
 
-
     /**
      * Initialize resource model
      *
@@ -127,7 +126,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Comment');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Comment::class);
     }
 
     /**

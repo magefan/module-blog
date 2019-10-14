@@ -20,8 +20,7 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
- * Class CategoryRepository
- * @package Magefan\Blog\Model
+ * Class CategoryRepository model
  */
 class CategoryRepository implements CategoryRepositoryInterface
 {

@@ -18,8 +18,6 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @var \Magento\Framework\Stdlib\DateTime\DateTime
      */
     protected $date;
-
-
     /**
      * Construct
      *

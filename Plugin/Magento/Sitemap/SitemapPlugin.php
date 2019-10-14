@@ -155,6 +155,6 @@ class SitemapPlugin
      */
     public function isMageWorxXmlSitemap($sitemap)
     {
-        return (get_class($sitemap) == 'MageWorx\XmlSitemap\Model\Rewrite\Sitemap\Interceptor');
+        return (get_class($sitemap) == MageWorx\XmlSitemap\Model\Rewrite\Sitemap\Interceptor::class);
     }
 }

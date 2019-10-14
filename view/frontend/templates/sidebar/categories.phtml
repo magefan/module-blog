@@ -20,7 +20,7 @@
 
 <div class="widget block block-categories" data-bind="scope: 'categories'">
     <div class="block-title">
-        <strong><?php echo __('Categories') ?></strong>
+        <strong><?= $block->escapeHtml(__('Categories')) ?></strong>
     </div>
 
     <ul class="accordion"  id="accordion-2">
@@ -46,11 +46,11 @@
 
         ?>
                 <li>
-                    <a href="<?php echo $item->getCategoryUrl() ?>">
-                    <?php echo $block->escapeHtml($item->getTitle()) ?>
+                    <a href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
+                    <?= $block->escapeHtml($item->getTitle()) ?>
                     </a>
                 <?php if ($block->showPostsCount()) { ?>
-                    (<?php echo $block->escapeHtml($item->getPostsCount()) ?>)
+                    (<?= $block->escapeHtml($item->getPostsCount()) ?>)
                     <?php } ?>
             <?php
             $level = $newLevel;

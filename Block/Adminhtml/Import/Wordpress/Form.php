@@ -61,7 +61,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         }
         $isElementDisabled = false;
 
-
         $form->setHtmlIdPrefix('import_');
 
         $fieldset = $form->addFieldset('base_fieldset', ['legend' => '']);
@@ -82,7 +81,12 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             [
                 'label' => __('NOTICE'),
                 'name' => 'prefix',
-                'after_element_html' => 'When the import is completed successfully, please copy image files from WordPress <strong style="color:#bd1616;">wp-content/uploads</strong> directory to Magento <strong style="color:#105610;">pub/media/magefan_blog</strong> directory.',
+                'after_element_html' => 'When the import is completed successfully, 
+                                        please copy image files from WordPress 
+                                        <strong style="color:#bd1616;">wp-content/uploads</strong> 
+                                        directory to Magento 
+                                        <strong style="color:#105610;">pub/media/magefan_blog</strong> 
+                                        directory.',
             ]
         );
 
@@ -168,7 +172,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 ]
             );
             $renderer = $this->getLayout()->createBlock(
-                'Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element'
+                \Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element::class
             );
             $field->setRenderer($renderer);
         } else {
@@ -200,7 +204,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $form->setValues($data);
 
         $this->setForm($form);
-
 
         return parent::_prepareForm();
     }

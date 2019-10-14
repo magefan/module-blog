@@ -20,14 +20,14 @@
     <div class="block related">
         <div class="block-title title">
             <strong id="block-relatedposts-heading" role="heading" aria-level="2">
-                <?= __('Related Posts') ?>
+                <?= $block->escapeHtml(__('Related Posts')) ?>
             </strong>
         </div>
         <ol class="block-content">
             <?php foreach ($postCollection as $post) { ?>
                 <li class="item">
                     <a class="post-item-link" title="<?= $block->escapeHtml($post->getTitle()) ?>"
-                       href="<?= $post->getPostUrl() ?>">
+                       href="<?= $block->escapeUrl($post->getPostUrl()) ?>">
                         <?= $block->escapeHtml($post->getTitle()) ?>
                     </a>
                 </li>

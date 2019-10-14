@@ -55,7 +55,6 @@ class SubCategoryLinks extends \Magefan\Blog\Block\Category\AbstractCategory
             ->setOrder('position')
             ->addFieldToFilter('category_id', ['in' => $this->getCategory()->getChildrenIds(false)]);
 
-
         return $subCategories;
     }
 

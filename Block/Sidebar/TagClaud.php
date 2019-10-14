@@ -127,13 +127,13 @@ class TagClaud extends \Magento\Framework\View\Element\Template
         if ($percent < 20) {
             return 'smallest';
         }
-        if ($percent >= 20 and $percent < 40) {
+        if ($percent >= 20 && $percent < 40) {
             return 'small';
         }
-        if ($percent >= 40 and $percent < 60) {
+        if ($percent >= 40 && $percent < 60) {
             return 'medium';
         }
-        if ($percent >= 60 and $percent < 80) {
+        if ($percent >= 60 && $percent < 80) {
             return 'large';
         }
         return 'largest';

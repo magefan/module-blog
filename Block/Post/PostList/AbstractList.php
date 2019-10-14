@@ -10,11 +10,13 @@ namespace Magefan\Blog\Block\Post\PostList;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Api\SortOrder;
+use \Magento\Framework\View\Element\Template;
+use \Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Abstract blog post list block
  */
-abstract class AbstractList extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
+abstract class AbstractList extends Template implements IdentityInterface
 {
     /**
      * @var \Magento\Cms\Model\Template\FilterProvider

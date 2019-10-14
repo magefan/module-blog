@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model\Import;
 
 use Magento\Framework\Config\ConfigOptionsListConstants;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * Aw2 import model
@@ -19,40 +20,30 @@ class Aw2 extends AbstractImport
 
     public function execute()
     {
-        $host = $this->getData('dbhost') ?: $this->getData('host');
-        if (false !== strpos($host, '.sock')) {
-            $con = $this->_connect = mysqli_connect(
-                'localhost',
-                $this->getData('uname'),
-                $this->getData('pwd'),
-                $this->getData('dbname'),
-                null,
-                $host
-            );
-        } else {
-            $con = $this->_connect = mysqli_connect(
-                $this->getData('dbhost'),
-                $this->getData('uname'),
-                $this->getData('pwd'),
-                $this->getData('dbname')
-            );
+        $connectionConf = [
+            'driver'   => 'Pdo_Mysql',
+            'database' => $this->getData('dbname'),
+            'username' => $this->getData('uname'),
+            'password' => $this->getData('pwd'),
+            'charset'  => 'utf8',
+        ];
+        $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
+
+        if (!$adapter) {
+            throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
-        if (mysqli_connect_errno()) {
-            throw new \Exception("Failed connect to magento database", 1);
+        if ($this->getData('prefix')) {
+            $_pref = $adapter->getPlatform()->quoteValue($this->getData('prefix'));
         }
 
-        mysqli_set_charset($con, "utf8");
+        $sql = 'SELECT * FROM ' . $_pref.'aw_blog_category LIMIT 1';
 
-        $_pref = mysqli_real_escape_string($con, $this->getData('prefix'));
-
-        $sql = 'SELECT * FROM '.$_pref.'aw_blog_category LIMIT 1';
         try {
-            $this->_mysqliQuery($sql);
+            $adapter->query($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('AheadWorks Blog Extension not detected.'), 1);
         }
-
         $storeIds = array_keys($this->_storeManager->getStores(true));
 
         $categories = [];
@@ -65,17 +56,22 @@ class Aw2 extends AbstractImport
                     t.url_key as identifier,
                     t.sort_order as position,
                     t.meta_description as meta_description
-                FROM '.$_pref.'aw_blog_category t';
+                FROM '.$_pref.'aw_blog_category t;';
+        $result = $adapter->query($sql)->execute();
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        foreach ($result as $data) {
             /* Prepare category data */
 
             /* Find store ids */
             $data['store_ids'] = [];
-            $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_category_store WHERE category_id = "'.$data['old_id'].'"';
-            $s_result = $this->_mysqliQuery($s_sql);
-            while ($s_data = mysqli_fetch_assoc($s_result)) {
+            $s_sql = 'SELECT 
+                          `store_id` 
+                      FROM 
+                          '.$_pref.'`aw_blog_category_store` 
+                      WHERE 
+                          `category_id` = '. $adapter->getPlatform()->quoteValue($data['old_id']) . ";";
+            $s_result =  $adapter->query($s_sql)->execute();
+            foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
 
@@ -120,8 +116,8 @@ class Aw2 extends AbstractImport
                     t.name as title
                 FROM '.$_pref.'aw_blog_tag t';
 
-        $result = $this->_mysqliQuery($sql);
-        while ($data = mysqli_fetch_assoc($result)) {
+        $result = $adapter->query($sql);
+        foreach ($result as $data) {
             /* Prepare tag data */
             foreach (['title'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
@@ -132,7 +128,6 @@ class Aw2 extends AbstractImport
             }
 
             $data['title'] = trim($data['title']);
-
 
             try {
                 /* Initial saving */
@@ -153,17 +148,16 @@ class Aw2 extends AbstractImport
             }
         }
 
-
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_post';
-        $result = $this->_mysqliQuery($sql);
+        $result = $adapter->query($sql);
 
-        while ($data = mysqli_fetch_assoc($result)) {
+        foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT category_id FROM '.$_pref.'aw_blog_post_category WHERE post_id = "'.$data['id'].'"';
-            $c_result = $this->_mysqliQuery($c_sql);
-            while ($c_data = mysqli_fetch_assoc($c_result)) {
+            $c_result = $adapter->query($c_sql);
+            foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
                     $id = $oldCategories[$oldId]->getId();
@@ -174,8 +168,8 @@ class Aw2 extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_post_store WHERE post_id = "'.$data['id'].'"';
-            $s_result = $this->_mysqliQuery($s_sql);
-            while ($s_data = mysqli_fetch_assoc($s_result)) {
+            $s_result = $adapter->query($s_sql);
+            foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
 
@@ -222,7 +216,6 @@ class Aw2 extends AbstractImport
             unset($post);
         }
         /* end */
-
-        mysqli_close($con);
+        $adapter->getDriver()->getConnection()->disconnect();
     }
 }

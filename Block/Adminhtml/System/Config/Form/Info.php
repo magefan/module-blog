@@ -16,7 +16,7 @@ use Magento\Store\Model\ScopeInterface;
 class Info extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
-     * Magefan Blog Plus
+     * Magefan Blog Plus constant
      */
     const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
 
@@ -61,7 +61,11 @@ class Info extends \Magento\Config\Block\System\Config\Form\Field
     {
         $m = $this->moduleList->getOne($this->getModuleName());
         $html = '<div style="padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;">
-            Blog Extension v' . $m['setup_version'] .  ' was developed by <a href="https://magefan.com?utm_source=m2admin_blog_config&utm_medium=link&utm_campaign=regular" target="_blank">Magefan</a>.
+            Blog Extension v' . $m['setup_version'] .  ' was developed by 
+            <a href="https://magefan.com?utm_source=m2admin_blog_config&utm_medium=link&utm_campaign=regular" 
+                target="_blank">
+               Magefan
+            </a>.
         </div>';
         $html .= '<style>#row_mfblog_general_key{display:none}</style>';
         if ($this->metadata->getEdition() != 'Community' || $this->moduleList->has(self::MAGEFAN_BLOG_PLUS)) {

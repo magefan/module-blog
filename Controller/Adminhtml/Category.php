@@ -29,7 +29,7 @@ class Category extends Actions
      * Model class name
      * @var string
      */
-    protected $_modelClass      = 'Magefan\Blog\Model\Category';
+    protected $_modelClass      = \Magefan\Blog\Model\Category::class;
 
     /**
      * Active menu key

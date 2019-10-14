@@ -9,6 +9,8 @@
 namespace Magefan\Blog\Block\Post\View\Comments\Magefan;
 
 use Magento\Store\Model\ScopeInterface;
+use \Magento\Framework\View\Element\Template;
+use \Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Magefan comment block
@@ -16,7 +18,7 @@ use Magento\Store\Model\ScopeInterface;
  * @method string getComment()
  * @method $this setComment(\Magefan\Blog\Model\Comment $comment)
  */
-class Comment extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
+class Comment extends Template implements IdentityInterface
 {
     /**
      * @var array
@@ -28,7 +30,6 @@ class Comment extends \Magento\Framework\View\Element\Template implements \Magen
      * @var string
      */
     protected $_template = 'Magefan_Blog::post/view/comments/magefan/comment.phtml';
-
 
     /**
      * Retrieve identities

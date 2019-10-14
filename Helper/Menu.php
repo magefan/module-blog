@@ -58,7 +58,6 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
         parent::__construct($context);
     }
 
-
     /**
      * Retrieve blog menu nodes
      * @param  mixed $menu
@@ -82,7 +81,10 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
         $addedNodes = [];
 
         $data = [
-            'name'      => $this->scopeConfig->getValue(Config::XML_PATH_TOP_MENU_ITEM_TEXT, ScopeInterface::SCOPE_STORE),
+            'name'      => $this->scopeConfig->getValue(
+                Config::XML_PATH_TOP_MENU_ITEM_TEXT,
+                ScopeInterface::SCOPE_STORE
+            ),
             'id'        => 'magefan-blog',
             'url'       => $this->url->getBaseUrl(),
             'is_active' => ($this->_request->getModuleName() == 'blog')

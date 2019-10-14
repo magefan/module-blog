@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Block;
 
 /**
- * Class Link
+ * Class Link block
  */
 class Link extends \Magento\Framework\View\Element\Html\Link
 {

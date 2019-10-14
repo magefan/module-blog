@@ -57,7 +57,9 @@ class Topmenu extends \Magento\Framework\View\Element\Text
 
             $html .= '
             <li class="nav-item level0 level-top classic ' . ($active ? 'active' : '') . ' ' . ($hasChildren ? 'parent nav-item--only-subcategories' : '') . ' ">
-                <a class="level-top" href="' . $blogNode->getUrl() . '" title="' . $this->escapeHtml($blogNode->getName()) . '">
+                <a class="level-top" 
+                   href="' . $blogNode->getUrl() . '" 
+                   title="' . $this->escapeHtml($blogNode->getName()) . '">
                     <span>' . $this->escapeHtml($blogNode->getName()) . '</span>';
             if ($hasChildren) {
                 $html .= '<span class="caret"></span>';
@@ -70,7 +72,6 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             if ($hasChildren) {
                 $html .= $this->getSubmenuItemsHtml($children, 1, $max_level);
             }
-
 
             $html .= '</li>';
         }
@@ -87,9 +88,13 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             foreach ($children as $child) {
                 $subChildren = $child->getChildren();
                 $html .= '<li class="nav-item level' . $level . ' classic">
-                    <a href="' . $child->getUrl() . '"><span>' . $this->escapeHtml($child->getName()) . '</span></a>
-                    ' . ($subChildren->count() ? $this->getSubmenuItemsHtml($subChildren, $level+1, $max_level) : '') . '
-                </li>';
+                            <a href="' . $child->getUrl() . '">
+                                <span>' . $this->escapeHtml($child->getName()) . '</span>
+                            </a>
+                            ' . ($subChildren->count() ?
+                            $this->getSubmenuItemsHtml($subChildren, $level+1, $max_level) :
+                            '') . '
+                           </li>';
             }
             $html .= '</ul>';
         }

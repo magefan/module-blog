@@ -21,8 +21,7 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
- * Class AuthorRepository
- * @package Magefan\Blog\Model
+ * Class AuthorRepository model
  */
 class AuthorRepository implements AuthorRepositoryInterface
 {

@@ -16,18 +16,24 @@ $_postCollection = $block->getPostCollection();
 echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
 
 ?>
-<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" version="2.0" >
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     version="2.0" >
 <channel>
    <title><?= $block->escapeHtml($block->getTitle()) ?></title>
-   <atom:link href="<?= $block->getLink() ?>" rel="self" type="application/rss+xml"/>
-   <link><?= $block->getLink() ?></link>
+   <atom:link href="<?= $block->escapeUrl($block->getLink()) ?>" rel="self" type="application/rss+xml"/>
+   <link><?= $block->escapeUrl($block->getLink()) ?></link>
    <description><?= $block->escapeHtml($block->getDescription()) ?></description>
     <?php foreach ($_postCollection as $_post) { ?>
    <item>
       <title><?= $block->escapeHtml($_post->getTitle(), null, true) ?></title>
-      <link><?= $_post->getPostUrl() ?></link>
-      <guid><?= $_post->getPostUrl() ?></guid>
-      <description><![CDATA[<?= $block->getPostContent($_post) ?>]]></description>
+      <link><?= $block->escapeUrl($_post->getPostUrl()) ?></link>
+      <guid><?= $block->escapeUrl($_post->getPostUrl()) ?></guid>
+      <description><![CDATA[<?= $block->escapeHtml($block->getPostContent($_post)) ?>]]></description>
         <?php /*if ($featuredImage = $_post->getFeaturedImage()) { ?>
          <image><?= $featuredImage ?></image>
       <?php }*/ ?>

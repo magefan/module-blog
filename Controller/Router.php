@@ -245,8 +245,6 @@ class Router implements \Magento\Framework\App\RouterInterface
                         $first = false;
                     }
                 }
-
-
                 if ($pathExist) {
                     if ($postId) {
                         $request
@@ -292,7 +290,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             $this->_response->setRedirect($condition->getRedirectUrl());
             $request->setDispatched(true);
             return $this->actionFactory->create(
-                'Magento\Framework\App\Action\Redirect',
+                \Magento\Framework\App\Action\Redirect::class,
                 ['request' => $request]
             );
         }
@@ -308,7 +306,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $_identifier);
 
         return $this->actionFactory->create(
-            'Magento\Framework\App\Action\Forward',
+            \Magento\Framework\App\Action\Forward::class,
             ['request' => $request]
         );
     }

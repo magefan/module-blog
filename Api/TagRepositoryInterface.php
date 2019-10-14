@@ -13,7 +13,6 @@ use Magefan\Blog\Model\TagFactory;
 
 /**
  * Interface TagRepositoryInterface
- * @package Magefan\Blog\Api
  */
 interface TagRepositoryInterface
 {

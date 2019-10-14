@@ -42,7 +42,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     /**
      * @var string
      */
-    protected $_defaultPostInfoBlock = 'Magefan\Blog\Block\Post\Info';
+    protected $_defaultPostInfoBlock = \Magefan\Blog\Block\Post\Info::class;
 
     /**
      * @var \Magefan\Blog\Model\Url

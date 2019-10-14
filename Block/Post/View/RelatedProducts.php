@@ -10,11 +10,13 @@ namespace Magefan\Blog\Block\Post\View;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\Framework\View\Element\AbstractBlock;
+use \Magento\Catalog\Block\Product\AbstractProduct;
+use \Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Blog post related products block
  */
-class RelatedProducts extends \Magento\Catalog\Block\Product\AbstractProduct implements \Magento\Framework\DataObject\IdentityInterface
+class RelatedProducts extends AbstractProduct implements IdentityInterface
 {
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection

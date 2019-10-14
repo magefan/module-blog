@@ -14,7 +14,7 @@
     require(['jquery', 'domReady!'], function($){
         setTimeout(function(){
             $.ajax({
-                url:"<?= $block->getUrl('blog/post/counter');?>",
+                url:"<?= $block->escapeUrl($block->getUrl('blog/post/counter'));?>",
                 type:'POST',
                 data: {id: <?= (int)$block->getRequest()->getParam('id'); ?> },
                 dataType: 'json',

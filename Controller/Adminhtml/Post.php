@@ -29,7 +29,7 @@ class Post extends Actions
      * Model class name
      * @var string
      */
-    protected $_modelClass      = 'Magefan\Blog\Model\Post';
+    protected $_modelClass      = \Magefan\Blog\Model\Post::class;
 
     /**
      * Active menu key

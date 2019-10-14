@@ -11,7 +11,7 @@ namespace Magefan\Blog\Block;
 use \Magento\Framework\View\Element\Template;
 
 /**
- * Class ViewCounter
+ * Class ViewCounter block
  */
 class ViewCounter extends Template
 {

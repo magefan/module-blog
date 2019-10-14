@@ -15,5 +15,4 @@ use Magento\Store\Model\ScopeInterface;
 class Gallery extends \Magefan\Blog\Block\Post\AbstractPost
 {
 
-
 }

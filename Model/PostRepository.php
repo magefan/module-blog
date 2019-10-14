@@ -20,8 +20,7 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
- * Class PostRepository
- * @package Magefan\Blog\Model
+ * Class PostRepository model
  */
 class PostRepository implements PostRepositoryInterface
 {
