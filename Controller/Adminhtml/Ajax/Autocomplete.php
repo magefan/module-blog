@@ -19,7 +19,7 @@ class Autocomplete extends \Magento\Backend\App\Action
     public function execute()
     {
         $search = $this->getRequest()->getParam('search');
-        $collection = $this->_objectManager->create('Magefan\Blog\Model\AutocompleteData\PostsTags');
+        $collection = $this->_objectManager->create(\Magefan\Blog\Model\AutocompleteData\PostsTags::class);
 
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
         $resultJson= $this->resultFactory->create(ResultFactory::TYPE_JSON);
