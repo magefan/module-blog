@@ -288,6 +288,7 @@
                 </item>
             </argument>
         </field>
+        <!--
         <container name="container_tags">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -309,9 +310,9 @@
                         <item name="dataScope" xsi:type="string">tags</item>
                         <item name="filterOptions" xsi:type="boolean">true</item>
                         <item name="chipsEnabled" xsi:type="boolean">true</item>
-                        <item name="showCheckbox" xsi:type="boolean">true</item><!--default is true -->
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
                         <item name="disableLabel" xsi:type="boolean">true</item>
-                        <item name="multiple" xsi:type="boolean">true</item><!--default is true -->
+                        <item name="multiple" xsi:type="boolean">true</item>
                         <item name="levelsVisibility" xsi:type="number">1</item>
                         <item name="sortOrder" xsi:type="number">40</item>
                         <item name="required" xsi:type="boolean">false</item>
@@ -353,6 +354,20 @@
                 </argument>
             </container>
         </container>
+	-->
+        <field name="tag_input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tags</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="dataScope" xsi:type="string">tag_input</item>
+                </item>
+            </argument>
+        </field>
+
         <field name="include_in_recent">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -1081,6 +1096,7 @@
             </argument>
         </container>
     </modal>
+    <!--
     <modal name="create_tag_modal">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
@@ -1116,6 +1132,7 @@
             </argument>
         </container>
     </modal>
+    -->
 
 
 </form>
