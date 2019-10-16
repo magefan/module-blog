@@ -32,11 +32,12 @@ class Aw extends AbstractImport
             throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
+        $_pref = '';
         if ($this->getData('prefix')) {
-            $_pref = $adapter->getPlatform()->quoteValue($this->getData('prefix'));
+            $_pref = $this->getData('prefix');
         }
 
-        $sql = 'SELECT * FROM '.$_pref.'aw_blog_cat LIMIT 1';
+        $sql = 'SELECT * FROM ' . $adapter->getPlatform()->quoteValue($_pref.'aw_blog_cat') . ' LIMIT 1';
         try {
             $adapter->query($sql);
         } catch (\Exception $e) {

@@ -89,8 +89,8 @@ class Info extends \Magento\Framework\View\Element\Template
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/design/publication_date',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-    );
-
+        );
+    }
     /**
      * @return bool
      */    
