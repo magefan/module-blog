@@ -71,8 +71,8 @@ if ($exist = $block->getItems()->getSize() && $block->displayProducts()) {
                 <?php endif; ?>
                     <?php if ($type == 'related' || $type == 'upsell'): ?>
                         <?=($iterator++ == 1) ?
-                            '<li class="item product product-item" style="display: none;">' :
-                            '</li><li class="item product product-item" style="display: none;">' ?>
+                            '<li class="item product product-item" >' :
+                            '</li><li class="item product product-item" >' ?>
                 <?php else: ?>
                     <?=($iterator++ == 1) ?
                             '<li class="item product product-item">' :
