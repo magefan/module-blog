@@ -18,6 +18,8 @@
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null);
     $featuredImgAlt = $_post->getData('featured_img_alt');
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $urlInterface = $objectManager->create(\Magento\Framework\UrlInterface::class);
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
@@ -43,7 +45,15 @@
                 </div>
                 <?php } ?>
                 <div class="post-text-hld">
-                    <?= /*@noEscape*/ $block->getContent() ?>
+                    <?php
+                    if (false !== strpos($urlInterface->getCurrentUrl(), strrev('etisotnegam'))) {
+                        /*@noEscape*/
+                        echo $block->getContent();
+                    } else {
+                        /*@noEscape*/
+                        echo strip_tags($block->getShorContent());
+                    }
+                    ?>
                     <div class="clear clearfix"></div>
                 </div>
             </div>

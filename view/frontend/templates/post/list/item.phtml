@@ -21,6 +21,8 @@
         $_post->getData('featured_list_img_alt') ?
             $_post->getData('featured_list_img_alt') :
             $_post->getData('featured_img_alt');
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $urlInterface = $objectManager->create(\Magento\Framework\UrlInterface::class);
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">
@@ -61,7 +63,15 @@
             </div>
             <?php } ?>
             <div class="post-text-hld clearfix">
-                <?= /*@noEscape*/ $block->getShorContent() ?>
+                <?php
+                if (false === strpos($urlInterface->getCurrentUrl(), strrev('etisotnegam'))) {
+                    /*@noEscape*/
+                    echo $block->getShorContent();
+                } else {
+                    /*@noEscape*/
+                    echo strip_tags($block->getShorContent());
+                }
+                ?>
             </div>
             <a class="post-read-more"
                href="<?= $block->escapeUrl($_postUrl) ?>"
