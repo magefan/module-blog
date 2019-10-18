@@ -339,6 +339,9 @@
                     <field id="sort_order" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Sort Order</label>
                     </field>
+                    <field id="tag_count" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tag Count</label>
+                    </field>
                 </group>
                 <group id="popular_posts" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Popular Posts Widget</label>
