@@ -93,9 +93,11 @@ class TagClaud extends \Magento\Framework\View\Element\Template
                     'main_table.is_active = ?',
                     \Magefan\Blog\Model\Tag::STATUS_ENABLED
                 )->order('count DESC');
+
+            $this->_tags->setPageSize($this->getConfigValue(self::TAG_COUNT) ?: 100);
         }
 
-        return $this->_tags->setPageSize($this->getConfigValue(TAG_COUNT));
+        return $this->_tags;
     }
 
     /**
