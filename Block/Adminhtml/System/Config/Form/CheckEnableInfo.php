@@ -8,6 +8,9 @@
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
+use Magento\Framework\App\ObjectManager;
+use Magefan\Community\Model\Section;
+
 /**
  * Class CheckEnableInfo block
  */
@@ -15,6 +18,7 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
 {
     /**
      * Magefan Blog Plus module
+     * @deprecated
      */
     const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
 
@@ -88,9 +92,8 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
      */
     public function isKeyMissing()
     {
+        $section = ObjectManager::getInstance()->create(Section::class, ['name' => 'mfblog']);
         return !$this->config->getConfig(self::XML_PATH_KEY)
-            && ($this->metadata->getEdition() != 'Community'
-                || $this->moduleList->has(self::MAGEFAN_BLOG_PLUS)
-        );
+            && $section->getModule();
     }
 }

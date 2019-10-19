@@ -23,6 +23,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     const ANIMATED_ENABLED = 'mfblog/sidebar/tag_claud/animated';
     const TEXT_HIGHLIGHT_COLOR = 'mfblog/sidebar/tag_claud/text_highlight_color';
     const CLOUD_HEIGHT = 'mfblog/sidebar/tag_claud/cloud_height';
+    const TAG_COUNT = 'mfblog/sidebar/tag_claud/tag_count';
 
     /**
      * @var string
@@ -91,7 +92,9 @@ class TagClaud extends \Magento\Framework\View\Element\Template
                 )->where(
                     'main_table.is_active = ?',
                     \Magefan\Blog\Model\Tag::STATUS_ENABLED
-                );
+                )->order('count DESC');
+
+            $this->_tags->setPageSize($this->getConfigValue(self::TAG_COUNT) ?: 100);
         }
 
         return $this->_tags;
