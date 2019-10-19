@@ -19,7 +19,7 @@ class Mageplaza extends AbstractImport
     public function execute()
     {
         $config = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get(Magento\Framework\App\DeploymentConfig::class);
+            ->get(\Magento\Framework\App\DeploymentConfig::class);
         $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
         $this->setData(
             'dbhost',
@@ -48,11 +48,12 @@ class Mageplaza extends AbstractImport
             throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
+        $_pref = '';
         if ($this->getData('prefix')) {
-            $_pref = $adapter->getPlatform()->quoteValue($config->get('db/table_prefix'));
+            $_pref = $config->get('db/table_prefix');
         }
 
-        $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_category LIMIT 1';
+        $sql = 'SELECT * FROM ' . $adapter->getPlatform()->quoteValue($_pref . 'mageplaza_blog_category') . ' LIMIT 1';
         try {
             $this->query($sql);
         } catch (\Exception $e) {

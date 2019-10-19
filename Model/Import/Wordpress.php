@@ -30,8 +30,9 @@ class Wordpress extends AbstractImport
             throw  new \Zend_Db_Exception("Failed connect to magento database");
         }
 
+        $_pref = '';
         if ($this->getData('prefix')) {
-            $_pref = $adapter->getPlatform()->quoteValue($this->getData('prefix'));
+            $_pref = $this->getData('prefix');
         }
 
         $categories = [];
@@ -43,8 +44,8 @@ class Wordpress extends AbstractImport
                     t.name as title,
                     t.slug as identifier,
                     tt.parent as parent_id
-                FROM '.$_pref.'terms t
-                LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
+                FROM '.$adapter->getPlatform()->quoteValue($_pref.'terms t') .'
+                LEFT JOIN '.$adapter->getPlatform()->quoteValue($_pref.'term_taxonomy').' tt on t.term_id = tt.term_id
                 WHERE tt.taxonomy = "category" AND t.slug <> "uncategorized"';
 
         $result = $adapter->query($sql)->execute();

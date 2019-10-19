@@ -19,7 +19,4 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magefan\Blog\Block\Post\View\Comments">
-        <plugin name="magefan_blogplus_block_post_view" type="Magefan\BlogPlus\Plugin\Block\Post\View\CommentsPlugin" sortOrder="10" disabled="false" />
-    </type>
 </config>
