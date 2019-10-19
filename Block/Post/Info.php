@@ -91,6 +91,7 @@ class Info extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
     /**
      * @return bool
      */    

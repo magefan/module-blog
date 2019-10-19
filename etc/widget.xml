@@ -9,7 +9,7 @@
 -->
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
     <widget id="magefan_blog_recent" class="Magefan\Blog\Block\Widget\Recent">
-        <label translate="true">Recent Blog Posts</label>
+        <label translate="true">Recent Blog Posts by Magefan</label>
         <description>Display recent blog posts</description>
         <parameters>
             <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
@@ -50,7 +50,7 @@
         </parameters>
     </widget>
     <widget id="magefan_blog_featured" class="Magefan\Blog\Block\Widget\Featured">
-        <label translate="true">Featured Blog Posts</label>
+        <label translate="true">Featured Blog Posts by Magefan</label>
         <description>Display featured blog posts</description>
         <parameters>
             <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
