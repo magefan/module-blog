@@ -103,9 +103,7 @@
             </table>
         </td>
     <?php
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $urlInterface = $objectManager->create(\Magento\Framework\UrlInterface::class);
-        if (false === strpos($urlInterface->getCurrentUrl(), strrev('etisotnegam'))) {
+        if (false === strpos($block->getUrl(), strrev('etisotnegam'))) {
     ?>
     <tr>
         <td class="item">

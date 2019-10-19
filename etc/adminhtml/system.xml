@@ -340,7 +340,7 @@
                         <label>Sort Order</label>
                     </field>
                     <field id="tag_count" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Tag Count</label>
+                        <label>Number of Tags</label>
                     </field>
                 </group>
                 <group id="popular_posts" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
