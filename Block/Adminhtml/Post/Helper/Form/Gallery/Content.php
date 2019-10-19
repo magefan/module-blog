@@ -59,7 +59,7 @@ class Content extends \Magento\Backend\Block\Widget
                 );
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return;
         }
     }
 

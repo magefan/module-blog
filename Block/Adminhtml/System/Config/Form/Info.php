@@ -13,72 +13,23 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Admin blog configurations information block
  */
-class Info extends \Magento\Config\Block\System\Config\Form\Field
+class Info extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
 {
     /**
-     * Magefan Blog Plus constant
+     * Return extension url
+     * @return string
      */
-    const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
-
-    /**
-     * @var \Magento\Framework\Module\ModuleListInterface
-     */
-    protected $moduleList;
-
-    /**
-     * @var \Magento\Framework\App\ProductMetadataInterface
-     */
-    protected $metadata;
-
-    /**
-     * Info constructor.
-     * @param \Magento\Framework\Module\ModuleListInterface $moduleList
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param array $data
-     * @param null|\Magento\Framework\App\ProductMetadataInterface
-     */
-    public function __construct(
-        \Magento\Framework\Module\ModuleListInterface $moduleList,
-        \Magento\Backend\Block\Template\Context $context,
-        array $data = [],
-        $metadata = null
-    ) {
-        parent::__construct($context, $data);
-        $this->moduleList = $moduleList;
-
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->metadata = $metadata ?: $objectManager->get(
-            \Magento\Framework\App\ProductMetadataInterface::class
-        );
+    protected function getModuleUrl()
+    {
+        return 'https://mage' . 'fan.com?utm_source=m2admin_blog_config&utm_medium=link&utm_campaign=regular';
     }
 
     /**
-     * Return info block html
-     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * Return extension title
      * @return string
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    protected function getModuleTitle()
     {
-        $m = $this->moduleList->getOne($this->getModuleName());
-        $html = '<div style="padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;">
-            Blog Extension v' . $m['setup_version'] .  ' was developed by 
-            <a href="https://magefan.com?utm_source=m2admin_blog_config&utm_medium=link&utm_campaign=regular" 
-                target="_blank">
-               Magefan
-            </a>.
-        </div>';
-        $html .= '<style>#row_mfblog_general_key{display:none}</style>';
-        if ($this->metadata->getEdition() != 'Community' || $this->moduleList->has(self::MAGEFAN_BLOG_PLUS)) {
-            $html .= '<script>
-        require([
-            "jquery",
-            "domReady!"
-        ], function($){
-             $("#row_mfblog_general_key").show();
-        });
-        </script>';
-        }
-
-        return $html;
+        return 'Blog Extension';
     }
 }

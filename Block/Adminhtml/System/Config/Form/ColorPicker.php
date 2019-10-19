@@ -12,8 +12,7 @@ use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
- * Class ColorPicker
- * @package Magefan\Blog\Block\Adminhtml\System\Config\Form
+ * Class Color Picker Block
  */
 class ColorPicker extends Field
 {

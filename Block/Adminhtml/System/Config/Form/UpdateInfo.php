@@ -12,7 +12,7 @@ use Magento\Framework\Module\ModuleListInterface;
 use Magefan\Blog\Model\AdminNotificationFeed;
 
 /**
- * Class UpdateInfo block
+ * Class Update Info Block
  */
 class UpdateInfo extends \Magento\Backend\Block\Template
 {

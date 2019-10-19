@@ -12,12 +12,12 @@ use Magento\Framework\App\ObjectManager;
 use Magefan\Community\Model\Section;
 
 /**
- * Class CheckEnableInfo block
+ * Class Check EnableInfo Block
  */
 class CheckEnableInfo extends \Magento\Backend\Block\Template
 {
     /**
-     * Magefan Blog Plus module
+     * Magefan Blog Plus Module
      * @deprecated
      */
     const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
