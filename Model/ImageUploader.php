@@ -76,7 +76,7 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
         $mediaPath = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath();
         $baseImageAbsolutePath = $mediaPath . $baseImagePath;
         $i = 1;
-        while ($baseImageAbsolutePath) {
+        while (file_exists($baseImageAbsolutePath)) {
             $i++;
             $p = mb_strrpos($originalImageName, '.');
             if (false !== $p) {

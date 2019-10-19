@@ -18,9 +18,10 @@
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null, true);
     $featuredImgAlt =
-        $_post->getData('featured_list_img_alt') ?
-            $_post->getData('featured_list_img_alt') :
-            $_post->getData('featured_img_alt');
+        $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+    if (!$featuredImgAlt) {
+        $featuredImgAlt = $_postName;
+    }
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">
@@ -56,7 +57,7 @@
             <div class="post-ftimg-hld">
                 <a href="<?= $block->escapeUrl($_postUrl) ?>" title="<?= $block->escapeHtml($_postName) ?>">
                     <img src="<?= $block->escapeUrl($featuredImage) ?>"
-                         alt="<?= $featuredImgAlt ?: $block->escapeHtml($_postName) ?>" />
+                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                 </a>
             </div>
             <?php } ?>

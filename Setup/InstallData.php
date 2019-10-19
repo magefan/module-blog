@@ -63,7 +63,7 @@ class InstallData implements InstallDataInterface
         try {
             $this->state->setAreaCode('adminhtml');
         } catch (\Exception $e) {
-            /* Do nothing */
+            /* Do nothing, it's OK */
         }
 
         $url =  $this->scopeConfig

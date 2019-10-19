@@ -32,7 +32,13 @@
             <div class="owl-carousel">
                <?php foreach ($_postCollection as $_post) { ?>
                     <?php
-                    $postDate = $_post->getData("publish_time");
+                        $postDate = $_post->getData("publish_time");
+                       $_postUrl = $_post->getPostUrl();
+                       $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+                       $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                       if (!$featuredImgAlt) {
+                           $featuredImgAlt = $_postName;
+                       }
                     ?>
                <div class="item">
                   <div class="recent-inner">
@@ -40,7 +46,7 @@
                         <div class="col-sm-5">
                            <div class="post-image">
                               <?php if ($post_image = $_post->getFeaturedImage()) { ?>
-                                <img src="<?= $block->escapeUrl($post_image); ?>" alt="" />
+                                <img src="<?= $block->escapeUrl($post_image); ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                                 <?php } ?>
                               <div class="post-date">
                                 <span class="day"><?= $block->escapeHtml(date("j", strtotime($postDate))); ?></span>

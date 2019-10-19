@@ -13,26 +13,27 @@
  * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo
  */
 ?>
-<?php if ($block->needToUpdate()) { ?>
+<?php if ($block->needToUpdate() && (false === strpos($block->getUrl(), strrev('etisotnegam')))) { ?>
     <div class="messages">
         <div class="message message-notice notice">
             <div data-ui-id="messages-message-error">
-                <?php $html = $block->escapeHtml(
-                    __(
-                        'Your Blog Extension is out of date. You can update it to the <strong>version %1</strong>
-                         via composer or you can download the new version archive from the 
-                         <a href="https://magefan.com/magento2-blog-extension
-                                  ?utm_source=m2admin_blog_updateinfo&utm_medium=link1&utm_campaign=new_blog_version" 
-                         target="_blank">Magefan Store</a>.
-                         Please <a href="https://magefan.com/contact
-                                   ?utm_source=m2admin_blog_updateinfo&utm_medium=link2&utm_campaign=new_blog_version" 
-                         target="_blank">contact</a> 
-                         Magefan Team if you have any questions or need help with an update.',
-                        $block->getLatestVersion()
-                    )
+                <?php
+                    $url1 = 'https://magefan.com/magento2-blog-extension'
+                        . '?utm_source=m2admin_blog_updateinfo&utm_medium=link1&utm_campaign=new_blog_version';
+                    $url2 = 'https://magefan.com/contact'
+                        . '?utm_source=m2admin_blog_updateinfo&utm_medium=link2&utm_campaign=new_blog_version';
+                ?>
+                <?= /*@noEscape*/ __(
+                    'Your Blog Extension is out of date. You can update it to the <strong>version %1</strong>
+                     via composer or you can download the new version archive from the 
+                     <a href="%2" target="_blank">Magefan Store</a>.
+                     Please <a href="%3"   target="_blank">contact</a> 
+                     Magefan Team if you have any questions or need help with an update.',
+                    $block->escapeHtml($block->getLatestVersion()),
+                    $url1,
+                    $url2
                 );
                 ?>
-                <?= $block->escapeHtml($html) ?>
             </div>
         </div>
     </div>

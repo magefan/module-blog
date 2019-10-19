@@ -70,11 +70,11 @@ if ($exist = $block->getItems()->getSize() && $block->displayProducts()) {
                     <?php endif; ?>
                 <?php endif; ?>
                     <?php if ($type == 'related' || $type == 'upsell'): ?>
-                        <?=($iterator++ == 1) ?
+                        <?= ($iterator++ == 1) ?
                             '<li class="item product product-item" >' :
                             '</li><li class="item product product-item" >' ?>
                 <?php else: ?>
-                    <?=($iterator++ == 1) ?
+                    <?= ($iterator++ == 1) ?
                             '<li class="item product product-item">' :
                             '</li><li class="item product product-item">' ?>
                 <?php endif; ?>
@@ -92,7 +92,7 @@ if ($exist = $block->getItems()->getSize() && $block->displayProducts()) {
                             <?= $block->escapeHtml($_item->getName()) ?></a>
                         </strong>
 
-                        <?= $block->escapeHtml($block->getProductPrice($_item)); ?>
+                        <?= /*@noEscape*/ $block->getProductPrice($_item); ?>
 
                             <?php if ($templateType): ?>
                                 <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
@@ -162,7 +162,7 @@ if ($exist = $block->getItems()->getSize() && $block->displayProducts()) {
                             <?php endif; ?>
                         </div>
                     </div>
-                    <?=($iterator == count($items)+1) ? '</li>' : '' ?>
+                    <?= ($iterator == count($items)+1) ? '</li>' : '' ?>
                 <?php endforeach ?>
             </ol>
         </div>

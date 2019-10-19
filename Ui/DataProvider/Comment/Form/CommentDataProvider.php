@@ -36,14 +36,21 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     protected $url;
 
     /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
+     * @var \Magento\Framework\Escaper
+     */
+    protected $escaper;
+
+    /**
+     * CommentDataProvider constructor.
+     * @param $name
+     * @param $primaryFieldName
+     * @param $requestFieldName
      * @param CollectionFactory $commentCollectionFactory
      * @param DataPersistorInterface $dataPersistor
      * @param \Magento\Framework\UrlInterface $url
      * @param array $meta
      * @param array $data
+     * @param \Magento\Framework\Escaper|null $escaper
      */
     public function __construct(
         $name,
@@ -53,13 +60,18 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         DataPersistorInterface $dataPersistor,
         \Magento\Framework\UrlInterface $url,
         array $meta = [],
-        array $data = []
+        array $data = [],
+        \Magento\Framework\Escaper $escaper = null
     ) {
         $this->collection = $commentCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->meta = $this->prepareMeta($this->meta);
         $this->url = $url;
+
+        $this->escaper = $escaper ?: \Magento\Framework\App\ObjectManager::getInstance()->create(
+            \Magento\Framework\Escaper::class
+        );
     }
 
     /**
@@ -138,13 +150,10 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                 $text = (mb_strlen($parentComment->getText()) > 200) ?
                     (mb_substr($parentComment->getText(), 0, 200) . '...') :
                     $parentComment->getText();
-                $escaper = \Magento\Framework\App\ObjectManager::getInstance()->create(
-                    \Magento\Framework\Escaper::class
-                );
-                $text = $escaper->escapeHtml($text);
+                $text = $this->escaper->escapeHtml($text);
                 $this->loadedData[$comment->getId()]['parent_url'] = [
                     'url' => $this->url->getUrl('blog/comment/edit', ['id' => $parentComment->getId()]),
-                    'title' => $escaper->escapeHtml($parentComment->getText()),
+                    'title' => $this->escaper->escapeHtml($parentComment->getText()),
                     'text' => '#' . $parentComment->getId() . '. ' . $text,
                 ];
             } else {

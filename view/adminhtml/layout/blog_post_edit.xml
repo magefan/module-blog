@@ -18,7 +18,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="blog_post_form"/>
-            <block class="Magefan\Blog\Block\Adminhtml\Post\Autocomplete" name="autoload_tag_autocomplete" template="Magefan_Blog::autoload.phtml" />
+            <block class="Magefan\Blog\Block\Adminhtml\Post\Autocomplete" name="autoload_tag_autocomplete" template="Magefan_Blog::post/autoload.phtml" />
         </referenceContainer>
     </body>
 </page>
