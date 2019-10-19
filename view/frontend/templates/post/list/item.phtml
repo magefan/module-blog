@@ -19,9 +19,9 @@
     $_postName = $block->escapeHtml($_post->getTitle(), null, true);
     $featuredImgAlt =
         $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-    if (!$featuredImgAlt) {
-        $featuredImgAlt = $_postName;
-    }
+if (!$featuredImgAlt) {
+    $featuredImgAlt = $_postName;
+}
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">

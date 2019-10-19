@@ -208,10 +208,10 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                '_',
+                '',
+                ucwords($key, '_')
+            );
             $data[$key] = $this->$method();
         }
 

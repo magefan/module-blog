@@ -18,9 +18,9 @@
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null);
     $featuredImgAlt = $_post->getData('featured_img_alt');
-    if (!$featuredImgAlt) {
-        $featuredImgAlt = $_postName;
-    }
+if (!$featuredImgAlt) {
+    $featuredImgAlt = $_postName;
+}
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">

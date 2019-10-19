@@ -177,10 +177,10 @@ class Author extends AbstractModel implements AuthorInterface
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                '_',
+                '',
+                ucwords($key, '_')
+            );
             $data[$key] = $this->$method();
         }
 

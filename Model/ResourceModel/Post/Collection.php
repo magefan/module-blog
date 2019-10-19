@@ -272,7 +272,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ['t' => $this->getTable('magefan_blog_tag')],
                 't.tag_id = pt.tag_id',
                 ['tag_title' => 'title']
-            )->where('t.title LIKE ?', '%' . $term . '%' );
+            )->where('t.title LIKE ?', '%' . $term . '%');
 
         foreach ($connection->fetchAll($select) as $item) {
             $tagPostIds[] = (int)$item['post_id'];

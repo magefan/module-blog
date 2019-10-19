@@ -900,10 +900,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                '_',
+                '',
+                ucwords($key, '_')
+            );
             $this->$method();
         }
 
@@ -934,10 +934,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                '_',
+                '',
+                ucwords($key, '_')
+            );
             $data[$key] = $this->$method();
         }
 

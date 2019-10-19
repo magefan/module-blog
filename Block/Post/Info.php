@@ -94,7 +94,7 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * @return bool
-     */    
+     */
     public function getViewsCount()
     {
         return true;

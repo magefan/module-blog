@@ -18,13 +18,13 @@
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
                <?= /*@noEscape*/  __(
-                       'Magefan Blog is disabled, to enable the extension please navigate to
+                   'Magefan Blog is disabled, to enable the extension please navigate to
                         <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.',
-                       $block->getUrl(
-                           'adminhtml/system_config/edit',
-                           ['section' => 'mfblog']
-                       )
-                   );
+                   $block->getUrl(
+                       'adminhtml/system_config/edit',
+                       ['section' => 'mfblog']
+                   )
+               );
                 ?>
             </div>
         </div>
@@ -34,14 +34,14 @@
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
                 <?= /*@noEscape*/ __(
-                        'Magefan Blog <strong>Product Key</strong> is missing. 
+                    'Magefan Blog <strong>Product Key</strong> is missing. 
                         Blog Extension will be automatically disabled soon. Please specify the product key in 
                         <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.',
-                        $block->getUrl(
-                            'adminhtml/system_config/edit',
-                            ['section' => 'mfblog']
-                        )
-                    );
+                    $block->getUrl(
+                        'adminhtml/system_config/edit',
+                        ['section' => 'mfblog']
+                    )
+                );
                 ?>
             </div>
         </div>
