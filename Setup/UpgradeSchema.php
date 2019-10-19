@@ -704,13 +704,13 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 255,
                     'nullable' => true,
-                    'comment' => 'Tag Degault Robots',
+                    'comment' => 'Tag Default Robots',
                     'after' => 'title'
                 ]
             );
         }
 
-        if (version_compare($version, '2.9.1.1') < 0) {
+        if (version_compare($version, '2.9.1') < 0) {
             $table = $setup->getTable('magefan_blog_post');
             $connection->addColumn(
                 $setup->getTable($table),
@@ -723,10 +723,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'after' => 'featured_img'
                 ]
             );
-        }
-      
-        if (version_compare($version, '2.9.1.4') < 0) {
-            $table =$setup->getTable('magefan_blog_post');
+
             $connection->addColumn(
                 $setup->getTable($table),
                 'сomments_сount',

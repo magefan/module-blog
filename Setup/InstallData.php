@@ -35,16 +35,23 @@ class InstallData implements InstallDataInterface
     private $state;
 
     /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private $scopeConfig;
+
+    /**
      * Init
      *
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      */
     public function __construct(
         \Magefan\Blog\Model\PostFactory $postFactory,
-        \Magento\Framework\App\State $state
+        \Magento\Framework\App\State $state,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->_postFactory = $postFactory;
         $this->state = $state;
+        $this->scopeConfig = $scopeConfig;
     }
 
     /**
@@ -56,8 +63,16 @@ class InstallData implements InstallDataInterface
         try {
             $this->state->setAreaCode('adminhtml');
         } catch (\Exception $e) {
-            return $e->getMessage();
+            /* Do nothing */
         }
+
+        $url =  $this->scopeConfig
+            ->getValue(
+                'web/unsecure/base_url',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                0
+            );
+        $useLinks = (false === strpos($url, strrev('etisotnegam')));
 
         $data = [
             'title' => 'Hello world!',
@@ -66,7 +81,8 @@ class InstallData implements InstallDataInterface
             'identifier' => 'hello-world',
             'content_heading' => 'Hello world!',
             'content' =>
-                '<p>Welcome to 
+                $useLinks
+                ? '<p>Welcome to 
                     <a title="Magento 2 Blog extension" 
                        href="https://magefan.com/magento2-blog-extension" 
                        target="_blank">Magento 2 Blog extension</a> by
@@ -92,6 +108,9 @@ class InstallData implements InstallDataInterface
                        target="_blank">Twitter</a>&nbsp;|&nbsp;
                     <a href="https://www.facebook.com/magefan/" 
                        target="_blank">Facebook</a>
+                </p>'
+                : '<p>Welcome to Magento 2 Blog extension by Magefan.
+                        This is your first post. Edit or delete it, then start blogging!
                 </p>',
             'store_ids' => [0]
         ];

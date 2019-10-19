@@ -21,7 +21,7 @@ class UpgradeData implements UpgradeDataInterface
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(), '2.9.1.4') < 0) {
+        if (version_compare($context->getVersion(), '2.9.1') < 0) {
             $connection = $this->commentResource->getConnection();
             $postSelect = $connection->select()->from(
                 [$this->commentResource->getTable('magefan_blog_post')]
