@@ -26,7 +26,6 @@
         <?php foreach ($_months as $time) { ?>
             <?php
                 $title = $block->getTranslatedDate($time);
-                $title = $block->escapeHtml($title, null, true);
             ?>
             <div class="item">
                 <a title="<?= $block->escapeHtml(__('Archive %1', $title)) ?>"

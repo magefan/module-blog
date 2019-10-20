@@ -42,9 +42,9 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     /**
      * CommentDataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param CollectionFactory $commentCollectionFactory
      * @param DataPersistorInterface $dataPersistor
      * @param \Magento\Framework\UrlInterface $url

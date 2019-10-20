@@ -25,10 +25,6 @@
             <?php
                 $_postUrl = $_post->getPostUrl();
                 $_postName = $block->escapeHtml($_post->getTitle(), null, true);
-                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-            if (!$featuredImgAlt) {
-                $featuredImgAlt = $_postName;
-            }
             ?>
             <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
                 <div class="post-header">
@@ -43,12 +39,13 @@
                     </div>
 
                     <div class="post-info clear">
-                        <div class="item post-posed-date">
-                            <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
-                            <span class="value"><?= $block->escapeHtml($block->getPublishDate()) ?></span>
-                        </div>
+                        <?php if ($_post->isPublishDateEnabled()) { ?>
+                            <div class="item post-posed-date">
+                                <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
+                                <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                            </div>
+                        <?php } ?>
                         <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
-                        <div class="dash">|</div>
                         <div class="item post-categories">
                             <span class="label"><?= $block->escapeHtml(__('Categories:')) ?></span>
                             <?php $n = 0;
@@ -68,12 +65,18 @@
                     <div class="post-description clearfix">
                         <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
                         <?php if ($featuredImage) { ?>
-                        <div class="post-ftimg-hld">
-                            <a href="<?= $block->escapeUrl($_postUrl) ?>" title="<?= $block->escapeHtml($_postName) ?>">
-                                <img src="<?= $block->escapeHtml($featuredImage) ?>"
-                                     alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
-                            </a>
-                        </div>
+                            <?php
+                                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                if (!$featuredImgAlt) {
+                                    $featuredImgAlt = $_postName;
+                                }
+                            ?>
+                            <div class="post-ftimg-hld">
+                                <a href="<?= $block->escapeUrl($_postUrl) ?>" title="<?= $block->escapeHtml($_postName) ?>">
+                                    <img src="<?= $block->escapeHtml($featuredImage) ?>"
+                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                </a>
+                            </div>
                         <?php } ?>
                         <?php if ($content = $block->getShorContent($_post)) { ?>
                             <div class="post-text-hld clearfix">

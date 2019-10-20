@@ -27,6 +27,11 @@
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
+                <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/popular.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
                 <block class="Magefan\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="sidebar/archive.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
@@ -45,7 +50,6 @@
                     </action>
                 </block>
             </block>
-            <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/popular.phtml" />
             <referenceBlock name="catalog.compare.sidebar" remove="true"/>
             <referenceBlock name="wishlist_sidebar" remove="true"/>
         </referenceContainer>

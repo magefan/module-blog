@@ -15,6 +15,10 @@
                 <mfmodule>Blog</mfmodule>
                 <mftype>1</mftype>
             </general>
+            <design>
+                <format_date>F d, Y</format_date>
+                <publication_date>1</publication_date>
+            </design>
             <index_page>
                 <title>Blog</title>
                 <display_mode>0></display_mode>
@@ -34,6 +38,7 @@
                     <number_of_replies>5</number_of_replies>
                     <guest_comments>1</guest_comments>
                     <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
+                    <format_date>M d, Y H:i</format_date>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
@@ -76,9 +81,15 @@
                     <posts_ids></posts_ids>
                     <sort_order>35</sort_order>
                 </featured_posts>
+                <popular_posts>
+                    <enabled>0</enabled>
+                    <posts_per_page>5</posts_per_page>
+                    <sort_order>36</sort_order>
+                </popular_posts>
                 <archive>
                     <enabled>1</enabled>
                     <sort_order>40</sort_order>
+                    <format_date>F, Y</format_date>
                 </archive>
                 <tag_claud>
                     <enabled>1</enabled>
@@ -124,6 +135,7 @@
                 <include_categories>1</include_categories>
                 <max_depth>0</max_depth>
             </top_menu>
+
         </mfblog>
     </default>
 </config>

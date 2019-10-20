@@ -7,16 +7,15 @@
  */
 
 /**
- * @var \Magefan\Blog\Block\ViewCounter $block
+ * @var \Magefan\Blog\Block\ViewsCount $block
  */
 ?>
 <script>
     require(['jquery', 'domReady!'], function($){
         setTimeout(function(){
             $.ajax({
-                url:"<?= $block->escapeUrl($block->getUrl('blog/post/counter'));?>",
+                url:"<?= $block->escapeUrl($block->getCounterUrl());?>",
                 type:'POST',
-                data: {id: <?= (int)$block->getRequest()->getParam('id'); ?> },
                 dataType: 'json',
                 success: function(response) { }
             })

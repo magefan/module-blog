@@ -35,14 +35,12 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * Prepare posts collection
-     * @return void
+     * Retrieve collection order field
+     *
+     * @return string
      */
-    protected function _preparePostCollection()
+    public function getCollectionOrderField()
     {
-        $this->_postCollection = $this->_postCollectionFactory->create()
-        ->addActiveFilter()
-        ->addStoreFilter($this->_storeManager->getStore()->getId())
-        ->setOrder('views_count', $this->getCollectionOrderDirection());
+        return 'views_count';
     }
 }

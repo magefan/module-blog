@@ -17,13 +17,12 @@
 <?php $_post = $block->getPost() ?>
 
 <div class="post-info">
-    <?php if ($block->isPublicationDateEnabled()): ?>
+    <?php if ($_post->isPublishDateEnabled()) { ?>
         <div class="item post-posed-date">
             <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
-            <span class="value"><?= $block->escapeHtml($_post->getPublishDate('F d, Y')) ?></span>
+            <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
         </div>
-        <div class="dash">|</div>
-    <?php endif; ?>
+    <?php } ?>
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
     <div class="item post-categories">
         <span class="label"><?= $block->escapeHtml(__('Categories:')) ?></span>
@@ -38,7 +37,6 @@
     </div>
     <?php } ?>
     <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
-    <div class="dash">|</div>
     <div class="item post-comments">
         <span class="label"><?= $block->escapeHtml(__('Comments:')) ?></span>
         <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
@@ -48,7 +46,6 @@
     </div>
     <?php } ?>
     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
-    <div class="dash">|</div>
     <div class="item post-categories">
         <span class="label"><?= $block->escapeHtml(__('Tags:')) ?></span>
         <?php $n = 0;
@@ -63,7 +60,6 @@
     <?php } ?>
     <?php if ($block->authorEnabled()) { ?>
         <?php if ($_author = $_post->getAuthor()) { ?>
-        <div class="dash">|</div>
         <div class="item post-author">
             <span class="label"><?= $block->escapeHtml(__('Author:')) ?></span>
             <span class="value">
@@ -80,15 +76,14 @@
         <?php } ?>
     <?php } ?>
 
-    <?php if ($block->getViewsCount()) { ?>
-        <?php if ($_views = $_post->getViewsCount()) { ?>
-            <div class="dash">|</div>
+    <?php if ($block->viewsCountEnabled()) { ?>
+        <?php if ($viewsCount = $_post->getViewsCount()) { ?>
             <div class="item post-views">
                 <span class="label"><?= $block->escapeHtml(__('Views:')) ?></span>
                 <span class="value">
-                <?= $block->escapeHtml($_post->getViewsCount())?>
+                    <?= $block->escapeHtml($viewsCount)?>
                 </span>
-                </div>
+            </div>
         <?php } ?>
     <?php } ?>
 

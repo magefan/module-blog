@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Post model
@@ -484,7 +485,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     if (!$len) {
                         $len = (int)$this->scopeConfig->getValue(
                             'mfblog/post_list/shortcotent_length',
-                            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                            ScopeInterface::SCOPE_STORE
                         );
                     }
                 }
@@ -841,12 +842,36 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getPublishDate($format = 'Y-m-d H:i:s')
+    public function getPublishDate($format = '')
     {
+        if (!$format) {
+            $format = $this->scopeConfig->getValue(
+                'mfblog/design/format_date',
+                ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$format) {
+                $format = 'Y-m-d H:i:s';
+            }
+        }
+
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
             $this->getData('publish_time')
         );
+    }
+
+    /**
+     * Retrieve true if post publish date display is enabled
+     * @return bool
+     */
+    public function isPublishDateEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue(
+            'mfblog/design/publication_date',
+            ScopeInterface::SCOPE_STORE
+        );
+        return true;
     }
 
     /**

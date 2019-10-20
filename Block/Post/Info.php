@@ -22,9 +22,9 @@ class Info extends \Magento\Framework\View\Element\Template
     protected $_template = 'Magefan_Blog::post/info.phtml';
 
     /**
-     * DEPRECATED METHOD!!!!
      * Retrieve formated posted date
      * @var string
+     * @deprecated Use $post->getPublishDate() instead
      * @return string
      */
     public function getPostedOn($format = 'Y-m-d H:i:s')
@@ -69,34 +69,13 @@ class Info extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @return mixed
-     */
-    public function getPublishDate()
-    {
-        $dateFormat = $this->_scopeConfig->getValue(
-            'mfblog/design/format_date',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-
-        return $this->getPost()->getPublishDate($dateFormat);
-    }
-
-    /**
      * @return bool
      */
-    public function isPublicationDateEnabled()
+    public function viewsCountEnabled()
     {
         return (bool)$this->_scopeConfig->getValue(
-            'mfblog/design/publication_date',
+            'mfblog/post_view/views_count/enabled',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
-    }
-
-    /**
-     * @return bool
-     */
-    public function getViewsCount()
-    {
-        return true;
     }
 }

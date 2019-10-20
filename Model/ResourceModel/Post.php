@@ -198,6 +198,19 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @param \Magento\Framework\Model\AbstractModel $object
+     */
+    public function incrementViewsCount(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $this->getConnection()->update(
+            $this->getMainTable(),
+            ['views_count' => $object->getData('views_count') + 1],
+            ['post_id = ?' => $object->getId()]
+        );
+    }
+
+    /**
      * Update post connections
      * @param  \Magento\Framework\Model\AbstractModel $object
      * @param  Array $newRelatedIds

@@ -8,7 +8,7 @@
 ?>
 <?php
 /**
- * Blog sidebar recent posts template
+ * Blog sidebar popular posts template
  *
  * @var $block \Magefan\Blog\Block\Sidebar\Popular
  */
@@ -20,7 +20,7 @@ $_postCollection = $block->getPostCollection();
 <?php if ($_postCollection->count()) { ?>
     <div class="widget block block-popular-posts" data-bind="scope: 'popular-posts'">
         <div class="block-title">
-            <strong><?= $block->escapeHtml(__('Popular')) ?></strong>
+            <strong><?= $block->escapeHtml(__('Popular Posts')) ?></strong>
         </div>
         <div class="block-content">
             <?php foreach ($_postCollection as $_post) { ?>

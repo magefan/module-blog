@@ -17,10 +17,6 @@
     $_post = $block->getPost();
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null);
-    $featuredImgAlt = $_post->getData('featured_img_alt');
-if (!$featuredImgAlt) {
-    $featuredImgAlt = $_postName;
-}
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
@@ -37,10 +33,16 @@ if (!$featuredImgAlt) {
         <div class="post-content">
             <div class="post-description clearfix">
                 <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
-                <div class="post-ftimg-hld">
-                    <img src="<?= $block->escapeUrl($featuredImage) ?>"
-                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
-                </div>
+                    <?php
+                        $featuredImgAlt = $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt = $_postName;
+                        }
+                    ?>
+                    <div class="post-ftimg-hld">
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    </div>
                 <?php } ?>
                 <div class="post-text-hld">
                     <?= /*@noEscape*/ $block->getContent() ?>

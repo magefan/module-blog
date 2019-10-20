@@ -16,21 +16,19 @@
 <?php $tags = $block->getTags(); ?>
 
 <?php if (count($tags)) { ?>
-    <?php $maxCount = $block->getMaxCount() ?>
-
 <div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
     <div class="block-title">
-        <strong><?php echo __('Tags') ?></strong>
+        <strong><?= $block->escapeHtml(__('Tags')) ?></strong>
     </div>
 
     <div id="cloudCanvasContainer">
-        <canvas style="width:100%" height="<?php echo $block->getConfigValue($block::CLOUD_HEIGHT) ?>" id="cloudCanvas">
+        <canvas style="width:100%" height="<?= $block->escapeHtml($block->getConfigValue($block::CLOUD_HEIGHT)) ?>" id="cloudCanvas">
             <div class="tagclaud-hld">
                 <?php foreach ($tags as $tag) { ?>
-                    <?php $title = $block->escapeHtml($tag->getTitle()) ?>
-                    <span class="<?php echo $block->getTagClass($tag) ?>">
-                        <a href="<?php echo $tag->getTagUrl() ?>" title="<?php echo $title ?>">
-                            <?php echo $title ?>
+                    <?php $title = $tag->getTitle() ?>
+                    <span class="<?= $block->escapeHtml($block->getTagClass($tag)) ?>">
+                        <a href="<?= $block->escapeUrl($tag->getTagUrl()) ?>" title="<?= $block->escapeHtml($title) ?>">
+                            <?= $block->escapeHtml($title) ?>
                          </a>
                     </span>
                 <?php } ?>
@@ -41,7 +39,7 @@
 
 <script>
     require(['jquery', 'Magefan_Blog/js/jquery.tagcanvas.min', 'domReady!'], function($){
-        if (  ! $('#cloudCanvas').tagcanvas(<?= $block->getAnimationConfig() ?>)) {
+        if (  ! $('#cloudCanvas').tagcanvas(<?= /*@noEscape*/ $block->getAnimationConfig() ?>)) {
             $('#cloudCanvasContainer').hide();
         }
     });

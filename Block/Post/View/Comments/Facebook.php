@@ -15,14 +15,18 @@ use Magefan\Blog\Model\Config\Source\CommetType;
  */
 class Facebook extends \Magefan\Blog\Block\Post\View\Comments
 {
+    /**
+     * @var string
+     */
     protected $commetType = CommetType::FACEBOOK;
 
+    /**
+     * @return string
+     */
     public function getFbSdkJsUrl()
     {
-        $url = 'http://connect.facebook.net/'.
+        return '//connect.facebook.net/'.
             $this->getLocaleCode() . '/sdk.js#xfbml=1&version=v3.3&appId=' .
             $this->getFacebookAppId() . '&autoLogAppEvents=1';
-
-        return str_replace('amp;', '', $url);
     }
 }

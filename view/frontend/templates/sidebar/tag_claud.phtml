@@ -16,8 +16,6 @@
 <?php $tags = $block->getTags(); ?>
 
 <?php if (count($tags)) { ?>
-    <?php $maxCount = $block->getMaxCount() ?>
-
 <div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
     <div class="block-title">
         <strong><?= $block->escapeHtml(__('Tags')) ?></strong>
@@ -25,7 +23,7 @@
 
     <div class="tagclaud-hld">
     <?php foreach ($tags as $tag) { ?>
-        <?php $title = $block->escapeHtml($tag->getTitle()) ?>
+        <?php $title = $tag->getTitle() ?>
         <span class="<?= $block->escapeHtml($block->getTagClass($tag)) ?>">
             <a href="<?= $block->escapeUrl($tag->getTagUrl()) ?>" title="<?= $block->escapeHtml($title) ?>">
                 <?= $block->escapeHtml($title) ?>

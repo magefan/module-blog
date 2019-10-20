@@ -29,9 +29,7 @@
                 </field>
                 <field id="key" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Product Key</label>
-                    <comment><![CDATA[
-                            You can find product key in your <a href="https://magefan.com/downloadable/customer/products/" target="_blank">Magefan account</a>.
-                        ]]></comment>
+                    <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\ProductKeyField</frontend_model>
                 </field>
             </group>
             <group id="index_page" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -176,6 +174,14 @@
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                 </group>
+
+                <group id="views_count" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Views Count</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Calculate &amp; Display Views Counts</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
             </group>
 
             <group id="post_list" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -286,7 +292,7 @@
                         <label>Sort Order</label>
                     </field>
                 </group>
-                 <group id="featured_posts" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                <group id="featured_posts" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Featured Post Widget</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enabled</label>
@@ -295,6 +301,19 @@
                     <field id="posts_ids" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Post IDs</label>
                         <comment>Please indicate post IDs (separated by comma) you want to display.</comment>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                    </field>
+                </group>
+                <group id="popular_posts" translate="label" type="text" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popular Posts Widget</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="posts_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Posts Number</label>
                     </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Sort Order</label>
@@ -341,19 +360,6 @@
                     </field>
                     <field id="tag_count" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Number of Tags</label>
-                    </field>
-                </group>
-                <group id="popular_posts" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Popular Posts Widget</label>
-                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Enabled</label>
-                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="posts_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Posts Number</label>
-                    </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Sort Order</label>
                     </field>
                 </group>
                 <group id="custom" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
