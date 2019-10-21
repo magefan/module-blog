@@ -89,6 +89,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_storeManager;
 
     /**
+     * @var \Zend\Db\Adapter\Adapter
+     */
+    protected $dbAdapter;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -191,5 +196,45 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         }
 
         return $identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrefix()
+    {
+        $adapter = $this->getDbAdapter();
+        if ($this->getData('prefix')) {
+            $_pref = $adapter->getPlatform()->quoteValue(
+                $this->getData('prefix')
+            );
+            $_pref = trim($_pref, "'");
+        } else {
+            $_pref = '';
+        }
+
+        return $_pref;
+    }
+
+    /**
+     * @return \Zend\Db\Adapter\Adapter
+     */
+    protected function getDbAdapter()
+    {
+        if (null === $this->dbAdapter) {
+            $connectionConf = [
+                'driver' => 'Pdo_Mysql',
+                'database' => $this->getData('dbname'),
+                'username' => $this->getData('uname'),
+                'password' => $this->getData('pwd'),
+                'charset' => 'utf8',
+            ];
+            $this->dbAdapter = new \Zend\Db\Adapter\Adapter($connectionConf);
+
+            if (!$this->dbAdapter) {
+                throw  new \Zend_Db_Exception("Failed connect to magento database");
+            }
+        }
+        return $this->dbAdapter;
     }
 }

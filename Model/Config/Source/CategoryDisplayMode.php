@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
- * Category Display Mode model
+ * Category Display Mode Model
  */
 class CategoryDisplayMode implements \Magento\Framework\Option\ArrayInterface
 {

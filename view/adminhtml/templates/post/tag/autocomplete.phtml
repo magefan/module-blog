@@ -8,9 +8,9 @@
 ?>
 <?php
 /**
- * Alternative page autoload template
+ * Post tag autocomplete template
  *
- * @var $block \Magefan\Blog\Block\Adminhtml\Post\Autocomplete
+ * @var $block \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete
  */
 ?>
 
@@ -64,7 +64,7 @@
                         'maxChars' : 0,
                     });
 
-                    var linkedTags = <?php echo $block->getLinkedTags() ?>;
+                    var linkedTags = <?= /*@noEscape*/ $block->getLinkedTags() ?>;
 
                     for (var i=0; i<linkedTags.length;i++) {
                         if (!$tags.tagExist(linkedTags[i])) {
@@ -76,7 +76,7 @@
                         source: function (request, response) {
                             var searchTag = extractLast(request.term);
                             $.ajax({
-                                url: '<?= $block->escapeUrl($block->getUrl('blog/ajax/autocomplete')) ?>',
+                                url: '<?= $block->escapeUrl($block->getAutocompleteUrl()) ?>',
                                 type: 'post',
                                 dataType: "json",
                                 data: {

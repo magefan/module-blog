@@ -20,25 +20,10 @@ class Aw2 extends AbstractImport
 
     public function execute()
     {
-        $connectionConf = [
-            'driver'   => 'Pdo_Mysql',
-            'database' => $this->getData('dbname'),
-            'username' => $this->getData('uname'),
-            'password' => $this->getData('pwd'),
-            'charset'  => 'utf8',
-        ];
-        $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
+        $adapter = $this->getDbAdapter();
+        $_pref = $this->getPrefix();
 
-        if (!$adapter) {
-            throw  new \Zend_Db_Exception("Failed connect to magento database");
-        }
-
-        $_pref = '';
-        if ($this->getData('prefix')) {
-            $_pref = $this->getData('prefix');
-        }
-
-        $sql = 'SELECT * FROM ' . $adapter->getPlatform()->quoteValue($_pref.'aw_blog_category') .' LIMIT 1';
+        $sql = 'SELECT * FROM '.$_pref.'aw_blog_category LIMIT 1';
         try {
             $adapter->query($sql);
         } catch (\Exception $e) {
@@ -56,7 +41,7 @@ class Aw2 extends AbstractImport
                     t.url_key as identifier,
                     t.sort_order as position,
                     t.meta_description as meta_description
-                FROM '.$_pref.'aw_blog_category t;';
+                FROM '.$_pref.'aw_blog_category t';
         $result = $adapter->query($sql)->execute();
 
         foreach ($result as $data) {
@@ -69,7 +54,7 @@ class Aw2 extends AbstractImport
                       FROM 
                           '.$_pref.'`aw_blog_category_store` 
                       WHERE 
-                          `category_id` = '. $adapter->getPlatform()->quoteValue($data['old_id']) . ";";
+                          `category_id` = '. ((int)$data['old_id']) . ";";
             $s_result =  $adapter->query($s_sql)->execute();
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];

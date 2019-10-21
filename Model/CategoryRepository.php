@@ -28,14 +28,17 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @var CategoryFactory
      */
     private $categoryFactory;
+
     /**
      * @var CategoryResourceModel
      */
     private $categoryResourceModel;
+
     /**
      * @var CollectionFactory
      */
     private $collectionFactory;
+
     /**
      * @var SearchResultsFactory
      */

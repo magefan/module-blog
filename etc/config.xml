@@ -135,7 +135,6 @@
                 <include_categories>1</include_categories>
                 <max_depth>0</max_depth>
             </top_menu>
-
         </mfblog>
     </default>
 </config>

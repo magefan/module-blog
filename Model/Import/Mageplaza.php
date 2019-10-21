@@ -35,25 +35,10 @@ class Mageplaza extends AbstractImport
             $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
         );
 
-        $connectionConf = [
-            'driver'   => 'Pdo_Mysql',
-            'database' => $this->getData('dbname'),
-            'username' => $this->getData('uname'),
-            'password' => $this->getData('pwd'),
-            'charset'  => 'utf8',
-        ];
-        $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
+        $adapter = $this->getDbAdapter();
+        $_pref = $this->getPrefix();
 
-        if (!$adapter) {
-            throw  new \Zend_Db_Exception("Failed connect to magento database");
-        }
-
-        $_pref = '';
-        if ($this->getData('prefix')) {
-            $_pref = $config->get('db/table_prefix');
-        }
-
-        $sql = 'SELECT * FROM ' . $adapter->getPlatform()->quoteValue($_pref . 'mageplaza_blog_category') . ' LIMIT 1';
+        $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_category LIMIT 1';
         try {
             $this->query($sql);
         } catch (\Exception $e) {

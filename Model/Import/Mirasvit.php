@@ -38,17 +38,10 @@ class Mirasvit extends AbstractImport
             $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
         );
 
-        $adapter = $this->createAdapter();
+        $adapter = $this->getDbAdapter();
+        $_pref = $this->getPrefix();
 
-        if (!$adapter) {
-            throw  new \Zend_Db_Exception("Failed connect to magento database");
-        }
-
-        $_pref = '';
-        if ($this->getData('prefix')) {
-            $_pref = $config->get('db/table_prefix');
-        }
-        $sql = 'SELECT * FROM ' . $adapter->getPlatform()->quoteValue($_pref . 'mst_blog_post_entity') . ' LIMIT 1';
+        $sql = 'SELECT * FROM ' . $_pref . 'mst_blog_post_entity LIMIT 1';
         try {
             $adapter->query($sql);
         } catch (\Exception $e) {
@@ -299,18 +292,20 @@ class Mirasvit extends AbstractImport
 
     protected function getAttributValue($entitytTypeCode, $entitytId, $attributeCode)
     {
-        $_pref = $this->pref;
+        $adapter = $this->getDbAdapter();
+        $_pref = $this->getPrefix();
 
-        $adapter = $this->createAdapter();
         if (!isset($this->entityTypeId[$entitytTypeCode])) {
             $sql = 'SELECT
                     entity_type_id
                 FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code="' . $entitytTypeCode . '"';
 
             $result = $adapter->query($sql)->execute();
-            $data = $result;
-            if ($data) {
-                $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
+            if (count($result)) {
+                foreach ($result as $data) {
+                    $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
+                    break;
+                }
             } else {
                 $this->entityTypeId[$entitytTypeCode] = false;
             }
@@ -345,24 +340,12 @@ class Mirasvit extends AbstractImport
                    AND attribute_id = ' . $attribute['attribute_id'] . '
                    AND entity_id=' . $entitytId;
         $result = $adapter->query($sql)->execute();
-        $data = $result;
-
-        if ($data) {
-            return $data['value'];
-        } else {
-            return null;
+        if (count($result)) {
+            foreach ($result as $data) {
+                return $data['value'];
+            }
         }
+        return null;
     }
 
-    protected function createAdapter()
-    {
-        $connectionConf = [
-            'driver'   => 'Pdo_Mysql',
-            'database' => $this->getData('dbname'),
-            'username' => $this->getData('uname'),
-            'password' => $this->getData('pwd'),
-            'charset'  => 'utf8',
-        ];
-        return $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
-    }
 }

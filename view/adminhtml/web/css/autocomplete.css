@@ -108,10 +108,17 @@
 }
 .ui-menu .ui-menu-item {
     margin: 0;
+    padding: 5px;
     cursor: pointer;
     /* support: IE10, see #8844 */
     list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
+.ui-menu .ui-menu-item a{
+    width: 100%;
+    display: inline-block;
+    padding: 5px;
+}
+
 .ui-menu .ui-menu-item-wrapper {
     position: relative;
     padding: 3px 1em 3px .4em;
@@ -333,6 +340,7 @@ a.ui-button:active,
     width: 16px;
     height: 16px;
 }
+/*
 .ui-icon,
 .ui-widget-content .ui-icon {
     background-image: url("images/ui-icons_444444_256x240.png");
@@ -361,6 +369,7 @@ a.ui-button:active,
 .ui-button .ui-icon {
     background-image: url("images/ui-icons_777777_256x240.png");
 }
+*/
 
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }

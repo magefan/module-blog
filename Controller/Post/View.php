@@ -8,7 +8,7 @@
 namespace Magefan\Blog\Controller\Post;
 
 /**
- * Blog post views counter
+ * Blog post view
  */
 class View extends \Magefan\Blog\App\Action\Action
 {

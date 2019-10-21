@@ -350,13 +350,13 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     public function getCategoryUrl()
     {
-        $category = $this->getData('category_url');
-        if (!$category) {
-            $category = $this->_url->getUrl($this, $this->controllerName);
-            $this->setData('category_url', $category);
+        if (!$this->hasData('category_url')) {
+            $url = $this->_url->getUrl($this, $this->controllerName);
+            $this->setData('category_url', $url);
         }
 
-        return $category;
+        return $this->getData('category_url');
+
     }
 
     /**

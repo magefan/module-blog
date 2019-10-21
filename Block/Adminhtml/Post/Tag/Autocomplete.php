@@ -6,7 +6,7 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Block\Adminhtml\Post;
+namespace Magefan\Blog\Block\Adminhtml\Post\Tag;
 
 use \Magento\Framework\Registry;
 use \Magento\Backend\Block\Template;
@@ -51,5 +51,13 @@ class Autocomplete extends Template
             $tagsTitles = [];
         }
         return json_encode($tagsTitles);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAutocompleteUrl()
+    {
+        return $this->getUrl('blog/tag/autocomplete');
     }
 }

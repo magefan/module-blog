@@ -29,14 +29,17 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @var AuthorInterfaceFactory
      */
     private $authorFactory;
+
     /**
      * @var AuthorResourceModel
      */
     private $authorResourceModel;
+
     /**
      * @var AuthorCollectionInterfaceFactory
      */
     private $collectionFactory;
+
     /**
      * @var SearchResultsFactory
      */

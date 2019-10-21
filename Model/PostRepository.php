@@ -28,14 +28,17 @@ class PostRepository implements PostRepositoryInterface
      * @var PostFactory
      */
     private $postFactory;
+
     /**
      * @var PostResourceModel
      */
     private $postResourceModel;
+
     /**
      * @var CollectionFactory
      */
     private $collectionFactory;
+
     /**
      * @var SearchResultsFactory
      */

@@ -11,7 +11,7 @@ namespace Magefan\Blog\Model\Sitemap;
 use Magefan\Blog\Api\SitemapConfigInterface;
 
 /**
- * Class SitemapConfig model
+ * Class Sitemap Config Model
  */
 class SitemapConfig implements SitemapConfigInterface
 {

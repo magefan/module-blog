@@ -26,36 +26,33 @@
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
     <div class="item post-categories">
         <span class="label"><?= $block->escapeHtml(__('Categories:')) ?></span>
-        <?php $n = 0;
-        foreach ($_post->getParentCategories() as $ct) { $n++; ?>
+        <?php $n = 0; ?>
+        <?php foreach ($_post->getParentCategories() as $ct) { ?>
+            <?php $n++; ?>
             <a title="<?= $block->escapeHtml($ct->getTitle()) ?>"
-               href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>">
-                        <?= $block->escapeHtml($ct->getTitle()) ?>
-            </a>
-                    <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
-                <?php } ?>
+               href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+            ><?= $block->escapeHtml($ct->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_categoriesCount) ? ',' : '' ?>
+        <?php } ?>
     </div>
     <?php } ?>
     <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
     <div class="item post-comments">
         <span class="label"><?= $block->escapeHtml(__('Comments:')) ?></span>
         <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
-           href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments">
-            <?= $block->escapeHtml($_post->getCommentsCount()) ?>
-        </a>
+           href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
+        ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
     </div>
     <?php } ?>
     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
     <div class="item post-categories">
         <span class="label"><?= $block->escapeHtml(__('Tags:')) ?></span>
-        <?php $n = 0;
-        foreach ($_post->getRelatedTags() as $tag) { $n++; ?>
+        <?php $n = 0; ?>
+        <?php foreach ($_post->getRelatedTags() as $tag) { ?>
+            <?php $n++; ?>
             <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
-               href="<?= $block->escapeUrl($tag->getTagUrl()) ?>">
-                        <?= $block->escapeHtml($tag->getTitle()) ?>
-            </a>
-                    <?php if ($n != $_tagsCount) { ?>, <?php } ?>
-                <?php } ?>
+               href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
+            ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_tagsCount) ? ',' : '' ?>
+        <?php } ?>
     </div>
     <?php } ?>
     <?php if ($block->authorEnabled()) { ?>
@@ -67,7 +64,9 @@
                 <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                    href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>">
                 <?php } ?>
-                    <?= $block->escapeHtml($_author->getTitle()) ?>
+
+                <?= $block->escapeHtml($_author->getTitle()) ?>
+
                 <?php if ($authorPageEnabled) { ?>
                 </a>
                 <?php } ?>

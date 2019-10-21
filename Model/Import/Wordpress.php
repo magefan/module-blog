@@ -17,23 +17,8 @@ class Wordpress extends AbstractImport
 
     public function execute()
     {
-        $connectionConf = [
-            'driver'   => 'Pdo_Mysql',
-            'database' => $this->getData('dbname'),
-            'username' => $this->getData('uname'),
-            'password' => $this->getData('pwd'),
-            'charset'  => 'utf8',
-        ];
-        $adapter = new \Zend\Db\Adapter\Adapter($connectionConf);
-
-        if (!$adapter) {
-            throw  new \Zend_Db_Exception("Failed connect to magento database");
-        }
-
-        $_pref = '';
-        if ($this->getData('prefix')) {
-            $_pref = $this->getData('prefix');
-        }
+        $adapter = $this->getDbAdapter();
+        $_pref = $this->getPrefix();
 
         $categories = [];
         $oldCategories = [];
@@ -44,8 +29,8 @@ class Wordpress extends AbstractImport
                     t.name as title,
                     t.slug as identifier,
                     tt.parent as parent_id
-                FROM '.$adapter->getPlatform()->quoteValue($_pref.'terms t') .'
-                LEFT JOIN '.$adapter->getPlatform()->quoteValue($_pref.'term_taxonomy').' tt on t.term_id = tt.term_id
+                FROM '.$_pref.'terms t
+                LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
                 WHERE tt.taxonomy = "category" AND t.slug <> "uncategorized"';
 
         $result = $adapter->query($sql)->execute();
@@ -218,9 +203,10 @@ class Wordpress extends AbstractImport
                     p1.post_date DESC';
 
             $result2 = $adapter->query($sql)->execute();
-            if ($data2 = $result2) {
+            foreach ($result2 as $data2) {
                 if ($data2['featured_img']) {
                     $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $data2['featured_img'];
+                    break;
                 }
             }
 
@@ -243,7 +229,7 @@ class Wordpress extends AbstractImport
                         p1.post_date DESC';
 
                 $result2 = $adapter->query($sql)->execute();
-                if ($data2 = $result2) {
+                foreach ($result2 as $data2) {
                     if ($data2['featured_img']) {
                         $serializeInterface = \Magento\Framework\App\ObjectManager::getInstance()
                         ->create(\Magento\Framework\Serialize\SerializerInterface::class);
@@ -255,7 +241,7 @@ class Wordpress extends AbstractImport
                                 $item = $item[count($item) - 1];
                                 if ($item) {
                                     $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $item;
-                                    break;
+                                    break 2;
                                 }
 
                             }
@@ -518,8 +504,6 @@ class Wordpress extends AbstractImport
 
         // Optionally insert line breaks.
         if ($br) {
-            // Replace newlines that shouldn't be touched with a placeholder.
-            $pee = preg_replace_callback('/<(script|style).*?<\/\\1>/s', '_autop_newline_preservation_helper', $pee);
 
             // Normalize <br>
             $pee = str_replace([ '<br>', '<br/>' ], '<br />', $pee);

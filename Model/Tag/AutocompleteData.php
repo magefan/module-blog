@@ -2,17 +2,18 @@
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Model\AutocompleteData;
+namespace Magefan\Blog\Model\Tag;
 
 use Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory;
 
 /**
- * Class BlogPost
- * Provides Data for Autocomplete Ajax Call
+ * Provides Data for Tag Autocomplete Ajax Call
  */
-class PostsTags
+class AutocompleteData
 {
     /**
      * @var BlogFactory
@@ -44,7 +45,7 @@ class PostsTags
                     ['like' => '%' . $search . '%'],
                 ]
             )
-            ->setPageSize(10)
+            ->setPageSize(15)
         ;
 
         $result = [];

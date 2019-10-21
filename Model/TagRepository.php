@@ -28,14 +28,17 @@ class TagRepository implements TagRepositoryInterface
      * @var TagFactory
      */
     private $tagFactory;
+
     /**
      * @var TagResourceModel
      */
     private $tagResourceModel;
+
     /**
      * @var CollectionFactory
      */
     private $collectionFactory;
+
     /**
      * @var SearchResultsFactory
      */
@@ -118,7 +121,6 @@ class TagRepository implements TagRepositoryInterface
     {
         $tag = $this->tagFactory->create();
         $this->tagResourceModel->load($tag, $tagId);
-
         if (!$tag->getId()) {
             throw new NoSuchEntityException(__('Requested item doesn\'t exist'));
         }

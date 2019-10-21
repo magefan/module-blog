@@ -28,14 +28,17 @@ class CommentRepository implements CommentRepositoryInterface
      * @var CommentFactory
      */
     private $commentFactory;
+
     /**
      * @var CommentResourceModel
      */
     private $commentResourceModel;
+
     /**
      * @var CollectionFactory
      */
     private $collectionFactory;
+
     /**
      * @var SearchResultsFactory
      */

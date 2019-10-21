@@ -29,19 +29,7 @@ class UpgradeData implements UpgradeDataInterface
                 ->where('is_active = ?', 1);
             $posts = $connection->fetchAll($postSelect);
             foreach ($posts as $post) {
-                $commentSelect = $connection->select()->from(
-                    [$this->commentResource->getTable('magefan_blog_comment')]
-                )
-                    ->where('post_id = ?', $post['post_id'])
-                    ->where('status = ?', 1);
-                $comments = $connection->fetchAll($commentSelect);
-                $commentsIds = [];
-                foreach ($comments as $comment) {
-                    if (!in_array($comment['comment_id'], $commentsIds)) {
-                        array_push($commentsIds, $comment['comment_id']);
-                        $this->commentResource->updatePostCommentsCount($post['post_id']);
-                    }
-                }
+                $this->commentResource->updatePostCommentsCount($post['post_id']);
             }
         }
     }
