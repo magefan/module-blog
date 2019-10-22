@@ -16,11 +16,8 @@
 <?php if ($block->getCollection()->getSize()) { ?>
     <?php $woj = $block->getWidgetOptionsJson() ?>
     <div class="toolbar toolbar-blog-posts"
-        <?php
-        if ($woj) {
-            echo $block->escapeHtml('data-mage-init="'.$woj.'"');
-        }
-        ?>>
-        <?= $block->getPagerHtml() ?>
+        <?= /*@noEscape*/ ($woj) ? 'data-mage-init="'.$woj.'"' : ''; ?>
+    >
+        <?= /*@noEscape*/ $block->getPagerHtml() ?>
     </div>
 <?php } ?>

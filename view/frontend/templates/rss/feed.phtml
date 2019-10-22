@@ -30,7 +30,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
    <description><?= $block->escapeHtml($block->getDescription()) ?></description>
     <?php foreach ($_postCollection as $_post) { ?>
    <item>
-      <title><?= $block->escapeHtml($_post->getTitle(), null, true) ?></title>
+      <title><?= $block->escapeHtml($_post->getTitle()) ?></title>
       <link><?= $block->escapeUrl($_post->getPostUrl()) ?></link>
       <guid><?= $block->escapeUrl($_post->getPostUrl()) ?></guid>
       <description><![CDATA[<?= $block->escapeHtml($block->getPostContent($_post)) ?>]]></description>

@@ -28,17 +28,17 @@
           </span>
       </h2>
       <div id="latest_news" class="owl-top-narrow">
-         <div class="recent-posts recent-posts-<?= $block->escapeHtml($id) ?>">
+         <div class="recent-posts recent-posts-<?= (int)$id ?>">
             <div class="owl-carousel">
                <?php foreach ($_postCollection as $_post) { ?>
                     <?php
                         $postDate = $_post->getData("publish_time");
-                       $_postUrl = $_post->getPostUrl();
-                       $_postName = $block->escapeHtml($_post->getTitle(), null, true);
-                       $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                    if (!$featuredImgAlt) {
-                        $featuredImgAlt = $_postName;
-                    }
+                        $_postUrl = $_post->getPostUrl();
+                        $_postName = $block->escapeHtml($_post->getTitle());
+                        $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt = $_postName;
+                        }
                     ?>
                <div class="item">
                   <div class="recent-inner">
@@ -63,7 +63,7 @@
                               </h2>
                            </div>
                            <div class="postContent">
-                              <p><?= $block->escapeHtml($_post->getShortFilteredContent()) ?></p>
+                              <p><?= /*@noEscape*/ $_post->getShortFilteredContent() ?></p>
                            </div>
                            <a class="readmore btn btn-default"
                               href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
@@ -76,12 +76,12 @@
                 <?php } ?>
             </div>
          </div>
-         <script type="text/javascript" xml="space">// 
+         <script>
             require([
               'jquery',
               'owl.carousel/owl.carousel.min'
             ], function ($) {
-              $(".recent-posts-<?= $block->escapeHtml($id) ?> .owl-carousel").owlCarousel({
+              $(".recent-posts-<?= (int)$id ?> .owl-carousel").owlCarousel({
                 loop: false,
                 margin: 20,
                 nav: false,
@@ -105,8 +105,6 @@
                 }
               });
             });
-            
-            // 
          </script>
       </div>
    </div>

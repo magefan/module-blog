@@ -23,8 +23,8 @@
     <ul class="post-list clearfix">
         <?php foreach ($_postCollection as $_post) { ?>
             <?php
-                $_postUrl = $_post->getPostUrl();
-                $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
             ?>
             <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
                 <div class="post-header">
@@ -32,8 +32,8 @@
                     <div class="post-title-holder clearfix">
                         <div class="post-title">
                             <a class="post-item-link"
-                               href="<?= $block->escapeUrl($_postUrl) ?>">
-                                <?= $block->escapeHtml($_postName); ?>
+                               href="<?= /*@noEscape*/ $_postUrl ?>">
+                                <?= /*@noEscape*/ $_postName ?>
                             </a>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 }
                             ?>
                             <div class="post-ftimg-hld">
-                                <a href="<?= $block->escapeUrl($_postUrl) ?>" title="<?= $block->escapeHtml($_postName) ?>">
+                                <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                     <img src="<?= $block->escapeHtml($featuredImage) ?>"
                                          alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                                 </a>
@@ -80,12 +80,12 @@
                         <?php } ?>
                         <?php if ($content = $block->getShorContent($_post)) { ?>
                             <div class="post-text-hld clearfix">
-                                <?= $block->escapeHtml($content) ?>
+                                <?= /*@noEscape*/ $content ?>
                             </div>
                         <?php } ?>
                         <a class="post-read-more"
-                           href="<?= $block->escapeUrl($_postUrl) ?>"
-                           title="<?= $block->escapeHtml($_postName) ?>">
+                           href="<?= /*@noEscape*/ $_postUrl ?>"
+                           title="<?= /*@noEscape*/ $_postName ?>">
                            <?= $block->escapeHtml(__('Read more &#187;')) ?>
                         </a>
                     </div>
@@ -110,7 +110,7 @@ function( require, $, Masonry ) {
         })
     });
 });
-    <?php /* more info http://masonry.desandro.com/extras.html */ ?>
+<?php /* more info http://masonry.desandro.com/extras.html */ ?>
 </script>
 
 <?php } ?>

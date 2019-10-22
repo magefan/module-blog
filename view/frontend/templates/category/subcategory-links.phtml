@@ -24,8 +24,8 @@ $subCategoriesCollection = $block->getSubCategories();
                 <li>
                     <?php $categoryTitle = $block->escapeHtml($category->getTitle()) ?>
                     <a href="<?= $block->escapeUrl($category->getCategoryUrl()) ?>"
-                       title="<?= $block->escapeHtml($categoryTitle) ?>">
-                        <?= $block->escapeHtml($categoryTitle) ?>
+                       title="<?= /*@noEscape*/ $categoryTitle ?>">
+                        <?= /*@noEscape*/ $categoryTitle ?>
                     </a>
                 </li>
             <?php } ?>

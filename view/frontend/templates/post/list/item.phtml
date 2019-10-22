@@ -15,8 +15,8 @@
 ?>
 <?php
     $_post = $block->getPost();
-    $_postUrl = $_post->getPostUrl();
-    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+    $_postUrl = $block->escapeUrl($_post->getPostUrl());
+    $_postName = $block->escapeHtml($_post->getTitle());
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">
@@ -24,14 +24,14 @@
         <div class="post-title-holder clearfix">
             <h2 class="post-title">
                 <a class="post-item-link"
-                   href="<?= $block->escapeUrl($_postUrl) ?>">
-                    <?= $block->escapeHtml($_postName); ?>
+                   href="<?= /*@noEscape*/ $_postUrl ?>">
+                    <?= /*@noEscape*/ $_postName ?>
                 </a>
             </h2>
 
             <div class="addthis_toolbox addthis_default_style"
-                addthis:url="<?= $block->escapeUrl($_postUrl) ?>"
-                addthis:title="<?= $block->escapeHtml($_postName); ?>"
+                addthis:url="<?= /*@noEscape*/ $_postUrl ?>"
+                addthis:title="<?= /*@noEscape*/ $_postName ?>"
                 <?php if ($firstImage = $_post->getFirstImage()) { ?>
                 addthis:media="<?= $block->escapeHtml($firstImage) ?>"
                 <?php } ?>>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <?= $block->getInfoHtml() ?>
+        <?= /*@noEscape*/ $block->getInfoHtml() ?>
     </div>
 
     <div class="post-content">
@@ -56,7 +56,7 @@
                     }
                 ?>
                 <div class="post-ftimg-hld">
-                    <a href="<?= $block->escapeUrl($_postUrl) ?>" title="<?= $block->escapeHtml($_postName) ?>">
+                    <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                         <img src="<?= $block->escapeUrl($featuredImage) ?>"
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </a>
@@ -66,8 +66,8 @@
                 <?= /*@noEscape*/ $block->getShorContent() ?>
             </div>
             <a class="post-read-more"
-               href="<?= $block->escapeUrl($_postUrl) ?>"
-               title="<?= $block->escapeHtml($_postName) ?>"
+               href="<?= /*@noEscape*/ $_postUrl ?>"
+               title="<?= /*@noEscape*/ $_postName ?>"
                >
                 <?= $block->escapeHtml(__('Read more &#187;')) ?>
             </a>

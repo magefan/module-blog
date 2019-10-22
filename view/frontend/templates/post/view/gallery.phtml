@@ -25,9 +25,9 @@
         <?php foreach ($galleryImages as $image) { ?>
             <a class="gallery-image-hld"
                data-fancybox="gallery"
-               href="<?= $block->escapeHtml($image) ?>"
+               href="<?= $block->escapeUrl($image) ?>"
                rel="nofollow">
-                <img class="gallery-image" src="<?= $block->escapeHtml($image->resize(200)) ?>" alt="" />
+                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200)) ?>" alt="" />
             </a>
         <?php } ?>
     </div>

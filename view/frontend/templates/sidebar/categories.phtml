@@ -27,35 +27,35 @@
     <?php
         $level = 0;
         $first = true;
-    foreach ($items as $item) {
-        $newLevel = $item->getLevel();
+        foreach ($items as $item) {
+            $newLevel = $item->getLevel();
 
-        if ($level == $newLevel && !$first) {
-            echo '</li>';
-        }
-
-        if ($level < $newLevel) {
-            echo '<ul>';
-        }
-
-        if ($level > $newLevel) {
-            for ($i = $level; $i > $newLevel; $i--) {
-                echo '</ul></li>';
+            if ($level == $newLevel && !$first) {
+                echo '</li>';
             }
-        }
 
-        ?>
-                <li>
-                    <a href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
-                    <?= $block->escapeHtml($item->getTitle()) ?>
-                    </a>
-                <?php if ($block->showPostsCount()) { ?>
-                    (<?= $block->escapeHtml($item->getPostsCount()) ?>)
-                    <?php } ?>
-            <?php
-            $level = $newLevel;
-            $first = false;
-    }
+            if ($level < $newLevel) {
+                echo '<ul>';
+            }
+
+            if ($level > $newLevel) {
+                for ($i = $level; $i > $newLevel; $i--) {
+                    echo '</ul></li>';
+                }
+            }
+
+            ?>
+                    <li>
+                        <a href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
+                        <?= $block->escapeHtml($item->getTitle()) ?>
+                        </a>
+                    <?php if ($block->showPostsCount()) { ?>
+                        (<?= $block->escapeHtml($item->getPostsCount()) ?>)
+                        <?php } ?>
+                <?php
+                $level = $newLevel;
+                $first = false;
+        }
     ?>
     </ul>
 </div>

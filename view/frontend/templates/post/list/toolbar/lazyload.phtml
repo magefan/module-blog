@@ -20,7 +20,7 @@
         ]);
     ?>
     <div class="mfblog-autoloader"
-         data-mage-init='{"<?= $block->escapeJs($block->getLazyloadJs()) ?>" : <?= $block->escapeHtml($config) ?>}'>
+         data-mage-init='{"<?= /*@noEscape*/ $block->getLazyloadJs() ?>" : <?= /*@noEscape*/ $config ?>}'>
         <button class="mbblog-lazyload-trigger mfblog-hide-onload action primary"
                 title="<?= $block->escapeHtml(__('See more')) ?>"
                 type="button">

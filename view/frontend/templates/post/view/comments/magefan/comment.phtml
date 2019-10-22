@@ -21,13 +21,13 @@
     <?php if ($comment->getIsHidden()) { echo 'style="display:none"'; } ?>>
     <?php if ($authorImage = $comment->getAuthorImage()) { ?>
     <div class="c-img">
-        <img src="<?= $block->escapeHtml($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
+        <img src="<?= $block->escapeUrl($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
     <div class="c-post c-post-<?= (int)$comment->getId() ?>"
          id="c-post-<?= (int)$comment->getId() ?>">
         <div class="p-name"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
-        <div class="p-text"><?= $block->escapeHtml(nl2br($block->escapeHtml($comment->getText()))) ?></div>
+        <div class="p-text"><?= /*@noEscape*/ nl2br($block->escapeHtml($comment->getText())) ?></div>
         <div class="p-actions">
             <a href="#" class="reply-action"
                data-comment="<?= $comment->isReply() ?
@@ -48,7 +48,7 @@
                         $i++;
                         $reply->setIsHidden($i > $numberOfCommentsToDisplay);
                     ?>
-                    <?= $block->setComment($reply)->toHtml() ?>
+                    <?= /*@noEscape*/ $block->setComment($reply)->toHtml() ?>
                 <?php } ?>
 
                 <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>

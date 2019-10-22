@@ -22,7 +22,7 @@
              alt="<?= $block->escapeHtml(__('RSS Feed')) ?>" >
         <strong>
             <a target="_blank"
-               href="<?= $block->escapeHtml($block->getUrl('blog/rss/feed')) ?>">
+               href="<?= $block->escapeUrl($block->getUrl('blog/rss/feed')) ?>">
                 <?= $block->escapeHtml(__('RSS Feed')) ?>
             </a>
         </strong>

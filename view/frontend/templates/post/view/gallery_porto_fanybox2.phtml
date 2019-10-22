@@ -25,9 +25,9 @@
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
             <a class="gallery-image-hld fancybox-thumb"
-               href="<?= $block->escapeHtml($image) ?>"
+               href="<?= $block->escapeUrl($image) ?>"
                rel="fancybox-thumb">
-                <img class="gallery-image" src="<?= $block->escapeHtml($image->resize(200)) ?>" alt="" />
+                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200)) ?>" alt="" />
             </a>
         <?php } ?>
     </div>

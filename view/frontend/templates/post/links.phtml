@@ -29,7 +29,7 @@
         <ul class="post-links">
             <?php foreach ($postCollection as $post): ?>
                 <li>
-                    <?php $postTitle = $block->escapeHtml($post->getTitle()) ?>
+                    <?php $postTitle = $post->getTitle() ?>
                     <a href="<?= $block->escapeUrl($post->getPostUrl()) ?>"
                        title="<?= $block->escapeHtml($postTitle) ?>">
                         <?= $block->escapeHtml($postTitle) ?>
