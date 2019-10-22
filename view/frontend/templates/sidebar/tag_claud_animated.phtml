@@ -21,8 +21,8 @@
         <strong><?= $block->escapeHtml(__('Tags')) ?></strong>
     </div>
 
-    <div id="cloudCanvasContainer">
-        <canvas style="width:100%" height="<?= $block->escapeHtml($block->getConfigValue($block::CLOUD_HEIGHT)) ?>" id="cloudCanvas">
+    <div id="blogSidebarCloudCanvasContainer">
+        <canvas style="width:100%" height="<?= $block->escapeHtml($block->getConfigValue($block::CLOUD_HEIGHT)) ?>" id="blogSidebarCloudCanvas">
             <div class="tagclaud-hld">
                 <?php foreach ($tags as $tag) { ?>
                     <?php $title = $tag->getTitle() ?>
@@ -38,10 +38,12 @@
 </div>
 
 <script>
-    require(['jquery', 'Magefan_Blog/js/jquery.tagcanvas.min', 'domReady!'], function($){
-        if (  ! $('#cloudCanvas').tagcanvas(<?= /*@noEscape*/ $block->getAnimationConfig() ?>)) {
-            $('#cloudCanvasContainer').hide();
-        }
+    require(['jquery', 'domReady!'], function($) {
+        require(['Magefan_Blog/js/jquery.tagcanvas.min'], function(){
+            if (  ! $('#blogSidebarCloudCanvas').tagcanvas(<?= /*@noEscape*/ $block->getAnimationConfig() ?>)) {
+                $('#blogSidebarCloudCanvasContainer').hide();
+            }
+        });
     });
 </script>
 <?php } ?>

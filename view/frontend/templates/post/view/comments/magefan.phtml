@@ -21,7 +21,9 @@
     $canPost = $block->canPost();
 ?>
 <div id="post-comments">
-    <div class="c-count"><?= $block->escapeHtml(__('%1 Comment(s)', $comments->getSize())) ?></div>
+    <div class="c-count">
+      <?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?>
+    </div>
     <!-- reply form -->
     <div class="c-reply cf">
         <?php if ($image = $block->getCustomerImage()) { ?>
@@ -39,8 +41,7 @@
                 <textarea name="text"
                           placeholder="<?= $canPost ? $block->escapeHtml(__('Add a comment...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
                           disabled="disabled"<?php } ?>
-                          data-validate="{required:true}">
-                </textarea>
+                          data-validate="{required:true}"></textarea>
                 <div class="c-btn-hld">
 
                     <?php if ($canPost && !$session->getCustomerGroupId()) { ?>

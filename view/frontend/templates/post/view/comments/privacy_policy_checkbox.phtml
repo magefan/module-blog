@@ -18,14 +18,14 @@
            name="privacy">
     <?php
     $privacyPolicy =
-        "<a href=".$block->getUrl('privacy-policy-cookie-restriction-mode')." 
-            target='_blank' style='text-decoration: underline;'>". __('privacy policy') . "</a>"
+        "<a href=" . 
+            $block->escapeHtml($block->getUrl('privacy-policy-cookie-restriction-mode')) . 
+            " target='_blank' style='text-decoration: underline;'>". __('privacy policy') . 
+        "</a>";
     ?>
     <label for="<?= $block->escapeHtml($id) ?>"
            class="required">
-        <?= $block->escapeHtml(
-            __('Yes, I have read the %1 and agree to the processing of my personal data.', $privacyPolicy)
-        ) ?>
+        <?= /*@noEscape*/ __('Yes, I have read the %1 and agree to the processing of my personal data.', $privacyPolicy) ?>
     </label>
 </div>
 

@@ -75,8 +75,26 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
         $result =  parent::_afterSave($object);
-        $postId = $object->getDataByKey('post_id');
+        $postId = $object->getData('post_id');
 
+        if ($postId) {
+            $this->updatePostCommentsCount($postId);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Perform actions before object delete
+     *
+     * @param \Magento\Framework\Model\AbstractModel|\Magento\Framework\DataObject $object
+     * @return $this
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function _beforeDelete(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $result = parent::_beforeDelete($object);
+        $postId = $object->getData('post_id');
         if ($postId) {
             $this->updatePostCommentsCount($postId);
         }
@@ -100,7 +118,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $this->getConnection()->update(
             $this->getTable('magefan_blog_post'),
-            ['сomments_сount' => $count],
+            ['comments_count' => $count],
             ['post_id = ' . ((int)$postId)]
         );
     }

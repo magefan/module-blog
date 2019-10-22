@@ -392,9 +392,6 @@
                     <item name="source" xsi:type="string">post</item>
                     <item name="sortOrder" xsi:type="number">80</item>
                     <item name="dataScope" xsi:type="string">views_count</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>

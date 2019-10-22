@@ -89,12 +89,12 @@
                 <archive>
                     <enabled>1</enabled>
                     <sort_order>40</sort_order>
-                    <format_date>F, Y</format_date>
+                    <format_date>F Y</format_date>
                 </archive>
                 <tag_claud>
                     <enabled>1</enabled>
                     <!-- <max_tags_number>10</max_tags_number> -->
-                    <animated>1</animated>
+                    <animated>0</animated>
                     <text_highlight_color>006bb4</text_highlight_color>
                     <cloud_height>250</cloud_height>
                     <sort_order>45</sort_order>

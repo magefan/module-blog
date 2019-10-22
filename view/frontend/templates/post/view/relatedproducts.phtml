@@ -79,7 +79,7 @@ if ($exist = $block->getItems()->getSize() && $block->displayProducts()) {
                             '</li><li class="item product product-item">' ?>
                 <?php endif; ?>
                 <div class="product-item-info <?= $block->escapeHtml($available); ?>">
-                    <?= $block->escapeHtml('<!-- ' . $image . '-->') ?>
+                    <?= '<!-- ' . $block->escapeHtml($image) . '-->' ?>
                     <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
                        class="product photo product-item-photo">
                         <?= $block->getImage($_item, $image)->toHtml(); ?>

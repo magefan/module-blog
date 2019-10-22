@@ -726,7 +726,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
             $connection->addColumn(
                 $setup->getTable($table),
-                'сomments_сount',
+                'comments_count',
                 [
                     'type' =>\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                     'length' => null,
