@@ -90,7 +90,7 @@ Try out our open demo and if you like our extension **please give us some star o
 
 ## Requirements
   * Magento Community Edition 2.1.0-2.3.x or Magento Enterprise Edition 2.1.0-2.3.x
-  * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.4 . Please install this extension first if you use installation via FTP.
+  * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.8 . Please install this extension first if you use installation via FTP.
 
 ## Add-ons
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
