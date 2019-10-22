@@ -5,6 +5,12 @@
 
 This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows you to create a full-fledged blog on your Magento 2 Store.
 
+## Requirements
+  * Magento Community Edition 2.2.0-2.3.x or Magento Enterprise Edition 2.2.0-2.3.x
+  * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.8 . Please install this extension first if you use installation via FTP.
+  * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
+
+
 
 ## Editions & Pricing
   
@@ -87,10 +93,6 @@ Try out our open demo and if you like our extension **please give us some star o
     </tr>
   </tbody>
 </table>
-
-## Requirements
-  * Magento Community Edition 2.2.0-2.3.x or Magento Enterprise Edition 2.2.0-2.3.x
-  * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.8 . Please install this extension first if you use installation via FTP.
 
 ## Add-ons
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
