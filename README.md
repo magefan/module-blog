@@ -21,6 +21,7 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
         </a>
         
 ## Features
+  * **NEW!** Blog GraphQL
   * Unlimited blog posts, multi-level categories, and tags
   * Multilanguage and Multiple Websites Support
   * Facebook, Disqus, Google+, and Magefan Magento Comments
@@ -95,8 +96,8 @@ Try out our open demo and if you like our extension **please give us some star o
 </table>
 
 ## Add-ons
+  * [Blog GraphQL for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
-  * [Blog Graph Gl for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
 
 
