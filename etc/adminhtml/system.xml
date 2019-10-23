@@ -206,11 +206,7 @@
                 </field>
             </group>
 
-
-
-
-
-            <group id="author" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="author" translate="label" type="text" sortOrder="66" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Author</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Author Information</label>
@@ -232,9 +228,8 @@
                     <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
                     <comment>This will be included before head closing tag in page HTML.</comment>
                 </field>
-
             </group>
-            <group id="tag" translate="label" type="text" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="tag" translate="label" type="text" sortOrder="67" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Tag</label>
                 <field id="robots" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Default Robots</label>
@@ -242,7 +237,7 @@
                     <comment>This will be included before head closing tag in page HTML.</comment>
                 </field>
             </group>
-            <group id="search" translate="label" type="text" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="search" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Search</label>
                 <field id="robots" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Default Robots</label>
@@ -407,7 +402,7 @@
             </group>
 
 
-            <group id="product_page" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="product_page" translate="label" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Product Page</label>
                 <field id="related_posts_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Related Posts</label>
