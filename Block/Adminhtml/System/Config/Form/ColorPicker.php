@@ -23,23 +23,23 @@ class ColorPicker extends Field
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = $element->getElementHtml();
-        $value = $element->getData('value');
+        $value = $this->escapeHtml($element->getData('value'));
 
         $html .= '<script>
             require(["jquery", "jquery/colorpicker/js/colorpicker", "domReady!"], function ($) {
-                var el = $("#'.$element->getHtmlId().'");
+                var el = $("#' . $element->getHtmlId() . '");
                 
-                el.css("background-color", "#'.$value.'");
+                el.css("background-color", "#' . $value . '");
                 el.ColorPicker({
                     layout: "hex",
-                    submit: 0,
-                    colorScheme: "dark",
-                    color: "#'.$value.'",
                     onChange: function (hsb, hex, rgb) {
                         el.css("background-color", "#"+hex);
+                        el.val(hex);
                     }
                 }).keyup(function() {
-                    $(this).ColorPickerSetColor(this.value);
+                    var value = el.val();
+                    $(this).ColorPickerSetColor(value);
+                    el.css("background-color", "#" + value);
                 });
             });
             </script>';
