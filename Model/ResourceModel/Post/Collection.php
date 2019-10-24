@@ -540,4 +540,21 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         parent::_renderFiltersBefore();
     }
+
+    /**
+     * Add select order
+     *
+     * @param   string $field
+     * @param   string $direction
+     * @return  $this
+     */
+    public function setOrder($field, $direction = self::SORT_ORDER_DESC)
+    {
+        parent::setOrder($field, $direction);
+
+        if (is_string($field) && $field == 'publish_time') {
+            parent::setOrder('post_id', $direction);
+        }
+        return $this;
+    }
 }
