@@ -124,7 +124,49 @@ class NextPrev extends \Magento\Framework\View\Element\Template
      * Retrieve next post
      * @return \Magefan\Blog\Model\Post || bool
      */
+    public function getNextPost()
+    {
+        if ($this->_nextPost === null) {
+            $this->_nextPost = false;
+            $currentPost = $this->getPost();
+            $collection = $this->_getFrontendCollection()->addFieldToFilter(
+                'publish_time',
+                ['lteq' => $currentPost->getPublishTime()]
+            )->setOrder('publish_time', 'DESC');
 
+            $post = $collection->getFirstItem();
+
+            if ($currentPost->getPublishTime() == $post->getPublishTime()) {
+
+                $collection = $this->_postCollectionFactory->create();
+                $collection->addActiveFilter()
+                    ->addStoreFilter($this->_storeManager->getStore()->getId())
+                    ->addFieldToFilter('publish_time', $currentPost->getPublishTime())
+                    ->setOrder('post_id', 'ASC');
+
+                if ($collection->getFirstItem()->getId() != $currentPost->getId()) {
+                    foreach ($collection as $item) {
+                        if ($item->getId() != $currentPost->getId()) {
+                            $post = $item;
+                        } else {
+                            break;
+                        }
+                    }
+                } else {
+                    $collection = $this->_getFrontendCollection()->addFieldToFilter(
+                        'publish_time',
+                        ['lt' => $this->getPost()->getPublishTime()]
+                    );
+                    $post = $collection->getFirstItem();
+                }
+            }
+
+            if ($post->getId()) {
+                $this->_nextPost = $post;
+            }
+        }
+        return $this->_nextPost;
+    }
 
 
     /**
