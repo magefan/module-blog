@@ -49,7 +49,7 @@
 .subcategory-links-wrapper ul,
 .post-links-wrapper ul {list-style: none}
 
-.post-content .post-description img {margin: 15px 0}
+.post-content .post-description img {margin: 15px 0;max-width: 100%;height: auto}
 .post-content .post-description ul,
 .post-content .post-description ol {list-style-position: inside;}
 
