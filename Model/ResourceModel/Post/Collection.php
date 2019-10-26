@@ -100,7 +100,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             return $this->addStoreFilter($condition);
         }
 
-        if ($field === 'category' || $field === 'category_id') {
+        if ($field === 'category' || $field === 'categories' || $field === 'category_id') {
             return $this->addCategoryFilter($condition);
         }
 
