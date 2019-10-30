@@ -22,6 +22,7 @@ class Url
     /**
      * Objects Types
      */
+    const CONTROLLER_INDEX = 'blog_index';
     const CONTROLLER_POST = 'post';
     const CONTROLLER_CATEGORY = 'category';
     const CONTROLLER_ARCHIVE = 'archive';

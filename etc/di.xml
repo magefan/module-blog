@@ -21,6 +21,7 @@
     <preference for="Magefan\Blog\Api\AuthorRepositoryInterface" type="Magefan\Blog\Model\AuthorRepository" />
     <preference for="Magefan\Blog\Api\CommentRepositoryInterface" type="Magefan\Blog\Model\CommentRepository" />
     <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
+    <preference for="Magefan\Blog\Api\UrlResolverInterface" type="Magefan\Blog\Model\UrlResolver" />
     <virtualType name="Magefan\Blog\ImageUpload" type="Magefan\Blog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">magefan_blog/tmp</argument>
