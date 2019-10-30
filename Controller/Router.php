@@ -116,7 +116,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response,
-        UrlResolverInterface $urlResolver
+        UrlResolverInterface $urlResolver = null
     ) {
     
         $this->actionFactory = $actionFactory;
@@ -128,7 +128,9 @@ class Router implements \Magento\Framework\App\RouterInterface
         $this->_tagFactory = $tagFactory;
         $this->_storeManager = $storeManager;
         $this->_response = $response;
-        $this->urlResolver = $urlResolver;
+        $this->urlResolver = $urlResolver ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\UrlResolverInterface::class
+        );
     }
 
     /**
