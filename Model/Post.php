@@ -228,6 +228,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $newCategories = [];
         }
 
+        if ($this->getData('is_active') && $this->getData('is_active') != $this->getOrigData('is_active')) {
+            $identities[] = self::CACHE_TAG . '_' . 0;
+        }
+
         $isChangedCategories = count(array_diff($oldCategories, $newCategories));
 
         if ($isChangedCategories) {
@@ -238,7 +242,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
             }
         }
-
         return $identities;
     }
 

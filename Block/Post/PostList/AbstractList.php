@@ -56,6 +56,7 @@ abstract class AbstractList extends Template implements IdentityInterface
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
     const POSTS_SORT_FIELD_BY_TITLE = 'title';
+    const POST_ZERO_TAG = 'mfb_p_0';
 
     /**
      * AbstractList constructor.
@@ -164,6 +165,7 @@ abstract class AbstractList extends Template implements IdentityInterface
     public function getIdentities()
     {
         $identities = [];
+        $identities[] = self::POST_ZERO_TAG;
         foreach ($this->getPostCollection() as $item) {
             $identities = array_merge($identities, $item->getIdentities());
         }
