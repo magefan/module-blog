@@ -118,9 +118,18 @@
                         </depends>
                     </field>
 
-                    <field id="fb_app_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <field id="fb_app_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Facebook API</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">facebook</field>
+                        </depends>
+                    </field>
+
+                    <field id="fb_app_id" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Facebook Application ID</label>
                         <depends>
+                            <field id="fb_app_enabled">1</field>
                             <field id="type">facebook</field>
                         </depends>
                         <comment><![CDATA[
