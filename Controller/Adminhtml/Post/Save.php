@@ -138,6 +138,8 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                 }
             }
             $model->setData('tags', $tags);
+        } else {
+            $model->setData('tags', []);
         }
     }
 
