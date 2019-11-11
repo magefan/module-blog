@@ -24,7 +24,7 @@ class Aw extends AbstractImport
 
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_cat LIMIT 1';
         try {
-            $adapter->query($sql);
+            $adapter->query($sql)->execute();
         } catch (\Exception $e) {
             throw new \Exception(__('AheadWorks Blog Extension not detected.'), 1);
         }
@@ -97,7 +97,7 @@ class Aw extends AbstractImport
                     t.tag as title
                 FROM '.$_pref.'aw_blog_tags t';
 
-        $result = $adapter->query($sql);
+        $result = $adapter->query($sql)->execute();
         foreach ($result as $data) {
             /* Prepare tag data */
             foreach (['title'] as $key) {
@@ -131,14 +131,14 @@ class Aw extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog';
-        $result = $adapter->query($sql);
+        $result = $adapter->query($sql)->execute();
 
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT cat_id as category_id FROM '.
                       _pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
-            $c_result = $adapter->query($c_sql);
+            $c_result = $adapter->query($c_sql)->execute();
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -150,7 +150,7 @@ class Aw extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_store WHERE post_id = "'.$data['post_id'].'"';
-            $s_result = $adapter->query($s_sql);
+            $s_result = $adapter->query($s_sql)->execute();
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -192,7 +192,7 @@ class Aw extends AbstractImport
 
                 /* find post comment s*/
                 $sql = 'SELECT * FROM '.$_pref.'aw_blog_comment WHERE `post_id` = ' . $post->getOldId();
-                $resultComments = $adapter->query($sql);
+                $resultComments = $adapter->query($sql)->execute();
                 foreach ($resultComments as $comments) {
                     $commentParentId = 0;
 
