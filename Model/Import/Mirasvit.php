@@ -43,7 +43,7 @@ class Mirasvit extends AbstractImport
 
         $sql = 'SELECT * FROM ' . $_pref . 'mst_blog_post_entity LIMIT 1';
         try {
-            $adapter->query($sql);
+            $adapter->query($sql)->execute();
         } catch (\Exception $e) {
             throw new \Exception(__('Mirasvit Blog Extension not detected.'), 1);
         }
