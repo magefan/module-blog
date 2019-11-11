@@ -19,13 +19,15 @@
     $id = rand(10000, 20000);
 ?>
 <?php if ($_postCollection->count()) { ?>
-<div class="latest-blog" style="background-color: #f4f4f4; padding-bottom: 50px;">
-   <div class="container">
+
+<div class="latest-blog" style="margin-top: 20px; margin-bottom: 5px; background: none;">
+   <div class="container" >
       <h2 class="filterproduct-title"
           style="margin-top: 40px; padding-bottom: 5px;">
           <span class="content">
               <strong><?= $block->escapeHtml($block->getTitle()) ?></strong>
           </span>
+          <span class="title_line"></span>
       </h2>
       <div id="latest_news" class="owl-top-narrow">
          <div class="recent-posts recent-posts-<?= (int)$id ?>">
@@ -65,7 +67,7 @@
                            <div class="postContent">
                               <p><?= /*@noEscape*/ $_post->getShortFilteredContent() ?></p>
                            </div>
-                           <a class="readmore btn btn-default"
+                           <a class="readmore"
                               href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
                                <?= $block->escapeHtml(__("Read more >"));?>
                            </a>
