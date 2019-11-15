@@ -72,8 +72,7 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
      */
     protected function _addBreadcrumbs($title = null, $key = null)
     {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
-            && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
+        if ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs')
         ) {
             $breadcrumbsBlock->addCrumb(
                 'home',
