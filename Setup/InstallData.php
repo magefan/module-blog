@@ -72,7 +72,7 @@ class InstallData implements InstallDataInterface
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
                 0
             );
-        $useLinks = (false === strpos($url, strrev('etisotnegam')));
+        $useLinks = (false === strpos($url, strrev('otnegam')));
 
         $data = [
             'title' => 'Hello world!',
