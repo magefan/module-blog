@@ -40,7 +40,7 @@ class Mageplaza extends AbstractImport
 
         $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_category LIMIT 1';
         try {
-            $adapter->query($sql);
+            $adapter->query($sql)->execute();
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
