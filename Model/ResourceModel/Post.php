@@ -121,6 +121,13 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             );
         }
 
+        $id = $this->checkIdentifier($object->getData('identifier'), $object->getData('store_ids'));
+        if ($id && $id !== $object->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('URL key is already in use by another blog item.')
+            );
+        }
+
         $gmtDate = $this->_date->gmtDate();
 
         if ($object->isObjectNew() && !$object->getCreationTime()) {
