@@ -21,15 +21,25 @@
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml" />
-                <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="sidebar/featured.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml" >
+                    <action method="setBlogTitle">
+                        <argument name="time" xsi:type="string">Recent Posts</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="sidebar/recent.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
+                    <action method="setBlogTitle">
+                        <argument name="time" xsi:type="string">Featured Posts</argument>
+                    </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/popular.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/recent.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                    <action method="setBlogTitle">
+                        <argument name="time" xsi:type="string">Popular Posts</argument>
                     </action>
                 </block>
                 <block class="Magefan\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="sidebar/archive.phtml">
