@@ -102,7 +102,7 @@
                 <tr>
             </table>
         </td>
-    <?php if (false === strpos($block->getUrl(), strrev('otnegam'))) { ?>
+    <?php if (\Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
     <tr>
         <td class="item">
             <table>

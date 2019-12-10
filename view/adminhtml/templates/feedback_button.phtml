@@ -19,7 +19,7 @@ $reviewProductUrl = 'https://magefan.com/review/product/list/id/1797/
 $contactUrl = 'https://magefan.com/review/product/list/id/1797/
                ?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular';
 ?>
-<?php if (false === strpos($block->getUrl(), strrev('otnegam'))) { ?>
+<?php if (\Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
 <div id="blog-feedback-block">
     <div class="blog-leave-feedback blog-leave-review">
         <img  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
