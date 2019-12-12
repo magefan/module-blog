@@ -492,6 +492,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         $object = clone $this;
         $object
             ->unsetData('category_id')
+            ->unsetData('identifier')
             ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
             ->setData('is_active', 0);
 
