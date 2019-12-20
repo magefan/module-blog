@@ -229,6 +229,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
                 'password' => $this->getData('pwd'),
                 'charset' => 'utf8',
             ];
+            
+            if ($this->getData('dbhost')) {
+                $connectionConf['host'] = $this->getData('dbhost');
+            }
+            
             $this->dbAdapter = new \Zend\Db\Adapter\Adapter($connectionConf);
 
             if (!$this->dbAdapter) {
