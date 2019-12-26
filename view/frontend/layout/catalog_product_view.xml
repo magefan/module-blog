@@ -25,5 +25,14 @@
                 </arguments>
             </block>
         </referenceBlock>
+
+
+        <referenceContainer name="product.info.details.wrapper.main" >
+            <block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="product.info.blog.relatedposts.block" template="Magefan_Blog::catalog/product/relatedposts.phtml" >
+                <arguments>
+                    <argument name="show_title" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
