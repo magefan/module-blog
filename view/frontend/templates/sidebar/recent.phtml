@@ -50,15 +50,18 @@
                     </div>
                 <?php } ?>
 
-                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                    <?= $_postName ?>
-                </a>
+                <div class="post-item-link-date">
+                    <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                        <?= $_postName ?>
+                    </a>
 
-                <?php if ($featuredImage && $_post->isPublishDateEnabled()) { ?>
-                    <div class="post-item-date">
-                        <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
-                    </div>
-                <?php } ?>
+                    <?php if ($featuredImage && $_post->isPublishDateEnabled()) { ?>
+                        <div class="post-item-date">
+                            <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                        </div>
+                    <?php } ?>
+                </div>
+
             </div>
         <?php } ?>
     </div>

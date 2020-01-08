@@ -20,6 +20,7 @@
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+
         <div class="post-header clearfix">
             <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
                 <a class="addthis_button_facebook"></a>
@@ -44,6 +45,21 @@
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </div>
                 <?php } ?>
+
+                <div class="post-tag-hld">
+                    <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                        <div class="item post-tags">
+                            <?php $n = 0; ?>
+                            <?php foreach ($_post->getRelatedTags() as $tag) { ?>
+                                <?php $n++; ?>
+                                <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
+                                   href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
+                                ><?= $block->escapeHtml($tag->getTitle()) ?></a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+
                 <div class="post-text-hld">
                     <?= /*@noEscape*/ $block->getContent() ?>
                     <div class="clear clearfix"></div>

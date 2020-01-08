@@ -46,6 +46,8 @@
         ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
     </div>
     <?php } ?>
+
+    <?php /*
     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
     <div class="item post-tags">
         <i class="fa fa-fw fa-tags"></i>
@@ -55,10 +57,12 @@
             <?php $n++; ?>
             <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
                href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
-            ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_tagsCount) ? ',' : '' ?>
+            ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= /*@noEscape ($n != $_tagsCount) ? ',' : '' ?>
         <?php } ?>
     </div>
-    <?php } ?>
+    <?php }  ?>
+    */ ?>
+
     <?php if ($block->authorEnabled()) { ?>
         <?php if ($_author = $_post->getAuthor()) { ?>
         <div class="item post-author">
