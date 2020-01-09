@@ -1,0 +1,111 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $mediaUrl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')
+        ->getStore()
+        ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+<!-- Mosaicф -->
+<div class="mosaica my-5 clear" style="height: 450px">
+    <div class="block-inner d-flex row-cols-2">
+        <div class="m-block-left">
+            <div class="post-block position-relative block-left">
+                <div class="image-container">
+                    <a href="#" class="image-wrap" style="_max-height: 450px;">
+                        <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
+                    </a>
+                </div>
+                <div class="post-info p-4 mb-0">
+                    <a href="#" class="post-category">Fashion</a>
+                    <div class="post-title-wrap mb-3">
+                        <h3 class="post-title">
+                            <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                        </h3>
+                    </div>
+                    <div class="block-date">
+                        <span class="post-author-name">
+                            <a href="#">Armin Vans</a>
+                            <span>-</span>
+                        </span>
+                        <span class="post-date">August 7, 2019</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-block-right d-flex flex-column">
+            <div class="post-block post-top position-relative">
+                <div class="image-container">
+                    <a href="#" class="image-wrap">
+                        <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/28-696x368.jpg)"></span>
+                    </a>
+                </div>
+                <div class="post-info p-3 mb-0">
+                    <a href="#" class="post-category">Fashion</a>
+                    <div class="post-title-wrap">
+                        <h3 class="post-title">
+                            <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                        </h3>
+                    </div>
+                    <div class="block-date d-none">
+                            <span class="post-author-name">
+                                <a href="#">Armin Vans</a>
+                                <span>-</span>
+                            </span>
+                        <span class="post-date">August 7, 2019</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-bottom d-flex w-100">
+                <div class="post-block position-relative post-b-left w-50">
+                    <div class="image-container">
+                        <a href="#" class="image-wrap p-0">
+                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/54-1-696x405.jpg)"></span>
+                        </a>
+                    </div>
+                    <div class="post-info">
+                        <a href="#" class="post-category">Fashion</a>
+                        <div class="post-title-wrap">
+                            <h3 class="post-title mb-2">
+                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                            </h3>
+                        </div>
+                        <div class="block-date d-none">
+                            <span class="block-post-author-name">
+                                <a href="#">Armin Vans</a>
+                                <span>-</span>
+                            </span>
+                            <span class="block-post-date">August 7, 2019</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-block position-relative post-b-right w-50">
+                    <div class="image-container">
+                        <a href="#" class="image-wrap p-0">
+                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/43-2-696x464.jpg)"></span>
+                        </a>
+                    </div>
+                    <div class="post-info">
+                        <a href="#" class="post-category">Fashion</a>
+                        <div class="post-title-wrap">
+                            <h3 class="post-title mb-2">
+                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                            </h3>
+                        </div>
+                        <div class="block-date d-none">
+                            <span class="block-post-author-name">
+                                <a href="#">Armin Vans</a>
+                                <span>-</span>
+                            </span>
+                            <span class="block-post-date">August 7, 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END Mosaic -->
