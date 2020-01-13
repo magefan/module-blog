@@ -295,10 +295,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 'search_rate',
                 '(0
                   + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) 
-                  + IF(main_table.post_id IN ({{tagPostIds}}), "1", "0"))',
+                  + IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))',
                 [
-                    'term' => $this->getConnection()->quote($term),
-                    'tagPostIds' => $this->getConnection()->quote($tagPostIds)
+                    'term' => $this->getConnection()->quote($term)
                 ]
             );
         } else {
