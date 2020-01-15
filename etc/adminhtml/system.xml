@@ -421,6 +421,7 @@
                 <label>Permalink Settings</label>
                 <field id="route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Blog Route</label>
+                    <validate>required-entry</validate>
                     <comment>E.g.: "blog" will make the blog accessible from mystore.com/blog</comment>
                 </field>
                 <field id="redirect_to_no_slash" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -435,6 +436,7 @@
 
                 <field id="post_route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Post Route</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="type">default</field>
                     </depends>
@@ -450,6 +452,7 @@
                 </field>
                 <field id="category_route" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Category Route</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="type">default</field>
                     </depends>
@@ -465,6 +468,7 @@
                 </field>
                 <field id="archive_route" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Archive Route</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="type">default</field>
                     </depends>
@@ -472,6 +476,7 @@
                 </field>
                 <field id="tag_route" translate="label comment" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Tag Route</label>
+                    <validate>required-entry</validate>
                     <comment>E.g.: "tag" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name</comment>
                 </field>
                 <field id="tag_sufix" translate="label comment" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -480,6 +485,7 @@
                 </field>
                 <field id="author_route" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Author Route</label>
+                    <validate>required-entry</validate>
                     <comment>E.g.: "author" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name</comment>
                 </field>
                 <field id="author_sufix" translate="label comment" type="text" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -488,6 +494,7 @@
                 </field>
                 <field id="search_route" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Route</label>
+                    <validate>required-entry</validate>
                     <comment>E.g.: "search" will make the blog search accessible from mystore.com/{blog_route}/search/query</comment>
                 </field>
             </group>
