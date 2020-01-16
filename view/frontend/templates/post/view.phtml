@@ -49,6 +49,7 @@
                 <div class="post-tag-hld">
                     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
                         <div class="item post-tags">
+                            <div class="post-tag-title">Tags</div>
                             <?php $n = 0; ?>
                             <?php foreach ($_post->getRelatedTags() as $tag) { ?>
                                 <?php $n++; ?>

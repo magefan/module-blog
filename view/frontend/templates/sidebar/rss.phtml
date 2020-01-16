@@ -15,16 +15,14 @@
 ?>
 <div class="widget block block-rss" data-bind="scope: 'blog-rss'">
     <div class="block-title">
-        <img width="17"
-             height="17"
-             class="rss-icon"
-             src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/rss-icon.png')) ?>"
-             alt="<?= $block->escapeHtml(__('RSS Feed')) ?>" >
         <strong>
             <a target="_blank"
                href="<?= $block->escapeUrl($block->getUrl('blog/rss/feed')) ?>">
                 <?= $block->escapeHtml(__('RSS Feed')) ?>
             </a>
         </strong>
+        <img width="17" height="17" class="rss-icon"
+             src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/rss-icon.png')) ?>"
+             alt="<?= $block->escapeHtml(__('RSS Feed')) ?>" >
     </div>
 </div>
