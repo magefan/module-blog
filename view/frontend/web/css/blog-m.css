@@ -136,9 +136,9 @@
 [class^=template-] .post-info h3.post-title a {color: #111111;font-weight: 500;font-size: 20px;line-height: 25px;}
 [class^=template-] .post-info h3.post-title a:hover {color: #4db2ec;}
 /* Post Date */
-[class^=template-] .post-date {font-size: 11px;}
-[class^=template-] .post-date .block-post-author-name a {color: #000000;line-height: 18px;}
-[class^=template-] .post-date span {color: #bbbbbb;}
+[class^=template-] .post-data {font-size: 11px;}
+[class^=template-] .post-data .block-post-author-name a {color: #000000;line-height: 18px;}
+[class^=template-] .post-data span {color: #bbbbbb;}
 /* Post Author */
 [class^=template-] .post-author-name {font-weight: 600;}
 /* Post View */
@@ -168,15 +168,19 @@
 /* END All Widget Templates */
 
 /* Widget Templates Mosaica */
+[class^=mosaica] * {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+[class^=mosaica] *:before,
+[class^=mosaica] *:after {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 [class^=mosaica] {position: relative;overflow: hidden;}
 [class^=mosaica] .block-inner {margin-left: -2px;margin-right: -2px;}
 /* Post Images */
 [class^=mosaica] .image-container {overflow: hidden;}
-[class^=mosaica] .image-wrap {position: relative;}
+[class^=mosaica] .image-wrap {position: relative;display: block;}
 [class^=mosaica] .m-block-left {border-width: 0 2px;border-style: solid;border-color: transparent;}
-[class^=mosaica] .m-block-left .image-wrap .bg-img {display: block;height: 450px;background-size: cover;background-position: center;}
+/*[class^=mosaica] .m-block-left .image-wrap .bg-img {display: block;height: 450px;background-size: cover;background-position: center;}*/
+[class^=mosaica] .image-container .image-wrap .bg-img {position: absolute;display: block;width: 100%;height: 100%;background-size: cover;background-position: center;}
 /* Post Info */
-[class^=mosaica] .post-info {position: absolute;left: 0;bottom: 0;width: 90%;pointer-events: none;z-index: 1;}
+[class^=mosaica] .post-info {position: absolute;left: 0;bottom: 0;width: 100%;pointer-events: none;z-index: 1;}
 /* Post Category */
 [class^=mosaica] .post-category {display: inline-block;margin: 0 0 5px;padding: 5px 10px;font-size: 11px;line-height: 13px;font-weight: 500;text-transform: uppercase;pointer-events: auto;background: #000000;color: #ffffff;text-decoration: none;}
 [class^=mosaica] .post-block:hover .post-info .post-category {background-color: #4db2ec;}
@@ -185,27 +189,50 @@
 [class^=mosaica] .post-title a {color: #fff;text-decoration: none;text-shadow: 1px 1px 3px rgba(0,0,0,.2);}
 /* Post Date*/
 [class^=mosaica] .block-date {display: inline-block;font-size: 11px;}
-[class^=mosaica] .post-author-name {font-weight: 700;}
+[class^=mosaica] .post-author-name {font-weight: 700;color: #ffffff;}
 [class^=mosaica] .post-author-name a,
 [class^=mosaica] .post-author-name span,
-[class^=mosaica] .post-date {color: #ffffff;}
-/*[class^=mosaica] .m-block-right .post-top .image-wrap {display: block;padding-bottom: 225px;position: relative;overflow: hidden;}*/
+[class^=mosaica] .post-data {color: #ffffff;pointer-events: auto;}
+[class^=mosaica] .post-author-name a:hover {text-decoration: none;}
+[class^=mosaica] .m-block-right .post-top .image-wrap {display: block;padding-bottom: 225px;position: relative;overflow: hidden;}
 /*[class^=mosaica] .m-block-right .post-top .image-wrap img {display: block;width: 100%;height: 100%;position: absolute;background-size: cover;background-position: center center;background-position: center 50%;-webkit-transition: transform .3s ease,opacity .3s;transition: transform .3s ease,opacity .3s;}*/
 [class^=mosaica] .m-block-right {border-width: 0 2px;border-style: solid;border-color: transparent;}
 [class^=mosaica] .m-block-right .post-top  {border-width: 0 0 4px 0;border-style: solid;border-color: transparent;}
-[class^=mosaica] .m-block-right .post-top .image-wrap .bg-img {display: block;height: 223px;background-size: cover;background-position: center;}
-[class^=mosaica] .m-block-right .post-top .post-title {margin-bottom: 0;}
-[class^=mosaica] .m-block-right .post-top .post-title a {margin: 0;font-size: 24px;line-height: 30px;font-weight: 500;}
+/*[class^=mosaica] .m-block-right .post-top .image-wrap {padding-bottom: 223px;}*/
+[class^=mosaica] .m-block-right .post-top .image-wrap .bg-img {display: block;height: 225px;background-size: cover;background-position: center;}
+[class^=mosaica] .m-block-right .post-top .post-title {margin: 0;font-size: 21px;line-height: 27px;font-weight: 500;}
 [class^=mosaica] .m-block-right .post-b-left {border-width: 0 2px 0 0;border-style: solid;border-color: transparent;}
-[class^=mosaica] .m-block-right .post-bottom .image-wrap .bg-img {display: block;height: 223px;background-size: cover;background-position: center;}
-[class^=mosaica] .m-block-right .post-info {width: 95%;padding: 11px 15px;}
-[class^=mosaica] .m-block-right .post-bottom.post-title a {font-size: 16px;}
+[class^=mosaica] .m-block-right .post-bottom .image-wrap {padding-bottom: 223px;}
+/*[class^=mosaica] .m-block-right .post-bottom .image-wrap .bg-img {display: block;height: 223px;background-size: cover;background-position: center;}*/
+[class^=mosaica] .m-block-right .post-info {width: 100%;padding: 11px 15px;}
+[class^=mosaica] .m-block-right .post-bottom .post-title a {font-size: 16px;}
 [class^=mosaica] .m-block-right .post-b-right {border-width: 0 0 0 2px;border-style: solid;border-color: transparent;}
+
+/* Mosaica 1 */
+.mosaica-1 .m-block-left .image-wrap {display: block;padding-bottom: 450px;}
+
+@media (max-width: 1024px) {
+    /*[class^=mosaica] .block-inner {flex-direction: column;}*/
+    /*[class^=mosaica] .m-block-right .post-top .image-wrap {padding-bottom: 400px;}*/
+    /*[class^=mosaica] .m-block-left {-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;border-width: 0 0 2px;}*/
+    /*[class^=mosaica] .m-block-right {-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;border-width: 2px 0 0;}*/
+    /*[class^=mosaica] .m-block-right .post-top {height: 100%;}*/
+    [class^=mosaica] .m-block-right .post-top .post-title {margin: 0;font-size: 21px;line-height: 27px;font-weight: 600;}
+    /*[class^=mosaica] .m-block-right .post-bottom .image-wrap {padding-bottom: 250px;}*/
+    /*[class^=mosaica] .m-block-right .post-b-left,*/
+    /*[class^=mosaica] .m-block-right .post-b-right {}*/
+}
 @media (max-width: 767px) {
     [class^=mosaica] {height: auto !important;}
     [class^=mosaica] .block-inner {flex-direction: column;-ms-flex-direction: column;margin-left: 0;margin-right: 0;}
     [class^=mosaica] .m-block-left {-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;border-width: 0 0 2px;}
+    .mosaica-1 .m-block-left .image-wrap {display: block;padding-bottom: 350px;}
     [class^=mosaica] .m-block-right {-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;border-width: 2px 0 0;}
+    [class^=mosaica] .m-block-right .post-bottom {-ms-flex-direction: column;flex-direction: column;}
+    [class^=mosaica] .m-block-right .post-b-left {width: 100% !important;border-width: 0 0 4px;}
+    [class^=mosaica] .m-block-right .post-b-right {width: 100% !important;border-width: 0;}
+    [class^=mosaica] .block-left .post-info h3.post-title {}
+    [class^=mosaica]  .post-info .post-title {font-size: 1.4rem !important;line-height: 1.4 !important;font-weight: 600 !important;}
 }
 /* END Widget Templates Mosaica */
 
@@ -229,7 +256,7 @@
 /* Post Info */
 .template-3 .block-post .post-info {position: absolute;left: 0;bottom: 0;pointer-events: none;z-index: 1;}
 .template-3 .post-list .block-info .post-item-name {max-height: 42px;overflow: hidden;}
-.template-3 .post-info .post-date a {color: #ffffff;font-size: 11px;}
+.template-3 .post-info .post-data a {color: #ffffff;font-size: 11px;}
 @media (max-width: 768px) {
     .template-3 .block-row {margin: 0;}
 }
@@ -240,7 +267,7 @@
 .template-4 .block-post {position: relative;}
 .template-4 .block-post .post-info {position: absolute;left: 0;bottom: 0;pointer-events: none;z-index: 1;}
 .template-4 .post-info h3.post-title a {color: #ffffff;font-size: 17px;line-height: 1.1 ;font-weight: 700 ;}
-.template-4 .post-info .post-date a {color: #ffffff;font-size: 11px;}
+.template-4 .post-info .post-data a {color: #ffffff;font-size: 11px;}
 @media (max-width: 767px){
     .template-4 .block-row {margin-right: 0;margin-left: 0;}
 }
@@ -395,7 +422,7 @@ a:hover {color: #4db2ec;}
 .widget.block-list-posts .post-item .image-container .image-wrap img {max-width: 100%;height: auto;vertical-align: middle;}
 .widget.block-list-posts .post-item .block-info .post-item-name {font-size: 14px;line-height: 20px;font-weight: 600;text-decoration: none;color: #333333;}
 .widget.block-list-posts .post-item .block-info .block-date {color: #bbbbbb;}
-.widget.block-list-posts .post-item .block-info .block-date .post-date {font-size: 11px;}
+.widget.block-list-posts .post-item .block-info .block-date .post-data {font-size: 11px;}
 /* END Posts List */
 
 /* Archive */
@@ -420,11 +447,14 @@ a:hover {color: #4db2ec;}
 /*.post-tag-hld .post-tags a:nth-of-type(5) {background-color: #4db2ec;border-color: #4db2ec;}*/
 /*.post-tag-hld .post-tags a:nth-of-type(6) {background-color: #000000;border-color: #000000;}*/
 
+/* Post Bottom *****************************************/
+.post-view .post-bottom {margin-top:30px;}
 /* Post Navigation */
-.post-view .post-nextprev-hld  {margin-bottom: 30px;display: flex;}
+.post-view .post-nextprev-hld  {margin-bottom: 30px;display: flex;border-top: 1px solid #d5d6da;border-bottom: 1px solid #d5d6da;padding: 20px 0;}
 .post-view .post-nextprev-hld .nextprev-link {display: block;font-size: 20px;color: #636363;}
 .post-view .post-nextprev-hld .nextprev-link:hover {text-decoration: none;}
 .post-view .post-nextprev-hld .nextprev-link span {display: block;color: #bbbbbb;font-size: 14px;font-weight: normal;}
+/* END Post Bottom *************************************/
 /* END Post View ******************************************************************************************************/
 
 
@@ -474,7 +504,7 @@ a:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0
 .post-list .hidden {display:none;}
 
 .post-view .post-holder .post-header .addthis_toolbox {float: right;}
-.post-view .post-bottom {margin-top:30px;}
+
 
 
 .post-view .post-gallery {margin:15px 0 15px 0}

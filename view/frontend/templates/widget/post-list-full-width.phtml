@@ -1,216 +1,301 @@
 <?php
-$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-$mediaUrl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')
-    ->getStore()
-    ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $_postCollection = $block->getPostCollection();
 ?>
 
-<!-- One column Post List Full Width Template 11 -->
-<div class="template-11 my-5">
-    <div class="block-inner">
-        <div class="block-title-wrap">
-            <h4 class="block-title m-0">Template 11 Full Width</h4>
-        </div>
-        <div class="block-content">
-            <!-- post list -->
-            <div class="post-list">
-                <!-- post item -->
-                <div class="post-item d-flex">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/02.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info">
-                        <div class="post-title-wrap mb-2">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right d-none d-md-block">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none d-md-block">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                        <div class="read-more d-none">Read More</div>
-                    </div>
-                </div>
-                <!-- end post item -->
+<?php
+    $count = (int) $_postCollection->count();
 
-                <!-- post item -->
-                <div class="post-item d-flex">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/02.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info">
-                        <div class="post-title-wrap mb-2">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right d-none d-md-block">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none d-md-block">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                        <div class="read-more d-none">Read More</div>
-                    </div>
-                </div>
-                <!-- end post item -->
+    //$count = 2;
+    $maxCount = $count;
+    if ($maxCount > 4) {
+        $maxCount = 4;
+    }
+?>
 
-                <!-- post item -->
-                <div class="post-item d-flex">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/02.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info">
-                        <div class="post-title-wrap mb-2">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right d-none d-md-block">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none d-md-block">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                        <div class="read-more d-none">Read More</div>
-                    </div>
-                </div>
-                <!-- end post item -->
+<?php if ($count) { ?>
 
-                <!-- post item -->
-                <div class="post-item d-flex">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/02.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info">
-                        <div class="post-title-wrap mb-2">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right d-none d-md-block">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none d-md-block">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                        <div class="read-more d-none">Read More</div>
-                    </div>
-                </div>
-                <!-- end post item -->
+    <?php
+        $posts = [];
+        foreach ($_postCollection as $post) {
+            $posts[] = $post;
+        }
+    ?>
 
-                <!-- post item -->
-                <div class="post-item d-flex">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/02.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info">
-                        <div class="post-title-wrap mb-2">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right d-none d-md-block">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none d-md-block">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                        <div class="read-more d-none">Read More</div>
-                    </div>
-                </div>
-                <!-- end post item -->
+    <!-- One column Post List Full Width Template 11 -->
+    <?php
+        $_post = $posts[0];
+        $_postUrl = $block->escapeUrl($_post->getPostUrl());
+        $_postName = $block->escapeHtml($_post->getTitle());
+    ?>
+    <div class="template-11 mb-5">
+        <div class="block-inner">
+            <div class="block-title-wrap">
+                <h4 class="block-title m-0">Template 11 Full Width</h4>
             </div>
-            <!-- END post list -->
+            <div class="block-content">
+                <!-- post list -->
+                <div class="post-list">
+                    <!-- post item -->
+                    <div class="post-item d-flex">
+                        <!-- img container -->
+                        <div class="image-container">
+                            <a href="<?= /*@noEscape*/ $_postUrl ?>" class="image-wrap">
+                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                <?php if ($featuredImage) { ?>
+                                    <?php
+                                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                    if (!$featuredImgAlt) {
+                                        $featuredImgAlt = $_postName;
+                                    }
+                                    ?>
+                                    <span  class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                <?php } ?>
+                            </a>
+                        </div>
+                        <!-- block info -->
+                        <div class="post-info">
+                            <!-- post title -->
+                            <div class="post-title-wrap mb-2">
+                                <h3 class="post-title m-0">
+                                    <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                                </h3>
+                            </div>
+                            <!-- post data -->
+                            <div class="post-data-wrap mb-3">
+                                <!-- post author -->
+                                <?php if ($block->authorEnabled()) { ?>
+                                    <?php if ($_author = $_post->getAuthor()) { ?>
+                                        <span class="post-author-name">
+                                        <?php if ($block->authorPageEnabled()) { ?>
+                                            <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                               href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                            </a>
+                                        <?php } else { ?>
+                                            <?= $block->escapeHtml($_author->getTitle()) ?>
+                                        <?php } ?>
+                                        <span>-</span>
+                                    </span>
+                                    <?php } ?>
+                                <?php } ?>
+
+                                <!-- post data -->
+                                <?php if ($_post->isPublishDateEnabled()) { ?>
+                                    <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                <?php } ?>
+
+                                <span class="post-view float-right d-none d-md-block">
+                                    <a href="#">5</a>
+                                </span>
+                            </div>
+                            <div class="post-description d-none d-md-block">
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                            </div>
+                            <div class="read-more d-none">Read More</div>
+                        </div>
+                    </div>
+                    <!-- end post item -->
+
+                    <!-- post item -->
+                    <div class="post-item d-flex">
+                        <!-- img container -->
+                        <div class="image-container">
+                            <a href="<?= /*@noEscape*/ $_postUrl ?>" class="image-wrap">
+                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                <?php if ($featuredImage) { ?>
+                                    <?php
+                                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                    if (!$featuredImgAlt) {
+                                        $featuredImgAlt = $_postName;
+                                    }
+                                    ?>
+                                    <span  class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                <?php } ?>
+
+                            </a>
+                        </div>
+                        <!-- block info -->
+                        <div class="post-info">
+                            <div class="post-title-wrap mb-2">
+                                <h3 class="post-title m-0">
+                                    <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                                </h3>
+                            </div>
+                            <div class="post-data mb-3">
+                                <span class="post-author-name">
+                                    <a href="#">Armin Vans</a>
+                                    <span>-</span>
+                                </span>
+                                <span class="post-data">August 7, 2019</span>
+                                <span class="post-view float-right d-none d-md-block">
+                                    <a href="#">5</a>
+                                </span>
+                            </div>
+                            <div class="post-description d-none d-md-block">
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                            </div>
+                            <div class="read-more d-none">Read More</div>
+                        </div>
+                    </div>
+                    <!-- end post item -->
+
+                    <!-- post item -->
+                    <div class="post-item d-flex">
+                        <!-- img container -->
+                        <div class="image-container">
+                            <a href="<?= /*@noEscape*/ $_postUrl ?>" class="image-wrap">
+                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                <?php if ($featuredImage) { ?>
+                                    <?php
+                                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                    if (!$featuredImgAlt) {
+                                        $featuredImgAlt = $_postName;
+                                    }
+                                    ?>
+                                    <span  class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                <?php } ?>
+
+                            </a>
+                        </div>
+                        <!-- block info -->
+                        <div class="post-info">
+                            <div class="post-title-wrap mb-2">
+                                <h3 class="post-title m-0">
+                                    <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                                </h3>
+                            </div>
+                            <div class="post-data mb-3">
+                                <span class="post-author-name">
+                                    <a href="#">Armin Vans</a>
+                                    <span>-</span>
+                                </span>
+                                <span class="post-data">August 7, 2019</span>
+                                <span class="post-view float-right d-none d-md-block">
+                                    <a href="#">5</a>
+                                </span>
+                            </div>
+                            <div class="post-description d-none d-md-block">
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                            </div>
+                            <div class="read-more d-none">Read More</div>
+                        </div>
+                    </div>
+                    <!-- end post item -->
+
+                    <!-- post item -->
+                    <div class="post-item d-flex">
+                        <!-- img container -->
+                        <div class="image-container">
+                            <a href="<?= /*@noEscape*/ $_postUrl ?>" class="image-wrap">
+                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                <?php if ($featuredImage) { ?>
+                                    <?php
+                                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                    if (!$featuredImgAlt) {
+                                        $featuredImgAlt = $_postName;
+                                    }
+                                    ?>
+                                    <span  class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                <?php } ?>
+
+                            </a>
+                        </div>
+                        <!-- block info -->
+                        <div class="post-info">
+                            <div class="post-title-wrap mb-2">
+                                <h3 class="post-title m-0">
+                                    <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                                </h3>
+                            </div>
+                            <div class="post-data mb-3">
+                                <span class="post-author-name">
+                                    <a href="#">Armin Vans</a>
+                                    <span>-</span>
+                                </span>
+                                <span class="post-data">August 7, 2019</span>
+                                <span class="post-view float-right d-none d-md-block">
+                                    <a href="#">5</a>
+                                </span>
+                            </div>
+                            <div class="post-description d-none d-md-block">
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                            </div>
+                            <div class="read-more d-none">Read More</div>
+                        </div>
+                    </div>
+                    <!-- end post item -->
+
+                    <!-- post item -->
+                    <div class="post-item d-flex">
+                        <!-- img container -->
+                        <div class="image-container">
+                            <a href="<?= /*@noEscape*/ $_postUrl ?>" class="image-wrap">
+                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                <?php if ($featuredImage) { ?>
+                                    <?php
+                                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                    if (!$featuredImgAlt) {
+                                        $featuredImgAlt = $_postName;
+                                    }
+                                    ?>
+                                    <span  class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                <?php } ?>
+
+                            </a>
+                        </div>
+                        <!-- block info -->
+                        <div class="post-info">
+                            <div class="post-title-wrap mb-2">
+                                <h3 class="post-title m-0">
+                                    <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
+                                </h3>
+                            </div>
+                            <div class="post-data mb-3">
+                                <span class="post-author-name">
+                                    <a href="#">Armin Vans</a>
+                                    <span>-</span>
+                                </span>
+                                <span class="post-data">August 7, 2019</span>
+                                <span class="post-view float-right d-none d-md-block">
+                                    <a href="#">5</a>
+                                </span>
+                            </div>
+                            <div class="post-description d-none d-md-block">
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                                Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
+                                Description Post.Description Post.Description Post.Description Post.
+                            </div>
+                            <div class="read-more d-none">Read More</div>
+                        </div>
+                    </div>
+                    <!-- end post item -->
+                </div>
+                <!-- END post list -->
+            </div>
         </div>
     </div>
-</div>
-<!-- END Template 3 -->
+    <!-- END Template 11 -->
+
+<?php } ?>
