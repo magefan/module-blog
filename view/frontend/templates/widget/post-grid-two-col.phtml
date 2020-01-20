@@ -1,224 +1,122 @@
 <?php
-$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-$mediaUrl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')
-    ->getStore()
-    ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+    $count = (int) $_postCollection->count();
 ?>
 
 <!-- Post Grid Three Column Template 9 -->
-<div class="template-9 my-5">
+<?php if ($count) { ?>
+    <div class="template-9 mb-5">
     <div class="block-inner">
-        <div class="block-title-wrap">
-            <h4 class="block-title m-0">Template 9</h4>
-        </div>
+        <!-- block title -->
+        <?php if ($block->getTitle()) { ?>
+            <div class="block-title-wrap">
+                <h4 class="block-title m-0"><?= $block->escapeHtml($block->getTitle()) ?></h4>
+            </div>
+        <?php } ?>
+
+        <!-- block content -->
         <div class="block-content m-0">
+            <!-- post grid -->
             <div class="block-post-grid">
-                <!-- block post -->
-                <div class="block-post">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info pt-3">
-                        <div class="post-title-wrap mb-1">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
+                <?php foreach ($_postCollection as $_post) { ?>
+                    <?php
+                        $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                        $_postName = $block->escapeHtml($_post->getTitle());
+                    ?>
+                    <!-- post item -->
+                    <div class="block-post">
+                        <!-- img container -->
+                        <div class="image-container">
+                            <!-- post image -->
+                            <a class="image-wrap" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                <?php if ($featuredImage) { ?>
+                                    <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                        if (!$featuredImgAlt) {$featuredImgAlt = $_postName;
+                                    }
+                                ?>
+                                <span class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                <?php } ?>
+                            </a>
+                            <!-- post category-->
+                            <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                                <span class="post-category m-0">
+                                    <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                                    <a class="category-name"
+                                       href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                                       title="<?= $block->escapeHtml($ct->getTitle()) ?>">
+                                        <?= $block->escapeHtml($ct->getTitle()) ?>
+                                    </a>
+                                    <?php } ?>
+                                </span>
+                            <?php } ?>
+                            <!-- end post category-->
                         </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                    </div>
-                </div>
-                <!-- END block post -->
 
-                <!-- block post -->
-                <div class="block-post">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info pt-3">
-                        <div class="post-title-wrap mb-1">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                    </div>
-                </div>
-                <!-- END block post -->
+                        <!-- block info -->
+                        <div class="post-info">
+                            <!-- post title -->
+                            <div class="post-title-wrap mb-1">
+                                <h3 class="post-title m-0">
+                                    <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                                </h3>
+                            </div>
+                            <!-- post data -->
+                            <div class="post-data-wrap mb-3">
+                                <!-- post author -->
+                                <?php if ($block->authorEnabled()) { ?>
+                                    <?php if ($_author = $_post->getAuthor()) { ?>
+                                        <span class="post-author-name">
+                                            <?php if ($block->authorPageEnabled()) { ?>
+                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                                </a>
+                                            <?php } else { ?>
+                                                <?= $block->escapeHtml($_author->getTitle()) ?>
+                                            <?php } ?>
+                                            <span>-</span>
+                                        </span>
+                                    <?php } ?>
+                                <?php } ?>
 
-                <!-- block post -->
-                <div class="block-post">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info pt-3">
-                        <div class="post-title-wrap mb-1">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                    </div>
-                </div>
-                <!-- END block post -->
+                                <!-- post data -->
+                                <?php if ($_post->isPublishDateEnabled()) { ?>
+                                    <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                <?php } ?>
 
-                <!-- block post -->
-                <div class="block-post">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info pt-3">
-                        <div class="post-title-wrap mb-1">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
+                                <!-- post view -->
+                                <?php if ($block->viewsCountEnabled()) { ?>
+                                    <?php if ($viewsCount = $_post->getViewsCount()) { ?>
+                                        <span class="post-view float-right d-none d-md-block">
+                                                <?= $block->escapeHtml($viewsCount)?>
+                                            </span>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- END block post -->
-
-                <!-- block post -->
-                <div class="block-post">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info pt-3">
-                        <div class="post-title-wrap mb-1">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                    </div>
-                </div>
-                <!-- END block post -->
-
-                <!-- block post -->
-                <div class="block-post">
-                    <!-- img container -->
-                    <div class="image-container">
-                        <a href="#" class="image-wrap">
-                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $mediaUrl ?>wysiwyg/h104-696x464.jpg)"></span>
-                            <span class="post-category m-0">Fashion</span>
-                        </a>
-                    </div>
-                    <!-- block info -->
-                    <div class="post-info pt-3">
-                        <div class="post-title-wrap mb-1">
-                            <h3 class="post-title m-0">
-                                <a href="#">New Templates For Blog. New Templates For Blog. New Templates For Blog.</a>
-                            </h3>
-                        </div>
-                        <div class="post-date mb-3">
-                            <span class="post-author-name">
-                                <a href="#">Armin Vans</a>
-                                <span>-</span>
-                            </span>
-                            <span class="post-date">August 7, 2019</span>
-                            <span class="post-view float-right">
-                                <a href="#">5</a>
-                            </span>
-                        </div>
-                        <div class="post-description d-none">
-                            Description Post. Description Post. Description Post.Description Post.Description Post.Description Post.
-                            Description Post.Description Post.Description Post.Description Post.
-                        </div>
-                    </div>
-                </div>
-                <!-- END block post -->
+                    <!-- end post item -->
+                <?php } ?>
             </div>
 
         </div>
     </div>
 </div>
+<?php } ?>
 <!-- END Template 9 -->
