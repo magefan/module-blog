@@ -17,7 +17,7 @@
 <script>
     var disqus_config = function () {
         this.page.url = "<?= $block->escapeUrl($block->getPost()->getPostUrl()) ?>";
-        this.page.identifier = "<?= $block->escapeHtml($block->getPost()->getUrl()) ?>"
+        <?php /*this.page.identifier = "<?= $block->escapeHtml($block->getPost()->getUrl()) ?>" */ ?>
     };
 
     (function() {
