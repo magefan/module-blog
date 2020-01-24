@@ -605,7 +605,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
-        return trim($desc);
+        return trim(html_entity_decode($desc));
     }
 
     /**
