@@ -58,4 +58,36 @@
         <plugin name="mageworks_sitemap_model_sitemap_magefan_blog"
                 type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
     </type>
+    <virtualType name="Magefan\Blog\Block\Widget\PostLink" type="Magefan\Blog\Block\Widget\Link">
+        <arguments>
+            <argument name="context" xsi:type="object">Magento\Framework\View\Element\Template\Context</argument>
+            <argument name="urlFinder" xsi:type="object">Magefan\Blog\Model\Url</argument>
+            <argument name="modelRepository" xsi:type="object">Magefan\Blog\Model\PostRepository</argument>
+            <argument name="data" xsi:type="array"></argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Block\Widget\CategoryLink" type="Magefan\Blog\Block\Widget\Link">
+        <arguments>
+            <argument name="context" xsi:type="object">Magento\Framework\View\Element\Template\Context</argument>
+            <argument name="urlFinder" xsi:type="object">Magefan\Blog\Model\Url</argument>
+            <argument name="modelRepository" xsi:type="object">Magefan\Blog\Model\CategoryRepository</argument>
+            <argument name="data" xsi:type="array"></argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Block\Widget\TagLink" type="Magefan\Blog\Block\Widget\Link">
+        <arguments>
+            <argument name="context" xsi:type="object">Magento\Framework\View\Element\Template\Context</argument>
+            <argument name="urlFinder" xsi:type="object">Magefan\Blog\Model\Url</argument>
+            <argument name="modelRepository" xsi:type="object">Magefan\Blog\Model\TagRepository</argument>
+            <argument name="data" xsi:type="array"></argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Block\Widget\AuthorLink" type="Magefan\Blog\Block\Widget\Link">
+        <arguments>
+            <argument name="context" xsi:type="object">Magento\Framework\View\Element\Template\Context</argument>
+            <argument name="urlFinder" xsi:type="object">Magefan\Blog\Model\Url</argument>
+            <argument name="modelRepository" xsi:type="object">Magefan\Blog\Model\AuthorRepository</argument>
+            <argument name="data" xsi:type="array"></argument>
+        </arguments>
+    </virtualType>
 </config>

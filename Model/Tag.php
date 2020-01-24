@@ -53,6 +53,11 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     protected $_url;
 
     /**
+     * @var string
+     */
+    protected $controllerName;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -82,6 +87,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     protected function _construct()
     {
         $this->_init(\Magefan\Blog\Model\ResourceModel\Tag::class);
+        $this->controllerName = URL::CONTROLLER_TAG;
     }
 
     /**
@@ -190,6 +196,15 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     public function getIdentifier()
     {
         return (string)$this->getData('identifier');
+    }
+
+    /**
+     * Retrieve controller name
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
     }
 
     /**
