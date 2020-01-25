@@ -1,24 +1,36 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
 
 namespace Magefan\Blog\Plugin\Magento\AdminGws\Model;
 
-use Magento\AdminGws\Model\Models;
-
+/**
+ * Class ModelsPlugin
+ */
 class ModelsPlugin
 {
-    const POST_INTERCEPTOR_TYPE = 'Magefan\Blog\Model\Post\Interceptor';
-    const CATEGORY_INTERCEPTOR_TYPE = 'Magefan\Blog\Model\Category\Interceptor';
-
-    public function aroundCmsPageSaveBefore(Models $subject, callable $proceed, $model)
+    /**
+     * @param $subject
+     * @param callable $proceed
+     * @param $model
+     * @return callable
+     */
+    public function aroundCmsPageSaveBefore($subject, callable $proceed, $model)
     {
-        $modelType = get_class($model);
-        if ($modelType != self::POST_INTERCEPTOR_TYPE && $modelType != self::CATEGORY_INTERCEPTOR_TYPE) {
-            return $proceed;
+        $isBlogModel = ($model instanceof \Magefan\Blog\Model\Post
+            || $model instanceof \Magefan\Blog\Model\Category
+        );
+        if ($isBlogModel) {
+            $storeId = $model->getStoreId();
+            if ($model->getStoreIds()) {
+                $model->setStoreId($model->getStoreIds());
+            }
         }
-        $storeId = $model->getStoreId();
 
-        if ($model->getStoreIds()) {
-            $model->setStoreId($model->getStoreIds());
-        }
+        return $proceed($model);
     }
 }
