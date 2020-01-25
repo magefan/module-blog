@@ -44,4 +44,14 @@ trait Widget
 
         return '';
     }
+
+    /**
+     * Retrieve widget key
+     *
+     * @return string
+     */
+    public function getWidgetKey()
+    {
+        return $this->_widgetKey;
+    }
 }

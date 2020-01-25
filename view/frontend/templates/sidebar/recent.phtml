@@ -8,27 +8,57 @@
 ?>
 <?php
 /**
- * Blog sidebar recent posts template
+ * Blog sidebar posts list template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\Recent
+ * @var $block \Magefan\Blog\Block\Post\PostList\AbstractList
  */
 ?>
 
 <?php
     $_postCollection = $block->getPostCollection();
 ?>
+<?php
+    $width = $block->getBlockImageWidth() ?: 300;
+    $height = $block->getBlockImageheight() ?: 200;
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+?>
 <?php if ($_postCollection->count()) { ?>
-<div class="widget block block-recent-posts" data-bind="scope: 'recent-posts'">
+<div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__('Recent Posts')) ?></strong>
+        <strong><?= $block->escapeHtml(__($block->getBlogTitle() ?: 'Recent Posts')) ?></strong>
     </div>
     <div class="block-content">
         <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+            ?>
             <div class="item">
-                <a class="post-item-link"
-                   href="<?= $block->escapeUrl($_post->getPostUrl()) ?>">
-                    <?= $block->escapeHtml($_post->getTitle()) ?>
+                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                <?php if ($featuredImage) { ?>
+                    <div class="post-image">
+                        <?php
+                        $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt =  $_postName;
+                        }
+                        ?>
+                        <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                            <img src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
+                                 alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                        </a>
+                    </div>
+                <?php } ?>
+
+                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                    <?= $_postName ?>
                 </a>
+
+                <?php if ($featuredImage && $_post->isPublishDateEnabled()) { ?>
+                    <div class="post-item-date">
+                        <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                    </div>
+                <?php } ?>
             </div>
         <?php } ?>
     </div>
