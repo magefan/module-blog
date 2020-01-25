@@ -70,4 +70,75 @@
             </parameter>
         </parameters>
     </widget>
+
+    <widget id="blog_post_link"
+            class="Magefan\Blog\Block\Widget\PostLink">
+        <label translate="true">Blog Post Link</label>
+        <description translate="true">Link to a Specified Post</description>
+        <parameters>
+            <parameter name="anchor_text" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Text</label>
+            </parameter>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Title</label>
+            </parameter>
+            <parameter name="entity_id" xsi:type="text" visible="true">
+                <label translate="true">Post ID</label>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="blog_category_link"
+            class="Magefan\Blog\Block\Widget\CategoryLink">
+        <label translate="true">Blog Category Link</label>
+        <description translate="true">Link to a Specified Category</description>
+        <parameters>
+            <parameter name="anchor_text" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Text</label>
+            </parameter>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Title</label>
+            </parameter>
+            <parameter name="entity_id" xsi:type="text" visible="true">
+                <label translate="true">Category ID</label>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="blog_tag_link"
+            class="Magefan\Blog\Block\Widget\TagLink">
+        <label translate="true">Blog Tag Link</label>
+        <description translate="true">Link to a Specified Tag</description>
+        <parameters>
+            <parameter name="anchor_text" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Text</label>
+            </parameter>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Title</label>
+            </parameter>
+            <parameter name="entity_id" xsi:type="text" visible="true">
+                <label translate="true">Tag ID</label>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="blog_author_link"
+            class="Magefan\Blog\Block\Widget\AuthorLink">
+        <label translate="true">Blog Author Link</label>
+        <description translate="true">Link to a Specified Author</description>
+        <parameters>
+            <parameter name="anchor_text" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Text</label>
+            </parameter>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Anchor Custom Title</label>
+            </parameter>
+            <parameter name="entity_id" xsi:type="text" visible="true">
+                <label translate="true">Author ID</label>
+                <description translate="true"><![CDATA[
+                    Enter user ID.
+                ]]></description>
+            </parameter>
+        </parameters>
+    </widget>
 </widgets>
