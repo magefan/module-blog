@@ -33,7 +33,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
       <title><?= $block->escapeHtml($_post->getTitle()) ?></title>
       <link><?= $block->escapeUrl($_post->getPostUrl()) ?></link>
       <guid><?= $block->escapeUrl($_post->getPostUrl()) ?></guid>
-      <description><![CDATA[<?= $block->escapeHtml($block->getPostContent($_post)) ?>]]></description>
+      <description><![CDATA[<?= /*@noEscape*/ $block->getPostContent($_post) ?>]]></description>
         <?php /*if ($featuredImage = $_post->getFeaturedImage()) { ?>
          <image><?= $featuredImage ?></image>
       <?php }*/ ?>

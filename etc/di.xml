@@ -21,6 +21,7 @@
     <preference for="Magefan\Blog\Api\AuthorRepositoryInterface" type="Magefan\Blog\Model\AuthorRepository" />
     <preference for="Magefan\Blog\Api\CommentRepositoryInterface" type="Magefan\Blog\Model\CommentRepository" />
     <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
+    <preference for="Magefan\Blog\Api\UrlResolverInterface" type="Magefan\Blog\Model\UrlResolver" />
     <virtualType name="Magefan\Blog\ImageUpload" type="Magefan\Blog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">magefan_blog/tmp</argument>
@@ -58,6 +59,11 @@
         <plugin name="mageworks_sitemap_model_sitemap_magefan_blog"
                 type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
     </type>
+
+    <type name="Magento\AdminGws\Model\Models">
+        <plugin name="magefan_blog_plugin_admingws_model_models_plugin" type="\Magefan\Blog\Plugin\Magento\AdminGws\Model\ModelsPlugin" sortOrder="10"/>
+    </type>
+    
     <virtualType name="Magefan\Blog\Block\Widget\PostLink" type="Magefan\Blog\Block\Widget\Link">
         <arguments>
             <argument name="context" xsi:type="object">Magento\Framework\View\Element\Template\Context</argument>

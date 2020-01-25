@@ -33,10 +33,11 @@
                     <number_of_products>5</number_of_products>
                 </related_products>
                 <comments>
-                    <type>facebook</type>
+                    <type>magefan</type>
                     <number_of_comments>5</number_of_comments>
                     <number_of_replies>5</number_of_replies>
                     <guest_comments>1</guest_comments>
+                    <fb_app_id_header>1</fb_app_id_header>
                     <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
                     <format_date>M d, Y H:i</format_date>
                 </comments>

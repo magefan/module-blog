@@ -418,13 +418,13 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'creation_time',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                 null,
-                ['nullable' => false],
+                [],
                 'Comment Creation Time'
             )->addColumn(
                 'update_time',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                 null,
-                ['nullable' => false],
+                [],
                 'Comment Update Time'
             )->addIndex(
                 $installer->getIdxName('magefan_blog_comment', ['parent_id']),

@@ -141,10 +141,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     protected function getBreadcrumbsBlock()
     {
-        if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)) {
-            return $this->getLayout()->getBlock('breadcrumbs');
-        }
-
-        return false;
+        return $this->getLayout()->getBlock('breadcrumbs');
     }
 }

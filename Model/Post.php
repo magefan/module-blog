@@ -242,6 +242,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
             }
         }
+
         return $identities;
     }
 
@@ -605,7 +606,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
-        return trim($desc);
+        return trim(html_entity_decode($desc));
     }
 
     /**

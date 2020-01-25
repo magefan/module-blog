@@ -65,7 +65,7 @@
             </group>
 
             <group id="post_view" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Post View</label>
+                <label>Post Page (Post View)</label>
 
                 <group id="related_posts" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Related Posts</label>
@@ -128,6 +128,14 @@
                                 How do I get a Facebook Application ID?
                             </a>
                         ]]></comment>
+                    </field>
+
+                    <field id="fb_app_id_header" translate="label comment" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Insert Facebook Application ID (fb:app_id) In HEAD Tag</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">facebook</field>
+                        </depends>
                     </field>
 
                     <field id="disqus_forum_shortname" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
