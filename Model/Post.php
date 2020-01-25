@@ -243,13 +243,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
-        $links = $this->getData('links');
-        if (!empty($links['product'])) {
-            foreach ($links['product'] as $productId => $linkData) {
-                $identities[] = \Magento\Catalog\Model\Product::CACHE_TAG . '_' . $productId;
-            }
-        }
-
         return $identities;
     }
 
