@@ -9,7 +9,7 @@
 -->
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
     <widget id="magefan_blog_recent" class="Magefan\Blog\Block\Widget\Recent">
-        <label translate="true">Recent Blog Posts by Magefan</label>
+        <label translate="true">Magefan Blog Extension - Recent Blog Posts</label>
         <description>Display recent blog posts</description>
         <parameters>
             <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
@@ -50,7 +50,7 @@
         </parameters>
     </widget>
     <widget id="magefan_blog_featured" class="Magefan\Blog\Block\Widget\Featured">
-        <label translate="true">Featured Blog Posts by Magefan</label>
+        <label translate="true">Magefan Blog Extension - Featured Blog Posts</label>
         <description>Display featured blog posts</description>
         <parameters>
             <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
@@ -73,11 +73,12 @@
 
     <widget id="blog_post_link"
             class="Magefan\Blog\Block\Widget\PostLink">
-        <label translate="true">Blog Post Link</label>
-        <description translate="true">Link to a Specified Post</description>
+        <label translate="true">Magefan Blog Extension - Blog Post Link</label>
+        <description translate="true">Link to a Specified Blog Post Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Text</label>
+                <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Title</label>
@@ -90,11 +91,12 @@
 
     <widget id="blog_category_link"
             class="Magefan\Blog\Block\Widget\CategoryLink">
-        <label translate="true">Blog Category Link</label>
-        <description translate="true">Link to a Specified Category</description>
+        <label translate="true">Magefan Blog Extension - Blog Category Link</label>
+        <description translate="true">Link to a Specified Blog Category Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Text</label>
+                <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Title</label>
@@ -107,11 +109,12 @@
 
     <widget id="blog_tag_link"
             class="Magefan\Blog\Block\Widget\TagLink">
-        <label translate="true">Blog Tag Link</label>
-        <description translate="true">Link to a Specified Tag</description>
+        <label translate="true">Magefan Blog Extension - Blog Tag Link</label>
+        <description translate="true">Link to a Specified Blog Tag Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Text</label>
+                <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Title</label>
@@ -124,11 +127,12 @@
 
     <widget id="blog_author_link"
             class="Magefan\Blog\Block\Widget\AuthorLink">
-        <label translate="true">Blog Author Link</label>
-        <description translate="true">Link to a Specified Author</description>
+        <label translate="true">Magefan Blog Extension - Blog Author Link</label>
+        <description translate="true">Link to a Specified Blog Author Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Text</label>
+                <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
                 <label translate="true">Anchor Custom Title</label>

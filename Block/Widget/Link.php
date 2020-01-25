@@ -8,91 +8,45 @@
 namespace Magefan\Blog\Block\Widget;
 
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\AbstractBlock;
 use Magefan\Blog\Model\Url;
 
 /**
  * Class Link
  */
-class Link extends \Magento\Framework\View\Element\Template implements \Magento\Widget\Block\BlockInterface
+class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 {
-
-    const CLASS_AUTHOR = 'author';
-    /**
-     * @var string
-     */
-    protected $_href;
-
-    /**
-     * @var string
-     */
-    protected $_anchorText;
-
     /**
      * @var Url
      */
-    protected $urlFinder;
+    private $blogUrl;
 
     /**
      * @var null
      */
-    protected $modelRepository;
+    private $modelRepository;
 
     /**
-     * @var null
+     * @var mixed
      */
-    protected $model = null;
+    private $model;
 
     /**
-     * AdstractLink constructor.
-     * @param Template\Context $context
-     * @param Url $urlFinder
-     * @param null $modelRepository
+     * Link constructor.
+     * @param \Magento\Framework\View\Element\Context $context
+     * @param Url $blogUrl
+     * @param $modelRepository
      * @param array $data
      */
     public function __construct(
-        Template\Context $context,
-        Url $urlFinder,
+        \Magento\Framework\View\Element\Context $context,
+        Url $blogUrl,
         $modelRepository,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->urlFinder = $urlFinder;
+        $this->blogUrl = $blogUrl;
         $this->modelRepository = $modelRepository;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHref()
-    {
-        if ($this->_href === null && $this->model) {
-            if ($this->model->getData('identifier') && $this->model->getControllerName() != self::CLASS_AUTHOR && $this->model->getControllerName()) {
-                $this->_href = $this->urlFinder->getUrlPath($this->model->getData('identifier'), $this->model->getControllerName());
-            } elseif ($this->model->getControllerName() == self::CLASS_AUTHOR) {
-                $this->_href = $this->model->getUrl();
-            }
-        }
-        return $this->_href;
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function getLabel()
-    {
-        if (!$this->_anchorText) {
-            if ($this->getData('anchor_text')) {
-                $this->_anchorText = $this->getData('anchor_text');
-            } elseif ($this->model && $this->model->getControllerName() != self::CLASS_AUTHOR && $this->model->getData('title')) {
-                $this->_anchorText = $this->model->getData('title');
-            } elseif ($this->model && $this->model->getData('meta-title')) {
-                $this->_anchorText = $this->model->getData('meta-title');
-            } elseif ($this->model->getControllerName() == self::CLASS_AUTHOR) {
-                $this->_anchorText = $this->model->getTitle();
-            }
-        }
-        return $this->_anchorText;
     }
 
     /**
@@ -100,40 +54,50 @@ class Link extends \Magento\Framework\View\Element\Template implements \Magento\
      */
     protected function _toHtml()
     {
-        try {
-            if ($this->getData('entity_id')) {
-                $this->model = $this->getRepository()->getbyId($this->getData('entity_id'));
-            }
-            if (!$this->getHref()) {
-                return '<b>' . $this->escapeHtml($this->getLabel()) . '</b>';
-            } else {
-                return '<a href="' . $this->getHref() . '" title="' . $this->getData('anchor_title') . '">' . $this->escapeHtml($this->getLabel()) . '</a>';
-            }
+        $model = $this->getModel();
+        if (!$model && !$model->getId()) {
             return '';
+        }
 
-        } catch (NoSuchEntityException $e) {
-            return '';
-//            return '<b>There is no object with such link</b>';
+        $href = $this->blogUrl->getUrl($model, $this->model->getControllerName());
+
+        $title = trim($this->getData('title'));
+        if (!$title) {
+            $title = $model->getTitle();
+        }
+
+        $anchorText = trim($this->getData('anchor_text'));
+        if (!$anchorText) {
+            $anchorText = $model->getTitle();
+        }
+
+        if (!$href) {
+            return $this->escapeHtml($title);
+        } else {
+            return '<a href="' . $this->escapeUrl($href) . '" title="' . $this->escapeHtml($anchorText) . '">' . $this->escapeHtml($title) . '</a>';
         }
     }
 
     /**
-     * @return \Magento\Framework\App\ObjectManager
+     * @return mixed
      */
-    private function ObjectManager()
+    private function getModel()
     {
-        return $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    }
+        if (null === $this->model) {
+            $this->model = false;
 
-    /**
-     * @return mixed|null
-     */
-    private function getRepository()
-    {
-        if (is_array($this->modelRepository)) {
-            $this->modelRepository = $this->ObjectManager()->get($this->modelRepository['instance']);
+            try {
+                $id = trim($this->getData('entity_id'));
+                if ($id) {
+                    $this->model = \Magento\Framework\App\ObjectManager::getInstance()
+                        ->get($this->modelRepository['instance'])
+                        ->getbyId($id);
+                }
+            } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+
+            }
         }
-        return $this->modelRepository;
+        return $this->model;
     }
 
 }
