@@ -279,7 +279,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
 
         $tagPostIds = array_unique($tagPostIds);
-        $term = trim(str_replace('as', '', $term)); //tmp fix
+        $term = trim(str_replace(' as ', ' ', $term)); //tmp fix
 
         if (count($tagPostIds)) {
             $this->addFieldToFilter(
