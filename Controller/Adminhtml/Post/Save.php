@@ -158,6 +158,10 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             if (!empty($data[$dateField])) {
                 $filterRules[$dateField] = $dateFilter;
                 $data[$dateField] = preg_replace('/(.*)(\+\d\d\d\d\d\d)(\d\d)/U', '$1$3', $data[$dateField]);
+
+                if (!preg_match('/\d{1}:\d{2}/', $data[$dateField])) {
+                    $data[$dateField] .= " 00:00";
+                }
             }
         }
 
