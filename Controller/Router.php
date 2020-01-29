@@ -118,7 +118,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magento\Framework\App\ResponseInterface $response,
         UrlResolverInterface $urlResolver = null
     ) {
-    
+
         $this->actionFactory = $actionFactory;
         $this->_eventManager = $eventManager;
         $this->_url = $url;
@@ -292,15 +292,21 @@ class Router implements \Magento\Framework\App\RouterInterface
         }
 
         switch($blogPage['type']) {
-            case 'rss':
+            case Url::CONTROLLER_INDEX:
+                $blogPage['type'] = 'index';
+                $actionName = 'index';
+                $idKey = null;
+                break;
+
+            case Url::CONTROLLER_RSS:
                 $actionName = 'feed';
                 $idKey = null;
                 break;
-            case 'search':
+            case Url::CONTROLLER_SEARCH:
                 $actionName = 'index';
                 $idKey = 'q';
                 break;
-            case 'archive':
+            case Url::CONTROLLER_ARCHIVE:
                 $actionName = 'view';
                 $idKey = 'date';
                 break;
