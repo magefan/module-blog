@@ -142,4 +142,78 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
         return $identities;
     }
+
+     /**
+      * Return blog type. Can be related-rule, related, upsell-rule, upsell, crosssell-rule, crosssell
+      *
+      * @return string
+      */
+    public function getType()
+    {
+        if ($this->getData('related_products_type')) {
+            return $this->getData('related_products_type');
+        }
+
+        return 'related-rule';
+    }
+
+    /**
+     * Synonim to getItems. Added to support different templates
+     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
+     */
+    public function getAllItems()
+    {
+        return $this->getItems();
+    }
+
+    /**
+     * Synonim to getItems. Added to support different templates
+     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
+     */
+    public function getItemCollection()
+    {
+        return $this->getItems();
+    }
+
+    /**
+     * @return int
+     */
+    public function hasItems()
+    {
+        return count($this->getItems());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShuffled()
+    {
+        if ($this->getData('is_shuffled')) {
+            return (bool)$this->getData('is_shuffled');
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canItemsAddToCart()
+    {
+        if ($this->getData('can_items_add_to_cart')) {
+            return (bool)$this->getData('can_items_add_to_cart');
+        }
+        return false;
+    }
+
+    /**
+     * Return blog html
+     * @return bool
+     */
+    protected function _toHtml()
+    {
+        $html = parent::_toHtml();
+        $html = str_replace('product-item" style="display: none;"', 'product-item"', $html);
+
+        return $html;
+    }
 }
