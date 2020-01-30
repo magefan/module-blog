@@ -44,7 +44,7 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
   * Structured Data
   * Open Graph (OG) meta tags
   * Canonical URL  
-  * [Much more](https://magefan.com/magento2-blog-extension/pricing)
+  * [Much More](https://magefan.com/magento2-blog-extension/pricing)
 
 ## Demo
 
