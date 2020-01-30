@@ -18,7 +18,6 @@
     $_postCollection = $block->getPostCollection();
     $count = (int) $_postCollection->count();
 
-    //$count = 2;
     $maxCount = $count;
     if ($maxCount > 4) {
         $maxCount = 4;
@@ -28,10 +27,10 @@
 <?php if ($count) { ?>
 
     <?php
-    $posts = [];
-    foreach ($_postCollection as $post) {
-        $posts[] = $post;
-    }
+        $posts = [];
+        foreach ($_postCollection as $post) {
+            $posts[] = $post;
+        }
     ?>
 
     <!-- Mosaica -->
@@ -41,7 +40,15 @@
         $_postName = $block->escapeHtml($_post->getTitle());
     ?>
     <div class="mosaica-1 mb-5 items-count-<?= $maxCount ?> clear">
-        <div class="block-inner d-flex <?php echo ($maxCount > 1) ? 'row-cols-2' : 'row-cols-1' ?> ">
+
+        <!-- block title -->
+        <?php if ($block->getTitle()) { ?>
+            <div class="block-title-wrap">
+                <h4 class="block-title m-0"><?= $block->escapeHtml($block->getTitle()) ?></h4>
+            </div>
+        <?php } ?>
+
+        <div class="block-inner d-flex <?php echo ($maxCount > 1) ? 'row-cols-2' : 'row-cols-1' ?>">
             <div class="m-block-left">
                 <div class="post-block position-relative block-left">
                     <div class="image-container">
@@ -79,7 +86,7 @@
                             <!-- post author -->
                             <?php if ($block->authorEnabled()) { ?>
                                 <?php if ($_author = $_post->getAuthor()) { ?>
-                                    <span class="post-author-name">
+                                    <span class="post-author">
                                         <?php if ($block->authorPageEnabled()) { ?>
                                             <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                                                href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
@@ -141,7 +148,7 @@
                                 <!-- post author -->
                                 <?php if ($block->authorEnabled()) { ?>
                                     <?php if ($_author = $_post->getAuthor()) { ?>
-                                        <span class="post-author-name">
+                                        <span class="post-author">
                                         <?php if ($block->authorPageEnabled()) { ?>
                                             <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                                                href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
@@ -199,7 +206,7 @@
                                     <div class="post-data-wrap d-none">
                                         <?php if ($block->authorEnabled()) { ?>
                                             <?php if ($_author = $_post->getAuthor()) { ?>
-                                                <span class="post-author-name">
+                                                <span class="post-author">
                                                 <?php if ($block->authorPageEnabled()) { ?>
                                                     <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                                                        href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
@@ -255,7 +262,7 @@
                                         <div class="post-data-wrap d-none">
                                             <?php if ($block->authorEnabled()) { ?>
                                                 <?php if ($_author = $_post->getAuthor()) { ?>
-                                                    <span class="post-author-name">
+                                                    <span class="post-author">
                                                     <?php if ($block->authorPageEnabled()) { ?>
                                                         <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                                                            href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
