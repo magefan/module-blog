@@ -7,7 +7,7 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
 
 ## Requirements
   * Magento Community Edition 2.2.0-2.3.x or Magento Enterprise Edition 2.2.0-2.3.x
-  * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.8 . Please install this extension first if you use installation via FTP.
+  * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.11 . Please install this extension first if you use installation via FTP.
   * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
 
 
@@ -39,13 +39,12 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
   * 100% Open Source
   * Compatible with [Porto Theme](https://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864?ref=magefan) for Magento 2
   * Accelerated Mobile Pages (AMP) Project support. To enable AMP view on blog pages [Magento Amp Extension](http://magefan.com/accelerated-mobile-pages/) by Plumrocket is required.
-  
-## SEO Features
   * Blog Sitemap XML
   * SEO-friendly URLs
   * Structured Data
   * Open Graph (OG) meta tags
   * Canonical URL  
+  * [Much more](https://magefan.com/magento2-blog-extension/pricing)
 
 ## Demo
 
