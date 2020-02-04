@@ -218,6 +218,9 @@
     box-sizing: border-box;
 }
 .post-list-wrapper.blog-widget-recent:not(.blog-widget-recent-masonry) .post-holder {width: 48%;}
+.post-list-wrapper.blog-widget-recent:not(.blog-widget-recent-masonry) .post-holder:nth-child(2n+1) {
+    clear: both;
+}
 @media (max-width: 767px) {
     .post-list-wrapper.blog-widget-recent:not(.blog-widget-recent-masonry) .post-holder {width: 98%;}
 }
