@@ -370,7 +370,7 @@
 /*.template-1 .post-list .block-content .image-wrap {padding-bottom: 67%;}*/
 .template-1 .post-list .image-container .post-category {display: none;}
 /*.template-1 .post-list .post-info h3.post-title a {font-size: 20px !important;font-weight: 500;line-height: 25px !important;display: inline-block;}*/
-.template-1 .post-list .post-description {max-height: 84px;overflow: hidden;}
+/*.template-1 .post-list .post-description {max-height: 84px;overflow: hidden;}*/
 @media (max-width: 1024px) {
     .template-1 .post-list .post-description {max-height: 42px;overflow: hidden;}
 }
@@ -482,19 +482,6 @@
 /* END Widget Template 2-2 ********************************************************************************************/
 
 
-/* Widget Template 2-3 ************************************************************************************************/
-@media (max-width: 767px) {
-    .template-2-3.w-50 {width: 100% !important;}
-}
-/* END Widget Template 2-3 ********************************************************************************************/
-
-
-/* Widget Template 2-4 ************************************************************************************************/
-.template-2-4 .block-row {margin-left: -1rem;margin-right: -1rem;}
-.template-2-4 .block-content {margin-left: -1.5rem;margin-right: -1.5rem;}
-/* END Widget Template 2-4 ********************************************************************************************/
-
-
 /* Widget Template 3 **************************************************************************************************/
 [class^=template-3-] .block-post-grid {position: relative;overflow: hidden;margin-left: -15px;margin-right: -15px;}
 [class^=template-3-] .block-post {display: -ms-flexbox;display: flex;}
@@ -507,7 +494,7 @@
 [class^=template-3-] .block-post-grid .image-container {-ms-flex: 0 0 30%;flex: 0 0 30%;order: 0;/*max-width: 30%;width: 30%;*/}
 [class^=template-3-] .post-category {display: none !important;}
 [class^=template-3-] .post-info {padding: 0 1rem;}
-[class^=template-3-] .post-data-wrap {font-weight: 600;font-size: 11px;line-height: 18px;margin-bottom: 0 !important;}
+[class^=template-3-] .post-data-wrap {font-weight: 600;font-size: 11px;line-height: 18px;}
 [class^=template-3-] .post-author-name {display: none;}
 [class^=template-3-] .post-view {display: none !important;}
 [class^=template-3-] .post-description {display: none !important;}
@@ -542,6 +529,7 @@
 }
 @media (max-width: 767px) {
     [class^=template-3-] .block-post-grid .block-post {width: 100%;float: left;padding: 0 7.5px 7.5px;margin-bottom: 15px;}
+    [class^=template-3-] .post-data-wrap {margin-bottom: 0 !important;}
     [class^=template-3-] .post-view {display: none !important;}
 }
 
@@ -634,16 +622,6 @@
 .template-3-3 .block-post:nth-child(1) .post-view {display: block !important;}
 .template-3-3 .block-post:nth-child(1) .post-data-wrap .post-author-name {display: inline-block !important;}
 .template-3-3 .block-post:nth-child(1) .post-description {display: block !important;}
-
-@media (max-width: 767px) {
-    .template-3-6 .block-post:nth-child(1) .image-container .image-wrap {padding-bottom: 55%;}
-    .template-3-6 .post-view {display: none !important;}
-    .template-3-6 .post-info h3.post-title a {font-size: 14px !important;line-height: 18px !important;font-weight: 600 !important;}
-    .template-3-6 .block-post:nth-child(1) .post-info h3.post-title a {font-size: 14px !important;line-height: 18px !important;font-weight: 600 !important;}
-    .template-3-6 .post-description {display: none !important;}
-
-}
-
 @media (max-width: 767px) {
     .template-3-3 .post-info h3.post-title a {font-size: 14px !important;line-height: 18px !important;font-weight: 600 !important;}
     .template-3-3 .post-view {display: none !important;}
@@ -770,61 +748,59 @@
 /* END Widget Template 3-6 ********************************************************************************************/
 
 
-
-/* Widget Template 4 **************************************************************************************************/
-.template-4 .block-row {margin-left: -1rem;margin-right: -1rem;}
-.template-4 .block-post {position: relative;}
-.template-4 .block-post .post-info {position: absolute;left: 0;bottom: 0;z-index: 1;}
-.template-4 .post-info h3.post-title a {color: #fff;font-size: 17px;line-height: 1.1 ;font-weight: 700 ;}
-.template-4 .post-info .post-data a {color: #fff;font-size: 11px;}
-@media (max-width: 767px){
-    .template-4 .block-row {margin-right: 0;margin-left: 0;}
-}
-
-/* Widget Template 4 ************************************/
+/* Widget Template 4-1 ************************************************************************************************/
 .template-4-1 .block-content {margin-left: -1.5rem;margin-right: -1.5rem;}
 [class^=template-4] .post-list .block-info .post-title a {font-size: 14px;line-height: 20px;font-weight: 600;}
 @media (max-width: 767px) {
     .template-4-1 .block-content {margin-left: 0;margin-right: 0;}
 }
-
-/* Widget Template 10 ************************************/
-.template-10 .post-list .post-item {margin-bottom: 2.5rem !important;}
-.template-10 .post-list .image-container {-ms-flex: 0 0 24%;flex: 0 0 24%;max-width: 24%;width: 24%;order: 0;}
-.template-10 .post-description {max-height: 42px;overflow: hidden;}
-@media (max-width: 992px) {
-    .template-10 .post-description {max-height: 42px;overflow: hidden;display: none !important;}
-    .template-10 .post-view {display: none !important;}
-}
-@media (max-width: 768px) {
-    .template-10 .post-list .image-container {-ms-flex: 0 0 30%;flex: 0 0 30%;max-width: 30%;width: 30%;order: 0;}
-    .template-10 .post-info h3.post-title a {font-size: 14px;font-weight: 600;line-height: 1.4;display: inline-block;max-height: 39px;overflow: hidden;}
-}
+/* END Widget Template 4-1 ********************************************************************************************/
 
 
+/* Widget Template 4-2 ************************************************************************************************/
+.template-4-2 .block-content {margin-left: -1.5rem;margin-right: -1.5rem;}
+.template-4-2 .block-left {width: 33.3%;}
+.template-4-2 .block-right {width: 66.6%;}
+.template-4-2 .post-list {
+    display: -ms-flexbox !important;display: flex !important;
+    -ms-flex-wrap: wrap;flex-wrap: wrap;}
+.template-4-2 .block-right .post-item {
+    display: -ms-flexbox !important;display: flex !important;
+    width: 50%;}
 
+[class^=template-4] .post-list .block-info .post-title a {font-size: 14px;line-height: 20px;font-weight: 600;}
+@media (max-width: 1023px) {
+    .template-4-2 .block-content {
+        -ms-flex-direction: column !important;flex-direction: column !important;}
+    .template-4-2 .block-left {width: 100%;}
+    .template-4-2 .block-post {margin-bottom: 2.5rem !important;}
+    .template-4-2 .block-left .image-container .image-wrap {padding-bottom: 55%;}
 
-
-/* Widget Template 13 ************************************/
-.template-13 .post-list {margin-left: -15px;margin-right: -15px;}
-.template-13 .post-list .post-item {width: 50%;float: left;padding-left: 15px;padding-right: 15px;padding-bottom: 15px;}
-.template-13 .block-content .image-wrap {padding-bottom: 70%;}
-.template-13 .post-list .post-title {max-height: 50px;overflow: hidden;}
-.template-13 .post-description {max-height: 43px;overflow: hidden;}
-@media (max-width: 992px) {
-    .template-13 .post-info h3.post-title a {font-size: 14px;font-weight: 600;line-height: 1.4;display: inline-block;max-height: 39px;overflow: hidden;}
-    .template-13 .post-view {display: none !important;}
-}
-@media (max-width: 768px) {
-    .template-13 .block-content .image-wrap {padding-bottom: 67%;}
-    .template-13 .post-description {font-size: 13px;}
+    .template-4-2 .block-right {width: 100%;}
+    .template-4-2 .block-right .post-item {
+        display: -ms-flexbox !important;display: flex !important;
+        width: 50% !important;}
 }
 @media (max-width: 767px) {
-    .template-13 .post-list {margin: 0;}
-    .template-13 .post-list .post-item {width: 100%;float: none;padding: 0;}
-    .template-13 .post-list .post-title {max-height: 42px;overflow: hidden;}
-    .template-13 .post-view {display: block !important;}
+    .template-4-2 .block-content {margin-left: 0;margin-right: 0;}
+    .template-4-2 .block-right .post-item {width: 100% !important;}
 }
+/* END Widget Template 4-2 ********************************************************************************************/
+
+
+
+/* Widget Template 5-3 ************************************************************************************************/
+@media (max-width: 767px) {
+    .template-5-3.w-50 {width: 100% !important;}
+}
+/* END Widget Template 5-3 ********************************************************************************************/
+
+/* Widget Template 5-1 ************************************************************************************************/
+.template-5-1 .block-row {margin-left: -1rem;margin-right: -1rem;}
+.template-5-1 .block-content {margin-left: -1.5rem;margin-right: -1.5rem;}
+/* END Widget Template 5-1 ********************************************************************************************/
+
+
 /* END Widget Templates ***********************************************************************************************/
 
 
