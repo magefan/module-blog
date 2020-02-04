@@ -109,24 +109,26 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
      */
     public function disableAnotherBlogModules()
     {
-        $allowedModules = [
-            'Magefan_Blog',
-            'Magefan_BlogAuthor',
-            'Magefan_BlogPlus',
-            'Magefan_BlogExtra'
-        ];
+        if ($this->isEnabled()) {
+            $allowedModules = [
+                'Magefan_Blog',
+                'Magefan_BlogAuthor',
+                'Magefan_BlogPlus',
+                'Magefan_BlogExtra'
+            ];
 
-        $moduleNames = [];
+            $moduleNames = [];
 
-        foreach ($this->getModulesNameList() as $module) {
-            if (strpos($module, 'Blog')
-                && !in_array($module, $allowedModules)
-            ) {
-                $moduleNames[] = $module;
+
+            foreach ($this->getModulesNameList() as $module) {
+                if (strpos($module, 'Blog')
+                    && !in_array($module, $allowedModules)
+                ) {
+                    $moduleNames[] = $module;
+                }
             }
+            $this->moduleStatus->setIsEnabled(false, $moduleNames);
         }
-
-        $this->moduleStatus->setIsEnabled(false, $moduleNames);
     }
 
     /**
