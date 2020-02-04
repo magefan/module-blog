@@ -13,6 +13,7 @@
  * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\CheckEnableInfo
  */
 ?>
+<?php $block->disableAnotherBlogModules(); ?>
 <?php if (!$block->isEnabled()) { ?>
     <div class="messages">
         <div class="message message-error">
@@ -34,8 +35,8 @@
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
                 <?= /*@noEscape*/ __(
-                    'Magefan Blog <strong>Product Key</strong> is missing. 
-                        Blog Extension will be automatically disabled soon. Please specify the product key in 
+                    'Magefan Blog <strong>Product Key</strong> is missing.
+                        Blog Extension will be automatically disabled soon. Please specify the product key in
                         <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.',
                     $block->getUrl(
                         'adminhtml/system_config/edit',
