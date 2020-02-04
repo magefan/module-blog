@@ -15,13 +15,13 @@
 ?>
 
 <?php
-    $_postCollection = $block->getPostCollection();
-    $count = (int) $_postCollection->count();
+$_postCollection = $block->getPostCollection();
+$count = (int) $_postCollection->count();
 ?>
 
 <?php if ($count) { ?>
-<!-- Post Grid Three Column Mix Template 3-1 -->
-<div class="template-3-1 mb-5">
+    <!-- Post Grid Three Column Mix Template 3-2 -->
+    <div class="template-3-2 mb-5">
         <div class="block-inner">
             <!-- block title -->
             <?php if ($block->getTitle()) { ?>
@@ -33,7 +33,7 @@
             <!-- block content -->
             <div class="block-content m-0">
                 <!-- post grid -->
-                <div class="block-post-grid col-3-wrap">
+                <div class="block-post-grid col-2-wrap">
                 <?php foreach ($_postCollection as $_post) { ?>
                         <?php
                         $_postUrl = $block->escapeUrl($_post->getPostUrl());

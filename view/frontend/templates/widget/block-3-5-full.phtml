@@ -15,13 +15,13 @@
 ?>
 
 <?php
-    $_postCollection = $block->getPostCollection();
-    $count = (int) $_postCollection->count();
+$_postCollection = $block->getPostCollection();
+$count = (int) $_postCollection->count();
 ?>
 
 <?php if ($count) { ?>
-<!-- Post Grid Three Column Mix Template 3-1 -->
-<div class="template-3-1 mb-5">
+    <!-- Post Grid Three Column Mix Template 3-5 -->
+    <div class="template-3-5 mb-5">
         <div class="block-inner">
             <!-- block title -->
             <?php if ($block->getTitle()) { ?>
@@ -33,8 +33,8 @@
             <!-- block content -->
             <div class="block-content m-0">
                 <!-- post grid -->
-                <div class="block-post-grid col-3-wrap">
-                <?php foreach ($_postCollection as $_post) { ?>
+                <div class="block-post-grid col-2-wrap">
+                    <?php foreach ($_postCollection as $_post) { ?>
                         <?php
                         $_postUrl = $block->escapeUrl($_post->getPostUrl());
                         $_postName = $block->escapeHtml($_post->getTitle());
@@ -57,14 +57,14 @@
                                 <!-- post category-->
                                 <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
                                     <span class="post-category m-0">
-                                    <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                                        <a class="category-name"
-                                           href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
-                                           title="<?= $block->escapeHtml($ct->getTitle()) ?>">
-                                        <?= $block->escapeHtml($ct->getTitle()) ?>
-                                    </a>
-                                    <?php } ?>
-                                </span>
+                                <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                                    <a class="category-name"
+                                       href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                                       title="<?= $block->escapeHtml($ct->getTitle()) ?>">
+                                    <?= $block->escapeHtml($ct->getTitle()) ?>
+                                </a>
+                                <?php } ?>
+                            </span>
                                 <?php } ?>
                                 <!-- end post category-->
                             </div>
@@ -84,15 +84,15 @@
                                     <?php if ($block->authorEnabled()) { ?>
                                         <?php if ($_author = $_post->getAuthor()) { ?>
                                             <span class="post-author-name">
-                                            <?php if ($block->authorPageEnabled()) { ?>
-                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
-                                                </a>
-                                            <?php } else { ?>
-                                                <?= $block->escapeHtml($_author->getTitle()) ?>
-                                            <?php } ?>
-                                            <span>-</span>
-                                        </span>
+                                        <?php if ($block->authorPageEnabled()) { ?>
+                                            <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                               href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                            </a>
+                                        <?php } else { ?>
+                                            <?= $block->escapeHtml($_author->getTitle()) ?>
+                                        <?php } ?>
+                                        <span>-</span>
+                                    </span>
                                         <?php } ?>
                                     <?php } ?>
 
@@ -105,8 +105,8 @@
                                     <?php if ($block->viewsCountEnabled()) { ?>
                                         <?php if ($viewsCount = $_post->getViewsCount()) { ?>
                                             <span class="post-view float-right d-none d-md-block">
-                                                <?= $block->escapeHtml($viewsCount)?>
-                                            </span>
+                                            <?= $block->escapeHtml($viewsCount)?>
+                                        </span>
                                         <?php } ?>
                                     <?php } ?>
                                 </div>
