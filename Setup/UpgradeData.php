@@ -72,33 +72,29 @@ class UpgradeData implements UpgradeDataInterface
      */
     public function disableAnotherBlogModules()
     {
-//        if ($this->config->isEnabled()) {
+        $disableModules = [];
 
-            $disableModules = [];
-
-            foreach ($this->moduleList->getNames() as $module) {
-                if (false === strpos($module, '_')) {
-                    continue;
-                }
-
-                list($vendor, $name) = explode('_' , $module);
-                if ('Magefan' == $vendor) {
-                    continue;
-                }
-
-                if ('Blog' == $name) {
-                    $disableModules[] = $module;
-                }
+        foreach ($this->moduleList->getNames() as $module) {
+            if (false === strpos($module, '_')) {
+                continue;
             }
-            if (count($disableModules)) {
-                try {
 
-                    $this->moduleStatus->setIsEnabled(false, $disableModules);
-                } catch(\Exception $e) {
-                    \Magento\Framework\Exception\LocalizedException(
-                        __('Please remove "%1" module/module\'s manually.', implode(',', $disableModules)));
-                }
+            list($vendor, $name) = explode('_' , $module);
+            if ('Magefan' == $vendor) {
+                continue;
             }
-//        }
+
+            if ('Blog' == $name) {
+                $disableModules[] = $module;
+            }
+        }
+        if (count($disableModules)) {
+            try {
+                $this->moduleStatus->setIsEnabled(false, $disableModules);
+            } catch(\Exception $e) {
+                \Magento\Framework\Exception\LocalizedException(
+                    __('Please remove "%1" module/module\'s manually.', implode(',', $disableModules)));
+            }
+        }
     }
 }
