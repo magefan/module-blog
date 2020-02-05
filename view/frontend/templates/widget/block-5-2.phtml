@@ -28,168 +28,28 @@
         }
     ?>
 
-    <!-- Template 2-5 two columns -->
+    <!-- Template 5-2 two columns -->
     <?php
         $_post = $posts[0];
         $_postUrl = $block->escapeUrl($_post->getPostUrl());
         $_postName = $block->escapeHtml($_post->getTitle());
     ?>
-    <div class="template-2-5 my-5">
-        <div class="block-inner">
-            <!-- block title -->
-            <?php if ($block->getTitle()) { ?>
-                <div class="block-title-wrap">
-                    <h4 class="block-title m-0"><?= $block->escapeHtml($block->getTitle()) ?></h4>
-                </div>
-            <?php } ?>
-
-            <!-- block content -->
-            <div class="block-content d-flex flex-column row-cols-1 flex-md-row row-cols-md-2">
-                <!-- block left -->
-                <div class="block-left">
-                    <div class="block-wrap px-md-4">
-                        <!-- block post -->
-                        <div class="block-post">
-                            <!-- img container -->
-                            <div class="image-container mb-3">
-                                <!-- post image -->
-                                <a class="image-wrap _3x2" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
-                                    <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
-                                    <?php if ($featuredImage) { ?>
-                                        <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                                        if (!$featuredImgAlt) {
-                                            $featuredImgAlt = $_postName;
-                                        }
-                                        ?>
-                                        <span class="animation-type-zoom bg-img"
-                                              style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)">
-                                        </span>
-                                    <?php } ?>
-                                </a>
-                                <!-- post category-->
-                                <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
-                                    <span class="post-category m-0">
-                                            <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                                                <a class="category-name"
-                                                   href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
-                                                   title="<?= $block->escapeHtml($ct->getTitle()) ?>">
-                                                <?= $block->escapeHtml($ct->getTitle()) ?>
-                                            </a>
-                                            <?php } ?>
-                                        </span>
-                                <?php } ?>
-                                <!-- end post category-->
-                            </div>
-
-
-                            <!-- block info -->
-                            <div class="post-info">
-                                <!-- post title -->
-                                <div class="post-title-wrap mb-1">
-                                    <h3 class="post-title m-0">
-                                        <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
-                                    </h3>
-                                </div>
-
-                                <!-- block data -->
-                                <div class="post-data-wrap mb-3">
-                                    <!-- post author -->
-                                    <?php if ($block->authorEnabled()) { ?>
-                                        <?php if ($_author = $_post->getAuthor()) { ?>
-                                            <span class="post-author">
-                                            <?php if ($block->authorPageEnabled()) { ?>
-                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
-                                                </a>
-                                            <?php } else { ?>
-                                                <?= $block->escapeHtml($_author->getTitle()) ?>
-                                            <?php } ?>
-                                            <span>-</span>
-                                        </span>
-                                        <?php } ?>
-                                    <?php } ?>
-
-                                    <!-- post data -->
-                                    <?php if ($_post->isPublishDateEnabled()) { ?>
-                                        <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
-                                    <?php } ?>
-
-                                    <!-- post view -->
-                                    <?php if ($block->viewsCountEnabled()) { ?>
-                                        <?php if ($viewsCount = $_post->getViewsCount()) { ?>
-                                            <span class="post-view float-right">
-                                                <?= $block->escapeHtml($viewsCount)?>
-                                            </span>
-                                        <?php } ?>
-                                    <?php } ?>
-                                </div>
-
-                                <!-- post description -->
-                                <div class="post-description">
-                                    <?= /*@noEscape*/ $block->getShorContent($_post) ?>
-                                </div>
-                            </div>
+    <div class="template-5-2 my-5">
+        <div class="block-row d-flex flex-column flex-md-row row-cols-md-2">
+            <div class="block-inner">
+                <div class="block-wrap px-md-3">
+                    <!-- block title -->
+                    <?php if ($block->getTitle()) { ?>
+                        <div class="block-title-wrap">
+                            <h4 class="block-title m-0"><?= $block->escapeHtml($block->getTitle()) ?></h4>
                         </div>
-                        <!-- END block post -->
+                    <?php } ?>
 
-                        <!-- post list -->
-                        <div class="post-list mt-4">
-
-                            <?php foreach ($posts as $i => $_post) { ?>
-                                <?php if (!$i) continue; ?>
-                                    <?php
-                                        $_postUrl = $block->escapeUrl($_post->getPostUrl());
-                                        $_postName = $block->escapeHtml($_post->getTitle());
-                                    ?>
-
-                                    <!-- post item -->
-                                    <div class="post-item d-flex mb-4">
-                                        <!-- img container -->
-                                        <div class="image-container">
-                                            <!-- post image -->
-                                            <a class="image-wrap _4x3" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
-                                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
-                                                <?php if ($featuredImage) { ?>
-                                                    <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                                                    if (!$featuredImgAlt) {
-                                                        $featuredImgAlt = $_postName;
-                                                    }
-                                                    ?>
-                                                    <span class="bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
-                                                <?php } ?>
-                                            </a>
-                                        </div>
-
-                                        <!-- block info -->
-                                        <div class="block-info px-3">
-                                            <!-- post title -->
-                                            <div class="post-title-wrap mb-2">
-                                                <h3 class="post-title m-0">
-                                                    <a class="post-link" href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
-                                                </h3>
-                                            </div>
-
-                                            <!-- post data -->
-                                            <?php if ($_post->isPublishDateEnabled()) { ?>
-                                                <div class="block-date">
-                                                    <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                    <!-- END post item -->
-                            <?php } ?>
-                        </div>
-                        <!-- END post list -->
-                    </div>
-                </div>
-
-                <?php if ($count > 1) { ?>
-                    <!-- block right -->
-                    <div class="block-right">
+                    <!-- block content -->
+                    <div class="block-content d-flex flex-column row-cols-1">
                         <div class="block-wrap px-md-4">
                             <!-- block post -->
-                            <div class="block-post">
+                            <div class="block-post position-relative">
                                 <!-- img container -->
                                 <div class="image-container mb-3">
                                     <!-- post image -->
@@ -206,21 +66,7 @@
                                         </span>
                                         <?php } ?>
                                     </a>
-                                    <!-- post category-->
-                                    <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
-                                        <span class="post-category m-0">
-                                            <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                                                <a class="category-name"
-                                                   href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
-                                                   title="<?= $block->escapeHtml($ct->getTitle()) ?>">
-                                                <?= $block->escapeHtml($ct->getTitle()) ?>
-                                            </a>
-                                            <?php } ?>
-                                        </span>
-                                    <?php } ?>
-                                    <!-- end post category-->
                                 </div>
-
 
                                 <!-- block info -->
                                 <div class="post-info">
@@ -232,20 +78,19 @@
                                     </div>
 
                                     <!-- block data -->
-                                    <div class="post-data-wrap mb-3">
+                                    <div class="post-data-wrap">
                                         <!-- post author -->
                                         <?php if ($block->authorEnabled()) { ?>
                                             <?php if ($_author = $_post->getAuthor()) { ?>
                                                 <span class="post-author">
-                                            <?php if ($block->authorPageEnabled()) { ?>
-                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
-                                                </a>
-                                            <?php } else { ?>
-                                                <?= $block->escapeHtml($_author->getTitle()) ?>
-                                            <?php } ?>
+                                                <?php if ($block->authorPageEnabled()) { ?>
+                                                    <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                                       href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?></a>
+                                                <?php } else { ?>
+                                                    <?= $block->escapeHtml($_author->getTitle()) ?>
+                                                <?php } ?>
                                             <span>-</span>
-                                        </span>
+                                            </span>
                                             <?php } ?>
                                         <?php } ?>
 
@@ -253,20 +98,6 @@
                                         <?php if ($_post->isPublishDateEnabled()) { ?>
                                             <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                                         <?php } ?>
-
-                                        <!-- post view -->
-                                        <?php if ($block->viewsCountEnabled()) { ?>
-                                            <?php if ($viewsCount = $_post->getViewsCount()) { ?>
-                                                <span class="post-view float-right">
-                                                <?= $block->escapeHtml($viewsCount)?>
-                                            </span>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </div>
-
-                                    <!-- post description -->
-                                    <div class="post-description">
-                                        <?= /*@noEscape*/ $block->getShorContent($_post) ?>
                                     </div>
                                 </div>
                             </div>
@@ -323,9 +154,130 @@
                             <!-- END post list -->
                         </div>
                     </div>
-                <?php } ?>
+                </div>
+            </div>
+
+            <div class="block-inner">
+                <div class="block-wrap px-md-3">
+                    <!-- block title -->
+                    <?php if ($block->getTitle()) { ?>
+                        <div class="block-title-wrap">
+                            <h4 class="block-title m-0"><?= $block->escapeHtml($block->getTitle()) ?></h4>
+                        </div>
+                    <?php } ?>
+
+                    <!-- block content -->
+                    <div class="block-content d-flex flex-column row-cols-1">
+                        <div class="block-wrap px-md-4">
+                            <!-- block post -->
+                            <div class="block-post position-relative">
+                                <!-- img container -->
+                                <div class="image-container mb-3">
+                                    <!-- post image -->
+                                    <a class="image-wrap _3x2" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                        <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                        <?php if ($featuredImage) { ?>
+                                            <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                            if (!$featuredImgAlt) {
+                                                $featuredImgAlt = $_postName;
+                                            }
+                                            ?>
+                                            <span class="animation-type-zoom bg-img"
+                                                  style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)">
+                                        </span>
+                                        <?php } ?>
+                                    </a>
+                                </div>
+
+                                <!-- block info -->
+                                <div class="post-info">
+                                    <!-- post title -->
+                                    <div class="post-title-wrap mb-1">
+                                        <h3 class="post-title m-0">
+                                            <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                                        </h3>
+                                    </div>
+
+                                    <!-- block data -->
+                                    <div class="post-data-wrap">
+                                        <!-- post author -->
+                                        <?php if ($block->authorEnabled()) { ?>
+                                            <?php if ($_author = $_post->getAuthor()) { ?>
+                                                <span class="post-author">
+                                                <?php if ($block->authorPageEnabled()) { ?>
+                                                    <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                                       href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?></a>
+                                                <?php } else { ?>
+                                                    <?= $block->escapeHtml($_author->getTitle()) ?>
+                                                <?php } ?>
+                                            <span>-</span>
+                                            </span>
+                                            <?php } ?>
+                                        <?php } ?>
+
+                                        <!-- post data -->
+                                        <?php if ($_post->isPublishDateEnabled()) { ?>
+                                            <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END block post -->
+
+                            <!-- post list -->
+                            <div class="post-list mt-4">
+
+                                <?php foreach ($posts as $i => $_post) { ?>
+                                    <?php if (!$i) continue; ?>
+                                    <?php
+                                    $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                                    $_postName = $block->escapeHtml($_post->getTitle());
+                                    ?>
+
+                                    <!-- post item -->
+                                    <div class="post-item d-flex mb-4">
+                                        <!-- img container -->
+                                        <div class="image-container">
+                                            <!-- post image -->
+                                            <a class="image-wrap _4x3" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                                <?php if ($featuredImage) { ?>
+                                                    <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                                    if (!$featuredImgAlt) {
+                                                        $featuredImgAlt = $_postName;
+                                                    }
+                                                    ?>
+                                                    <span class="bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                                <?php } ?>
+                                            </a>
+                                        </div>
+
+                                        <!-- block info -->
+                                        <div class="block-info px-3">
+                                            <!-- post title -->
+                                            <div class="post-title-wrap mb-2">
+                                                <h3 class="post-title m-0">
+                                                    <a class="post-link" href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                                                </h3>
+                                            </div>
+
+                                            <!-- post data -->
+                                            <?php if ($_post->isPublishDateEnabled()) { ?>
+                                                <div class="block-date">
+                                                    <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <!-- END post item -->
+                                <?php } ?>
+                            </div>
+                            <!-- END post list -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- END Template 2-5 -->
+    <!-- END Template 5-2 -->
 <?php } ?>
