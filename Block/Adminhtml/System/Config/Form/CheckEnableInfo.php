@@ -33,41 +33,25 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     protected $config;
 
     /**
-     * @var \Magento\Framework\Module\ModuleListInterface
-     */
-    protected $moduleList;
-
-    /**
      * @var \Magento\Framework\App\ProductMetadataInterface
      */
     protected $metadata;
 
     /**
-     * @var \Magento\Framework\Module\Status
-     */
-    protected $moduleStatus;
-
-    /**
      * CheckEnableInfo constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magefan\Blog\Model\Config $config
-     * @param \Magento\Framework\Module\ModuleListInterface $moduleList
      * @param \Magento\Framework\App\ProductMetadataInterface $metadata
-     * @param \Magento\Framework\Module\Status $moduleStatus
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magefan\Blog\Model\Config $config,
-        \Magento\Framework\Module\ModuleListInterface $moduleList,
         \Magento\Framework\App\ProductMetadataInterface $metadata,
-        \Magento\Framework\Module\Status $moduleStatus,
         array $data = []
     ) {
         $this->config = $config;
-        $this->moduleList  = $moduleList;
         $this->metadata = $metadata;
-        $this->moduleStatus = $moduleStatus;
         parent::__construct($context, $data);
     }
 
@@ -102,40 +86,5 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
         $section = ObjectManager::getInstance()->create(Section::class, ['name' => 'mfblog']);
         return !$this->config->getConfig(self::XML_PATH_KEY)
             && $section->getModule();
-    }
-
-    /**
-     * Disable all modules witch have Blog part on his name
-     */
-    public function disableAnotherBlogModules()
-    {
-        if ($this->isEnabled()) {
-            $allowedModules = [
-                'Magefan_Blog',
-                'Magefan_BlogAuthor',
-                'Magefan_BlogPlus',
-                'Magefan_BlogExtra'
-            ];
-
-            $moduleNames = [];
-
-
-            foreach ($this->getModulesNameList() as $module) {
-                if (strpos($module, 'Blog')
-                    && !in_array($module, $allowedModules)
-                ) {
-                    $moduleNames[] = $module;
-                }
-            }
-            $this->moduleStatus->setIsEnabled(false, $moduleNames);
-        }
-    }
-
-    /**
-     * @return string[]
-     */
-    private function getModulesNameList()
-    {
-        return $this->moduleList->getNames();
     }
 }
