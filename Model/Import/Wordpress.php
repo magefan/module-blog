@@ -532,6 +532,56 @@ class Wordpress extends AbstractImport
             $pee = str_replace([ ' <!-- wpnl --> ', '<!-- wpnl -->' ], "\n", $pee);
         }
 
+        // replace [caption] with <div>
+        while ( false !== ($p1 = strpos($pee, '[caption')) ) {
+            $p2 = strpos($pee, ']', $p1);
+
+            if (false === $p2) {
+                break;
+            }
+            $origElement = substr($pee, $p1, $p2 - $p1 + 1);
+            $divElement = html_entity_decode($origElement);
+            $divElement = str_replace('[caption', '<div', $divElement);
+            $divElement = str_replace('align="', 'class="wp-caption ', $divElement);
+            $divElement = str_replace(']', '>', $divElement);
+
+            $pee = str_replace($origElement, $divElement, $pee);
+            $pee = str_replace('[/caption]', '</div>', $pee);
+        }
+
+        // replace [video] with <div>
+        while ( false !== ($p1 = strpos($pee, '[video')) ) {
+            $p2 = strpos($pee, ']', $p1);
+
+            if (false === $p2) {
+                break;
+            }
+            $origElement = substr($pee, $p1, $p2 - $p1 + 1);
+            $divElement = html_entity_decode($origElement);
+
+            $source = '';
+
+            foreach (['mp4', 'ogg'] as $format) {
+                $len = strlen($format . '="');
+                $x1 = strpos($divElement, $format . '="');
+                if (false !== $x1) {
+                    $x2 = strpos($divElement, '"', $x1 + $len );
+                    if (false !== $x2) {
+                        $src = substr($divElement, $x1 + $len, $x2 - $x1 - $len);
+                        $source .= '<source src="' . $src . '" type="video/' . $format . '">';
+                    }
+                }
+            }
+
+
+            $divElement = str_replace('[video', '<video controls ', $divElement);
+            $divElement = str_replace('align="', 'class="wp-caption ', $divElement);
+            $divElement = str_replace(']', '>', $divElement);
+
+            $pee = str_replace($origElement, $divElement . $source, $pee);
+            $pee = str_replace('[/video]', '</video>', $pee);
+        }
+
         return $pee;
     }
 }
