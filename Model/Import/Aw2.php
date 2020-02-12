@@ -104,9 +104,11 @@ class Aw2 extends AbstractImport
         $result = $adapter->query($sql)->execute();
         foreach ($result as $data) {
             /* Prepare tag data */
+            /*
             foreach (['title'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
+            */
 
             if (!$data['title']) {
                 continue;

@@ -100,9 +100,11 @@ class Aw extends AbstractImport
         $result = $adapter->query($sql)->execute();
         foreach ($result as $data) {
             /* Prepare tag data */
+            /*
             foreach (['title'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
+            */
 
             if (!$data['title']) {
                 continue;
@@ -208,10 +210,11 @@ class Aw extends AbstractImport
                         'text' => $comments['comment'],
                         'creation_time' => $comments['created_time'],
                     ];
-
+                    /*
                     foreach (['text'] as $key) {
                         $commentData[$key] = mb_convert_encoding($commentData[$key], 'HTML-ENTITIES', 'UTF-8');
                     }
+                    */
 
                     if (!$commentData['text']) {
                         continue;

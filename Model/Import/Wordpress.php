@@ -36,9 +36,11 @@ class Wordpress extends AbstractImport
         $result = $adapter->query($sql)->execute();
         foreach ($result as $data) {
             /* Prepare category data */
+            /*
             foreach (['title', 'identifier'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
+            */
 
             $data['store_ids'] = [$this->getStoreId()];
             $data['is_active'] = 1;
@@ -114,9 +116,11 @@ class Wordpress extends AbstractImport
         $result = $adapter->query($sql)->execute();
         foreach ($result as $data) {
             /* Prepare tag data */
+            /*
             foreach (['title', 'identifier'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
+            */
 
             if (isset($data['title']) && $data['title']{0} == '?') {
                 /* fix for ???? titles */
@@ -274,9 +278,11 @@ class Wordpress extends AbstractImport
             }
 
             /* Prepare post data */
+            /*
             foreach (['post_title', 'post_name', 'post_content'] as $key) {
                 $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
             }
+            */
 
             $creationTime = strtotime($data['post_date_gmt']);
 
