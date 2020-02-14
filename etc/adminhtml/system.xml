@@ -212,6 +212,9 @@
                     </depends>
                     <comment>The distance in pixels from the bottom of the scrollable content at which to trigger the loading of the next set of posts.</comment>
                 </field>
+                <field id="end_characters" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Short Content End Сharacters</label>
+                </field>
             </group>
 
             <group id="author" translate="label" type="text" sortOrder="66" showInDefault="1" showInWebsite="1" showInStore="1">

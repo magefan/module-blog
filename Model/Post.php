@@ -242,7 +242,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 $identities[] = \Magefan\Blog\Model\Category::CACHE_TAG . '_' . $categoryId;
             }
         }
-        
+
         $links = $this->getData('links');
         if (!empty($links['product'])) {
             foreach ($links['product'] as $productId => $linkData) {
@@ -532,6 +532,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 }
             }
 
+            if ($endСharacters === null) {
+                $endСharacters = $this->scopeConfig->getValue(
+                    'mfblog/post_list/end_characters',
+                    ScopeInterface::SCOPE_STORE
+                );
+            }
+
             if ($len && $endСharacters) {
                 $trimMask = " \t\n\r\0\x0B,.!?";
                 if ($p = strrpos($content, '</')) {
@@ -543,7 +550,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         . $endСharacters;
                 }
             }
-            
+
             $this->setData($key, $content);
         }
 
