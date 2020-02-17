@@ -28,13 +28,12 @@
         }
     ?>
 
-
-    <!-- Three Column Template 5-1 Full Width -->
     <?php
         $_post = $posts[0];
         $_postUrl = $block->escapeUrl($_post->getPostUrl());
         $_postName = $block->escapeHtml($_post->getTitle());
     ?>
+    <!-- Three Column Template 5-1 Full Width -->
     <div class="template-5-1 my-5">
         <div class="block-row d-flex flex-column flex-md-row row-cols-md-3">
             <div class="block-inner">
@@ -133,7 +132,7 @@
                                         </div>
 
                                         <!-- block info -->
-                                        <div class="block-info px-3">
+                                        <div class="post-info">
                                             <!-- post title -->
                                             <div class="post-title-wrap mb-2">
                                                 <h3 class="post-title m-0">
@@ -254,7 +253,7 @@
                                         </div>
 
                                         <!-- block info -->
-                                        <div class="block-info px-3">
+                                        <div class="post-info">
                                             <!-- post title -->
                                             <div class="post-title-wrap mb-2">
                                                 <h3 class="post-title m-0">
@@ -375,7 +374,7 @@
                                         </div>
 
                                         <!-- block info -->
-                                        <div class="block-info px-3">
+                                        <div class="post-info">
                                             <!-- post title -->
                                             <div class="post-title-wrap mb-2">
                                                 <h3 class="post-title m-0">
@@ -401,5 +400,4 @@
             </div>
         </div>
     </div>
-    <!-- END Template 5-1 -->
 <?php } ?>

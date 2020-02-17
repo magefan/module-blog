@@ -95,8 +95,21 @@
                     }
                     ?>
                     <a class="image-wrap _4x3" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                        <img src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
+                        <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                        <?php if ($featuredImage) { ?>
+                            <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                            if (!$featuredImgAlt) {
+                                $featuredImgAlt = $_postName;
+                            }
+                            ?>
+                            <span class="_animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                            <?php /* <img class="" src="<?= $block->escapeHtml($featuredImage) ?>" alt=""> */ ?>
+                        <?php } ?>
+
+                        <?php /*
+                            <img src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                        */?>
                     </a>
                 </div>
                 <?php } ?>
