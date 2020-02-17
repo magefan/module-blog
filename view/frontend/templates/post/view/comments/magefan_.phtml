@@ -22,7 +22,7 @@
 ?>
 <div id="post-comments">
     <div class="c-count">
-        <strong><?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?></strong>
+      <?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?>
     </div>
     <!-- reply form -->
     <div class="c-reply cf">
@@ -69,13 +69,6 @@
                     </div>
                     <?php } ?>
 
-                    <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
-                        <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
-                    <?php } ?>
-                    <div class="clearfix"></div>
-
-                    <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
-
                     <?php if ($canPost) { ?>
                         <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
                     <?php } else { ?>
@@ -84,7 +77,11 @@
                             <?= $block->escapeHtml(__('Sign In')) ?>
                         </button>
                     <?php } ?>
-
+                    <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
+                        <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                   <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
                 </div>
             </form>
         </div>
