@@ -102,14 +102,8 @@
                                 $featuredImgAlt = $_postName;
                             }
                             ?>
-                            <span class="_animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
-                            <?php /* <img class="" src="<?= $block->escapeHtml($featuredImage) ?>" alt=""> */ ?>
+                            <span class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
                         <?php } ?>
-
-                        <?php /*
-                            <img src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
-                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
-                        */?>
                     </a>
                 </div>
                 <?php } ?>

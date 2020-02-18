@@ -151,7 +151,7 @@
                                         <!-- img container -->
                                         <div class="image-container">
                                             <!-- post image -->
-                                            <a class="image-wrap" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                            <a class="image-wrap _4x3" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                                 <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
                                                 <?php if ($featuredImage) { ?>
                                                     <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
@@ -159,7 +159,7 @@
                                                         $featuredImgAlt = $_postName;
                                                     }
                                                     ?>
-                                                    <span class="bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                                    <span class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
                                                 <?php } ?>
                                             </a>
                                         </div>
