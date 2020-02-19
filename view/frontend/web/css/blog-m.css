@@ -283,6 +283,10 @@
 /* END Widgets Templates Mosaica **************************************************************************************/
 
 
+/* Slider *************************************************************************************************************/
+.post-slider .post-block .image-wrap {padding-bottom: 450px;}
+/* END Slider *********************************************************************************************************/
+
 
 /* All Widget Templates ***********************************************************************************************/
 [class^=template-] {position: relative;overflow: hidden;}
@@ -331,6 +335,8 @@
 [class^=template-] .post-list .post-info {padding: 0 0 0 25px;width: 100%;}
 [class^=template-] .block-content .post-list .post-info h3 a {font-size: 14px;line-height: 20px;font-weight: 600;}
 /* Images Format */
+[class^=template-] .image-wrap._16x9 {padding-bottom: 35% !important;}
+[class^=template-] .image-wrap._16x9 {padding-bottom: 35% !important;}
 [class^=template-] .image-wrap._4x3 {padding-bottom: 67% !important;}
 [class^=template-] .image-wrap._3x2 {padding-bottom: 55% !important;}
 [class^=template-] .image-wrap._1x1 {padding-bottom: 100% !important;}
@@ -373,7 +379,7 @@
 /* Widget Template-1  Post List ***************************************************************************************/
 .template-1 .post-list .post-item {margin-bottom: 2.5rem;}
 .template-1 .post-list .image-container {-ms-flex: 0 0 24%;flex: 0 0 24%;max-width: 24%;width: 24%;order: 0;}
-.template-1 .post-list .image-container .post-category {display: none;}
+/*.template-1 .post-list .image-container .post-category {display: none;}*/
 .template-1 .post-list .post-info h3.post-title a {font-size: 20px;line-height: 25px;font-weight: 500;display: inline-block;}
 @media (max-width: 1024px) {
     .template-1 .post-list .post-description {max-height: 42px;overflow: hidden;}
@@ -445,18 +451,18 @@
 
 
 /* Widget All Template 2 **********************************************************************************************/
+[class^=template-2] .block-post-grid {position: relative;overflow: hidden;margin-left: -15px;margin-right: -15px;}
 [class^=template-2] .block-content {margin-left: -1.5rem;margin-right: -1.5rem;}
+[class^=template-2] .block-post-grid .block-post .image-container {position: relative;}
+[class^=template-2] .post-info {padding-top: 15px;}
 @media (max-width: 767px) {
     [class^=template-2] .block-content {margin: 0 0;}
 }
 /* END Widget All Template 2 ******************************************************************************************/
 
 /* Widget Template-2-1  Post Grid Three Column ************************************************************************/
-.template-2-1 .block-post-grid {position: relative;overflow: hidden;margin-left: -15px;margin-right: -15px;}
 .template-2-1 .block-post {width: 33.3%;float: left;padding: 0 15px 15px;margin-bottom: 15px;}
 .template-2-1 .block-post:nth-child(3n+1) {clear: both;}
-.template-2-1 .block-post-grid .block-post .image-container {position: relative;}
-.template-2-1 .post-info {padding-top: 15px;}
 @media (max-width: 1024px) {
     .template-2-1 .post-view {display: none !important;}
 }
@@ -469,18 +475,24 @@
 }
 /* END Widget Template-2-1  Post Grid Three Column ********************************************************************/
 
-
 /* Widget Template 2-2 ************************************************************************************************/
-.template-2-2 .block-post-grid {position: relative;overflow: hidden;margin-left: -15px;margin-right: -15px;}
 .template-2-2 .block-post {width: 50%;float: left;padding: 0 15px 15px;margin-bottom: 15px;}
 .template-2-2 .block-post:nth-child(2n+1) {clear: both;}
-.template-2-2 .block-post-grid .block-post .image-container {position: relative;}
-.template-2-2 .post-info {padding-top: 15px;}
 @media (max-width: 767px) {
     .template-2-2 .block-post-grid {margin: 0;}
     .template-2-2 .block-post {width: 100%;padding: 0;margin-bottom: 25px;}
 }
 /* END Widget Template 2-2 ********************************************************************************************/
+
+/* Widget Template 2-3 ************************************************************************************************/
+.template-2-3 .block-post-grid {position: relative;overflow: hidden;margin: 0;}
+.template-2-3 .block-post {width: 100%;float: left;padding: 0 0 15px;margin-bottom: 15px;}
+.template-2-3 .block-post .image-wrap {padding-bottom: 35% !important;}
+@media (max-width: 767px) {
+    .template-2-3 .block-post-grid {margin: 0;}
+    .template-2-3 .block-post {padding: 0;margin-bottom: 25px;}
+}
+/* END Widget Template 2-3 ********************************************************************************************/
 
 
 /* Widget Template 3 **************************************************************************************************/
@@ -572,6 +584,7 @@
 
 /* Widget Template 3-3 ************************************************************************************************/
 .template-3-3 .block-post-grid .block-post {margin-bottom: 25px;}
+.template-3-3 .post-category {display: block !important;}
 .template-3-3 .block-post-grid .post-info h3.post-title a {font-size: 18px !important;line-height: 22px !important;font-weight: 500 !important;}
 .template-3-3 .post-data-wrap .post-author-name {display: inline-block;}
 .template-3-3 .post-view {display: block !important;}
@@ -857,6 +870,7 @@ button {box-shadow: none !important;}
 
 
 /* Images Format *******************************************/
+.post-image .image-wrap._16x9 {padding-bottom: 35% !important;}
 .post-image .image-wrap._4x3 {padding-bottom: 67% !important;}
 .post-image .image-wrap._3x2 {padding-bottom: 55% !important;}
 .post-image .image-wrap._1x1 {padding-bottom: 100% !important;}
