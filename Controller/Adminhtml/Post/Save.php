@@ -134,7 +134,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
                     $tags[] = $tagModel->getId();
                 } else {
-                    $tags[] = $allTags[$tagTitle];
+                    $tags[] = $allTags[strtolower($tagTitle)];
                 }
             }
             $model->setData('tags', $tags);
