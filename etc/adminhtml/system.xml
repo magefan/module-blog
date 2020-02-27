@@ -150,6 +150,10 @@
                             </a>
                         ]]></comment>
                     </field>
+                    <field id="allow_notifications" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Comment's Notification</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
                     <field id="guest_comments" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Allow Guest Comments</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

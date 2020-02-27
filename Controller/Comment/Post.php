@@ -41,11 +41,17 @@ class Post extends \Magefan\Blog\App\Action\Action
     protected $formKeyValidator;
 
     /**
+     * @var \Magento\Framework\Notification\NotifierInterface
+     */
+    protected $notifierPool;
+
+    /**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
-     * @param\Magefan\Blog\Model\PostFactory $postFactory,
+     * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Magento\Framework\Notification\NotifierInterface $notifierPool
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -53,12 +59,14 @@ class Post extends \Magefan\Blog\App\Action\Action
         \Magento\Customer\Model\Session $customerSession,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magefan\Blog\Model\PostFactory $postFactory,
-        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Magento\Framework\Notification\NotifierInterface $notifierPool
     ) {
         $this->customerSession = $customerSession;
         $this->commentFactory = $commentFactory;
         $this->postFactory = $postFactory;
         $this->formKeyValidator = $formKeyValidator;
+        $this->notifierPool = $notifierPool;
 
         parent::__construct($context);
     }
@@ -80,11 +88,17 @@ class Post extends \Magefan\Blog\App\Action\Action
         }
 
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            return $this->_forwardNoroute($request);
         }
 
         $comment = $this->commentFactory->create();
         $comment->setData($request->getPostValue());
+        if (            $this->getConfigValue(
+            \Magefan\Blog\Helper\Config::ENABLE_COMMENT_NOTIFICATION,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        )) {
+            $this->sendNotification($request);
+        }
 
         if ($this->customerSession->getCustomerGroupId()) {
             /* Customer */
@@ -107,9 +121,9 @@ class Post extends \Magefan\Blog\App\Action\Action
                     'success' => false,
                     'message' => __('Please enter your name and email'),
                 ]));
-                return; 
+                return;
             }
-            
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );
@@ -204,5 +218,23 @@ class Post extends \Magefan\Blog\App\Action\Action
         }
 
         return $comment;
+    }
+
+    /**
+     * @param $request
+     * @return $this
+     */
+    protected function sendNotification($request)
+    {
+        $requestParams = $request->getParams();
+
+        $message = $requestParams['author_nickname'] . ', left comment under "' . $this->initPost()->getTitle() . '" post';
+
+        $this->notifierPool->addNotice('New Comment', $message);
+
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $resultRedirect->setPath('home/');
+
+        return $this;
     }
 }

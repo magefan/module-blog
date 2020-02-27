@@ -24,6 +24,7 @@ class Config
     const NUMBER_OF_COMMENTS = 'mfblog/post_view/comments/number_of_comments';
     const NUMBER_OF_REPLIES = 'mfblog/post_view/comments/number_of_replies';
     const COMMENT_STATUS = 'mfblog/post_view/comments/default_status';
+    const ENABLE_COMMENT_NOTIFICATION = 'mfblog/post_view/comments/allow_notifications';
 
     /**
      * Show top menu item config path
