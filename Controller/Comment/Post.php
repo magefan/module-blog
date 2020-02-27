@@ -228,7 +228,7 @@ class Post extends \Magefan\Blog\App\Action\Action
     {
         $requestParams = $request->getParams();
 
-        $message = $requestParams['author_nickname'] . ', left comment under "' . $this->initPost()->getTitle() . '" post';
+        $message = $requestParams['author_nickname'] . ', left comment to "' . $this->initPost()->getTitle() . '" post';
 
         $this->notifierPool->addNotice('New Comment', $message);
 
