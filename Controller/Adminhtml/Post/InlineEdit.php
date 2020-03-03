@@ -89,7 +89,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements HttpPostActionIn
                 $postData = $this->filterPost($postItems[$postId]);
                 $this->validatePost($postData, $post, $error, $messages);
                 $extendedPostData = $post->getData();
-                $this->setCmsPostData($post, $extendedPostData, $postData);
+                $this->setBlogPostData($post, $extendedPostData, $postData);
                 $this->postRepository->save($post);
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $messages[] = $this->getErrorWithPostId($post, $e->getMessage());
@@ -117,12 +117,12 @@ class InlineEdit extends \Magento\Backend\App\Action implements HttpPostActionIn
     /**
      * Filtering POSTed data.
      *
-     * @param array $blogPostData
+     * @param array $postData
      * @return array
      */
-    protected function filterPost($blogPostData = [])
+    protected function filterPost($postData = [])
     {
-        $blogPostData = $this->dataProcessor->filter($blogPostData);
+        $blogPostData = $this->dataProcessor->filter($postData);
         $blogPostData['custom_theme'] = isset($blogPostData['custom_theme']) ? $blogPostData['custom_theme'] : null;
         $blogPostData['custom_root_template'] = isset($blogPostData['custom_root_template'])
             ? $blogPostData['custom_root_template']
@@ -169,7 +169,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements HttpPostActionIn
      * @param array $postData
      * @return $this
      */
-    public function setCmsPostData(Post $post, array $extendedPostData, array $postData)
+    public function setBlogPostData(Post $post, array $extendedPostData, array $postData)
     {
         $post->setData(array_merge($post->getData(), $extendedPostData, $postData));
         return $this;
