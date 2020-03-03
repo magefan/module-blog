@@ -14,6 +14,32 @@ namespace Magefan\Blog\Model\ResourceModel\Post;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
+     * @var string
+     */
+    protected $_idFieldName = 'post_id';
+
+    /**
+     * Load data for preview flag
+     *
+     * @var bool
+     */
+    protected $_previewFlag;
+
+    /**
+     * Event prefix
+     *
+     * @var string
+     */
+    protected $_eventPrefix = 'blog_post_collection';
+
+    /**
+     * Event object
+     *
+     * @var string
+     */
+    protected $_eventObject = 'post_collection';
+
+    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -458,11 +484,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     if ($result[$postId] == 0) {
                         $stores = $this->_storeManager->getStores(false, true);
                         $storeId = current($stores)->getId();
+                        $storeCode = key($stores);
                     } else {
-                        $storeId = $result[$item->getData('post_id')];
+                        $storeId = current($result[$item->getData('post_id')]);
+                        $storeCode = $this->_storeManager->getStore($storeId)->getCode();
                     }
                     $item->setData('_first_store_id', $storeId);
                     $item->setData('store_ids', $result[$postId]);
+                    $item->setData('store_code', $storeCode);
+                    $item->setData('store_id', $result[$item->getData('post_id')]);
                 }
             }
 
