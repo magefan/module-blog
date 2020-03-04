@@ -7,13 +7,21 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<!--<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="formkey"/>
     <update handle="blog_update_info"/>
     <update handle="blog_tag_grid_block"/>
     <body>
         <referenceContainer name="content">
            <block class="Magefan\Blog\Block\Adminhtml\Tag" name="blog.tag.container"/>
+        </referenceContainer>
+    </body>
+</page>-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="blog_tag_listing"/>
         </referenceContainer>
     </body>
 </page>

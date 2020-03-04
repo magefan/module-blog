@@ -116,17 +116,18 @@
             <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Category</argument>
         </arguments>
     </type>
-    <!--<virtualType name="Magefan\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+
+    <virtualType name="Magefan\Blog\Model\ResourceModel\Tag\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">magefan_blog_post</argument>
-            <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Post</argument>
+            <argument name="mainTable" xsi:type="string">magefan_blog_tag</argument>
+            <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Tag</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="blog_post_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+                <item name="blog_tag_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Tag\Grid\Collection</item>
             </argument>
         </arguments>
-    </type>-->
+    </type>
 </config>
