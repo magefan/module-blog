@@ -14,6 +14,18 @@ namespace Magefan\Blog\Model\ResourceModel\Category;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
+     * @var string
+     */
+    protected $_idFieldName = 'category_id';
+
+    /**
+     * Load data for preview flag
+     *
+     * @var bool
+     */
+    protected $_previewFlag;
+
+    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -166,11 +178,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     if ($result[$categoryId] == 0) {
                         $stores = $this->_storeManager->getStores(false, true);
                         $storeId = current($stores)->getId();
+                        $storeCode = key($stores);
                     } else {
-                        $storeId = $result[$item->getData('category_id')];
+                        $storeId = current($result[$item->getData('category_id')]);
+                        $storeCode = $this->_storeManager->getStore($storeId)->getCode();
                     }
                     $item->setData('_first_store_id', $storeId);
                     $item->setData('store_ids', $result[$categoryId]);
+                    $item->setData('store_code', $storeCode);
+                    $item->setData('store_id', $result[$item->getData('category_id')]);
                 }
             }
 

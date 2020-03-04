@@ -100,6 +100,22 @@
             <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Post</argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_category_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Category\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magefan_blog_category</argument>
+            <argument name="eventPrefix" xsi:type="string">magefan_blog_category_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">blog_category_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magefan\Blog\Model\ResourceModel\Category</argument>
+        </arguments>
+    </type>
     <!--<virtualType name="Magefan\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">magefan_blog_post</argument>
