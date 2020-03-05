@@ -212,7 +212,7 @@
     <fieldset name="additional_options">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
                 <item name="label" xsi:type="string" translate="true">Display Settings</item>
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
