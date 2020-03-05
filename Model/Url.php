@@ -60,6 +60,11 @@ class Url
     protected $storeId;
 
     /**
+     * @var mixed
+     */
+    protected $originalStore;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Registry $registry
@@ -188,10 +193,8 @@ class Url
 
         $storeChanged = false;
         if ($useOtherStore) {
-            $origStore = $this->_url->getScope();
-            if ($newStore->getId() != $origStore->getId()) {
-                $this->_url->setScope($newStore);
-                $this->setStoreId($newStore->getId());
+            if ($newStore->getId() != $this->_url->getScope()->getId()) {
+                $this->startStoreEmulation($newStore);
                 $storeChanged = true;
             }
         }
@@ -199,8 +202,7 @@ class Url
         $url = $this->getUrl($object, $object->getControllerName());
 
         if ($storeChanged) {
-            $this->_url->setScope($origStore);
-            $this->setStoreId($origStore->getId());
+            $this->stopStoreEmulation();
         }
 
         return $url;
@@ -366,7 +368,7 @@ class Url
         return $this->_storeManager->getStore()
             ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
     }
-    
+
     /**
      * @return int|null
      */
@@ -383,6 +385,37 @@ class Url
     {
         $this->storeId = $storeId;
         return $this;
+    }
+
+    /**
+     * Start blog URL store emulation
+     * @param $store
+     * @throws \Exception
+     */
+    public function startStoreEmulation($store)
+    {
+        if (null !== $this->originalStore) {
+            throw new \Exception('Cannot start Blog URL store emulation, emulation already started.');
+        }
+
+        $this->originalStore = $this->_url->getScope();
+        $this->setStoreId($store->getId());
+        $this->_url->setScope($store);
+    }
+
+    /**
+     * Stop blog URL store emulation
+     */
+    public function stopStoreEmulation()
+    {
+        if ($this->originalStore) {
+            $this->setStoreId($this->originalStore->getId());
+            $this->_url->setScope($this->originalStore);
+        } else {
+            $this->setStoreId(null);
+            $this->_url->setScope(null);
+        }
+        $this->originalStore = null;
     }
 
     /**
