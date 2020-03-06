@@ -83,18 +83,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addFieldToFilter($field, $condition = null)
     {
-        /* NEED TO IMPROVE THIS CODE */
-        if (is_array($field) && count($field) > 1) {
-            return parent::addFieldToFilter($field, $condition);
-        }
-
-        if (is_array($field) && count($field) == 1) {
-            $field = $field[0];
-            if (isset($condition[0])) {
-                $condition = $condition[0];
+        if (is_array($field)) {
+            if (count($field) > 1) {
+                return parent::addFieldToFilter($field, $condition);
+            } elseif (count($field) === 1) {
+                $field = $field[0];
+                $condition = $condition[0] ?? $condition;
             }
         }
-        /* END NEED TO IMPROVE */
 
         if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition);
@@ -158,7 +154,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         return $this;
     }
-    
+
     /**
      * Add "include in recent" filter to collection
      * @return $this
@@ -167,7 +163,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         return $this->addFieldToFilter('include_in_recent', 1);
     }
-    
+
     /**
      * Add posts filter to collection
      * @param array|int|string  $category
