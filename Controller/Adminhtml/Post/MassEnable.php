@@ -23,7 +23,7 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magefan_Blog::post';
+    const ADMIN_RESOURCE = 'Magefan_Blog::post_save';
 
     /**
      * @var Filter

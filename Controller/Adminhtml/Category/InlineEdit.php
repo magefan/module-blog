@@ -24,7 +24,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements HttpPostActionIn
     /**
      * Authorization level of a basic admin session
      */
-    const ADMIN_RESOURCE = 'Magefan_Blog::category';
+    const ADMIN_RESOURCE = 'Magefan_Blog::category_save';
 
     /**
      * @var PostDataProcessor
