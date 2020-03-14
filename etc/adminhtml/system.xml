@@ -214,6 +214,7 @@
                 </field>
                 <field id="end_characters" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Short Content End Сharacters</label>
+                    <comment>E.g.: "..."</comment>
                 </field>
             </group>
 
