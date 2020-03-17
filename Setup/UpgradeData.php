@@ -89,12 +89,18 @@ class UpgradeData implements UpgradeDataInterface
             }
         }
         if (count($disableModules)) {
-            try {
-                $this->moduleStatus->setIsEnabled(false, $disableModules);
-            } catch(\Exception $e) {
-                \Magento\Framework\Exception\LocalizedException(
-                    __('Please remove "%1" module/module\'s manually.', implode(',', $disableModules)));
-            }
+
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $notifierPool = $objectManager->create(\Magento\Framework\Notification\NotifierInterface::class);
+
+            $notifierPool->addMajor('Disable Modules', __('Please remove or disable "%1" module/module\'s.', implode(', ', $disableModules)));
+
+//            try {
+//                $this->moduleStatus->setIsEnabled(false, $disableModules);
+//            } catch(\Exception $e) {
+//                \Magento\Framework\Exception\LocalizedException(
+//                    __('Please remove "%1" module/module\'s manually.', implode(', ', $disableModules)));
+//            }
         }
     }
 }
