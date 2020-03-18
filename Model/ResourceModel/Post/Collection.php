@@ -216,9 +216,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 if (!is_numeric($id)) {
                     $select = $connection->select()
                         ->from(['t' => $tableName], 'category_id')
-                        ->where('t.identifier = ?', $id);
+                        ->where('t.identifier IN (?)', $id);
 
-                    $id = $connection->fetchOne($select);
+                    $id = $connection->fetchAll($select);
                     if (!$id) {
                         $id = 0;
                     }
@@ -291,7 +291,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $this->addExpressionFieldToSelect(
                 'search_rate',
                 '(0
-                  + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) 
+                  + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4)
                   + IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))',
                 [
                     'term' => $this->getConnection()->quote($term)
@@ -342,9 +342,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 if (!is_numeric($id)) {
                     $select = $connection->select()
                         ->from(['t' => $tableName], 'tag_id')
-                        ->where('t.identifier = ?', $id);
+                        ->where('t.identifier IN (?)', $id);
 
-                    $id = $connection->fetchOne($select);
+                    $id = $connection->fetchAll($select);
                     if (!$id) {
                         $id = 0;
                     }
@@ -379,14 +379,19 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $authorModel = $objectManager->get(\Magefan\Blog\Api\AuthorInterface::class);
 
+            $ids = [];
+
             foreach ($author as $k => $id) {
                 if (!is_numeric($id)) {
-                    $id = $authorModel->checkIdentifier($id);
-
-                    if (!$id) {
-                        $id = 0;
+                    foreach ($id as $identifier) {
+                        $ids[] = $authorModel->checkIdentifier($identifier);
                     }
-                    $author[$k] = $id;
+
+                    if (!$ids) {
+                        $ids = 0;
+                    }
+
+                    $author[$k] = $ids;
                 }
             }
 
