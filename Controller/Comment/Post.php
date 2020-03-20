@@ -72,12 +72,12 @@ class Post extends \Magefan\Blog\App\Action\Action
     {
         $request = $this->getRequest();
 
-        if (!$this->formKeyValidator->validate($request)) {
-            $this->getResponse()->setRedirect(
-                $this->_redirect->getRefererUrl()
-            );
-            return;
-        }
+//        if (!$this->formKeyValidator->validate($request)) {
+//            $this->getResponse()->setRedirect(
+//                $this->_redirect->getRefererUrl()
+//            );
+//            return;
+//        }
 
         if (!$this->moduleEnabled()) {
             return $this->_forwardNoroute();
@@ -85,6 +85,11 @@ class Post extends \Magefan\Blog\App\Action\Action
 
         $comment = $this->commentFactory->create();
         $comment->setData($request->getPostValue());
+
+        $this->_eventManager->dispatch(
+            'mfblog_comment_prepare_save',
+            ['category' => $comment, 'request' => $this->getRequest()]
+        );
 
         if ($this->customerSession->getCustomerGroupId()) {
             /* Customer */
@@ -107,9 +112,9 @@ class Post extends \Magefan\Blog\App\Action\Action
                     'success' => false,
                     'message' => __('Please enter your name and email'),
                 ]));
-                return; 
+                return;
             }
-            
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );
