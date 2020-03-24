@@ -51,12 +51,10 @@
     <div class="messages">
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
-                <?= /*@noEscape*/  __(
-                    'Another Blog Modules are enabled. For correct work of Magefan_Blog Module, please disable another Blog Modules.
-                        <a href="%1" target="_blank">Stores > Configuration</a>.',
-                    $block->getUrl(
-                        'adminhtml/system_config/edit')
-                );
+                <?= $block->escapeHtml(__(
+                    'Possible conflict. If you have problems with the module Magefan Blog, try to disable the following modules: ' .
+                    implode(', ', $block->isAnotherBlogModulesEnabled() ). '. For disable module run following command in root directory of your project ')) .
+                    '<strong>bin/magento module:disable vendor_module</strong>.';
                 ?>
             </div>
         </div>

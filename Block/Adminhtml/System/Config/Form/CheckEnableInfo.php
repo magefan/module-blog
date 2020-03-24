@@ -97,9 +97,12 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
             && $section->getModule();
     }
 
+    /**
+     * @return array|bool
+     */
     public function isAnotherBlogModulesEnabled()
     {
-        $disableModules = [];
+        $blogModules = [];
 
         foreach ($this->moduleList->getNames() as $module) {
             if (false === strpos($module, '_')) {
@@ -112,12 +115,12 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
             }
 
             if ('Blog' == $name) {
-                $disableModules[] = $module;
+                $blogModules[] = $module;
             }
         }
 
-        if (count($disableModules) && $this->isEnabled()) {
-            return true;
+        if (count($blogModules) && $this->isEnabled()) {
+            return $blogModules;
         }
 
         return false;
