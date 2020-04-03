@@ -18,8 +18,8 @@
     $_postCollection = $block->getPostCollection();
 ?>
 <?php
-    $width = $block->getBlockImageWidth() ?: 300;
-    $height = $block->getBlockImageheight() ?: 200;
+    $width = (int)$block->getBlockImageWidth() ?: 300;
+    $height = (int)$block->getBlockImageheight() ?: 200;
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 ?>
 <?php if ($_postCollection->count()) { ?>
@@ -44,7 +44,7 @@
                         }
                         ?>
                         <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                            <img src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
+                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
                                  alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                         </a>
                     </div>
