@@ -212,18 +212,35 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
             $connection = $this->getConnection();
             $tableName = $this->getTable('magefan_blog_category');
-            foreach ($categories as $k => $id) {
-                if (!is_numeric($id)) {
-                    $select = $connection->select()
-                        ->from(['t' => $tableName], 'category_id')
-                        ->where('t.identifier = ?', $id);
 
-                    $id = $connection->fetchOne($select);
-                    if (!$id) {
-                        $id = 0;
+            if (is_numeric(key($categories))) {
+                foreach ($categories as $k => $id) {
+                    if (!is_numeric($id)) {
+                        $select = $connection->select()
+                            ->from(['t' => $tableName], 'category_id')
+                            ->where('t.identifier = ?', $id);
+
+                        $id = $connection->fetchOne($select);
+                        if (!$id) {
+                            $id = 0;
+                        }
+
+                        $categories[$k] = $id;
                     }
-
-                    $categories[$k] = $id;
+                }
+                
+            } else {
+                $select = $connection->select()
+                    ->from(['t' => $tableName], 'category_id')
+                    ->where(
+                        $connection->prepareSqlCondition('t.identifier', $categories)
+                        . ' OR ' .
+                        $connection->prepareSqlCondition('t.category_id', $categories)
+                    );
+                
+                $categories = [];
+                foreach ($connection->fetchAll($select) as $item) {
+                    $categories[] = $item['category_id'];
                 }
             }
 
@@ -338,18 +355,34 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
             $connection = $this->getConnection();
             $tableName = $this->getTable('magefan_blog_tag');
-            foreach ($tag as $k => $id) {
-                if (!is_numeric($id)) {
-                    $select = $connection->select()
-                        ->from(['t' => $tableName], 'tag_id')
-                        ->where('t.identifier = ?', $id);
+            
+            if (is_numeric(key($tag))) {
+                foreach ($tag as $k => $id) {
+                    if (!is_numeric($id)) {
+                        $select = $connection->select()
+                            ->from(['t' => $tableName], 'tag_id')
+                            ->where('t.identifier = ?', $id);
 
-                    $id = $connection->fetchOne($select);
-                    if (!$id) {
-                        $id = 0;
+                        $id = $connection->fetchOne($select);
+                        if (!$id) {
+                            $id = 0;
+                        }
+
+                        $tag[$k] = $id;
                     }
-
-                    $tag[$k] = $id;
+                }
+            } else {
+                $select = $connection->select()
+                    ->from(['t' => $tableName], 'tag_id')
+                    ->where(
+                        $connection->prepareSqlCondition('t.identifier', $tag)
+                        . ' OR ' .
+                        $connection->prepareSqlCondition('t.tag_id', $tag)
+                    );
+                
+                $tag = [];
+                foreach ($connection->fetchAll($select) as $item) {
+                    $tag[] = $item['tag_id'];
                 }
             }
 
@@ -378,6 +411,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $authorModel = $objectManager->get(\Magefan\Blog\Api\AuthorInterface::class);
+
+            $firstKey = key($author);
+            if ('in' == $firstKey) {
+                $author = $author[$firstKey];
+            }
 
             foreach ($author as $k => $id) {
                 if (!is_numeric($id)) {
