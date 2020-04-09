@@ -292,7 +292,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
 
         $tagPostIds = array_unique($tagPostIds);
-        $term = trim(str_replace(' as ', ' ', $term)); //tmp fix
+
+        $advancedSortingEnabled = true;
+        if (false !== stripos($term, ' as ')) {
+            $advancedSortingEnabled = false;
+        }
 
         if (count($tagPostIds)) {
             $this->addFieldToFilter(
@@ -305,15 +309,19 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ]
             );
 
-            $this->addExpressionFieldToSelect(
-                'search_rate',
-                '(0
-                  + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) 
-                  + IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))',
-                [
-                    'term' => $this->getConnection()->quote($term)
-                ]
-            );
+            if ($advancedSortingEnabled) {
+                $this->addExpressionFieldToSelect(
+                    'search_rate',
+                    '(0
+                      + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) 
+                      + IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))',
+                    [
+                        'term' => $this->getConnection()->quote($term)
+                    ]
+                );
+            } else {
+                $this->addExpressionFieldToSelect('search_rate', ' publish_time', []);
+            }
         } else {
             $this->addFieldToFilter(
                 ['title', 'short_content', 'content'],
@@ -324,14 +332,18 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ]
             );
 
-            $this->addExpressionFieldToSelect(
-                'search_rate',
-                '(0
-                  + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
-                [
-                    'term' => $this->getConnection()->quote($term)
-                ]
-            );
+            if ($advancedSortingEnabled) {
+                $this->addExpressionFieldToSelect(
+                    'search_rate',
+                    '(0
+                      + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
+                    [
+                        'term' => $this->getConnection()->quote($term)
+                    ]
+                );
+            } else {
+                $this->addExpressionFieldToSelect('search_rate', ' publish_time', []);
+            }
         }
 
         return $this;
