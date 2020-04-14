@@ -124,9 +124,9 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                 $itemData = $item->getData();
                 $itemData['id'] = $item->getId();
                 /* Fix for big request data array */
-                foreach (['description', 'short_description', 'meta_description'] as $field) {
-                    if (isset($itemData[$field])) {
-                        unset($itemData[$field]);
+                foreach ($itemData as $key => $value) {
+                    if (!in_array($key, ['entity_id', 'position', 'display_on_product', 'display_on_post', 'auto_related', 'related_by_rule', 'name', 'store_id', 'id'])) {
+                        unset($itemData[$key]);
                     }
                 }
                 /* End */
