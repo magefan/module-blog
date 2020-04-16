@@ -75,7 +75,7 @@ class Content extends \Magento\Backend\Block\Widget
         );
 
         $this->getUploader()->getConfig()->setUrl(
-            $this->_urlBuilder->addSessionParam()->getUrl('blog/post_upload/gallery')
+            $this->_urlBuilder->getUrl('blog/post_upload/gallery')
         )->setFileField(
             'image'
         )->setFilters(

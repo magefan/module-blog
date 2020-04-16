@@ -59,12 +59,12 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
      * Checking file for moving and move it
      *
      * @param string $imageName
-     *
+     * @param bool $returnRelativePath
      * @return string
      *
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function moveFileFromTmp($imageName)
+    public function moveFileFromTmp($imageName, $returnRelativePath = false)
     {
         $originalImageName = $imageName;
 
@@ -103,6 +103,6 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
             );
         }
 
-        return $imageName;
+        return $returnRelativePath ? $baseImagePath : $imageName;
     }
 }
