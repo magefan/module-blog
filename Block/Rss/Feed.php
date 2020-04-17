@@ -72,4 +72,18 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
         return $content;
     }
+    
+
+    /**
+     * Prepare posts collection
+     *
+     * @return void
+     */
+    protected function _preparePostCollection()
+    {
+        parent::_preparePostCollection();
+        if ($categoryId = $this->getRequest()->getParam('category_id')) {
+            $this->_postCollection->addCategoryFilter($categoryId);
+        }
+    }
 }
