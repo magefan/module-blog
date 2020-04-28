@@ -82,7 +82,8 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected function _preparePostCollection()
     {
         parent::_preparePostCollection();
-        if ($categoryId = $this->getRequest()->getParam('category_id')) {
+        $categoryId = (int)$this->getRequest()->getParam('category_id');
+        if ($categoryId) {
             $this->_postCollection->addCategoryFilter($categoryId);
         }
     }
