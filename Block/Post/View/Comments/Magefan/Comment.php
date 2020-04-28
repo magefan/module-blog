@@ -9,8 +9,9 @@
 namespace Magefan\Blog\Block\Post\View\Comments\Magefan;
 
 use Magento\Store\Model\ScopeInterface;
-use \Magento\Framework\View\Element\Template;
-use \Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * Magefan comment block
@@ -20,6 +21,27 @@ use \Magento\Framework\DataObject\IdentityInterface;
  */
 class Comment extends Template implements IdentityInterface
 {
+    /**
+     * @var TimezoneInterface
+     */
+    protected $timezone;
+
+    /**
+     * Comment constructor.
+     * @param Template\Context $context
+     * @param TimezoneInterface $timezone
+     * @param array $data
+     */
+    public function __construct(
+        Template\Context $context,
+        array $data = [],
+        TimezoneInterface $timezone = null
+    ){
+        $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(TimezoneInterface::class);
+        parent::__construct($context, $data);
+    }
+
     /**
      * @var array
      */
@@ -88,6 +110,8 @@ class Comment extends Template implements IdentityInterface
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
-        return $this->getComment()->getPublishDate($dateFormat);
+        $gmtDate = $this->getComment()->getPublishDate();
+
+        return $this->timezone->date($gmtDate)->format($dateFormat);
     }
 }
