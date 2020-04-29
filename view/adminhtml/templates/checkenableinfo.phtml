@@ -47,16 +47,15 @@
         </div>
     </div>
 <?php } ?>
-<?php if ($block->isAnotherBlogModulesEnabled()) { ?>
+<?php if ($anotherBlogs = $block->isAnotherBlogModulesEnabled()) { ?>
     <div class="messages">
-        <div class="message message-error">
-            <div data-ui-id="messages-message-error">
+        <div class="message message-notice">
+            <div data-ui-id="messages-message-notice">
                 <?= $block->escapeHtml(__(
-                    'Possible conflict. If you have problems with the module Magefan Blog, try to disable the following modules: ' .
-                    implode(', ', $block->isAnotherBlogModulesEnabled() ). '. For disable module run following command in root directory of your project ')) .
-                    '<strong>bin/magento module:disable vendor_module</strong>.';
+                    'Possible conflict. If you have problems with the module Magefan Blog, try to disable the following modules: %1. To disable module please run following command in the Magento root directory: bin/magento module:disable Vendor_ModuleName' , implode(', ', $anotherBlogs )) );
                 ?>
             </div>
         </div>
     </div>
 <?php } ?>
+
