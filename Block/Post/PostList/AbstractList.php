@@ -171,4 +171,17 @@ abstract class AbstractList extends Template implements IdentityInterface
 
         return array_unique($identities);
     }
+
+    /**
+     * Get cache key informative items
+     *
+     * @return array
+     */
+    public function getCacheKeyInfo()
+    {
+        return array_merge(
+            parent::getCacheKeyInfo(),
+            [$this->getNameInLayout()]
+        );
+    }
 }
