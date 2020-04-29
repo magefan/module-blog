@@ -85,13 +85,13 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Perform actions before object delete
+     * Perform actions after object delete
      *
      * @param \Magento\Framework\Model\AbstractModel|\Magento\Framework\DataObject $object
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function _beforeDelete(\Magento\Framework\Model\AbstractModel $object)
+    public function _afterDelete(\Magento\Framework\Model\AbstractModel $object)
     {
         $result = parent::_beforeDelete($object);
         $postId = $object->getData('post_id');
