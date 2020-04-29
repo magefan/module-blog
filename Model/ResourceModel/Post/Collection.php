@@ -427,6 +427,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $firstKey = key($author);
             if ('in' == $firstKey) {
                 $author = $author[$firstKey];
+                if (!is_array($author)) {
+                    $author = [$author];
+                }
             }
 
             foreach ($author as $k => $id) {
