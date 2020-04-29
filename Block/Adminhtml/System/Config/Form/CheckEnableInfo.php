@@ -96,4 +96,33 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
         return !$this->config->getConfig(self::XML_PATH_KEY)
             && $section->getModule();
     }
+
+    /**
+     * @return array|bool
+     */
+    public function isAnotherBlogModulesEnabled()
+    {
+        $blogModules = [];
+
+        foreach ($this->moduleList->getNames() as $module) {
+            if (false === strpos($module, '_')) {
+                continue;
+            }
+
+            list($vendor, $name) = explode('_' , $module);
+            if ('Magefan' == $vendor) {
+                continue;
+            }
+
+            if ('Blog' == $name) {
+                $blogModules[] = $module;
+            }
+        }
+
+        if (count($blogModules) && $this->isEnabled()) {
+            return $blogModules;
+        }
+
+        return false;
+    }
 }

@@ -34,8 +34,8 @@
         <div class="message message-error">
             <div data-ui-id="messages-message-error">
                 <?= /*@noEscape*/ __(
-                    'Magefan Blog <strong>Product Key</strong> is missing. 
-                        Blog Extension will be automatically disabled soon. Please specify the product key in 
+                    'Magefan Blog <strong>Product Key</strong> is missing.
+                        Blog Extension will be automatically disabled soon. Please specify the product key in
                         <a href="%1" target="_blank">Stores > Configuration > Magefan Extensions > Blog</a>.',
                     $block->getUrl(
                         'adminhtml/system_config/edit',
@@ -47,3 +47,15 @@
         </div>
     </div>
 <?php } ?>
+<?php if ($anotherBlogs = $block->isAnotherBlogModulesEnabled()) { ?>
+    <div class="messages">
+        <div class="message message-notice">
+            <div data-ui-id="messages-message-notice">
+                <?= $block->escapeHtml(__(
+                    'Possible conflict. If you have problems with the module Magefan Blog, try to disable the following modules: %1. To disable module please run following command in the Magento root directory: bin/magento module:disable Vendor_ModuleName' , implode(', ', $anotherBlogs )) );
+                ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
