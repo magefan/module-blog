@@ -1,0 +1,489 @@
+"%1 Comment(s)","%1 Yorum"
+"%1 has been saved.","%1 kaydedildi."
+"%1 have been deleted.","%1 silindi."
+"%1 status have been changed.","%1 durumu değiştirildi."
+"&larr; Previous","&larr; Önceki"
+"-- Please Select --","-- Lütfen Seçiniz --"
+"Add New Category","Yeni Kategori Ekle"
+"Add New Images","Yeni Resim Ekle"
+"Add New Post","Yazı Ekle"
+"Add New Tag","Yeni Etiket Ekle"
+"Add Related Post","İlişkili Yazı Ekle"
+"Add Related Posts","İlişkili Yazıları Ekle"
+"Add Related Products","İlişkili Ürün Ekle"
+"Add Selected Posts","Seçili Yazıları Ekle"
+"Add Selected Products","Seçili Ürünleri Ekle"
+"Add a comment...","Yorum yap..."
+"Add a reply...","Cevap ver..."
+"Add to Cart","Sepete Ekle"
+"Add to Compare","Karşılaştırmaya Ekle"
+"Add to Wish List","Takip Listesine Ekle"
+"AddThis Enabled","AddThis Açık"
+"AddThis ID","AddThis No"
+"AddThis Language","AddThis Dili"
+"Additional Options","Ek Seçenekler"
+"AheadWorks Blog Extension not detected.","AheadWorks Blog eklentisi bulunamadı."
+"All Authors","Tüm Yazarlar"
+"All Blog Pages","Tüm Blog Sayfaları"
+"All Categories","Tüm Kategoriler"
+"Allow Guest Comments","Misafir Yorumlarına İzin Ver"
+"Anchor Custom Text","Bağlantı Yazısı"
+"Anchor Custom Title","Bağlantı Başlığı"
+"Apr","Nis"
+"April","Nisan"
+"Archive %s","Arşiv %s"
+"Archive Route","Arşiv Yolu"
+"Archive Widget","Arşiv Kutucuğu"
+"Are you sure you want to do this?","Bunu yapmak istediğinizden emin misiniz?"
+"Attribute Set","Özellik Seti"
+"Aug","Ağu"
+"August","Ağustos"
+"Author ID","Yazar No"
+"Author Route","Yazar Yolu"
+"Author Type","Yazar Tipi"
+"Author URL Suffix","Yazar Adresi Son Eki"
+"Auto Triger Padding (px)","Otomatik Tetik Boşluğu (px)"
+"Auto-redirect to No-Slash URL","/ İle Bitmeyen Adrese Yönlendir"
+"Automatically load more posts on page.","Sayfada aşağı inildikçe yazıları otomatik yükle."
+"Blog Archive Page","Blog Arşiv Sayfası"
+"Blog Archive Pages","Blog Arşiv Sayfaları"
+"Blog Author Page","Blog Yazar Sayfası"
+"Blog Author Pages","Blog Yazar Sayfaları"
+"Blog Category Page","Blog Kategori Sayfası"
+"Blog Category Pages","Blog Kategori Sayfaları"
+"Blog Category","Blog Kategorisi"
+"Blog Import from AheadWorks M2","AheadWorks M2 Modülünden Veri Al"
+"Blog Import from AheadWorks","AheadWorks Modülünden Veri Al"
+"Blog Import from WordPress","Wordpress'ten Veri Al"
+"Blog Import","Dışardan Blog Verisi Al"
+"Blog Index Page","Blog Ana Sayfası"
+"Blog Information","Blog Bilgisi"
+"Blog Main Page","Blog Ana Sayfası"
+"Blog Post Page","Blog Yazı Sayfası"
+"Blog Post Pages","Blog Yazı Sayfaları"
+"Blog Route","Blog Yolu"
+"Blog Tag Page","Blog Etiket Sayfası"
+"Blog Tag Pages","Blog Etiket Sayfaları"
+"Blog import type is not specified.","Blog içeriği veri alımı için tip belirtilmedi."
+"Browse to find or drag image here","Yüklemek istediğiniz resim dosyasını seçiniz ya da sürükleyip buraya bırakınız"
+"Calculate & Display Views Counts","Gösterim Sayılarını Hesapla Ve Göster"
+"Can not make import.","Veri alınamadı."
+"Categories Widget","Kategori Kutucuğu"
+"Category ID","Kategori No"
+"Category Information","Kategori Bilgisi"
+"Category Route","Kategori Yolu"
+"Category Title","Kategori Başlığı"
+"Category Top Navigation","Kategori Üst Menüsü"
+"Category URL Suffix","Kategori Adresi Son Eki"
+"Category in Websites","Kategori Web Siteleri"
+"Cloud Height","Bulut Yüksekliği"
+"Comment Information","Yorum Bilgisi"
+"Comment text is too short.","Yorum çok kısa."
+"Create %1","Yeni %1"
+"Custom Design Update","Özel Tasarım Güncellemesi"
+"Custom HTML 2","Özel HTML 2"
+"Custom HTML","Özel HTML"
+"Custom Template","Özel Şablon"
+"Database Host","Veritabanı Sunucusu"
+"Database Name","Veritabanı Adı"
+"Database connection error","Veritabanı bağlantı hatası"
+"Dec","Ara"
+"December","Aralık"
+"Default Robots","Varsayılan Robotlar"
+"Default Short Content Length","Varsayılan Kısa İçerik Uzunluğu"
+"Default: mystore.com/{blog_route}/{post_route}/post-title/","Varsayılan: mystore.com/{blog_route}/{post_route}/post-title/"
+"Delete image","Resmi Sil"
+"Display Author Information","Yazar Bilgisi Göster"
+"Display Blog Link","Blog Bağlantısını Göster"
+"Display Mode","Gösterim Şekli"
+"Display Number Of Posts","Yazı Sayısını Göster"
+"Display Post List By Author","Yazara Göre Yazı Listesi Göster"
+"Display Prev. & Next Post Links","Önceki ve Sonraki Yazı Bağlantılarını Göster"
+"Display Privacy Policy Agreement (GDPR)","Gizlilik Sözleşmesini Göster (GDPR)"
+"Display Related Posts","İlişkili Yazıları Göster"
+"Display Related Products","İlişkili Ürünleri Göster"
+"Display Settings","Gösterim Ayarları"
+"E.g.: "".html"" will make the blog author accessible from mystore.com/{blog_route}/author/author-name.html","Ör.: "".html"" girerseniz adres böyle olur : mystore.com/{blog_route}/author/author-name.html"
+"E.g.: "".html"" will make the blog category accessible from mystore.com/{blog_route}/category/category-identifier.html","Ör.: "".html"" girerseniz adres böyle olur : mystore.com/{blog_route}/category/category-identifier.html"
+"E.g.: "".html"" will make the blog post accessible from mystore.com/{blog_route}/post/post-identifier.html","Ör.: "".html"" girerseniz adres böyle olur : mystore.com/{blog_route}/post/post-identifier.html"
+"E.g.: "".html"" will make the blog tag accessible from mystore.com/{blog_route}/tag/tag-name.html","Ör.: "".html"" girerseniz adres böyle olur : mystore.com/{blog_route}/tag/tag-name.html"
+"E.g.: ""archive"" will make the blog archive accessible from mystore.com/{blog_route}/archive/2016-02","Ör.: ""archive"" girerseniz adres böyle olur : mystore.com/{blog_route}/archive/2016-02"
+"E.g.: ""author"" will make the blog author posts accessible from mystore.com/{blog_route}/author/author-name","Ör.: ""author"" girerseniz adres böyle olur : mystore.com/{blog_route}/author/author-name"
+"E.g.: ""blog"" will make the blog accessible from mystore.com/blog","Ör.: ""blog"" girerseniz adres böyle olur : mystore.com/blog"
+"E.g.: ""category"" will make the blog category accessible from mystore.com/{blog_route}/category/category-identifier","Ör.: ""category"" girerseniz adres böyle olur : mystore.com/{blog_route}/category/category-identifier"
+"E.g.: ""post"" will make the blog post accessible from mystore.com/{blog_route}/post/post-identifier","Ör.: ""post"" girerseniz adres böyle olur : mystore.com/{blog_route}/post/post-identifier"
+"E.g.: ""search"" will make the blog search accessible from mystore.com/{blog_route}/search/query","Ör.: ""search"" girerseniz adres böyle olur : mystore.com/{blog_route}/search/query"
+"E.g.: ""tag"" will make the blog posts by tag accessible from mystore.com/{blog_route}/tag/tag-name","Ör.: ""tag"" girerseniz adres böyle olur : mystore.com/{blog_route}/tag/tag-name"
+"Edit %1","Düzelt %1"
+"Enable 3D Animation","3D Animasyonları Etkinleştir"
+"Enable Category","Kategoriyi Etkinleştir"
+"Enable Extension","Eklentiyi Etkinleştir"
+"Enable Post","Yazı Etkin"
+"Enable Tag","Etiket Etkin"
+"Facebook Application ID","Facebook Uygulama ID"
+"Featured Blog Posts","Öne Çıkan Blog Yazıları"
+"Featured Image Alt","Öne Çıkan Resim ALT Açıklaması"
+"Featured Image","Öne Çıkan Resim"
+"Featured Post Widget","Öne Çıkan Yazı Kutucuğu"
+"Featured Posts","Öne Çıkan Yazılar"
+"Feb","Şub"
+"February","Şubat"
+"Feed Description","Akış Açıklaması"
+"Feed Title","Akış Başlığı"
+"Full Name","Adı"
+"Go to Blog Home Page","Blog Ana Sayfasına Git"
+"Go to Home Page","Ana Sayfaya Git"
+"If empty, we'll use the object name here.","Eğer boş bırakırsanız burada nesne adını kullanılır"
+"If set to ""Yes"". author page with post list will be available.","Eğer ""Evet"" seçerseniz yazıları da içeren yazar sayfası kullanılır hale gelir."
+"Images (.gif, .jpg, .png)","Resimler (.gif, .jpg, .png)"
+"Import Categories","Kategorileri Dışarıdan Al"
+"Import Comments","Yorumları Dışarıdan Al"
+"Import Posts","Yazıları Dışarıdan Al"
+"Import Tags","Etiketleri Dışarıdan Al"
+"Import from Blogger.com","Blogger.com'dan Veri Al"
+"Import from CSV","CSV'den Veri Al"
+"Import from Drupal","Drupal'den Veri Al"
+"Import from Joomla","Joomla'dan Veri Al"
+"Import from XML","XML'den Veri Al"
+"Import from aheadWorks Blog Extension","aheadWorks Blog Eklentisinden Veri Al"
+"In stock","Stokta Var"
+"Include Blog Categories","Blog Kategorilerini de Ekle"
+"Include In Menu","Menüde Göster"
+"Include in Recent Posts","En Son Yazılarda Göster"
+"Jan","Oca"
+"January","Ocak"
+"Jul","Tem"
+"July","Temmuz"
+"Jun","Haz"
+"June","Haziran"
+"Layout Update XML","Yapı Güncelleme XML'i"
+"Leave a review about the blog extension","Blog eklentisi ile ilgili yorum yapın"
+"Leave blank or use date format YYYY-MM-DD.","Standart tarih tipini ( YYYY-AA-GG ) kullanmak için boş bırakınız."
+"Leave blank to display posts from all authors.","Tüm yazarların tüm yazılarını göstermek için burayı boş bırakınız."
+"Leave blank to display posts from all categories.","Tüm kategorilerden tüm yazıları göstermek için burayı boş bırakınız."
+"Leave blank to display posts from all tags.","Tüm etiketlere bağlı tüm yazıları göstermek için burayı boş bırakınız."
+"Leave blank to use ""article"" type by default.","Varsayılan olarak ""article"" tipini kullanmak için boş bırakınız."
+"Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Öne çıkan resmi kullanmak için bu alanı boş bırakınız. İzin verilen görsel tipleri: jpg, jpeg, gif, png."
+"Leave blank to use Meta Description by default.","Varsayılan meta açıklamasını kullanmak için burayı boş bırakınız."
+"Leave blank to use Meta Title by default.","Varsayılan meta başlığını kullanmak için burayı boş bırakınız."
+"Link Text","Bağlantı Yazısı"
+"Link to a Specified Blog Author Page","Belirli bir Yazar Sayfasına Bağla"
+"Link to a Specified Blog Category Page","Belirli bir Kategori Sayfasına Bağla"
+"Link to a Specified Blog Post Page","Belirli bir Yazı Sayfasına Bağla"
+"Link to a Specified Blog Tag Page","Belirli bir Etiket Sayfasına Bağla"
+"Load more comments","Daha fazla yorum göster"
+"Login to submit comment","Yorum yapmak için giriş yapmanız gerekiyor"
+"MageFan Extensions","MageFan Eklentileri"
+"Magefan Blog Extension - Blog Author Link","Magefan Blog Eklentisi - Blog Yazar Bağlantısı"
+"Magefan Blog Extension - Blog Category Link","Magefan Blog Eklentisi - Blog Kategori Bağlantısı"
+"Magefan Blog Extension - Blog Post Link","Magefan Blog Eklentisi - Blog Yazı Bağlantısı"
+"Magefan Blog Extension - Blog Tag Link","Magefan Blog Eklentisi - Blog Etiket Bağlantısı"
+"Magefan Blog Extension - Recent Blog Posts","Magefan Blog Eklentisi - En Son Yazılar Bağlantısı"
+"Mageplaza Blog Extension not detected.","Mageplaza Blog Eklentisi bulunamadı."
+"Manage %1","Yönet %1"
+"Mar","Mar"
+"March","Mart"
+"Mark as Pending","Beklemede Olarak İşaretle"
+"Maximal Depth","En Fazla Derinlik"
+"May","May"
+"May","Mayıs"
+"Media Gallery","Resim Galerisi"
+"Meta Description","Meta Açıklaması"
+"Meta Keywords","Meta Kelimeleri"
+"Meta Robots","Meta Robotları"
+"Meta Title","Meta Başlığı"
+"Mirasvit Blog Extension not detected.","Mirasvit Blog Eklentisi bulunamadı."
+"Monthly Archives: %s %s","Aylık Arşivler: %s %s"
+"Nead a new blog feature?","Yeni bir blog özelliği mi istiyorsunuz ?"
+"New %1","Yeni %1"
+"New Category","Yeni Kategori"
+"New Comment Status","Yeni Yorum Durumu"
+"New Layout Update XML","Yeni Yapı Güncellemesi XML'i"
+"New Layout","Yeni Yapı"
+"New Tag","Yeni Etiket"
+"New Theme","Yeni Şablon"
+"Next &rarr;","Sonraki &rarr;"
+"Not Approved","Onaylanmadı"
+"Nothing to import.","Alınacak veri yok."
+"Nov","Kas"
+"November","Kasım"
+"Number of Comments","Yorum Sayısı"
+"Number of Posts","Yazı Sayısı"
+"Number of Products","Ürün Sayısı"
+"Number of Replies","Cevap Sayısı"
+"Number of Tags","Etiket Sayısı"
+"OG Description","OG Açıklaması"
+"OG Image","OG Resmi"
+"OG Title","OG Başlığı"
+"OG Type","OG Tipi"
+"Oct","Eki"
+"October","Ekim"
+"Open Graph Metadata","Open Graph Meta Bilgisi"
+"Out of stock","Stokta yok"
+"Parameter ""Status"" missing in request data.","İstem verisinde ""Durum"" parametresi eksik."
+"Parameter %1 is required","%1 parametresi zorunludur"
+"Parent Category","Üst Kategori"
+"Parent Comment","Üst Yorum"
+"Permalink Settings","Kalıcı Bağlantı Ayarları"
+"Permalink Type","Kalıcı Bağlantı Tipi"
+"Please enter your name and email","Lütfen adınızı ve e-mail adresinizi giriniz"
+"Please indicate number of recent posts you want to display. Leave blank to use predefined ""Posts Per Page"" value.","Lütfen göstermek istediğiniz 'Son Yazılar' sayısını belirtiniz. Önceden ayarlanmış 'Sayfa Başı Yazı' değerinin kullanılması için bu alanı boş bırakınız."
+"Please indicate post IDs (separated by comma) you want to display.","Lütfen göstermek istediğiniz yazı numaralarını ( virgülle ayırarak ) giriniz."
+"Please select","Lütfen seçiniz"
+"Please specify title you want to display on the frontend. You can leave it blank if necessary.","Lütfen önyüzde görüntülemek istediğiniz başlığı belirtiniz. Gerekirse boş bırakabilirsiniz."
+"Popular Posts Widget","Popüler Yazılar Kutucuğu"
+"Popular Posts","Popüler Yazılar"
+"Post ID","Post No"
+"Post IDs","Post No"
+"Post Information","Yazı Bilgisi"
+"Post List","Yazı Listesi"
+"Post Page (Post View)","Yazı Sayfsı (Yazı Görünümü)"
+"Post Route","Yazı Yolu"
+"Post Title","Yazı Başlığı"
+"Post URL Suffix","Yazı Adesi Soneki"
+"Post View","Yazı Görünümü"
+"Post in Websites","Yazı Web Siteleri"
+"Posts & Subcategories Links","Yazı ve Alt Kategori Linkleri"
+"Posts (default)","Yazılar (varsayılan)"
+"Posts Author","Yazı Yazarları"
+"Posts Category","Yazı Kategorileri"
+"Posts Links","Yazı Bağlantıları"
+"Posts Number","Yazı Sayısı"
+"Posts Per Page","Sayfa Başı Yazı Sayısı"
+"Posts Publish Date From","Yazı Yayın Tarihi Başlangıcı"
+"Posts Publish Date To","Yazı Yayın Tarihi Sonu"
+"Posts Sort By","Yazı Sırala"
+"Posts Tag","Yazı Etiketi"
+"Posts loader","Yazı yükleyici"
+"Preview and Next Post","Önceki ve Sonraki Yazı"
+"Product Key","Ürün Anahtarı"
+"Product Page","Ürün Sayfası"
+"Publish Date (default)","Yayın Tarihi (default)"
+"Publish Date","Yayınlanma Tarihi"
+"RSS Feed","RSS Akışı"
+"Read %1","Oku %1"
+"Read more &#187;","Daha fazla &#187;"
+"Read more >","Daha fazla >"
+"Recent Blog Posts","Son Yazılar"
+"Recent Posts Widget","Son Yazılar Kutucuğu"
+"Recent Posts","En Son Yazılar"
+"Related Posts and Products","İlişkili Yazılar ve Ürünler"
+"Related Posts","İlişkili Yazılar"
+"Related Products","İlişkili Ürünler"
+"Related posts are shown to customers in addition to the item the customer is looking at.","İlişkili yazılar müşterinin okuduğu yazının yanında gösterilir."
+"Related posts","İlişkili yazılar"
+"Related products are shown to customers in addition to the item the customer is looking at.","İlişkili ürünler müşterinin okuduğu yazının yanında gösterilir."
+"Reply","Cevapla"
+"Requested item doesn't exist","İstenen kayıt bulunamadı"
+"Rss Feed","Rss Akışı"
+"Search ""%1""","Ara ""%1"""
+"Search Engine Optimization","Arama Motoru Optimizasyonu"
+"Search Form Widget","Arama Formu Kutucuğu"
+"Search Route","Arama Yolu"
+"Search posts here...","Blog'da ara..."
+"See more","Daha fazla"
+"Sep","Eyl"
+"September","Eylül"
+"Share with friends","Arkadaşlarınla paylaş"
+"Short Content","Kısa İçerik"
+"Short: mystore.com/{blog_route}/post-title/","Kısa: mystore.com/{blog_route}/post-title/"
+"Show more replies in this thread","Bu başlıkta daha fazla yorum göster"
+"Sign In","Giriş Yap"
+"Sign in to add a comment...","Yorum yapmak için giriş yapınız..."
+"Sign in to add a reply...","Cevaplamak için giriş yapınız..."
+"Some blog comments are pending for approval. <a href=""%1"">Manage Comments</a>.","Bazı blog yorumları onay bekliyor. <a href=""%1"">Yorumları Yönet</a>."
+"Something went wrong %1","Bir şeyler yanlış gitti %1"
+"Something went wrong while saving the file(s).","Dosya kaydedilirken bir sorun oluştu."
+"Something went wrong while saving this %1. %2","Kaydederken bir sorun oluştu %1. %2"
+"Something went wrong: ","Bir hata oluştu: "
+"Sort Order","Sıralama"
+"Start Import","Veri Almaya Başla"
+"Status Field Name is not specified.","Durum Alanı Adı belirtilmedi."
+"Store View","Mağaza Görünümü"
+"Subcategories Links","Alt Kategori Bağlantıları"
+"Table Prefix","Tablo ÖnEki"
+"Tag Claud Widget","Etiket Bulutu Kutucuğu"
+"Tag ID","Etiket No"
+"Tag Route","Etiket Yolu"
+"Tag Title","Etiket Başlığı"
+"Tag URL Suffix","Etiket Adresi Soneki"
+"Thank you for your comment.","Yorumunuz için teşekkür ederiz."
+"The category URL key cannot be made of only numbers.","Kategori adresi sadece rakamdan oluşamaz."
+"The category URL key contains disallowed symbols.","Kategori adresi izin verilmeyen karakterler içeriyor."
+"The distance in pixels from the bottom of the scrollable content at which to trigger the loading of the next set of posts.","Sayfa aşağı kaydırıldıkça en alta olan uzaklık buraya gireceğiniz değerden az olunca sonraki yazıların yüklenmesi tetiklenir."
+"The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4","Veri alım işlemi tamamlandı. %1 yazı, %2 kategori verisi alındı. Bazı yazılar ve kategorilerin verisi alınamadı.<br/> %3 %4"
+"The import process was completed successfully. %1 posts and %2 categories where imported.","Veri alım işlemi tamamlandı. %1 yazı, %2 kategori verisi alındı."
+"The post URL key cannot be made of only numbers.","Yazı adresi sadece rakamdan oluşamaz."
+"The post URL key contains disallowed symbols.","Kategori adresi izin verilmeyen noktalama karakterleri içeriyor."
+"The tag URL key cannot be made of only numbers.","Etiket adresi sadece rakamdan oluşamaz."
+"The tag URL key contains disallowed symbols.","Etiket adresi izin verilmeyen karakterler içeriyor."
+"The tag is already exist.","Etiket zaten var."
+"This will be included before head closing tag in page HTML.","HTML içeriğindeki HEAD etiketi kapanmadan önce eklenecektir."
+"URL Key","URL Anahtar Kelimesi"
+"URL key is already in use by another blog item.","Bu adres anahtarı zaten başka bir blog içeriğine ait."
+"Unable to remove item","Kayıt silinemedi"
+"Unable to save item","Veri kaydedilemedi"
+"Use Canonical Link Meta Tag For","Canonical Link Meta Etiketi Kullan"
+"Use Categories Path for Post URLs","Yazı adresleri için üst kategori yolunu kullan"
+"Use Disqus Comments","Disqus Yorumlarını Kullan"
+"Use Facebook Comments","Facebook Yorumlarını Kullan"
+"Use Google Comments","Google Yorumlarını Kullan"
+"Use Lazy Loading","Lazy Loading Kullan"
+"Use Magefan Blog Comments","Magefan Blog Yorumlarını Kullan"
+"Use Parent Category Path for Category URLs","Kategori adresleri için üst kategori yolunu kullan"
+"User Name","Kullanıcı Adı"
+"Views Count","Gösterim Sayısı"
+"We can't change status of %1 right now. %2","%1 için durum değiştirilemiyor. %2"
+"We can't delete %1 right now. %2","%1 silinemiyor. %2"
+"We can't find posts matching the selection.","Seçiminize uygun yazı bulunamadı."
+"Yes (With auto trigger)","Evet (Otomatik tetikleyici ile)"
+"Yes (Without auto trigger)","Yes (Otomatik tetikleyici olmadan)"
+"Yes, I have read the %1 and agree to the processing of my personal data.","Evet, %1 okudum ve kişisel verilerimin işlenmesi ile ilgili koşulları kabul ediyoruz."
+"You can set a future date to schedule the publication. The post will not be available for reading until this date.","Yazıyı yayına almak için gelecekteki bir tarih ayarlayabilirsiniz. Bu tarihe kadar yazı okunamayacak."
+"You cannot post comment. Blog post is not longer exist.","Yazıya yorum yapmanıza izin verilmiyor. Yorum yapacağınız yazıya ulaşılamıyor."
+"You cannot reply to this comment. Comment is not longer exist.","Bu yoruma cevap vermenize izin verilmiyor. Cevaplayacağınız yoruma ulaşılamıyor."
+"You cannot reply to this comment.","Bu yoruma cevap vermenize izin verilmiyor."
+"You submitted your comment for moderation.","Yorumunuz değerlendirilmek üzere kaydedildi."
+"privacy policy","gizlilik poliçesi"
+Actions,İşlemler
+Admin,Yönetim
+Approve,Onayla
+Approved,Onaylandı
+Archive,Arşiv
+AttributeSetText,AttributeSetText
+Author,Yazar
+Author:,Yazar:
+Blog,Blog
+Cancel,İptal
+Categories,Kategoriler
+Categories:,Kategoriler:
+Category,Kategori
+Color,Renk
+Comment,Yorum
+Comments,Comments
+Comments,Yorumlar
+Comments:,Daha fazla:
+Content,İçerik
+Customer,Müşteri
+Custumer,Müşteri
+Delete,Sil
+Deny,Reddet
+Design,Tasarım
+Disable,Pasifleştir
+Disabled,Pasif
+Duplicated,Çoğaltıldı
+Email,Email
+Enable,Etkinleştir
+Enabled,Etkin
+From,Başlangıç
+General,Genel
+Guest,Misafir
+HTML,HTML
+Hidden,Gizli
+Home,Ana Sayfa
+ID,No
+Layout,Yapı
+Modified,Düzenleme
+NOTICE,NOT
+NOTICE,Not
+Name,Adı
+Nickname,Takma Adı
+No,Hayır
+Password,Şifre
+Pending,Beklemede
+Position,Pozisyon
+Post,Yazı
+Posted:,Ekleme Tarihi:
+Price,Price
+Published,Yayınlanma Tarihi
+Remove,Sil
+Reply,Cevapla
+SKU,ÜrünKodu
+Search,Ara
+Sidebar,Yan Bar
+Social,Sosyal
+Status,Durum
+StatusText,Durum Yazısı
+Submit,Gönder
+Tag,Etiket
+Tags,Etiketler
+Tags:,Etiketler:
+Text,Yazı
+Thumbnail,Küçük Resim
+Title,Title
+To,Bitiş
+Type,Tip
+Views:,Gösterim:
+
+"The import process was completed successfully. 
+                        %1 posts, %2 categories, %3 tags and %4 comments where imported.","Veri alma işlemi tamamlandı. %1 yazı, %2 kategori, %3 etiket ve %4 yorum verisi alındı."
+
+"The import process completed. %1 posts, %2 categories, %3 tags and %4 comments where imported. 
+                        Some posts or categories or tags or comments where skipped. %5 %6 %7 %8","Veri alma işlemi tamamlandı. %1 yazı, %2 kategori, %3 etiket ve %4 yorum verisi alındı. 
+                        Bazı yazılar, kategoriler, etiketler veya yorumlar ise alınmadı. %5 %6 %7 %8"
+
+"
+                        <strong>Notice:</strong> <em>Please use this section only if you need to enter short content completely different from main content.<br/>Please <a href=""https://magefan.com/blog/add-read-more-tag-to-blog-post-content/"" target=""_blank"" title=""Add &quot;read more&quot; tag to Magento 2 blog post content"">read more</a> about how to configure ""read more"" tag.</em>
+                    ","
+                        <strong>Not:</strong> <em>Lütfen bu bölümü yalnızca ana içerikten tamamen farklı kısa içerik girmeniz gerekiyorsa kullanın.<br/>'Devamını oku' ayarını nasıl yapacağınızı görmek için lütfen <a href=""https://magefan.com/blog/add-read-more-tag-to-blog-post-content/"" target=""_blank"" title=""Magento2 blog yazısı içeriğine  &quot;devamını oku&quot; etiketi eklemek"">buraya</a> tıklayınız.</em>
+                    "
+
+"
+                    Enter user ID.
+                ","Kullanıcı No giriniz."
+
+"Magefan Blog is disabled, to enable the extension please navigate to
+                        <a href=""%1"" target=""_blank"">Stores > Configuration > Magefan Extensions > Blog</a>.",""Magefan Blog kullanım dışı, kullanmaya devam etmek istiyorsanız <a href=""%1"" target=""_blank"">Mağazalar > Ayarlar > Magefan Eklentileri > Blog</a> kısmına girip etkinleştirmeniz gerekiyor."
+
+"Magefan Blog <strong>Product Key</strong> is missing. 
+                        Blog Extension will be automatically disabled soon. Please specify the product key in 
+                        <a href=""%1"" target=""_blank"">Stores > Configuration > Magefan Extensions > Blog</a>.","Magefan Blog <strong>Ürün Anahtarı</strong> bulunamadı. 
+                        Blog Eklentisi bir süre sonra devre dışı kalacak. Lütfen <a href=""%1"" target=""_blank"">Mağazalar > Ayarlar > Magefan Eklentileri > Blog</a> kısmına ürün anahtarını giriniz."
+
+"Your Blog Extension is out of date. You can update it to the <strong>version %1</strong>
+                     via composer or you can download the new version archive from the 
+                     <a href=""%2"" target=""_blank"">Magefan Store</a>.
+                     Please <a href=""%3""   target=""_blank"">contact</a> 
+                     Magefan Team if you have any questions or need help with an update.","Blog eklentinizin sürümü eski. Composer ile veya <a href=""%2"" target=""_blank"">Magefan Mağazasından</a> doğrudan indirerek <strong>%1</strong> versiyona güncelleyebilirsiniz.
+                     Magefan ekibine bir sorunuz varsa lütfen <a href=""%3""   target=""_blank"">buraya tıklayarak</a> bize ulaşın"
+
+"<a href=""https://developers.facebook.com/docs/apps/register/"" target=""_blank"">
+                                How do I get a Facebook Application ID?
+                            </a>","<a href=""https://developers.facebook.com/docs/apps/register/"" target=""_blank"">
+                                Facebook Uygulama Numarası nasıl alınır?
+                            </a>"
+"Insert Facebook Application ID (fb:app_id) In HEAD Tag","Facebook Uygulama Numarasını (fb:app_id) HEAD Etiketi içine yerleştir"
+
+"Your Disqus Forum Shortname","Disqus Forum Kısa Adınız"
+
+"<a href=""https://help.disqus.com/customer/portal/articles/466208"" target=""_blank"">
+                                What's a shortname?
+                            </a>","<a href=""https://help.disqus.com/customer/portal/articles/466208"" target=""_blank"">
+                                Kısa ad nedir?
+                            </a>"
+
+"
+                    Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>
+                    <em>Magefan_Blog::widget/recent_masonry.phtml</em> template is also available out of the box.
+                ","
+                    Varsayılan temayı ( <em>Magefan_Blog::widget/recent.phtml</em>.<br/> ) kullanmak için burayı boş bırakınız.
+                    Ayrıca <em>Magefan_Blog::widget/recent_masonry.phtml</em> temasını da kullanabilirsiniz.
+                "
+
+"Magefan Blog Extension - Featured Blog Posts","Magefan Blog Eklentisi - Öne Çıkan Yazılar"
+
+"
+                    Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.
+                ","
+                    Varsayılan şablonu <em>Magefan_Blog::widget/recent.phtml</em> kullanmak için boş bırakınız.
+                "
+
+"
+                    Enter user ID.
+                ","
+                    Kullanıcı no giriniz.
+                "
+Yönet Posts,Yazıları Yönet
+Add Blog Blocks via Widgets,Kutucukları Kullanarak Blog Blokları Ekle
+"Posts","Yazılar"
+"Search Posts","Ara"
