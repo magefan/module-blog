@@ -990,6 +990,18 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         }
         $data['tags'] = $tags;
 
+        $relatedPosts = [];
+        foreach ($this->getRelatedPosts() as $relatedPost) {
+            $relatedPosts[] = $relatedPost->getDynamicData();
+        }
+        $data['related_posts'] = $relatedPosts;
+
+        $relatedProducts = [];
+        foreach ($this->getRelatedProducts() as $relatedProduct) {
+            $relatedProducts[] = $relatedProduct->getData();
+        }
+        $data['related_products'] = $relatedProducts;
+
         $categories = [];
         foreach ($this->getParentCategories() as $category) {
             $categories[] = $category->getDynamicData();
