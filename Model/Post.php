@@ -955,7 +955,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Prepare all additional data
-     * @param null $fields
+     * @param null|array $fields
      * @return array
      */
     public function getDynamicData($fields = null)
@@ -977,15 +977,17 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         ];
 
         foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $data[$key] = $this->$method();
+            if (null === $fields || array_key_exists($key, $fields)) {
+                $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+                $data[$key] = $this->$method();
+            }
         }
 
-        if (array_key_exists('tags', $fields)) {
+        if (null === $fields || array_key_exists('tags', $fields)) {
             $tags = [];
             foreach ($this->getRelatedTags() as $tag) {
                 $tags[] = $tag->getDynamicData();
@@ -993,14 +995,19 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $data['tags'] = $tags;
         }
 
+        /* Do not use check for null === $fields here 
+         * this checks is used for REST, and related data was not provided via reset */
         if (array_key_exists('related_posts', $fields)) {
             $relatedPosts = [];
             foreach ($this->getRelatedPosts() as $relatedPost) {
-                $relatedPosts[] = $relatedPost->getDynamicData($fields);
+                $relatedPosts[] = $relatedPost->getDynamicData(
+                    $fields['related_posts']
+                );
             }
             $data['related_posts'] = $relatedPosts;
         }
 
+        /* Do not use check for null === $fields here */
         if (array_key_exists('related_products', $fields)) {
             $relatedProducts = [];
             foreach ($this->getRelatedProducts() as $relatedProduct) {
@@ -1009,7 +1016,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $data['related_products'] = $relatedProducts;
         }
 
-        if (array_key_exists('categories', $fields)) {
+        if (null === $fields || array_key_exists('categories', $fields)) {
             $categories = [];
             foreach ($this->getParentCategories() as $category) {
                 $categories[] = $category->getDynamicData();
@@ -1017,8 +1024,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $data['categories'] = $categories;
         }
 
-        if (array_key_exists('author', $fields) && $author = $this->getAuthor()) {
-            $data['author'] = $author->getDynamicData();
+        if (null === $fields || array_key_exists('author', $fields)) {
+            if ($author = $this->getAuthor()) {
+                $data['author'] = $author->getDynamicData();
+            }
         }
 
         return $data;
