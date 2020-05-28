@@ -3,12 +3,14 @@
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
 
-This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows you to create a full-fledged blog on your Magento 2 Store.
+Magento 2 Blog  is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 230 000 downloads.
 
 ## Requirements
-  * Magento Community Edition 2.2.0-2.3.x or Magento Enterprise Edition 2.2.0-2.3.x
-  * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.11 . Please install this extension first if you use installation via FTP.
+  * Magento Community 2.2.0-2.3.x (CE, EE, ECE, B2B)
+  * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.12. Please install this extension first if you use installation via FTP.
+  * **Note** that extension is free only for the Magento Community (Open Source) Edition. For Magento EE, ECE, B2B you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
   * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
+  
 
 
 
@@ -20,7 +22,7 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
             alt="Magento 2 Blog Editions & Pricing" />
         </a>
         
-## Features
+## Main Features
   * **NEW!** Blog GraphQL
   * Unlimited blog posts, multi-level categories, and tags
   * Multilanguage and Multiple Websites Support
