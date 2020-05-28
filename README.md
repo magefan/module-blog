@@ -130,11 +130,11 @@ Do you want to create the same category or blog posts with a slight content chan
 
 Magento 2 is very flexible and customizable and so is our Magento 2 Blog extension. It is 100% Open Code so except for the big variety of features it is offering you can still make changes and add some improvements to make a blog for your Magento 2 store stand out.
 
-* **Compatible with Porto Theme for Magento 2**
+* **Compatible with [Porto Theme](https://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864?ref=magefan) for Magento 2**
 
 In case you were looking for a great theme for your Magento 2 store and wanted to start managing a blog you can have it all at once since our Magento 2 Blog extension is fully compatible with the Porto Theme for Magento 2.
 Accelerated Mobile Pages (AMP) Project support. 
-Fast performing website is very important since it influences traffic, SEO and a lot of other things. Magento 2 blog module supports accelerated mobile pages. So, your blog will be loading fast for users who enter it from a mobile. To enable AMP view on blog pages Magento Amp Extension by Plumrocket is required.
+Fast performing website is very important since it influences traffic, SEO and a lot of other things. Magento 2 blog module supports accelerated mobile pages. So, your blog will be loading fast for users who enter it from a mobile. To enable AMP view on blog pages [Magento Amp Extension](http://magefan.com/accelerated-mobile-pages/) by Plumrocket is required.
 
 * **Blog Sitemap XML**
 
