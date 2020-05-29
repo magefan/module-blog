@@ -142,7 +142,9 @@ class Url
      */
     public function getBaseUrl()
     {
-        $url = $this->_url->getUrl($this->getBasePath());
+        $url = $this->_url->getUrl($this->getBasePath(), [
+            '_nosid' => $this->storeId ?: null
+        ]);
         $url = $this->trimSlash($url);
         return $url;
     }
@@ -156,9 +158,9 @@ class Url
     public function getUrl($identifier, $controllerName)
     {
         $url = $this->_url->getUrl('', [
-            '_direct' => $this->getUrlPath($identifier, $controllerName)
+            '_direct' => $this->getUrlPath($identifier, $controllerName),
+            '_nosid' => $this->storeId ?: null
         ]);
-
         return $url;
     }
 
