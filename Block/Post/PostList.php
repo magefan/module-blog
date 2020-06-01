@@ -28,12 +28,16 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     protected function _prepareLayout()
     {
-        $page = $this->_request->getParam(
+        $page = (int)$this->_request->getParam(
             \Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME
         );
 
         if ($page > 1) {
             $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+
+            $this->pageConfig->getTitle()->set(
+                $this->pageConfig->getTitle()->get() . ' - ' . __('Page') . ' ' . $page
+            );
         }
 
         return parent::_prepareLayout();

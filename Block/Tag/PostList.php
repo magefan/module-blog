@@ -70,6 +70,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     ['attributes' => ['rel' => 'canonical']]
                 );
             }
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $this->escapeHtml($tag->getTitle())
+                );
+            }
         }
 
         return parent::_prepareLayout();

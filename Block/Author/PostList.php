@@ -64,6 +64,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $robots = $this->config->getAuthorRobots();
                 $this->pageConfig->setRobots($robots);
             }
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $this->escapeHtml($author->getTitle())
+                );
+            }
         }
 
         return parent::_prepareLayout();
