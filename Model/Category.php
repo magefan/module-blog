@@ -459,9 +459,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Prepare all additional data
+     * @param null|array $fields
      * @return array
      */
-    public function getDynamicData()
+    public function getDynamicData($fields = null)
     {
         $data = $this->getData();
 
@@ -478,6 +479,39 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
                 ucwords($key, '_')
             );
             $data[$key] = $this->$method();
+        }
+
+        if (array_key_exists('breadcrumbs', $fields)) {
+            $breadcrumbs = [];
+
+            $category = $this;
+            $parentCategories = [];
+            while ($parentCategory = $category->getParentCategory()) {
+                $parentCategories[] = $category = $parentCategory;
+            }
+
+            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                $category = $parentCategories[$i];
+
+                $breadcrumbs[] = [
+                    'category_id' => $category->getId(),
+                    'category_name' => $category->getTitle(),
+                    'category_level' => $category->getLevel(),
+                    'category_url_key' => $category->getIdentifier(),
+                    'category_url_path' => $category->getUrl(),
+                ];
+            }
+
+            $category = $this;
+            $breadcrumbs[] = [
+                'category_id' => $category->getId(),
+                'category_name' => $category->getTitle(),
+                'category_level' => $category->getLevel(),
+                'category_url_key' => $category->getIdentifier(),
+                'category_url_path' => $category->getUrl(),
+            ];
+
+            $data['breadcrumbs'] = $breadcrumbs;
         }
 
         return $data;
