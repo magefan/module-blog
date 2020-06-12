@@ -990,25 +990,27 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (null === $fields || array_key_exists('tags', $fields)) {
             $tags = [];
             foreach ($this->getRelatedTags() as $tag) {
-                $tags[] = $tag->getDynamicData();
+                $tags[] = $tag->getDynamicData(
+                    // isset($fields['tags']) ? $fields['tags'] : null
+                );
             }
             $data['tags'] = $tags;
         }
 
-        /* Do not use check for null === $fields here 
+        /* Do not use check for null === $fields here
          * this checks is used for REST, and related data was not provided via reset */
-        if (array_key_exists('related_posts', $fields)) {
+        if (is_array($fields) && array_key_exists('related_posts', $fields)) {
             $relatedPosts = [];
             foreach ($this->getRelatedPosts() as $relatedPost) {
                 $relatedPosts[] = $relatedPost->getDynamicData(
-                    $fields['related_posts']
+                    isset($fields['related_posts']) ? $fields['related_posts'] : null
                 );
             }
             $data['related_posts'] = $relatedPosts;
         }
 
         /* Do not use check for null === $fields here */
-        if (array_key_exists('related_products', $fields)) {
+        if (is_array($fields) && array_key_exists('related_products', $fields)) {
             $relatedProducts = [];
             foreach ($this->getRelatedProducts() as $relatedProduct) {
                 $relatedProducts[] = $relatedProduct->getSku();
@@ -1019,14 +1021,18 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (null === $fields || array_key_exists('categories', $fields)) {
             $categories = [];
             foreach ($this->getParentCategories() as $category) {
-                $categories[] = $category->getDynamicData();
+                $categories[] = $category->getDynamicData(
+                    isset($fields['categories']) ? $fields['categories'] : null
+                );
             }
             $data['categories'] = $categories;
         }
 
         if (null === $fields || array_key_exists('author', $fields)) {
             if ($author = $this->getAuthor()) {
-                $data['author'] = $author->getDynamicData();
+                $data['author'] = $author->getDynamicData(
+                    //isset($fields['author']) ? $fields['author'] : null
+                );
             }
         }
 

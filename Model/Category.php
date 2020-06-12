@@ -481,7 +481,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             $data[$key] = $this->$method();
         }
 
-        if (array_key_exists('breadcrumbs', $fields)) {
+        if (is_array($fields) && array_key_exists('breadcrumbs', $fields)) {
             $breadcrumbs = [];
 
             $category = $this;
@@ -512,6 +512,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             ];
 
             $data['breadcrumbs'] = $breadcrumbs;
+        }
+
+        if (is_array($fields) && array_key_exists('parent_category_id', $fields)) {
+            $data['parent_category_id'] = $this->getParentCategory() ? $this->getParentCategory()->getId() : 0;
+        }
+
+        if (is_array($fields) && array_key_exists('category_level', $fields)) {
+            $data['category_level'] = $this->getLevel();
         }
 
         return $data;
