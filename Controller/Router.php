@@ -287,7 +287,7 @@ class Router implements \Magento\Framework\App\RouterInterface
 
         $_identifier = trim($request->getPathInfo(), '/');
         $blogPage = $this->urlResolver->resolve($_identifier);
-        if (!$blogPage || empty($blogPage['type']) || empty($blogPage['id'])) {
+        if (!$blogPage || empty($blogPage['type']) || (empty($blogPage['id']) && $blogPage['type'] != Url::CONTROLLER_SEARCH)) {
             return null;
         }
 
