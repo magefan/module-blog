@@ -146,6 +146,9 @@ class Url
             '_direct' => $this->getBasePath(),
             '_nosid' => $this->storeId ?: null
         ]);
+        if ($url[strlen($url) - 1] != '/') {
+            $url .= '/';
+        }
         $url = $this->trimSlash($url);
         return $url;
     }
