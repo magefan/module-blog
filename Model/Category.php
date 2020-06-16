@@ -522,6 +522,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             $data['category_level'] = $this->getLevel();
         }
 
+        if (is_array($fields) && array_key_exists('posts_count', $fields)) {
+            $data['posts_count'] = $this->getPostsCount();
+        }
+
+        if (is_array($fields) && array_key_exists('category_url_path', $fields)) {
+            $data['category_url_path'] = $this->getUrl();
+        }
+
         return $data;
     }
 
