@@ -55,7 +55,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
     protected function _toHtml()
     {
         $model = $this->getModel();
-        if (!$model && !$model->getId()) {
+        if (!$model || !$model->getId()) {
             return '';
         }
 
