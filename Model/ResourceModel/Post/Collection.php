@@ -39,9 +39,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
-     * @param Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param null|\Zend_Db_Adapter_Abstract $connection
      * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
+     * @param \Magefan\Blog\Model\CategoryFactory|null $category
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactory $entityFactory,
@@ -51,11 +52,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
+        \Magefan\Blog\Model\CategoryFactory $category = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_date = $date;
         $this->_storeManager = $storeManager;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->category = $category ?: $objectManager->create(
+            \Magefan\Blog\Model\Category::class
+        );
     }
 
     /**
@@ -228,7 +235,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         $categories[$k] = $id;
                     }
                 }
-                
             } else {
                 $select = $connection->select()
                     ->from(['t' => $tableName], 'category_id')
@@ -237,10 +243,18 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         . ' OR ' .
                         $connection->prepareSqlCondition('t.category_id', $categories)
                     );
-                
+
                 $categories = [];
                 foreach ($connection->fetchAll($select) as $item) {
                     $categories[] = $item['category_id'];
+                }
+
+                if (1 === count($categories)) {
+                    /* Fix for graphQL to get posts from child categories when filtering by category */
+                    $this->category->load($categories[0]);
+                    if ($this->category->getId()) {
+                        return $this->addCategoryFilter($this->category);
+                    }
                 }
             }
 
@@ -313,7 +327,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $this->addExpressionFieldToSelect(
                     'search_rate',
                     '(0
-                      + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) 
+                      + FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4)
                       + IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))',
                     [
                         'term' => $this->getConnection()->quote($term)
@@ -367,7 +381,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
             $connection = $this->getConnection();
             $tableName = $this->getTable('magefan_blog_tag');
-            
+
             if (is_numeric(key($tag))) {
                 foreach ($tag as $k => $id) {
                     if (!is_numeric($id)) {
@@ -391,7 +405,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         . ' OR ' .
                         $connection->prepareSqlCondition('t.tag_id', $tag)
                     );
-                
+
                 $tag = [];
                 foreach ($connection->fetchAll($select) as $item) {
                     $tag[] = $item['tag_id'];
