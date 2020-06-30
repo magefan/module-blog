@@ -65,9 +65,25 @@
             <table>
                 <tr>
                     <td>
+                        <div class="itm-hld"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/mageplaza1')) ?>'"
+                            >
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mageplaza_m1.png')) ?>" />
+                            <br/>
+                            <span class="lable">Import from Mageplaza<br/><br/></span>
+                        </div>
+                    </td>
+                <tr>
+            </table>
+        </td>
+        <td class="item">
+            <table>
+                <tr>
+                    <td>
                         <div class="itm-hld" onclick="goToMgImport();">
                             <img class="img"
-                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mageplaza.png')) ?>" />
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mageplaza_m2.png')) ?>" />
                             <br/>
                             <span class="lable">Import from Mageplaza<br/><br/></span>
                             <form id="start_mg_import"
