@@ -6,7 +6,7 @@
         "magefan/module-wysiwyg-advanced" : ">=2.0.9"
     },
     "type": "magento2-module",
-    "version": "2.9.4.4",
+    "version": "2.9.4.5",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
