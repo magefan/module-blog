@@ -32,7 +32,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
 
         $this->_postCollection->getSelect()->order($orderBy.' '.$order);
         if ($this->getCategories()) {
-            $categories = explode(',',trim($this->getCategories()));
+            $categories = explode(',', trim($this->getCategories()));
             $this->_postCollection->addCategoryFilter($categories);
         }
 
@@ -52,7 +52,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         return $this->_postCollection;
     }
 
-    public function getPostedOn($post,$format = 'Y-m-d H:i:s')
+    public function getPostedOn($post, $format = 'Y-m-d H:i:s')
     {
         return date($format, strtotime($post->getData('publish_time')));
     }

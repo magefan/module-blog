@@ -7,7 +7,6 @@
  */
 namespace Magefan\Blog\Block\Post\View\Comments;
 
-
 /**
  * Class HeadFbApi
  */
@@ -27,7 +26,7 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
     public function __construct(
         \Magento\Framework\View\Element\Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    ){
+    ) {
         $this->scopeConfig = $scopeConfig;
         parent::__construct($context);
     }
@@ -37,7 +36,7 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
      */
     public function _toHtml()
     {
-        if ($this->isEnabled() && $this->getCommentType() == 'facebook' && $this->isHeadApiEnabled() &&  $this->getApiId()) {
+        if ($this->isEnabled() && $this->getCommentType() == 'facebook' && $this->isHeadApiEnabled() && $this->getApiId()) {
             return '<meta property="fb:app_id" content="' . $this->escapeHtml($this->getApiId()) . '" />';
         }
     }

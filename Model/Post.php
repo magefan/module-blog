@@ -995,7 +995,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $data['tags'] = $tags;
         }
 
-        /* Do not use check for null === $fields here 
+        /* Do not use check for null === $fields here
          * this checks is used for REST, and related data was not provided via reset */
         if (array_key_exists('related_posts', $fields)) {
             $relatedPosts = [];

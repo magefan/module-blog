@@ -26,5 +26,4 @@ class Autocomplete extends \Magefan\Blog\Controller\Adminhtml\Tag
         $resultJson->setData($collection->getItems($search));
         return $resultJson;
     }
-
 }

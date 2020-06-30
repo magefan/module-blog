@@ -35,9 +35,9 @@
                 <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
                     <?php
                         $featuredImgAlt = $_post->getData('featured_img_alt');
-                        if (!$featuredImgAlt) {
-                            $featuredImgAlt = $_postName;
-                        }
+                    if (!$featuredImgAlt) {
+                        $featuredImgAlt = $_postName;
+                    }
                     ?>
                     <div class="post-ftimg-hld">
                         <img src="<?= $block->escapeUrl($featuredImage) ?>"

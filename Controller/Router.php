@@ -291,7 +291,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             return null;
         }
 
-        switch($blogPage['type']) {
+        switch ($blogPage['type']) {
             case Url::CONTROLLER_INDEX:
                 $blogPage['type'] = 'index';
                 $actionName = 'index';

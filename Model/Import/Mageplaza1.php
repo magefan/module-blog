@@ -361,5 +361,4 @@ class Mageplaza1 extends AbstractImport
 
         return $this->blogAttributes[$attributeCode];
     }
-
 }

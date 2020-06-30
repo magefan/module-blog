@@ -36,7 +36,7 @@ class Comment extends Template implements IdentityInterface
         Template\Context $context,
         array $data = [],
         TimezoneInterface $timezone = null
-    ){
+    ) {
         $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()
             ->get(TimezoneInterface::class);
         parent::__construct($context, $data);

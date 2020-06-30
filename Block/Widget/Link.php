@@ -99,5 +99,4 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
         }
         return $this->model;
     }
-
 }

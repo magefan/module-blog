@@ -347,5 +347,4 @@ class Mirasvit extends AbstractImport
         }
         return null;
     }
-
 }

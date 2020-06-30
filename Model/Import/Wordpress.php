@@ -539,7 +539,7 @@ class Wordpress extends AbstractImport
         }
 
         // replace [caption] with <div>
-        while ( false !== ($p1 = strpos($pee, '[caption')) ) {
+        while (false !== ($p1 = strpos($pee, '[caption'))) {
             $p2 = strpos($pee, ']', $p1);
 
             if (false === $p2) {
@@ -556,7 +556,7 @@ class Wordpress extends AbstractImport
         }
 
         // replace [video] with <div>
-        while ( false !== ($p1 = strpos($pee, '[video')) ) {
+        while (false !== ($p1 = strpos($pee, '[video'))) {
             $p2 = strpos($pee, ']', $p1);
 
             if (false === $p2) {
@@ -571,7 +571,7 @@ class Wordpress extends AbstractImport
                 $len = strlen($format . '="');
                 $x1 = strpos($divElement, $format . '="');
                 if (false !== $x1) {
-                    $x2 = strpos($divElement, '"', $x1 + $len );
+                    $x2 = strpos($divElement, '"', $x1 + $len);
                     if (false !== $x2) {
                         $src = substr($divElement, $x1 + $len, $x2 - $x1 - $len);
                         $source .= '<source src="' . $src . '" type="video/' . $format . '">';
