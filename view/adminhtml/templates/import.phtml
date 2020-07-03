@@ -21,7 +21,7 @@
                 <tr>
                     <td>
                         <div class="itm-hld"
-                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/wordpress')) ?>'">
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'wordpress'])) ?>'">
                             <img class="img"
                                  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/wordpress.png')) ?>" />
                             <br/>
@@ -36,7 +36,7 @@
                 <tr>
                     <td>
                         <div class="itm-hld"
-                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw')) ?>'">
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'aw'])) ?>'">
                             <img class="img"
                                  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/aw_blog.png')) ?>" />
                             <br/>
@@ -51,7 +51,7 @@
                 <tr>
                     <td>
                         <div class="itm-hld"
-                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/aw2')) ?>'">
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'aw2'])) ?>'">
                             <img class="img"
                                  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/aw2_blog.png')) ?>" />
                             <br/>
@@ -66,7 +66,7 @@
                 <tr>
                     <td>
                         <div class="itm-hld"
-                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/mageplaza1')) ?>'"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'mageplaza1'])) ?>'"
                             >
                             <img class="img"
                                  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mageplaza_m1.png')) ?>" />
@@ -81,17 +81,13 @@
             <table>
                 <tr>
                     <td>
-                        <div class="itm-hld" onclick="goToMgImport();">
+                        <div class="itm-hld"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'mageplaza'])) ?>'"
+                            >
                             <img class="img"
                                  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mageplaza_m2.png')) ?>" />
                             <br/>
                             <span class="lable">Import from Mageplaza<br/><br/></span>
-                            <form id="start_mg_import"
-                                  action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>"
-                                  method="post">
-                                <input type="hidden" name="type" value="mageplaza" />
-                                <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
-                            </form>
                         </div>
                     </td>
                 <tr>
@@ -102,17 +98,12 @@
                 <tr>
                     <td>
                         <div class="itm-hld"
-                             onclick="goToMstImport();">
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'mirasvit'])) ?>'"
+                            >
                             <img class="img"
                                  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/mirasvit.png')) ?>" />
                             <br/>
                             <span class="lable">Import from Mirasvit<br/><br/></span>
-                            <form id="start_mst_import"
-                                  action="<?= $block->escapeUrl($block->getUrl('blog/import/run')) ?>"
-                                  method="post">
-                                <input type="hidden" name="type" value="mirasvit" />
-                                <?= $block->getLayout()->getBlock('formkey')->toHtml() ?>
-                            </form>
                         </div>
                     </td>
                 <tr>
@@ -198,18 +189,3 @@
     <?php } ?>
     </tr>
 </table>
-<script type="text/javascript">
-    function goToMgImport()
-    {
-        if (confirm('Are you sure you want to start import Blog? Attention! Do not run this import again.')) {
-            document.getElementById('start_mg_import').submit();
-        }
-    }
-    function goToMstImport()
-    {
-        if (confirm('Are you sure you want to start import Blog? Attention! Do not run this import again.')) {
-            document.getElementById('start_mst_import').submit();
-        }
-    }
-
-</script>

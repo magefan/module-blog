@@ -11,13 +11,13 @@ namespace Magefan\Blog\Block\Adminhtml\Import;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * AheadWorks import block
+ * Form import block
  */
-class Aw extends \Magento\Backend\Block\Widget\Form\Container
+class Form extends \Magento\Backend\Block\Widget\Form\Container
 {
 
     /**
-     * Initialize aheadworks import block
+     * Initialize form import block
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class Aw extends \Magento\Backend\Block\Widget\Form\Container
         $this->_objectId = 'id';
         $this->_blockGroup = 'Magefan_Blog';
         $this->_controller = 'adminhtml_import';
-        $this->_mode = 'aheadworks';
+        $this->_mode = 'form';
 
         parent::_construct();
 

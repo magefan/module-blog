@@ -21,23 +21,6 @@ class Mirasvit extends AbstractImport
 
     public function execute()
     {
-        $config = \Magento\Framework\App\ObjectManager::getInstance()
-            ->get(\Magento\Framework\App\DeploymentConfig::class);
-        $pref = ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT . '/';
-        $this->setData(
-            'dbhost',
-            $config->get($pref . ConfigOptionsListConstants::KEY_HOST)
-        )->setData(
-            'uname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_USER)
-        )->setData(
-            'pwd',
-            $config->get($pref . ConfigOptionsListConstants::KEY_PASSWORD)
-        )->setData(
-            'dbname',
-            $config->get($pref . ConfigOptionsListConstants::KEY_NAME)
-        );
-
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
 
