@@ -12,7 +12,7 @@
         <mfblog>
             <general>
                 <enabled>0</enabled>
-                <mfmodule>Blog</mfmodule>
+<!--                <mfmodule>Blog</mfmodule>-->
                 <mftype>1</mftype>
             </general>
             <design>

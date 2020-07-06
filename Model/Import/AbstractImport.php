@@ -94,15 +94,21 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $dbAdapter;
 
     /**
+     * @var \Magento\Framework\App\ProductMetadataInterface
+     */
+    protected $_productMetadata;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
-     * @param \Magefan\Blog\Model\PostFactory $postFactory,
-     * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory,
-     * @param \Magefan\Blog\Model\TagFactory $tagFactory,
-     * @param \Magefan\Blog\Model\CommentFactory $commentFactory,
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager,
+     * @param \Magefan\Blog\Model\PostFactory $postFactory ,
+     * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory ,
+     * @param \Magefan\Blog\Model\TagFactory $tagFactory ,
+     * @param \Magefan\Blog\Model\CommentFactory $commentFactory ,
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager ,
+     * @param \Magento\Framework\App\ProductMetadataInterface $productMetadata
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
@@ -115,6 +121,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\App\ProductMetadataInterface $productMetadata,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
@@ -124,6 +131,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_tagFactory = $tagFactory;
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
+        $this->_productMetadata = $productMetadata;
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
@@ -229,11 +237,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
                 'password' => $this->getData('pwd'),
                 'charset' => 'utf8',
             ];
-            
+
             if ($this->getData('dbhost')) {
                 $connectionConf['host'] = $this->getData('dbhost');
             }
-            
+
             $this->dbAdapter = new \Zend\Db\Adapter\Adapter($connectionConf);
 
             if (!$this->dbAdapter) {
@@ -241,5 +249,13 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             }
         }
         return $this->dbAdapter;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getMagentoEdition()
+    {
+        return $this->_productMetadata->getEdition();
     }
 }

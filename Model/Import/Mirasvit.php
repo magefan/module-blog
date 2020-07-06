@@ -120,7 +120,7 @@ class Mirasvit extends AbstractImport
         $sql = 'SELECT
                     t.tag_id as old_id,
                     t.name as title,
-                    t.url_key as identifier,    
+                    t.url_key as identifier,
                     1 as is_active
                 FROM ' . $_pref . 'mst_blog_tag t';
 
@@ -164,7 +164,7 @@ class Mirasvit extends AbstractImport
                     t.author_id as author_id,
                     t.created_at as creation_time,
                     t.created_at as publish_time,
-                    t.updated_at as update_time  
+                    t.updated_at as update_time
                 FROM ' . $_pref . 'mst_blog_post_entity t WHERE type="post"';
 
         $result = $adapter->query($sql)->execute();
@@ -202,11 +202,11 @@ class Mirasvit extends AbstractImport
 
             /* Find post categories*/
             $postCategories = [];
-            $c_sql = 'SELECT 
-                          category_id 
-                      FROM 
-                          ' . $_pref . 'mst_blog_category_post 
-                      WHERE 
+            $c_sql = 'SELECT
+                          category_id
+                      FROM
+                          ' . $_pref . 'mst_blog_category_post
+                      WHERE
                           post_id = "'.$data['old_id'].'"';
             $c_result = $adapter->query($c_sql)->execute();
             foreach ($c_result as $c_data) {
@@ -244,7 +244,7 @@ class Mirasvit extends AbstractImport
                 $id = $t_data['product_id'];
                 $postProducts[$id] = $id;
             }
-            
+
             if (count($postProducts)) {
                 $data['links']['product'] = $postProducts;
             }
@@ -257,6 +257,10 @@ class Mirasvit extends AbstractImport
                 $storeIds[] = $data2['store_id'];
             }
             $data['store_ids'] = $storeIds;
+
+            if ('Enterprise' === $this->getMagentoEdition()) {
+                $data['content'] = '<div data-content-type="row" data-appearance="contained" data-element="main"><div data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-element="inner" style="justify-content: flex-start; display: flex; flex-direction: column; background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: scroll; border-style: none; border-width: 1px; border-radius: 0px; margin: 0px 0px 10px; padding: 10px;"><div data-content-type="text" data-appearance="default" data-element="main" style="border-style: none; border-width: 1px; border-radius: 0px; margin: 0px; padding: 0px;">' . $data['content'] . '</div></div></div>';
+            }
 
             $post = $this->_postFactory->create();
             try {

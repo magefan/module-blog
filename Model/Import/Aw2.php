@@ -49,11 +49,11 @@ class Aw2 extends AbstractImport
 
             /* Find store ids */
             $data['store_ids'] = [];
-            $s_sql = 'SELECT 
-                          `store_id` 
-                      FROM 
-                          '.$_pref.'`aw_blog_category_store` 
-                      WHERE 
+            $s_sql = 'SELECT
+                          `store_id`
+                      FROM
+                          '.$_pref.'`aw_blog_category_store`
+                      WHERE
                           `category_id` = '. ((int)$data['old_id']) . ";";
             $s_result =  $adapter->query($s_sql)->execute();
             foreach ($s_result as $s_data) {
@@ -188,6 +188,9 @@ class Aw2 extends AbstractImport
                 'featured_img' => !empty($data['featured_image']) ? 'magefan_blog/' . $data['featured_image'] : '',
             ];
             $data['identifier'] = trim(strtolower($data['identifier']));
+            if ('Enterprise' === $this->getMagentoEdition()) {
+                $data['content'] = '<div data-content-type="row" data-appearance="contained" data-element="main"><div data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-element="inner" style="justify-content: flex-start; display: flex; flex-direction: column; background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: scroll; border-style: none; border-width: 1px; border-radius: 0px; margin: 0px 0px 10px; padding: 10px;"><div data-content-type="text" data-appearance="default" data-element="main" style="border-style: none; border-width: 1px; border-radius: 0px; margin: 0px; padding: 0px;">' . $data['content'] . '</div></div></div>';
+            }
 
             $post = $this->_postFactory->create();
             try {
