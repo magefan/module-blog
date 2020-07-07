@@ -997,7 +997,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         /* Do not use check for null === $fields here
          * this checks is used for REST, and related data was not provided via reset */
-        if (array_key_exists('related_posts', $fields)) {
+        if (null !== $fields && array_key_exists('related_posts', $fields)) {
             $relatedPosts = [];
             foreach ($this->getRelatedPosts() as $relatedPost) {
                 $relatedPosts[] = $relatedPost->getDynamicData(
@@ -1008,7 +1008,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         }
 
         /* Do not use check for null === $fields here */
-        if (array_key_exists('related_products', $fields)) {
+        if (null !== $fields && array_key_exists('related_products', $fields)) {
             $relatedProducts = [];
             foreach ($this->getRelatedProducts() as $relatedProduct) {
                 $relatedProducts[] = $relatedProduct->getSku();
