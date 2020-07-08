@@ -87,7 +87,32 @@ class PostManagement extends AbstractManagement
 
             $posts = [];
             foreach ($collection as $item) {
-                $posts[] = $item->getDynamicData();
+                $data = $item->getData();
+
+                $keys = [
+                    'og_image',
+                    'og_type',
+                    'og_description',
+                    'og_title',
+                    'meta_description',
+                    'meta_title',
+                    'short_filtered_content',
+                    'filtered_content',
+                    'first_image',
+                    'featured_image',
+                    'post_url',
+                ];
+
+                foreach ($keys as $key) {
+                    $method = 'get' . str_replace(
+                            '_',
+                            '',
+                            ucwords($key, '_')
+                        );
+                    $data[$key] = $item->$method();
+                }
+
+                $posts[] = $data;
             }
 
             $result = [

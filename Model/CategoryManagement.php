@@ -28,7 +28,7 @@ class CategoryManagement extends AbstractManagement
     ) {
         $this->_itemFactory = $categoryFactory;
     }
-    
+
      /**
       * Retrieve list of category by page type, term, store, etc
       *
@@ -59,7 +59,24 @@ class CategoryManagement extends AbstractManagement
 
             $categories = [];
             foreach ($collection as $item) {
-                $categories[] = $item->getDynamicData();
+                $data = $item->getData();
+
+                $keys = [
+                    'meta_description',
+                    'meta_title',
+                    'category_url',
+                ];
+
+                foreach ($keys as $key) {
+                    $method = 'get' . str_replace(
+                            '_',
+                            '',
+                            ucwords($key, '_')
+                        );
+                    $data[$key] = $item->$method();
+                }
+
+                $categories[] = $data;
             }
 
             $result = [

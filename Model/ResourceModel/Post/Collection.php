@@ -34,6 +34,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $category;
 
     /**
+     * @var \Magefan\Blog\Model\CategoryFactory
+     */
+    protected $categoryFactory;
+
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -42,7 +47,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param null|\Zend_Db_Adapter_Abstract $connection
      * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
-     * @param \Magefan\Blog\Model\CategoryFactory|null $category
+     * @param \Magefan\Blog\Model\CategoryFactory|null $categoryFactory
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactory $entityFactory,
@@ -53,15 +58,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
-        \Magefan\Blog\Model\CategoryFactory $category = null
+        \Magefan\Blog\Model\CategoryFactory $categoryFactory = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_date = $date;
         $this->_storeManager = $storeManager;
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->category = $category ?: $objectManager->create(
-            \Magefan\Blog\Model\Category::class
+        $this->categoryFactory = $categoryFactory ?: $objectManager->create(
+            \Magefan\Blog\Model\CategoryFactory::class
         );
     }
 
@@ -251,9 +256,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
                 if (1 === count($categories)) {
                     /* Fix for graphQL to get posts from child categories when filtering by category */
-                    $this->category->load($categories[0]);
-                    if ($this->category->getId()) {
-                        return $this->addCategoryFilter($this->category);
+                    $category = $this->categoryFactory->create()->load($categories[0]);
+                    if ($category->getId()) {
+                        return $this->addCategoryFilter($category);
                     }
                 }
             }
