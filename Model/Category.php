@@ -458,9 +458,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Prepare all additional data
+     * @param null|array $fields
      * @return array
      */
-    public function getDynamicData()
+    public function getDynamicData($fields = null)
     {
         $data = $this->getData();
 
@@ -477,6 +478,55 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
                 ucwords($key, '_')
             );
             $data[$key] = $this->$method();
+        }
+
+        if (is_array($fields) && array_key_exists('breadcrumbs', $fields)) {
+            $breadcrumbs = [];
+
+            $category = $this;
+            $parentCategories = [];
+            while ($parentCategory = $category->getParentCategory()) {
+                $parentCategories[] = $category = $parentCategory;
+            }
+
+            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                $category = $parentCategories[$i];
+
+                $breadcrumbs[] = [
+                    'category_id' => $category->getId(),
+                    'category_name' => $category->getTitle(),
+                    'category_level' => $category->getLevel(),
+                    'category_url_key' => $category->getIdentifier(),
+                    'category_url_path' => $category->getUrl(),
+                ];
+            }
+
+            $category = $this;
+            $breadcrumbs[] = [
+                'category_id' => $category->getId(),
+                'category_name' => $category->getTitle(),
+                'category_level' => $category->getLevel(),
+                'category_url_key' => $category->getIdentifier(),
+                'category_url_path' => $category->getUrl(),
+            ];
+
+            $data['breadcrumbs'] = $breadcrumbs;
+        }
+
+        if (is_array($fields) && array_key_exists('parent_category_id', $fields)) {
+            $data['parent_category_id'] = $this->getParentCategory() ? $this->getParentCategory()->getId() : 0;
+        }
+
+        if (is_array($fields) && array_key_exists('category_level', $fields)) {
+            $data['category_level'] = $this->getLevel();
+        }
+
+        if (is_array($fields) && array_key_exists('posts_count', $fields)) {
+            $data['posts_count'] = $this->getPostsCount();
+        }
+
+        if (is_array($fields) && array_key_exists('category_url_path', $fields)) {
+            $data['category_url_path'] = $this->getUrl();
         }
 
         return $data;
