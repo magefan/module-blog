@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Model\ResourceModel\Post;
 
+use Magento\Framework\Exception\NoSuchEntityException;
+
 /**
  * Blog post collection
  */
@@ -34,15 +36,20 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $category;
 
     /**
+     * @var \Magefan\Blog\Api\CategoryRepositoryInterface
+     */
+    private $categoryRepository;
+
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param null|\Zend_Db_Adapter_Abstract $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
-     * @param \Magefan\Blog\Model\CategoryFactory|null $category
+     * @param null $connection
+     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null $resource
+     * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactory $entityFactory,
@@ -53,15 +60,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
-        \Magefan\Blog\Model\CategoryFactory $category = null
+        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_date = $date;
         $this->_storeManager = $storeManager;
 
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->category = $category ?: $objectManager->create(
-            \Magefan\Blog\Model\Category::class
+        $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\CategoryRepositoryInterface::class
         );
     }
 
@@ -251,9 +257,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
                 if (1 === count($categories)) {
                     /* Fix for graphQL to get posts from child categories when filtering by category */
-                    $this->category->load($categories[0]);
-                    if ($this->category->getId()) {
-                        return $this->addCategoryFilter($this->category);
+                    try {
+                        $categoryById = $this->categoryRepository->getById($categories[0]);
+                    } catch (NoSuchEntityException $e) {
+                        $categoryById = false;
+                    }
+
+                    if ($categoryById) {
+                        return $this->addCategoryFilter($categoryById);
                     }
                 }
             }
