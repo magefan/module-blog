@@ -59,24 +59,7 @@ class CategoryManagement extends AbstractManagement
 
             $categories = [];
             foreach ($collection as $item) {
-                $data = $item->getData();
-
-                $keys = [
-                    'meta_description',
-                    'meta_title',
-                    'category_url',
-                ];
-
-                foreach ($keys as $key) {
-                    $method = 'get' . str_replace(
-                            '_',
-                            '',
-                            ucwords($key, '_')
-                        );
-                    $data[$key] = $item->$method();
-                }
-
-                $categories[] = $data;
+                $categories[] = $this->getDynamicData($item);
             }
 
             $result = [
@@ -90,5 +73,31 @@ class CategoryManagement extends AbstractManagement
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * @param $item
+     * @return array
+     */
+    public function getDynamicData($item)
+    {
+        $data = $item->getData();
+
+        $keys = [
+            'meta_description',
+            'meta_title',
+            'category_url',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+            $data[$key] = $item->$method();
+        }
+
+        return $data;
     }
 }

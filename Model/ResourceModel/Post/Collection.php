@@ -34,9 +34,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $category;
 
     /**
-     * @var \Magefan\Blog\Model\CategoryFactory
+     * @var \Magefan\Blog\Api\CategoryRepositoryInterface|null
      */
-    protected $categoryFactory;
+    protected $categoryRepository;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
@@ -47,7 +47,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param null|\Zend_Db_Adapter_Abstract $connection
      * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
-     * @param \Magefan\Blog\Model\CategoryFactory|null $categoryFactory
+     * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactory $entityFactory,
@@ -58,15 +58,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
-        \Magefan\Blog\Model\CategoryFactory $categoryFactory = null
+        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_date = $date;
         $this->_storeManager = $storeManager;
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->categoryFactory = $categoryFactory ?: $objectManager->create(
-            \Magefan\Blog\Model\CategoryFactory::class
+        $this->categoryRepository = $categoryRepository ?: $objectManager->create(
+            \Magefan\Blog\Api\CategoryRepositoryInterface::class
         );
     }
 
@@ -256,9 +256,13 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
                 if (1 === count($categories)) {
                     /* Fix for graphQL to get posts from child categories when filtering by category */
-                    $category = $this->categoryFactory->create()->load($categories[0]);
-                    if ($category->getId()) {
-                        return $this->addCategoryFilter($category);
+                    try {
+                        $category = $this->categoryRepository->getById($categories[0]);
+                        if ($category->getId()) {
+                            return $this->addCategoryFilter($category);
+                        }
+                    } catch (\Exception $e) {
+
                     }
                 }
             }
