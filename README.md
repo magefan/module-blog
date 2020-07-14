@@ -201,6 +201,7 @@ Try out our open demo and if you like our extension **please give us some star o
 ## Add-ons
   * [Blog GraphQL for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
+  * [Blog Integration with Plumrocker AMP Extension](https://github.com/magefan/module-blog-amp)
   * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
 
 
