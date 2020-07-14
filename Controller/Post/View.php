@@ -62,8 +62,8 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected function _initPost()
     {
-        $id = $this->getRequest()->getParam('id');
-        $secret = $this->getRequest()->getParam('secret');
+        $id = (int)$this->getRequest()->getParam('id');
+        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $post = $this->_objectManager->create(\Magefan\Blog\Model\Post::class)->load($id);
