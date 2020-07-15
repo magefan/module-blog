@@ -151,7 +151,8 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
     protected function filterParams($data)
     {
         /* Prepare dates */
-        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\DateTime::class);
+        $dateTimeFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\DateTime::class);
+        $dateFilter = $this->_objectManager->create(\Magento\Framework\Stdlib\DateTime\Filter\Date::class);
 
         $filterRules = [];
         foreach (['publish_time', 'custom_theme_from', 'custom_theme_to'] as $dateField) {
@@ -160,7 +161,10 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                 $data[$dateField] = preg_replace('/(.*)(\+\d\d\d\d\d\d)(\d\d)/U', '$1$3', $data[$dateField]);
 
                 if (!preg_match('/\d{1}:\d{2}/', $data[$dateField])) {
-                    $data[$dateField] .= " 00:00";
+                    /*$data[$dateField] .= " 00:00";*/
+                    $filterRules[$dateField] = $dateFilter;
+                } else {
+                    $filterRules[$dateField] = $dateTimeFilter;
                 }
             }
         }
