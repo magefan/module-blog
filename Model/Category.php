@@ -457,6 +457,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
      * @param null|array $fields
      * @return array

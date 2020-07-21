@@ -121,9 +121,15 @@ abstract class AbstractManagement implements ManagementInterface
                 return false;
             }
 
-            return json_encode($item->getDynamicData());
+            return json_encode($this->getDynamicData($item));
         } catch (\Exception $e) {
             return false;
         }
     }
+
+    /**
+     * @param $item
+     * @return mixed
+     */
+    protected abstract function getDynamicData($item);
 }

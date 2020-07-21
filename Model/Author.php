@@ -164,6 +164,7 @@ class Author extends AbstractModel implements AuthorInterface
     }
 
     /**
+     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
      * @return array
      */

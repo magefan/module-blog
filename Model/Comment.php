@@ -301,6 +301,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
+     * @deprecated use getDynamicData method in graphQL data provider
      * @param null $fields
      * @return array
      */
