@@ -67,7 +67,6 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
     public function moveFileFromTmp($imageName, $returnRelativePath = false)
     {
         $originalImageName = $imageName;
-
         $baseTmpPath = $this->getBaseTmpPath();
         $basePath = $this->getBasePath();
         $baseImagePath = $this->getFilePath($basePath, $imageName);
