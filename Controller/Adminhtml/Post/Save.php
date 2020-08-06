@@ -67,9 +67,9 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                         $imageUploader = $this->_objectManager->get(
                             \Magefan\Blog\ImageUpload::class
                         );
-                        $image = $imageUploader->moveFileFromTmp($image);
+                        $image = $imageUploader->moveFileFromTmp($image, true);
 
-                        $model->setData($key, Post::BASE_MEDIA_PATH . '/' . $image);
+                        $model->setData($key, $image);
                     } else {
                         if (isset($data[$key][0]['name'])) {
                             $model->setData($key, $data[$key][0]['name']);
@@ -104,8 +104,8 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                         $imageUploader = $this->_objectManager->get(
                             \Magefan\Blog\ImageUpload::class
                         );
-                        $image['file'] = $imageUploader->moveFileFromTmp($image['file']);
-                        $gallery[] = Post::BASE_MEDIA_PATH . '/' . $image['file'];
+                        $image['file'] = $imageUploader->moveFileFromTmp($image['file'], true);
+                        $gallery[] = $image['file'];
                     }
                 }
             }

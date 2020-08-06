@@ -31,7 +31,7 @@
                         <arguments>
                             <argument name="is_shuffled" xsi:type="boolean">false</argument>
                             <argument name="can_items_add_to_cart" xsi:type="boolean">false</argument>
-                            <argument name="related_products_type" xsi:type="string">related-rule</argument>
+                            <argument name="related_products_type" xsi:type="string">related</argument>
                         </arguments>
                     </block>
                     <container name="blog.post.comments" label="Comments Container" htmlTag="div" htmlClass="block comments" >
