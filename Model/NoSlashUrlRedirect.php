@@ -60,7 +60,7 @@ class NoSlashUrlRedirect
             $currentUrl = $this->urlInterface->getCurrentUrl();
             $result = explode('?', $currentUrl);
             $result[0] = trim($result[0], '/');
-            $urlNoSlash = implode($result, '?');
+            $urlNoSlash = implode('?', $result);
 
             if ($urlNoSlash != $currentUrl) {
                 $controller = $observer->getEvent()->getData('controller_action');
