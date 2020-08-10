@@ -263,5 +263,6 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Translation Extension](https://magefan.com/magento-2-translation-extension)
   * [Magento 2 WebP Optimized Images Extension](https://magefan.com/magento-2-webp-optimized-images)
   * [Magento 2 Image Optimization Extension](https://magefan.com/magento-2-image-optimization-extension)
+  * [Magento 2 Zendesk Chat Extension](https://magefan.com/magento-2-zendesk-chat-extension)
   * [Magento 2 Zero Downtime Deployment](https://magefan.com/blog/magento-2-zero-downtime-deployment)
 
