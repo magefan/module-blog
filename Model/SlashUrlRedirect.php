@@ -87,7 +87,7 @@ class SlashUrlRedirect
             }
 
             $result[0] = trim($result[0], '/') . '/';
-            $urlSlash = implode($result, '?');
+            $urlSlash = implode('?', $result);
 
             if ($urlSlash != $currentUrl) {
                 $controller = $observer->getEvent()->getData('controller_action');
