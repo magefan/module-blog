@@ -52,16 +52,15 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             trim(strtolower($object->getTitle()))
         );
 
-        if (!$object->getId()) {
-            $tag = $object->getCollection()
-                ->addFieldToFilter('title', $object->getTitle())
-                ->setPageSize(1)
-                ->getFirstItem();
-            if ($tag->getId()) {
-                throw new \Magento\Framework\Exception\LocalizedException(
-                    __('The tag is already exist.')
-                );
-            }
+        $tag = $object->getCollection()
+            ->addFieldToFilter('title', $object->getTitle())
+            ->addFieldToFilter('tag_id', ['neq' => $object->getId()])
+            ->setPageSize(1)
+            ->getFirstItem();
+        if ($tag->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('The tag is already exist.')
+            );
         }
 
         $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
