@@ -12,11 +12,12 @@
         <referenceBlock name="blog.category.container">
             <block class="Magento\Backend\Block\Widget\Grid" name="blog.category.grid" as="grid">
                 <arguments>
-                    <argument name="id" xsi:type="string">subscriberGrid</argument>
+                    <argument name="id" xsi:type="string">mfBlogCategoryGrid</argument>
                     <argument name="dataSource" xsi:type="object">Magefan\Blog\Model\ResourceModel\Category\Collection</argument>
                     <argument name="default_sort" xsi:type="string">id</argument>
                     <argument name="default_dir" xsi:type="string">desc</argument>
                     <argument name="use_ajax" xsi:type="string">1</argument>
+                    <argument name="save_parameters_in_session" xsi:type="string">1</argument>
                 </arguments>
                 <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="blog.category.grid.massaction" as="grid.massaction">
                     <arguments>
