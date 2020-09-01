@@ -283,3 +283,68 @@
     vertical-align: middle;
 }
 /* END Posts List */
+
+
+/* Fix Related Products */
+/*.products-grid .product-item {*/
+/*    display: inline-block;*/
+/*    margin-left: 2%;*/
+/*    width: calc((100% - 2%)/2);*/
+/*}*/
+/*.product-item:nth-child(2n+1) {*/
+/*    margin-left: 0;*/
+/*}*/
+/*.products-grid .product-item .product-item-info {*/
+/*    width: auto;*/
+/*}*/
+/*@media (min-width: 640px){*/
+/*    .products-grid .product-item {*/
+/*        display: inline-block;*/
+/*        margin-left: 2%;*/
+/*        width: calc((100% - 4%)/3);*/
+/*    }*/
+/*    .products-grid .product-item:nth-child(2n+1) {*/
+/*        margin-left: 2%;*/
+/*    }*/
+/*    .products-grid .product-item:nth-child(3n+1) {*/
+/*        margin-left: 0;*/
+/*    }*/
+/*}*/
+@media (min-width: 1024px){
+    .products-grid .product-item {
+        width: calc((100% - 8%)/5);
+        margin-left: 2%;
+    }
+    .products-grid .product-item:nth-child(3n+1) {
+        margin-left: 2%;
+    }
+    .products-grid .product-item:nth-child(5n+1) {
+        margin-left: 0;
+    }
+}
+/* END Fix Related Products */
+
+
+/* Fix Price Related Products */
+/*.products-grid .product-items {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+/*.products-grid .product-item .product-item-info {*/
+/*    width: auto;*/
+/*    height: 100%;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+/*.products-grid .product-item .product-item-info .product-item-photo {*/
+/*    align-self: center;*/
+/*}*/
+/*.products-grid .product-item .product-item-details {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    flex: 1 1;*/
+/*}*/
+/*.products-grid .product-item .price-box {*/
+/*    margin: auto 0 10px;*/
+/*}*/
+/* END Fix Price Related Products */
