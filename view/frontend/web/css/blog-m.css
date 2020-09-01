@@ -283,3 +283,42 @@
     vertical-align: middle;
 }
 /* END Posts List */
+
+/* Fix Related Products */
+.products-grid .product-item {
+    display: inline-block;
+    margin-left: 2%;
+    width: calc((100% - 2%)/2);
+}
+.product-item:nth-child(2n+1) {
+    margin-left: 0;
+}
+.products-grid .product-item .product-item-info {
+    width: auto;
+}
+@media (min-width: 640px){
+    .products-grid .product-item {
+        display: inline-block;
+        margin-left: 2%;
+        width: calc((100% - 4%)/3);
+    }
+    .products-grid .product-item:nth-child(2n+1) {
+        margin-left: 2%;
+    }
+    .products-grid .product-item:nth-child(3n+1) {
+        margin-left: 0;
+    }
+}
+@media (min-width: 1024px){
+    .products-grid .product-item {
+        width: calc((100% - 8%)/5);
+        margin-left: 2%;
+    }
+    .products-grid .product-item:nth-child(3n+1) {
+        margin-left: 2%;
+    }
+    .products-grid .product-item:nth-child(5n+1) {
+        margin-left: 0;
+    }
+}
+/* END Fix Related Products */
