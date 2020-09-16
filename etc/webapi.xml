@@ -16,7 +16,7 @@
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/post" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
       -H "Content-Type:application/json" \
-      -d '{"data":"{\"title\":\"value_1\",\"content\":"Test",\"is_active\":1,\"store_ids\":\"0\"}"}' -->
+      -d '{"data":"{\"title\":\"value_1\",\"content\":\"Test\",\"is_active\":1,\"store_ids\":\"0\"}"}' -->
     <route url="/V1/blog/post" method="POST">
         <service class="Magefan\Blog\Api\PostManagementInterface" method="create"/>
         <resources>
@@ -26,7 +26,7 @@
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/post/:id" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
       -H "Content-Type:application/json" \
-      -d '{"data":"{\"title\":\"value_1\",\"content\":"Test2",\"is_active\":1,\"store_ids\":\"0\"}"}' -->
+      -d '{"data":"{\"title\":\"value_1\",\"content\":\"Test2\",\"is_active\":1,\"store_ids\":\"0\"}"}' -->
     <route url="/V1/blog/post/:id" method="PUT">
         <service class="Magefan\Blog\Api\PostManagementInterface" method="update"/>
         <resources>
