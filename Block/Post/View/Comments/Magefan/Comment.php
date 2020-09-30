@@ -111,7 +111,8 @@ class Comment extends Template implements IdentityInterface
         );
 
         $gmtDate = $this->getComment()->getPublishDate();
+        $gmtTime = strtotime($gmtDate);
 
-        return $this->timezone->date($gmtDate)->format($dateFormat);
+        return $this->timezone->date($gmtTime)->format($dateFormat);
     }
 }
