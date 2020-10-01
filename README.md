@@ -185,12 +185,12 @@ Try out our open demo and if you like our extension **please give us some star o
     </tr>
     <tr>
       <td align="center" valign="middle">
-        <a href="http://blog.demo.magefan.com/blog/">
+        <a href="http://blog.demo.magefan.top/blog/">
           view
         </a>
       </td>
       <td align="center" valign="middle">
-        <a href="http://blog.demo.magefan.com/admin/">
+        <a href="http://blog.demo.magefan.top/admin/">
           view
         </a>
       </td>
