@@ -372,7 +372,7 @@ class Url
     public function getMediaUrl($file)
     {
         return $this->_storeManager->getStore()
-            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'magefan_blog' . $file;
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'magefan_blog/' . $file;
     }
 
     /**
