@@ -1,0 +1,102 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar recent posts template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count()) { ?>
+<h2 style="margin:0 0 18px 0;font-size:18px;font-weight:600;text-align:center" class="theme-color a-center"><?= $block->escapeHtml($block->getTitle()) ?></h2>
+<div class="recent-posts">
+    <div class="owl-carousel">
+    <?php foreach ($_postCollection as $_post) { ?>
+        <?php
+            $_postUrl = $block->escapeUrl($_post->getPostUrl());
+            $_postName = $block->escapeHtml($_post->getTitle());
+        ?>
+        <div class="item">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="post-image">
+                    <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                    <?php if ($featuredImage) { ?>
+                        <?php
+                            $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                            if (!$featuredImgAlt) {
+                                $featuredImgAlt = $_postName;
+                            }
+                        ?>
+                           <img src="<?= $block->escapeHtml($featuredImage) ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="post-date">
+                        <span class="day"><?= $block->escapeHtml($_post->getPublishDate('j')) ?></span>
+                        <span class="month"><?= $block->escapeHtml($_post->getPublishDate('M')) ?></span>
+                    </div>
+                    <div class="postTitle">
+                        <h2><a href="<?= $_postUrl ?>" ><?= $_postName ?></a></h2>
+                    </div>
+                    <?php 
+                        $content = $block->getShorContent($_post);
+                        $content = preg_replace("/<img[^>]+\>/i", "", $content);
+                        $content = preg_replace("#<iframe[^>]+>.*?</iframe>#is", "", $content);
+                    ?>
+                    <div class="postContent"><?= /*@noEscape*/ $content ?></div>
+                    <a class="readmore" href="<?= $_postUrl ?>"><?= $block->escapeHtml(__('Read more &#187;')) ?></a>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    </div>
+    <script>
+        require([
+            'jquery',
+            'owl.carousel/owl.carousel.min'
+        ], function ($) {
+            var owl_5 = $(".recent-posts .owl-carousel").owlCarousel({
+                items: 2,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                margin: 20,
+                navRewind: true,
+                animateIn: 'fadeIn',
+                animateOut: 'fadeOut',
+                loop: false,
+                nav: false,
+                dots: false,
+                navText: ["<em class='porto-icon-chevron-left'></em>","<em class='porto-icon-chevron-right'></em>"],
+
+                responsive: {
+                    0: {
+                        items:1
+                    },
+                    768: {
+                        items:2
+                    },
+                    992: {
+                        items:2
+                    },
+                    1200: {
+                        items:2
+                    }
+                }
+            });
+        });
+    </script>
+</div>
+<?php } ?>
