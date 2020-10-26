@@ -35,7 +35,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected $category;
 
-    /**
+    /*
      * @var \Magefan\Blog\Api\CategoryRepositoryInterface
      */
     private $categoryRepository;
@@ -66,6 +66,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_date = $date;
         $this->_storeManager = $storeManager;
 
+
         $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\CategoryRepositoryInterface::class
         );
@@ -85,6 +86,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
+        $this->_map['fields']['relatedproduct'] = 'relatedproduct_table.related_id';
+
     }
 
     /**
@@ -119,6 +122,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
         if ($field === 'author' || $field === 'author_id') {
             return $this->addAuthorFilter($condition);
+        }
+
+        if ($field === 'relatedproduct' || $field === 'relatedproduct_id') {
+            return $this->addRelatedProductFilter($condition);
         }
 
         if ($field === 'search') {
@@ -258,13 +265,12 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 if (1 === count($categories)) {
                     /* Fix for graphQL to get posts from child categories when filtering by category */
                     try {
-                        $categoryById = $this->categoryRepository->getById($categories[0]);
-                    } catch (NoSuchEntityException $e) {
-                        $categoryById = false;
-                    }
+                        $category = $this->categoryRepository->getById($categories[0]);
+                        if ($category->getId()) {
+                            return $this->addCategoryFilter($category);
+                        }
+                    } catch (\NoSuchEntityException $e) {
 
-                    if ($categoryById) {
-                        return $this->addCategoryFilter($categoryById);
                     }
                 }
             }
@@ -475,6 +481,28 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Add related product filter to collection
+     * @param $product
+     * @return $this
+     */
+    public function addRelatedProductFilter($product)
+    {
+        if (!$this->getFlag('author_filter_added')) {
+            if ($product instanceof \Magento\Catalog\Api\Data\ProductInterface) {
+                $product = [$product->getId()];
+            }
+
+            if (!is_array($product)) {
+                $product = [$product];
+            }
+
+            $this->addFilter('relatedproduct', ['in' => $product], 'public');
+            $this->setFlag('relatedproduct_filter_added', 1);
+        }
+        return $this;
+    }
+
+    /**
      * Add is_active filter to collection
      * @return $this
      */
@@ -589,7 +617,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _renderFiltersBefore()
     {
-        foreach (['store', 'category', 'tag', 'author'] as $key) {
+        foreach (['store', 'category', 'tag', 'author', 'relatedproduct'] as $key) {
 
             if ($this->getFilter($key)) {
 

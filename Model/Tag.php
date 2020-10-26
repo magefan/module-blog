@@ -208,6 +208,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
+     * @deprecated use getDynamicData method in graphQL data provider
      * Return all additional data
      * @return array
      */
