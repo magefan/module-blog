@@ -106,4 +106,18 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
     {
         return $this;
     }
+
+    /**
+     * Fix for MageWorx_XmlSitemap
+     * @return string
+     */
+    public function getSitemapPath(): string
+    {
+        $path = $this->getData('sitemap_path');
+        if ($this->getServerPath()) {
+            return trim($this->getServerPath(), '/') . $path;
+        }
+
+        return $path;
+    }
 }

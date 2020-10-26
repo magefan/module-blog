@@ -59,8 +59,35 @@ class SlashUrlRedirect
         if ($moduleEnabled) {
             $currentUrl = $this->urlInterface->getCurrentUrl();
             $result = explode('?', $currentUrl);
+
+            $advancedPermalinkEnabled =  $this->scopeConfig->getValue(
+                Config::XML_PATH_ADVANCED_PERMALINK_ENABLED,
+                ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$advancedPermalinkEnabled) {
+
+                foreach ([
+                    Url::CONTROLLER_POST,
+                    Url::CONTROLLER_CATEGORY,
+                    Url::CONTROLLER_AUTHOR,
+                    Url::CONTROLLER_TAG
+                ] as $controllerName) {
+
+                    $controllerSufix = $this->scopeConfig->getValue(
+                        'mfblog/permalink/' . $controllerName . '_sufix',
+                        ScopeInterface::SCOPE_STORE
+                    );
+                    if ($controllerSufix) {
+                        if (strpos($result[0], $controllerSufix) == strlen($result[0]) - strlen($controllerSufix) ) {
+                            return;
+                        }
+                    }
+                }
+            }
+
             $result[0] = trim($result[0], '/') . '/';
-            $urlSlash = implode($result, '?');
+            $urlSlash = implode('?', $result);
 
             if ($urlSlash != $currentUrl) {
                 $controller = $observer->getEvent()->getData('controller_action');

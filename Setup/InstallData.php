@@ -83,9 +83,9 @@ class InstallData implements InstallDataInterface
             'content' =>
                 $useLinks
                 ? '<p>Welcome to 
-                    <a title="Magento 2 Blog" 
+                    <a title="Magento Blog" 
                        href="https://magefan.com/magento2-blog-extension" 
-                       target="_blank">Magento 2 Blog</a> by
+                       target="_blank">Magento Blog</a> by
                     <a title="Magento 2 Extensions" 
                        href="https://magefan.com/magento2-extensions"
                        target="_blank">Magefan</a>. 

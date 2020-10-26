@@ -51,9 +51,9 @@
             <?php if ($featuredImage) { ?>
                 <?php
                     $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                    if (!$featuredImgAlt) {
-                        $featuredImgAlt = $_postName;
-                    }
+                if (!$featuredImgAlt) {
+                    $featuredImgAlt = $_postName;
+                }
                 ?>
                 <div class="post-ftimg-hld">
                     <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">

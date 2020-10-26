@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Model\ResourceModel\Post;
 
+use Magento\Framework\Exception\NoSuchEntityException;
+
 /**
  * Blog post collection
  */
@@ -33,10 +35,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected $category;
 
-    /**
-     * @var \Magefan\Blog\Api\CategoryRepositoryInterface|null
+    /*
+     * @var \Magefan\Blog\Api\CategoryRepositoryInterface
      */
-    protected $categoryRepository;
+    private $categoryRepository;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
@@ -45,8 +47,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param null|\Zend_Db_Adapter_Abstract $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
+     * @param null $connection
+     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null $resource
      * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
      */
     public function __construct(
@@ -64,8 +66,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_date = $date;
         $this->_storeManager = $storeManager;
 
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->categoryRepository = $categoryRepository ?: $objectManager->create(
+
+        $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\CategoryRepositoryInterface::class
         );
     }
@@ -267,7 +269,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         if ($category->getId()) {
                             return $this->addCategoryFilter($category);
                         }
-                    } catch (\Exception $e) {
+                    } catch (\NoSuchEntityException $e) {
 
                     }
                 }

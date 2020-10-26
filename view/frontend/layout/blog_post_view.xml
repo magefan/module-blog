@@ -22,7 +22,7 @@
                 <action method="setPostInfoBlockName">
                     <argument name="name" xsi:type="string">blog.post.info</argument>
                 </action>
-                <block class="Magento\Framework\View\Element\Text\ListText" name="blog.post.bottom">
+                <container name="blog.post.bottom" label="Blog Post Bottom Container" >
                     <block class="Magefan\Blog\Block\Post\View\Gallery" name="blog.post.gallery" as="gallery"  template="Magefan_Blog::post/view/gallery.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\NextPrev" name="blog.post.nextprev" as="nextprev"  template="Magefan_Blog::post/view/nextprev.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
@@ -31,7 +31,7 @@
                         <arguments>
                             <argument name="is_shuffled" xsi:type="boolean">false</argument>
                             <argument name="can_items_add_to_cart" xsi:type="boolean">false</argument>
-                            <argument name="related_products_type" xsi:type="string">related-rule</argument>
+                            <argument name="related_products_type" xsi:type="string">related</argument>
                         </arguments>
                     </block>
                     <container name="blog.post.comments" label="Comments Container" htmlTag="div" htmlClass="block comments" >
@@ -54,7 +54,7 @@
                         <block class="Magefan\Blog\Block\Post\View\Comments\Google" name="blog.post.comments.google" template="post/view/comments/google.phtml" />
                     </container>
                     <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
-                </block>
+                </container>
             </block>
         </referenceContainer>
     </body>

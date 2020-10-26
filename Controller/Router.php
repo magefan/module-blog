@@ -285,13 +285,14 @@ class Router implements \Magento\Framework\App\RouterInterface
         }
         */
 
-        $_identifier = trim($request->getPathInfo(), '/');
+        $pathInfo = $request->getPathInfo();
+        $_identifier = trim($pathInfo, '/');
         $blogPage = $this->urlResolver->resolve($_identifier);
-        if (!$blogPage || empty($blogPage['type']) || empty($blogPage['id'])) {
+        if (!$blogPage || empty($blogPage['type']) || (empty($blogPage['id']) && $blogPage['type'] != Url::CONTROLLER_SEARCH)) {
             return null;
         }
 
-        switch($blogPage['type']) {
+        switch ($blogPage['type']) {
             case Url::CONTROLLER_INDEX:
                 $blogPage['type'] = 'index';
                 $actionName = 'index';
@@ -360,7 +361,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             return null;
         }
 
-        $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $_identifier);
+        $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, ltrim($pathInfo, '/'));
 
         return $this->actionFactory->create(
             \Magento\Framework\App\Action\Forward::class,

@@ -101,7 +101,7 @@ class Page extends \Magento\Framework\App\Helper\AbstractHelper
 
         $fullActionName = $action->getRequest()->getFullActionName();
         $resultPage->addHandle($fullActionName);
-        $resultPage->addPageLayoutHandles(['id' => str_replace('/', '_',$page->getIdentifier())]);
+        $resultPage->addPageLayoutHandles(['id' => str_replace('/', '_', $page->getIdentifier())]);
 
         $this->_eventManager->dispatch(
             $fullActionName . '_render',

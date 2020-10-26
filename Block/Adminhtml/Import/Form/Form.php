@@ -6,10 +6,10 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Block\Adminhtml\Import\Wordpress;
+namespace Magefan\Blog\Block\Adminhtml\Import\Form;
 
 /**
- * Wordpress import form block
+ * Form import form block
  */
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
@@ -43,13 +43,14 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      */
     protected function _prepareForm()
     {
-        //Magento\Backend\Model\Session
         $form = $this->_formFactory->create(
             ['data' => ['id' => 'edit_form', 'action' => $this->getData('action'), 'method' => 'post']]
         );
         $form->setUseContainer(true);
 
         $data = $this->_coreRegistry->registry('import_config')->getData();
+
+        $type = $this->getRequest()->getParam('type');
 
         /*
          * Checking if user have permissions to save information
@@ -82,9 +83,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('NOTICE'),
                 'name' => 'prefix',
                 'after_element_html' => 'When the import is completed successfully, 
-                                        please copy image files from WordPress 
-                                        <strong style="color:#bd1616;">wp-content/uploads</strong> 
-                                        directory to Magento 
+                                        please copy image files from the old blog to Magento 
                                         <strong style="color:#105610;">pub/media/magefan_blog</strong> 
                                         directory.',
             ]
@@ -99,7 +98,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'title' => __('Database Name'),
                 'required' => true,
                 'disabled' => $isElementDisabled,
-                'after_element_html' => '<small>The name of the database you run in WP.</small>',
+                'after_element_html' => '<small>The name of the database you run in old blog.</small>',
             ]
         );
 
@@ -112,7 +111,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'name' => 'uname',
                 'required' => true,
                 'disabled' => $isElementDisabled,
-                'after_element_html' => '<small>Your WP MySQL username.</small>',
+                'after_element_html' => '<small>Your old blog MySQL username.</small>',
             ]
         );
 
@@ -125,7 +124,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'name' => 'pwd',
                 'required' => false,
                 'disabled' => $isElementDisabled,
-                'after_element_html' => '<small>…and your WP MySQL password.</small>',
+                'after_element_html' => '<small>…and your old blog MySQL password.</small>',
             ]
         );
 
@@ -138,7 +137,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'name' => 'dbhost',
                 'required' => true,
                 'disabled' => $isElementDisabled,
-                'after_element_html' => '<small>…and your WP MySQL host.</small>',
+                'after_element_html' => '<small>…and your old blog MySQL host.</small>',
             ]
         );
 
@@ -151,55 +150,55 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'name' => 'prefix',
                 'required' => false,
                 'disabled' => $isElementDisabled,
-                'after_element_html' => '<small>…and your WP MySQL table prefix.</small>',
+                'after_element_html' => '<small>…and your old blog MySQL table prefix.</small>',
             ]
         );
 
         /**
          * Check is single store mode
          */
-        if (!$this->_storeManager->isSingleStoreMode()) {
-            $field = $fieldset->addField(
-                'store_id',
-                'select',
-                [
-                    'name' => 'store_id',
-                    'label' => __('Store View'),
-                    'title' => __('Store View'),
-                    'required' => true,
-                    'values' => $this->_systemStore->getStoreValuesForForm(false, true),
-                    'disabled' => $isElementDisabled,
-                ]
-            );
-            $renderer = $this->getLayout()->createBlock(
-                \Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element::class
-            );
-            $field->setRenderer($renderer);
-        } else {
-            $fieldset->addField(
-                'store_id',
-                'hidden',
-                ['name' => 'store_id', 'value' => $this->_storeManager->getStore(true)->getId()]
-            );
+        if (!in_array($type, ['aw', 'aw2', 'mageplaza', 'mageplaza1', 'mirasvit'])) {
+            if (!$this->_storeManager->isSingleStoreMode()) {
+                $field = $fieldset->addField(
+                    'store_id',
+                    'select',
+                    [
+                        'name' => 'store_id',
+                        'label' => __('Store View'),
+                        'title' => __('Store View'),
+                        'required' => true,
+                        'values' => $this->_systemStore->getStoreValuesForForm(false, true),
+                        'disabled' => $isElementDisabled,
+                    ]
+                );
+                $renderer = $this->getLayout()->createBlock(
+                    \Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element::class
+                );
+                $field->setRenderer($renderer);
+            } else {
+                $fieldset->addField(
+                    'store_id',
+                    'hidden',
+                    ['name' => 'store_id', 'value' => $this->_storeManager->getStore(true)->getId()]
+                );
 
-            $data['store_id'] = $this->_storeManager->getStore(true)->getId();
+                $data['store_id'] = $this->_storeManager->getStore(true)->getId();
+            }
         }
 
-        $this->_eventManager->dispatch('magefan_blog_import_wordpress_prepare_form', ['form' => $form]);
+        $this->_eventManager->dispatch('magefan_blog_import_' . $type . '_prepare_form', ['form' => $form]);
 
-        /*if (empty($data['homepageurl'])) {
-            $data['homepageurl'] = $this->getUrl('blog', ['_store' => 1]);
-        }*/
-
+	/*
         if (empty($data['prefix'])) {
             $data['prefix'] = 'wp_';
         }
+        */
 
         if (empty($data['dbhost'])) {
             $data['dbhost'] = 'localhost';
         }
 
-        $data['type'] = 'wordpress';
+        $data['type'] = $type;
 
         $form->setValues($data);
 

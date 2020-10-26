@@ -80,6 +80,11 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
         $this->_itemCollection->getSelect()->order('rl.position', 'ASC');
 
+        $this->_eventManager->dispatch('mfblog_relatedproducts_block_load_collection_before', [
+            'block' => $this,
+            'collection' => $this->_itemCollection
+        ]);
+
         $this->_itemCollection->load();
 
         foreach ($this->_itemCollection as $product) {
@@ -211,6 +216,9 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      */
     protected function _toHtml()
     {
+        if (!$this->displayProducts()) {
+            return '';
+        }
         $html = parent::_toHtml();
         $html = str_replace('product-item" style="display: none;"', 'product-item"', $html);
 

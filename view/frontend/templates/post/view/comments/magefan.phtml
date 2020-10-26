@@ -22,7 +22,7 @@
 ?>
 <div id="post-comments">
     <div class="c-count">
-      <?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?>
+        <?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?>
     </div>
     <!-- reply form -->
     <div class="c-reply cf">
@@ -88,7 +88,7 @@
     </div>
 <?php
     $commentsCount = count($comments);
-    if ($commentsCount) {
+if ($commentsCount) {
     ?>
     <!-- comments list -->
     <div class="c-comments" >

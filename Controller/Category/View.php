@@ -62,7 +62,7 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected function _initCategory()
     {
-        $id = $this->getRequest()->getParam('id');
+        $id = (int)$this->getRequest()->getParam('id');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);

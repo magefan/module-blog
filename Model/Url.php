@@ -142,9 +142,13 @@ class Url
      */
     public function getBaseUrl()
     {
-        $url = $this->_url->getUrl($this->getBasePath(), [
+        $url = $this->_url->getUrl('', [
+            '_direct' => $this->getBasePath(),
             '_nosid' => $this->storeId ?: null
         ]);
+        if ($url[strlen($url) - 1] != '/') {
+            $url .= '/';
+        }
         $url = $this->trimSlash($url);
         return $url;
     }

@@ -6,7 +6,7 @@
 Magento 2 Blog  is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 230 000 downloads.
 
 ## Requirements
-  * Magento Community 2.2.0-2.3.x (CE, EE, ECE, B2B)
+  * Magento Community 2.2.0-2.4.0 (CE, EE, ECE, B2B)
   * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.12. Please install this extension first if you use installation via FTP.
   * **Note** that extension is free only for the Magento Community (Open Source) Edition. For Magento EE, ECE, B2B you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
   * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
@@ -165,7 +165,7 @@ Try out our open demo and if you like our extension **please give us some star o
     </tr>
     <tr>
       <td align="center" valign="middle">
-        <a href="http://blog.demo.magefan.com/blog/">
+        <a href="http://blog.demo.magefan.top/blog/">
           <img
             src="https://magefan.com/static/version1520969775/frontend/Magefan/new/en_US/images/product-tab-demo-1.jpg"
             alt="Magneto 2 Blog Extension Storefront Demo"
@@ -174,7 +174,7 @@ Try out our open demo and if you like our extension **please give us some star o
         </a>
       </td>
       <td align="center" valign="middle">
-        <a href="http://blog.demo.magefan.com/admin/">
+        <a href="http://blog.demo.magefan.top/admin/">
           <img
             src="https://magefan.com/static/version1520969775/frontend/Magefan/new/en_US/images/product-tab-demo-2.jpg"
             alt="Magneto 2 Blog Extension Admin Panel Demo"
@@ -185,12 +185,12 @@ Try out our open demo and if you like our extension **please give us some star o
     </tr>
     <tr>
       <td align="center" valign="middle">
-        <a href="http://blog.demo.magefan.com/blog/">
+        <a href="http://blog.demo.magefan.top/blog/">
           view
         </a>
       </td>
       <td align="center" valign="middle">
-        <a href="http://blog.demo.magefan.com/admin/">
+        <a href="http://blog.demo.magefan.top/admin/">
           view
         </a>
       </td>
@@ -201,6 +201,7 @@ Try out our open demo and if you like our extension **please give us some star o
 ## Add-ons
   * [Blog GraphQL for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
+  * [Blog Integration with Plumrocker AMP Extension](https://github.com/magefan/module-blog-amp)
   * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
 
 
@@ -241,6 +242,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 ## Other [Magento 2 Extensions](https://magefan.com/magento2-extensions) by Magefan
   * [Magento 2 Blog Plus Extension](https://magefan.com/magento2-blog-extension/pricing)
   * [Magento 2 Blog Extra Extension](https://magefan.com/magento2-blog-extension/pricing)
+  * [Magento 2 Multi Blog Extension](https://magefan.com/magento-2-multi-blog-extension)
   * [Magento 2 Login As Customer Extension](https://magefan.com/login-as-customer-magento-2-extension)
   * [Magento 2 Convert Guest to Customer Extension](https://magefan.com/magento2-convert-guest-to-customer)
   * [Magento 2 Facebook Open Graph Extension](https://magefan.com/magento-2-open-graph-extension-og-tags)
@@ -253,12 +255,14 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Lazy Load Extension](https://magefan.com/magento-2-image-lazy-load-extension)
   * [Magento 2 Rocket JavaScript Extension](https://magefan.com/rocket-javascript-deferred-javascript)
   * [Magento 2 CLI Extension](https://magefan.com/magento2-cli-extension)
-  * [Magento Twitter Cards Extension](https://magefan.com/magento-2-twitter-cards-extension)
+  * [Magento 2 Twitter Cards Extension](https://magefan.com/magento-2-twitter-cards-extension)
   * [Magento 2 Mautic Integration Extension](https://magefan.com/magento-2-mautic-extension)
   * [Magento 2 Alternate Hreflang Extension](https://magefan.com/magento2-alternate-hreflang-extension)
   * [Magento 2 Dynamic Categories](https://magefan.com/magento-2-dynamic-categories)
   * [Magento 2 CMS Display Rules Extension](https://magefan.com/magento-2-cms-display-rules-extension)
   * [Magento 2 Translation Extension](https://magefan.com/magento-2-translation-extension)
   * [Magento 2 WebP Optimized Images Extension](https://magefan.com/magento-2-webp-optimized-images)
+  * [Magento 2 Image Optimization Extension](https://magefan.com/magento-2-image-optimization-extension)
+  * [Magento 2 Zendesk Chat Extension](https://magefan.com/magento-2-zendesk-chat-extension)
   * [Magento 2 Zero Downtime Deployment](https://magefan.com/blog/magento-2-zero-downtime-deployment)
 

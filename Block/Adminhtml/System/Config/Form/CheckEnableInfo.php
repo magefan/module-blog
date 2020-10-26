@@ -109,7 +109,7 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
                 continue;
             }
 
-            list($vendor, $name) = explode('_' , $module);
+            list($vendor, $name) = explode('_', $module);
             if ('Magefan' == $vendor) {
                 continue;
             }

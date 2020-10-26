@@ -356,7 +356,6 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         }
 
         return $this->getData('category_url');
-
     }
 
     /**

@@ -80,6 +80,4 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
             $this->slashUrlRedirect->execute($observer);
         }
     }
-
-
 }

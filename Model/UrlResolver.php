@@ -103,10 +103,8 @@ class UrlResolver implements UrlResolverInterface
             if (!isset($pathInfo[2]) || in_array($pathInfo[2], ['index', 'feed'])) {
                 return ['id' => 1, 'type' => Url::CONTROLLER_RSS];
             }
-        } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_SEARCH)
-            && !empty($pathInfo[2])
-        ) {
-            return ['id' => $pathInfo[2], 'type' => Url::CONTROLLER_SEARCH];
+        } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_SEARCH)) {
+            return ['id' => empty($pathInfo[2]) ? '' : $pathInfo[2], 'type' => Url::CONTROLLER_SEARCH];
         } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_AUTHOR)
             && !empty($pathInfo[2])
             && ($authorId = $this->_getAuthorId($pathInfo[2]))
