@@ -108,39 +108,51 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             ];
 
             $author = $comment->getAuthor();
+            $guestData = [
+                'url' => 'mailto:' . $author->getEmail(),
+                'title' => $author->getNickname(),
+                'text' => $author->getNickname() .
+                    ' - ' . $author->getEmail() .
+                    ' (' . __('Guest')  . ')',
+            ];
+
             switch ($comment->getAuthorType()) {
                 case \Magefan\Blog\Model\Config\Source\AuthorType::GUEST:
-                    $this->loadedData[$comment->getId()]['author_url'] = [
-                        'url' => 'mailto:' . $author->getEmail(),
-                        'title' => $author->getNickname(),
-                        'text' => $author->getNickname() .
-                            ' - ' . $author->getEmail() .
-                            ' (' . __('Guest')  . ')',
-                    ];
+                    $this->loadedData[$comment->getId()]['author_url'] = $guestData;
                     break;
                 case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER:
-                    $this->loadedData[$comment->getId()]['author_url'] = [
-                        'url' => $this->url->getUrl(
-                            'customer/index/edit',
-                            ['id' => $comment->getCustomerId()]
-                        ),
-                        'title' => $author->getNickname(),
-                        'text' => '#' . $comment->getCustomerId() .
-                            '. ' . $author->getNickname() .
-                            ' (' . __('Customer')  . ')',
-                    ];
+
+                    if ($author->getCustomer()) {
+                        $this->loadedData[$comment->getId()]['author_url'] = [
+                            'url' => $this->url->getUrl(
+                                'customer/index/edit',
+                                ['id' => $comment->getCustomerId()]
+                            ),
+                            'title' => $author->getNickname(),
+                            'text' => '#' . $comment->getCustomerId() .
+                                '. ' . $author->getNickname() .
+                                ' (' . __('Customer') . ')',
+                        ];
+                    } else {
+                        $this->loadedData[$comment->getId()]['author_url'] = $guestData;
+                    }
+
                     break;
                 case \Magefan\Blog\Model\Config\Source\AuthorType::ADMIN:
-                    $this->loadedData[$comment->getId()]['author_url'] = [
-                        'url' => $this->url->getUrl(
-                            'admin/user/edit',
-                            ['id' => $comment->getAdminId()]
-                        ),
-                        'title' => $author->getNickname(),
-                        'text' => '#' . $comment->getAdminId() .
-                            '. ' . $author->getNickname() .
-                            ' (' . __('Admin')  . ')',
-                    ];
+                    if ($author->getAdmin()) {
+                        $this->loadedData[$comment->getId()]['author_url'] = [
+                            'url' => $this->url->getUrl(
+                                'admin/user/edit',
+                                ['id' => $comment->getAdminId()]
+                            ),
+                            'title' => $author->getNickname(),
+                            'text' => '#' . $comment->getAdminId() .
+                                '. ' . $author->getNickname() .
+                                ' (' . __('Admin') . ')',
+                        ];
+                    } else {
+                        $this->loadedData[$comment->getId()]['author_url'] = $guestData;
+                    }
                     break;
             }
 

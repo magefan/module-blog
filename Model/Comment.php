@@ -179,30 +179,40 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
                 $this->getAuthorType()
             );
 
+            $guestData = [
+                'nickname' => $this->getAuthorNickname(),
+                'email' => $this->getAuthorEmail(),
+            ];
+
             switch ($this->getAuthorType()) {
                 case \Magefan\Blog\Model\Config\Source\AuthorType::GUEST:
-                    $this->author->setData([
-                        'nickname' => $this->getAuthorNickname(),
-                        'email' => $this->getAuthorEmail(),
-                    ]);
+                    $this->author->setData($guestData);
                     break;
                 case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER:
                     $customer = $this->customerFactory->create();
                     $customer->load($this->getCustomerId());
-                    $this->author->setData([
-                        'nickname' => $customer->getName(),
-                        'email' => $this->getEmail(),
-                        'customer' => $customer,
-                    ]);
+                    if ($customer->getId()) {
+                        $this->author->setData([
+                            'nickname' => $customer->getName(),
+                            'email' => $this->getEmail(),
+                            'customer' => $customer,
+                        ]);
+                    } else {
+                        $this->author->setData($guestData);
+                    }
                     break;
                 case \Magefan\Blog\Model\Config\Source\AuthorType::ADMIN:
                     $admin = $this->userFactory->create();
                     $admin->load($this->getAdminId());
-                    $this->author->setData([
-                        'nickname' => $admin->getName(),
-                        'email' => $this->getEmail(),
-                        'admin' => $admin,
-                    ]);
+                    if ($admin->getId()) {
+                        $this->author->setData([
+                            'nickname' => $admin->getName(),
+                            'email' => $this->getEmail(),
+                            'admin' => $admin,
+                        ]);
+                    } else {
+                        $this->author->setData($guestData);
+                    }
                     break;
             }
         }
