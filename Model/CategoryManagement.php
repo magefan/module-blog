@@ -79,7 +79,7 @@ class CategoryManagement extends AbstractManagement
      * @param $item
      * @return array
      */
-    public function getDynamicData($item)
+    protected function getDynamicData($item)
     {
         $data = $item->getData();
 

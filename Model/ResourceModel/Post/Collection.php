@@ -35,7 +35,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected $category;
 
-    /*
+    /**
      * @var \Magefan\Blog\Api\CategoryRepositoryInterface
      */
     private $categoryRepository;
@@ -66,7 +66,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_date = $date;
         $this->_storeManager = $storeManager;
 
-
         $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\CategoryRepositoryInterface::class
         );
@@ -87,7 +86,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['category'] = 'category_table.category_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
         $this->_map['fields']['relatedproduct'] = 'relatedproduct_table.related_id';
-
     }
 
     /**
