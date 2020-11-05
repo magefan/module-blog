@@ -26,7 +26,8 @@
                     <block class="Magefan\Blog\Block\Post\View\Gallery" name="blog.post.gallery" as="gallery"  template="Magefan_Blog::post/view/gallery.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\NextPrev" name="blog.post.nextprev" as="nextprev"  template="Magefan_Blog::post/view/nextprev.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
-                    <!--<block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />-->
+                    <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />
+                    <!--
                     <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magento_Catalog::product/list/items.phtml" >
                         <arguments>
                             <argument name="is_shuffled" xsi:type="boolean">false</argument>
@@ -34,6 +35,7 @@
                             <argument name="related_products_type" xsi:type="string">related</argument>
                         </arguments>
                     </block>
+                    -->
                     <container name="blog.post.comments" label="Comments Container" htmlTag="div" htmlClass="block comments" >
                         <block class="Magefan\Blog\Block\Post\View\Comments\Magefan" name="blog.post.comments.magefan" template="post/view/comments/magefan.phtml">
                             <block class="Magento\Framework\View\Element\Template" name="display_privacy_policy_checkbox" template="Magefan_Blog::post/view/comments/privacy_policy_checkbox.phtml"/>
