@@ -75,11 +75,11 @@ class InstallData implements InstallDataInterface
         $useLinks = \Magefan\Community\Model\UrlChecker::showUrl($url);
 
         $data = [
-            'title' => 'Hello world!',
-            'meta_keywords' => 'magento 2 blog',
+            'title' => 'Magento 2 Blog Post Sample',
+            'meta_keywords' => 'magento 2 blog sample',
             'meta_description' => 'Magento 2 blog default post.',
-            'identifier' => 'hello-world',
-            'content_heading' => 'Hello world!',
+            'identifier' => 'magento-2-blog-post-sample',
+            'content_heading' => 'Magento 2 Blog Post Sample',
             'content' =>
                 $useLinks
                 ? '<p>Welcome to 
@@ -95,19 +95,19 @@ class InstallData implements InstallDataInterface
                 <p>Please also read&nbsp;
                     <a title="Magento 2 Blog online documentation" 
                        href="https://magefan.com/blog/magento-2-blog-extension-documentation" 
-                       target="_blank">Online documentation</a>&nbsp;and&nbsp;
+                       target="_blank">Magento 2 Blog online documentation</a>&nbsp;and&nbsp;
                     <a href="https://magefan.com/blog/add-read-more-tag-to-blog-post-content" 
                        target="_blank">How to add "read more" tag to post content</a>
                 </p>
                 <p>Follow Magefan on:</p>
                 <p>
-                    <a title="Blog Extension for Magento 2" 
+                    <a title="Magento 2 Blog Extension GitHub" 
                        href="https://github.com/magefan/module-blog" 
-                       target="_blank">GitHub</a>&nbsp;|&nbsp;
-                    <a href="https://twitter.com/magento2fan" 
-                       target="_blank">Twitter</a>&nbsp;|&nbsp;
-                    <a href="https://www.facebook.com/magefan/" 
-                       target="_blank">Facebook</a>
+                       target="_blank">Magento 2 Blog Extension GitHub</a>&nbsp;|&nbsp;
+                    <a href="https://twitter.com/magento2fan" title="Magefan at Twitter"
+                       target="_blank">Magefan at Twitter</a>&nbsp;|&nbsp;
+                    <a href="https://www.facebook.com/magefan/"  title="Magefan at Facebook"
+                       target="_blank">Magefan at Facebook</a>
                 </p>'
                 : '<p>Welcome to Magento 2 Blog extension by Magefan.
                         This is your first post. Edit or delete it, then start blogging!
