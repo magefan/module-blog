@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+
+<script>
+    require(['jquery', 'domReady!'], function ($) {
+        var isLoadedInerval = setInterval(isLoaded, 2000);
+
+        function isLoaded() {
+            var el = $('[data-index="related"] .admin__data-grid-pager-wrap');
+
+            if (el.length) {
+                $('[data-index="related"] .admin__data-grid-pager-wrap').click(function () {
+                    $('[data-index="related"] [data-role="spinner"]').show();
+                    setTimeout(function () {
+                        $('[data-index="related"] [data-role="spinner"]').hide();
+                    }, 5000);
+                });
+
+                clearInterval(isLoadedInerval);
+            }
+        }
+    });
+</script>
