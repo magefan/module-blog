@@ -46,6 +46,7 @@
                 </nextprev>
             </post_view>
             <post_list>
+                <set_template>default</set_template>
                 <shortcotent_length>1000</shortcotent_length>
                 <posts_per_page>10</posts_per_page>
                 <lazyload_padding>200</lazyload_padding>
