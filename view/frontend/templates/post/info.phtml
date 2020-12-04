@@ -19,12 +19,14 @@
 <div class="post-info">
     <?php if ($_post->isPublishDateEnabled()) { ?>
         <div class="item post-posed-date">
+            <i class="fa fa-fw fa-calendar"></i>
             <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
             <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
         </div>
     <?php } ?>
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
     <div class="item post-categories">
+        <i class="fa fa-fw fa-folder"></i>
         <span class="label"><?= $block->escapeHtml(__('Categories:')) ?></span>
         <?php $n = 0; ?>
         <?php foreach ($_post->getParentCategories() as $ct) { ?>
@@ -37,27 +39,34 @@
     <?php } ?>
     <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
     <div class="item post-comments">
+        <i class="fa fa-fw fa-comments"></i>
         <span class="label"><?= $block->escapeHtml(__('Comments:')) ?></span>
         <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
            href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
         ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
     </div>
     <?php } ?>
+
+    <?php /*
     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
-    <div class="item post-categories">
+    <div class="item post-tags">
+        <i class="fa fa-fw fa-tags"></i>
         <span class="label"><?= $block->escapeHtml(__('Tags:')) ?></span>
         <?php $n = 0; ?>
         <?php foreach ($_post->getRelatedTags() as $tag) { ?>
             <?php $n++; ?>
             <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
                href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
-            ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_tagsCount) ? ',' : '' ?>
+            ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= /*@noEscape ($n != $_tagsCount) ? ',' : '' ?>
         <?php } ?>
     </div>
-    <?php } ?>
+    <?php }  ?>
+    */ ?>
+
     <?php if ($block->authorEnabled()) { ?>
         <?php if ($_author = $_post->getAuthor()) { ?>
         <div class="item post-author">
+            <i class="fa fa-fw fa-user"></i>
             <span class="label"><?= $block->escapeHtml(__('Author:')) ?></span>
             <span class="value">
                 <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
@@ -78,6 +87,7 @@
     <?php if ($block->viewsCountEnabled()) { ?>
         <?php if ($viewsCount = $_post->getViewsCount()) { ?>
             <div class="item post-views">
+                <i class="fa fa-fw fa-eye" aria-hidden="true"></i>
                 <span class="label"><?= $block->escapeHtml(__('Views:')) ?></span>
                 <span class="value">
                     <?= $block->escapeHtml($viewsCount)?>

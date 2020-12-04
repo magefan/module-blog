@@ -184,4 +184,51 @@ abstract class AbstractList extends Template implements IdentityInterface
             [$this->getNameInLayout()]
         );
     }
+
+   /**
+     * Retrieve 1 if display author information is enabled
+     * @return int
+     */
+    public function authorEnabled()
+    {
+        return (int) $this->_scopeConfig->getValue(
+            'mfblog/author/enabled',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Retrieve 1 if author page is enabled
+     * @return int
+     */
+    public function authorPageEnabled()
+    {
+        return (int) $this->_scopeConfig->getValue(
+            'mfblog/author/page_enabled',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Retrieve true if magefan comments are enabled
+     * @return bool
+     */
+    public function magefanCommentsEnabled()
+    {
+        return $this->_scopeConfig->getValue(
+                'mfblog/post_view/comments/type',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
+    }
+
+    /**
+     * @return bool
+     */
+    public function viewsCountEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/post_view/views_count/enabled',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 }

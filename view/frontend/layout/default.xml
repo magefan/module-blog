@@ -13,6 +13,10 @@
         <css src="Magefan_Blog::css/blog-custom.css" />
     </head>
     <body>
+        <referenceContainer name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="font_awesome" before="-" template="Magefan_Blog::font_awesome.phtml"/>
+        </referenceContainer>
+
         <referenceBlock name="footer_links">
             <block class="Magefan\Blog\Block\Link" name="footer_blog_link" />
         </referenceBlock>

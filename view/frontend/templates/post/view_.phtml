@@ -1,0 +1,75 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $block->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null);
+?>
+<div class="post-view">
+    <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+
+        <div class="post-header clearfix d-none">
+            <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
+                <a class="addthis_button_facebook"></a>
+                <a class="addthis_button_twitter"></a>
+                <a class="addthis_button_email"></a>
+                <a class="addthis_button_compact"></a>
+            </div>
+            <?= $block->getInfoHtml() ?>
+        </div>
+
+        <div class="post-content">
+            <div class="post-description clearfix">
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                    <?php
+                        $featuredImgAlt = $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt = $_postName;
+                        }
+                    ?>
+                    <div class="post-ftimg-hld">
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    </div>
+                <?php } ?>
+
+                <div class="post-tag-hld">
+                    <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                        <div class="item post-tags">
+                            <div class="post-tag-title">Tags</div>
+                            <?php $n = 0; ?>
+                            <?php foreach ($_post->getRelatedTags() as $tag) { ?>
+                                <?php $n++; ?>
+                                <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
+                                   href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
+                                ><?= $block->escapeHtml($tag->getTitle()) ?></a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <div class="post-text-hld">
+                    <?= /*@noEscape*/ $block->getContent() ?>
+                    <div class="clear clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+            <?= $block->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog related posts template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\RelatedPosts
+ */
+?>
+
+<?php if ($block->displayPosts()) { ?>
+    <?php $postCollection = $block->getPostCollection(); ?>
+    <?php if (count($postCollection)) { ?>
+    <div class="block related">
+        <div class="block-title title">
+            <strong id="block-relatedposts-heading" role="heading" aria-level="2">
+                <?= $block->escapeHtml(__('Related Posts')) ?>
+            </strong>
+        </div>
+        <ol class="block-content">
+            <?php foreach ($postCollection as $post) { ?>
+                <li class="item">
+                    <a class="post-item-link" title="<?= $block->escapeHtml($post->getTitle()) ?>"
+                       href="<?= $block->escapeUrl($post->getPostUrl()) ?>">
+                        <?= $block->escapeHtml($post->getTitle()) ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ol>
+    </div>
+    <?php } ?>
+<?php } ?>
+

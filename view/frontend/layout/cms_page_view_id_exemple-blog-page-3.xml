@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="blog-page"/>
+
+        <referenceContainer name="main.content">
+            <block class="Magefan\Blog\Block\Post\PostList" template="Magefan_Blog::widget/block-0-2-full.phtml" before="-" />
+        </referenceContainer>
+
+        <referenceContainer name="sidebar.additional">
+            <block class="Magefan\Blog\Block\Sidebar" name="blog.sidebar" template="sidebar.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Search" name="blog.sidebar.search" template="sidebar/search.phtml" />
+                <block class="Magefan\Blog\Block\Sidebar\Categories" name="blog.sidebar.category" template="sidebar/categories.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml" >
+                    <action method="setBlogTitle">
+                        <argument name="time" xsi:type="string">Recent Posts</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="sidebar/recent.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                    <action method="setBlogTitle">
+                        <argument name="time" xsi:type="string">Featured Posts</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/recent.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                    <action method="setBlogTitle">
+                        <argument name="time" xsi:type="string">Popular Posts</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="sidebar/archive.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\TagClaud" name="blog.sidebar.tagclaud" template="sidebar/tag_claud.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Magefan\Blog\Block\Sidebar\Custom" name="blog.sidebar.custom" template="sidebar/custom.phtml" />
+                <block class="Magefan\Blog\Block\Sidebar\CustomTwo" name="blog.sidebar.custom2" template="sidebar/custom.phtml" />
+                <block class="Magefan\Blog\Block\Sidebar\Rss" name="blog.sidebar.rss" template="sidebar/rss.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+            </block>
+            <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+            <referenceBlock name="wishlist_sidebar" remove="true"/>
+        </referenceContainer>
+    </body>
+</page>
