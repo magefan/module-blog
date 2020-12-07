@@ -83,6 +83,31 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($version, '2.2.0') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'post_list_templates',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 100,
+                    'nullable' => true,
+                    'comment' => 'Post List Templates',
+                ]
+            );
+        }
+        if (version_compare($version, '2.2.0') < 0) {
+        $connection->addColumn(
+            $setup->getTable('magefan_blog_tag'),
+            'post_list_templates',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'length' => 100,
+                'nullable' => true,
+                'comment' => 'Post List Templates',
+            ]
+        );
+    }
+
         if (version_compare($version, '2.2.5') < 0) {
             /* Add layout field to posts and category table */
             foreach (['magefan_blog_post', 'magefan_blog_category'] as $table) {

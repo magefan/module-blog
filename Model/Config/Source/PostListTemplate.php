@@ -1,7 +1,7 @@
 <?php
 namespace Magefan\Blog\Model\Config\Source;
 
-class SetTemplate implements \Magento\Framework\Option\ArrayInterface
+class PostListTemplate implements \Magento\Framework\Option\ArrayInterface
 {
     /**
      * {@inheritdoc}
@@ -11,8 +11,9 @@ class SetTemplate implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
+            ['value' => '', 'label' => __('-- Please Select --')],
             ['value' => 'default', 'label' => __('Default')],
-            ['value' => 'custom', 'label' => __('Custom')]
+            ['value' => 'list', 'label' => __('List')]
         ];
     }
 }

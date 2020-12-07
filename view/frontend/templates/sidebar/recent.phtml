@@ -35,6 +35,11 @@
             ?>
             <div class="item clearfix">
                 <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                <?php
+                    if (!$featuredImage) {
+                    $featuredImage = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                    }
+                ?>
                 <?php if ($featuredImage) { ?>
                     <div class="post-image">
                         <?php

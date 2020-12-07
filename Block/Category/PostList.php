@@ -181,4 +181,19 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
         return [];
     }
+
+    /**
+     * Get relevant path to post template
+     *
+     * @return string
+     */
+    public function getPostTemplate()
+    {
+        $template = $this->getCategory()->getData('template');
+        if ('list' == $template) {
+            return 'Magefan_Blog::post/list/item-grid.phtml';
+        }
+
+        return parent::getPostTemplate();
+    }
 }

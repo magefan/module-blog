@@ -14,9 +14,9 @@
  */
 ?>
 <?php
-    $_post = $block->getPost();
-    $_postUrl = $block->escapeUrl($_post->getPostUrl());
-    $_postName = $block->escapeHtml($_post->getTitle());
+$_post = $block->getPost();
+$_postUrl = $block->escapeUrl($_post->getPostUrl());
+$_postName = $block->escapeHtml($_post->getTitle());
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">
@@ -30,10 +30,10 @@
             </h2>
 
             <div class="addthis_toolbox addthis_default_style"
-                addthis:url="<?= /*@noEscape*/ $_postUrl ?>"
-                addthis:title="<?= /*@noEscape*/ $_postName ?>"
+                 addthis:url="<?= /*@noEscape*/ $_postUrl ?>"
+                 addthis:title="<?= /*@noEscape*/ $_postName ?>"
                 <?php if ($firstImage = $_post->getFirstImage()) { ?>
-                addthis:media="<?= $block->escapeHtml($firstImage) ?>"
+                    addthis:media="<?= $block->escapeHtml($firstImage) ?>"
                 <?php } ?>>
                 <a class="addthis_button_facebook"></a>
                 <a class="addthis_button_twitter"></a>
@@ -50,7 +50,7 @@
             <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
             <?php if ($featuredImage) { ?>
                 <?php
-                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
                 if (!$featuredImgAlt) {
                     $featuredImgAlt = $_postName;
                 }
@@ -68,7 +68,7 @@
             <a class="post-read-more"
                href="<?= /*@noEscape*/ $_postUrl ?>"
                title="<?= /*@noEscape*/ $_postName ?>"
-               >
+            >
                 <?= $block->escapeHtml(__('Read more &#187;')) ?>
             </a>
         </div>

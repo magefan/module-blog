@@ -47,6 +47,10 @@
                     <label>Posts Sort By</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostsSortBy</source_model>
                 </field>
+                <field id="template" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Template</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
+                </field>
                 <field id="post_ids" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Post IDs</label>
                     <depends>
@@ -192,9 +196,9 @@
 
             <group id="post_list" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Post List</label>
-                <field id="set_template" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Set Blog Template</label>
-                    <source_model>Magefan\Blog\Model\Config\Source\SetTemplate</source_model>
+                <field id="template" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Template</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
                 </field>
                 <field id="shortcotent_length" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Default Short Content Length</label>
