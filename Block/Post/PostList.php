@@ -58,18 +58,29 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Get template type
+     *
+     * @return string
+     */
+    protected function getPostTemplateType()
+    {
+        return (string)$this->_scopeConfig->getValue(
+            'mfblog/post_list/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * Get relevant path to template
      *
      * @return string
      */
-    public function getPostTemplate()
+    protected function getPostTemplate()
     {
-        $template = $this->_scopeConfig->getValue(
-            'mfblog/post_list/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-
-        if ('list' == $template) {
+        $type = $this->getPostTemplateType();
+        if ('list' == $type) {
+            return 'Magefan_Blog::post/list/item-list.phtml';
+        }elseif ("grid" == $type){
             return 'Magefan_Blog::post/list/item-grid.phtml';
         }
 

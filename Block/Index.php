@@ -160,4 +160,22 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             );
         }
     }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    protected function getPostTemplateType()
+    {
+        $template = (string)(string)$this->_scopeConfig->getValue(
+            'mfblog/index_page/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template) {
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
 }

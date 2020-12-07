@@ -13,7 +13,8 @@ class PostListTemplate implements \Magento\Framework\Option\ArrayInterface
         return [
             ['value' => '', 'label' => __('-- Please Select --')],
             ['value' => 'default', 'label' => __('Default')],
-            ['value' => 'list', 'label' => __('List')]
+            ['value' => 'list', 'label' => __('List')],
+            ['value' => 'grid', 'label' => __('Grid')],
         ];
     }
 }
