@@ -83,7 +83,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-        if (version_compare($version, '2.2.0') < 0) {
+        if (version_compare($version, '2.9.7') < 0) {
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'post_list_templates',
@@ -95,7 +95,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
-        if (version_compare($version, '2.2.0') < 0) {
+        if (version_compare($version, '2.9.7') < 0) {
         $connection->addColumn(
             $setup->getTable('magefan_blog_tag'),
             'post_list_templates',
