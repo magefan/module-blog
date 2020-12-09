@@ -166,9 +166,9 @@ class Index extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    protected function getPostTemplateType()
+    public function getPostTemplateType()
     {
-        $template = (string)(string)$this->_scopeConfig->getValue(
+        $template = (string)$this->_scopeConfig->getValue(
             'mfblog/index_page/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );

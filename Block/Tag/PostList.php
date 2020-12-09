@@ -87,7 +87,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    protected function getPostTemplateType()
+    public function getPostTemplateType()
     {
         $template = (string)$this->getTag()->getData('post_list_templates');
         if ($template) {
