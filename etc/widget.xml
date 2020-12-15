@@ -18,7 +18,7 @@
             </parameter>
             <parameter name="no_repeat_posts_enable" xsi:type="select"  source_model="Magento\Config\Model\Config\Source\Yesno" visible="true" sort_order="15" >
                 <label translate="true">Don't repeat posts</label>
-                <description translate="true">Set it to YES if you display multiple recent post widget on the same page and don't want them do display the same posts.</description>
+                <description translate="true">Set it to YES if you display multiple recent post widgets on the same page and don't want them do display the same posts.</description>
             </parameter>
             <parameter name="number_of_posts" xsi:type="text"  visible="true" sort_order="20" >
                 <label translate="true">Number of Posts</label>
