@@ -131,6 +131,17 @@
                 </item>
             </argument>
         </field>
+        <field name="posts_limit_per_page">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">integer</item>
+                    <item name="label" xsi:type="string" translate="true">Post Per Page</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="dataScope" xsi:type="string">posts_limit_per_page</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">

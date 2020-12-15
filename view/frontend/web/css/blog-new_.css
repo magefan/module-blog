@@ -798,11 +798,12 @@
 
 
 .clearfix:after {content:"";display:table;clear:both;}
-
+/*
 .blog-page a {color: #222222;text-decoration: none;}
 .blog-page a:hover {color: #4db2ec;text-decoration: none;}
 a:visited, .alink:visited {color: #222222;text-decoration: none;}
 h1, h2, h3, h4, h5, h6 {font-family: sans-serif;}
+*/
 
 .post-holder {margin-bottom: 40px;/*padding: 20px;*/border-radius: 0;color: #222222;}
 .fa, .fas {font-family:'FontAwesome';font-weight: 900;font-size: 48px;}
@@ -849,11 +850,11 @@ button {box-shadow: none !important;}
 /*.post-list .post-view:before {display: inline-block;content: "\f06e";width: 10px;height: 10px;text-align: center;margin-right: 3px;*/
 /*    font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}*/
 /* Read More */
-.post-list .post-read-more {display: none;}
+/*  .post-list .post-read-more {display: none;}  */
 .post-read-more a.post-read {display: inline-block;color: #fff;background-color: #4db2ec;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;}
 .post-read-more a.post-read:hover {color: #fff;background: #222222;}
 @media (max-width: 1200px) {
-    .blog-index-index .post-list .post-read-more {display: none;}
+    .blog-index-index .post-list /*.post-read-more */ {display: none;}
 }
 @media (max-width: 768px) {
     .post-list .post-item.post-holder {margin-bottom: 1.5rem;}
@@ -886,13 +887,13 @@ button {box-shadow: none !important;}
 .blog-post-view .page-title-wrapper .page-title {font-size: 35px;line-height: 1.2;margin-bottom: 20px;}
 /* Category */
 .blog-post-view .post-category a {display: inline-block;margin: 0 5px 0 0;padding: 5px 10px;background: #000;color: #fff;font-size: 11px;line-height: 12px;font-weight: 500;text-decoration: none;text-transform: uppercase;}
-.blog-post-view .post-category a:nth-of-type(1) {background-color: #dd3333;border-color: #dd3333;}
+/*.blog-post-view .post-category a:nth-of-type(1) {background-color: #dd3333;border-color: #dd3333;}
 .blog-post-view .post-category a:nth-of-type(2) {background-color: #f96945;border-color: #f96945;}
 .blog-post-view .post-category a:nth-of-type(3) {background-color: #ff7500;border-color: #ff7500;}
 .blog-post-view .post-category a:nth-of-type(4) {background-color: #4caf50;border-color: #4caf50;}
 .blog-post-view .post-category a:nth-of-type(5) {background-color: #4db2ec;border-color: #4db2ec;}
 .blog-post-view .post-category a:nth-of-type(6) {background-color: #000;border-color: #000;}
-.blog-post-view .post-category a:hover {color: #fff;background: #222222;}
+.blog-post-view .post-category a:hover {color: #fff;background: #222222;}*/
 /* Post Data */
 .blog-post-view .post-data-wrap {font-size: 13px;font-family: sans-serif;margin-bottom: 30px;}
 .blog-post-view .post-data-wrap a {font-weight: 600;}
@@ -969,7 +970,7 @@ button {box-shadow: none !important;}
 /* END Post View ******************************************************************************************************/
 
 
-/* Toolbar Blog Posts *************************************************************************************************/
+/* Toolbar Blog Posts *************************************************************************************************
 .pages .pages-items a {-webkit-transition: all 0s;-ms-transition: all 0s;transition: all 0s;}
 .pages .pages-items .item {border: 1px solid #ccc;}
 .pages .pages-items .item .page {padding: 0 10px;border: none;color: #666;}
@@ -984,11 +985,13 @@ button {box-shadow: none !important;}
 
 
 /* Hover Effect *******************************************************************************************************/
-a {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
-a:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
+/*
+.blog-page a {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
+.blog-page a:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
 
-.sidebar * {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
-.sidebar *:hover {-webkit-transition: all 0.3s;-ms-transition: all 0.3s;transition: all 0.3s;}
+.blog-page .sidebar * {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
+.blog-page .sidebar *:hover {-webkit-transition: all 0.3s;-ms-transition: all 0.3s;transition: all 0.3s;}
+*/
 
 /* Animation Zoom */
 .image-wrap .animation-type-zoom {display: block;line-height: 0;overflow: hidden;position: relative;}
@@ -1003,16 +1006,13 @@ a:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0
 /* END Hover Effect ***************************************************************************************************/
 
 
-/* Sidebar ************************************************************************************************************/
+/* Sidebar ************************************************************************************************************
 .sidebar .widget.block:not(:last-child),
 .sidebar .widget:not(:last-child) {margin-bottom: 30px;}
 
-/* Block Title */
-/*.sidebar .block-compare .block-title,*/
-/*.sidebar .block-reorder .block-title,*/
-/*.sidebar .block-wishlist .block-title,*/
 .sidebar .widget .block-title {margin: 0 0 20px;border-bottom: 1px solid #222222;padding: 5px 0;}
 .sidebar .widget.block .block-title strong {border-bottom: 3px solid #222222;padding-bottom: 3px;font-weight: 400;}
+ */
 
 /* Block Search */
 .widget.blog-search {width:100%;margin-bottom: 40px;position: relative;float: right;}
@@ -1028,7 +1028,7 @@ a:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0
 
 /* Block Category */
 .widget.block-categories .accordion {margin: 5px 0 5px 0;}
-.widget.block-categories .accordion li {list-style:  none;margin: 6px 0 6px 10px;font-weight: 600;color: #222222;}
+.widget.block-categories .accordion li {list-style:  none;margin: 6px 0 6px 10px;font-weight: 600; /*color: #222222;*/}
 .widget.block-categories .accordion li a {display: inline-block;font-weight: 600;}
 .widget.block-categories .accordion>li>ul>li a {font-weight: 400;}
 
@@ -1237,5 +1237,6 @@ a:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0
 }
 /* END Fix Related Products */
 
-/****** COLOR *****/
+/****** COLOR *****
 .blog-page .widget.block a {color: #333333;}
+ */

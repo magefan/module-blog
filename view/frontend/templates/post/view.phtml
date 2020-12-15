@@ -127,10 +127,9 @@
         <div class="post-bottom">
             <div class="post-sharing-bottom mb-4">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <?= $block->getChildHtml('blog.post.bottom') ?>
                 <div class="addthis_inline_share_toolbox"></div>
             </div>
-
-            <?= $block->getChildHtml('blog.post.bottom') ?>
         </div>
     </div>
 </div>

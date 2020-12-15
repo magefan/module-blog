@@ -50,6 +50,26 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
+     * Retrieve Toolbar Block
+     * @return \Magefan\Blog\Block\Post\PostList\Toolbar
+     */
+    public function getToolbarBlock()
+    {
+        $toolBarBlock = parent::getToolbarBlock();
+        $limit = (int)$this->_scopeConfig->getValue(
+            'mfblog/index_page/posts_per_page',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        if ($limit) {
+            $toolBarBlock->setData('limit', $limit);
+        }
+
+        return $toolBarBlock;
+    }
+
+
+    /**
      * Prepare posts collection
      *
      * @return void

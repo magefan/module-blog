@@ -30,7 +30,37 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $version = $context->getVersion();
         $connection = $setup->getConnection();
 
-        if (version_compare($version, '2.0.1') < 0) {
+        if (version_compare($version, '2.4.1') < 1) {
+            /* Add author field to posts table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_tag'),
+                'posts_limit_per_page',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Posts Limit Per Page',
+
+                ]
+            );
+        }
+
+
+
+        if (version_compare($version, '2.4.1') < 1) {
+            /* Add author field to posts table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'posts_limit_per_page',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Posts Limit Per Page',
+
+                ]
+            );
+        }
+
+            if (version_compare($version, '2.0.1') < 0) {
             foreach (['magefan_blog_post_relatedpost', 'magefan_blog_post_relatedproduct'] as $tableName) {
                 // Get module table
                 $tableName = $setup->getTable($tableName);
