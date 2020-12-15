@@ -322,9 +322,19 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
         $tagPostIds = array_unique($tagPostIds);
 
+        $mySqlItems = [
+            ' as ',
+            'life',
+            'guard'
+        ];
+
         $advancedSortingEnabled = true;
-        if (false !== stripos($term, ' as ')) {
-            $advancedSortingEnabled = false;
+        $tmpTerm = ' ' . trim(trim($term), '!.?:,') . ' ';
+        foreach ($mySqlItems as $item) {
+            if (false !== stripos($tmpTerm, $item)) {
+                $advancedSortingEnabled = false;
+                break;
+            }
         }
 
         if (count($tagPostIds)) {
