@@ -13,6 +13,10 @@ namespace Magefan\Blog\Block\Widget;
  */
 class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \Magento\Widget\Block\BlockInterface
 {
+    /**
+     * @var array
+     */
+    static $processedIds = [];
 
     /**
      * @var \Magefan\Blog\Model\CategoryFactory
@@ -51,7 +55,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     /**
      * Set blog template
      *
-     * @return this
+     * @return string
      */
     public function _toHtml()
     {
@@ -59,7 +63,12 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
             $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
         );
 
-        return parent::_toHtml();
+        $html = parent::_toHtml();
+
+        foreach ($this->getPostCollection() as $item) {
+            self::$processedIds[$item->getId()] = $item->getId();
+        }
+        return $html;
     }
 
     /**
@@ -113,6 +122,12 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
             $this->_postCollection
                 ->addFieldToFilter('publish_time', ['lteq' => $to . " 00:00:00"]);
         }
+
+        $enableNoRepeat = $this->getData('no_repeat_posts_enable');
+        if ($enableNoRepeat && self::$processedIds){
+            $this->_postCollection->addFieldToFilter('post_id', ['nin' => self::$processedIds]);
+        }
+
     }
 
     /**

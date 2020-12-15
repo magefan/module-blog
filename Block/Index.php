@@ -72,7 +72,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     /**
      * Prepare posts collection
      *
-     * @return void
+     * @return string
      */
     protected function _preparePostCollection()
     {
@@ -82,6 +82,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
             ScopeInterface::SCOPE_STORE
         );
+
         /* If featured posts enabled */
         if ($displayMode == 1) {
             $postIds = $this->_scopeConfig->getValue(
@@ -197,5 +198,39 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         }
 
         return parent::getPostTemplateType();
+    }
+
+    /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        $displayMode = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+        if (2 == $displayMode) {
+            return '';
+        }
+        return parent::_toHtml();
+    }
+
+    /**
+     * Retrieve identities
+     *git add
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $displayMode = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+        if (2 == $displayMode) {
+            return [];
+        }
+        return parent::getIdentities();
     }
 }
