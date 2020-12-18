@@ -8,8 +8,6 @@
 
 namespace Magefan\Blog\Model\ResourceModel\Post;
 
-use Magento\Framework\Exception\NoSuchEntityException;
-
 /**
  * Blog post collection
  */
@@ -36,9 +34,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $category;
 
     /**
-     * @var \Magefan\Blog\Api\CategoryRepositoryInterface
+     * @var \Magefan\Blog\Api\CategoryRepositoryInterface|null
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
@@ -65,8 +63,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_date = $date;
         $this->_storeManager = $storeManager;
-
-        $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->categoryRepository = $categoryRepository ?: $objectManager->create(
             \Magefan\Blog\Api\CategoryRepositoryInterface::class
         );
     }
@@ -268,7 +266,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                             return $this->addCategoryFilter($category);
                         }
                     } catch (\NoSuchEntityException $e) {
-
                     }
                 }
             }
@@ -432,7 +429,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         return $this;
     }
-
 
     /**
      * Add author filter to collection
@@ -616,10 +612,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _renderFiltersBefore()
     {
         foreach (['store', 'category', 'tag', 'author', 'relatedproduct'] as $key) {
-
             if ($this->getFilter($key)) {
-
-                $joinOptions = new \Magento\Framework\DataObject;
+                $joinOptions = new \Magento\Framework\DataObject();
                 $joinOptions->setData([
                     'key' => $key,
                     'fields' => [],
@@ -630,8 +624,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     ['join_options' => $joinOptions]
                 );
                 $this->getSelect()->join(
-                    [$key.'_table' => $this->getTable('magefan_blog_post_'.$key)],
-                    'main_table.post_id = '.$key.'_table.post_id',
+                    [$key . '_table' => $this->getTable('magefan_blog_post_' . $key)],
+                    'main_table.post_id = ' . $key . '_table.post_id',
                     $joinOptions->getData('fields')
                 )->group(
                     'main_table.post_id'
