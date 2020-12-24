@@ -79,7 +79,8 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
         }
 
         $productMetadata = $objectManager->get(ProductMetadataInterface::class);
-        if (version_compare($productMetadata->getVersion(), '2.3.0', '<')) {
+        $version = str_replace(['dev-', '-develop'], ['', '.0'], $productMetadata->getVersion());
+        if (version_compare($version, '2.3.0', '<')) {
             $this->_sitemapItems = $sitemapItems;
         } else {
             $this->_sitemapItems = [];

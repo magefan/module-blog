@@ -175,6 +175,11 @@ class Url
      */
     public function getCanonicalUrl(\Magento\Framework\Model\AbstractModel $object)
     {
+        if ($object->getData('parent_category')) {
+            $object = clone $object;
+            $object->setData('parent_category', null);
+        }
+
         $storeIds = $object->getStoreIds();
         $useOtherStore = false;
         $currentStore = $this->_storeManager->getStore($object->getStoreId());
