@@ -50,6 +50,9 @@ class View extends \Magefan\Blog\App\Action\Action
     protected function _initAuthor()
     {
         $id = (int)$this->getRequest()->getParam('id');
+        if (!$id) {
+            return false;
+        }
 
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 

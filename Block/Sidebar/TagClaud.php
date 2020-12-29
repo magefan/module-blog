@@ -69,6 +69,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     {
         if ($this->_tags === null) {
             $this->_tags = $this->_tagCollectionFactory->create()
+                ->addStoreFilter($this->_storeManager->getStore()->getId())
                 ->addActiveFilter();
 
             $resource = $this->_tags->getResource();
