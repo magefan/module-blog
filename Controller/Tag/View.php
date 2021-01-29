@@ -64,7 +64,7 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
-        $post->setStoreId($storeId);
+        $tag->setStoreId($storeId);
 
         return $tag;
     }
