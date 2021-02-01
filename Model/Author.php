@@ -203,13 +203,4 @@ class Author extends AbstractModel implements AuthorInterface
     {
         return $this->controllerName;
     }
-
-    /**
-     * Retrieve true if author is active
-     * @return boolean
-     */
-    public function isActive()
-    {
-        return $this->getIsActive();
-    }
 }
