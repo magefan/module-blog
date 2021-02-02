@@ -53,7 +53,7 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
-        if (!$author->getId()) {
+        if (!$author->isActive()) {
             return false;
         }
 
