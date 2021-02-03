@@ -515,7 +515,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     /* Skip <style> tags at the begining of string in calculations */
                     $sp1 = mb_strpos($content, '<style>');
                     if (false !== $sp1) {
-                        $cc = preg_replace("~\<style(.*)\>(.*)\<\/style\>~", " ", $content); /* remove style tag */
+                        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
+                        $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
                         $sp2 = mb_strpos($content, '</style>');
 
                         while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
@@ -536,16 +537,16 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         $cc = $content;
                     }
 
-                    /* Skip long Html */
+                    /* Skip long HTML */
                     $stcc = trim(strip_tags($cc));
-                    if ($stcc && strlen($stcc) < strlen($cc) / 3) {
+                    //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
                         $str = '';
                         $start = false;
                         foreach (explode(' ', $stcc) as $s) {
                             $str .= ($str ? ' ' : '') . $s;
 
                         
-                            $pos = mb_strpos($content,  $str, $len);
+                            $pos = mb_strpos($content, $str, $len);
                             if (false !== $pos) {
                                 $start = $pos;
                             } else {
@@ -558,9 +559,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                                 $len = $start + $oLen;
                             }
                         }
-                    }
+                    //}
                 }
-
 
                 /* Do not cut words */
                 while ($len < strlen($content)
