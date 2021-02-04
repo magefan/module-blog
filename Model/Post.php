@@ -540,6 +540,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     /* Skip long HTML */
                     $stcc = trim(strip_tags($cc));
                     //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
+                    if ($len < mb_strlen($content)) {
                         $str = '';
                         $start = false;
                         foreach (explode(' ', $stcc) as $s) {
@@ -559,7 +560,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                                 $len = $start + $oLen;
                             }
                         }
-                    //}
+                    }
                 }
 
                 /* Do not cut words */
