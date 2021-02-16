@@ -74,7 +74,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
         if (!$href) {
             return $this->escapeHtml($title);
         } else {
-            return '<a href="' . $this->escapeUrl($href) . '" title="' . $this->escapeHtml($anchorText) . '">' . $this->escapeHtml($title) . '</a>';
+            return '<a href="' . $this->escapeUrl($href) . '" title="' . $this->escapeHtml($title) . '">' . $this->escapeHtml($anchorText) . '</a>';
         }
     }
 
