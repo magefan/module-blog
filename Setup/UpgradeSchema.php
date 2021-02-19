@@ -503,7 +503,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
-        
+
         if (version_compare($version, '2.7.2') < 0) {
             /* Add position column into post table */
             $connection->addColumn(
@@ -736,6 +736,51 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
+
+
+
+        if (version_compare($version, '2.9.8') < 0) {
+            /**
+             * Create table 'magefan_blog_tag_store'
+             */
+            $table = $connection->newTable(
+                $setup->getTable('magefan_blog_tag_store')
+            )->addColumn(
+                'tag_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'primary' => true],
+                'Tag ID'
+            )->addColumn(
+                'store_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                null,
+                ['unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Store ID'
+            )->addIndex(
+                $setup->getIdxName('magefan_blog_tag_store', ['store_id']),
+                ['store_id']
+            )->addForeignKey(
+                $setup->getFkName('magefan_blog_tag_store', 'tag_id', 'magefan_blog_tag', 'tag_id'),
+                'tag_id',
+                $setup->getTable('magefan_blog_tag'),
+                'tag_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            )->addForeignKey(
+                $setup->getFkName('magefan_blog_tag_store', 'store_id', 'store', 'store_id'),
+                'store_id',
+                $setup->getTable('store'),
+                'store_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            )->setComment(
+                'Magefan Blog Tag To Store Linkage Table'
+            );
+            $connection->createTable($table);
+        }
+
+
+
+
         $setup->endSetup();
     }
 }

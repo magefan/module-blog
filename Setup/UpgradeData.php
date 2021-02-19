@@ -21,7 +21,8 @@ class UpgradeData implements UpgradeDataInterface
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(), '2.9.1') < 0) {
+        $version = $context->getVersion();
+        if (version_compare($version, '2.9.1') < 0) {
             $connection = $this->commentResource->getConnection();
             $postSelect = $connection->select()->from(
                 [$this->commentResource->getTable('magefan_blog_post')]
@@ -30,6 +31,34 @@ class UpgradeData implements UpgradeDataInterface
             $posts = $connection->fetchAll($postSelect);
             foreach ($posts as $post) {
                 $this->commentResource->updatePostCommentsCount($post['post_id']);
+            }
+        }
+
+        if (version_compare($version, '2.9.8') < 0) {
+            $connection = $this->commentResource->getConnection();
+            $tagSelect = $connection->select()->from(
+                [$this->commentResource->getTable('magefan_blog_tag')]
+            );
+            $tags = $connection->fetchAll($tagSelect);
+
+
+            $count = count($tags);
+            if ($count) {
+                $data = [];
+                foreach ($tags as $i => $tag) {
+                    $data[] = [
+                        'tag_id' => $tag['tag_id'],
+                        'store_id' => 0,
+                    ];
+
+                    if (count($data) == 100 || $i == $count - 1) {
+                        $this->commentResource->getConnection()->insertMultiple(
+                            $this->commentResource->getTable('magefan_blog_tag_store'),
+                            $data
+                        );
+                        $data = [];
+                    }
+                }
             }
         }
     }

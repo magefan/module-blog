@@ -770,6 +770,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (null === $this->_relatedTags) {
             $this->_relatedTags = $this->_tagCollectionFactory->create()
                 ->addFieldToFilter('tag_id', ['in' => $this->getTags()])
+                ->addStoreFilter($this->getStoreId())
                 ->addActiveFilter()
                 ->setOrder('title');
         }
