@@ -20,7 +20,7 @@ class PostLinks extends \Magefan\Blog\Block\Category\PostList
      *
      * @return $this
      */
-    public function _beforeToHtml()
+    protected function _beforeToHtml()
     {
         return \Magefan\Blog\Block\Post\PostList\AbstractList::_beforeToHtml();
     }
