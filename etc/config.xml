@@ -22,6 +22,7 @@
             <index_page>
                 <title>Blog</title>
                 <display_mode>0></display_mode>
+                <template>default</template>
             </index_page>
             <post_view>
                 <related_posts>
@@ -46,6 +47,7 @@
                 </nextprev>
             </post_view>
             <post_list>
+                <template>default</template>
                 <shortcotent_length>1000</shortcotent_length>
                 <posts_per_page>10</posts_per_page>
                 <lazyload_padding>200</lazyload_padding>

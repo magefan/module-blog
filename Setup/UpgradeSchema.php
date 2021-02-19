@@ -30,7 +30,37 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $version = $context->getVersion();
         $connection = $setup->getConnection();
 
-        if (version_compare($version, '2.0.1') < 0) {
+        if (version_compare($version, '2.4.1') < 1) {
+            /* Add author field to posts table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_tag'),
+                'posts_limit_per_page',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Posts Limit Per Page',
+
+                ]
+            );
+        }
+
+
+
+        if (version_compare($version, '2.4.1') < 1) {
+            /* Add author field to posts table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'posts_limit_per_page',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Posts Limit Per Page',
+
+                ]
+            );
+        }
+
+            if (version_compare($version, '2.0.1') < 0) {
             foreach (['magefan_blog_post_relatedpost', 'magefan_blog_post_relatedproduct'] as $tableName) {
                 // Get module table
                 $tableName = $setup->getTable($tableName);
@@ -82,6 +112,31 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ['author_id']
             );
         }
+
+        if (version_compare($version, '2.9.7') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'post_list_templates',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 100,
+                    'nullable' => true,
+                    'comment' => 'Post List Templates',
+                ]
+            );
+        }
+        if (version_compare($version, '2.9.7') < 0) {
+        $connection->addColumn(
+            $setup->getTable('magefan_blog_tag'),
+            'post_list_templates',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'length' => 100,
+                'nullable' => true,
+                'comment' => 'Post List Templates',
+            ]
+        );
+    }
 
         if (version_compare($version, '2.2.5') < 0) {
             /* Add layout field to posts and category table */

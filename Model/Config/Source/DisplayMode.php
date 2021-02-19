@@ -22,6 +22,11 @@ class DisplayMode implements \Magento\Framework\Option\ArrayInterface
      * @const int
      */
     const APPROVED = 1;
+
+    /**
+     * @const int
+     */
+    const BLANK = 2;
     
     /**
      * Options int
@@ -33,6 +38,8 @@ class DisplayMode implements \Magento\Framework\Option\ArrayInterface
         return  [
             ['value' => self::PENDING, 'label' => __('Recent Blog Posts')],
             ['value' => self::APPROVED, 'label' => __('Featured Blog Posts')],
+            ['value' => self::BLANK, 'label' => __('Blank (Use widgets to build the page content)')],
+
         ];
     }
 

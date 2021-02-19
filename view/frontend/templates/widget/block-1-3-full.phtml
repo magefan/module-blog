@@ -1,0 +1,102 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+    $count = (int) $_postCollection->count();
+?>
+
+<?php if ($count) { ?>
+<!-- Three column Post List Full Width Template 1-3 -->
+<div class="template-1-3 mb-5">
+    <div class="block-inner">
+        <!-- block title -->
+        <?php if ($block->getTitle()) { ?>
+            <div class="block-title-wrap">
+                <h4 class="block-title m-0"><?= $block->escapeHtml($block->getTitle()) ?></h4>
+            </div>
+        <?php } ?>
+
+        <!-- block content -->
+        <div class="block-content">
+            <!-- post list -->
+            <div class="post-list">
+            <?php foreach ($_postCollection as $_post) { ?>
+                <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+                ?>
+                <!-- post item -->
+                <div class="post-item mb-4">
+                    <!-- img container -->
+                    <div class="image-container">
+                        <!-- post image -->
+                        <a class="image-wrap _4x3" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                            <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                            <?php if ($featuredImage) { ?>
+                                <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                if (!$featuredImgAlt) {
+                                    $featuredImgAlt = $_postName;
+                                }
+                                ?>
+                                <span class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                            <?php } ?>
+                        </a>
+                    </div>
+
+                    <!-- block info -->
+                    <div class="post-info">
+                        <!-- post title -->
+                        <div class="post-title-wrap mb-2">
+                            <h3 class="post-title m-0">
+                                <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                            </h3>
+                        </div>
+
+
+                        <!-- block data -->
+                        <div class="post-data-wrap mb-3">
+                            <!-- post author -->
+                            <?php if ($block->authorEnabled()) { ?>
+                                <?php if ($_author = $_post->getAuthor()) { ?>
+                                    <span class="post-author-name">
+                                    <?php if ($block->authorPageEnabled()) { ?>
+                                        <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                           href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                        </a>
+                                    <?php } else { ?>
+                                        <?= $block->escapeHtml($_author->getTitle()) ?>
+                                    <?php } ?>
+                                    <span>-</span>
+                                </span>
+                                <?php } ?>
+                            <?php } ?>
+
+                            <!-- post data -->
+                            <?php if ($_post->isPublishDateEnabled()) { ?>
+                                <span class="post-data"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <!-- end post item -->
+            <?php } ?>
+            </div>
+            <!-- END post list -->
+        </div>
+    </div>
+</div>
+<?php } ?>

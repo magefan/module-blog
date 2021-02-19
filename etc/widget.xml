@@ -16,6 +16,10 @@
                 <label translate="true">Title</label>
                 <description translate="true">Please specify title you want to display on the frontend. You can leave it blank if necessary.</description>
             </parameter>
+            <parameter name="no_repeat_posts_enable" xsi:type="select"  source_model="Magento\Config\Model\Config\Source\Yesno" visible="true" sort_order="15" >
+                <label translate="true">Don't repeat posts</label>
+                <description translate="true">Set it to YES if you display multiple recent post widgets on the same page and don't want them do display the same posts.</description>
+            </parameter>
             <parameter name="number_of_posts" xsi:type="text"  visible="true" sort_order="20" >
                 <label translate="true">Number of Posts</label>
                 <description translate="true">Please indicate number of recent posts you want to display. Leave blank to use predefined "Posts Per Page" value.</description>

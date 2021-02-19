@@ -81,4 +81,35 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
         return parent::_prepareLayout();
     }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    public function getPostTemplateType()
+    {
+        $template = (string)$this->getTag()->getData('post_list_templates');
+        if ($template) {
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
+
+    /**
+     * Retrieve Toolbar Block
+     * @return \Magefan\Blog\Block\Post\PostList\Toolbar
+     */
+    public function getToolbarBlock()
+    {
+        $toolBarBlock = parent::getToolbarBlock();
+        $limit = (int)$this->getTag()->getData('posts_limit_per_page');
+
+        if ($limit) {
+            $toolBarBlock->setData('limit', $limit);
+        }
+
+        return $toolBarBlock;
+    }
 }

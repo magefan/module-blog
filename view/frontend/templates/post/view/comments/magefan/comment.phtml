@@ -24,9 +24,12 @@
         <img src="<?= $block->escapeUrl($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
-    <div class="c-post c-post-<?= (int)$comment->getId() ?>"
-         id="c-post-<?= (int)$comment->getId() ?>">
-        <div class="p-name"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+    <div class="c-post c-post-<?= (int)$comment->getId() ?>" id="c-post-<?= (int)$comment->getId() ?>">
+        <div class="p-info">
+            <div class="p-name"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+            <div class="publish-date"><?php echo $block->escapeHtml($block->getPublishDate()) ?></div>
+        </div>
+
         <div class="p-text"><?= /*@noEscape*/ nl2br($block->escapeHtml($comment->getText())) ?></div>
         <div class="p-actions">
             <a href="#" class="reply-action"
@@ -34,7 +37,6 @@
                    (int)$comment->getParentId() :
                    (int)$comment->getId() ?>"
                title="<?= $block->escapeHtml(__('Reply')) ?>"><?= $block->escapeHtml(__('Reply')) ?></a>
-            <span class="publish-date"><?php echo $block->escapeHtml($block->getPublishDate()) ?></span>
         </div>
         <?php
             $replies = $block->getRepliesCollection();
