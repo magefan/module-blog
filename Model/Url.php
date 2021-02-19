@@ -200,7 +200,7 @@ class Url
         $storeChanged = false;
         if ($useOtherStore) {
             $scope = $this->_url->getScope();
-            if ($scope && $newStore->getId() != $this->_url->getScope()->getId()) {
+            if ($scope && $newStore->getId() != $scope->getId()) {
                 $this->startStoreEmulation($newStore);
                 $storeChanged = true;
             }
