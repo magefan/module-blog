@@ -10,8 +10,9 @@
         "magefan/module-blog-graph-ql": "Install this module to activate GraphQl integration for the blog.",
         "magefan/module-blog-amp": "Install this module to activate Blog integration with the Plumrocket AMP extension."
     },
+    "license": "Magefan EULA",
     "type": "magento2-module",
-    "version": "2.9.7",
+    "version": "2.9.8",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {

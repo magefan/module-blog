@@ -44,8 +44,21 @@ class Collection extends AbstractCollection
      */
     public function addFieldToFilter($field, $condition = null)
     {
+        if (is_array($field)) {
+            if (count($field) > 1) {
+                return parent::addFieldToFilter($field, $condition);
+            } elseif (count($field) === 1) {
+                $field = $field[0];
+                $condition = $condition[0] ?? $condition;
+            }
+        }
+
         if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition);
+        }
+
+        if ($field === 'post_id') {
+            return $this->addPostFilter($condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -84,6 +97,61 @@ class Collection extends AbstractCollection
 
             $this->addFilter('store', ['in' => $store], 'public');
             $this->setFlag('store_filter_added', 1);
+        }
+        return $this;
+    }
+
+    /**
+     * Add post filter to collection
+     * @param array|int|string|\Magefan\Blog\Model\Post  $post
+     * @return $this
+     */
+    public function addPostFilter($post)
+    {
+        if (!$this->getFlag('post_filter_added')) {
+            if ($post instanceof \Magefan\Blog\Model\Post) {
+                $post = [$post->getId()];
+            }
+
+            if (!is_array($post)) {
+                $post = [$post];
+            }
+
+            $connection = $this->getConnection();
+            $tableName = $this->getTable('magefan_blog_post');
+
+            if (is_numeric(key($post))) {
+                foreach ($post as $k => $id) {
+                    if (!is_numeric($id)) {
+                        $select = $connection->select()
+                            ->from(['t' => $tableName], 'post_id')
+                            ->where('t.identifier = ?', $id);
+
+                        $id = $connection->fetchOne($select);
+                        if (!$id) {
+                            $id = 0;
+                        }
+
+                        $post[$k] = $id;
+                    }
+                }
+            } else {
+                $select = $connection->select()
+                    ->from(['t' => $tableName], 'post_id')
+                    ->where(
+                        $connection->prepareSqlCondition('t.identifier', $post)
+                        . ' OR ' .
+                        $connection->prepareSqlCondition('t.post_id', $post)
+                    );
+
+                $post = [];
+                foreach ($connection->fetchAll($select) as $item) {
+                    $post[] = $item['post_id'];
+                }
+            }
+
+            $this->addFilter('post_id', ['in' => $post], 'public');
+            $this->setFlag('post_filter_added', 1);
         }
         return $this;
     }

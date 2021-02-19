@@ -67,7 +67,7 @@ class Mageplaza extends AbstractImport
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 unset($category);
                 $this->_skippedCategories[] = $data['title'];
-                $this->_logger->addDebug('Blog Category Import [' . $data['title'] . ']: '. $e->getMessage());
+                $this->_logger->debug('Blog Category Import [' . $data['title'] . ']: '. $e->getMessage());
             }
         }
 
@@ -152,7 +152,7 @@ class Mageplaza extends AbstractImport
                 }
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedTags[] = $data['title'];
-                $this->_logger->addDebug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());
+                $this->_logger->debug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());
             }
         }
 
@@ -263,7 +263,7 @@ class Mageplaza extends AbstractImport
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
-                $this->_logger->addDebug('Blog Post Import [' . $data['title'] . ']: '. $e->getMessage());
+                $this->_logger->debug('Blog Post Import [' . $data['title'] . ']: '. $e->getMessage());
             }
             unset($post);
         }

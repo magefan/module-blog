@@ -100,7 +100,7 @@ class Image extends AbstractHelper
      * @param null $height
      * @return $this
      */
-    public function resize($width, $height = null)
+    public function resize($width, $height = null, $keepFrame = null)
     {
         if ($this->_baseFile) {
             $pathinfo = pathinfo(($this->_baseFile));
@@ -108,9 +108,13 @@ class Image extends AbstractHelper
                 $this->_newFile = $this->_baseFile;
             } else {
                 $path = 'blog/cache/' . $width . 'x' . $height;
+                if (null !== $keepFrame) {
+                    $path .= '_' . (int)$keepFrame;
+                }
+
                 $this->_newFile = $path . '/' . $this->_baseFile;
                 if (!$this->fileExists($this->_newFile)) {
-                    $this->resizeBaseFile($width, $height);
+                    $this->resizeBaseFile($width, $height, $keepFrame);
                 }
             }
         }
@@ -122,18 +126,22 @@ class Image extends AbstractHelper
      * @param $height
      * @return $this
      */
-    protected function resizeBaseFile($width, $height)
+    protected function resizeBaseFile($width, $height, $keepFrame)
     {
         if (!$this->fileExists($this->_baseFile)) {
             $this->_baseFile = null;
             return $this;
         }
 
+        if (null === $keepFrame) {
+            $keepFrame = $this->_keepFrame;
+        }
+
         $processor = $this->_imageFactory->create(
             $this->_mediaDirectory->getAbsolutePath($this->_baseFile)
         );
         $processor->keepAspectRatio($this->_keepAspectRatio);
-        $processor->keepFrame($this->_keepFrame);
+        $processor->keepFrame((bool)$keepFrame);
         $processor->keepTransparency($this->_keepTransparency);
         $processor->constrainOnly($this->_constrainOnly);
         $processor->backgroundColor($this->_backgroundColor);
@@ -165,8 +173,8 @@ class Image extends AbstractHelper
         $url = "";
         if ($this->_baseFile) {
             $url = $this->_storeManager->getStore()->getBaseUrl(
-                \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-            ) . $this->_newFile;
+                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                ) . $this->_newFile;
         }
         return $url;
     }
