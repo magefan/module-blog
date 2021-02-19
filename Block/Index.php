@@ -72,7 +72,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     /**
      * Prepare posts collection
      *
-     * @return string
+     * @return void
      */
     protected function _preparePostCollection()
     {
