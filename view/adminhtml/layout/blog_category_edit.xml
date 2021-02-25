@@ -14,7 +14,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="blog_category_form"/>
-            <block name="tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />
+            <block name="mfblog.tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />
         </referenceContainer>
     </body>
 </page>
