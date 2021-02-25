@@ -19,7 +19,7 @@
         <referenceContainer name="content">
             <uiComponent name="blog_post_form"/>
             <block class="Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete" name="post.tag.autocomplete" template="Magefan_Blog::post/tag/autocomplete.phtml" />
-            <block name="tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />
+            <block name="mfblog.tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />
         </referenceContainer>
     </body>
 </page>
