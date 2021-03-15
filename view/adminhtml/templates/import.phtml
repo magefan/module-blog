@@ -188,4 +188,21 @@
         <td class="item"></td>
     <?php } ?>
     </tr>
+    <tr>
+        <td class="item">
+            <table>
+                <tr>
+                    <td>
+                        <div class="itm-hld"
+                             onclick="window.location='<?= $block->escapeUrl($block->getUrl('blog/import/form', ['type' => 'articles'])) ?>'">
+                            <img class="img"
+                                 src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/articles.jpg')) ?>" />
+                            <br/>
+                            <span class="lable">Import from M1 Articles<br/><br/></span>
+                        </div>
+                    </td>
+                <tr>
+            </table>
+        </td>
+    </tr>
 </table>
