@@ -131,7 +131,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $date ? $this->date = $date : $this->date = $objectManager->create(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+        $this->date = $date ?:  $objectManager->create(\Magento\Framework\Stdlib\DateTime\DateTime::class);
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
