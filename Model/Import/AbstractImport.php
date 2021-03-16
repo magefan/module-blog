@@ -107,9 +107,9 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      * @param array $data
      */
     public function __construct(
@@ -120,9 +120,9 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\Stdlib\DateTime\DateTime $date,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Stdlib\DateTime\DateTime $date = null,
         array $data = []
     ) {
         $this->_postFactory = $postFactory;
@@ -130,8 +130,8 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_tagFactory = $tagFactory;
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
-        $this->date = $date;
-
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $date ? $this->date = $date : $this->date = $objectManager->create(\Magento\Framework\Stdlib\DateTime\DateTime::class);
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 

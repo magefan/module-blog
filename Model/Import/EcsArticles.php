@@ -11,7 +11,7 @@ namespace Magefan\Blog\Model\Import;
 /**
  * Articles import model
  */
-class Articles extends AbstractImport
+class EcsArticles extends AbstractImport
 {
     protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
 
