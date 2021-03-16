@@ -171,7 +171,7 @@ class EcsArticles extends AbstractImport
             }
 
             /* Prepare post data */
-            $pastDate = $this->date->gmtDate();
+            $postDate = $this->date->gmtDate();
             $data = [
                 'old_id' => $data['entity_id'],
                 'store_ids' => $data['store_ids'],
@@ -181,9 +181,9 @@ class EcsArticles extends AbstractImport
                 'content_heading' => '',
                 'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['summary']),
                 'short_content' => $data['summary'],
-                'creation_time' => strtotime($data['created_at']),
-                'update_time' => strtotime($data['updated_at']),
-                'publish_time' => $pastDate,/*strtotime($data['published_at'])*/
+                'creation_time' => $postDate,/*strtotime($data['created_at'])*/
+                'update_time' => $postDate,/*strtotime($data['updated_at'])*/
+                'publish_time' => $postDate,/*strtotime($data['published_at'])*/
                 'is_active' => (int)($data['status'] == 1),
                 'categories' => $postCategories,
                 'tags' => $postTags,
