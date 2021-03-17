@@ -179,7 +179,7 @@ class EcsArticles extends AbstractImport
                 'meta_keywords' => $data['meta_keywords'],
                 'meta_description' => $data['meta_description'],
                 'content_heading' => '',
-                'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['summary']),
+                'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['content']),
                 'short_content' => $data['summary'],
                 'creation_time' => $postDate,/*strtotime($data['created_at'])*/
                 'update_time' => $postDate,/*strtotime($data['updated_at'])*/
