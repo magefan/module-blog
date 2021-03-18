@@ -114,7 +114,6 @@ class EcsArticles extends AbstractImport
                     } else {
                         $tag->save();
                     }
-
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
                     $oldTags[$tag->getOldId()] = $tag;
@@ -210,6 +209,32 @@ class EcsArticles extends AbstractImport
                 $data['author_id'] = null;
             }
 
+            /* Find post video*/
+            $postVideos = '';
+            $c_sql = 'SELECT * FROM '.
+                $_pref.'ecs_articles_video WHERE entity_id = "'.$data['video_id'].'"';
+
+            $c_result = $adapter->query($c_sql)->execute();
+            $prepareUrl = '';
+            foreach ($c_result as $c_data) {
+                if (isset($c_data['entity_id'])) {
+                    if (strpos($c_data['url'], 'vimeo')) {
+                        $videoId = preg_replace( '/[^0-9]/', '', $c_data['url']);
+                        $prepareUrl = 'https://player.vimeo.com/video/' . $videoId;
+
+                    }elseif (strpos($c_data['url'], 'youtube')){
+                        parse_str( parse_url( $c_data['url'], PHP_URL_QUERY ), $videoId );
+                        $prepareUrl = 'https://www.youtube.com/embed/' . $videoId['v'];
+                    }
+                    $postVideos .= '<iframe 
+                        src="' . $prepareUrl . '" 
+                        title="' . $c_data['title'] . '"
+                        width="640" 
+                        height="360" 
+                        frameborder="0" 
+                        ></iframe> <br>';
+                }
+            }
 
             if ($data['status'] > 0) {
                 $data['status'] = 1;
@@ -228,7 +253,7 @@ class EcsArticles extends AbstractImport
                 'meta_keywords' => $data['meta_keywords'],
                 'meta_description' => $data['meta_description'],
                 'content_heading' => '',
-                'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['content']),
+                'content' => $postVideos . $data['content'],
                 'short_content' => $data['summary'],
                 'creation_time' => $postDate,/*strtotime($data['created_at'])*/
                 'update_time' => $postDate,/*strtotime($data['updated_at'])*/
