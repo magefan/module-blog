@@ -64,6 +64,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_importedCommentsCount = 0;
 
     /**
+     * @var integer
+     */
+    protected $_importedAuthorsCount = 0;
+
+    /**
      * @var array
      */
     protected $_skippedPosts = [];
@@ -84,6 +89,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_skippedComments = [];
 
     /**
+     * @var array
+     */
+    protected $_skippedAuthors = [];
+
+    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -99,17 +109,23 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $date;
 
     /**
+     * @var \Magefan\BlogAuthor\Model\AuthorFactory
+     */
+    protected $_authorFactory;
+
+    /**
      * AbstractImport constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
+     * @param \Magefan\BlogAuthor\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime|null $date
      * @param array $data
      */
     public function __construct(
@@ -118,6 +134,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
         \Magefan\Blog\Model\TagFactory $tagFactory,
+        \Magefan\BlogAuthor\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
@@ -128,6 +145,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
         $this->_tagFactory = $tagFactory;
+        $this->_authorFactory = $authorFactory;
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -146,19 +164,23 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             'imported_categories_count' => $this->_importedCategoriesCount,
             'imported_tags_count'       => $this->_importedTagsCount,
             'imported_comments_count'   => $this->_importedCommentsCount,
+            'imported_authors_count'   => $this->_importedAuthorsCount,
             'imported_count'            => $this->_importedPostsCount +
                                             $this->_importedCategoriesCount +
                                             $this->_importedTagsCount +
                                             $this->_importedCommentsCount,
+                                            $this->_importedAuthorsCount,
 
             'skipped_posts'             => $this->_skippedPosts,
             'skipped_categories'        => $this->_skippedCategories,
             'skipped_tags'              => $this->_skippedTags,
             'skipped_comments'          => $this->_skippedComments,
+            'skipped_authors'          => $this->_skippedAuthors,
             'skipped_count'             => count($this->_skippedPosts) +
                                             count($this->_skippedCategories) +
                                             count($this->_skippedTags) +
                                             count($this->_skippedComments),
+                                            count($this->_skippedAuthors),
         ]);
     }
 

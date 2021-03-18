@@ -129,6 +129,46 @@ class EcsArticles extends AbstractImport
             }
         }
 
+        /* Import authors */
+        $authors = [];
+        $oldAuthors = [];
+
+        $sql = 'SELECT
+                    t.entity_id as old_id,
+                    t.first_name as firstname,
+                    t.last_name as lastname,
+                    t.description as content,
+                    t.picture as featured_img,
+                    t.status as is_active,
+                    t.meta_title as meta_title,
+                    t.meta_keywords as meta_keywords,
+                    t.meta_description as meta_description
+                FROM '.$_pref.'ecs_articles_author t';
+
+        $result = $adapter->query($sql)->execute();
+        foreach ($result as $data) {
+
+            if (!$data['firstname'] || !$data['lastname'] || !$data['old_id']) {
+                continue;
+            }
+
+            $data['firstname'] = trim($data['firstname']);
+            $data['lastname'] = trim($data['lastname']);
+
+
+            try {
+                $author = $this->_authorFactory->create();
+                $author->setData($data);
+                $author->save();
+                $this->_importedAuthorsCount++;
+                $authors[$author->getId()] = $author;
+                $oldAuthors[$author->getOldId()] = $author;
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->_skippedAuthors[] = $data['firstname'] . ' ' . $data['lastname'];
+                $this->_logger->debug('Blog Author Import [' . $data['firstname'] . ' ' . $data['lastname'] . ']: '. $e->getMessage());
+            }
+        }
+
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'ecs_articles_article';
         $result = $adapter->query($sql)->execute();
@@ -162,6 +202,15 @@ class EcsArticles extends AbstractImport
                 }
             }
 
+            /* Find post author */
+            $oldAuthorId = $data['author_id'];
+            if (isset($oldAuthors[$oldAuthorId])) {
+                $data['author_id'] = $oldAuthors[$oldAuthorId]->getId();
+            } else {
+                $data['author_id'] = null;
+            }
+
+
             if ($data['status'] > 0) {
                 $data['status'] = 1;
             }
@@ -186,6 +235,7 @@ class EcsArticles extends AbstractImport
                 'publish_time' => $postDate,/*strtotime($data['published_at'])*/
                 'is_active' => (int)($data['status'] == 1),
                 'categories' => $postCategories,
+                'author_id' => $data['author_id'],
                 'tags' => $postTags,
                 'featured_img' => !empty($data['photo_credits']) ? 'magefan_blog/' . $data['photo_credits'] : '',
             ];
