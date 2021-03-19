@@ -262,7 +262,7 @@ class EcsArticles extends AbstractImport
                 'categories' => $postCategories,
                 'author_id' => $data['author_id'],
                 'tags' => $postTags,
-                'featured_img' => !empty($data['photo_credits']) ? 'magefan_blog/' . $data['photo_credits'] : '',
+                'featured_img' => !empty($data['image']) ? 'magefan_blog/' . $data['image'] : '',
             ];
 
             $post = $this->_postFactory->create();
