@@ -120,11 +120,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
-     * @param \Magefan\BlogAuthor\Model\AuthorFactory $authorFactory
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
+     * @param \Magefan\BlogAuthor\Model\AuthorFactory|null $authorFactory
      * @param \Magento\Framework\Stdlib\DateTime\DateTime|null $date
      * @param array $data
      */
@@ -134,21 +134,21 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
         \Magefan\Blog\Model\TagFactory $tagFactory,
-        \Magefan\BlogAuthor\Model\AuthorFactory $authorFactory,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magefan\BlogAuthor\Model\AuthorFactory $authorFactory = null,
         \Magento\Framework\Stdlib\DateTime\DateTime $date = null,
         array $data = []
     ) {
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
         $this->_tagFactory = $tagFactory;
-        $this->_authorFactory = $authorFactory;
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->_authorFactory = $authorFactory ?:  $objectManager->create(\Magefan\BlogAuthor\Model\AuthorFactory::class);
         $this->date = $date ?:  $objectManager->create(\Magento\Framework\Stdlib\DateTime\DateTime::class);
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
