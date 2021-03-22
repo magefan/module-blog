@@ -114,6 +114,12 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_authorFactory;
 
     /**
+     * @var \Magento\Catalog\Model\ProductRepository|mixed
+     */
+    protected $productRepository;
+
+
+    /**
      * AbstractImport constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
@@ -126,6 +132,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param \Magefan\BlogAuthor\Model\AuthorFactory|null $authorFactory
      * @param \Magento\Framework\Stdlib\DateTime\DateTime|null $date
+     * @param \Magento\Catalog\Model\ProductRepository|null $productRepository
      * @param array $data
      */
     public function __construct(
@@ -140,6 +147,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         \Magefan\BlogAuthor\Model\AuthorFactory $authorFactory = null,
         \Magento\Framework\Stdlib\DateTime\DateTime $date = null,
+        \Magento\Catalog\Model\ProductRepository $productRepository = null,
         array $data = []
     ) {
         $this->_postFactory = $postFactory;
@@ -148,9 +156,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->_authorFactory = $authorFactory ?:  $objectManager->create(\Magefan\BlogAuthor\Model\AuthorFactory::class);
-        $this->date = $date ?:  $objectManager->create(\Magento\Framework\Stdlib\DateTime\DateTime::class);
-        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+        $this->_authorFactory = $authorFactory ?: $objectManager->create(\Magefan\BlogAuthor\Model\AuthorFactory::class);
+        $this->date = $date ?: $objectManager->create(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+        $this->productRepository = $productRepository ?: $objectManager->create(\Magento\Catalog\Model\ProductRepository::class);
+
+parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
     /**

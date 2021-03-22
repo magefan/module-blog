@@ -141,7 +141,8 @@ class EcsArticles extends AbstractImport
                     t.status as is_active,
                     t.meta_title as meta_title,
                     t.meta_keywords as meta_keywords,
-                    t.meta_description as meta_description
+                    t.meta_description as meta_description,
+                    t.url_key as identifier
                 FROM '.$_pref.'ecs_articles_author t';
 
         $result = $adapter->query($sql)->execute();
@@ -215,17 +216,20 @@ class EcsArticles extends AbstractImport
                 $_pref.'ecs_articles_video WHERE entity_id = "'.$data['video_id'].'"';
 
             $c_result = $adapter->query($c_sql)->execute();
-            $prepareUrl = '';
             foreach ($c_result as $c_data) {
+                $prepareUrl = '';
                 if (isset($c_data['entity_id'])) {
                     if (strpos($c_data['url'], 'vimeo')) {
                         $videoId = preg_replace( '/[^0-9]/', '', $c_data['url']);
                         $prepareUrl = 'https://player.vimeo.com/video/' . $videoId;
+                        $videoId = '';
 
                     }elseif (strpos($c_data['url'], 'youtube')){
                         parse_str( parse_url( $c_data['url'], PHP_URL_QUERY ), $videoId );
                         $prepareUrl = 'https://www.youtube.com/embed/' . $videoId['v'];
+                        $videoId['v'] = '';
                     }
+
                     $postVideos .= '<iframe 
                         src="' . $prepareUrl . '" 
                         title="' . $c_data['title'] . '"
@@ -236,6 +240,27 @@ class EcsArticles extends AbstractImport
                 }
             }
 
+            /* Find post related product*/
+            $c_sql = 'SELECT * FROM '. $_pref.'ecs_articles_article_product tr
+                    LEFT JOIN '.$_pref.'catalog_product_entity tt ON tr.product_id = tt.entity_id
+                    WHERE article_id = "'.$data['entity_id'].'"';
+
+            $c_result = $adapter->query($c_sql)->execute();
+            $postProducts = [];
+            foreach ($c_result as $c_data) {
+                if (isset($c_data['sku'])) {
+                    try {
+                        $product = $this->productRepository->get($c_data['sku']);
+                        $postProducts[$c_data['rel_id']] = $product->getId();
+                    } catch (\Exception $e) {
+
+                    }
+                }
+            }
+            if (count($postProducts)) {
+                $data['links']['product'] = $postProducts;
+            }
+
             if ($data['status'] > 0) {
                 $data['status'] = 1;
             }
@@ -244,14 +269,23 @@ class EcsArticles extends AbstractImport
                 $data['store_ids'] = 0;
             }
 
+            if (!empty($data['image'])) {
+                $imagePost = 'magefan_blog' . $data['image'];
+            }elseif (!empty($data['highlight_image'])){
+                $imagePost = 'magefan_blog' . $data['highlight_image'];
+            }else {
+                $imagePost = '';
+            }
             /* Prepare post data */
             $postDate = $this->date->gmtDate();
             $data = [
                 'old_id' => $data['entity_id'],
                 'store_ids' => $data['store_ids'],
                 'title' => $data['title'],
+                'meta_title' => $data['meta_title'],
                 'meta_keywords' => $data['meta_keywords'],
                 'meta_description' => $data['meta_description'],
+                'identifier' => $data['url_key'],
                 'content_heading' => '',
                 'content' => $postVideos . $data['content'],
                 'short_content' => $data['summary'],
@@ -262,8 +296,12 @@ class EcsArticles extends AbstractImport
                 'categories' => $postCategories,
                 'author_id' => $data['author_id'],
                 'tags' => $postTags,
-                'featured_img' => !empty($data['image']) ? 'magefan_blog/' . $data['image'] : '',
+                'featured_img' => $imagePost
             ];
+
+            if (count($postProducts)) {
+                $data['links']['product'] = $postProducts;
+            }
 
             $post = $this->_postFactory->create();
             try {
