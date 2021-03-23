@@ -251,14 +251,11 @@ class EcsArticles extends AbstractImport
                 if (isset($c_data['sku'])) {
                     try {
                         $product = $this->productRepository->get($c_data['sku']);
-                        $postProducts[$c_data['rel_id']] = $product->getId();
+                        $postProducts[$product->getId()] = $product->getId();
                     } catch (\Exception $e) {
 
                     }
                 }
-            }
-            if (count($postProducts)) {
-                $data['links']['product'] = $postProducts;
             }
 
             if ($data['status'] > 0) {
