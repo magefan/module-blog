@@ -155,6 +155,7 @@ class EcsArticles extends AbstractImport
             $data['firstname'] = trim($data['firstname']);
             $data['lastname'] = trim($data['lastname']);
 
+            $data['featured_img'] = 'magefan_blogauthor' . $data['featured_img'];
 
             try {
                 $author = $this->_authorFactory->create();
