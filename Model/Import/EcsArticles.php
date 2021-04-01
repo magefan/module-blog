@@ -275,7 +275,6 @@ class EcsArticles extends AbstractImport
                 $imagePost = '';
             }
             /* Prepare post data */
-            $postDate = $this->date->gmtDate();
             $data = [
                 'old_id' => $data['entity_id'],
                 'store_ids' => $data['store_ids'],
@@ -287,9 +286,9 @@ class EcsArticles extends AbstractImport
                 'content_heading' => '',
                 'content' => $postVideos . $data['content'],
                 'short_content' => $data['summary'],
-                'creation_time' => $postDate,/*strtotime($data['created_at'])*/
-                'update_time' => $postDate,/*strtotime($data['updated_at'])*/
-                'publish_time' => $postDate,/*strtotime($data['published_at'])*/
+                'creation_time' => $data['created_at'],
+                'update_time' => $data['updated_at'],
+                'publish_time' => $data['published_at'],
                 'is_active' => (int)($data['status'] == 1),
                 'categories' => $postCategories,
                 'author_id' => $data['author_id'],
