@@ -142,7 +142,9 @@ class EcsArticles extends AbstractImport
                     t.meta_title as meta_title,
                     t.meta_keywords as meta_keywords,
                     t.meta_description as meta_description,
-                    t.url_key as identifier
+                    t.url_key as identifier,
+                    t.created_at as creation_time,
+                    t.updated_at as update_time
                 FROM '.$_pref.'ecs_articles_author t';
 
         $result = $adapter->query($sql)->execute();
