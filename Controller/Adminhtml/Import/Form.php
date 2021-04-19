@@ -8,23 +8,33 @@
 
 namespace Magefan\Blog\Controller\Adminhtml\Import;
 
+use Magento\Framework\Exception\LocalizedException;
 /**
  * Blog prepare import controller
  */
 class Form extends \Magento\Backend\App\Action
 {
     /**
+     * @var  \Magefan\Blog\Model\Config
+     */
+    private $config;
+
+    /**
      * Prepare wordpress import
      * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
-        $type = $this->getRequest()->getParam('type');
         try {
-
-            if (!$type) {
-                throw new \Exception(__('Blog import type is not specified.'), 1);
+            if (!$this->getConfig()->isEnabled()) {
+                throw new LocalizedException(__(strrev('golB > snoisnetxE nafegaM > noitarugifnoC > serotS ni noisnetxe golb elbane esaelP')));
             }
+
+            $type = (string)$this->getRequest()->getParam('type');
+            if (!$type) {
+                throw new LocalizedException(__('Blog import type is not specified.'));
+            }
+
             $_type = ucfirst($type);
 
             $this->_view->loadLayout();
@@ -41,8 +51,11 @@ class Form extends \Magento\Backend\App\Action
 
             $this->_view->renderLayout();
 
+        } catch (LocalizedException $e) {
+            $this->messageManager->addExceptionMessage($e);
+            $this->_redirect('*/*/index');
         } catch (\Exception $e) {
-            $this->messageManager->addException($e, __('Something went wrong: ').' '.$e->getMessage());
+            $this->messageManager->addExceptionMessage($e, __('Something went wrong: ').' '.$e->getMessage());
             $this->_redirect('*/*/index');
         }
     }
@@ -55,5 +68,20 @@ class Form extends \Magento\Backend\App\Action
     protected function _isAllowed()
     {
         return $this->_authorization->isAllowed('Magefan_Blog::import');
+    }
+
+
+    /**
+     * Retrieve store config value
+     *
+     * @return string | null | bool
+     */
+    protected function getConfig()
+    {
+        if (null === $this->config) {
+            $this->config = $this->_objectManager->get(\Magefan\Blog\Model\Config::class);
+        }
+
+        return $this->config;
     }
 }

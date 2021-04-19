@@ -5,11 +5,12 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
-table.available-imports {width:100%; max-width:850px;}
-table.available-imports td.item {width:25%;}
-table.available-imports td {text-align: center; margin:0px; padding:0px;}
-table.available-imports td .itm-hld  {margin: 10px; padding: 20px; background: #373330; cursor: pointer;}
-table.available-imports td .itm-hld:hover {background:#524D49; }
-table.available-imports td .img {width:200px; height:200px; max-width: 200px; margin:5px;}
-table.available-imports td .more {background: #AAA6A0; color: white; padding-top: 30px; font-weight: 700;}
-table.available-imports td .lable {font-weight: 700; font-size:16px; color: #F7F3EB;}
+.mfblog-imports {width:100%;}
+.mfblog-imports .item {width:16%; display: inline-block;min-width: 270px;}
+.mfblog-imports .item {text-align: center; margin:0px; padding:0px;}
+.mfblog-imports .item .itm-hld  {margin: 10px; padding: 20px; background: #373330; cursor: pointer;}
+.mfblog-imports .item .itm-hld:hover {background:#524D49; }
+.mfblog-imports .item .img {width:200px; height:200px; max-width: 200px; margin:5px;}
+.mfblog-imports .item .more {background: #AAA6A0; color: white; padding-top: 30px; font-weight: 700;}
+.mfblog-imports .item .lable {font-weight: 700; font-size:16px; color: #F7F3EB;}
+
