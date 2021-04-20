@@ -547,7 +547,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                             $str .= ($str ? ' ' : '') . $s;
 
                         
-                            $pos = mb_strpos($content, $str, $len);
+                            $pos = mb_strpos($content, $str);
                             if (false !== $pos) {
                                 $start = $pos;
                             } else {
