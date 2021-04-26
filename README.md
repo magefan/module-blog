@@ -5,6 +5,9 @@
 
 Magento 2 Blog  is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 230 000 downloads.
 
+
+<a href="https://magefan.com/magento2-blog-extension"><img width="300" height="60" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/DOWNLOAD_NOW.webp"></a>
+
 ## Requirements
   * Magento Community 2.2.0-2.4.x (CE, EE, ECE, B2B)
   * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.14. Please install this extension first if you use installation via FTP.
@@ -267,4 +270,6 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Zendesk Chat Extension](https://magefan.com/magento-2-zendesk-chat-extension)
   * [Magento 2 Admin View Extension](https://magefan.com/magento-2-admin-view-extension)
   * [Magento 2 Zero Downtime Deployment](https://magefan.com/blog/magento-2-zero-downtime-deployment)
+  * [Magento 2 Better Order Grid Extension](https://magefan.com/magento-2-better-order-grid-extension)
+  * [Magento 2 Admin Email Notifications](https://magefan.com/magento-2-admin-email-notifications)
 

@@ -10,6 +10,7 @@ namespace Magefan\Blog\Model;
 
 use Magento\Framework\App\ProductMetadataInterface;
 use Magefan\Blog\Api\SitemapConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Deprecated
@@ -32,6 +33,26 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
 
         $sitemapItems = [];
         if ($sitemapConfig->isEnabledSitemap(SitemapConfigInterface::HOME_PAGE)) {
+
+            $url = $objectManager->get(\Magefan\Blog\Model\Url::class)->getBasePath();
+
+            $scopeConfig = $objectManager->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+            $advancedPermalinkEnabled =  $scopeConfig->getValue(
+                Config::XML_PATH_ADVANCED_PERMALINK_ENABLED,
+                ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$advancedPermalinkEnabled) {
+                $redirectToNoSlash = $scopeConfig->getValue(
+                    Config::XML_PATH_REDIRECT_TO_NO_SLASH,
+                    ScopeInterface::SCOPE_STORE
+                );
+
+                if (!$redirectToNoSlash) {
+                    $url = trim($url, '/') . '/';
+                }
+            }
+
             $sitemapItems[] = new \Magento\Framework\DataObject(
                 [
                     'changefreq' => $sitemapConfig->getFrequency(SitemapConfigInterface::HOME_PAGE),
@@ -43,7 +64,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                             \Magento\Framework\DataObject::class
                         )->setData([
                             'updated_at' => '',
-                            'url' => $objectManager->get(\Magefan\Blog\Model\Url::class)->getBasePath(),
+                            'url' => $url,
                         ])
                     )
                 ]

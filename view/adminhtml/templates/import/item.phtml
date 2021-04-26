@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog import item template
+ *
+ * @var $block \Magento\Backend\Block\Template
+ */
+?>
+
+<div class="item">
+    <div class="itm-hld"
+         <?php
+
+            if ($block->getImportUrl() && !$block->getImportType()) {
+                $action = 'window.open(\'' . $block->escapeUrl($block->getImportUrl()) . '\')';
+            } else {
+                if ($block->getImportPath()) {
+                    $url = $block->getUrl($block->getImportPath());
+                } else {
+                    $url = $block->getUrl('blog/import/form', ['type' => $block->getImportType()]);
+                }
+                $action = 'window.location=\'' .  $block->escapeUrl($url) . '\'';
+            }
+         ?>
+         onclick="<?= $action ?>">
+        <img class="img"
+             src="<?= $block->escapeUrl($block->getViewFileUrl($block->getImage())) ?>" />
+        <br/>
+        <span class="lable"><?= $block->escapeHtml(__($block->getLabel())) ?><br/><br/></span>
+    </div>
+</div>

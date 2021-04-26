@@ -540,14 +540,14 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     /* Skip long HTML */
                     $stcc = trim(strip_tags($cc));
                     //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
-                    if ($len < mb_strlen($content)) {
+                    if ($stcc && $len < mb_strlen($content)) {
                         $str = '';
                         $start = false;
                         foreach (explode(' ', $stcc) as $s) {
                             $str .= ($str ? ' ' : '') . $s;
 
                         
-                            $pos = mb_strpos($content, $str, $len);
+                            $pos = mb_strpos($content, $str);
                             if (false !== $pos) {
                                 $start = $pos;
                             } else {
