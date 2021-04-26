@@ -43,4 +43,16 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return 'views_count';
     }
+
+    /**
+     * Retrieve true if display the post image is enabled in the config
+     * @return bool
+     */
+    public function getDisplayImage()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 }

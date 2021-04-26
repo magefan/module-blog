@@ -83,7 +83,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getPostTemplateType()
     {
-        $template = (string)$this->getAuthor()->getData('post_list_templates');
+        $template = (string)$this->getAuthor()->getData('posts_list_template');
         if ($template) {
             return $template;
         }
@@ -98,7 +98,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     public function getToolbarBlock()
     {
         $toolBarBlock = parent::getToolbarBlock();
-        $limit = (int)$this->getAuthor()->getData('posts_limit_per_page');
+        $limit = (int)$this->getAuthor()->getData('posts_per_page');
 
         if ($limit) {
             $toolBarBlock->setData('limit', $limit);

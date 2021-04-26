@@ -205,7 +205,7 @@
                 </item>
             </argument>
         </field>
-        <field name="post_list_templates">
+        <field name="posts_list_template">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\PostListTemplate</item>
                 <item name="config" xsi:type="array">
@@ -213,19 +213,19 @@
                     <item name="label" xsi:type="string" translate="true">Template</item>
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">category</item>
-                    <item name="dataScope" xsi:type="string">post_list_templates</item>
+                    <item name="dataScope" xsi:type="string">posts_list_template</item>
                     <item name="default" xsi:type="string">default</item>
                 </item>
             </argument>
         </field>
-        <field name="posts_limit_per_page">
+        <field name="posts_per_page">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">integer</item>
-                    <item name="label" xsi:type="string" translate="true">Post Per Page</item>
+                    <item name="label" xsi:type="string" translate="true">Posts Per Page</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">category</item>
-                    <item name="dataScope" xsi:type="string">posts_limit_per_page</item>
+                    <item name="dataScope" xsi:type="string">posts_per_page</item>
                 </item>
             </argument>
         </field>

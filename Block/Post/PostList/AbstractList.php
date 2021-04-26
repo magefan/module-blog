@@ -53,6 +53,11 @@ abstract class AbstractList extends Template implements IdentityInterface
      */
     protected $config;
 
+    /**
+     * @var \Magefan\Blog\Model\TemplatePool
+     */
+    protected $templatePool;
+
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
     const POSTS_SORT_FIELD_BY_TITLE = 'title';
@@ -66,6 +71,7 @@ abstract class AbstractList extends Template implements IdentityInterface
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
      * @param null $config
+     * @param null $templatePool
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -74,7 +80,8 @@ abstract class AbstractList extends Template implements IdentityInterface
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
         array $data = [],
-        $config = null
+        $config = null,
+        $templatePool = null
     ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $coreRegistry;
@@ -85,6 +92,9 @@ abstract class AbstractList extends Template implements IdentityInterface
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->config = $config ?: $objectManager->get(
             \Magefan\Blog\Model\Config::class
+        );
+        $this->templatePool = $templatePool ?: $objectManager->get(
+            \Magefan\Blog\Model\TemplatePool::class
         );
     }
 

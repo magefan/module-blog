@@ -90,9 +90,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    /**
-     * @return string
-     */
     protected function _toHtml()
     {
         if (!$this->canDisplay()) {
@@ -192,7 +189,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getPostTemplateType()
     {
-        $template = (string)$this->getCategory()->getData('post_list_templates');
+        $template = (string)$this->getCategory()->getData('posts_list_template');
         if ($template) {
             return $template;
         }
@@ -207,7 +204,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     public function getToolbarBlock()
     {
         $toolBarBlock = parent::getToolbarBlock();
-        $limit = (int)$this->getCategory()->getData('posts_limit_per_page');
+        $limit = (int)$this->getCategory()->getData('posts_per_page');
 
         if ($limit) {
             $toolBarBlock->setData('limit', $limit);

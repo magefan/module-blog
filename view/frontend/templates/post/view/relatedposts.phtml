@@ -19,53 +19,21 @@
     <?php if (count($postCollection)) { ?>
     <div class="block related">
         <div class="block-title title">
-            <strong id="block-relatedposts-heading"><?= $block->escapeHtml(__('Related Posts')) ?></strong>
+            <strong id="block-relatedposts-heading" role="heading" aria-level="2">
+                <?= $block->escapeHtml(__('Related Posts')) ?>
+            </strong>
         </div>
-        <div class="block-content">
-            <!-- post list -->
-            <div class="post-list">
-                <?php foreach ($postCollection as $post) { ?>
-                    <?php
-                        $_postUrl = $block->escapeUrl($post->getPostUrl());
-                        $_postName = $block->escapeHtml($post->getTitle());
-                    ?>
-                    <!-- post item -->
-                    <div class="post-item d-flex mb-4">
-                        <?php $featuredImage = $post->getFeaturedListImage() ?: $post->getFeaturedImage(); ?>
-                        <?php if ($featuredImage) { ?>
-                            <div class="image-container">
-                                <?php
-                                    $featuredImgAlt = $post->getData('featured_list_img_alt') ?: $post->getData('featured_img_alt');
-                                    if (!$featuredImgAlt) {
-                                        $featuredImgAlt =  $_postName;
-                                    }
-                                ?>
-                                <a class="image-wrap _4x3" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                                    <?php $featuredImage = $post->getFeaturedListImage() ?: $post->getFeaturedImage(); ?>
-                                    <?php if ($featuredImage) { ?>
-                                        <?php $featuredImgAlt = $post->getData('featured_list_img_alt') ?: $post->getData('featured_img_alt');
-                                        if (!$featuredImgAlt) {
-                                            $featuredImgAlt = $_postName;
-                                        }
-                                        ?>
-                                        <span class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
-                                    <?php } ?>
-                                </a>
-                            </div>
-                        <?php } ?>
-                        <div class="block-info px-3">
-                            <h3 class="post-title m-0 mb-2">
-                                <a class="post-item-name" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                                    <?= $_postName ?>
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                    <!-- END post item -->
-                <?php } ?>
-            </div>
-            <!-- END post list -->
-        </div>
+        <ol class="block-content">
+            <?php foreach ($postCollection as $post) { ?>
+                <li class="item">
+                    <a class="post-item-link" title="<?= $block->escapeHtml($post->getTitle()) ?>"
+                       href="<?= $block->escapeUrl($post->getPostUrl()) ?>">
+                        <?= $block->escapeHtml($post->getTitle()) ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ol>
     </div>
     <?php } ?>
 <?php } ?>
+

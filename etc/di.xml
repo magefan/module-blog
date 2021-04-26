@@ -84,4 +84,80 @@
             <argument name="modelRepository" xsi:type="object">Magefan\Blog\Api\AuthorRepositoryInterface</argument>
         </arguments>
     </virtualType>
+
+    <type name="Magefan\Blog\Model\TemplatePool">
+        <arguments>
+            <argument name="templates" xsi:type="array">
+                <item name="blog_post_list" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Default</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/list/item.phtml</item>
+                    </item>
+                    <item name="list" xsi:type="array">
+                        <item name="label" xsi:type="string">List</item>
+                        <item name="value" xsi:type="string">list</item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/list/item-list.phtml</item>
+                    </item>
+                </item>
+                <item name="blog_post_view" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Default</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/view.phtml</item>
+                    </item>
+                    <item name="modern" xsi:type="array">
+                        <item name="label" xsi:type="string">Modern</item>
+                        <item name="value" xsi:type="string">modern</item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/view-modern.phtml</item>
+                    </item>
+                </item>
+                <item name="blog_post_view_next_prev" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Default (Next / Previous Labels)</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/view/nextprev.phtml</item>
+                    </item>
+                    <item name="modern" xsi:type="array">
+                        <item name="label" xsi:type="string">Modern (Next / Previous Post Titles)</item>
+                        <item name="value" xsi:type="string">modern</item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/view/nextprev-modern.phtml</item>
+                    </item>
+                </item>
+                <item name="blog_post_view_related_post" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Default</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/view/relatedposts.phtml</item>
+                    </item>
+                    <item name="modern" xsi:type="array">
+                        <item name="label" xsi:type="string">Modern</item>
+                        <item name="value" xsi:type="string">modern</item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/view/relatedposts-modern.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magefan\Blog\Model\Config\Source\PostListTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_list</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\PostViewTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\NextPrevPostTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_next_prev</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_related_post</argument>
+        </arguments>
+    </virtualType>
+
 </config>

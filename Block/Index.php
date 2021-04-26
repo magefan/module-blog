@@ -82,7 +82,6 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
             ScopeInterface::SCOPE_STORE
         );
-
         /* If featured posts enabled */
         if ($displayMode == 1) {
             $postIds = $this->_scopeConfig->getValue(

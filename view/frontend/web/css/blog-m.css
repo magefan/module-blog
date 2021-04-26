@@ -13,21 +13,9 @@
 
 .post-holder {
     padding-bottom: 20px;
-    margin-bottom: 40px;
-    /*background: #F5F5F5;*/
-    padding: 20px;
-    /*
-    border: 1px solid #e9e9e9;
-    border-radius: 5px;
-     */
+    margin-bottom: 20px;
 }
-/*
-.post-holder:hover {
-    box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
-}
-*/
+.blog-page-list .post-holder {border-bottom: 1px solid #eee}
 
 .post-holder .post-header {position:relative;}
 
@@ -113,8 +101,6 @@
     margin-bottom: 40px;
     position: relative;
     float: right;
-    /*padding-left: 15px;
-    z-index: 4;*/
 }
 
 .widget.blog-search .block-content {
@@ -323,4 +309,13 @@
         margin-left: 0;
     }
 }
+
+/* Icons */
+.mf-blog-icon {width: 15px;height: 15px;display: inline-block;position: relative;top: 2px;background-size: cover;}
+.mf-blog-icon.mfbi-calendar {background-image: url('../images/calendar-icon.svg')}
+.mf-blog-icon.mfbi-folder {background-image: url('../images/folder-icon.svg')}
+.mf-blog-icon.mfbi-comments {background-image: url('../images/comments-icon.svg')}
+.mf-blog-icon.mfbi-tags {background-image: url('../images/tags-icon.svg')}
+.mf-blog-icon.mfbi-user {background-image: url('../images/user-icon.svg')}
+.mf-blog-icon.mfbi-views {background-image: url('../images/views-icon.svg')}
 /* END Fix Related Products */
