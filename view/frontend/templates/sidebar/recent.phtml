@@ -34,8 +34,8 @@
                 $_postName = $block->escapeHtml($_post->getTitle());
             ?>
             <div class="item clearfix">
-                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
-                <?php if ($featuredImage) { ?>
+                <?php if ($block->getDisplayImage()) { ?>
+                    <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
                     <div class="post-image">
                         <?php
                         $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
@@ -44,7 +44,14 @@
                         }
                         ?>
                         <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
+                            <?php
+                                if ($featuredImage) {
+                                    $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
+                                } else {
+                                    $featuredImageUrl = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                                }
+                            ?>
+                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $block->escapeUrl($featuredImageUrl) ?>"
                                  alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                         </a>
                     </div>
@@ -54,7 +61,7 @@
                     <?= $_postName ?>
                 </a>
 
-                <?php if ($featuredImage && $_post->isPublishDateEnabled()) { ?>
+                <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>
                     <div class="post-item-date">
                         <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                     </div>

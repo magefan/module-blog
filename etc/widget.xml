@@ -16,6 +16,10 @@
                 <label translate="true">Title</label>
                 <description translate="true">Please specify title you want to display on the frontend. You can leave it blank if necessary.</description>
             </parameter>
+            <parameter name="no_repeat_posts_enable" xsi:type="select"  source_model="Magento\Config\Model\Config\Source\Yesno" visible="true" sort_order="15" >
+                <label translate="true">Don't repeat posts</label>
+                <description translate="true">Set it to YES if you display multiple recent post widgets on the same page and don't want them do display the same posts.</description>
+            </parameter>
             <parameter name="number_of_posts" xsi:type="text"  visible="true" sort_order="20" >
                 <label translate="true">Number of Posts</label>
                 <description translate="true">Please indicate number of recent posts you want to display. Leave blank to use predefined "Posts Per Page" value.</description>
@@ -45,6 +49,31 @@
                 <description translate="true"><![CDATA[
                     Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>
                     <em>Magefan_Blog::widget/recent_masonry.phtml</em> template is also available out of the box.
+                    <br/>
+                    If you use Blog Extra, you can also apply these ones: <br/>
+                    <pre>
+                    Magefan_BlogExtra::post/list/block-0-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-4-row-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-5-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-6-full.phtml
+                    Magefan_BlogExtra::post/list/block-1-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-1-3-full.phtml
+                    Magefan_BlogExtra::post/list/block-2-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-2-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-2-3.phtml
+                    Magefan_BlogExtra::post/list/block-3-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-3-2.phtml
+                    Magefan_BlogExtra::post/list/block-3-3.phtml
+                    Magefan_BlogExtra::post/list/block-3-4.phtml
+                    Magefan_BlogExtra::post/list/block-3-5-full.phtml
+                    Magefan_BlogExtra::post/list/block-3-6.phtml
+                    Magefan_BlogExtra::post/list/block-4-1.phtml
+                    Magefan_BlogExtra::post/list/block-4-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-5-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-5-2.phtml
+                    Magefan_BlogExtra::post/list/block-5-3.phtml
+                    <pre>
                 ]]></description>
             </parameter>
         </parameters>
@@ -65,7 +94,33 @@
             <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
                 <label translate="true">Custom Template</label>
                 <description translate="true"><![CDATA[
-                    Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.
+                    Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>
+                    <em>Magefan_Blog::widget/recent_masonry.phtml</em> template is also available out of the box.
+                    <br/>
+                    If you use Blog Extra, you can also apply these ones: <br/>
+                    <pre>
+                    Magefan_BlogExtra::post/list/block-0-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-4-row-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-5-full.phtml
+                    Magefan_BlogExtra::post/list/block-0-6-full.phtml
+                    Magefan_BlogExtra::post/list/block-1-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-1-3-full.phtml
+                    Magefan_BlogExtra::post/list/block-2-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-2-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-2-3.phtml
+                    Magefan_BlogExtra::post/list/block-3-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-3-2.phtml
+                    Magefan_BlogExtra::post/list/block-3-3.phtml
+                    Magefan_BlogExtra::post/list/block-3-4.phtml
+                    Magefan_BlogExtra::post/list/block-3-5-full.phtml
+                    Magefan_BlogExtra::post/list/block-3-6.phtml
+                    Magefan_BlogExtra::post/list/block-4-1.phtml
+                    Magefan_BlogExtra::post/list/block-4-2-full.phtml
+                    Magefan_BlogExtra::post/list/block-5-1-full.phtml
+                    Magefan_BlogExtra::post/list/block-5-2.phtml
+                    Magefan_BlogExtra::post/list/block-5-3.phtml
+                    <pre>
                 ]]></description>
             </parameter>
         </parameters>

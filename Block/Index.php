@@ -50,6 +50,26 @@ class Index extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
+     * Retrieve Toolbar Block
+     * @return \Magefan\Blog\Block\Post\PostList\Toolbar
+     */
+    public function getToolbarBlock()
+    {
+        $toolBarBlock = parent::getToolbarBlock();
+        $limit = (int)$this->_scopeConfig->getValue(
+            'mfblog/index_page/posts_per_page',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        if ($limit) {
+            $toolBarBlock->setData('limit', $limit);
+        }
+
+        return $toolBarBlock;
+    }
+
+
+    /**
      * Prepare posts collection
      *
      * @return void
@@ -159,5 +179,57 @@ class Index extends \Magefan\Blog\Block\Post\PostList
                 ]
             );
         }
+    }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    public function getPostTemplateType()
+    {
+        $template = (string)$this->_scopeConfig->getValue(
+            'mfblog/index_page/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template) {
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
+
+    /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        $displayMode = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+        if (2 == $displayMode) {
+            return '';
+        }
+        return parent::_toHtml();
+    }
+
+    /**
+     * Retrieve identities
+     *git add
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $displayMode = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+        if (2 == $displayMode) {
+            return [];
+        }
+        return parent::getIdentities();
     }
 }

@@ -1,0 +1,137 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $block->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null);
+?>
+<?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
+<div class="_post-view">
+    <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+
+        <div class="post-header clearfix">
+
+            <!-- post category-->
+            <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                <div class="post-category mb-4">
+                        <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                               title="<?= $block->escapeHtml($ct->getTitle()) ?>">
+                                <?= $block->escapeHtml($ct->getTitle()) ?>
+                            </a>
+                        <?php } ?>
+                    </div>
+            <?php }  ?>
+
+            <!-- block data -->
+            <div class="post-data-wrap mb-5">
+                <!-- post author -->
+                <?php if ($block->authorEnabled()) { ?>
+                    <?php if ($_author = $_post->getAuthor()) { ?>
+                        <span class="post-author-name">
+                            <?php if ($block->authorPageEnabled()) { ?>
+                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                </a>
+                            <?php } else { ?>
+                                <?= $block->escapeHtml($_author->getTitle()) ?>
+                            <?php } ?>
+                            <span>-</span>
+                        </span>
+                    <?php } ?>
+                <?php } ?>
+
+                <!-- post date -->
+                <?php if ($_post->isPublishDateEnabled()) { ?>
+                    <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                <?php } ?>
+
+                <!-- post view -->
+                <?php if ($block->viewsCountEnabled()) { ?>
+                    <?php if ($viewsCount = $_post->getViewsCount()) { ?>
+                        <span class="post-view float-right d-none d-md-block">
+                            <i class="mf-blog-icon mfbi-views"></i>
+                            <?= $block->escapeHtml($viewsCount)?>
+                        </span>
+                    <?php } ?>
+                <?php } ?>
+
+                <!-- post comments -->
+                <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
+                    <span class="post-comments float-right d-none d-md-block">
+                        <i class="mf-blog-icon mfbi-comments"></i>
+                        <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
+                           href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
+                        ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
+                    </span>
+                <?php } ?>
+            </div>
+            <?php /*
+            <div class="post-sharing mb-4 d-none">
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox text-center" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
+            </div>
+            */ ?>
+        </div>
+
+        <div class="post-content">
+            <div class="_post-description clearfix">
+                <!-- Post Image -->
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                    <?php
+                        $featuredImgAlt = $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt = $_postName;
+                        }
+                    ?>
+                    <div class="post-featured-image">
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    </div>
+                <?php } ?>
+
+                <!-- Post Tags -->
+                <div class="post-tag">
+                    <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                        <div class="item post-tags">
+                            <div class="post-tag-title">Tags</div>
+                            <?php $n = 0; ?>
+                            <?php foreach ($_post->getRelatedTags() as $tag) { ?>
+                                <?php $n++; ?>
+                                <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
+                                   href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
+                                ><?= $block->escapeHtml($tag->getTitle()) ?></a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <div class="post-description">
+                    <?= /*@noEscape*/ $block->getContent() ?>
+                    <div class="clear clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+            <div class="post-sharing-bottom mb-4">
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
+            </div>
+            <?= $block->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

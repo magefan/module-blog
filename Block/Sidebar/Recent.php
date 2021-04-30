@@ -44,4 +44,33 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
         parent::_preparePostCollection();
         $this->_postCollection->addRecentFilter();
     }
+
+    /**
+     * Retrieve true if display the post image is enabled in the config
+     * @return bool
+     */
+    public function getDisplayImage()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        $templateName = (string)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
+            $this->_template = $template;
+        }
+        return parent::getTemplate();
+    }
 }

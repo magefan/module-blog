@@ -73,4 +73,21 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
         }
         return $this->getData('product');
     }
+
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        $templateName = (string)$this->_scopeConfig->getValue(
+            'mfblog/product_page/related_posts_template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template = $this->templatePool->getTemplate('blog_post_view_related_post', $templateName)) {
+            $this->_template = $template;
+        }
+        return parent::getTemplate();
+    }
 }

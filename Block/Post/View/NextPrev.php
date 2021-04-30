@@ -40,22 +40,34 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     protected $_coreRegistry;
 
     /**
+     * @var \Magefan\Blog\Model\TemplatePool
+     */
+    protected $templatePool;
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $_tagCollectionFactory
      * @param \Magento\Framework\Registry $coreRegistry
      * @param array $data
+     * @param null $templatePool
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magento\Framework\Registry $coreRegistry,
-        array $data = []
+        array $data = [],
+        $templatePool = null
     ) {
         parent::__construct($context, $data);
         $this->_postCollectionFactory = $postCollectionFactory;
         $this->_coreRegistry = $coreRegistry;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->templatePool = $templatePool ?: $objectManager->get(
+            \Magefan\Blog\Model\TemplatePool::class
+        );
     }
 
     /**
@@ -192,5 +204,22 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     public function getPost()
     {
         return $this->_coreRegistry->registry('current_blog_post');
+    }
+
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        $templateName = (string)$this->_scopeConfig->getValue(
+            'mfblog/post_view/nextprev/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template = $this->templatePool->getTemplate('blog_post_view_next_prev', $templateName)) {
+            $this->_template = $template;
+        }
+        return parent::getTemplate();
     }
 }

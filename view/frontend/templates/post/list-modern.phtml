@@ -1,0 +1,146 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList
+ */
+?>
+<?php
+$_postCollection = $block->getPostCollection();
+?>
+<?php if (!$_postCollection->count()): ?>
+    <div class="message info empty">
+        <div>
+            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+        </div>
+    </div>
+<?php else: ?>
+
+    <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
+    <?= $block->getAdditionalHtml() ?>
+    <div class="post-list-wrapper">
+        <?php $iterator = 1; ?>
+        <ol class="post-list">
+            <?php foreach ($_postCollection as $_post): ?>
+                <?php
+                    $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                    $_postName = $block->escapeHtml($_post->getTitle());
+                ?>
+                <li class="post-item post-holder post-holder-<?= (int)$_post->getId() ?>">
+
+                    <div class="post-container">
+                        <!-- post image -->
+                        <div class="post-image">
+                            <!-- img container -->
+                            <div class="image-container">
+                                <a class="image-wrap" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                    <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                                    <?php
+                                    if (!$featuredImage) {
+                                        $featuredImage = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                                    }
+                                    ?>
+                                    <?php if ($featuredImage) { ?>
+                                        <?php $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                        if (!$featuredImgAlt) {
+                                            $featuredImgAlt = $_postName;
+                                        }
+                                        ?>
+                                        <span class="animation-type-zoom bg-img" style="background-image: url(<?= $block->escapeHtml($featuredImage) ?>)"></span>
+                                        <?php /* <img class="" src="<?= $block->escapeHtml($featuredImage) ?>" alt=""> */ ?>
+                                    <?php } ?>
+                                </a>
+
+                                <!-- post category-->
+                                <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                                    <span class="post-category">
+                                        <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                                               title="<?= $block->escapeHtml($ct->getTitle()) ?>">
+                                                <?= $block->escapeHtml($ct->getTitle()) ?>
+                                            </a>
+                                        <?php } ?>
+                                    </span>
+                                <?php }  ?>
+                                <!-- end post category-->
+                            </div>
+                        </div>
+
+                        <!-- block info -->
+                        <div class="post-info">
+                            <!-- post title -->
+                            <div class="post-title-wrap mb-2">
+                                <h3 class="post-title">
+                                    <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                                </h3>
+                            </div>
+
+                            <!-- block data -->
+                            <div class="post-data-wrap mb-3">
+                                <!-- post author -->
+                                <?php if ($block->authorEnabled()) { ?>
+                                    <?php if ($_author = $_post->getAuthor()) { ?>
+                                        <span class="post-author-name">
+                                            <?php if ($block->authorPageEnabled()) { ?>
+                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                                </a>
+                                            <?php } else { ?>
+                                                <?= $block->escapeHtml($_author->getTitle()) ?>
+                                            <?php } ?>
+                                            <span>-</span>
+                                        </span>
+                                    <?php } ?>
+                                <?php } ?>
+
+                                <!-- post date -->
+                                <?php if ($_post->isPublishDateEnabled()) { ?>
+                                    <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                <?php } ?>
+
+                                <!-- post view -->
+                                <?php if ($block->viewsCountEnabled()) { ?>
+                                    <?php if ($viewsCount = $_post->getViewsCount()) { ?>
+                                        <span class="post-view float-right d-none d-md-block">
+                                            <?= $block->escapeHtml($viewsCount)?>
+                                        </span>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+
+                            <!-- post description -->
+                            <div class="post-description mb-4">
+                                <?= /*@noEscape*/ $_post->getShortFilteredContent() ?>
+                            </div>
+
+                            <!-- read more -->
+                            <div class="post-read-more">
+                                <a class="post-read btn-white" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                    <?= $block->escapeHtml(__('Read more')) ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+            <li class="hidden">
+                <script type="text/javascript">
+                    if (window.addthis) {
+                        addthis.toolbox('.addthis_toolbox');
+                    }
+                </script>
+            </li>
+        </ol>
+    </div>
+
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getChildHtml('addthisJs'); ?>
+<?php endif; ?>

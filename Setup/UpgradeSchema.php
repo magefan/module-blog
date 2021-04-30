@@ -349,7 +349,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.6.0') < 0) {
-        /**
+            /**
              * Create table 'magefan_blog_comment'
              */
             $table = $setup->getConnection()->newTable(
@@ -452,7 +452,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.6.2') < 0) {
-        /* Add include in menu field into categories table */
+            /* Add include in menu field into categories table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'include_in_menu',
@@ -473,7 +473,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
 
         if (version_compare($version, '2.6.3') < 0) {
-        /* Add display mode field into category table */
+            /* Add display mode field into category table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_category'),
                 'display_mode',
@@ -564,7 +564,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => '2M',
-                     [],
+                    [],
                     'comment' =>'Tag Content'
                 ]
             );
@@ -778,8 +778,30 @@ class UpgradeSchema implements UpgradeSchemaInterface
             $connection->createTable($table);
         }
 
+        if (version_compare($version, '2.10.0') < 0) {
+            foreach (['magefan_blog_tag', 'magefan_blog_category'] as $table) {
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'posts_per_page',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                        'nullable' => true,
+                        'comment' => 'Posts Per Page',
 
-
+                    ]
+                );
+                $connection->addColumn(
+                    $setup->getTable($table),
+                    'posts_list_template',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 100,
+                        'nullable' => true,
+                        'comment' => 'Posts List Template',
+                    ]
+                );
+            }
+        }
 
         $setup->endSetup();
     }

@@ -54,6 +54,34 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getPostTemplateType())) {
+            $this->_template = $template;
+        }
+
+        return parent::getTemplate();
+    }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    protected function getPostTemplateType()
+    {
+        return (string)$this->_scopeConfig->getValue(
+            'mfblog/post_list/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+
+    /**
      * Retrieve Toolbar Block
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */

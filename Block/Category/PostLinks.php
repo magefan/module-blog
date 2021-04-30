@@ -49,4 +49,14 @@ class PostLinks extends \Magefan\Blog\Block\Category\PostList
     {
         return null;
     }
+
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return \Magento\Framework\View\Element\Template::getTemplate();
+    }
 }
