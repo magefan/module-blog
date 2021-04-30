@@ -215,4 +215,19 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * @return \Magefan\Blog\ViewModel\Style
+     */
+    public function getStyleViewModel()
+    {
+        $viewModel = $this->getData('style_view_model');
+        if (!$viewModel) {
+            $viewModel = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(\Magefan\Blog\ViewModel\Style::class);
+            $this->setData('style_view_model', $viewModel );
+        }
+
+        return $viewModel;
+    }
 }

@@ -11,18 +11,21 @@
  * Blog related posts template
  *
  * @var $block \Magefan\Blog\Block\Post\View\RelatedPosts
+ * @var $block \Magefan\Blog\Block\Catalog\Product\RelatedPosts
  */
 ?>
 
 <?php if ($block->displayPosts()) { ?>
     <?php $postCollection = $block->getPostCollection(); ?>
     <?php if (count($postCollection)) { ?>
-    <div class="block related">
+    <div class="mfblog-replated-posts-block block related">
+        <?php if (!$block->getHideTitle()) { ?>
         <div class="block-title title">
             <strong id="block-relatedposts-heading" role="heading" aria-level="2">
                 <?= $block->escapeHtml(__('Related Posts')) ?>
             </strong>
         </div>
+        <?php } ?>
         <ol class="block-content">
             <?php foreach ($postCollection as $post) { ?>
                 <li class="item">

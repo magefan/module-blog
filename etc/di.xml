@@ -90,19 +90,19 @@
             <argument name="templates" xsi:type="array">
                 <item name="blog_post_list" xsi:type="array">
                     <item name="default" xsi:type="array">
-                        <item name="label" xsi:type="string">Default</item>
+                        <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/list/item.phtml</item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/list.phtml</item>
                     </item>
                     <item name="list" xsi:type="array">
-                        <item name="label" xsi:type="string">List</item>
-                        <item name="value" xsi:type="string">list</item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/list/item-list.phtml</item>
+                        <item name="label" xsi:type="string">Modern (List)</item>
+                        <item name="value" xsi:type="string">list-modern</item>
+                        <item name="template" xsi:type="string">Magefan_Blog::post/list-modern.phtml</item>
                     </item>
                 </item>
                 <item name="blog_post_view" xsi:type="array">
                     <item name="default" xsi:type="array">
-                        <item name="label" xsi:type="string">Default</item>
+                        <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string">Magefan_Blog::post/view.phtml</item>
                     </item>
@@ -126,14 +126,16 @@
                 </item>
                 <item name="blog_post_view_related_post" xsi:type="array">
                     <item name="default" xsi:type="array">
-                        <item name="label" xsi:type="string">Default</item>
+                        <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string">Magefan_Blog::post/view/relatedposts.phtml</item>
                     </item>
-                    <item name="modern" xsi:type="array">
-                        <item name="label" xsi:type="string">Modern</item>
-                        <item name="value" xsi:type="string">modern</item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/view/relatedposts-modern.phtml</item>
+                </item>
+                <item name="blog_post_sidebar_posts" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Use System Settings</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string">Magefan_Blog::sidebar/recent.phtml</item>
                     </item>
                 </item>
             </argument>
@@ -157,6 +159,11 @@
     <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view_related_post</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\SidebarPostsTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
         </arguments>
     </virtualType>
 

@@ -55,4 +55,21 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        $templateName = (string)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
+            $this->_template = $template;
+        }
+        return parent::getTemplate();
+    }
 }

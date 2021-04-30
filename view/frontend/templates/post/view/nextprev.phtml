@@ -22,7 +22,7 @@
     <?php if ($prevPost || $nextPost) { ?>
         <div class="post-nextprev-hld clearfix">
             <?php if ($prevPost) { ?>
-                <?php $title = $prevPost->getTitle() ?>
+                <?php $title = $block->escapeHtml($prevPost->getTitle()) ?>
                 <a class="nextprev-link prev-link"
                    href="<?= $block->escapeUrl($prevPost->getPostUrl()) ?>"
                    title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
@@ -30,7 +30,7 @@
                 </a>
             <?php } ?>
             <?php if ($nextPost) { ?>
-                <?php $title = $nextPost->getTitle() ?>
+                <?php $title = $block->escapeHtml($nextPost->getTitle()) ?>
                 <a class="nextprev-link next-link"
                    href="<?= $block->escapeUrl($nextPost->getPostUrl()) ?>"
                    title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">

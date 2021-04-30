@@ -83,6 +83,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getPostTemplateType()
     {
+        $template = (string)$this->_scopeConfig->getValue(
+            'mfblog/author/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template) {
+            return $template;
+        }
+
         $template = (string)$this->getAuthor()->getData('posts_list_template');
         if ($template) {
             return $template;

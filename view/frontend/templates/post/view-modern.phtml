@@ -18,6 +18,7 @@
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null);
 ?>
+<?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
 <div class="_post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
 
@@ -78,11 +79,12 @@
                     </span>
                 <?php } ?>
             </div>
-
+            <?php /*
             <div class="post-sharing mb-4 d-none">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox text-center"></div>
+                <div class="addthis_inline_share_toolbox text-center" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
             </div>
+            */ ?>
         </div>
 
         <div class="post-content">
@@ -127,9 +129,9 @@
         <div class="post-bottom">
             <div class="post-sharing-bottom mb-4">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <?= $block->getChildHtml('blog.post.bottom') ?>
-                <div class="addthis_inline_share_toolbox"></div>
+                <div class="addthis_inline_share_toolbox" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
             </div>
+            <?= $block->getChildHtml('blog.post.bottom') ?>
         </div>
     </div>
 </div>

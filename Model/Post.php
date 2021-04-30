@@ -1114,6 +1114,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             ->unsetData('update_time')
             ->unsetData('publish_time')
             ->unsetData('identifier')
+            ->unsetData('comments_count')
             ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
             ->setData('is_active', 0);
 

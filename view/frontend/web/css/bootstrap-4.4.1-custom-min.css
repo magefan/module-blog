@@ -1,0 +1,91 @@
+/* Bootstrap v4.4.1 custom min ***************************************************************************************************/
+/* padding */
+
+.p-0 {padding: 0 !important;}
+.p-2 {padding: 0.5rem !important;}
+.pl-2, .px-2 {padding-left: 0.5rem !important;}
+.pr-2, .px-2 {padding-right: 0.5rem !important;}
+.p-3 {padding: 1rem !important;}
+.pr-3, .px-3 {padding-right: 1rem !important;}
+.pl-3, .px-3 {padding-left: 1rem !important;}
+.pt-3, .py-3 {padding-top: 1rem !important;}
+.pb-3, .py-3 {padding-bottom: 1rem !important;}
+.p-4 {padding: 1.5rem !important;}
+.pr-4, .px-4 {padding-right: 1.5rem !important;}
+.pl-4, .px-4 {padding-left: 1.5rem !important;}
+@media (min-width: 768px) {
+    .pr-md-3, .px-md-3 {padding-right: 1rem !important;}
+    .pl-md-3, .px-md-3 {padding-left: 1rem !important;}
+    .pr-md-4, .px-md-4 {padding-right: 1.5rem !important;}
+    .pl-md-4, .px-md-4 {padding-left: 1.5rem !important;}
+}
+/* margin */
+.m-0 {margin: 0 !important;}
+.mb-0, .my-0 {margin-bottom: 0 !important;}
+.mt-1, .my-1 {margin-top: 0.25rem !important;}
+.mr-1, .mx-1 {margin-right: 0.25rem !important;}
+.mb-1, .my-1 {margin-bottom: 0.25rem !important;}
+.mt-2, .my-2 {margin-top: 0.5rem !important;}
+.mb-2, .my-2 {margin-bottom: 0.5rem !important;}
+.mt-3, .my-3 {margin-top: 1rem !important;}
+.mb-3, .my-3 {margin-bottom: 1rem !important;}
+.mt-4, .my-4 {margin-top: 1.5rem !important;}
+.mb-4, .my-4 {margin-bottom: 1.5rem !important;}
+.mt-5, .my-5 {margin-top: 3rem !important;}
+.mb-5, .my-5 {margin-bottom: 5px !important;}
+@media (min-width: 768px) {
+    .mb-md-0 {margin-bottom: 0 !important;}
+    .mb-md-3 {margin-bottom: 1rem !important;}
+    .mb-md-4 {margin-bottom: 1.5rem !important;}
+}
+/* text */
+.text-left {text-align: left !important;}
+.text-right {text-align: right !important;}
+.text-center {text-align: center !important;}
+/* float */
+.float-left {float: left !important;}
+.float-right {float: right !important;}
+.float-none {float: none !important;}
+/* position */
+.position-relative {position: relative !important;}
+.position-absolute {position: absolute !important;}
+/* display */
+.d-none {display: none !important;}
+.d-block {display: block !important;}
+.d-inline {display: inline !important;}
+.d-inline-block {display: inline-block !important;}
+.d-flex {display: -ms-flexbox !important;display: flex !important;}
+.flex-row {-ms-flex-direction: row !important;flex-direction: row !important;}
+.flex-column {-ms-flex-direction: column !important;flex-direction: column !important;}
+.flex-wrap {-ms-flex-wrap: wrap !important;flex-wrap: wrap !important;}
+.flex-grow-1 {-ms-flex-positive: 1 !important;flex-grow: 1 !important;}
+/* width */
+.w-100 {width: 100% !important;}
+.w-50 {width: 50% !important;}
+.w-25 {width: 25% !important;}
+/* height */
+.h-100 {height: 100% !important;}
+.h-50 {height: 50% !important;}
+@media (min-width: 1200px) {
+    .d-xl-block {display: block !important;}
+}
+@media (min-width: 768px) {
+    .d-md-block {display: block !important;}
+}
+@media (min-width: 992px) {
+    .d-lg-block {display: block !important;}
+}
+/* columns */
+.row {display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;}
+.row-cols-1 > * {-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;}
+.row-cols-2 > * {-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+.row-cols-3 > * {-ms-flex: 0 0 33.333333%;flex: 0 0 33.333333%;max-width: 33.333333%;}
+.row-cols-4 > * {-ms-flex: 0 0 25%;flex: 0 0 25%;max-width: 25%;}
+@media (min-width: 768px) {
+    .flex-md-row {-ms-flex-direction: row !important;flex-direction: row !important;}
+    .flex-md-column {-ms-flex-direction: column !important;flex-direction: column !important;}
+    .row-cols-md-1 > * {-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;}
+    .row-cols-md-2 > * {-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .row-cols-md-3 > * {-ms-flex: 0 0 33.333333%;flex: 0 0 33.333333%;max-width: 33.333333%;}
+}
+/* END Bootstrap ******************************************************************************************************/

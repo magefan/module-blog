@@ -131,7 +131,7 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
         if ($template = $this->templatePool->getTemplate('blog_post_view', $templateName)) {
-            return $template;
+            $this->_template = $template;
         }
         return parent::getTemplate();
     }

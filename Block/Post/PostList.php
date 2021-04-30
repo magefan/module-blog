@@ -50,13 +50,22 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getPostHtml($post)
     {
-        $block = $this->getChildBlock('blog.posts.list.item')->setPost($post);
-        if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getPostTemplateType())) {
-            $block->setTemplate($template);
-        }
-        return $block->toHtml();
+        return $this->getChildBlock('blog.posts.list.item')->setPost($post)->toHtml();
     }
 
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getPostTemplateType())) {
+            $this->_template = $template;
+        }
+
+        return parent::getTemplate();
+    }
 
     /**
      * Get template type

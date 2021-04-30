@@ -263,6 +263,13 @@
                     </depends>
                     <comment>If set to "Yes". author page with post list will be available.</comment>
                 </field>
+                <field id="template" translate="label comment" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Post List Template</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
+                    <depends>
+                        <field id="page_enabled">1</field>
+                    </depends>
+                </field>
                 <field id="robots" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Default Robots</label>
                     <depends>
@@ -323,6 +330,10 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
+                    <field id="template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
+                    </field>
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -339,6 +350,10 @@
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
                     </field>
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Display Post Image</label>
@@ -357,6 +372,10 @@
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
                     </field>
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Display Post Image</label>
@@ -464,7 +483,15 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
 
-                <field id="number_of_related_posts" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="related_posts_template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Template</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\RelatedPostTemplate</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="number_of_related_posts" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Number of Posts</label>
                     <depends>
                         <field id="enabled">1</field>

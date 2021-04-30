@@ -11,6 +11,9 @@
     <body>
         <attribute name="class" value="blog-page-list" />
         <referenceBlock name="blog.posts.list">
+            <arguments>
+                <argument name="style_view_model" xsi:type="object">Magefan\Blog\ViewModel\Style</argument>
+            </arguments>
             <block class="Magefan\Blog\Block\Post\PostList\Item" name="blog.posts.list.item" template="post/list/item.phtml">
                 <block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
                 <action method="setPostInfoBlockName">

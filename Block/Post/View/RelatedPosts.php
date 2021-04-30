@@ -75,7 +75,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
         if ($template = $this->templatePool->getTemplate('blog_post_view_related_post', $templateName)) {
-            return $template;
+            $this->_template = $template;
         }
         return parent::getTemplate();
     }

@@ -218,7 +218,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
         if ($template = $this->templatePool->getTemplate('blog_post_view_next_prev', $templateName)) {
-            return $template;
+            $this->_template = $template;
         }
         return parent::getTemplate();
     }
