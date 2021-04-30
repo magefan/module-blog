@@ -17,5 +17,5 @@
     <type id="blog_post_view" label="Blog Post View Page"/>
     <type id="blog_search_index" label="Blog Search Page"/>
     <type id="blog_tag_view" label="Blog Tag View Page"/>
-    <type id="blog_post_index" label="Blog Post View Page"/>
+    <type id="blog_post_index" label="Blog Post Index Page"/>
 </page_types>
