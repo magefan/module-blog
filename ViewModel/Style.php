@@ -59,7 +59,7 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
             $file = $file . '.css';
         }
 
-        $asset = $this->assetRepository->createAsset($file );
+        $asset = $this->assetRepository->createAsset($file);
 
         $fileContent = null;
         /*
@@ -70,8 +70,13 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
 
         $file = '../' . $this->source->findRelativeSourceFilePath($asset);
 
-        if (file_exists($file) && $file != '../') {
+        if ($file != '../' && file_exists($file)) {
             $fileContent = file_get_contents($file);
+        } else {
+            $file = $this->source->findRelativeSourceFilePath($asset);
+            if ($file && file_exists($file)) {
+                $fileContent = file_get_contents($file);
+            }
         }
 
         $fileContent = str_replace(
