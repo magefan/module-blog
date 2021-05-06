@@ -334,7 +334,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             }
         }
 
-        if (count($tagPostIds)) {
+        if ($tagPostIdsCount = count($tagPostIds)) {
             $this->addFieldToFilter(
                 ['title', 'short_content', 'content', 'post_id'],
                 [
