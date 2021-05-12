@@ -153,8 +153,8 @@ button {box-shadow: none !important;}
 .mfblog-replated-posts-block.block.related .block-title strong {border-bottom: 3px solid #222222;padding-bottom: 2px;font-weight: 400;font-size: 18px;}
 
 .mfblog-replated-posts-block.block.related .post-list {display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;
-    position: relative;overflow: hidden;margin-left: -15px;margin-right: -15px;}
-.mfblog-replated-posts-block.block.related .post-list .post-item {-webkit-flex-direction: column;-ms-flex-direction: column;flex-direction: column;margin-bottom: 2rem !important;-ms-flex: 0 0 25%;flex: 0 0 25%;max-width: 25%;padding-left: 10px;padding-right: 10px;}
+    position: relative;overflow: hidden;margin-left: -10px;margin-right: -10px;}
+.mfblog-replated-posts-block.block.related .post-list .post-item {-webkit-flex-direction: column;-ms-flex-direction: column;flex-direction: column;margin-bottom: 2rem !important;-ms-flex: 0 0 25%;flex: 0 0 25%;max-width: 25%;padding-left: 10px;padding-right: 10px;width: 25%;box-sizing: border-box;}
 
 .mfblog-replated-posts-block.block.related .post-list .post-item .image-container {
     -ms-flex: 0 0;flex: 0 0;width: 100%;display: block;order: 0;margin-bottom: 10px;}
