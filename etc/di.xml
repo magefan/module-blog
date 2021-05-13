@@ -92,7 +92,7 @@
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/list.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                     <item name="list" xsi:type="array">
                         <item name="label" xsi:type="string">Modern (List)</item>
@@ -104,7 +104,7 @@
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/view.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                     <item name="modern" xsi:type="array">
                         <item name="label" xsi:type="string">Modern</item>
@@ -128,14 +128,14 @@
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/view/relatedposts.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                 </item>
                 <item name="blog_post_sidebar_posts" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::sidebar/recent.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                 </item>
             </argument>
