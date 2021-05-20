@@ -42,22 +42,4 @@ $contactUrl = 'https://magefan.com/review/product/list/id/1797/
     .blog-leave-feedback a {color:#000;text-decoration:underline}
     .blog-leave-feedback img {float:left; margin-right: 10px; height:20px}
 </style>
-
-<script>
-    require(['jquery', 'jquery/ui', 'domReady!'], function($){
-        $(document).ready( function() {
-            if (Math.floor(Math.random() * 10) == 1) {
-                var s = 1000;
-                var d = 2000;
-                for(var i=0;i<3;i++) {
-                    setTimeout(function () {
-                        $('#blog-feedback-block').animate({opacity: "0.2"}, parseInt(d/2)).animate({opacity: "1"}, d);
-                    }, s);
-                    s+=d;
-                }
-
-            }
-        });
-    });
-</script>
 <?php } ?>
