@@ -94,6 +94,13 @@
                         <argument name="image" xsi:type="string">Magefan_Blog::images/hubspot.jpg</argument>
                     </arguments>
                 </block>
+                <block name="mfblog.import.drupal" template="Magefan_Blog::import/item.phtml" >
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="label" xsi:type="string">Import from Drupal</argument>
+                        <argument name="image" xsi:type="string">Magefan_Blog::images/drupal.jpg</argument>
+                    </arguments>
+                </block>
                 <block name="mfblog.import.custom" template="Magefan_Blog::import/item.phtml">
                     <arguments>
                         <argument name="import_url" xsi:type="string">https://magefan.com/contact</argument>
