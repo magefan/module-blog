@@ -154,13 +154,15 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $parentCategories[$parentCategory->getId()] = $category = $parentCategory;
             }
 
-            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
-                $category = $parentCategories[$i];
-                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $category->getId(), [
-                    'label' => $category->getTitle(),
-                    'title' => $category->getTitle(),
-                    'link'  => $category->getCategoryUrl()
-                ]);
+            if (!empty($parentCategories)) {
+                for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                    $category = $parentCategories[$i];
+                    $breadcrumbsBlock->addCrumb('blog_parent_category_' . $category->getId(), [
+                        'label' => $category->getTitle(),
+                        'title' => $category->getTitle(),
+                        'link' => $category->getCategoryUrl()
+                    ]);
+                }
             }
 
             $category = $this->getCategory();
@@ -170,7 +172,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             ]);
         }
     }
-    
+
     /**
      * Retrieve identities
      *

@@ -106,15 +106,16 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
                 $parentCategory = $parentCategory->getParentCategory();
             }
 
-            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
-                $parentCategory = $parentCategories[$i];
-                $breadcrumbsBlock->addCrumb('blog_parent_category_' . $parentCategory->getId(), [
-                    'label' => $parentCategory->getTitle(),
-                    'title' => $parentCategory->getTitle(),
-                    'link'  => $parentCategory->getCategoryUrl()
-                ]);
+            if (!empty($parentCategory)) {
+                for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
+                    $parentCategory = $parentCategories[$i];
+                    $breadcrumbsBlock->addCrumb('blog_parent_category_' . $parentCategory->getId(), [
+                        'label' => $parentCategory->getTitle(),
+                        'title' => $parentCategory->getTitle(),
+                        'link'  => $parentCategory->getCategoryUrl()
+                    ]);
+                }
             }
-
             $breadcrumbsBlock->addCrumb($key, [
                 'label' => $title ,
                 'title' => $title
