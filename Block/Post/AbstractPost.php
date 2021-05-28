@@ -200,9 +200,9 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     public function magefanCommentsEnabled()
     {
         return $this->_scopeConfig->getValue(
-                'mfblog/post_view/comments/type',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
+            'mfblog/post_view/comments/type',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
     }
 
     /**
@@ -225,7 +225,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         if (!$viewModel) {
             $viewModel = \Magento\Framework\App\ObjectManager::getInstance()
                 ->get(\Magefan\Blog\ViewModel\Style::class);
-            $this->setData('style_view_model', $viewModel );
+            $this->setData('style_view_model', $viewModel);
         }
 
         return $viewModel;

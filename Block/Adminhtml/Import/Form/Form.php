@@ -82,9 +82,9 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             [
                 'label' => __('NOTICE'),
                 'name' => 'prefix',
-                'after_element_html' => 'When the import is completed successfully, 
-                                        please copy image files from the old blog to Magento 
-                                        <strong style="color:#105610;">pub/media/magefan_blog</strong> 
+                'after_element_html' => 'When the import is completed successfully,
+                                        please copy image files from the old blog to Magento
+                                        <strong style="color:#105610;">pub/media/magefan_blog</strong>
                                         directory.',
             ]
         );
@@ -188,7 +188,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
 
         $this->_eventManager->dispatch('magefan_blog_import_' . $type . '_prepare_form', ['form' => $form]);
 
-	/*
+        /*
         if (empty($data['prefix'])) {
             $data['prefix'] = 'wp_';
         }

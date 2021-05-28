@@ -68,7 +68,6 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         return $toolBarBlock;
     }
 
-
     /**
      * Prepare posts collection
      *
@@ -218,7 +217,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve identities
-     *git add
+     * git add
      * @return array
      */
     public function getIdentities()

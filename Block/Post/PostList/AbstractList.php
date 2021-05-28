@@ -195,7 +195,7 @@ abstract class AbstractList extends Template implements IdentityInterface
         );
     }
 
-   /**
+    /**
      * Retrieve 1 if display author information is enabled
      * @return int
      */
@@ -226,9 +226,9 @@ abstract class AbstractList extends Template implements IdentityInterface
     public function magefanCommentsEnabled()
     {
         return $this->_scopeConfig->getValue(
-                'mfblog/post_view/comments/type',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
+            'mfblog/post_view/comments/type',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) == \Magefan\Blog\Model\Config\Source\CommetType::MAGEFAN;
     }
 
     /**
@@ -251,7 +251,7 @@ abstract class AbstractList extends Template implements IdentityInterface
         if (!$viewModel) {
             $viewModel = \Magento\Framework\App\ObjectManager::getInstance()
                 ->get(\Magefan\Blog\ViewModel\Style::class);
-            $this->setData('style_view_model', $viewModel );
+            $this->setData('style_view_model', $viewModel);
         }
 
         return $viewModel;

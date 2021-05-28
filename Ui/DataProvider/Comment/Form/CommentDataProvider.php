@@ -121,7 +121,6 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                     $this->loadedData[$comment->getId()]['author_url'] = $guestData;
                     break;
                 case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER:
-
                     if ($author->getCustomer()) {
                         $this->loadedData[$comment->getId()]['author_url'] = [
                             'url' => $this->url->getUrl(

@@ -74,7 +74,6 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
         return $content;
     }
-    
 
     /**
      * Prepare posts collection

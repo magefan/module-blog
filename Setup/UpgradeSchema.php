@@ -737,8 +737,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-
-
         if (version_compare($version, '2.9.8') < 0) {
             /**
              * Create table 'magefan_blog_tag_store'

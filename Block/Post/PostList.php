@@ -80,7 +80,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
         );
     }
 
-
     /**
      * Retrieve Toolbar Block
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar

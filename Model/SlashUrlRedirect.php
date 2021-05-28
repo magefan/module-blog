@@ -79,7 +79,7 @@ class SlashUrlRedirect
                         ScopeInterface::SCOPE_STORE
                     );
                     if ($controllerSufix) {
-                        if (strpos($result[0], $controllerSufix) == strlen($result[0]) - strlen($controllerSufix) ) {
+                        if (strpos($result[0], $controllerSufix) == strlen($result[0]) - strlen($controllerSufix)) {
                             return;
                         }
                     }
