@@ -153,6 +153,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 }
                 $parentCategories[$parentCategory->getId()] = $category = $parentCategory;
             }
+            $parentCategories = array_values($parentCategories);
 
             for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
                 $category = $parentCategories[$i];
