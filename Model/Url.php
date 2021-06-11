@@ -316,7 +316,7 @@ class Url
                 if ($char) {
                     $data = explode($char, $url);
                     $data[0] = trim($data[0], '/')  . $sufix;
-                    $url = implode($char, $url);
+                    $url = implode($char, $data);
                 } else {
                     $url = trim($url, '/') . $sufix;
                 }
