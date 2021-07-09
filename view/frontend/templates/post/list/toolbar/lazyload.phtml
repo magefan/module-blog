@@ -13,6 +13,10 @@
  * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar\Pager
  */
 ?>
+<?php
+$width = 220;
+$height = 150;
+?>
 <?php if ($block->useLazyload()) { ?>
     <?php
         $config = $block->getLazyloadConfig([
@@ -28,6 +32,9 @@
         </button>
         <img class="posts-loader mfblog-show-onload"
              src="<?= $block->escapeUrl($block->getViewFileUrl('images/loader-2.gif')) ?>"
-             alt="<?= $block->escapeHtml(__('Posts loader')) ?>" />
+             alt="<?= $block->escapeHtml(__('Posts loader')) ?>"
+             width="<?= $width ?>"
+             height="<?= $height ?>"
+        />
     </div>
 <?php } ?>

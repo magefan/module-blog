@@ -18,12 +18,21 @@
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Post\View\ViewsCount" name="blog.posts.views.count" template="post/view/views_count.phtml"></block>
             <block class="Magefan\Blog\Block\Post\View" name="blog.post" template="post/view.phtml">
+                <arguments>
+                    <argument name="width" xsi:type="number">800</argument>
+                    <argument name="height" xsi:type="number">500</argument>
+                </arguments>
                 <block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
                 <action method="setPostInfoBlockName">
                     <argument name="name" xsi:type="string">blog.post.info</argument>
                 </action>
                 <container name="blog.post.bottom" label="Blog Post Bottom Container" >
-                    <block class="Magefan\Blog\Block\Post\View\Gallery" name="blog.post.gallery" as="gallery"  template="Magefan_Blog::post/view/gallery.phtml" />
+                    <block class="Magefan\Blog\Block\Post\View\Gallery" name="blog.post.gallery" as="gallery"  template="Magefan_Blog::post/view/gallery.phtml" >
+                        <arguments>
+                            <argument name="width" xsi:type="number">300</argument>
+                            <argument name="height" xsi:type="number">300</argument>
+                        </arguments>
+                    </block>
                     <block class="Magefan\Blog\Block\Post\View\NextPrev" name="blog.post.nextprev" as="nextprev"  template="Magefan_Blog::post/view/nextprev.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />

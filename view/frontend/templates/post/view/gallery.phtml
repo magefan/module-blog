@@ -18,6 +18,8 @@
     $post = $block->getPost();
     $galleryImages = $post->getGalleryImages();
     $viewFileUrl = $block->getViewFileUrl("Magefan_Blog::css/jquery.fancybox.min.css");
+    $width = (int)$block->getWidth() ?: 300;
+    $height = (int)$block->getHeight() ?: 300;
 ?>
 
 <?php if (count($galleryImages)) { ?>
@@ -27,7 +29,12 @@
                data-fancybox="gallery"
                href="<?= $block->escapeUrl($image) ?>"
                rel="nofollow">
-                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200)) ?>" alt="" />
+                <img class="gallery-image"
+                     src="<?= $block->escapeUrl($image->resize(200)) ?>"
+                     alt=""
+                     width="<?= $width ?>"
+                     height="<?= $height ?>"
+                />
             </a>
         <?php } ?>
     </div>

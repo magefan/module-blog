@@ -16,12 +16,18 @@
 <?php
     $comment = $block->getComment();
     $numberOfCommentsToDisplay = $block->getNumberOfReplies();
+    $width = 200;
+    $height = 200;
 ?>
 <div class="c-comment c-comment-parent-<?= (int)$comment->getParentId() ?>"
     <?php if ($comment->getIsHidden()) { echo 'style="display:none"'; } ?>>
     <?php if ($authorImage = $comment->getAuthorImage()) { ?>
     <div class="c-img">
-        <img src="<?= $block->escapeUrl($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
+        <img src="<?= $block->escapeUrl($authorImage) ?>"
+             alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>"
+             width="<?= $width ?>"
+             height="<?= $height ?>"
+        >
     </div>
     <?php } ?>
     <div class="c-post c-post-<?= (int)$comment->getId() ?>" id="c-post-<?= (int)$comment->getId() ?>">

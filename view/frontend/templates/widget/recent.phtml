@@ -16,6 +16,8 @@
 
 <?php
     $_postCollection = $block->getPostCollection();
+    $width = (int)$block->getWidth() ?: 500;
+    $height = (int)$block->getHeight() ?: 400;
 ?>
 <?php if ($_postCollection->count()) { ?>
 <div class="post-list-wrapper blog-widget-recent">
@@ -74,7 +76,10 @@
                             <div class="post-ftimg-hld">
                                 <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                     <img src="<?= $block->escapeHtml($featuredImage) ?>"
-                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>"
+                                         width="<?= $width ?>"
+                                         height="<?= $height ?>"
+                                    />
                                 </a>
                             </div>
                         <?php } ?>
