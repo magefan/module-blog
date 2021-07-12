@@ -147,6 +147,21 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
 
         if (!$this->getFlag('store_filter_added')) {
+            $this->setFlag('store_filter_added', 1);
+
+            if (is_array($store)) {
+                foreach ($store as $k => $v) {
+                    if ($k == 'like') {
+                        if (is_object($v) && $v instanceof \Zend_Db_Expr && (string)$v == "'%0%'") {
+                            return $this;
+                        } else {
+                            $this->addFilter('store', $store, 'public');
+                            return $this;
+                        }
+                    }
+                }
+            }
+
             if ($store instanceof \Magento\Store\Model\Store) {
                 $this->_storeId = $store->getId();
                 $store = [$store->getId()];
@@ -165,8 +180,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $store[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
             }
 
+
             $this->addFilter('store', ['in' => $store], 'public');
-            $this->setFlag('store_filter_added', 1);
+
         }
         return $this;
     }
