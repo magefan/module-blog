@@ -122,7 +122,7 @@ class Wordpress extends AbstractImport
             }
             */
 
-            if (isset($data['title']) && $data['title'][0] == '?') {
+            if (isset($data['title']) && isset($data['title'][0]) && $data['title'][0] == '?') {
                 /* fix for ???? titles */
                 $data['title'] = $data['identifier'];
             }
