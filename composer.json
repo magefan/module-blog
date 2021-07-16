@@ -11,7 +11,7 @@
         "magefan/module-blog-amp": "Install this module to activate Blog integration with the Plumrocket AMP extension."
     },
     "type": "magento2-module",
-    "version": "2.10.1.4",
+    "version": "2.10.1.5",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
