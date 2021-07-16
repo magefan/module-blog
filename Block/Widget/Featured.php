@@ -58,4 +58,15 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     {
         return $post->getShortFilteredContent();
     }
+
+    /**
+     * Get relevant path to template
+     * Skip parent one as it use template for sidebar block
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return \Magefan\Blog\Block\Post\PostList\AbstractList::getTemplate();
+    }
 }
