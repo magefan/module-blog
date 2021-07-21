@@ -44,8 +44,7 @@
                         <span class="post-author-name">
                             <?php if ($block->authorPageEnabled()) { ?>
                                 <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>">
-                                    <?= $block->escapeHtml($_author->getTitle()) ?>
+                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
                                 </a>
                             <?php } else { ?>
                                 <?= $block->escapeHtml($_author->getTitle()) ?>
@@ -83,8 +82,7 @@
             <?php /*
             <div class="post-sharing mb-4 d-none">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox text-center" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
-                </div>
+                <div class="addthis_inline_share_toolbox text-center" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
             </div>
             */ ?>
         </div>
@@ -93,10 +91,12 @@
             <div class="_post-description clearfix">
                 <!-- Post Image -->
                 <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
-                    <?php $featuredImgAlt = $_post->getData('featured_img_alt');
+                    <?php
+                        $featuredImgAlt = $_post->getData('featured_img_alt');
                         if (!$featuredImgAlt) {
                             $featuredImgAlt = $_postName;
-                        } ?>
+                        }
+                    ?>
                     <div class="post-featured-image">
                         <img src="<?= $block->escapeUrl($featuredImage) ?>"
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />

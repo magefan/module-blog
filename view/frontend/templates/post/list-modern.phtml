@@ -41,9 +41,7 @@ $_postCollection = $block->getPostCollection();
                         <div class="post-image">
                             <!-- img container -->
                             <div class="image-container">
-                                <a class="image-wrap"
-                                   href="<?= /*@noEscape*/ $_postUrl ?>"
-                                   title="<?= /*@noEscape*/ $_postName ?>">
+                                <a class="image-wrap" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                     <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
                                     <?php
                                     if (!$featuredImage) {
@@ -65,8 +63,7 @@ $_postCollection = $block->getPostCollection();
                                 <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
                                     <span class="post-category">
                                         <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                                            <a class="category-name"
-                                               href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
                                                title="<?= $block->escapeHtml($ct->getTitle()) ?>">
                                                 <?= $block->escapeHtml($ct->getTitle()) ?>
                                             </a>
@@ -94,8 +91,7 @@ $_postCollection = $block->getPostCollection();
                                         <span class="post-author-name">
                                             <?php if ($block->authorPageEnabled()) { ?>
                                                 <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>">
-                                                    <?= $block->escapeHtml($_author->getTitle()) ?>
+                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
                                                 </a>
                                             <?php } else { ?>
                                                 <?= $block->escapeHtml($_author->getTitle()) ?>
@@ -127,9 +123,7 @@ $_postCollection = $block->getPostCollection();
 
                             <!-- read more -->
                             <div class="post-read-more">
-                                <a class="post-read btn-white"
-                                   href="<?= /*@noEscape*/ $_postUrl ?>"
-                                   title="<?= /*@noEscape*/ $_postName ?>">
+                                <a class="post-read btn-white" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                     <?= $block->escapeHtml(__('Read more')) ?>
                                 </a>
                             </div>

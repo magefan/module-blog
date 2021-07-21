@@ -74,9 +74,7 @@
                     <?php } ?>
                     <div class="clearfix"></div>
 
-                    <div id="recaptcha-append-to">
-                        <?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?>
-                    </div>
+                    <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
 
                     <?php if ($canPost) { ?>
                         <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
@@ -106,9 +104,7 @@ if ($commentsCount) {
             <?= $block->getCommentHtml($comment) ?>
         <?php } ?>
         <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
-            <a href="#" class="c-allcomments more-comments-action" data-comment="0">
-                <?= $block->escapeHtml(__('Load more comments')) ?>
-            </a>
+            <a href="#" class="c-allcomments more-comments-action" data-comment="0"><?= $block->escapeHtml(__('Load more comments')) ?></a>
         <?php } ?>
     </div>
 
@@ -152,9 +148,7 @@ if ($commentsCount) {
                     </div>
                 </div>
                 <?php } ?>
-                <button type="button" class="cancel reply-cancel-action" >
-                    <?= $block->escapeHtml(__('Cancel')) ?>
-                </button>
+                <button type="button" class="cancel reply-cancel-action" ><?= $block->escapeHtml(__('Cancel')) ?></button>
             <?php if ($canPost) { ?>
                     <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
                     <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
@@ -170,9 +164,7 @@ if ($commentsCount) {
                     </button>
                 <?php } ?>
                 <div class="clearfix"></div>
-                <div id="recaptcha-reply-append-to">
-                    <?= $block->getChildHtml('blog.post.comments.magefan.reply.additional'); ?>
-                </div>
+                <div id="recaptcha-reply-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.reply.additional'); ?></div>
             </div>
         </form>
     </div>

@@ -18,9 +18,7 @@
     $_postCollection = $block->getPostCollection();
 ?>
 <?php if ($_postCollection->count()) { ?>
-<h2 style="margin:0 0 18px 0;font-size:18px;font-weight:600;text-align:center" class="theme-color a-center">
-    <?= $block->escapeHtml($block->getTitle()) ?>
-</h2>
+<h2 style="margin:0 0 18px 0;font-size:18px;font-weight:600;text-align:center" class="theme-color a-center"><?= $block->escapeHtml($block->getTitle()) ?></h2>
 <div class="recent-posts">
     <div class="owl-carousel">
     <?php foreach ($_postCollection as $_post) { ?>
@@ -50,17 +48,15 @@
                         <span class="month"><?= $block->escapeHtml($_post->getPublishDate('M')) ?></span>
                     </div>
                     <div class="postTitle">
-                        <h2><a href="<?= $block->escapeUrl($_postUrl) ?>" ><?= $block->escapeUrl($_postName) ?></a></h2>
+                        <h2><a href="<?= $_postUrl ?>" ><?= $_postName ?></a></h2>
                     </div>
-                    <?php
+                    <?php 
                         $content = $block->getShorContent($_post);
                         $content = preg_replace("/<img[^>]+\>/i", "", $content);
                         $content = preg_replace("#<iframe[^>]+>.*?</iframe>#is", "", $content);
                     ?>
                     <div class="postContent"><?= /*@noEscape*/ $content ?></div>
-                    <a class="readmore" href="<?= $block->escapeUrl($_postUrl) ?>">
-                        <?= $block->escapeHtml(__('Read more &#187;')) ?>
-                    </a>
+                    <a class="readmore" href="<?= $_postUrl ?>"><?= $block->escapeHtml(__('Read more &#187;')) ?></a>
                 </div>
             </div>
         </div>
