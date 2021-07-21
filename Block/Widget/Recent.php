@@ -16,7 +16,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     /**
      * @var array
      */
-    public static $processedIds = [];
+    static $processedIds = [];
 
     /**
      * @var \Magefan\Blog\Model\CategoryFactory
