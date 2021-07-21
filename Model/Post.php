@@ -546,7 +546,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         foreach (explode(' ', $stcc) as $s) {
                             $str .= ($str ? ' ' : '') . $s;
 
-                        
                             $pos = mb_strpos($content, $str);
                             if (false !== $pos) {
                                 $start = $pos;
@@ -565,7 +564,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
                 /* Do not cut words */
                 while ($len < strlen($content)
-                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"]) ) {
+                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"])) {
                     $len++;
                 }
 
@@ -950,7 +949,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             'mfblog/design/publication_date',
             ScopeInterface::SCOPE_STORE
         );
-        return true;
     }
 
     /**

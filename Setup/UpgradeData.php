@@ -41,7 +41,6 @@ class UpgradeData implements UpgradeDataInterface
             );
             $tags = $connection->fetchAll($tagSelect);
 
-
             $count = count($tags);
             if ($count) {
                 $data = [];

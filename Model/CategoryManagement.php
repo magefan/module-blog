@@ -90,11 +90,7 @@ class CategoryManagement extends AbstractManagement
         ];
 
         foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+            $method = 'get' . str_replace('_', '', ucwords($key, '_'));
             $data[$key] = $item->$method();
         }
 

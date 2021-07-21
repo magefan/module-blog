@@ -27,8 +27,7 @@
                     $url = $block->getUrl('blog/import/form', ['type' => $block->getImportType()]);
                 }
                 $action = 'window.location=\'' .  $block->escapeUrl($url) . '\'';
-            }
-         ?>
+            } ?>
          onclick="<?= $action ?>">
         <img class="img"
              src="<?= $block->escapeUrl($block->getViewFileUrl($block->getImage())) ?>" />

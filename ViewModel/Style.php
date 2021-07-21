@@ -31,11 +31,15 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
      */
     private $done = [];
 
-
+    /**
+     * Style constructor.
+     * @param Source $source
+     * @param AssetRepository $assetRepository
+     */
     public function __construct(
         Source $source,
         AssetRepository $assetRepository
-    )  {
+    ) {
         $this->source = $source;
         $this->assetRepository = $assetRepository;
     }
@@ -49,7 +53,6 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
             return '';
         }
         $this->done[$file] = true;
-
 
         if (false === strpos($file, '::')) {
             $file = 'Magefan_Blog::css/' . $file;
@@ -92,6 +95,5 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
         return PHP_EOL . '
         <!-- Start CSS ' . $file . ' ' . ((int)(strlen($fileContent) / 1024)) . 'Kb -->
         <style>' . $fileContent . '</style>';
-
     }
 }

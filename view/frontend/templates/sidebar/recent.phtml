@@ -43,12 +43,12 @@
                             $featuredImgAlt =  $_postName;
                         }
                         ?>
-                        <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                        <a class="post-item-link" title="<?= $block->escapeHtml($_postName) ?>" href="<?= $block->escapeUrl($_postUrl) ?>">
                             <?php
                                 if ($featuredImage) {
                                     $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
                                 } else {
-                                    $featuredImageUrl = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                                    $featuredImageUrl = $block->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
                                 }
                             ?>
                             <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $block->escapeUrl($featuredImageUrl) ?>"
@@ -57,8 +57,8 @@
                     </div>
                 <?php } ?>
 
-                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                    <?= $_postName ?>
+                <a class="post-item-link" title="<?= $block->escapeHtml($_postName) ?>" href="<?= $block->escapeUrl($_postUrl) ?>">
+                    <?= $block->escapeHtml($_postName) ?>
                 </a>
 
                 <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>

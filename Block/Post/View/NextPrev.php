@@ -180,7 +180,6 @@ class NextPrev extends \Magento\Framework\View\Element\Template
         return $this->_nextPost;
     }
 
-
     /**
      * Retrieve post collection with frontend filters and order
      * @return bool

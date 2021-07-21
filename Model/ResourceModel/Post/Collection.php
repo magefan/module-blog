@@ -362,7 +362,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             );
 
             if ($advancedSortingEnabled) {
-                    
+
                 if ($tagPostIdsCount > 200) {
                     $tagPostIds = array_slice($tagPostIds, 0, 200);
                 }
@@ -392,7 +392,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             if ($advancedSortingEnabled) {
                 $this->addExpressionFieldToSelect(
                     'search_rate',
-                    '(0 ' . 
+                    '(0 ' .
                     '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
                     [
                         'term' => $this->getConnection()->quote($term)

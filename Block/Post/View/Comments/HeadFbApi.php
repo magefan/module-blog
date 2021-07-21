@@ -8,7 +8,7 @@
 namespace Magefan\Blog\Block\Post\View\Comments;
 
 /**
- * Class HeadFbApi
+ * Class HeadFbApi class
  */
 class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
 {

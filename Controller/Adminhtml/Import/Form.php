@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Controller\Adminhtml\Import;
 
 use Magento\Framework\Exception\LocalizedException;
+
 /**
  * Blog prepare import controller
  */
@@ -69,7 +70,6 @@ class Form extends \Magento\Backend\App\Action
     {
         return $this->_authorization->isAllowed('Magefan_Blog::import');
     }
-
 
     /**
      * Retrieve store config value

@@ -128,10 +128,9 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         }
 
         $enableNoRepeat = $this->getData('no_repeat_posts_enable');
-        if ($enableNoRepeat && self::$processedIds){
+        if ($enableNoRepeat && self::$processedIds) {
             $this->_postCollection->addFieldToFilter('post_id', ['nin' => self::$processedIds]);
         }
-
     }
 
     /**

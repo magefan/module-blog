@@ -28,7 +28,7 @@ class Autocomplete extends Template
      * @param array $data
      * @param Registry $registry
      */
-    public function __construct(Context $context, array $data = [], Registry $registry)
+    public function __construct(Context $context, Registry $registry, array $data = [])
     {
         parent::__construct($context, $data);
         $this->registry = $registry;

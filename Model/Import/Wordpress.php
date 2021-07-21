@@ -325,13 +325,13 @@ class Wordpress extends AbstractImport
                 $post->setData($data)->save();
 
                 /* find post comment s*/
-                $sql = 'SELECT 
-                            * 
-                        FROM 
-                            '.$_pref.'comments 
-                        WHERE 
-                            `comment_approved`=1 
-                        AND 
+                $sql = 'SELECT
+                            *
+                        FROM
+                            '.$_pref.'comments
+                        WHERE
+                            `comment_approved`=1
+                        AND
                             `comment_post_ID` = ' . $wordpressPostId;
                 $resultComments = $adapter->query($sql)->execute();
                 $commentParents = [];
@@ -578,7 +578,6 @@ class Wordpress extends AbstractImport
                     }
                 }
             }
-
 
             $divElement = str_replace('[video', '<video controls ', $divElement);
             $divElement = str_replace('align="', 'class="wp-caption ', $divElement);
