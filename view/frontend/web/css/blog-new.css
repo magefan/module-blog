@@ -38,7 +38,7 @@ button {box-shadow: none !important;}
 /*.post-list a:hover {color: #006bb4;text-decoration: none;}*/
 
 .post-list {margin-top: 0px;margin-bottom: 20px;list-style: none;padding-left: 0}
-.post-list .post-item.post-holder {padding: 0 15px 0 0;margin-bottom: 30px;}
+.post-list .post-item.post-holder {margin: 0 0 30px 0;padding: 0;display: block;}
 .post-list .post-container {display: -ms-flexbox;display: flex;}
 
 /* Post Image ************************************/
@@ -54,13 +54,13 @@ button {box-shadow: none !important;}
 .post-list .post-image .post-category a:hover {background: #4db2ec;}
 
 /* Post Info **************************************/
-.post-list .post-info {padding: 0 0 0 25px;width: 100%;}
+.post-list .post-info {padding: 0 0 0 25px;flex: 0 0 70%;max-width: 70%;width: 70%;order: 1}
 /* Post Title */
 .post-list .post-info .post-title-wrap h3 {margin: 0;}
 .post-list .post-info .post-title-wrap h3 a {font-size: 20px;line-height: 25px;font-weight: 500;}
 /* Post Data */
 .post-list .post-info .post-data-wrap {font-size: 11px;font-family: sans-serif;}
-.post-list .post-info .post-data-wrap .post-date {font-size: 11px;color: #bbbbbb;}
+.post-list .post-info .post-data-wrap .post-date {font-size: 11px;color: #bbbbbb; margin: 0;padding: 0;box-shadow: none;float: none;width: auto;}
 .post-list .post-info .post-data-wrap a {font-weight: 600;}
 /* Post Description */
 .post-list .post-description {color: #7d7d7d;line-height: 21px;font-size: 13px;}
