@@ -100,7 +100,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 return parent::addFieldToFilter($field, $condition);
             } elseif (count($field) === 1) {
                 $field = $field[0];
-                $condition = $condition[0] ?? $condition;
+                $condition = isset($condition[0]) ? $condition[0] : $condition;
             }
         }
 
