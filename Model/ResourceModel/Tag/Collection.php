@@ -42,6 +42,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addFieldToFilter($field, $condition = null)
     {
+        if (is_array($field)) {
+            if (count($field) > 1) {
+                return parent::addFieldToFilter($field, $condition);
+            } elseif (count($field) === 1) {
+                $field = $field[0];
+                $condition = $condition[0] ?? $condition;
+            }
+        }
+        
         if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition);
         }
