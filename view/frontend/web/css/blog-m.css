@@ -46,21 +46,8 @@
 .post-content .post-description .post-ftimg-hld {margin: 0 0 10px 0;}
 .post-content .post-description .post-ftimg-hld img {width:100%; padding:0; margin:0;}
 
-.post-list .post-header .post-title {max-width:80%;}
-.post-list .post-header .post-title a {
-    text-decoration: none;
-    font-size: 22px;
-    color: #636363;
-    font-weight: 400;
-}
-
-
-
-.post-list .post-header .post-title {
-    margin: 0;
-    padding: 10px 0;
-    float:left;
-}
+.post-list .post-header .post-title {max-width:80%;margin: 0;padding: 10px 0;float: none;}
+.post-list .post-header .post-title a {text-decoration: none;font-size: 22px;color: #636363;font-weight: 400;}
 
 .post-list .post-holder .post-header .addthis_toolbox {float: right; padding-top: 20px;}
 .post-list .hidden {display:none;}
@@ -80,20 +67,11 @@
 .post-view .block {margin-bottom: 30px;}
 
 
-.widget.block-categories ul {
-    list-style: initial;
-    padding-left:0;
-}
+.widget.block-categories > ul {list-style: none;padding: 0;margin: 0;position: relative;}
+/*.widget.block-categories ul,*/
+.widget.block-categories ul li {margin: 5px 0 5px 9px;padding: 0;}
+.widget.block-categories ul ul {margin-left:20px;}
 
-.widget.block-categories ul ul {
-    margin-left:20px;
-}
-
-.widget.block-categories ul,
-.widget.block-categories li {
-    margin: 5px 0 5px 9px;
-    padding: 0;
-}
 
 .widget.block-rss .rss-icon {float: left; width: 23px; padding-right: 10px;}
 
