@@ -24,7 +24,7 @@
 
 .clearfix:after {content:"";display:table;clear:both;}
 
-.post-holder {margin-bottom: 40px;/*padding: 20px;*/border-radius: 0;color: #222222;}
+.post-holder {margin-bottom: 40px;border-radius: 0;}
 /*
 .fa, .fas {font-family:'FontAwesome';font-weight: 900;font-size: 48px;}
 button {box-shadow: none !important;}
@@ -33,10 +33,6 @@ button {box-shadow: none !important;}
 
 
 /* Blog Post List *****************************************************************************************************/
-/* * {box-sizing: border-box;}*/
-/*.post-list a {color: #222222;text-decoration: none;}*/
-/*.post-list a:hover {color: #006bb4;text-decoration: none;}*/
-
 .post-list {margin-top: 0px;margin-bottom: 20px;list-style: none;padding-left: 0}
 .post-list .post-item.post-holder {margin: 0 0 30px 0;padding: 0;display: block;}
 .post-list .post-container {display: -ms-flexbox;display: flex;}
@@ -60,10 +56,10 @@ button {box-shadow: none !important;}
 .post-list .post-info .post-title-wrap h3 a {font-size: 20px;line-height: 25px;font-weight: 500;}
 /* Post Data */
 .post-list .post-info .post-data-wrap {font-size: 11px;font-family: sans-serif;}
-.post-list .post-info .post-data-wrap .post-date {font-size: 11px;color: #bbbbbb; margin: 0;padding: 0;box-shadow: none;float: none;width: auto;}
+.post-list .post-info .post-data-wrap .post-date {font-size: 11px; margin: 0;padding: 0;box-shadow: none;float: none;width: auto;}
 .post-list .post-info .post-data-wrap a {font-weight: 600;}
 /* Post Description */
-.post-list .post-description {color: #7d7d7d;line-height: 21px;font-size: 13px;}
+.post-list .post-description {line-height: 21px;font-size: 13px;}
 /* Post View */
 .post-list .post-view {display: block;background: #000;color: #fff;font-size: 10px;font-weight: 600;text-align: center;line-height: 11px;position: relative;top: -5px;padding: 4px 6px;}
 .post-list .post-view:after {position: absolute;left: 0;bottom: -3px;content: '';width: 0;height: 0;border-style: solid;border-width: 3px 3px 0 0;border-color: #000 transparent transparent;}
@@ -130,10 +126,8 @@ button {box-shadow: none !important;}
 
 
 /* Post Text */
-.blog-post-view .post-description {margin-bottom: 30px;color: #7d7d7d;}
+.blog-post-view .post-description {margin-bottom: 30px;}
 .blog-post-view .post-description p {font-size: 1.4rem;line-height: 1.7;}
-.blog-post-view .post-description a {color: #4db2ec !important;}
-
 
 /* Post Bottom *****************************************/
 .post-view .post-bottom {margin-top:30px;}
