@@ -15,7 +15,7 @@
         </referenceContainer>
         -->
         <referenceBlock name="product.info.details">
-            <block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="product.info.blog.relatedposts.tab" as="relatedposts.tab"  template="Magefan_Blog::post/view/relatedposts.phtml" group="detailed_info">
+            <block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="product.info.blog.relatedposts.tab" as="blog.relatedposts.tab"  template="Magefan_Blog::post/view/relatedposts.phtml" group="detailed_info">
                 <arguments>
                     <argument translate="true" name="title" xsi:type="string">Related Posts</argument>
                     <argument name="at_call" xsi:type="string">getRelatedposts</argument>
