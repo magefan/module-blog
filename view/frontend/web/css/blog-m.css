@@ -50,7 +50,7 @@
 .post-list .post-header .post-title-holder:before {content: "";display: table;}
 .post-list .post-header .post-title-holder:after {content: "";display: table;clear: both;}
 .post-list .post-header .post-title {max-width:80%;margin: 0;padding: 10px 0;}
-.post-list .post-header .post-title a {text-decoration: none;font-size: 22px;color: #636363;font-weight: 400;}
+.post-list .post-header .post-title a {text-decoration: none;font-size: 22px;font-weight: 400;}
 .post-list .post-holder .post-header .addthis_toolbox {float: right; padding-top: 20px;}
 
 .post-list .hidden {display:none;}
