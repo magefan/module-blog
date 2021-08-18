@@ -10,6 +10,11 @@
         <policies>
             <policy id="connect-src">
                 <values>
+                    <value id="magefan-blog-addthis-buttons" type="host">ekr.zdassets.com/</value>
+                </values>
+            </policy>
+            <policy id="script-src">
+                <values>
                     <value id="magefan-blog-addthis-buttons" type="host">s7.addthis.com</value>
                 </values>
             </policy>
