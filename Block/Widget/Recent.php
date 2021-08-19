@@ -78,7 +78,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      */
     public function getTitle()
     {
-        return $this->getData('title') ?: __('Recent Blog Posts');
+        return $this->getData('title') ?: '';
     }
 
     /**
