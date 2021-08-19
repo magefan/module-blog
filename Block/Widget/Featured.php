@@ -41,6 +41,7 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
 
     /**
      * Retrieve post ids string
+     *
      * @return string
      */
     protected function getPostIdsConfigValue()
@@ -50,13 +51,15 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
 
     /**
      * Retrieve post short content
-     * @param  \Magefan\Blog\Model\Post $post
      *
+     * @param  \Magefan\Blog\Model\Post $post
+     * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShorContent($post)
+    public function getShorContent($post, $len = null, $endСharacters = null)
     {
-        return $post->getShortFilteredContent();
+        return $post->getShortFilteredContent($len, $endСharacters);
     }
 
     /**
