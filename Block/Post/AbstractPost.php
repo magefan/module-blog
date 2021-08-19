@@ -118,11 +118,13 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     /**
      * Retrieve post short content
      *
+     * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShorContent()
+    public function getShorContent($len = null, $endСharacters = null)
     {
-        return $this->getPost()->getShortFilteredContent();
+        return $this->getPost()->getShortFilteredContent($len, $endСharacters);
     }
 
     /**
