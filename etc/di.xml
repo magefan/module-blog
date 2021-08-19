@@ -166,5 +166,31 @@
             <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
         </arguments>
     </virtualType>
+    
+    <type name="Magento\PageBuilder\Model\UpgradableEntitiesPool">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="magefan_blog_post" xsi:type="array">
+                    <item name="identifier" xsi:type="string">post_id</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="content" xsi:type="boolean">true</item>
+                        <item name="short_content" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="magefan_blog_category" xsi:type="array">
+                    <item name="identifier" xsi:type="string">category_id</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="content" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="magefan_blog_tag" xsi:type="array">
+                    <item name="identifier" xsi:type="string">tag_id</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="content" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 
 </config>
