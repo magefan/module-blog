@@ -157,15 +157,17 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         return $this->_category;
     }
-
+    
     /**
      * Retrieve post short content
-     * @param  \Magefan\Blog\Model\Post $post
      *
+     * @param  \Magefan\Blog\Model\Post $post
+     * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShorContent($post)
+    public function getShorContent($post, $len = null, $endСharacters = null)
     {
-        return $post->getShortFilteredContent();
+        return $post->getShortFilteredContent($len, $endСharacters);
     }
 }
