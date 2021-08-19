@@ -36,7 +36,7 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
      */
     public function getTitle()
     {
-        return $this->getData('title') ?: __('Featured Blog Posts');
+        return $this->getData('title') ?: '';
     }
 
     /**
