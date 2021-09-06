@@ -335,21 +335,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
         $tagPostIds = array_unique($tagPostIds);
 
-        $mySqlItems = [
-            ' as ',
-            'life',
-            'guard'
-        ];
-
-        $advancedSortingEnabled = true;
-        $tmpTerm = ' ' . trim(trim($term), '!.?:,') . ' ';
-        foreach ($mySqlItems as $item) {
-            if (false !== stripos($tmpTerm, $item)) {
-                $advancedSortingEnabled = false;
-                break;
-            }
-        }
-
         if ($tagPostIdsCount = count($tagPostIds)) {
             $this->addFieldToFilter(
                 ['title', 'short_content', 'content', 'post_id'],
@@ -361,24 +346,19 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ]
             );
 
-            if ($advancedSortingEnabled) {
-
-                if ($tagPostIdsCount > 200) {
-                    $tagPostIds = array_slice($tagPostIds, 0, 200);
-                }
-
-                $this->addExpressionFieldToSelect(
-                    'search_rate',
-                    '(0 ' .
-                    '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4) ' .
-                    '+ IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))',
-                    [
-                        'term' => $this->getConnection()->quote($term)
-                    ]
-                );
-            } else {
-                $this->addExpressionFieldToSelect('search_rate', ' publish_time', []);
+            if ($tagPostIdsCount > 200) {
+                $tagPostIds = array_slice($tagPostIds, 0, 200);
             }
+
+            $fullExpression = '(0 ' .
+                '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ('
+                . $this->getConnection()->quote($term)
+                . '), 4) ' .
+                '+ IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))';
+
+            $fullExpression = new \Zend_Db_Expr($fullExpression);
+            $this->getSelect()->columns(['search_rate' => $fullExpression]);
+            //$this->expressionFieldsToSelect['search_rate'] = $fullExpression;
         } else {
             $this->addFieldToFilter(
                 ['title', 'short_content', 'content'],
@@ -389,18 +369,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ]
             );
 
-            if ($advancedSortingEnabled) {
-                $this->addExpressionFieldToSelect(
-                    'search_rate',
-                    '(0 ' .
-                    '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ("{{term}}"), 4))',
-                    [
-                        'term' => $this->getConnection()->quote($term)
-                    ]
-                );
-            } else {
-                $this->addExpressionFieldToSelect('search_rate', ' publish_time', []);
-            }
+            $fullExpression = '(0 ' .
+                '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ('
+                . $this->getConnection()->quote($term)
+                . '), 4))';
+
+            $fullExpression = new \Zend_Db_Expr($fullExpression);
+            $this->getSelect()->columns(['search_rate' => $fullExpression]);
+            //$this->expressionFieldsToSelect['search_rate'] = $fullExpression;
         }
 
         return $this;
