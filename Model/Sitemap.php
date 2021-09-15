@@ -135,7 +135,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
      */
     public function getSitemapPath(): string
     {
-        $path = $this->getData('sitemap_path');
+        $path = (string)$this->getData('sitemap_path');
         if ($serverPath = $this->getServerPath()) {
             if (!$this->_directory->isDirectory($serverPath)) {
                 $serverPath = BP . '/' . $serverPath;
