@@ -66,6 +66,13 @@
                         <argument name="image" xsi:type="string">Magefan_Blog::images/amasty1_blog.png</argument>
                     </arguments>
                 </block>
+                <block name="mfblog.import.amasty2" template="Magefan_Blog::import/item.phtml" >
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="label" xsi:type="string">Import from Amasty</argument>
+                        <argument name="image" xsi:type="string">Magefan_Blog::images/amasty2_blog.png</argument>
+                    </arguments>
+                </block>
                 <block name="mfblog.import.csvxml" template="Magefan_Blog::import/item.phtml">
                     <arguments>
                         <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
