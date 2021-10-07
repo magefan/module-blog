@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+?>
+<?php
+$helper = $this->helper(\Magefan\Blog\Helper\Data::class);
+?>
+
+<?php if (!$helper->isOriginMfLazyLoadEnable()) { ?>
+    <script>
+        require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
+            $('.mfblogunveil').mfblogunveil();
+        });
+    </script>
+<?php } ?>
+
