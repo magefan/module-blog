@@ -17,5 +17,9 @@
         <referenceBlock name="footer_links">
             <block class="Magefan\Blog\Block\Link" name="footer_blog_link" />
         </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="mfblog.lazyload.js" template="Magefan_Blog::lazyload-js.phtml" />
+        </referenceContainer>
     </body>
 </page>
