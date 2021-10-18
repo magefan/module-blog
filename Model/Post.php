@@ -481,14 +481,14 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getShortFilteredContent($len = null, $endСharacters = null)
     {
+        /* Fix for custom themes that send wrong parameters to this function, and that brings the error */
+        if (is_object($len)) {
+             $len = null;
+        }
+        /* End fix */
+        
         $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
-
-            /* Fix for custom themes that send wrong parameters to this function, and that brings the error */
-            if (is_object($len)) {
-                $len = null;
-            }
-            /* End fix */
 
             $isPagebreakDefined = false;
 
