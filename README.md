@@ -3,7 +3,7 @@
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
 
-Magento 2 Blog  is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 230 000 downloads.
+Magento 2 Blog  is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 515 000 downloads.
 
 
 <a href="https://magefan.com/magento2-blog-extension"><img width="300" height="60" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/DOWNLOAD_NOW.webp"></a>
