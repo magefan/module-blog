@@ -80,7 +80,7 @@ button {box-shadow: none !important;}
 @media (max-width: 767px) {
     .post-list .post-image .post-category {display: none;}
     .post-list .post-info {padding: 0 0 0 15px;}
-    .post-list .post-description {display: none;}
+    .post-list.modern .post-description {display: none;}
     .post-read-more a.post-read {display: none;}
 }
 @media (max-width: 640px) {
