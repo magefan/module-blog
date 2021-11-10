@@ -30,7 +30,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
     <?= $block->getAdditionalHtml() ?>
     <div class="post-list-wrapper">
         <?php $iterator = 1; ?>
-        <ol class="post-list">
+        <ol class="post-list modern">
             <?php foreach ($_postCollection as $_post): ?>
                 <?php
                     $_postUrl = $block->escapeUrl($_post->getPostUrl());
