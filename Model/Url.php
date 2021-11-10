@@ -146,8 +146,11 @@ class Url
             '_direct' => $this->getBasePath(),
             '_nosid' => $this->storeId ?: null
         ]);
-        if ($url[strlen($url) - 1] != '/') {
-            $url .= '/';
+        $urlParts = explode('?', $url);
+        if ($urlParts[0][strlen($urlParts[0]) - 1] != '/') {
+            $urlParts[0] .= '/';
+            $url = implode('?', $urlParts);
+
         }
         $url = $this->trimSlash($url);
         return $url;
@@ -334,7 +337,9 @@ class Url
     protected function trimSlash($url)
     {
         if ($this->_getConfig('redirect_to_no_slash')) {
-            $url = trim($url, '/');
+            $urlParts = explode('?', $url);
+            $urlParts[0] = trim($urlParts[0], '/');
+            $url = implode('?', $urlParts);
         }
         return $url;
     }
