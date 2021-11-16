@@ -58,6 +58,12 @@
                         that.opt.current_page++;
                     }
 
+                    if ($html.find('[data-original]').length) {
+                        require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
+                            $('.mfblogunveil').mfblogunveil();
+                        });
+                    }
+
                     endLoading();
 
                 }).fail(function (xhr, ajaxOptions, thrownError) {
