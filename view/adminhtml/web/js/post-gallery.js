@@ -12,7 +12,8 @@ define([
     'mage/template',
     'uiRegistry',
     'productGallery',
-    'jquery/ui',
+    'jquery-ui-modules/core',
+    'jquery-ui-modules/widget',
     'baseImage'
 ], function ($, _, mageTemplate, registry, productGallery) {
     'use strict';
