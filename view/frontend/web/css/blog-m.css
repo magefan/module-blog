@@ -41,10 +41,19 @@
 
 .post-content .post-description img {margin: 15px 0;max-width: 100%;height: auto}
 .post-content .post-description ul,
-.post-content .post-description ol {list-style-position: inside;}
+.post-content .post-description ol {list-style-position: outside;}
+
+.post-content .post-description .mfblog-contents li {display: list-item;}
+.post-content .post-description .mfblog-contents li li {margin-left: 15px;}
 
 .post-content .post-description .post-ftimg-hld {margin: 0 0 10px 0;}
 .post-content .post-description .post-ftimg-hld img {width:100%; padding:0; margin:0;}
+
+.post-content .post-description .mfblog-contents-toc {list-style: decimal;}
+.post-content .post-description .mfblog-contents-toc li {margin-bottom: 1rem;}
+.post-content .post-description .mfblog-contents-toc li:before {content: none;}
+.post-content .post-description .mfblog-contents-toc li a {display: inline;}
+
 
 /* Post Title */
 .post-list .post-header .post-title-holder:before {content: "";display: table;}
@@ -61,7 +70,7 @@
 .post-view .post-nextprev-hld .prev-link {float:left}
 .post-view .post-nextprev-hld .next-link {float:right}
 
-/* Post Gallery */ 
+/* Post Gallery */
 .post-view .post-gallery {margin:15px 0 15px 0}
 .post-view .post-gallery .gallery-image-hld {margin: 0 14px 14px 0; border:1px solid #ccc; display: block; float:left}
 .post-view .post-gallery .gallery-image{padding: 0; margin:0; display:block}

@@ -27,7 +27,7 @@
                data-fancybox="gallery"
                href="<?= $block->escapeUrl($image) ?>"
                rel="nofollow">
-                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200)) ?>" alt="" />
+                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200, 133)) ?>" alt="" />
             </a>
         <?php } ?>
     </div>

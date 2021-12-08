@@ -37,7 +37,7 @@
             <?php }  ?>
 
             <!-- block data -->
-            <div class="post-data-wrap mb-5">
+            <div class="post-data-wrap mb-4">
                 <!-- post author -->
                 <?php if ($block->authorEnabled()) { ?>
                     <?php if ($_author = $_post->getAuthor()) { ?>
@@ -127,7 +127,7 @@
         </div>
 
         <div class="post-bottom">
-            <div class="post-sharing-bottom mb-4">
+            <div class="post-sharing-bottom">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_inline_share_toolbox" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
             </div>
