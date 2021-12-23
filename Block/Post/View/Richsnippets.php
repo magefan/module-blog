@@ -74,7 +74,14 @@ class Richsnippets extends Opengraph
     {
         if ($author = $this->getPost()->getAuthor()) {
             if ($author->getTitle()) {
-                return $author->getTitle();
+                $authorPageEnabled = $this->config->getConfig(
+                      'mfblog/author/page_enabled'
+                );
+                return [
+                    '@type' => 'Person',
+                    'name' => $author->getTitle(),
+                    'url' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl()
+                ];
             }
         }
 
@@ -89,16 +96,20 @@ class Richsnippets extends Opengraph
      */
     public function getPublisher()
     {
-        $publisher =  $this->_scopeConfig->getValue(
+        $publisherName =  $this->_scopeConfig->getValue(
             'general/store_information/name',
             ScopeInterface::SCOPE_STORE
         );
 
-        if (!$publisher) {
-            $publisher = 'Magento2 Store';
+        if (!$publisherName) {
+            $publisherName = 'Magento2 Store';
         }
 
-        return $publisher;
+        return [
+            '@type' => 'Organization',
+            'name' => $publisherName,
+            'url' => $this->getUrl()
+        ];
     }
 
     /**
