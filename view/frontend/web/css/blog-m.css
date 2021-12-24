@@ -47,9 +47,8 @@
 .post-content .post-description .post-ftimg-hld img {width:100%; padding:0; margin:0;}
 
 /* Post Title */
-.post-list .post-header .post-title-holder:before {content: "";display: table;}
-.post-list .post-header .post-title-holder:after {content: "";display: table;clear: both;}
-.post-list .post-header .post-title {max-width:80%;margin: 0;padding: 10px 0;}
+.post-list .post-header .post-title-holder {display: flex;align-items: center;justify-content: space-between;}
+.post-list .post-header .post-title {margin: 0;padding: 10px 0;}
 .post-list .post-header .post-title a {text-decoration: none;font-size: 22px;font-weight: 400;}
 .post-list .post-holder .post-header .addthis_toolbox {float: right; padding-top: 20px;}
 
