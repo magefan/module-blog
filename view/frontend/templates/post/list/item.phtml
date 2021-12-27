@@ -17,6 +17,8 @@
 $_post = $block->getPost();
 $_postUrl = $block->escapeUrl($_post->getPostUrl());
 $_postName = $block->escapeHtml($_post->getTitle());
+$width = (int)$block->getWidth() ?: 800;
+$height = (int)$block->getHeight() ?: 500;
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">
@@ -62,7 +64,10 @@ $_postName = $block->escapeHtml($_post->getTitle());
                     <a href="<?= /*@noEscape*/ $_postUrl ?>"
                        title="<?= /*@noEscape*/ $_postName ?>">
                         <img src="<?= $block->escapeUrl($featuredImage) ?>"
-                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>"
+                             width="<?= $width ?>"
+                             height="<?= $height ?>"
+                        />
                     </a>
                 </div>
             <?php } ?>

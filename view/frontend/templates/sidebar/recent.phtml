@@ -18,8 +18,8 @@
     $_postCollection = $block->getPostCollection();
 ?>
 <?php
-    $width = (int)$block->getBlockImageWidth() ?: 300;
-    $height = (int)$block->getBlockImageheight() ?: 200;
+    $width = (int)$block->getWidth() ?: 300;
+    $height = (int)$block->getHeight() ?: 200;
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 ?>
 <?php if ($_postCollection->count()) { ?>
@@ -51,8 +51,11 @@
                                     $featuredImageUrl = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
                                 }
                             ?>
-                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $block->escapeUrl($featuredImageUrl) ?>"
-                                 alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                            <img src="<?= $block->escapeUrl($featuredImageUrl) ?>"
+                                 alt="<?= $block->escapeHtml($featuredImgAlt) ?>"
+                                 width="<?= $width ?>"
+                                 height="<?= $height ?>"
+                            />
                         </a>
                     </div>
                 <?php } ?>

@@ -19,6 +19,8 @@
     $session = $block->getCustomerSession();
 
     $canPost = $block->canPost();
+    $width = 200;
+    $height = 200;
 ?>
 <div id="post-comments">
     <div class="c-count">
@@ -28,7 +30,11 @@
     <div class="c-reply cf">
         <?php if ($image = $block->getCustomerImage()) { ?>
         <div class="c-img">
-            <img src="<?= $block->escapeUrl($image) ?>" alt="<?= $block->escapeHtml($block->getCustomerName()) ?>">
+            <img src="<?= $block->escapeUrl($image) ?>"
+                 alt="<?= $block->escapeHtml($block->getCustomerName()) ?>"
+                 width="<?= $width ?>"
+                 height="<?= $height ?>"
+            >
         </div>
         <?php } ?>
         <div class="c-replyform <?php if ($canPost) {  echo 'no-active'; } ?>">

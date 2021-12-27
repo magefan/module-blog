@@ -25,6 +25,10 @@
                     <action method="setBlockTitle">
                         <argument name="time" xsi:type="string">Recent Posts</argument>
                     </action>
+                    <arguments>
+                        <argument name="width" xsi:type="number">60</argument>
+                        <argument name="height" xsi:type="number">40</argument>
+                    </arguments>
                 </block>
                 <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="sidebar/recent.phtml">
                     <action method="setCacheLifetime">
@@ -33,6 +37,10 @@
                     <action method="setBlockTitle">
                         <argument name="time" xsi:type="string">Featured Posts</argument>
                     </action>
+                    <arguments>
+                        <argument name="width" xsi:type="number">60</argument>
+                        <argument name="height" xsi:type="number">40</argument>
+                    </arguments>
                 </block>
                 <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/recent.phtml">
                     <action method="setCacheLifetime">
@@ -41,6 +49,10 @@
                     <action method="setBlockTitle">
                         <argument name="time" xsi:type="string">Popular Posts</argument>
                     </action>
+                    <arguments>
+                        <argument name="width" xsi:type="number">300</argument>
+                        <argument name="height" xsi:type="number">200</argument>
+                    </arguments>
                 </block>
                 <block class="Magefan\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="sidebar/archive.phtml">
                     <action method="setCacheLifetime">
@@ -55,6 +67,10 @@
                 <block class="Magefan\Blog\Block\Sidebar\Custom" name="blog.sidebar.custom" template="sidebar/custom.phtml" />
                 <block class="Magefan\Blog\Block\Sidebar\CustomTwo" name="blog.sidebar.custom2" template="sidebar/custom.phtml" />
                 <block class="Magefan\Blog\Block\Sidebar\Rss" name="blog.sidebar.rss" template="sidebar/rss.phtml">
+                    <arguments>
+                        <argument name="width" xsi:type="number">20</argument>
+                        <argument name="height" xsi:type="number">20</argument>
+                    </arguments>
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>

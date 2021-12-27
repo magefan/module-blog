@@ -15,6 +15,10 @@
                 <argument name="style_view_model" xsi:type="object">Magefan\Blog\ViewModel\Style</argument>
             </arguments>
             <block class="Magefan\Blog\Block\Post\PostList\Item" name="blog.posts.list.item" template="post/list/item.phtml">
+                <arguments>
+                    <argument name="width" xsi:type="string">800</argument>
+                    <argument name="height" xsi:type="string">500</argument>
+                </arguments>
                 <block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
                 <action method="setPostInfoBlockName">
                     <argument name="name" xsi:type="string">blog.post.info</argument>
