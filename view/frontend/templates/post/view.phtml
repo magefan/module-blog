@@ -20,15 +20,18 @@ $_postName = $block->escapeHtml($_post->getTitle(), null);
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
-        <div class="post-header clearfix">
-            <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
-                <a class="addthis_button_facebook"></a>
-                <a class="addthis_button_twitter"></a>
-                <a class="addthis_button_email"></a>
-                <a class="addthis_button_compact"></a>
-            </div>
-            <?= $block->getInfoHtml() ?>
-        </div>
+
+        <?php if ($block->displayAddThisToolbox()) : ?>
+          <div class="post-header">
+              <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
+                  <a class="addthis_button_facebook"></a>
+                  <a class="addthis_button_twitter"></a>
+                  <a class="addthis_button_email"></a>
+                  <a class="addthis_button_compact"></a>
+              </div>
+              <?= $block->getInfoHtml() ?>
+          </div>
+        <?php endif; ?>
 
         <div class="post-content">
             <div class="post-description clearfix">
