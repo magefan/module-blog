@@ -1,0 +1,29 @@
+<?php
+$helper = $this->helper(Wyomind\ElasticsearchAutocomplete\Helper\Config::class);
+$labels = $helper->getLabels();
+?>
+
+<div id="ea_search_autocomplete" class="top-arrow-primary ea-search-autocomplete no-result">
+    <div class="content">
+        <div class="left wyomind-bg-secondary">
+            <div id="ea-suggests"></div>
+            <div id="ea-categories"></div>
+            <div id="ea-cms"></div>
+            <div id="ea-mfpost"></div>
+            <div id="ea-others"></div>
+        </div>
+        <div class="right wyomind-bg-primary">
+            <div id="ea-products"></div>
+            <div id="ea-all-results"></div>
+        </div>
+    </div>
+</div>
+<div id="ea-search-autocomplete-no-result" class="top-arrow-primary ea-search-autocomplete-no-result">
+    <div class="content wyomind-bg-secondary wyomind-primary-border">
+        <?php
+        if (isset($labels['no_product'])) :
+            echo $labels['no_product'];
+        endif;
+        ?>
+    </div>
+</div>

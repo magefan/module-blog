@@ -1,0 +1,319 @@
+<?php
+$themeHelper = $this->helper('Wyomind\ElasticsearchCore\Helper\Theme');
+$dataHelper = $this->helper('Wyomind\ElasticsearchCore\Helper\Data');
+$coreConfigHelper = $this->helper('Wyomind\ElasticsearchCore\Helper\Config');
+$taxHelper = $this->helper('Wyomind\ElasticsearchCore\Helper\Tax');
+$currencyHelper = $this->helper('Wyomind\ElasticsearchCore\Helper\Currency');
+/** @var \Wyomind\ElasticsearchAutocomplete\Helper\Config $configHelper */
+$configHelper = $this->helper('Wyomind\ElasticsearchAutocomplete\Helper\Config');
+$helper = $this->helper('Magento\Search\Helper\Data');
+
+$eaConfig = $block->escapeHtml(json_encode($configHelper->getConfig()));
+
+$storeCode = $dataHelper->getCurrentStoreCode();
+$storeId = $dataHelper->getCurrentStoreId();
+
+$autocompleteUrl = $dataHelper->getElasticsearchUrl($storeCode);
+$jsComponent = "Magefan_Blog/js/form-mini";
+
+$searchId = "search_" . rand(0, 999999);
+$searchMiniFormId = "search_mini_form" . rand(0, 999999);
+
+$minQueryLength = $coreConfigHelper->getMinQueryLength($storeCode);
+
+/* @noEscape */
+echo $block->getChildBlock('elasticsearchautocomplete.autocomplete.mage_version')->toHtml();
+
+?>
+
+
+<?php if (stripos($themeHelper->getThemeModel(), "codazon") !== false) : ?>
+    <?php
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // CODAZON
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ?>
+
+    <div class="search-wrapper">
+        <div class="search-content block block-search" id="search-content">
+            <a class="search-icon" title="<?php /* @escapeNotVerified */
+            echo __('Search'); ?>" href="javascript:void(0);"><span><?php /* @escapeNotVerified */
+                    echo __('Search'); ?></span></a>
+
+            <div class="search-form-container">
+                <form class="form minisearch" id="<?= $searchMiniFormId ?>" action="<?php /* @escapeNotVerified */
+                echo $helper->getResultUrl() ?>" method="get">
+                    <div class="field search">
+                        <label class="label" for="search" data-role="minisearch-label">
+                            <span><?php /* @escapeNotVerified */
+                                echo __('Search'); ?></span>
+                        </label>
+                        <div class="control">
+                            <input id="<?= /* @noEscape */ $searchId; ?>"
+                                   data-mage-init='{"<?= /* @noEscape */ $jsComponent; ?>": {
+                               "formSelector": "#<?= /* @noEscape */ $searchMiniFormId; ?>",
+                               "url":"<?php /* @escapeNotVerified */ echo $autocompleteUrl ?>",
+                               "searchUrl":"<?= /* @noEscape */ $helper->getResultUrl(); ?>",
+                               "storeCode":"<?= /* @noEscape */ $storeCode; ?>",
+                               "destinationSelector": "#search_autocomplete",
+                               "minSearchLength": <?= /* @noEscape */ $minQueryLength ?>,
+                               "config": <?= /* @noEscape */ $eaConfig; ?>,
+                                "debug" : <?= $configHelper->isDebugEnabled($storeId) ? 'true' : 'false' ?>,
+                               "urlUpdateSearchTerm": "<?= /* @noEscape */ $block->getUrl('elasticsearchcore/searchTerm/add'); ?>"
+                               }}'
+                                   type="text"
+                                   name="<?php /* @escapeNotVerified */
+                                   echo $helper->getQueryParamName() ?>"
+                                   value="<?php /* @escapeNotVerified */
+                                   echo $helper->getEscapedQueryText() ?>"
+                                   placeholder="<?php /* @escapeNotVerified */
+                                   echo __('Search entire store here...'); ?>"
+                                   class="input-text"
+                                   onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = '<?php /* @escapeNotVerified */
+                                   echo __('Search entire store here...'); ?>'"
+                                   maxlength="<?php /* @escapeNotVerified */
+                                   echo $helper->getMaxQueryLength(); ?>"
+                                   role="combobox"
+                                   aria-haspopup="false"
+                                   aria-autocomplete="both"
+                                   autocomplete="off"
+                                   aria-expanded="false"/>
+                            <div id="search_autocomplete" class="search-autocomplete"></div>
+                            <?php echo $block->getChildHtml() ?>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button type="submit"
+                                title="<?php echo $block->escapeHtml(__('Search')) ?>"
+                                class="action search primary">
+                            <span><?php /* @escapeNotVerified */
+                                echo __('Search'); ?></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<?php elseif (stripos($themeHelper->getThemeModel(), "infortis") !== false) : ?>
+    <?php
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // INFORTIS/ULTIMO
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ?>
+    <?php
+    $theme = $this->helper('Infortis\Base\Helper\Data');
+
+    $searchClasses = '';
+    $mode = $theme->getCfgDesign('search/mode');
+    if ($mode === 'e') {
+        $searchClasses .= ' expanding';
+    }
+
+    $searchSize = $theme->getCfgDesign('search/size');
+    if (!empty($searchSize)) {
+        $searchClasses .= ' size-' . $searchSize;
+    }
+    ?>
+    <div id="header-search" class="ultimo skip-content skip-content--style">
+        <div id="block-search"
+             class="block block-search search-wrapper<?= /* @noEscape */
+             $searchClasses; ?>"> <?php /* @deprecated class "search-wrapper" */ ?>
+            <div class="block block-title"><strong><?php /* @escapeNotVerified */
+                    echo __('Search'); ?></strong></div>
+            <div class="block block-content">
+                <form class="form minisearch" id="<?= /* @noEscape */
+                $searchMiniFormId; ?>" action="<?php echo /* @escapeNotVerified */
+                $helper->getResultUrl() ?>" method="get">
+                    <div class="field search">
+                        <label class="label" for="<?= /* @noEscape */
+                        $searchId; ?>" data-role="minisearch-label">
+                        </label>
+                        <div class="control">
+                            <input id="<?= /* @noEscape */
+                            $searchId; ?>"
+                                   data-mage-init='{"<?= /* @noEscape */
+                                   $jsComponent; ?>": {
+                               "formSelector": "#<?= /* @noEscape */
+                                   $searchMiniFormId; ?>",
+                               "url":"<?php /* @escapeNotVerified */
+                                   echo $autocompleteUrl ?>",
+                               "searchUrl":"<?= /* @noEscape */
+                                   $helper->getResultUrl(); ?>",
+                               "storeCode":"<?= /* @noEscape */
+                                   $storeCode; ?>",
+                               "minSearchLength": <?= /* @noEscape */
+                                   $minQueryLength ?>,
+                               "destinationSelector": "#search_autocomplete",
+                               "config": <?= /* @noEscape */
+                                   $eaConfig; ?>,
+                                "debug" : <?= $configHelper->isDebugEnabled($storeId) ? 'true' : 'false' ?>,
+                               "urlUpdateSearchTerm": "<?= /* @noEscape */
+                                   $block->getUrl('elasticsearchcore/searchTerm/add'); ?>"
+                               }}'
+                                   type="text"
+                                   name="<?php /* @escapeNotVerified */
+                                   echo $helper->getQueryParamName() ?>"
+                                   value="<?php /* @escapeNotVerified */
+                                   echo $helper->getEscapedQueryText() ?>"
+                                   placeholder="<?php /* @escapeNotVerified */
+                                   echo __('Search entire store here...'); ?>"
+                                   class="input-text"
+                                   maxlength="<?php /* @escapeNotVerified */
+                                   echo $helper->getMaxQueryLength(); ?>"
+                                   role="combobox"
+                                   aria-haspopup="false"
+                                   aria-autocomplete="both"
+                                   autocomplete="off"/>
+                            <?= /* @noEscape */
+                            $block->getChildHtml() ?>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button id="action-search" type="submit"
+                                title="<?= /* @noEscape */
+                                $block->escapeHtml(__('Search')) ?>"
+                                class="action search">
+                            <span class="icon ic ic-search ib ib-square ib-hover"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- end: block-search -->
+        <?php if ($mode === 'e') : ?>
+            <script type="text/javascript">
+                //<![CDATA[
+                requirejs(['jquery', 'expandingsearch'], function (jQuery, expandingsearch) {
+                    jQuery(function ($) {
+                        $('#block-search').expandingsearch();
+                    });
+                }); //end: requirejs
+                //]]>
+            </script>
+        <?php endif; ?>
+    </div>
+
+
+<?php else : ?>
+
+
+    <?php
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// DEFAULT (LUMA)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ?>
+    <div class="block-search">
+        <div class="block-title"><strong><?php /* @escapeNotVerified */
+                echo __('Search'); ?></strong></div>
+        <div class="block block-content">
+            <form class="form minisearch" id="<?= /* @noEscape */
+            $searchMiniFormId; ?>" action="<?php /* @escapeNotVerified */
+            echo $helper->getResultUrl() ?>" method="get">
+                <div class="field search">
+                    <label class="label" for="<?= /* @noEscape */
+                    $searchId; ?>" data-role="minisearch-label">
+                    </label>
+                    <div class="control">
+                        <input id="<?= /* @noEscape */
+                        $searchId; ?>"
+                               data-mage-init='{"<?= /* @noEscape */
+                               $jsComponent; ?>": {
+                               "formSelector": "#<?= /* @noEscape */
+                               $searchMiniFormId; ?>",
+                               "url":"<?php /* @escapeNotVerified */
+                               echo $autocompleteUrl ?>",
+                               "searchUrl":"<?= /* @noEscape */
+                               $helper->getResultUrl(); ?>",
+                               "storeCode":"<?= /* @noEscape */
+                               $storeCode; ?>",
+                               "destinationSelector": "#search_autocomplete",
+                               "minSearchLength": <?= /* @noEscape */
+                               $minQueryLength ?>,
+                               "config": <?= /* @noEscape */
+                               $eaConfig; ?>,
+                                "debug" : <?= $configHelper->isDebugEnabled($storeId) ? 'true' : 'false' ?>,
+                               "urlUpdateSearchTerm": "<?= /* @noEscape */
+                               $block->getUrl('elasticsearchcore/searchTerm/add'); ?>"
+                               }}'
+                               type="text"
+                               name="<?php /* @escapeNotVerified */
+                               echo $helper->getQueryParamName() ?>"
+                               value="<?php /* @escapeNotVerified */
+                               echo $helper->getEscapedQueryText() ?>"
+                               placeholder="<?php /* @escapeNotVerified */
+                               echo __('Search entire store here...'); ?>"
+                               class="input-text"
+                               maxlength="<?php /* @escapeNotVerified */
+                               echo $helper->getMaxQueryLength(); ?>"
+                               role="combobox"
+                               aria-haspopup="false"
+                               aria-autocomplete="both"
+                               autocomplete="off"/>
+                        <?= /* @noEscape */
+                        $block->getChildHtml() ?>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button type="submit"
+                            title="<?= /* @noEscape */
+                            $block->escapeHtml(__('Search')) ?>"
+                            class="action search">
+                    <span><?php /* @escapeNotVerified */
+                        echo __('Search'); ?></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// COMMON
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+?>
+<script>
+    require(['underscore', 'Magento_Catalog/js/price-utils'], function (_, utils) {
+        _.mixin({
+            getBaseUrl: function () {
+                return '<?= /* @noEscape */ $block->getBaseUrl() ?>';
+            },
+            getSearchUrl: function () {
+                return '<?= /* @noEscape */ $helper->getResultUrl(); ?>';
+            },
+            getFormattedPrice: function (price, productTaxClassId) {
+                return _.formatPrice(_.calculateTax(_.convertPrice(price), productTaxClassId));
+            },
+            formatPrice: function (price) {
+                var priceFormat = <?php /* @escapeNotVerified */ echo $this->helper('Magento\Tax\Helper\Data')->getPriceFormat($block->getStore()); ?>;
+
+                return utils.formatPrice(price, priceFormat);
+            },
+            calculateTax: function (price, productTaxClassId) {
+                var needPriceConversion = <?= /* @noEscape */ $taxHelper->needPriceConversion() ? 'true' : 'false' ?>;
+                var taxRates = <?php /* @escapeNotVerified */ echo json_encode($taxHelper->getRates()) ?>;
+
+                if (!needPriceConversion || !taxRates[productTaxClassId]) {
+                    return price;
+                }
+
+                var rate = taxRates[productTaxClassId] / 100;
+                var priceIncludesTax = <?= /* @noEscape */ $taxHelper->priceIncludesTax() ? 'true' : 'false' ?>;
+
+                if (priceIncludesTax) {
+                    return price / (1 + rate);
+                }
+
+                return price + price * rate;
+            },
+            convertPrice: function (price) {
+                var rate = <?= /* @noEscape */ $currencyHelper->getCurrentCurrencyRate() ?>;
+
+                return price * rate;
+            }
+        });
+    });
+</script>
+

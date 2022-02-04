@@ -21,5 +21,19 @@
         <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template" name="mfblog.lazyload.js" template="Magefan_Blog::lazyload-js.phtml" />
         </referenceContainer>
+        <referenceBlock name="top.search">
+            <action ifconfig="wyomind_elasticsearchcore/configuration/can_use_elasticsearchautocomplete" method="setTemplate">
+                <argument name="template" xsi:type="string">Magefan_Blog::form.mini.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="elasticsearchautocomplete.autocomplete">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magefan_Blog::post/autocomplete.phtml</argument>
+            </action>
+            <block class="Magento\Framework\View\Element\Template" name="post.autocomplete.list" template="Magefan_Blog::post/post-autocomplete.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="elasticsearchautocomplete.autocomplete.mfposts" template="Magefan_Blog::post/post-autocomplete.phtml"/>
+        </referenceContainer>
     </body>
 </page>

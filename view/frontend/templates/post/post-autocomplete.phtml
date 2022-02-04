@@ -1,0 +1,29 @@
+<?php
+$dataHelper = $this->helper('Wyomind\ElasticsearchCore\Helper\Data');
+$configHelper = $this->helper('Wyomind\ElasticsearchAutocomplete\Helper\Config');
+$storeId = $dataHelper->getCurrentStoreId();
+
+?>
+<script id="ea-mfpost-template" type="text/x-magento-template">
+    <% if (enabled || (count > 0)) { %>
+    <span class="section wyomind-primary-bgcolor">
+        <span class="section-name"><%= title %></span>
+        <span aria-hidden="true" class="section-amount"><%= count %></span>
+    </span>
+    <div class="ea-mfpost-grid wyomind-bg-secondary <% if (count == 0) { %>no-result<% } %>">
+        <% _.each(mfpost, function(doc) { %>
+        <div class="ea-mfpost">
+            <a href="<%= doc.url %>">
+                <div class="info">
+                    <span class="name"><%= doc.title %></span>
+                </div>
+            </a>
+        </div>
+        <% }) %>
+        <% if (count == 0) { %>
+        <?= /* @noEscape */  __('No Post Found')?>
+        <% } %>
+    </div>
+    <% } %>
+
+</script>
