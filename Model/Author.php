@@ -10,6 +10,7 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\AuthorInterface;
 use Magento\Framework\Model\AbstractModel;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Blog author model
@@ -21,6 +22,11 @@ class Author extends AbstractModel implements AuthorInterface
      * @var string
      */
     protected $controllerName;
+
+    /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
 
     /**
      * Initialize dependencies.
@@ -90,13 +96,15 @@ class Author extends AbstractModel implements AuthorInterface
     public function getMetaDescription()
     {
         $desc = $this->getData('meta_description');
+
         if (!$desc) {
-            $desc = $this->getData('content');
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'));
+            $desc = str_replace(['<p>', '</p>'], [' ', ''], $desc);
         }
 
         $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 300) {
-            $desc = mb_substr($desc, 0, 300);
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 0, 160);
         }
 
         return trim($desc);
@@ -211,5 +219,18 @@ class Author extends AbstractModel implements AuthorInterface
     public function isActive()
     {
         return $this->getIsActive();
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
     }
 }

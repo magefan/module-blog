@@ -10,6 +10,7 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
 use Magento\Framework\DataObject\IdentityInterface;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Category model
@@ -80,6 +81,11 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @var string
      */
     protected $controllerName;
+
+    /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
 
     /**
      * Initialize dependencies.
@@ -389,7 +395,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getData('content');
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'));
+            $desc = str_replace(['<p>', '</p>'], [' ', ''], $desc);
         }
 
         $desc = strip_tags($desc);
@@ -547,5 +554,18 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             ->setData('is_active', 0);
 
         return $object->save();
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
     }
 }

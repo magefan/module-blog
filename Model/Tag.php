@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Tag model
@@ -56,6 +57,11 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * @var string
      */
     protected $controllerName;
+
+    /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
 
     /**
      * Initialize dependencies.
@@ -177,12 +183,13 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getData('content');
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'));
+            $desc = str_replace(['<p>', '</p>'], [' ', ''], $desc);
         }
 
         $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 300) {
-            $desc = mb_substr($desc, 0, 300);
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 0, 160);
         }
 
         return trim($desc);
@@ -242,5 +249,18 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
         }
 
         return $data;
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
     }
 }

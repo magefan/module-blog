@@ -10,6 +10,7 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
 use Magento\Store\Model\ScopeInterface;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Post model
@@ -143,6 +144,11 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @var string
      */
     protected $controllerName;
+
+    /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
 
     /**
      * Initialize dependencies.
@@ -486,135 +492,18 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
              $len = null;
         }
         /* End fix */
-        
+
         $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
 
-            $isPagebreakDefined = false;
-
             if ($this->getShortContent()) {
-                $content = $this->filterProvider->getPageFilter()->filter(
-                    (string) $this->getShortContent() ?: ''
-                );
+                $content = (string)$this->getShortContent() ?: '';
             } else {
-                $content = $this->getFilteredContent();
-
-                if (!$len) {
-                    $pageBraker = '<!-- pagebreak -->';
-                    $len = mb_strpos($content, $pageBraker);
-                    if ($len) {
-                        $isPagebreakDefined = true;
-                    } else {
-                        $len = (int)$this->scopeConfig->getValue(
-                            'mfblog/post_list/shortcotent_length',
-                            ScopeInterface::SCOPE_STORE
-                        );
-                    }
-                }
+                //$content = $this->getFilteredContent();
+                $content = (string)$this->getContent() ?: '';
             }
 
-            if ($len) {
-
-                if (!$isPagebreakDefined) {
-
-                    $oLen = $len;
-                    /* Skip <style> tags at the begining of string in calculations */
-                    $sp1 = mb_strpos($content, '<style>');
-                    if (false !== $sp1) {
-                        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
-                        $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
-                        $sp2 = mb_strpos($content, '</style>');
-
-                        while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
-                            $len = $oLen + $sp2 + 8;
-                            $sp1 = mb_strpos($content, '<style>', $sp2 + 1);
-                            $sp2 = mb_strpos($content, '</style>', $sp2 + 1);
-                        }
-
-                        $l = mb_strlen($content);
-                        if ($len < $l) {
-                            $sp2 = mb_strrpos($content, '</style>', $len - $l);
-                            if ($len < $oLen + $sp2 + 8) {
-                                $len = $oLen + $sp2 + 8;
-                            }
-                        }
-
-                    } else {
-                        $cc = $content;
-                    }
-
-                    /* Skip long HTML */
-                    $stcc = trim(strip_tags($cc));
-                    //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
-                    if ($stcc && $len < mb_strlen($content)) {
-                        $str = '';
-                        $start = false;
-                        foreach (explode(' ', $stcc) as $s) {
-                            $str .= ($str ? ' ' : '') . $s;
-
-                            $pos = mb_strpos($content, $str);
-                            if (false !== $pos) {
-                                $start = $pos;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        if (false !== $start) {
-                            if ($len < $start + $oLen) {
-                                $len = $start + $oLen;
-                            }
-                        }
-                    }
-                }
-
-                /* Do not cut words */
-                while ($len < strlen($content)
-                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"])) {
-                    $len++;
-                }
-
-                $content = mb_substr($content, 0, $len);
-                try {
-                    $previousLoaderState = libxml_disable_entity_loader(true);
-                    $previousErrorState = libxml_use_internal_errors(true);
-                    $dom = new \DOMDocument();
-                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                    libxml_disable_entity_loader($previousLoaderState);
-                    libxml_use_internal_errors($previousErrorState);
-
-                    $body = $dom->getElementsByTagName('body');
-                    if ($body && $body->length > 0) {
-                        $body = $body->item(0);
-                        $_content = new \DOMDocument;
-                        foreach ($body->childNodes as $child) {
-                            $_content->appendChild($_content->importNode($child, true));
-                        }
-                        $content = $_content->saveHTML();
-                    }
-                } catch (\Exception $e) {
-                    /* Do nothing, it's OK */
-                }
-            }
-
-            if ($endСharacters === null) {
-                $endСharacters = $this->scopeConfig->getValue(
-                    'mfblog/post_list/end_characters',
-                    ScopeInterface::SCOPE_STORE
-                );
-            }
-
-            if ($len && $endСharacters) {
-                $trimMask = " \t\n\r\0\x0B,.!?";
-                if ($p = strrpos($content, '</')) {
-                    $content = trim(substr($content, 0, $p), $trimMask)
-                        . $endСharacters
-                        . substr($content, $p);
-                } else {
-                    $content = trim($content, $trimMask)
-                        . $endСharacters;
-                }
-            }
+            $content = $this->getShortContentExtractor()->execute($content, $len, $endСharacters);
 
             $this->setData($key, $content);
         }
@@ -642,17 +531,26 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getMetaDescription()
     {
-        $desc = $this->getData('meta_description');
-        if (!$desc) {
-            $desc = $this->getData('content');
+
+        $key = 'filtered_meta_description';
+        if (!$this->hasData($key)) {
+            $desc = $this->getData('meta_description');
+            if (!$desc) {
+                $desc = $this->getShortFilteredContent();
+                $desc = str_replace(['<p>', '</p>'], [' ', ''], $desc);
+            }
+
+            $desc = strip_tags($desc);
+            if (mb_strlen($desc) > 160) {
+                $desc = mb_substr($desc, 0, 160);
+            }
+
+            $desc = trim($desc);
+
+            $this->setData($key, $desc);
         }
 
-        $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 300) {
-            $desc = mb_substr($desc, 0, 300);
-        }
-
-        return trim($desc);
+        return $this->getData($key);
     }
 
     /**
@@ -1160,5 +1058,18 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     public function getUpdatedAt()
     {
         return $this->getData('update_time');
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
     }
 }

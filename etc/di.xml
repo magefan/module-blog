@@ -20,6 +20,7 @@
     <preference for="Magefan\Blog\Api\TagRepositoryInterface" type="Magefan\Blog\Model\TagRepository" />
     <preference for="Magefan\Blog\Api\AuthorRepositoryInterface" type="Magefan\Blog\Model\AuthorRepository" />
     <preference for="Magefan\Blog\Api\CommentRepositoryInterface" type="Magefan\Blog\Model\CommentRepository" />
+    <preference for="Magefan\Blog\Api\ShortContentExtractorInterface" type="Magefan\Blog\Model\ShortContentExtractor" />
     <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
     <preference for="Magefan\Blog\Api\UrlResolverInterface" type="Magefan\Blog\Model\UrlResolver" />
     <virtualType name="Magefan\Blog\ImageUpload" type="Magefan\Blog\Model\ImageUploader">
@@ -68,7 +69,7 @@
     <type name="Magento\AdminGws\Model\Models">
         <plugin name="magefan_blog_plugin_admingws_model_models_plugin" type="\Magefan\Blog\Plugin\Magento\AdminGws\Model\ModelsPlugin" sortOrder="10"/>
     </type>
-    
+
     <virtualType name="Magefan\Blog\Block\Widget\PostLink" type="Magefan\Blog\Block\Widget\Link">
         <arguments>
             <argument name="modelRepository" xsi:type="object">Magefan\Blog\Api\PostRepositoryInterface</argument>
@@ -171,7 +172,7 @@
             <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
         </arguments>
     </virtualType>
-    
+
     <type name="Magento\PageBuilder\Model\UpgradableEntitiesPool">
         <arguments>
             <argument name="entities" xsi:type="array">
