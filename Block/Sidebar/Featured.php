@@ -31,6 +31,9 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
         $this->_postCollection->addPostsFilter(
             $this->getPostIdsConfigValue()
         );
+        if ($this->getPostIdsConfigValue()) {
+            $this->_postCollection->getSelect()->order(new \Zend_Db_Expr('FIELD(`main_table`.`post_id`,' . $this->getPostIdsConfigValue() .')'));
+        }
     }
 
     /**
