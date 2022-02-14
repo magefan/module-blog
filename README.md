@@ -21,7 +21,7 @@ Magento 2 Blog  is an extension that allows you to manage your store and blog fr
   
   <a href="https://magefan.com/magento2-blog-extension/pricing">
           <img
-            src="https://magefan.com/media/wysiwyg/products/magento2-blog-plans-min.png"
+            src="https://magefan.com/media/wysiwyg/products/magefan-blog-pricing.png"
             alt="Magento 2 Blog Editions & Pricing" />
         </a>
         
