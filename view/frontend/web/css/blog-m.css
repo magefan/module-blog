@@ -51,6 +51,7 @@
 
 .post-content .post-description .mfblog-contents-toc {list-style: decimal;}
 .post-content .post-description .mfblog-contents-toc li {margin-bottom: 1rem;}
+.post-content .post-description .mfblog-contents-toc li > ol {margin-top: 1rem;}
 .post-content .post-description .mfblog-contents-toc li:before {content: none;}
 .post-content .post-description .mfblog-contents-toc li a {display: inline;}
 
