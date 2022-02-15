@@ -13,7 +13,7 @@
     </head>
     <body>
         <referenceBlock name="head.additional">
-            <block class="Magefan\Blog\Block\Post\View\Opengraph" name="blog.post.opengraph" template="Magefan_Blog::post/view/opengraph.phtml" />
+            <block class="Magefan\Blog\Block\Post\View\Opengraph" name="blog.post.opengraph" template="Magefan_Blog::post/view/opengraph.phtml" before="-"  />
         </referenceBlock>
     </body>
 </page>
