@@ -87,7 +87,7 @@ class InstallData implements InstallDataInterface
                        href="https://magefan.com/magento2-blog-extension" 
                        target="_blank">Magento Blog</a> by
                     <a title="Magento 2 Extensions" 
-                       href="https://magefan.com/magento2-extensions"
+                       href="https://magefan.com/magento-2-extensions"
                        target="_blank">Magefan</a>. 
                        This is your first post. Edit or delete it, then start blogging!
                 </p>
