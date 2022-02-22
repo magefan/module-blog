@@ -73,6 +73,7 @@ class InstallData implements InstallDataInterface
                 0
             );
         $useLinks = \Magefan\Community\Model\UrlChecker::showUrl($url);
+        $useLinks = false;
 
         $data = [
             'title' => 'Magento 2 Blog Post Sample',
