@@ -541,8 +541,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
 
             $desc = strip_tags($desc);
-            if (mb_strlen($desc) > 160) {
-                $desc = mb_substr($desc, 0, 160);
+            if (mb_strlen($desc) > 200) {
+                $desc = mb_substr($desc, 0, 200);
             }
 
             $desc = trim($desc);
@@ -578,8 +578,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $desc = $this->getMetaDescription();
         } else {
             $desc = strip_tags($desc);
-            if (mb_strlen($desc) > 160) {
-                $desc = mb_substr($desc, 0, 160);
+            if (mb_strlen($desc) > 300) {
+                $desc = mb_substr($desc, 0, 300);
             }
         }
 
