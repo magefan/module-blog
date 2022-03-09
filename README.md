@@ -279,3 +279,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Better Magento 2 Checkout Extension](https://magefan.com/better-magento-2-checkout-extension)
   * [Magento 2 AMP Blog Extension](https://magefan.com/magento-2-amp-blog-extension)
   * [Magento 2 Coupon Code Link](https://magefan.com/magento-2-coupon-code-link)
+  * [Magento 2 SEO Extension](https://magefan.com/magento-2-seo-extension)
+  * [Magento 2 Rich Snippets Extension](https://magefan.com/magento-2-rich-snippets)
+  * [Magento 2 HTML Sitemap Extension](https://magefan.com/magento-2-html-sitemap-extension)
+  * [Magento 2 SEO Suite Ultimate Extension](https://magefan.com/magento-2-seo-suite-ultimate-extension)
