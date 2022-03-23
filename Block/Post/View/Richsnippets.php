@@ -105,11 +105,15 @@ class Richsnippets extends Opengraph
             $publisherName = 'Magento2 Store';
         }
 
+        return $publisherName;
+
+        /*
         return [
             '@type' => 'Organization',
             'name' => $publisherName,
             'url' => $this->getUrl()
         ];
+        */
     }
 
     /**
