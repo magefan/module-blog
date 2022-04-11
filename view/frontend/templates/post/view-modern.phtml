@@ -104,8 +104,8 @@
                 <?php } ?>
 
                 <!-- Post Tags -->
-                <div class="post-tag">
-                    <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                    <div class="post-tag">
                         <div class="item post-tags">
                             <div class="post-tag-title">Tags</div>
                             <?php $n = 0; ?>
@@ -116,8 +116,9 @@
                                 ><?= $block->escapeHtml($tag->getTitle()) ?></a>
                             <?php } ?>
                         </div>
-                    <?php } ?>
-                </div>
+                    </div>
+                <?php } ?>
+                <!-- END Post Tags -->
 
                 <div class="post-description">
                     <?= /*@noEscape*/ $block->getContent() ?>
