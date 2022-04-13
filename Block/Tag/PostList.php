@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Tag;
 
+use Magefan\Blog\Block\Post\PostList\Toolbar;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -64,8 +65,16 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             }
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {
+
+                $canonicalUrl = $tag->getTagUrl();
+                $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+                if ($page > 1) {
+                    $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                        . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                }
+
                 $this->pageConfig->addRemotePageAsset(
-                    $tag->getTagUrl(),
+                    $canonicalUrl,
                     'canonical',
                     ['attributes' => ['rel' => 'canonical']]
                 );

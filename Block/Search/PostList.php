@@ -68,6 +68,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setRobots($robots);
         }
 
+        if ($page > 1) {
+            $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+        }
+
         $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
         if ($pageMainTitle) {
             $pageMainTitle->setPageTitle(

@@ -11,6 +11,7 @@ namespace Magefan\Blog\Block;
 use Magento\Framework\Api\SortOrder;
 use Magento\Store\Model\ScopeInterface;
 use Magefan\Blog\Model\Config\Source\PostsSortBy;
+use Magefan\Blog\Block\Post\PostList\Toolbar;
 
 /**
  * Blog index block
@@ -32,8 +33,16 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         $this->pageConfig->setDescription($this->_getConfigValue('meta_description'));
 
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_INDEX)) {
+
+            $canonicalUrl = $this->_url->getBaseUrl();
+            $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+            if ($page > 1) {
+                $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                    . Toolbar::PAGE_PARM_NAME . '=' . $page;
+            }
+
             $this->pageConfig->addRemotePageAsset(
-                $this->_url->getBaseUrl(),
+                $canonicalUrl,
                 'canonical',
                 ['attributes' => ['rel' => 'canonical']]
             );

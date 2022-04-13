@@ -89,11 +89,9 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Render pagination HTML
-     *
-     * @return string
+     * @return bool|\Magento\Framework\DataObject|\Magento\Framework\View\Element\AbstractBlock|\Magento\Theme\Block\Html\Pager
      */
-    public function getPagerHtml()
+    public function getPagerBlock()
     {
         $pagerBlock = $this->getChildBlock('post_list_toolbar_pager');
         if ($pagerBlock instanceof \Magento\Framework\DataObject) {
@@ -106,7 +104,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             )->setShowAmounts(
                 false
             )->setPageVarName(
-                'page'
+                self::PAGE_PARM_NAME
             )->setFrameLength(
                 $this->_scopeConfig->getValue(
                     'design/pagination/pagination_frame',
@@ -122,6 +120,23 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             )->setCollection(
                 $this->getCollection()
             );
+        } else {
+            $pagerBlock = false;
+        }
+
+
+        return $pagerBlock;
+    }
+
+    /**
+     * Render pagination HTML
+     *
+     * @return string
+     */
+    public function getPagerHtml()
+    {
+        $pagerBlock = $this->getPagerBlock();
+        if ($pagerBlock instanceof \Magento\Framework\DataObject) {
             return $pagerBlock->toHtml();
         }
 

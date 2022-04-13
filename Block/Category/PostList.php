@@ -11,6 +11,7 @@ namespace Magefan\Blog\Block\Category;
 use Magento\Framework\Api\SortOrder;
 use Magefan\Blog\Model\Config\Source\CategoryDisplayMode;
 use Magefan\Blog\Model\Config\Source\PostsSortBy;
+use Magefan\Blog\Block\Post\PostList\Toolbar;
 
 /**
  * Blog category posts list
@@ -115,8 +116,16 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setDescription($category->getMetaDescription());
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_CATEGORY)) {
+
+                $canonicalUrl = $category->getCanonicalUrl();
+                $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+                if ($page > 1) {
+                    $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                        . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                }
+
                 $this->pageConfig->addRemotePageAsset(
-                    $category->getCanonicalUrl(),
+                    $canonicalUrl,
                     'canonical',
                     ['attributes' => ['rel' => 'canonical']]
                 );
