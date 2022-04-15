@@ -3,7 +3,7 @@
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
         "magefan/module-community" : ">=2.1.8",
-        "magefan/module-wysiwyg-advanced" : ">=2.0.10"
+        "magefan/module-wysiwyg-advanced" : ">=2.0.11"
     },
    "suggest": {
         "magefan/module-blog-comments-recaptcha": "Install this module to activate ReCaptcha on blog comments form to protect against spam.",
@@ -11,7 +11,7 @@
         "magefan/module-blog-amp": "Install this module to activate Blog integration with the Plumrocket AMP extension."
     },
     "type": "magento2-module",
-    "version": "2.10.6",
+    "version": "2.10.6.1",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
