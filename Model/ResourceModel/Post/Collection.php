@@ -204,7 +204,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     public function addPostsFilter($postIds)
     {
         if (!is_array($postIds)) {
-            $postIds = explode(',', $postIds);
+            $postIds = explode(',', (string)$postIds);
             foreach ($postIds as $key => $id) {
                 $id = trim($id);
                 if (!$id) {

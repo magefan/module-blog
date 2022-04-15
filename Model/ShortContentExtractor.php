@@ -33,7 +33,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
     /**
      * Retrieve short filtered content
-     * @param string$content
+     * @param string $content
      * @param mixed $len
      * @param mixed $endСharacters
      * @return string
@@ -41,6 +41,8 @@ class ShortContentExtractor implements ShortContentExtractorInterface
      */
     public function execute($content, $len = null, $endСharacters = null)
     {
+        $content = (string)$content;
+
         $key = md5($content) . $len . $endСharacters;
         if (!isset($this->executedContent[$key])) {
 

@@ -372,7 +372,7 @@ class Url
      */
     public function getUrlSufix($controllerName)
     {
-        return trim($this->_getConfig($controllerName . '_sufix'));
+        return trim((string)$this->_getConfig($controllerName . '_sufix'));
     }
 
     /**
