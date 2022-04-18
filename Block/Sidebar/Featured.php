@@ -54,7 +54,7 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve post ids string
      * @return string
      */
-    protected function getPostIdsConfigValue(): string
+    protected function getPostIdsConfigValue()
     {
         return (string)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/posts_ids',
