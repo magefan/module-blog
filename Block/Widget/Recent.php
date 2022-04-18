@@ -102,7 +102,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         $this->_postCollection->addRecentFilter();
 
-        $categoryIds = explode(',', $this->getData('category_id'));
+        $categoryIds = explode(',', $this->getData('category_id') ?? '');
         if (count($categoryIds) > 1) {
             $this->_postCollection->addCategoryFilter($categoryIds);
         } elseif ($category = $this->getCategory()) {
