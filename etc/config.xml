@@ -147,5 +147,14 @@
                 <max_depth>0</max_depth>
             </top_menu>
         </mfblog>
+        <system>
+            <media_storage_configuration>
+                <allowed_resources>
+                    <media_gallery_image_folders>
+                        <magefan_blog>magefan_blog</magefan_blog>
+                    </media_gallery_image_folders>
+                </allowed_resources>
+            </media_storage_configuration>
+        </system>
     </default>
 </config>
