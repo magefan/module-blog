@@ -125,11 +125,9 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
                 $content = mb_substr($content, 0, $len);
                 try {
-                    $previousLoaderState = libxml_disable_entity_loader(true);
                     $previousErrorState = libxml_use_internal_errors(true);
                     $dom = new \DOMDocument();
                     $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                    libxml_disable_entity_loader($previousLoaderState);
                     libxml_use_internal_errors($previousErrorState);
 
                     $body = $dom->getElementsByTagName('body');
