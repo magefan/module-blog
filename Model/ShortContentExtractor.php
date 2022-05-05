@@ -93,7 +93,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                     }
 
                     /* Skip long HTML */
-                    $stcc = trim(strip_tags($cc));
+                    $stcc = trim(strip_tags((string)$cc));
                     //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
                     if ($stcc && $len < mb_strlen($content)) {
                         $str = '';
