@@ -114,19 +114,26 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         }
 
         /* Prepare Tags */
-        $tagInput = trim($request->getPost('tag_input'));
+        $tagInput = trim((string)$request->getPost('tag_input'));
         if ($tagInput) {
             $tagInput = explode(',', $tagInput);
 
             $tagsCollection = $this->_objectManager->create(\Magefan\Blog\Model\ResourceModel\Tag\Collection::class);
             $allTags = [];
             foreach ($tagsCollection as $item) {
-                $allTags[strtolower($item->getTitle())] = $item->getId();
+                if (!$item->getTitle()) {
+                    continue;
+                }
+                $allTags[strtolower((string)$item->getTitle())] = $item->getId();
             }
 
             $tags = [];
             foreach ($tagInput as $tagTitle) {
-                if (empty($allTags[strtolower($tagTitle)])) {
+                $tagTitle = strtolower(trim((string)$tagTitle));
+                if (!$tagTitle) {
+                    continue;
+                }
+                if (empty($allTags[$tagTitle])) {
                     $tagModel = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class);
                     $tagModel->setData('title', $tagTitle);
                     $tagModel->setData('is_active', 1);
@@ -134,7 +141,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
                     $tags[] = $tagModel->getId();
                 } else {
-                    $tags[] = $allTags[strtolower($tagTitle)];
+                    $tags[] = $allTags[$tagTitle];
                 }
             }
             $model->setData('tags', $tags);
