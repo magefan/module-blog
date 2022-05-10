@@ -23,12 +23,21 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     private $executedContent = [];
 
     /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private $scopeConfig;
+
+    /**
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        \Magento\Cms\Model\Template\FilterProvider $filterProvider
+        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig = null
     ) {
         $this->filterProvider = $filterProvider;
+        $this->scopeConfig = $scopeConfig ?: \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
     }
 
     /**
@@ -58,7 +67,10 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 if ($len) {
                     $isPagebreakDefined = true;
                 } else {
-                    $len = 2000;
+                    $len = (int)$this->scopeConfig->getValue(
+                        'mfblog/post_list/shortcotent_length',
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                    ) ?: 2000;
                 }
             }
 
