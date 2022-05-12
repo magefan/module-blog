@@ -38,7 +38,7 @@ if ($exist = $block->getItems()->getSize()) {
 
     <?php if ($type == 'related' || $type == 'upsell'): ?>
         <?php if ($type == 'related'): ?>
-            <div class="mfblog-replated-products-block block <?= $block->escapeHtml($class); ?>"
+            <div class="mfblog-related-products-block block <?= $block->escapeHtml($class); ?>"
                  data-mage-init='{"relatedProducts":{"relatedCheckbox":".related.checkbox"}}'
                  data-limit="<?= $block->escapeHtml($limit); ?>"
                  data-shuffle="<?= $block->escapeHtml($shuffle); ?>">
