@@ -49,7 +49,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
         $object->setTitle(
-            trim(strtolower($object->getTitle()))
+            trim($object->getTitle())
         );
 
         $tag = $object->getCollection()
