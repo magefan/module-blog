@@ -107,7 +107,7 @@
                 <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
                     <div class="post-tag">
                         <div class="item post-tags">
-                            <div class="post-tag-title">Tags</div>
+                            <div class="post-tag-title"><?= $block->escapeHtml(__('Tags')) ?></div>
                             <?php $n = 0; ?>
                             <?php foreach ($_post->getRelatedTags() as $tag) { ?>
                                 <?php $n++; ?>
