@@ -11,6 +11,7 @@
     <head>
         <css src="Magefan_Blog::css/comments.css" />
     </head>
+    <update handle="blog_css"/>
     <body>
         <attribute name="class" value="blog-page" />
         <referenceContainer name="sidebar.additional">

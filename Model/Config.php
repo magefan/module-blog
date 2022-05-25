@@ -104,9 +104,9 @@ class Config
      * Blog CSS include config path
      */
 
-    const XML_INCLUDE_BLOG_CSS_ALL_PAGES = 'mfblog/developer/include_blog_css_all_pages';
-    const XML_INCLUDE_BLOG_CSS_HOME_PAGE = 'mfblog/developer/include_blog_css_home_page';
-    const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/include_blog_css_product_page';
+    const XML_INCLUDE_BLOG_CSS_ALL_PAGES = 'mfblog/developer/css_settings/include_all_pages';
+    const XML_INCLUDE_BLOG_CSS_HOME_PAGE = 'mfblog/developer/css_settings/include_home_page';
+    const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/css_settings/include_product_page';
 
     /**
      * Config constructor.

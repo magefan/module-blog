@@ -37,27 +37,19 @@ class LayoutLoadBeforeObserver implements ObserverInterface
     protected $config;
 
     /**
-     * @var Logo
-     */
-    protected $logo;
-
-    /**
      * LayoutLoadBeforeObserver constructor.
      * @param \Magento\Framework\Registry $registry
      * @param RequestInterface $request
      * @param Config $config
-     * @param Logo $logo
      */
     public function __construct(
         \Magento\Framework\Registry $registry,
         RequestInterface $request,
-        Config $config,
-        Logo $logo
+        Config $config
     ) {
         $this->registry = $registry;
         $this->request = $request;
         $this->config = $config;
-        $this->logo = $logo;
     }
 
     /**
@@ -69,21 +61,23 @@ class LayoutLoadBeforeObserver implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $post = $this->registry->registry('current_blog_post');
-        $layout = $observer->getLayout();
-        if ($post && $post->getIsPreviewMode()) {
-            $layout->getUpdate()->addHandle('blog_non_cacheable');
-        }
-        if (!$this->config->isBlogCssIncludeOnAll()) {
-            if ($this->config->isBlogCssIncludeOnHome() && $this->logo->isHomePage()) {
-                $layout->getUpdate()->addHandle('blog_css');
+        if ($this->config->isEnabled()) {
+            $post = $this->registry->registry('current_blog_post');
+            $layout = $observer->getLayout();
+            if ($post && $post->getIsPreviewMode()) {
+                $layout->getUpdate()->addHandle('blog_non_cacheable');
             }
+            if (!$this->config->isBlogCssIncludeOnAll()) {
+                if ($this->config->isBlogCssIncludeOnHome() && $this->request->getFullActionName() === 'cms_index_index') {
+                    $layout->getUpdate()->addHandle('blog_css');
+                }
 
-            if ($this->config->isBlogCssIncludeOnProduct() && $this->request->getFullActionName() === 'catalog_product_view') {
+                if ($this->config->isBlogCssIncludeOnProduct() && $this->request->getFullActionName() === 'catalog_product_view') {
+                    $layout->getUpdate()->addHandle('blog_css');
+                }
+            } else {
                 $layout->getUpdate()->addHandle('blog_css');
             }
-        } else {
-            $layout->getUpdate()->addHandle('blog_css');
         }
     }
 }
