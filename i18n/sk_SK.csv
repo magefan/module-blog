@@ -1,0 +1,200 @@
+Add New Category,Pridať novú kategóriu
+Are you sure you want to do this?,Naozaj to chcete urobiť?
+Start Import,Spustiť import
+NOTICE,OZNAM
+Database Name,Názov databázy
+User Name,Používateľské meno
+Database Host,Database Host
+Table Prefix,Table Prefix
+Post,Článok
+Add New Post,Pridať nový článok
+Blog,Blog
+Go to Blog Home Page,Prejdite na domovskú stránku blogu
+Monthly Archives: %s %s,Mesačné archívy: %s %s
+"Search ""%1""","Hľadať ""%1"""
+Recent Blog Posts,Najnovšie blogové príspevky
+Manage %1,Spravovať %1
+Edit %1,Editovať %1
+New %1,Nový %1
+Create %1,Vytvoriť %1
+%1 has been saved.,%1 bol uložený.
+Something went wrong while saving this %1. %2,Pri ukladaní sa niečo pokazilo %1. %2
+We can't delete %1 right now. %2,Nedokážeme teraz zmazať %1. %2
+%1 have been deleted.,%1 bol zmazaný.
+"Parameter ""Status"" missing in request data.","V údajoch požiadavky chýba parameter ""Status""."
+Status Field Name is not specified.,Nie je zadaný názov statusu.
+We can't change status of %1 right now. %2,Nedokážeme teraz zmeniť %1. %2
+%1 status have been changed.,%1 stav bol zmenený.
+Blog Import,Import blogu
+Blog import type is not specified.,Typ importu blogu nie je zadaný.
+The import process was completed successfully. %1 posts and %2 categories where imported.,Proces importu bol úspešne dokončený. Články %1 a kategórie %2 boli naimportované.
+The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,Proces importu bol dokončený. Články %1 a kategórie %2 boli naimportované. Niektoré články alebo kategórie boli preskočené.<br/> %3 %4
+Nothing to import.,Nič na import.
+Can not make import.,Nie je možné vykonať import.
+Something went wrong: ,Niečo sa pokazilo:
+Blog Import from WordPress,Import blogu z WordPress
+Please select,Prosím vyber
+Use Facebook Comments,Použite komentáre na Facebooku
+Use Disqus Comments,Použite komentáre Disqus
+Use Google Comments,Použite Google Comments
+Yes (With auto trigger),Áno (s automatickým spúšťaním)
+Yes (Without auto trigger),Áno (bez automatického spúšťania)
+Parameter %1 is required,Parameter %1 je povinný
+AheadWorks Blog Extension not detected.,AheadWorks Blog Extension sa nenašiel.
+The category URL key contains disallowed symbols.,URL kategórie obsahuje nepovolené symboly.
+The category URL key cannot be made of only numbers.,URL kategórie nemôže byť tvorený iba číslami.
+The post URL key contains disallowed symbols.,URL článku obsahuje nepovolené symboly.
+The post URL key cannot be made of only numbers.,URL článku nemôže pozostávať iba z čísel.
+The tag is already exist.,Tag už existuje.
+The tag URL key contains disallowed symbols.,URL tagu obsahuje nepovolené symboly.
+The tag URL key cannot be made of only numbers.,URL tagu nemôže pozostávať iba z čísel.
+Related posts,Súvisiace články
+Posted:,Uverejnené:
+Categories:,Kategórie:
+Tags:,Tagy:
+Author:,Autor:
+We can't find posts matching the selection.,Nemôžeme nájsť príspevky zodpovedajúce výberu.
+Read more &#187;,Čítaj viac &#187;
+See more,Pozri viac
+Read %1,Čítaj %1
+&larr; Previous,&larr; Predchádzajúce
+Previous,Predchádzajúce
+Next &rarr;,Ďalšie &rarr;
+Next,Ďalšie
+Related Posts,Súvisiace príspevky
+Archive,Archív
+Archive %s,Archív %s
+Recent Posts,Posledné články
+RSS Feed,RSS zdroj
+Search posts here...,Hľadať príspevky tu...
+Tags,Tagy
+MageFan Extensions,Rozšírenia MageFan
+Blog Information,Informácie o blogu
+Blog Index Page,Indexová stránka blogu
+Post View,Zobrazenie príspevku
+Display Related Posts,Zobraziť súvisiace príspevky
+Number of Posts,Počet príspevkov
+Display Related Products,Zobraziť súvisiace produkty
+Number of Products,Počet produktov
+Comments,Komentáre
+Number of Comments,Počet komentárov
+Facebook Application ID,ID aplikácie Facebook
+Preview and Next Post,Náhľad a Ďalší príspevok
+Display Prev. & Next Post Links,Zobraziť predchádzajúce a ďalšie články
+Post List,Zoznam článkov
+Posts Per Page,Počet článkov na stránku
+Use Lazy Loading,Použite Lazy Loading
+Automatically load more posts on page.,Automaticky načítať viac príspevkov na stránku.
+Auto Triger Padding (px),Auto Triger Padding (px)
+Author,Autor
+Display Author Information,Zobraziť informácie o autorovi
+Display Post List By Author,Zobraziť zoznam príspevkov podľa autora
+Sidebar,Bočný panel
+Search Form Widget,Widget vyhľadávacieho formulára
+Categories Widget,Widget kategórie
+Recent Posts Widget,Widget Nedávne príspevky
+Posts Number,Číslo príspevkov
+Archive Widget,Widget archívu
+Tag Claud Widget,Tag Claud Widget
+Rss Feed,RSS zdroj
+Feed Title,Názov informačného kanála
+Feed Description,Popis informačného kanála
+Product Page,Stránka produktu
+Permalink Settings,Nastavenia trvalého odkazu
+Blog Route,Cesta blogu
+Permalink Type,Typ trvalého odkazu
+Post Route,Trasa príspevku
+Category Route,Kategória Trasa
+Archive Route,Archívna trasa
+Tag Route,Označiť trasu
+Author Route,Cesta autora
+Search Route,Vyhľadať trasu
+Social,Sociálne
+AddThis Enabled,AddThis povolené
+AddThis ID,AddThis ID
+AddThis Language,AddThis Language
+Category Top Navigation,Kategória Horná navigácia
+Display Blog Link,Zobraziť odkaz na blog
+Blog Category,Kategória blogu
+Leave blank to display posts from all categories.,"Ak chcete zobraziť príspevky zo všetkých kategórií, nechajte prázdne."
+Custom Template,Vlastná šablóna
+Published,Publikovaný
+Category Information,Informácie o kategórii
+Enable Category,Povoliť kategóriu
+Category Title,Názov kategórie
+Category in Websites,Kategória na webových stránkach
+-- Please Select --,-- Prosím vyber --
+Tag Title,Názov tagu
+Post Information,Informácie o článku
+Enable Post,Povoliť uverejňovanie
+Post Title,Názov príspevku
+New Category,Nová kategória
+Additional Options,Ďalšie možnosti
+Featured Image,Hlavný obrázok
+Publish Date,Dátum zverejnenia
+New Tag,Nový tag
+Open Graph Metadata,Open Graph Metadata
+OG Title,Názov OG
+Leave blank to use Meta Title by default.,"Ak chcete predvolene použiť metanázov, nechajte prázdne."
+OG Description,Popis OG
+Leave blank to use Meta Description by default.,"Ak chcete predvolene použiť meta popis, nechajte pole prázdne."
+OG Image,Obrázok OG
+"Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Ak chcete predvolene použiť odporúčaný obrázok, nechajte pole prázdne. Povoliť typ obrázka: jpg, jpeg, gif, png."
+OG Type,Typ OG
+"Leave blank to use ""article"" type by default.","Ak chcete predvolene použiť typ „článku“, nechajte pole prázdne."
+Post in Websites,Uverejnite na webových stránkach
+Related Posts and Products,Súvisiace články a produkty
+Related posts are shown to customers in addition to the item the customer is looking at.,"Okrem položky, ktorú si zákazník prezerá, sa zákazníkom zobrazujú súvisiace príspevky."
+Add Related Post,Pridať súvisiaci článok
+Add Related Posts,Pridať súvisiace články
+Add Selected Posts,Pridať vybrané články
+January,Január
+February,Február
+March,Marec
+April,Apríl
+May,Máj
+June,Jún
+July,Júl
+August,August
+September,September
+October,Október
+November,November
+December,December
+Jan,Jan
+Feb,Feb
+Mar,Mar
+Apr,Apr
+May,Máj
+Jun,Jún
+Jul,Júl
+Aug,Aug
+Sep,Sep
+Oct,Okt
+Nov,Nov
+Dec,Dec
+Reply,Odpovedať
+Show more replies in this thread,Zobraziť viac odpovedí v tomto vlákne
+%1 Comment(s),%1 komentár(ov)
+Add a comment...,Pridať komentár...
+Add a reply...,Pridať odpoveď...
+Sign in to add a comment...,"Ak chcete pridať komentár, prihláste sa..."
+Sign in to add a reply...,"Ak chcete pridať odpoveď, prihláste sa..."
+Full Name,Celé meno
+Load more comments,Načítať ďalšie komentáre
+Login to submit comment,"Ak chcete odoslať komentár, prihláste sa"
+You cannot post comment. Blog post is not longer exist.,Nemôžete uverejniť komentár. Blogový príspevok už neexistuje.
+You cannot reply to this comment. Comment is not longer exist.,Na tento komentár nemôžete odpovedať. Komentár už neexistuje.
+You cannot reply to this comment.,Na tento komentár nemôžete odpovedať.
+You submitted your comment for moderation.,Svoj komentár ste odoslali na moderovanie.
+Thank you for your comment.,Ďakujem za Váš komentár.
+Import Categories,Importovať kategórie
+Import Comments,Importovať komentáre
+Import Posts,Importovať príspevky
+Import from aheadWorks Blog Extension,Import z aheadWorks Blog Extension
+Import from Joomla,Import z Joomla
+Import from Blogger.com,Import z Blogger.com
+Import from Drupal,Import z Drupal
+Import from CSV,Import z CSV
+Import from XML,Import z XML
+"Yes, I have read the %1 and agree to the processing of my personal data.","Áno, prečítal som si %1 a súhlasím so spracovaním mojich osobných údajov."
+privacy policy,zásady ochrany osobných údajov
