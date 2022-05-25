@@ -8,13 +8,9 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-        <referenceBlock name="footer_links">
-            <block class="Magefan\Blog\Block\Link" name="footer_blog_link" />
-        </referenceBlock>
-
-        <referenceContainer name="content">
-            <block class="Magento\Framework\View\Element\Template" name="mfblog.lazyload.js" template="Magefan_Blog::lazyload-js.phtml" />
-        </referenceContainer>
-    </body>
+    <head>
+        <css src="Magefan_Blog::css/blog-m.css" />
+        <css src="Magefan_Blog::css/blog-new.css" />
+        <css src="Magefan_Blog::css/blog-custom.css" />
+    </head>
 </page>

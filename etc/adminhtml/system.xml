@@ -632,6 +632,30 @@
                     </depends>
                 </field>
             </group>
+            <group id="developer" translate="label" type="text" sortOrder="990" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Developer</label>
+                <group id="css_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CSS Settings</label>
+                    <field id="include_all_pages" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Include Blog CSS On All Pages</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="include_home_page" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Include Blog CSS On Home Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="include_all_pages">0</field>
+                        </depends>
+                    </field>
+                    <field id="include_product_page" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Include Blog CSS On Page Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="include_all_pages">0</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
         </section>
     </system>
 </config>

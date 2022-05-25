@@ -146,6 +146,13 @@
                 <include_categories>1</include_categories>
                 <max_depth>0</max_depth>
             </top_menu>
+            <developer>
+                <css_settings>
+                    <include_all_pages>1</include_all_pages>
+                    <include_home_page>0</include_home_page>
+                    <include_product_page>0</include_product_page>
+                </css_settings>
+            </developer>
         </mfblog>
         <system>
             <media_storage_configuration>

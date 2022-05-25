@@ -101,6 +101,14 @@ class Config
     const XML_AUTHOR_ROBOTS = 'mfblog/author/robots';
 
     /**
+     * Blog CSS include config path
+     */
+
+    const XML_INCLUDE_BLOG_CSS_ALL_PAGES = 'mfblog/developer/css_settings/include_all_pages';
+    const XML_INCLUDE_BLOG_CSS_HOME_PAGE = 'mfblog/developer/css_settings/include_home_page';
+    const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/css_settings/include_product_page';
+
+    /**
      * Config constructor.
      * @param ScopeConfigInterface $scopeConfig
      */
@@ -213,5 +221,41 @@ class Config
         $displayFor = explode(',', $this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
 
         return in_array($pageType, $displayFor) || in_array(self::CANONICAL_PAGE_TYPE_ALL, $displayFor) ? true : false;
+    }
+
+    /**
+     * @param null $storeId
+     * @return bool
+     */
+    public function isBlogCssIncludeOnAll($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_INCLUDE_BLOG_CSS_ALL_PAGES,
+            $storeId
+        );
+    }
+
+    /**
+     * @param null $storeId
+     * @return bool
+     */
+    public function isBlogCssIncludeOnHome($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_INCLUDE_BLOG_CSS_HOME_PAGE,
+            $storeId
+        );
+    }
+
+    /**
+     * @param null $storeId
+     * @return bool
+     */
+    public function isBlogCssIncludeOnProduct($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES,
+            $storeId
+        );
     }
 }
