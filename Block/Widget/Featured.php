@@ -46,7 +46,7 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
      */
     protected function getPostIdsConfigValue()
     {
-        return $this->getData('posts_ids');
+        return (string)$this->getData('posts_ids');
     }
 
     /**
