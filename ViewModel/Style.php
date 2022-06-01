@@ -64,22 +64,19 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
 
         $asset = $this->assetRepository->createAsset($file);
 
-        $fileContent = null;
-        /*
-        if ($this->source->getFile($asset)) {
-            $fileContent = $this->source->getContent($asset);
-        }
-        */
+        $fileContent = '';
 
-        $file = '../' . $this->source->findRelativeSourceFilePath($asset);
-
-        if ($file != '../' && file_exists($file)) {
-            $fileContent = file_get_contents($file);
-        } else {
+        $file = $this->source->getFile($asset);
+        if (!$file || !file_exists($file)) {
             $file = $this->source->findRelativeSourceFilePath($asset);
-            if ($file && file_exists($file)) {
-                $fileContent = file_get_contents($file);
+            if ($file && !file_exists($file)) {
+                $file = '../' . $file;
+
             }
+        }
+
+        if ($file && file_exists($file)) {
+            $fileContent = file_get_contents($file);
         }
 
         $fileContent = str_replace(
