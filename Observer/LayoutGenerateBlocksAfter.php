@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
+use Magefan\Blog\Model\Config as BlogConfig;
 
 class LayoutGenerateBlocksAfter implements ObserverInterface
 {
@@ -18,12 +19,20 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
     private $pageConfig;
 
     /**
+     * @var BlogConfig
+     */
+    private $blogConfig;
+
+    /**
      * @param \Magento\Framework\View\Page\Config $pageConfig
+     * @param BlogConfig $scopeConfig
      */
     public function __construct(
-        \Magento\Framework\View\Page\Config $pageConfig
+        \Magento\Framework\View\Page\Config $pageConfig,
+        BlogConfig $blogConfig
     ) {
         $this->pageConfig = $pageConfig;
+        $this->blogConfig = $blogConfig;
     }
 
     /**
@@ -40,8 +49,19 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
             'blog_index_index',
             'blog_tag_view'
         ];
-        if (!in_array($observer->getEvent()->getFullActionName(), $availableActions)) {
+        $fan = $observer->getEvent()->getFullActionName();
+        if (!in_array($fan, $availableActions)) {
             return;
+        }
+
+        if ('blog_index_index' == $fan) {
+            $displayMode = $this->blogConfig->getConfig(
+                BlogConfig::XML_PATH_HOMEPAGE_DISPLAY_MODE
+            );
+
+            if (2 == $displayMode) {
+                return;
+            }
         }
 
         $productListBlock = $observer->getEvent()->getLayout()->getBlock('blog.posts.list');
