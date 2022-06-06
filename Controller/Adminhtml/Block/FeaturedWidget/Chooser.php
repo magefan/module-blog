@@ -5,6 +5,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Block\FeaturedWidget;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\LayoutFactory;
 use Magento\Framework\Controller\Result\RawFactory;
+use Magento\Framework\Registry;
 
 class Chooser extends \Magento\Backend\App\Action
 {
@@ -24,14 +25,20 @@ class Chooser extends \Magento\Backend\App\Action
     protected $resultRawFactory;
 
     /**
+     * @var
+     */
+    protected $registry;
+
+    /**
      * @param Context $context
      * @param LayoutFactory $layoutFactory
      * @param RawFactory $resultRawFactory
      */
-    public function __construct(Context $context, LayoutFactory $layoutFactory, RawFactory $resultRawFactory)
+    public function __construct(Context $context, LayoutFactory $layoutFactory, RawFactory $resultRawFactory,Registry $registry)
     {
         $this->layoutFactory = $layoutFactory;
         $this->resultRawFactory = $resultRawFactory;
+        $this->registry = $registry;
         parent::__construct($context);
     }
 
@@ -42,6 +49,10 @@ class Chooser extends \Magento\Backend\App\Action
      */
     public function execute()
     {
+        $selectedProducts = $this->getRequest()->getParam('selected_products');
+        if ($selectedProducts !== null) {
+            $this->registry->register('selected_products',$selectedProducts);
+        }
         /** @var \Magento\Framework\View\Layout $layout */
         $layout = $this->layoutFactory->create();
 
