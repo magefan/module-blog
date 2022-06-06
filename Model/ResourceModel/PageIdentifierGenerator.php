@@ -43,7 +43,7 @@ class PageIdentifierGenerator
             return;
         }
 
-        $identifier = trim($object->getData('title'));
+        $identifier = $object->getData('title') ? trim($object->getData('title')) : '';
         if (!$identifier) {
             return;
         }
