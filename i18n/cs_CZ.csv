@@ -1,0 +1,200 @@
+Add New Category,Přidat novou kategorii
+Are you sure you want to do this?,Opravdu to chcete udělat?
+Start Import,Spusťte import
+NOTICE,OZNÁMENÍ
+Database Name,Jméno databáze
+User Name,Uživatelské jméno
+Database Host,Hostitel databáze
+Table Prefix,Předpona tabulky
+Post,Pošta
+Add New Post,Přidat nový příspěvek
+Blog,Blog
+Go to Blog Home Page,Přejděte na domovskou stránku blogu
+Monthly Archives: %s %s,Měsíční archivy: %s %s
+"Search ""%1""","Hledat ""%1"""
+Recent Blog Posts,Nedávné příspěvky na blogu
+Manage %1,Spravovat %1
+Edit %1,Upravit %1
+New %1,Nové %1
+Create %1,Vytvořit %1
+%1 has been saved.,%1 bylo uloženo.
+Something went wrong while saving this %1. %2,Při ukládání tohoto %1 se něco pokazilo. %2
+We can't delete %1 right now. %2,Momentálně nemůžeme smazat %1. %2
+%1 have been deleted.,%1 byly smazány.
+"Parameter ""Status"" missing in request data.","V datech požadavku chybí parametr ""Stav""."
+Status Field Name is not specified.,Název pole stavu není zadán.
+We can't change status of %1 right now. %2,Momentálně nemůžeme změnit stav %1. %2
+%1 status have been changed.,Stav %1 byl změněn.
+Blog Import,Import blogu
+Blog import type is not specified.,Typ importu blogu není zadán.
+The import process was completed successfully. %1 posts and %2 categories where imported.,Proces importu byl úspěšně dokončen. Počet importovaných příspěvků: %1 a %2 kategorií.
+The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,Proces importu byl dokončen. Počet importovaných příspěvků: %1 a %2 kategorií. Některé příspěvky nebo kategorie byly přeskočeny.<br/> %3 %4
+Nothing to import.,Nic k importu.
+Can not make import.,Nelze provést import.
+Something went wrong:,Něco se pokazilo:
+Blog Import from WordPress,Import blogu z WordPressu
+Please select,Prosím vyberte
+Use Facebook Comments,Použít Facebook Komentáře
+Use Disqus Comments,Použít Disqus Comments
+Use Google Comments,Použít Google Comments
+Yes (With auto trigger),Ano (s automatickým spouštěním)
+Yes (Without auto trigger),Ano (bez automatického spouštění)
+Parameter %1 is required,Parametr %1 je povinný
+AheadWorks Blog Extension not detected.,Nebylo zjištěno rozšíření blogu AheadWorks.
+The category URL key contains disallowed symbols.,URL kategorie obsahuje nepovolené symboly.
+The category URL key cannot be made of only numbers.,URL kategorie nemůže být tvořen pouze čísly.
+The post URL key contains disallowed symbols.,URL příspěvku obsahuje nepovolené symboly.
+The post URL key cannot be made of only numbers.,URL příspěvku nemůže být tvořen pouze čísly.
+The tag is already exist.,Tag již existuje.
+The tag URL key contains disallowed symbols.,URL tagu obsahuje nepovolené symboly.
+The tag URL key cannot be made of only numbers.,URL tagu nemůže být tvořen pouze čísly.
+Related posts,Související příspěvky
+Posted:,Zveřejněn:
+Categories:,Kategorie:
+Tags:,Tagy:
+Author:,Autor:
+We can't find posts matching the selection.,Nemůžeme najít příspěvky odpovídající výběru.
+Read more &#187;,Číst více &#187;
+See more,Vidět víc
+Read %1,Číst %1
+&larr; Previous,&larr; Předchozí
+Previous,Předchozí
+Next &rarr;,Další &rarr;
+Next,Další
+Related Posts,Související příspěvky
+Archive,Archiv
+Archive %s,Archivovat %s
+Recent Posts,Poslední příspěvky
+RSS Feed,RSS kanál
+Search posts here...,Hledat příspěvky zde...
+Tags,Tagy
+MageFan Extensions,Rozšíření MageFan
+Blog Information,Informace o blogu
+Blog Index Page,Stránka indexu blogu
+Post View,Zobrazení příspěvku
+Display Related Posts,Zobrazit související příspěvky
+Number of Posts,Počet příspěvků
+Display Related Products,Zobrazit související produkty
+Number of Products,Počet produktů
+Comments,Komentáře
+Number of Comments,Počet komentářů
+Facebook Application ID,ID aplikace Facebook
+Preview and Next Post,Náhled a další příspěvek
+Display Prev. & Next Post Links,Zobrazit odkazy na předchozí a další příspěvky
+Post List,Seznam příspěvků
+Posts Per Page,Počet příspěvků na stránku
+Use Lazy Loading,Použijte líné načítání
+Automatically load more posts on page.,Automaticky načíst více příspěvků na stránku.
+Auto Triger Padding (px),Auto Triger Padding (px)
+Author,Autor
+Display Author Information,Zobrazit informace o autorovi
+Display Post List By Author,Zobrazit seznam příspěvků podle autora
+Sidebar,Postranní panel
+Search Form Widget,Widget vyhledávacího formuláře
+Categories Widget,Widget Kategorie
+Recent Posts Widget,Widget posledních příspěvků
+Posts Number,Číslo příspěvků
+Archive Widget,Widget pro archivaci
+Tag Claud Widget,Tag Claud Widget
+Rss Feed,RSS zdroj
+Feed Title,Název zdroje
+Feed Description,Popis zdroje
+Product Page,Stránka produktu
+Permalink Settings,Nastavení trvalého odkazu
+Blog Route,Cesta blogu
+Permalink Type,Typ trvalého odkazu
+Post Route,Cesta příspěvku
+Category Route,Cesta Kategorie
+Archive Route,Cesta archivu
+Tag Route,Cesta tagu
+Author Route,Cesta autora
+Search Route,Hledat trasu
+Social,Sociální
+AddThis Enabled,AddThis Zapnuto
+AddThis ID,AddThis ID
+AddThis Language,AddThis Jazyk
+Category Top Navigation,Kategorie Navigace nahoře
+Display Blog Link,Zobrazit odkaz na blog
+Blog Category,Kategorie blogu
+Leave blank to display posts from all categories.,"Chcete-li zobrazit příspěvky ze všech kategorií, ponechte prázdné."
+Custom Template,Vlastní šablona
+Published,Publikováno
+Category Information,Informace o kategorii
+Enable Category,Povolit kategorii
+Category Title,Název kategorie
+Category in Websites,Kategorie na webových stránkách
+-- Please Select --,-- Prosím vyberte --
+Tag Title,Název tagu
+Post Information,Informace o příspěvku
+Enable Post,Povolit příspěvek
+Post Title,Název příspěvku
+New Category,Nová kategorie
+Additional Options,Další možnosti
+Featured Image,Vybraný obrázek
+Publish Date,Datum zveřejnění
+New Tag,Nová značka
+Open Graph Metadata,Open Graph Metadata
+OG Title,OG Název
+Leave blank to use Meta Title by default.,"Chcete-li jako výchozí použít metanázev, ponechte prázdné."
+OG Description,OG Popis
+Leave blank to use Meta Description by default.,"Chcete-li ve výchozím nastavení použít popis metadat, ponechte prázdné."
+OG Image,OG Obrázek
+"Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Chcete-li jako výchozí použít vybraný obrázek, ponechte prázdné. Povolit typ obrázku: jpg, jpeg, gif, png."
+OG Type,OG Typ
+"Leave blank to use ""article"" type by default.","Chcete-li jako výchozí použít typ ""článek"", ponechte prázdné."
+Post in Websites,Příspěvek na webových stránkách
+Related Posts and Products,Související příspěvky a produkty
+Related posts are shown to customers in addition to the item the customer is looking at.,"Související příspěvky se zákazníkům zobrazují kromě položky, kterou si zákazník prohlíží."
+Add Related Post,Přidat související příspěvek
+Add Related Posts,Přidat související příspěvky
+Add Selected Posts,Přidat vybrané příspěvky
+January,Leden
+February,Únor
+March,Březen
+April,Duben
+May,Květen
+June,Červen
+July,Červenec
+August,Srpen
+September,Září
+October,Říjen
+November,Listopad
+December,Prosinec
+Jan,Led
+Feb,Úno
+Mar,Bře
+Apr,Dub
+May,Kvě
+Jun,Črn
+Jul,Črc
+Aug,Srp
+Sep,Zář
+Oct,Říj
+Nov,Lis
+Dec,Pro
+Reply,Odpovědět
+Show more replies in this thread,Zobrazit více odpovědí v tomto vláknu
+%1 Comment(s),%1 komentářů
+Add a comment...,Přidat komentář...
+Add a reply...,Přidat odpověď...
+Sign in to add a comment...,"Chcete-li přidat komentář, přihlaste se..."
+Sign in to add a reply...,"Chcete-li přidat odpověď, přihlaste se..."
+Full Name,Celé jméno
+Load more comments,Načíst další komentáře
+Login to submit comment,"Chcete-li odeslat komentář, přihlaste se"
+You cannot post comment. Blog post is not longer exist.,Nemůžete přidat komentář. Blogový příspěvek již neexistuje.
+You cannot reply to this comment. Comment is not longer exist.,Na tento komentář nemůžete odpovědět. Komentář již neexistuje.
+You cannot reply to this comment.,Na tento komentář nemůžete odpovědět.
+You submitted your comment for moderation.,Odeslali jste svůj komentář k moderování.
+Thank you for your comment.,Děkuji za váš komentář.
+Import Categories,Importovat kategorie
+Import Comments,Importovat komentáře
+Import Posts,Importovat příspěvky
+Import from aheadWorks Blog Extension,Importovat z rozšíření blogu aheadWorks
+Import from Joomla,Import z Joomly
+Import from Blogger.com,Import z Blogger.com
+Import from Drupal,Import z Drupalu
+Import from CSV,Import z CSV
+Import from XML,Import z XML
+"Yes, I have read the %1 and agree to the processing of my personal data.","Ano, přečetl jsem %1 a souhlasím se zpracováním mých osobních údajů."
+privacy policy,zásady ochrany osobních údajů
