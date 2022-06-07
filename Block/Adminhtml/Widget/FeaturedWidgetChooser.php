@@ -1,27 +1,24 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Widget;
 
-use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory as WidgetCollectionFactory;
-use Magento\Framework\Registry;
+use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
+use Magento\Backend\Block\Template\Context;
+use Magento\Backend\Helper\Data;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
 class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
-     * @var \Magento\Cms\Model\BlockFactory
+     * @var PostCollectionFactoryy
      */
-    protected $blockFactory;
-
-    /**
-     * @var \Magento\Cms\Model\ResourceModel\Block\CollectionFactory
-     */
-    protected $collectionFactory;
-
-    /**
-     * @var \Magento\Framework\View\Helper\SecureHtmlRenderer
-     */
-     protected $secureHtmlRenderer;
+    protected $postCollectionFactory;
 
     /**
      * @var WidgetCollectionFactory
@@ -29,32 +26,21 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      protected $widgetCollectionFactory;
 
     /**
-     * @var Registry
-     */
-     protected $registry;
-
-    /**
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param CollectionFactory $collectionFactory
-     * @param \Magento\Backend\Helper\Data $backendHelper
-     * @param array $data
+     * @param Context                 $context
+     * @param Data                    $backendHelper
+     * @param PostCollectionFactory   $postCollectionFactory
+     * @param WidgetCollectionFactory $widgetCollectionFactory
+     * @param array                   $data
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Backend\Helper\Data $backendHelper,
-        \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory,
-        \Magento\Cms\Model\BlockFactory $blockFactory,
-        \Magento\Framework\View\Helper\SecureHtmlRenderer $secureHtmlRenderer,
+        Context $context,
+        Data $backendHelper,
+        PostCollectionFactory $postCollectionFactory,
         WidgetCollectionFactory $widgetCollectionFactory,
-        Registry $registry,
         array $data = []
-    )
-    {
-        $this->collectionFactory = $collectionFactory;
-        $this->blockFactory = $blockFactory;
-        $this->secureHtmlRenderer = $secureHtmlRenderer;
+    ) {
+        $this->postCollectionFactory = $postCollectionFactory;
         $this->widgetCollectionFactory = $widgetCollectionFactory;
-        $this->registry = $registry;
         parent::__construct($context, $backendHelper, $data);
     }
 
@@ -63,27 +49,26 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      *
      * @return void
      */
-    protected function _construct()
+    protected function _construct() : void
     {
         parent::_construct();
-        $this->widgetInstanceId = (int)$this->getRequest()->getParam('instance_id');
-
         $this->setId('post_ids');
         $this->setDefaultSort('post_id');
         $this->setUseAjax(true);
     }
 
     /**
-     * Prepare chooser element HTML
-     *
-     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element Form Element
+     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return \Magento\Framework\Data\Form\Element\AbstractElement
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function prepareElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function prepareElementHtml(AbstractElement $element) : AbstractElement
     {
         $uniqId = $this->mathRandom->getUniqueHash($element->getId());
-        $sourceUrl = $this->getUrl('blog/block_featuredwidget/chooser', ['uniq_id' => $uniqId,'instance_id' =>
-            (int)$this->getRequest()->getParam('instance_id')]);
+        $sourceUrl = $this->getUrl(
+            'blog/block_featuredwidget/chooser', ['uniq_id' => $uniqId,'instance_id' =>
+            (int)$this->getRequest()->getParam('instance_id')]
+        );
 
         $chooser = $this->getLayout()->createBlock(
             Chooser::class
@@ -113,14 +98,12 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * Prepare Cms static blocks collection
-     *
-     * @return \Magento\Backend\Block\Widget\Grid\Extended
+     * @return FeaturedWidgetChooser
      */
-    protected function _prepareCollection()
+    protected function _prepareCollection() : FeaturedWidgetChooser
     {
         $this->setDefaultFilter(['post_id_checkbox' => 1]);
-        $this->setCollection($this->collectionFactory->create());
+        $this->setCollection($this->postCollectionFactory->create());
         return parent::_prepareCollection();
     }
 
@@ -129,10 +112,26 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getRowInitCallback() : string
     {
-       return 'function (grid, element,checked) {
-                    grid.reloadParams = {
+        return 'function (grid, element,checked) {
+                if(window.needToReload){
+                    var currentState = ' .
+                    $this->getId() .
+                    '.getElementValue();
+                    
+                    if(!currentState) {
+                        grid.reloadParams = {
+                        "selected_products[]": ""
+                        };
+                    }
+                    else {
+                        grid.reloadParams = {
                             "selected_products[]": window.postState
-                    };
+                        };
+                    }
+                       
+                    grid.reload(grid.url);
+                    window.needToReload = false;
+                }
               }
        ';
     }
@@ -208,7 +207,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      *
      * @return string
      */
-    public function getCheckboxCheckCallback()
+    public function getCheckboxCheckCallback() : string
     {
             return 'function (grid, element,checked) {
                     var isRepresent = function(Array,character) {
@@ -240,10 +239,11 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param Column $column
+     * @param  $column
      * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function _addColumnFilterToCollection($column)
+    protected function _addColumnFilterToCollection($column) : FeaturedWidgetChooser
     {
         // Set custom filter for in category flag
         if ($column->getId() == 'post_id_checkbox') {
@@ -263,13 +263,11 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * Prepare columns for Cms blocks grid
-     *
-     * @return \Magento\Backend\Block\Widget\Grid\Extended
+     * @return FeaturedWidgetChooser
+     * @throws \Exception
      */
-    protected function _prepareColumns()
+    protected function _prepareColumns() : FeaturedWidgetChooser
     {
-        //var_dump(get_class_methods($this));exit;
         $this->addColumn(
             'post_id_checkbox',
             [
@@ -300,22 +298,6 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
             ]
         );
 
-
-//        $this->addColumn(
-//            'chooser_identifier',
-//            ['header' => __('Identifier'), 'align' => 'left', 'index' => 'identifier']
-//        );
-//
-//        $this->addColumn(
-//            'chooser_is_active',
-//            [
-//                'header' => __('Status'),
-//                'index' => 'is_active',
-//                'type' => 'options',
-//                'options' => [0 => __('Disabled'), 1 => __('Enabled')]
-//            ]
-//        );
-
         return parent::_prepareColumns();
     }
 
@@ -326,12 +308,10 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      *
      * @return string
      */
-    public function getGridUrl()
+    public function getGridUrl() : string
     {
         return $this->getUrl('blog/block_featuredwidget/chooser', ['_current' => true]);
     }
-
-    private int $use=0;
 
     /**
      * @return array
@@ -339,28 +319,24 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _getSelectedProducts() : array
     {
         $selectedPosts = $this->getRequest()->getParam('selected_products');
-        $selectedPostsFromRegistry = $this->registry->registry('selected_products');
-
-        if ($selectedPostsFromRegistry !== null) {
-            //$this->registry->register('selected_products',$selectedPosts);
-            return array_values($selectedPostsFromRegistry);
-        }
 
         if ($selectedPosts !== null) {
-            $this->registry->register('selected_products',$selectedPosts);
             return array_values($selectedPosts);
         }
 
-        $widgetCollection = $this->widgetCollectionFactory->create()->addFieldToFilter('instance_id',['eq' =>
-            (int)$this->getRequest()->getParam('instance_id')]);
+        $widgetCollection = $this->widgetCollectionFactory->create()->addFieldToFilter(
+            'instance_id', ['eq' =>
+            (int)$this->getRequest()->getParam('instance_id')]
+        );
 
         if (count($widgetCollection) === 1) {
             $widget = $widgetCollection->getFirstItem();
             $widgetParameters = $widget->getWidgetParameters();
             if (isset($widgetParameters['posts_ids'])) {
-                return explode(',',(string)$widgetParameters['posts_ids']);
+                return explode(',', (string)$widgetParameters['posts_ids']);
             }
         }
+
         return [];
     }
 }

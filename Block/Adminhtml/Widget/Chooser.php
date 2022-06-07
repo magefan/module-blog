@@ -1,9 +1,13 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Widget;
 
 use Magento\Framework\App\ObjectManager;
-use Magento\Framework\View\Asset\NotationResolver\Variable;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
@@ -14,11 +18,11 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
     protected $secureRenderer;
 
     /**
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
+     * @param \Magento\Backend\Block\Template\Context      $context
+     * @param \Magento\Framework\Json\EncoderInterface     $jsonEncoder
      * @param \Magento\Framework\Data\Form\Element\Factory $elementFactory
-     * @param array $data
-     * @param SecureHtmlRenderer|null $secureRenderer
+     * @param array                                        $data
+     * @param SecureHtmlRenderer|null                      $secureRenderer
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -26,19 +30,18 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
         \Magento\Framework\Data\Form\Element\Factory $elementFactory,
         array $data = [], ?SecureHtmlRenderer
         $secureRenderer = null
-    )
-    {
+    ) {
         $this->secureRenderer = $secureRenderer ?? ObjectManager::getInstance()->get(SecureHtmlRenderer::class);
         parent::__construct($context, $jsonEncoder, $elementFactory, $data, $secureRenderer);
     }
 
     /**
-     * @param string $chooserId
+     * @param  string $chooserId
      * @return string
      */
-    public function onClickJs(string $chooserId) : string {
-
-        $buttonHtml = "<button id='addBtn' class='action-primary' ><span>Add Post Ids</span></button>";
+    public function onClickJs(string $chooserId) : string
+    {
+        $buttonHtml = "<button id='addBtn' class='action-primary' ><span>Save</span></button>";
         $js = '
                 var waitForElm = function(selector) {
                     return new Promise(resolve => {
@@ -64,19 +67,21 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                  "jquery"
                   ],function($) { 
                      ' . $chooserId . '.choose();
-               
+                     window.needToReload = true;
+                     
                      waitForElm("#'. $chooserId . '_table").then((elm) => {
-                         $(".modal-header:last").append("'.$buttonHtml . '");
-           
-                         var currentState = $("#' . $chooserId . 'label").html();
+                         $(".modal-header:last .modal-title").replaceWith("'.$buttonHtml . '");
+                         $(".modal-header:last").css({"background": "#f8f8f8", "border-bottom": "1px solid #e3e3e3","border-top": "1px solid #e3e3e3",
+                         "margin-bottom": "20px"});
+                         var currentState = $("#' . $chooserId . 'label").html().replace("Not Selected","");
                          var currentStateArray = []; 
-                         
+    
                          if (currentState !== "") {
                             currentStateArray = $("#' . $chooserId . 'label").html().split(","); 
                          }
                         
                          window.postState = currentStateArray;
-                         
+                         window.realState = currentStateArray;
                          $("#addBtn").click(function() {
                             var postStateStr = "";
                           
@@ -110,18 +115,45 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
     }
 
     /**
+     * @return \Magento\Framework\DataObject|mixed|null
+     */
+    public function getConfig()
+    {
+        if ($this->_getData('config') instanceof \Magento\Framework\DataObject) {
+            return $this->_getData('config');
+        }
+
+        $configArray = $this->_getData('config');
+        $config = new \Magento\Framework\DataObject();
+        $this->setConfig($config);
+        if (!is_array($configArray)) {
+            return $this->_getData('config');
+        }
+
+        // define chooser label
+        if (isset($configArray['label'])) {
+            $config->setData('label', __($configArray['label']));
+        }
+
+        // chooser control buttons
+        $buttons = ['open' => __('Select Post Ids ...')];
+        $config->setButtons($buttons);
+
+        return $this->_getData('config');
+    }
+
+    /**
      * Return chooser HTML and init scripts
      *
      * @return string
      */
-    protected function _toHtml()
+    protected function _toHtml() : string
     {
         $element = $this->getElement();
         /* @var $fieldset \Magento\Framework\Data\Form\Element\Fieldset */
         $fieldset = $element->getForm()->getElement($this->getFieldsetId());
         $chooserId = $this->getUniqId();
         $config = $this->getConfig();
-        $chooserJsObject = $this->getChooserJsObject();
         // add chooser element to fieldset
         $chooser = $fieldset->addField(
             'chooser' . $element->getId(),
@@ -152,7 +184,6 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             $buttons['open']
         )->setOnclick(
             $this->onClickJs($chooserId)
-//            $chooserId . '.choose()'
         )->setDisabled(
             $element->getReadonly()
         );
