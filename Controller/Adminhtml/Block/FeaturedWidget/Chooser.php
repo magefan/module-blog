@@ -51,8 +51,7 @@ class Chooser extends \Magento\Backend\App\Action
         $uniqId = $this->getRequest()->getParam('uniq_id');
         $pagesGrid = $layout->createBlock(
             \Magefan\Blog\Block\Adminhtml\Widget\FeaturedWidgetChooser::class,
-            '',
-            ['data' => ['id' => $uniqId]]
+            'posts.id'
         );
 
         $resultRaw = $this->resultRawFactory->create();

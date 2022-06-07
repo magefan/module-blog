@@ -359,9 +359,12 @@
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="posts_ids" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <field id="posts_ids" translate="label comment" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Post IDs</label>
                         <comment>Please indicate post IDs (separated by comma) you want to display.</comment>
+                    </field>
+                    <field id="posts_ids_btn" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <frontend_model>Magefan\Blog\Block\Adminhtml\ConfigBlock</frontend_model>
                     </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Sort Order</label>

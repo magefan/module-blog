@@ -1,11 +1,6 @@
 <?php
-/**
- * Copyright © Magefan (support@magefan.com). All rights reserved.
- * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
- */
-declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml\Widget;
+namespace Magefan\Blog\Block\Adminhtml\Renderer;
 
 use Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory as WidgetCollectionFactory;
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
@@ -13,7 +8,7 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Helper\Data;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
+class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
      * @var PostCollectionFactoryy
@@ -23,7 +18,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @var WidgetCollectionFactory
      */
-     protected $widgetCollectionFactory;
+    protected $widgetCollectionFactory;
 
     /**
      * @param Context                 $context
@@ -67,7 +62,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
         $uniqId = $this->mathRandom->getUniqueHash($element->getId());
         $sourceUrl = $this->getUrl(
             'blog/block_featuredwidget/chooser', ['uniq_id' => $uniqId,'instance_id' =>
-            (int)$this->getRequest()->getParam('instance_id')]
+                (int)$this->getRequest()->getParam('instance_id')]
         );
 
         $chooser = $this->getLayout()->createBlock(
@@ -100,9 +95,9 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @return FeaturedWidgetChooser
      */
-    protected function _prepareCollection() : FeaturedWidgetChooser
+    protected function _prepareCollection() : Grid
     {
-//        $this->setDefaultFilter(['post_id_checkbox' => 1]);
+        $this->setDefaultFilter(['post_id_checkbox' => 1]);
         $this->setCollection($this->postCollectionFactory->create());
         return parent::_prepareCollection();
     }
@@ -113,28 +108,20 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getRowInitCallback() : string
     {
         return 'function (grid, element,checked) {
-        console.log("init");
-                if(window.needToReload){
-                    var currentState = ' .
-                    $this->getId() .
-                    '.getElementValue();
-                    
-                    if(!currentState) {
-                        grid.reloadParams = {
-                        "selected_products[]": ""
-                        };
-                    }
-                    else {
-                        grid.reloadParams = {
+         element.checked = true;
+                grid.reloadParams = {
                             "selected_products[]": window.postState
                         };
-                    }
-                       
-                    grid.reload(grid.url);
-                    window.needToReload = false;
-                }
+                     
               }
        ';
+    }
+
+    public function getPostIdsFromConfig() {
+        return (string)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/featured_posts/posts_ids',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -153,9 +140,8 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
                 checked = false,
                 checkbox = null;
                 
-                var blockId = trElement.down("td").innerHTML.replace(/^\s+|\s+$/g,"");
                 var blockTitle = trElement.down("td").next().innerHTML.replace(/^\s+|\s+$/g,"");
-                      
+                                   
                 var isRepresent = function(Array,character) {
                         for (var i = 0; i < Array.length; i++) {
                             if (Array[i] === character) {
@@ -173,11 +159,15 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
                     event.stopPropagation();
                     trElement.querySelector("#" + eventElement.htmlFor).trigger("click");
                 }
-                
+                    
                 if (trElement && !isInputPosition) {
+              
                     checkbox = Element.getElementsBySelector(trElement, "input");
+                    
                     var index = isRepresent(window.postState,blockTitle);
+            
                     if (checkbox[0]) {
+                      
                         checked = isInputCheckbox ? checkbox[0].checked : !checkbox[0].checked;
                         if (checked) {
                             if (index === -1) {
@@ -189,11 +179,11 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
                                 window.postState.splice(index, 1);
                             }
                         }
-                       
+                      
                         grid.reloadParams = {
                             "selected_products[]": window.postState
                         };
-                        
+                    
                         grid.setCheckboxChecked(checkbox[0], checked);
                     }
                 }
@@ -210,7 +200,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getCheckboxCheckCallback() : string
     {
-            return 'function (grid, element,checked) {
+        return 'function (grid, element,checked) {
                     var isRepresent = function(Array,character) {
                         for (var i = 0; i < Array.length; i++) {
                             if (Array[i] === character) {
@@ -244,7 +234,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      * @return $this
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function _addColumnFilterToCollection($column) : FeaturedWidgetChooser
+    protected function _addColumnFilterToCollection($column) : Grid
     {
         // Set custom filter for in category flag
         if ($column->getId() == 'post_id_checkbox') {
@@ -267,7 +257,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      * @return FeaturedWidgetChooser
      * @throws \Exception
      */
-    protected function _prepareColumns() : FeaturedWidgetChooser
+    protected function _prepareColumns() : Grid
     {
         $this->addColumn(
             'post_id_checkbox',
@@ -325,19 +315,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
             return array_values($selectedPosts);
         }
 
-        $widgetCollection = $this->widgetCollectionFactory->create()->addFieldToFilter(
-            'instance_id', ['eq' =>
-            (int)$this->getRequest()->getParam('instance_id')]
-        );
-
-        if (count($widgetCollection) === 1) {
-            $widget = $widgetCollection->getFirstItem();
-            $widgetParameters = $widget->getWidgetParameters();
-            if (isset($widgetParameters['posts_ids'])) {
-                return explode(',', (string)$widgetParameters['posts_ids']);
-            }
-        }
-
-        return [];
+        $postIds = $this->getPostIdsFromConfig();
+        return explode(',',$postIds);
     }
 }
