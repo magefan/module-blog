@@ -66,7 +66,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _construct()
     {
         parent::_construct();
-        $this->widgetInstanceId = (string)$this->getRequest()->getParam('instance_id');
+        $this->widgetInstanceId = (int)$this->getRequest()->getParam('instance_id');
 
         $this->setId('post_ids');
         $this->setDefaultSort('post_id');
@@ -83,10 +83,10 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         $uniqId = $this->mathRandom->getUniqueHash($element->getId());
         $sourceUrl = $this->getUrl('blog/block_featuredwidget/chooser', ['uniq_id' => $uniqId,'instance_id' =>
-            (string)$this->getRequest()->getParam('instance_id')]);
+            (int)$this->getRequest()->getParam('instance_id')]);
 
         $chooser = $this->getLayout()->createBlock(
-            \Magento\Widget\Block\Adminhtml\Widget\Chooser::class
+            Chooser::class
         )->setElement(
             $element
         )->setConfig(
@@ -119,9 +119,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection()
     {
-//        if (!$this->registry->registry('selected_products')) {
-            $this->setDefaultFilter(['post_id_checkbox' => 1]);
-//        }
+        $this->setDefaultFilter(['post_id_checkbox' => 1]);
         $this->setCollection($this->collectionFactory->create());
         return parent::_prepareCollection();
     }
@@ -333,6 +331,8 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
         return $this->getUrl('blog/block_featuredwidget/chooser', ['_current' => true]);
     }
 
+    private int $use=0;
+
     /**
      * @return array
      */
@@ -340,9 +340,9 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         $selectedPosts = $this->getRequest()->getParam('selected_products');
         $selectedPostsFromRegistry = $this->registry->registry('selected_products');
-        //var_dump($this->registry->registry('selected_products'));exit;
 
         if ($selectedPostsFromRegistry !== null) {
+            //$this->registry->register('selected_products',$selectedPosts);
             return array_values($selectedPostsFromRegistry);
         }
 

@@ -91,7 +91,7 @@
                 <block class="Magefan\Blog\Block\Adminhtml\Widget\FeaturedWidgetChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string" translate="true">Select Blocks...</item>
+                            <item name="open" xsi:type="string" translate="true">Select Post Ids...</item>
                         </item>
                     </data>
                 </block>
