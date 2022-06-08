@@ -28,6 +28,7 @@ class View extends \Magefan\Blog\App\Action\Action
     /**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magefan\Blog\Model\Url $url
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
