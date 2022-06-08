@@ -20,6 +20,9 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected $_storeManager;
 
+    /**
+     * @var \Magefan\Blog\Model\Url
+     */
     protected $url;
 
     /**
@@ -33,7 +36,7 @@ class View extends \Magefan\Blog\App\Action\Action
     ) {
         parent::__construct($context);
         $this->_storeManager = $storeManager;
-        $this->url = $url;
+        $this->url = $url ?: $this->_objectManager->get(\Magefan\Blog\Model\Url::class);
     }
 
     /**
@@ -44,10 +47,7 @@ class View extends \Magefan\Blog\App\Action\Action
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            $resultRedirect = $this->resultRedirectFactory->create();
-            $resultRedirect->setHttpResponseCode(301);
-            $resultRedirect->setPath($this->url->getBaseUrl());
-            return $resultRedirect;
+            return $this->_forwardNoroute();
         }
 
         $post = $this->_initPost();
