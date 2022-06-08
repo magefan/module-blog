@@ -45,6 +45,7 @@ class View extends \Magefan\Blog\App\Action\Action
     {
         if (!$this->moduleEnabled()) {
             $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setHttpResponseCode(301);
             $resultRedirect->setPath($this->url->getBaseUrl());
             return $resultRedirect;
         }
@@ -53,6 +54,7 @@ class View extends \Magefan\Blog\App\Action\Action
 
         if (!$post) {
             $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setHttpResponseCode(301);
             $resultRedirect->setPath($this->url->getBaseUrl());
             return $resultRedirect;
         }
