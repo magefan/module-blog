@@ -20,16 +20,20 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected $_storeManager;
 
+    protected $url;
+
     /**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magefan\Blog\Model\Url $url
     ) {
         parent::__construct($context);
         $this->_storeManager = $storeManager;
+        $this->url = $url;
     }
 
     /**
@@ -40,12 +44,17 @@ class View extends \Magefan\Blog\App\Action\Action
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setPath($this->url->getBaseUrl());
+            return $resultRedirect;
         }
 
         $post = $this->_initPost();
+
         if (!$post) {
-            return $this->_forwardNoroute();
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setPath($this->url->getBaseUrl());
+            return $resultRedirect;
         }
 
         $this->_objectManager->get(\Magento\Framework\Registry::class)
