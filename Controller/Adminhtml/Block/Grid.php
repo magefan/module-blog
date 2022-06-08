@@ -17,7 +17,7 @@ class Grid extends \Magento\Framework\App\Action\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magento_Sales::actions_edit';
+    const ADMIN_RESOURCE = 'Magento_Widget::widget_instance';
 
     /**
      * @var PageFactory
@@ -43,5 +43,4 @@ class Grid extends \Magento\Framework\App\Action\Action
     {
         return $this->pageFactory->create();
     }
-
 }

@@ -1,14 +1,17 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Renderer;
 
-use Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory as WidgetCollectionFactory;
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Helper\Data;
-use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
+class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
      * @var PostCollectionFactoryy
@@ -16,26 +19,18 @@ class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $postCollectionFactory;
 
     /**
-     * @var WidgetCollectionFactory
-     */
-    protected $widgetCollectionFactory;
-
-    /**
      * @param Context                 $context
      * @param Data                    $backendHelper
      * @param PostCollectionFactory   $postCollectionFactory
-     * @param WidgetCollectionFactory $widgetCollectionFactory
      * @param array                   $data
      */
     public function __construct(
         Context $context,
         Data $backendHelper,
         PostCollectionFactory $postCollectionFactory,
-        WidgetCollectionFactory $widgetCollectionFactory,
         array $data = []
     ) {
         $this->postCollectionFactory = $postCollectionFactory;
-        $this->widgetCollectionFactory = $widgetCollectionFactory;
         parent::__construct($context, $backendHelper, $data);
     }
 
@@ -50,46 +45,6 @@ class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->setId('post_ids');
         $this->setDefaultSort('post_id');
         $this->setUseAjax(true);
-    }
-
-    /**
-     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
-     * @return \Magento\Framework\Data\Form\Element\AbstractElement
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function prepareElementHtml(AbstractElement $element) : AbstractElement
-    {
-        $uniqId = $this->mathRandom->getUniqueHash($element->getId());
-        $sourceUrl = $this->getUrl(
-            'blog/block_featuredwidget/chooser', ['uniq_id' => $uniqId,'instance_id' =>
-                (int)$this->getRequest()->getParam('instance_id')]
-        );
-
-        $chooser = $this->getLayout()->createBlock(
-            Chooser::class
-        )->setElement(
-            $element
-        )->setConfig(
-            $this->getConfig()
-        )->setFieldsetId(
-            $this->getFieldsetId()
-        )->setSourceUrl(
-            $sourceUrl
-        )->setUniqId(
-            $uniqId
-        )->setChooserJsObject(
-            $this->getId()
-        )->setJsObjectName(
-            $this->getJsObjectName()
-        );
-
-        if ($element->getValue()) {
-            $chooser->setLabel($this->escapeHtml((string)$element->getValue()));
-        }
-
-        $element->setData('after_element_html', $chooser->toHtml());
-
-        return $element;
     }
 
     /**
@@ -108,16 +63,19 @@ class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getRowInitCallback() : string
     {
         return 'function (grid, element,checked) {
-         element.checked = true;
-                grid.reloadParams = {
-                            "selected_products[]": window.postState
-                        };
+                    grid.reloadParams = {
+                        "selected_products[]": window.postState
+                    };
                      
               }
        ';
     }
 
-    public function getPostIdsFromConfig() {
+    /**
+     * @return string
+     */
+    public function getPostIdsFromConfig() : string
+    {
         return (string)$this->_scopeConfig->getValue(
             'mfblog/sidebar/featured_posts/posts_ids',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -179,7 +137,7 @@ class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
                                 window.postState.splice(index, 1);
                             }
                         }
-                      
+                     
                         grid.reloadParams = {
                             "selected_products[]": window.postState
                         };
@@ -310,12 +268,12 @@ class Grid  extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _getSelectedProducts() : array
     {
         $selectedPosts = $this->getRequest()->getParam('selected_products');
-
+        //var_dump($selectedPosts);exit;
         if ($selectedPosts !== null) {
             return array_values($selectedPosts);
         }
 
         $postIds = $this->getPostIdsFromConfig();
-        return explode(',',$postIds);
+        return explode(',', $postIds);
     }
 }

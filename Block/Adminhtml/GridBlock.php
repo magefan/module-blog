@@ -18,7 +18,7 @@ class GridBlock extends \Magento\Backend\Block\Widget\Form\Generic
         $form = $this->_formFactory->create(
             [
                 'data' => [
-                    'id' => 'order_edit_form',
+                    'id' => 'post_ids_form',
                     'action' => 'action',
                     'method' => 'post',
                     'enctype' => 'multipart/form-data',
@@ -26,7 +26,7 @@ class GridBlock extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        $form->setHtmlIdPrefix('order_edit_');
+        $form->setHtmlIdPrefix('post_ids_');
 
         $fieldsetGrid = $form->addFieldset(
             'base_fieldset_grid',
@@ -34,13 +34,13 @@ class GridBlock extends \Magento\Backend\Block\Widget\Form\Generic
         );
 
         $fieldsetGrid->addType(
-            'base_field_gridd',
+            'base_field_grid_type',
             \Magefan\Blog\Block\Adminhtml\Renderer\GridElement::class
         );
 
         $fieldsetGrid->addField(
             'base_field_grid',
-            'base_field_gridd',
+            'base_field_grid_type',
             [
                 'name' => 'base_field_grid',
                 'label' => __('Please select post ids'),

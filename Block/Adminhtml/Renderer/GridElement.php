@@ -1,6 +1,12 @@
 <?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Renderer;
+
 use Magento\Framework\Data\Form\Element\CollectionFactory;
 use Magento\Framework\Data\Form\Element\Factory;
 use Magento\Framework\Escaper;
@@ -12,33 +18,29 @@ use Magento\Framework\View\LayoutFactory;
 class GridElement extends \Magento\Framework\Data\Form\Element\AbstractElement
 {
     /**
-     * @var Grid
+     * @var LayoutFactory
      */
-    private $grid;
-
-    private $layoutF;
+    private $layoutFactory;
 
     /**
-     * @param Factory                 $factoryElement
-     * @param CollectionFactory       $factoryCollection
-     * @param Escaper                 $escaper
-     * @param $data
+     * @param Factory $factoryElement
+     * @param CollectionFactory $factoryCollection
+     * @param Escaper $escaper
+     * @param LayoutFactory $layoutFactory
+     * @param array $data
      * @param SecureHtmlRenderer|null $secureRenderer
-     * @param Random|null             $random
-     * @param Grid                    $grid
+     * @param Random|null $random
      */
     public function __construct(
         Factory             $factoryElement,
         CollectionFactory   $factoryCollection,
         Escaper             $escaper,
-        Grid                $grid,
         LayoutFactory       $layoutFactory,
         array               $data = [],
         ?SecureHtmlRenderer $secureRenderer = null,
         ?Random             $random = null
     ) {
-        $this->grid = $grid;
-        $this->layoutF = $layoutFactory;
+        $this->layoutFactory = $layoutFactory;
         parent::__construct($factoryElement, $factoryCollection, $escaper, $data, $secureRenderer, $random);
     }
 
@@ -48,8 +50,9 @@ class GridElement extends \Magento\Framework\Data\Form\Element\AbstractElement
      */
     public function getElementHtml() : string
     {
-        $layout = $this->layoutF->create();
-        if(!$layout->getBlock('posts_grid')) {
+        $layout = $this->layoutFactory->create();
+
+        if (!$layout->getBlock('posts.grid')) {
             $layout->createBlock(
                 Grid::class,
                 'posts.grid'
