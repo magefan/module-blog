@@ -49,10 +49,20 @@ class Chooser extends \Magento\Backend\App\Action
         $layout = $this->layoutFactory->create();
 
         $uniqId = $this->getRequest()->getParam('uniq_id');
-        $pagesGrid = $layout->createBlock(
-            \Magefan\Blog\Block\Adminhtml\Renderer\Grid::class,
-            '',
-        );
+
+        if ($uniqId !== null) {
+            $pagesGrid = $layout->createBlock(
+                \Magefan\Blog\Block\Adminhtml\Widget\FeaturedWidgetChooser::class,
+                '',
+                ['data' => ['id' => $uniqId]]
+            );
+        }
+        else {
+            $pagesGrid = $layout->createBlock(
+                \Magefan\Blog\Block\Adminhtml\Renderer\Grid::class,
+                ''
+            );
+        }
 
         $resultRaw = $this->resultRawFactory->create();
         $resultRaw->setContents($pagesGrid->toHtml());
