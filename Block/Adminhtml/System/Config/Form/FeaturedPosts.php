@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml;
+namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class FeaturedConfigBlock extends \Magento\Config\Block\System\Config\Form\Field
+class FeaturedPosts extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
      * @return string
@@ -118,7 +118,7 @@ class FeaturedConfigBlock extends \Magento\Config\Block\System\Config\Form\Field
      */
     public function render(AbstractElement $element) : string
     {
-        $columns = $this->getRequest()->getParam('website') || $this->getRequest()->getParam('store') ? 5 : 4;
+        $columns = ($this->getRequest()->getParam('website')) || ($this->getRequest()->getParam('store')) ? 5 : 4;
         return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->toHtml() . '<div id="post_ids_grid"></div><script>'.$this->getJs().'</script>');
     }
 }

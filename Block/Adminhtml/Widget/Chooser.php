@@ -136,7 +136,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
         }
 
         // chooser control buttons
-        $buttons = ['open' => __('Select Post Ids ...')];
+        $buttons = ['open' => __('Select Post IDs ...')];
         $config->setButtons($buttons);
 
         return $this->_getData('config');

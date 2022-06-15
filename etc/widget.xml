@@ -87,11 +87,11 @@
                 <description translate="true">Please specify title you want to display on the frontend. You can leave it blank if necessary.</description>
             </parameter>
             <parameter name="posts_ids" xsi:type="block"  visible="true" sort_order="20" >
-                <label translate="true">Post Ids</label>
+                <label translate="true">Post IDs</label>
                 <block class="Magefan\Blog\Block\Adminhtml\Widget\FeaturedWidgetChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string" translate="true">Select Post Ids...</item>
+                            <item name="open" xsi:type="string" translate="true">Select Post IDs...</item>
                         </item>
                     </data>
                 </block>
