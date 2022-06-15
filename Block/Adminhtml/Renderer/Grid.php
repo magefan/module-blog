@@ -268,7 +268,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _getSelectedProducts() : array
     {
         $selectedPosts = $this->getRequest()->getParam('selected_products');
-        //var_dump($selectedPosts);exit;
+
         if ($selectedPosts !== null) {
             return array_values($selectedPosts);
         }
