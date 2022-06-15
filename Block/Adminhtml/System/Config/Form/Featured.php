@@ -9,14 +9,14 @@ namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class FeaturedPosts extends \Magento\Config\Block\System\Config\Form\Field
+class Featured extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
      * @return string
      */
     public function getJs() : string
     {
-        $url = $this->getUrl('blog/block/grid');
+        $url = $this->getUrl('blog/block_featured/grid');
         return "require([
                  'jquery',
                  'Magento_Ui/js/modal/modal'

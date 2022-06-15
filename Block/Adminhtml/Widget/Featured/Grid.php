@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml\Widget;
+namespace Magefan\Blog\Block\Adminhtml\Widget\Featured;
 
 use Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory as WidgetCollectionFactory;
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
@@ -13,7 +13,7 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Helper\Data;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
+class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
      * @var PostCollectionFactoryy
@@ -66,12 +66,12 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         $uniqId = $this->mathRandom->getUniqueHash($element->getId());
         $sourceUrl = $this->getUrl(
-            'blog/block_featuredwidget/chooser', ['uniq_id' => $uniqId,'instance_id' =>
+            'blog/block_featured_grid/chooser', ['uniq_id' => $uniqId,'instance_id' =>
             (int)$this->getRequest()->getParam('instance_id')]
         );
 
         $chooser = $this->getLayout()->createBlock(
-            Chooser::class
+            \Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid\Chooser::class
         )->setElement(
             $element
         )->setConfig(
@@ -98,9 +98,9 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @return FeaturedWidgetChooser
+     * @return Grid
      */
-    protected function _prepareCollection() : FeaturedWidgetChooser
+    protected function _prepareCollection() : Grid
     {
         $this->setDefaultFilter(['post_id_checkbox' => 1]);
         $this->setCollection($this->postCollectionFactory->create());
@@ -244,7 +244,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      * @return $this
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function _addColumnFilterToCollection($column) : FeaturedWidgetChooser
+    protected function _addColumnFilterToCollection($column) : Grid
     {
         // Set custom filter for in category flag
         if ($column->getId() == 'post_id_checkbox') {
@@ -264,10 +264,10 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @return FeaturedWidgetChooser
+     * @return Grid
      * @throws \Exception
      */
-    protected function _prepareColumns() : FeaturedWidgetChooser
+    protected function _prepareColumns() : Grid
     {
         $this->addColumn(
             'post_id_checkbox',
@@ -311,7 +311,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl() : string
     {
-        return $this->getUrl('blog/block_featuredwidget/chooser', ['_current' => true]);
+        return $this->getUrl('blog/block_featured_grid/chooser', ['_current' => true]);
     }
 
     /**

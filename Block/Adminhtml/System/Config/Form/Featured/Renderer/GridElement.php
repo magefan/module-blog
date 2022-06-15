@@ -5,14 +5,14 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml\Renderer;
+namespace Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured\Renderer;
 
 use Magento\Framework\Data\Form\Element\CollectionFactory;
 use Magento\Framework\Data\Form\Element\Factory;
 use Magento\Framework\Escaper;
 use Magento\Framework\Math\Random;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
-use Magefan\Blog\Block\Adminhtml\Renderer\Grid;
+use Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured\Grid;
 use Magento\Framework\View\LayoutFactory;
 
 class GridElement extends \Magento\Framework\Data\Form\Element\AbstractElement
@@ -48,7 +48,7 @@ class GridElement extends \Magento\Framework\Data\Form\Element\AbstractElement
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getElementHtml() : string
+    public function getElementHtml(): string
     {
         $layout = $this->layoutFactory->create();
 

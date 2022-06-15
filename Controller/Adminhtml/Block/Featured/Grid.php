@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Controller\Adminhtml\Block;
+namespace Magefan\Blog\Controller\Adminhtml\Block\Featured;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;

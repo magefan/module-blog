@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml\Renderer;
+namespace Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured;
 
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
 use Magento\Backend\Block\Template\Context;
@@ -259,7 +259,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl() : string
     {
-        return $this->getUrl('blog/block_featuredwidget/chooser', ['_current' => true]);
+        return $this->getUrl('blog/block_featured_grid/chooser', ['_current' => true]);
     }
 
     /**

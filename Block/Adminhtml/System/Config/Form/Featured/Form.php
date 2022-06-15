@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml;
+namespace Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured;
 
-class GridBlock extends \Magento\Backend\Block\Widget\Form\Generic
+class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
     /**
      * @return \Magento\Backend\Block\Widget\Form\Generic
@@ -35,7 +35,7 @@ class GridBlock extends \Magento\Backend\Block\Widget\Form\Generic
 
         $fieldsetGrid->addType(
             'base_field_grid_type',
-            \Magefan\Blog\Block\Adminhtml\Renderer\GridElement::class
+            \Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured\Renderer\GridElement::class
         );
 
         $fieldsetGrid->addField(
@@ -43,8 +43,8 @@ class GridBlock extends \Magento\Backend\Block\Widget\Form\Generic
             'base_field_grid_type',
             [
                 'name' => 'base_field_grid',
-                'label' => __('Please select post ids'),
-                'title' => __('Please select post ids')
+                'label' => __('Please select post IDs'),
+                'title' => __('Please select post IDs')
             ]
         );
 

@@ -88,7 +88,7 @@
             </parameter>
             <parameter name="posts_ids" xsi:type="block"  visible="true" sort_order="20" >
                 <label translate="true">Post IDs</label>
-                <block class="Magefan\Blog\Block\Adminhtml\Widget\FeaturedWidgetChooser">
+                <block class="Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid">
                     <data>
                         <item name="button" xsi:type="array">
                             <item name="open" xsi:type="string" translate="true">Select Post IDs...</item>

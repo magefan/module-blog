@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Controller\Adminhtml\Block\FeaturedWidget;
+namespace Magefan\Blog\Controller\Adminhtml\Block\Featured\Grid;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\LayoutFactory;
@@ -52,14 +52,14 @@ class Chooser extends \Magento\Backend\App\Action
 
         if ($uniqId !== null) {
             $pagesGrid = $layout->createBlock(
-                \Magefan\Blog\Block\Adminhtml\Widget\FeaturedWidgetChooser::class,
+                \Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid::class,
                 '',
                 ['data' => ['id' => $uniqId]]
             );
         }
         else {
             $pagesGrid = $layout->createBlock(
-                \Magefan\Blog\Block\Adminhtml\Renderer\Grid::class,
+                \Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured\Grid::class,
                 ''
             );
         }

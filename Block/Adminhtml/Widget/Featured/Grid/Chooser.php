@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magefan\Blog\Block\Adminhtml\Widget;
+namespace Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
