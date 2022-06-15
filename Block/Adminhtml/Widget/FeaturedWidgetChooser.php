@@ -102,7 +102,7 @@ class FeaturedWidgetChooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection() : FeaturedWidgetChooser
     {
-//        $this->setDefaultFilter(['post_id_checkbox' => 1]);
+        $this->setDefaultFilter(['post_id_checkbox' => 1]);
         $this->setCollection($this->postCollectionFactory->create());
         return parent::_prepareCollection();
     }
