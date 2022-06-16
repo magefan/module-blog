@@ -63,10 +63,16 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getRowInitCallback() : string
     {
         return 'function (grid, element,checked) {
-                    grid.reloadParams = {
-                        "selected_posts[]": window.postState
-                    };
-                     
+                     if (window.postState.length) {
+                            grid.reloadParams = {
+                                "selected_posts[]": window.postState
+                            }; 
+                        }
+                    else {
+                        grid.reloadParams = {
+                            "selected_posts[]": ["-1"]
+                        }; 
+                    } 
               }
        ';
     }
@@ -137,11 +143,18 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                                 window.postState.splice(index, 1);
                             }
                         }
-                     
-                        grid.reloadParams = {
-                            "selected_posts[]": window.postState
-                        };
-                    
+                        
+                        if (window.postState.length) {
+                            grid.reloadParams = {
+                                "selected_posts[]": window.postState
+                            }; 
+                        }
+                        else {
+                            grid.reloadParams = {
+                                "selected_posts[]": ["-1"]
+                            }; 
+                        }
+                        
                         grid.setCheckboxChecked(checkbox[0], checked);
                     }
                 }
@@ -180,10 +193,19 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                             window.postState.splice(index, 1);
                         }
                     }
+                        
                   
-                    grid.reloadParams = {
-                        "selected_posts[]": window.postState
-                    };    
+                    if (window.postState.length) {
+                            grid.reloadParams = {
+                                "selected_posts[]": window.postState
+                            }; 
+                        }
+                    else {
+                        grid.reloadParams = {
+                            "selected_posts[]": ["-1"]
+                        }; 
+                    }
+       
             }';
     }
 
