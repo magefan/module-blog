@@ -22,7 +22,7 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
                  'Magento_Ui/js/modal/modal'
                   ], function($, alert) {
                         $(document).ready(function(){
-                            document.getElementById('mfblog_sidebar_featured_posts_posts_ids').setAttribute('readonly', true);
+                            /*document.getElementById('mfblog_sidebar_featured_posts_posts_ids').setAttribute('readonly', true);*/
                             
                             var ensureGridIsSet = function (timeout) {
                                 var start = Date.now();
