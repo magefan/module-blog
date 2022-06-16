@@ -64,7 +64,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         return 'function (grid, element,checked) {
                     grid.reloadParams = {
-                        "selected_products[]": window.postState
+                        "selected_posts[]": window.postState
                     };
                      
               }
@@ -139,7 +139,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                         }
                      
                         grid.reloadParams = {
-                            "selected_products[]": window.postState
+                            "selected_posts[]": window.postState
                         };
                     
                         grid.setCheckboxChecked(checkbox[0], checked);
@@ -182,7 +182,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                     }
                   
                     grid.reloadParams = {
-                        "selected_products[]": window.postState
+                        "selected_posts[]": window.postState
                     };    
             }';
     }
@@ -196,14 +196,14 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         // Set custom filter for in category flag
         if ($column->getId() == 'post_id_checkbox') {
-            $productIds = $this->_getSelectedPosts();
-            if (empty($productIds)) {
-                $productIds = 0;
+            $postIds = $this->_getSelectedPosts();
+            if (empty($postIds)) {
+                $postIds = 0;
             }
             if ($column->getFilter()->getValue()) {
-                $this->getCollection()->addFieldToFilter('post_id', ['in' => $productIds]);
-            } elseif (!empty($productIds)) {
-                $this->getCollection()->addFieldToFilter('post_id', ['nin' => $productIds]);
+                $this->getCollection()->addFieldToFilter('post_id', ['in' => $postIds]);
+            } elseif (!empty($postIds)) {
+                $this->getCollection()->addFieldToFilter('post_id', ['nin' => $postIds]);
             }
         } else {
             parent::_addColumnFilterToCollection($column);
@@ -267,7 +267,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _getSelectedPosts() : array
     {
-        $selectedPosts = $this->getRequest()->getParam('selected_products');
+        $selectedPosts = $this->getRequest()->getParam('selected_posts');
 
         if ($selectedPosts !== null) {
             return array_values($selectedPosts);

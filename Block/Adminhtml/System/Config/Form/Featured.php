@@ -105,7 +105,7 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
                             ensureGridIsSet(10000).then(function(){
                                 var grid = window['post_idsJsObject'];
                                 grid.reloadParams = {
-                                    'selected_products[]': window.postState
+                                    'selected_posts[]': window.postState
                                 };
                             });
                            });
