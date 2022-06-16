@@ -24,7 +24,7 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
                         $(document).ready(function(){
                             document.getElementById('mfblog_sidebar_featured_posts_posts_ids').setAttribute('readonly', true);
                             
-                            var ensureFooIsSet = function (timeout) {
+                            var ensureGridIsSet = function (timeout) {
                                 var start = Date.now();
                                 return new Promise(waitForFoo);
                                 
@@ -102,7 +102,7 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
                                 $('#post_ids_grid').modal('openModal');
                               }
     
-                            ensureFooIsSet(10000).then(function(){
+                            ensureGridIsSet(10000).then(function(){
                                 var grid = window['post_idsJsObject'];
                                 grid.reloadParams = {
                                     'selected_products[]': window.postState

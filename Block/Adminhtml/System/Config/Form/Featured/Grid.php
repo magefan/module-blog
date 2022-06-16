@@ -74,18 +74,18 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @return string
      */
-    public function getPostIdsFromConfig() : string
+    public function getPostIdsFromConfig(): string
     {
-        return (string)$this->_scopeConfig->getValue(
+        return $this->_scopeConfig->getValue(
             'mfblog/sidebar/featured_posts/posts_ids',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        ) ?: '';
     }
 
     /**
      * @return string
      */
-    public function getRowClickCallback() : string
+    public function getRowClickCallback(): string
     {
         return '
             function (grid, event) {
@@ -196,7 +196,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         // Set custom filter for in category flag
         if ($column->getId() == 'post_id_checkbox') {
-            $productIds = $this->_getSelectedProducts();
+            $productIds = $this->_getSelectedPosts();
             if (empty($productIds)) {
                 $productIds = 0;
             }
@@ -222,7 +222,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             [
                 'type' => 'checkbox',
                 'name' => 'post_id_checkbox',
-                'values' => $this->_getSelectedProducts(),
+                'values' => $this->_getSelectedPosts(),
                 'index' => 'post_id',
                 'header_css_class' => 'col-select col-massaction',
                 'column_css_class' => 'col-select col-massaction'
@@ -265,7 +265,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @return array
      */
-    protected function _getSelectedProducts() : array
+    protected function _getSelectedPosts() : array
     {
         $selectedPosts = $this->getRequest()->getParam('selected_products');
 

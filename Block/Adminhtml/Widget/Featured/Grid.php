@@ -66,7 +66,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         $uniqId = $this->mathRandom->getUniqueHash($element->getId());
         $sourceUrl = $this->getUrl(
-            'blog/block_featured_grid/chooser', ['uniq_id' => $uniqId,'instance_id' =>
+            'blog/block_featured_grid/chooser',
+            ['uniq_id' => $uniqId,'instance_id' =>
             (int)$this->getRequest()->getParam('instance_id')]
         );
 
@@ -113,7 +114,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getRowInitCallback() : string
     {
         return 'function (grid, element,checked) {
-        console.log("init");
                 if(window.needToReload){
                     var currentState = ' .
                     $this->getId() .
@@ -248,7 +248,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         // Set custom filter for in category flag
         if ($column->getId() == 'post_id_checkbox') {
-            $productIds = $this->_getSelectedProducts();
+            $productIds = $this->_getSelectedPosts();
             if (empty($productIds)) {
                 $productIds = 0;
             }
@@ -274,7 +274,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             [
                 'type' => 'checkbox',
                 'name' => 'post_id_checkbox',
-                'values' => $this->_getSelectedProducts(),
+                'values' => $this->_getSelectedPosts(),
                 'index' => 'post_id',
                 'header_css_class' => 'col-select col-massaction',
                 'column_css_class' => 'col-select col-massaction'
@@ -317,7 +317,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @return array
      */
-    protected function _getSelectedProducts() : array
+    protected function _getSelectedPosts() : array
     {
         $selectedPosts = $this->getRequest()->getParam('selected_products');
 
@@ -326,7 +326,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         }
 
         $widgetCollection = $this->widgetCollectionFactory->create()->addFieldToFilter(
-            'instance_id', ['eq' =>
+            'instance_id',
+            ['eq' =>
             (int)$this->getRequest()->getParam('instance_id')]
         );
 
