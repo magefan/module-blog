@@ -40,7 +40,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
         if ($page > 1) {
             //$this->pageConfig->setRobots('NOINDEX,FOLLOW');
 
-            $title = $this->pageConfig->getTitle()->getShortHeading() . ' - ' . (__('Page') . ' ' . $page);
+            $title = (__('Page') . ' ' . $page) . ' - ' . $this->pageConfig->getTitle()->getShortHeading();
             $this->pageConfig->getTitle()->set($title);
         }
 
