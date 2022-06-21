@@ -86,10 +86,15 @@
                 <label translate="true">Title</label>
                 <description translate="true">Please specify title you want to display on the frontend. You can leave it blank if necessary.</description>
             </parameter>
-            <parameter name="posts_ids" xsi:type="text"  visible="true" sort_order="20" >
+            <parameter name="posts_ids" xsi:type="block" visible="true" sort_order="20">
                 <label translate="true">Post IDs</label>
-                <description translate="true">Please indicate post IDs (separated by comma) you want to display.</description>
-                <value></value>
+                <block class="Magefan\Blog\Block\Adminhtml\Block\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Post...</item>
+                        </item>
+                    </data>
+                </block>
             </parameter>
             <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
                 <label translate="true">Custom Template</label>
