@@ -52,9 +52,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($tag->getMetaTitle());
             $this->pageConfig->setKeywords($tag->getMetaKeywords());
             $this->pageConfig->setDescription($tag->getMetaDescription());
-
+            /*
             $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
             if ($page < 2) {
+            */
                 $robots = $tag->getData('meta_robots');
                 if ($robots) {
                     $this->pageConfig->setRobots($robots);
@@ -62,7 +63,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     $robots = $this->config->getTagRobots();
                     $this->pageConfig->setRobots($robots);
                 }
+            /*
             }
+
+            if ($page > 1) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+            }
+            */
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {
 
