@@ -68,11 +68,19 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     ['attributes' => ['rel' => 'canonical']]
                 );
             }
+            /*
             $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
             if ($page < 2) {
+            */
                 $robots = $this->config->getAuthorRobots();
                 $this->pageConfig->setRobots($robots);
+            /*
             }
+
+            if ($page > 1) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+            }
+            */
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
             if ($pageMainTitle) {
