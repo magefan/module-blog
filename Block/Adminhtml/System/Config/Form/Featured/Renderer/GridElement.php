@@ -11,7 +11,6 @@ use Magento\Framework\Data\Form\Element\CollectionFactory;
 use Magento\Framework\Data\Form\Element\Factory;
 use Magento\Framework\Escaper;
 use Magento\Framework\Math\Random;
-use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured\Grid;
 use Magento\Framework\View\LayoutFactory;
 
@@ -28,20 +27,16 @@ class GridElement extends \Magento\Framework\Data\Form\Element\AbstractElement
      * @param Escaper $escaper
      * @param LayoutFactory $layoutFactory
      * @param array $data
-     * @param SecureHtmlRenderer|null $secureRenderer
-     * @param Random|null $random
      */
     public function __construct(
         Factory             $factoryElement,
         CollectionFactory   $factoryCollection,
         Escaper             $escaper,
         LayoutFactory       $layoutFactory,
-        array               $data = [],
-        ?SecureHtmlRenderer $secureRenderer = null,
-        ?Random             $random = null
+        array               $data = []
     ) {
         $this->layoutFactory = $layoutFactory;
-        parent::__construct($factoryElement, $factoryCollection, $escaper, $data, $secureRenderer, $random);
+        parent::__construct($factoryElement, $factoryCollection, $escaper, $data);
     }
 
     /**

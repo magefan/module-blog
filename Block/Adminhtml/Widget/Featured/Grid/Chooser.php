@@ -7,41 +7,15 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid;
 
-use Magento\Framework\App\ObjectManager;
-use Magento\Framework\View\Helper\SecureHtmlRenderer;
-
 class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
 {
-    /**
-     * @var SecureHtmlRenderer|null
-     */
-    protected $secureRenderer;
-
-    /**
-     * @param \Magento\Backend\Block\Template\Context      $context
-     * @param \Magento\Framework\Json\EncoderInterface     $jsonEncoder
-     * @param \Magento\Framework\Data\Form\Element\Factory $elementFactory
-     * @param array                                        $data
-     * @param SecureHtmlRenderer|null                      $secureRenderer
-     */
-    public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\Json\EncoderInterface $jsonEncoder,
-        \Magento\Framework\Data\Form\Element\Factory $elementFactory,
-        array $data = [], ?SecureHtmlRenderer
-        $secureRenderer = null
-    ) {
-        $this->secureRenderer = $secureRenderer ?? ObjectManager::getInstance()->get(SecureHtmlRenderer::class);
-        parent::__construct($context, $jsonEncoder, $elementFactory, $data, $secureRenderer);
-    }
-
     /**
      * @param  string $chooserId
      * @return string
      */
     public function onClickJs(string $chooserId) : string
     {
-        $buttonHtml = "<button id='addBtn' class='action-primary' ><span>Save</span></button>";
+        $buttonHtml = "<button id='addBtn' class='action-primary' ><span>Use Selected Posts</span></button>";
         $js = '
                 var waitForElm = function(selector) {
                     return new Promise(resolve => {
@@ -203,9 +177,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             <div id="' .
             $chooserId .
             'advice-container" class="hidden"></div>' .
-            $this->secureRenderer->renderTag(
-                'script',
-                [],
+            '<script>' .
                 'require(["prototype", "mage/adminhtml/wysiwyg/widget"], function(){
             //<![CDATA[
                 (function() {
@@ -239,8 +211,6 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                 })();
             //]]>
             });
-            ',
-                false
-            );
+            ' . '</script>';
     }
 }
