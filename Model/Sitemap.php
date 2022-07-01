@@ -10,8 +10,6 @@ namespace Magefan\Blog\Model;
 
 use Magento\Framework\App\ProductMetadataInterface;
 use Magefan\Blog\Api\SitemapConfigInterface;
-use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
-use Magento\Sitemap\Model\SitemapConfigReaderInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
