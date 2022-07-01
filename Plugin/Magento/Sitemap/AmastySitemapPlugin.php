@@ -10,8 +10,6 @@ namespace Magefan\Blog\Plugin\Magento\Sitemap;
 
 use Magefan\Blog\Model\CategoryFactory;
 use Magefan\Blog\Model\PostFactory;
-use Magento\Framework\DataObject;
-use Magento\Sitemap\Model\Sitemap;
 
 /**
  * Plugin for sitemap generation
@@ -55,17 +53,21 @@ class AmastySitemapPlugin
         \Magefan\Blog\Model\SitemapFactory $sitemapFactory,
         CategoryFactory $categoryFactory,
         PostFactory $postFactory,
-        $config = null
+        \Magefan\Blog\Model\Config $config
     ) {
         $this->postFactory = $postFactory;
         $this->categoryFactory = $categoryFactory;
         $this->sitemapFactory = $sitemapFactory;
-
-        $this->config = $config ?: \Magento\Framework\App\ObjectManager::getInstance()
-            ->get(\Magefan\Blog\Model\Config::class);
+        $this->config = $config;
     }
 
-    public function afterGenerate(\Amasty\XmlSitemap\Model\XmlGenerator $subject, $result, $sitemap) {
+    /**
+     * @param $subject
+     * @param $result
+     * @param $sitemap
+     * @return mixed
+     */
+    public function afterGenerate($subject, $result, $sitemap) {
 
         $sitemapId = $sitemap->getId() ?: 0;
         if (in_array($sitemapId, $this->generated)) {
@@ -83,7 +85,7 @@ class AmastySitemapPlugin
         }
 
         /* Fix for Amasty\XmlSitemap\Model\Sitemap */
-        if (get_class($sitemap) === 'Amasty\XmlSitemap\Model\Sitemap') {
+        if ($sitemap instanceof \Amasty\XmlSitemap\Api\SitemapInterface ) {
             if ($sitemap->getFilePath()) {
                 $filepath = $sitemap->getFilePath();
                 $pathArray = explode('/', $filepath);
@@ -93,8 +95,8 @@ class AmastySitemapPlugin
                 $blogSitemap->setSitemapFilename('blog_sitemap.xml');
                 $blogSitemap->setSitemapPath($blogFilepath);
             }
+            $blogSitemap->generateXml();
         }
-        $blogSitemap->generateXml();
 
         return $result;
     }
