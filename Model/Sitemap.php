@@ -10,6 +10,8 @@ namespace Magefan\Blog\Model;
 
 use Magento\Framework\App\ProductMetadataInterface;
 use Magefan\Blog\Api\SitemapConfigInterface;
+use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
+use Magento\Sitemap\Model\SitemapConfigReaderInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -19,6 +21,34 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Sitemap extends \Magento\Sitemap\Model\Sitemap
 {
+    private $state;
+
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Escaper $escaper,
+        \Magento\Sitemap\Helper\Data $sitemapData,
+        \Magento\Framework\Filesystem $filesystem,
+        \Magento\Sitemap\Model\ResourceModel\Catalog\CategoryFactory $categoryFactory,
+        \Magento\Sitemap\Model\ResourceModel\Catalog\ProductFactory $productFactory,
+        \Magento\Sitemap\Model\ResourceModel\Cms\PageFactory $cmsFactory,
+        \Magento\Framework\Stdlib\DateTime\DateTime $modelDate,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Framework\Stdlib\DateTime $dateTime,
+        \Magento\Framework\App\State $state,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = [],
+        \Magento\Config\Model\Config\Reader\Source\Deployed\DocumentRoot $documentRoot = null,
+        ItemProviderInterface $itemProvider = null,
+        SitemapConfigReaderInterface $configReader = null,
+        \Magento\Sitemap\Model\SitemapItemInterfaceFactory $sitemapItemFactory = null
+    ) {
+        parent::__construct($context, $registry, $escaper, $sitemapData, $filesystem, $categoryFactory, $productFactory, $cmsFactory, $modelDate, $storeManager, $request, $dateTime, $resource, $resourceCollection, $data, $documentRoot, $itemProvider, $configReader, $sitemapItemFactory);
+        $this->state = $state;
+    }
+
     /**
      * Initialize sitemap items
      *
@@ -143,7 +173,54 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
 
             return rtrim($serverPath, '/') . $path;
         }
-
         return $path;
+    }
+
+    public function generateXml()
+    {
+        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
+        $this->_initSitemapItems();
+
+        /** @var $item SitemapItemInterface */
+        foreach ($this->_sitemapItems as $item) {
+            $xml = $this->_getSitemapRow(
+                $item->getUrl(),
+                $item->getUpdatedAt(),
+                $item->getChangeFrequency(),
+                $item->getPriority(),
+                $item->getImages()
+            );
+
+            if ($this->_isSplitRequired($xml) && $this->_sitemapIncrement > 0) {
+                $this->_finalizeSitemap();
+            }
+
+            if (!$this->_fileSize) {
+                $this->_createSitemap();
+            }
+
+            $this->_writeSitemapRow($xml);
+            // Increase counters
+            $this->_lineCount++;
+            $this->_fileSize += strlen($xml);
+        }
+
+        $this->_finalizeSitemap();
+
+        if ($this->_sitemapIncrement == 1) {
+            // In case when only one increment file was created use it as default sitemap
+            $path = rtrim($this->getSitemapPath(), '/')
+                . '/'
+                . $this->_getCurrentSitemapFilename($this->_sitemapIncrement);
+            $this->setSitemapPath($path);
+        } else {
+            // Otherwise create index file with list of generated sitemaps
+            $this->_createSitemapIndex();
+        }
+
+        $this->setSitemapTime($this->_dateModel->gmtDate('Y-m-d H:i:s'));
+        $this->save();
+
+        return $this;
     }
 }
