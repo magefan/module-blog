@@ -46,7 +46,7 @@
 
         ?>
                     <li>
-                        <a href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
+                        <a title="<?= $block->escapeHtml($item->getTitle()) ?>" href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
                     <?= $block->escapeHtml($item->getTitle()) ?>
                         </a>
                 <?php if ($block->showPostsCount()) { ?>
