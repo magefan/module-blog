@@ -143,7 +143,6 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
 
             return rtrim($serverPath, '/') . $path;
         }
-
         return $path;
     }
 }

@@ -66,6 +66,11 @@
                 type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
     </type>
 
+    <type name="Amasty\XmlSitemap\Model\XmlGenerator">
+        <plugin name="amasty_sitemap_model_sitemap_magefan_blog"
+                type="Magefan\Blog\Plugin\Magento\Sitemap\AmastySitemapPlugin" sortOrder="10"/>
+    </type>
+
     <type name="Magento\AdminGws\Model\Models">
         <plugin name="magefan_blog_plugin_admingws_model_models_plugin" type="\Magefan\Blog\Plugin\Magento\AdminGws\Model\ModelsPlugin" sortOrder="10"/>
     </type>
