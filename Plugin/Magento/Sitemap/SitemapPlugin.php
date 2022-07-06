@@ -105,9 +105,11 @@ class SitemapPlugin
                 }
             }
 
-            $blogSitemap->setSitemapFilename(
-                'blog_' . $blogSitemap->getSitemapFilename()
-            );
+            if (strpos($blogSitemap->getSitemapFilename(), 'blog_') !== false) {
+                $blogSitemap->setSitemapFilename(
+                    'blog_' . $blogSitemap->getSitemapFilename()
+                );
+            }
             $blogSitemap->generateXml();
         }
         return $result;
