@@ -36,6 +36,12 @@ class UpgradeData implements UpgradeDataInterface
 
         if (version_compare($version, '2.9.8') < 0) {
             $connection = $this->commentResource->getConnection();
+
+            $connection->delete(
+                $this->commentResource->getTable('magefan_blog_tag_store'),
+                ['store_id = ?' => 0]
+            );
+
             $tagSelect = $connection->select()->from(
                 [$this->commentResource->getTable('magefan_blog_tag')]
             );
@@ -51,7 +57,7 @@ class UpgradeData implements UpgradeDataInterface
                     ];
 
                     if (count($data) == 100 || $i == $count - 1) {
-                        $this->commentResource->getConnection()->insertMultiple(
+                        $connection->insertMultiple(
                             $this->commentResource->getTable('magefan_blog_tag_store'),
                             $data
                         );
