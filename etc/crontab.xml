@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="magefan_blog_default">
+        <job instance="Magefan\Blog\Cron\ReSaveExistingPosts" method="execute" name="magefan_blog_cron_resave_existing_posts">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>
