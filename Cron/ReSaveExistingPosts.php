@@ -10,22 +10,25 @@ use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFac
 use Magefan\Blog\Model\Config;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
+/**
+ * ReSave Posts that have PublishTime <= CurrentTime In Order To They Be Visible - Need If FPC Is Enabled
+ */
 class ReSaveExistingPosts
 {
     /**
      * @var Config
      */
-    protected $config;
+    private $config;
 
     /**
      * @var PostCollectionFactory
      */
-    protected $postCollectionFactory;
+    private $postCollectionFactory;
 
     /**
      * @var DateTime
      */
-    protected $date;
+    private $date;
 
     /**
      * @param Config $config
@@ -36,26 +39,29 @@ class ReSaveExistingPosts
         Config $config,
         PostCollectionFactory $postCollectionFactory,
         DateTime $date
-    )
-    {
+    ) {
         $this->config = $config;
         $this->postCollectionFactory = $postCollectionFactory;
         $this->date = $date;
     }
 
-
+    /**
+     * @return void
+     */
     public function execute()
     {
+        if (!$this->config->isEnabled()) {
+            return;
+        }
 
         $postCollection = $this->postCollectionFactory->create()
-            ->addFieldToFilter('publish_time', array('gteq' => $this->date->gmtDate('Y-m-d H:i:s', strtotime('-2 minutes'))))
-            ->addFieldToFilter('publish_time', array('lteq' => $this->date->gmtDate()));
-
-        var_dump($this->date->gmtDate());
-        var_dump(count($postCollection));
+            ->addActiveFilter()
+            ->addFieldToFilter('publish_time', ['gteq' => $this->date->gmtDate('Y-m-d H:i:s', strtotime('-2 minutes'))])
+            ->addFieldToFilter('publish_time', ['lteq' => $this->date->gmtDate()]);
 
         foreach ($postCollection as $post) {
-              var_dump($post->getId());exit;
+            $post->setOrigData('is_active', 0);
+            $post->afterCommitCallback();
         }
     }
 }
