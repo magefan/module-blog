@@ -790,7 +790,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             if ($authorId = $this->getData('author_id')) {
                 $_author = $this->_authorFactory->create();
                 $_author->load($authorId);
-                if ($_author->getId()) {
+
+                if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
                     $author = $_author;
                 }
             }

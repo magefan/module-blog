@@ -13,6 +13,13 @@ namespace Magefan\Blog\Controller\Author;
 class View extends \Magefan\Blog\App\Action\Action
 {
     /**
+     * Store manager
+     *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    private $_storeManager;
+
+    /**
      * View blog author action
      *
      * @return \Magento\Framework\Controller\ResultInterface
@@ -54,12 +61,26 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
+        $storeId = $this->getStoreManager()->getStore()->getId();
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
-        if (!$author->isActive()) {
+        if (!$author->isVisibleOnStore($storeId)) {
             return false;
         }
 
+        $author->setStoreId($storeId);
+
         return $author;
+    }
+
+    /**
+     * @return \Magento\Store\Model\StoreManagerInterface|mixed
+     */
+    private function getStoreManager()
+    {
+        if (null === $this->_storeManager) {
+            $this->_storeManager = $this->_objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+        }
+        return $this->_storeManager;
     }
 }
