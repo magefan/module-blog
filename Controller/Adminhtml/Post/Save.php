@@ -124,12 +124,12 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                 if (!$item->getTitle()) {
                     continue;
                 }
-                $allTags[strtolower((string)$item->getTitle())] = $item->getId();
+                $allTags[((string)$item->getTitle())] = $item->getId();
             }
 
             $tags = [];
             foreach ($tagInput as $tagTitle) {
-                $tagTitle = strtolower(trim((string)$tagTitle));
+                $tagTitle = trim((string)$tagTitle);
                 if (!$tagTitle) {
                     continue;
                 }
