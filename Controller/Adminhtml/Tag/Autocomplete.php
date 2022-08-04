@@ -18,7 +18,7 @@ class Autocomplete extends \Magefan\Blog\Controller\Adminhtml\Tag
      */
     public function execute()
     {
-        $search = $this->getRequest()->getParam('search');
+        $search = (string)$this->getRequest()->getParam('search');
         $collection = $this->_objectManager->create(\Magefan\Blog\Model\Tag\AutocompleteData::class);
 
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
