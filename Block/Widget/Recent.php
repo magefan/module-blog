@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Widget;
 
+use Magefan\Blog\Block\Post\PostList\AbstractList;
 use Magefan\Blog\Model\Config\Source\PostsSortBy;
 
 /**
@@ -133,24 +134,6 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         if ($enableNoRepeat && self::$processedIds) {
             $this->_postCollection->addFieldToFilter('post_id', ['nin' => self::$processedIds]);
         }
-
-        if ('' !== (string)$this->getData('sort_by')) {
-            $sortBy = (int)$this->getData('sort_by');
-            if (in_array($sortBy, [PostsSortBy::PUBLISH_DATE, PostsSortBy::POSITION, PostsSortBy::TITLE])) {
-                $orderField = 'publish_time';
-
-                switch ($sortBy) {
-                    case PostsSortBy::POSITION:
-                        $orderField = 'position';
-                        break;
-                    case PostsSortBy::TITLE:
-                        $orderField = 'title';
-                        break;
-                }
-
-                $this->_postCollection->setOrder($orderField, 'DESC');
-            }
-        }
     }
 
     /**
@@ -189,5 +172,26 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     public function getShorContent($post, $len = null, $endСharacters = null)
     {
         return $post->getShortFilteredContent($len, $endСharacters);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollectionOrderDirection(): string
+    {
+        if ('' !== (string)$this->getData('sort_by')) {
+            $sortBy = (int)$this->getData('sort_by');
+            if (in_array($sortBy, [PostsSortBy::PUBLISH_DATE, PostsSortBy::POSITION, PostsSortBy::TITLE])) {
+
+                switch ($sortBy) {
+                    case PostsSortBy::POSITION:
+                        return AbstractList::POSTS_SORT_FIELD_BY_POSITION;
+                    case PostsSortBy::TITLE:
+                        return AbstractList::POSTS_SORT_FIELD_BY_TITLE;
+                }
+            }
+        }
+
+        return parent::getCollectionOrderField();
     }
 }
