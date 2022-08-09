@@ -177,7 +177,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     /**
      * @return string
      */
-    public function getCollectionOrderDirection(): string
+    public function getCollectionOrderField(): string
     {
         if ('' !== (string)$this->getData('sort_by')) {
             $sortBy = (int)$this->getData('sort_by');
