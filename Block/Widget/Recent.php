@@ -14,7 +14,7 @@ use Magefan\Blog\Model\Config\Source\PostsSortBy;
 /**
  * Blog recent posts widget
  */
-class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \Magento\Widget\Block\BlockInterface
+class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterface
 {
     /**
      * @var array
