@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Block\Widget;
 
+use Magefan\Blog\Model\Config\Source\PostsSortBy;
+
 /**
  * Blog recent posts widget
  */
@@ -130,6 +132,24 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         $enableNoRepeat = $this->getData('no_repeat_posts_enable');
         if ($enableNoRepeat && self::$processedIds) {
             $this->_postCollection->addFieldToFilter('post_id', ['nin' => self::$processedIds]);
+        }
+
+        if ('' !== (string)$this->getData('sort_by')) {
+            $sortBy = (int)$this->getData('sort_by');
+            if (in_array($sortBy, [PostsSortBy::PUBLISH_DATE, PostsSortBy::POSITION, PostsSortBy::TITLE])) {
+                $orderField = 'publish_time';
+
+                switch ($sortBy) {
+                    case PostsSortBy::POSITION:
+                        $orderField = 'position';
+                        break;
+                    case PostsSortBy::TITLE:
+                        $orderField = 'title';
+                        break;
+                }
+
+                $this->_postCollection->setOrder($orderField, 'DESC');
+            }
         }
     }
 
