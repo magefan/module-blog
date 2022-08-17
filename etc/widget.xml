@@ -36,6 +36,9 @@
                 <label translate="true">Posts Author</label>
                 <description translate="true">Leave blank to display posts from all authors.</description>
             </parameter>
+            <parameter name="posts_sort_by" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\PostsSortBy" visible="true" sort_order="55" >
+                <label translate="true">Posts Sort By</label>
+            </parameter>
             <parameter name="from" xsi:type="text" visible="true" sort_order="60" >
                 <label translate="true">Posts Publish Date From</label>
                 <description translate="true">Leave blank or use date format YYYY-MM-DD.</description>
@@ -75,9 +78,6 @@
                     Magefan_BlogExtra::post/list/block-5-3.phtml
                     <pre>
                 ]]></description>
-            </parameter>
-            <parameter name="posts_sort_by" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\PostsSortBy" visible="true" sort_order="90" >
-                <label translate="true">Posts Sort By</label>
             </parameter>
         </parameters>
     </widget>
