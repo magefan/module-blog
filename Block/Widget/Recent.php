@@ -8,10 +8,14 @@
 
 namespace Magefan\Blog\Block\Widget;
 
+use Magefan\Blog\Block\Post\PostList\AbstractList;
+use Magefan\Blog\Model\Config\Source\PostsSortBy;
+use Magento\Framework\Api\SortOrder;
+
 /**
  * Blog recent posts widget
  */
-class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \Magento\Widget\Block\BlockInterface
+class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterface
 {
     /**
      * @var array
@@ -169,5 +173,39 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     public function getShorContent($post, $len = null, $endСharacters = null)
     {
         return $post->getShortFilteredContent($len, $endСharacters);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollectionOrderField(): string
+    {
+        $postsSortBy = (int)$this->getData('posts_sort_by');
+        if ($postsSortBy) {
+            switch ($postsSortBy) {
+                case PostsSortBy::POSITION:
+                    return AbstractList::POSTS_SORT_FIELD_BY_POSITION;
+                case PostsSortBy::TITLE:
+                    return AbstractList::POSTS_SORT_FIELD_BY_TITLE;
+            }
+        }
+
+        return parent::getCollectionOrderField();
+    }
+
+    /**
+     * Retrieve collection order direction
+     *
+     * @return string
+     */
+    public function getCollectionOrderDirection()
+    {
+        $postsSortBy = (int)$this->getData('posts_sort_by');
+
+        if (PostsSortBy::TITLE == $postsSortBy) {
+            return SortOrder::SORT_ASC;
+        }
+
+        return parent::getCollectionOrderDirection();
     }
 }

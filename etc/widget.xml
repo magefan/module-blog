@@ -76,6 +76,9 @@
                     <pre>
                 ]]></description>
             </parameter>
+            <parameter name="posts_sort_by" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\PostsSortBy" visible="true" sort_order="90" >
+                <label translate="true">Posts Sort By</label>
+            </parameter>
         </parameters>
     </widget>
     <widget id="magefan_blog_featured" class="Magefan\Blog\Block\Widget\Featured">
