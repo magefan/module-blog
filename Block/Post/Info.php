@@ -78,4 +78,30 @@ class Info extends \Magento\Framework\View\Element\Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * Get blog post vote action
+     *
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->getUrl(
+            'blogextra/post/vote',
+            [
+                '_secure' => $this->getRequest()->isSecure(),
+                'id' => $this->getPostId(),
+            ]
+        );
+    }
+
+    /**
+     * Get vote post id
+     *
+     * @return int
+     */
+    protected function getPostId()
+    {
+        return $this->getRequest()->getParam('id', false);
+    }
 }

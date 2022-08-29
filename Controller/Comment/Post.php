@@ -92,7 +92,7 @@ class Post extends \Magefan\Blog\App\Action\Action
                 $this->customerSession->getCustomerId()
             )->setAuthorNickname(
                 $this->customerSession->getCustomer()->getName()
-            )->setAauthorEmail(
+            )->setAuthorEmail(
                 $this->customerSession->getCustomer()->getEmail()
             )->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER
@@ -109,7 +109,7 @@ class Post extends \Magefan\Blog\App\Action\Action
                 ]));
                 return;
             }
-            
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );
