@@ -14,10 +14,10 @@ interface ShortContentExtractorInterface
      * Retrieve short filtered content
      * @param string$content
      * @param mixed $len
-     * @param mixed $endСharacters
+     * @param mixed $endCharacters
      * @return string
      * @throws \Exception
      */
-    public function execute($content, $len = null, $endСharacters = null);
+    public function execute($content, $len = null, $endCharacters = null);
 
 }

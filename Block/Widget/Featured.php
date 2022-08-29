@@ -54,12 +54,12 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
      *
      * @param  \Magefan\Blog\Model\Post $post
      * @param  mixed $len
-     * @param  mixed $endСharacters
+     * @param  mixed $endCharacters
      * @return string
      */
-    public function getShorContent($post, $len = null, $endСharacters = null)
+    public function getShorContent($post, $len = null, $endCharacters = null)
     {
-        return $post->getShortFilteredContent($len, $endСharacters);
+        return $post->getShortFilteredContent($len, $endCharacters);
     }
 
     /**
