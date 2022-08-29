@@ -157,12 +157,21 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             }
 
             if ($endCharacters === null) {
-                $endCharacters = '';
+                $endCharacters = $this->scopeConfig->getValue(
+                    'mfblog/post_list/end_characters',
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                );
             }
 
             if ($len && $endCharacters) {
                 $trimMask = " \t\n\r\0\x0B,.!?";
                 if ($p = strrpos($content, '</')) {
+                    $p2 = $p;
+                    do {
+                        $p = $p2;
+                        $p2 = strrpos($content, '</', $p - strlen($content) - 1);
+                    } while ($p2 && $p - $p2 <= 6);
+
                     $content = trim(substr($content, 0, $p), $trimMask)
                         . $endCharacters
                         . substr($content, $p);
