@@ -14,10 +14,12 @@
  */
 ?>
 <?php if ($block->getCollection()->getSize()) { ?>
-    <?php $woj = $block->getWidgetOptionsJson() ?>
-    <div class="toolbar toolbar-blog-posts"
-        <?= /*@noEscape*/ ($woj) ? 'data-mage-init="'.$woj.'"' : ''; ?>
-    >
-        <?= /*@noEscape*/ $block->getPagerHtml() ?>
-    </div>
+    <?php $pagerHtml = trim( $block->getPagerHtml()) ?>
+    <?php if ($pagerHtml) { ?>
+        <?php $woj = $block->getWidgetOptionsJson() ?>
+        <div class="toolbar toolbar-blog-posts"
+            <?= /*@noEscape*/ ($woj) ? 'data-mage-init="'.$woj.'"' : ''; ?>
+            <?= /*@noEscape*/ $pagerHtml ?>
+        </div>
+    <?php } ?>
 <?php } ?>
