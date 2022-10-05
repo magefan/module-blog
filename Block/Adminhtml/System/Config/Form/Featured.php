@@ -38,7 +38,7 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
                                 }
                             };
               
-                            $('#mfblog_sidebar_featured_posts_posts_ids').click(function() { 
+                            $('#mfblog_sidebar_featured_posts_posts_ids').dblclick(function() { 
                                 window.reload = true;
                                 postStateStr = $('#mfblog_sidebar_featured_posts_posts_ids').val();
                
@@ -127,6 +127,6 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
     public function render(AbstractElement $element) : string
     {
         $columns = ($this->getRequest()->getParam('website')) || ($this->getRequest()->getParam('store')) ? 5 : 4;
-        return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->toHtml() . '<div id="post_ids_grid"></div><script>'.$this->getJs().'</script>');
+        return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->getButtonHtml() . $this->toHtml() . '<div id="post_ids_grid"></div><script>'.$this->getJs().'</script>');
     }
 }

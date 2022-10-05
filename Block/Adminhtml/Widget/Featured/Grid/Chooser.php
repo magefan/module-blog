@@ -62,7 +62,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                             if (window.postState.length) {
                                 postStateStr = window.postState.join(",");
                             }
-                        
+                            document.getElementById("'. $chooserId . '_input").value = postStateStr;
                            ' .
             $chooserId .
             '.setElementValue(postStateStr);
@@ -167,7 +167,12 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
         $configJson = $this->_jsonEncoder->encode($config->getData());
 
         return '
-            <label class="widget-option-label" id="' .
+            <input id="'. $chooserId . '_input" class="widget-option input-text admin__control-text" 
+            onkeyup="keyupFunctionMf()"
+            value="' . ($this->getLabel() ? $this->escapeHtml($this->getLabel()) : __(
+                'Not Selected'
+            )) .'" />
+            <label class="widget-option-label" style="display: none" id="' .
             $chooserId .
             'label">' .
             ($this->getLabel() ? $this->escapeHtml($this->getLabel()) : __(
@@ -178,7 +183,13 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             $chooserId .
             'advice-container" class="hidden"></div>' .
             '<script>' .
-                'require(["prototype", "mage/adminhtml/wysiwyg/widget"], function(){
+                '
+                function keyupFunctionMf() {
+                    var inputV = document.getElementById("' . $chooserId . '_input").value;
+                    ' . $chooserId . '.setElementValue(inputV);
+                    ' . $chooserId . '.setElementLabel(inputV);    
+                }
+                require(["prototype", "mage/adminhtml/wysiwyg/widget"], function(){
             //<![CDATA[
                 (function() {
                     var instantiateChooser = function() {
