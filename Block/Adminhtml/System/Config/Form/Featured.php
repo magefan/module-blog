@@ -127,6 +127,6 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
     public function render(AbstractElement $element) : string
     {
         $columns = ($this->getRequest()->getParam('website')) || ($this->getRequest()->getParam('store')) ? 5 : 4;
-        return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->getButtonHtml() . $this->toHtml() . '<div id="post_ids_grid"></div><script>'.$this->getJs().'</script>');
+        return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->toHtml() . '<div id="post_ids_grid"></div><script>'.$this->getJs().'</script>');
     }
 }
