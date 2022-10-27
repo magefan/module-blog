@@ -15,9 +15,31 @@ $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
 
 <?php if (!$helper->isOriginMfLazyLoadEnable()) { ?>
     <script>
-        require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
-            $('.mfblogunveil').mfblogunveil();
-        });
+        if (window.require) {
+            require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
+                $('.mfblogunveil').mfblogunveil();
+            });
+        } else {
+            /* e.g. hyva theme */
+            document.addEventListener("DOMContentLoaded", function(){
+                var items =  document.getElementsByClassName('mfblogunveil');
+                var el, url;
+                if (items.length) {
+                    for (var i=0; i<items.length;i++) {
+                        el = items[i];
+                        url = el.getAttribute('data-original');
+                        if (!url) {
+                            continue;
+                        }
+                        if ('IMG' == el.tagName) {
+                            el.src = url;
+                        } else {
+                            el.style.backgroundImage = "url('" + url  + "')";
+                        }
+                    }
+                }
+            });
+        }
     </script>
 <?php } ?>
 
