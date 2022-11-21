@@ -311,3 +311,6 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 
 ### Magento 2 Point of Sale
   * [Magento 2 POS System](https://magefan.com/magento-pos-system)
+  
+### Shopware Extensions
+  * [Shopware WebP Extension](https://magefan.com/shopware/extensions/webp)
