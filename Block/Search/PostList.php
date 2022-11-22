@@ -21,7 +21,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getQuery()
     {
-        return (string)urldecode($this->getRequest()->getParam('q'));
+        return (string)urldecode((string)$this->getRequest()->getParam('q'));
     }
 
     /**
