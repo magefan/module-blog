@@ -314,3 +314,6 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   
 ### Shopware Extensions
   * [Shopware WebP Extension](https://magefan.com/shopware/extensions/webp)
+ 
+### Shopify Apps
+  * [Shopify Login As Customer](https://apps.shopify.com/login-as-customer)
