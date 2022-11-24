@@ -59,10 +59,10 @@
                     <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                 <?php } ?>
 
-                <!-- post view -->
+                <!-- post views -->
                 <?php if ($block->viewsCountEnabled()) { ?>
                     <?php if ($viewsCount = $_post->getViewsCount()) { ?>
-                        <span class="post-view float-right d-none d-md-block">
+                        <span class="post-views float-right d-none d-md-block">
                             <i class="mf-blog-icon mfbi-views"></i>
                             <?= $block->escapeHtml($viewsCount)?>
                         </span>
