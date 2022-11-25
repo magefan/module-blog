@@ -361,7 +361,7 @@
                     </field>
                     <field id="posts_ids" translate="label comment" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Post IDs</label>
-                        <comment>Please indicate post IDs (separated by comma) you want to display. To use grid perform double click on input field</comment>
+                        <comment><![CDATA[Please indicate post IDs (separated by comma) you want to display. <strong>To use grid with posts filter please double click on input field</strong>.]]></comment>
                     </field>
                     <field id="posts_ids_grid" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                         <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured</frontend_model>
