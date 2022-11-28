@@ -61,7 +61,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 
         $href = $this->blogUrl->getUrl($model, $this->model->getControllerName());
 
-        $title = trim($this->getData('title'));
+        $title = $this->getData('title') ? trim($this->getData('title')) : '';
         if (!$title) {
             $title = $model->getTitle();
         }
