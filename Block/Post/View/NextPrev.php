@@ -119,7 +119,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
                     $collection = $this->_getFrontendCollection()->addFieldToFilter(
                         'publish_time',
                         ['gt' => $this->getPost()->getPublishTime()]
-                    );
+                    )->setOrder('publish_time', 'ASC');
                     $post = $collection->getFirstItem();
                 }
             }
@@ -168,7 +168,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
                     $collection = $this->_getFrontendCollection()->addFieldToFilter(
                         'publish_time',
                         ['lt' => $this->getPost()->getPublishTime()]
-                    );
+                    )->setOrder('publish_time', 'DESC');
                     $post = $collection->getFirstItem();
                 }
             }
@@ -190,7 +190,6 @@ class NextPrev extends \Magento\Framework\View\Element\Template
         $collection->addActiveFilter()
             ->addFieldToFilter('post_id', ['neq' => $this->getPost()->getId()])
             ->addStoreFilter($this->_storeManager->getStore()->getId())
-            //->setOrder('publish_time', 'DESC')
             ->setPageSize(1);
         return $collection;
     }
