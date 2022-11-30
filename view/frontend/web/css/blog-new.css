@@ -76,7 +76,7 @@ body.blog-page {
 /* Read More */
 /*  .post-list .post-read-more {display: none;}  */
 .post-read-more a.post-read {display: inline-block;color: #fff;background-color: #4db2ec;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;}
-.post-read-more a.post-read:hover {color: #fff;background: #222222;}
+.post-read-more a.post-read:hover {color: #fff;/*background: #222222;*/text-decoration: none;}
 /*@media (max-width: 1200px) {
     .blog-index-index .post-list /*.post-read-more *//* {display: none;}
 }
