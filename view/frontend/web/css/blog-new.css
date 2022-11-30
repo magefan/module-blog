@@ -204,7 +204,7 @@ body.blog-page {
 .widget.blog-search  label {border: 0;clip: rect(0, 0, 0, 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;text-decoration: none;display: inline-block;float: right;}
 .widget.blog-search .control {border-top: 0;margin: 0;padding: 0;clear: both;}
 .widget.blog-search input {position: static;padding-right: 35px;margin: 0;left: -300%;border: 1px solid #bbbbbb;}
-.widget.blog-search .action.search {position: absolute;top: 0;right: 0;bottom: 0;height: 100%;z-index: 1;display: inline-block;background: #222222;-moz-box-sizing: content-box;border: 0;box-shadow: none;line-height: inherit;margin: 0;padding: 0 10px;text-decoration: none;text-shadow: none;font-weight: 400;border-radius: 0;}
+.widget.blog-search .action.search {position: absolute;top: 0;right: 0;bottom: 0;height: 100%;z-index: 1;display: inline-block;/*background: #222222;*/-moz-box-sizing: content-box;border: 0;box-shadow: none;line-height: inherit;margin: 0;padding: 0 10px;text-decoration: none;text-shadow: none;font-weight: 400;border-radius: 0;}
 .widget.blog-search .action.search:before {-webkit-font-smoothing: antialiased;content: '';margin: 0;vertical-align: top;display: inline-block;overflow: hidden;speak: none;width: 16px;height: 32px;background: url(../images/search-icon-white.svg) no-repeat -10px -7px;background-size: 35px;opacity: 1;}
 .widget.blog-search .action.search > span {border: 0;clip: rect(0, 0, 0, 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}
 /*.blog-search .actions .action.search {background: #222222;right: 0;padding: 0 10px;border-radius: 0;}*/
