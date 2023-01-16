@@ -115,10 +115,9 @@ body.blog-page {
 
 
 /* Post View **********************************************************************************************************/
-/* Page Title */
-/*.blog-post-view .page-title-wrapper .page-title {font-size: 35px;line-height: 1.2;margin-bottom: 20px;}*/
 /* Category */
-.blog-post-view .post-category a {display: inline-block;margin: 0 5px 0 0;padding: 5px 10px;background: #000;color: #fff;font-size: 11px;line-height: 12px;font-weight: 500;text-decoration: none;text-transform: uppercase;border: 1px solid #fff;}
+.blog-post-view .post-category a {display: inline-block;margin: 0 5px 0 0;padding: 5px 10px;background: #000;color: #fff;font-size: 11px;line-height: 12px;font-weight: 500;text-decoration: none;text-transform: uppercase;border: 1px solid #fff;transition: all .3s ease;}
+.blog-post-view .post-category a:hover {background: #555;transition: all .3s ease;}
 
 /* Post Data */
 .blog-post-view .post-data-wrap {font-size: 13px;font-family: sans-serif;margin-bottom: 30px;}
@@ -133,10 +132,10 @@ body.blog-page {
 .blog-post-view .post-featured-image {font-size: 0;margin-bottom: 20px;}
 /* Tags */
 .blog-post-view .post-tag {margin-bottom: 20px;}
-.blog-post-view .post-tag .post-tag-title {display: inline-block;padding: 7px 12px;border: 1px solid #222;background: #222;color: #fff;line-height: 1;margin: 0 10px 10px 0;text-transform: uppercase;font-size: 11px;}
-.blog-post-view .post-tag .post-tags a {display: inline-block;border: 1px solid var(--border-color);color: #222;background: #fff;padding: 7px 12px;margin-right: 10px;line-height: 1;font-weight: 600;letter-spacing: 1px;font-size: 11px;text-transform: capitalize;}
+.blog-post-view .post-tag .post-tag-title {display: inline-block;padding: 7px 12px;border: 1px solid var(--border-color);background: #222;color: #fff;line-height: 1;margin: 0 10px 10px 0;text-transform: uppercase;font-size: 11px;}
+.blog-post-view .post-tag .post-tags a {display: inline-block;border: 1px solid var(--border-color);color: #ffffff;background: #222;padding: 7px 12px;margin-right: 10px;line-height: 1;font-weight: 600;letter-spacing: 1px;font-size: 11px;text-transform: capitalize;transition: all .3s ease;}
 .blog-post-view .post-tag .post-tags a.current,
-.blog-post-view .post-tag .post-tags a:hover {text-decoration: none;opacity: .9;background: #333;color: #fff;}
+.blog-post-view .post-tag .post-tags a:hover {text-decoration: none;background: #555;color: #fff;transition: all .3s ease;}
 
 /* Post Text */
 .blog-post-view .post-description {margin-bottom: 30px;}
