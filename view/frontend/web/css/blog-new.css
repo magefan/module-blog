@@ -118,7 +118,7 @@ body.blog-page {
 /* Page Title */
 /*.blog-post-view .page-title-wrapper .page-title {font-size: 35px;line-height: 1.2;margin-bottom: 20px;}*/
 /* Category */
-.blog-post-view .post-category a {display: inline-block;margin: 0 5px 0 0;padding: 5px 10px;background: #000;color: #fff;font-size: 11px;line-height: 12px;font-weight: 500;text-decoration: none;text-transform: uppercase;}
+.blog-post-view .post-category a {display: inline-block;margin: 0 5px 0 0;padding: 5px 10px;background: #000;color: #fff;font-size: 11px;line-height: 12px;font-weight: 500;text-decoration: none;text-transform: uppercase;border: 1px solid #fff;}
 
 /* Post Data */
 .blog-post-view .post-data-wrap {font-size: 13px;font-family: sans-serif;margin-bottom: 30px;}
