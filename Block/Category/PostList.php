@@ -117,18 +117,21 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_CATEGORY)) {
 
-                $canonicalUrl = $category->getCanonicalUrl();
-                $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
-                if ($page > 1) {
-                    $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                        . Toolbar::PAGE_PARM_NAME . '=' . $page;
-                }
+                $layoutUpdate = $category->getData('layout_update_xml') ?: '';
+                if (false === strpos($layoutUpdate, 'rel="canonical"')) {
+                    $canonicalUrl = $category->getCanonicalUrl();
+                    $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+                    if ($page > 1) {
+                        $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                            . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                    }
 
-                $this->pageConfig->addRemotePageAsset(
-                    $canonicalUrl,
-                    'canonical',
-                    ['attributes' => ['rel' => 'canonical']]
-                );
+                    $this->pageConfig->addRemotePageAsset(
+                        $canonicalUrl,
+                        'canonical',
+                        ['attributes' => ['rel' => 'canonical']]
+                    );
+                }
             }
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
