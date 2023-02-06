@@ -179,7 +179,7 @@
 /* Fix Related Products */
 .mfblog-related-products-block .block-content {padding: 0;}
 .blog-post-view .products-grid .product-items {display: grid;grid-template-columns: repeat(2, 1fr);gap: 1rem;margin: 0;}
-.blog-post-view .products-grid .product-items .product-item {padding: 1rem;border: 1px solid transparent;transition: all .3s ease;}
+.blog-post-view .products-grid .product-items .product-item {border: 1px solid transparent;transition: all .3s ease;}
 .blog-post-view .products-grid .product-items .product-item.product-item-info {width: auto;}
 @media (min-width: 769px){
     .blog-post-view .products-grid .product-items {display: grid;grid-template-columns: repeat(3, 1fr);gap: 1rem;}
