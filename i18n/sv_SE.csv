@@ -11,6 +11,8 @@ Post,Inlägg
 Blog,Blogg
 "Go to Blog Home Page","Gå Till Bloggens Startsida"
 "Monthly Archives: %s %s","Månadsarkiv: %s %s"
+Home,Home
+"Go to Home Page","Go to Home Page"
 "Search ""%1""","Sök ""%1"""
 "Recent Blog Posts","Senaste Blogginlägg"
 "Manage %1","Hantera %1"
@@ -32,11 +34,14 @@ Blog,Blogg
 "Nothing to import.","Inget att importera."
 "Can not make import.","Kan inte genomföra importen."
 "Something went wrong: ","Något gick fel: "
+"Please enter your name and email","Please enter your name and email"
 "Blog Import from WordPress","Bloggimport från WordPress"
+"Comment text is too short.","Comment text is too short."
 "Please select","Vänligen välj"
 "Use Facebook Comments","Använd Facebook-kommentarer"
 "Use Disqus Comments","Använd Disqus-kommentarer"
 "Use Google Comments","Använd Googles kommentarer"
+"Featured Blog Posts","Featured Blog Posts"
 "Yes (With auto trigger)","Ja (Med automatisk utlösare)"
 "Yes (Without auto trigger)","Ja (Utan automatisk utlösare)"
 "Parameter %1 is required","Parameter %1 krävs"
@@ -54,20 +59,33 @@ Categories:,Kategorier:
 Tags:,Taggar:
 Author:,Författare:
 "We can't find posts matching the selection.","Vi kan inte hitta inlägg som matchar valet."
+"Read more","Read more"
 "Read more &#187;","Läs mer &#187;"
 "See more","Se mer"
+Email,Email
+Submit,Submit
+"Sign In","Sign In"
 "Read %1","Läs %1"
+Cancel,Cancel
 "&larr; Previous","&larr; Föregående"
 "Previous","Föregående"
 "Next &rarr;","Nästa &rarr;"
 "Next","Nästa"
 "Related Posts","Relaterade Inlägg"
+"Related Products","Related Products"
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Add to Wish List","Add to Wish List"
+"Add to Compare","Add to Compare"
 Archive,Arkiv
 "Archive %s","Arkiv %s"
 "Recent Posts","Nya Inlägg"
 "RSS Feed","RSS Flöde"
+Search,Search
 "Search posts here...","Sök inlägg här..."
 Tags,Taggar
+"Read more >","Read more >"
 "MageFan Extensions","MageFan Tillägg"
 "Blog Information","Blogg Information"
 "Blog Index Page","Blogg Indexsida"

@@ -11,6 +11,8 @@ Add New Post,Adicionar Novo Post
 Blog,Blog
 Go to Blog Home Page,Ir Para Home Page do Blog
 Monthly Archives: %s %s,Arquivo Mensal: %s %s
+Home,Home
+Go to Home Page,Go to Home Page
 "Search ""%1""","Procurar ""%1"""
 Recent Blog Posts,Posts Recentes
 Manage %1,Gerenciar %1
@@ -31,12 +33,15 @@ The import process was completed successfully. %1 posts and %2 categories where 
 The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,O processo de importação foi conluído. %1 posts e %2 categorias foram importados. Alguns posts ou categorias faltaram.<br/> %3 %4
 Nothing to import.,Nada para importar.
 Can not make import.,Não foi possível importar.
-Something went wrong: ,Ocorreu um erro: 
+Something went wrong: ,Ocorreu um erro:
+Please enter your name and email,Please enter your name and email
 Blog Import from WordPress,Importar Blog do Wordpress
+Comment text is too short.,Comment text is too short.
 Please select,Selecione
 Use Facebook Comments,Usar Comentários do Facebook
 Use Disqus Comments,Usar Comentários do Disqus
 Use Google Comments,Usar Comentários do Google
+Featured Blog Posts,Featured Blog Posts
 Yes (With auto trigger),Sim (Automaticamente)
 Yes (Without auto trigger),Yes (Manualmente)
 Parameter %1 is required,O parâmetro %1 é requerido
@@ -54,18 +59,30 @@ Categories:,Categorias:
 Tags:,Tags:
 Author:,Autor:
 We can't find posts matching the selection.,Não foi possível encontrar posts que se enquadrem na seleção.
+Read more,Read more
 Read more &#187;,Leia mais &#187;
 See more,Veja mais
+Email,Email
+Submit,Submit
+Sign In,Sign In
 Read %1,Ler %1
+Cancel,Cancel
 &larr; Previous,&larr; Anterior
 Previous,Anterior
 Next &rarr;,Próximo &rarr;
 Next,Próximo
 Related Posts,Posts Relacionados
+Related Products,Related Products
+Add to Cart,Add to Cart
+In stock,In stock
+Out of stock,Out of stock
+Add to Wish List,Add to Wish List
+Add to Compare,Add to Compare
 Archive,Arquivo
 Archive %s,Arquivo %s
 Recent Posts,Posts Recentes
 RSS Feed,Feed RSS
+Search,Search
 Search posts here...,Procure posts aqui…
 Tags,Tags
 MageFan Extensions,Extensões da MageFan
@@ -172,6 +189,21 @@ Sep,Set
 Oct,Out
 Nov,Nov
 Dec,Dez
+"Reply","Reply"
+"Show more replies in this thread","Show more replies in this thread"
+"%1 Comment(s)","%1 Comment(s)"
+"Add a comment...","Add a comment..."
+"Add a reply...","Add a reply..."
+"Sign in to add a comment...","Sign in to add a comment..."
+"Sign in to add a reply...","Sign in to add a reply..."
+"Full Name","Full Name"
+"Load more comments","Load more comments"
+"Login to submit comment","Login to submit comment"
+"You cannot post comment. Blog post is not longer exist.","You cannot post comment. Blog post is not longer exist."
+"You cannot reply to this comment. Comment is not longer exist.","You cannot reply to this comment. Comment is not longer exist."
+"You cannot reply to this comment.","You cannot reply to this comment."
+"You submitted your comment for moderation.","You submitted your comment for moderation."
+"Thank you for your comment.","Thank you for your comment."
 Read more >,Leia mais >
 "Import Categories","Import Categories"
 "Import Comments","Import Comments"

@@ -11,6 +11,8 @@ Post,Post
 Blog,Blog
 "Go to Blog Home Page","Zur Blog-Startseite gehen"
 "Monthly Archives: %s %s","Monatliche Archive: %s %s"
+Home,Home
+"Go to Home Page","Go to Home Page"
 "Search ""%1""","Suche ""%1"""
 "Recent Blog Posts","Neueste Blogposts"
 "Manage %1","%1 verwalten"
@@ -32,11 +34,14 @@ Blog,Blog
 "Nothing to import.","Nichts zu importieren."
 "Can not make import.","Import nicht möglich."
 "Something went wrong: ","Etwas ist schiefgelaufen: "
+"Please enter your name and email","Please enter your name and email"
 "Blog Import from WordPress","Blog-Import von WordPress"
+"Comment text is too short.","Comment text is too short."
 "Please select","Bitte auswählen"
 "Use Facebook Comments","Facebook-Kommentare verwenden"
 "Use Disqus Comments","Disqus-Kommentare verwenden"
 "Use Google Comments","Google-Kommentare verwenden"
+"Featured Blog Posts","Featured Blog Posts"
 "Yes (With auto trigger)","Ja (mit automatischem Trigger)"
 "Yes (Without auto trigger)","Ja (ohne automatischen Trigger)"
 "Parameter %1 is required","Parameter %1 ist erforderlich"
@@ -52,11 +57,17 @@ Blog,Blog
 Posted:,Verfasst:
 Categories:,Kategorien:
 Tags:,Tags:
+"Read more >","Read more >"
 Author:,Autor:
 "We can't find posts matching the selection.","Wir können keine Posts finden, die der Auswahl entsprechen."
+"Read more","Read more"
 "Read more &#187;","Mehr lesen &#187;"
 "See more","Mehr anzeigen"
+Email,Email
+Submit,Submit
+"Sign In","Sign In"
 "Read %1","%1 lesen"
+Cancel,Cancel
 "&larr; Previous","&larr; Zurück"
 "Previous","Zurück"
 "Next &rarr;","Weiter &rarr;"
@@ -66,6 +77,7 @@ Archive,Archiv
 "Archive %s","%s archivieren"
 "Recent Posts","Neueste Posts"
 "RSS Feed","RSS-Feed"
+Search,Search
 "Search posts here...","Posts hier suchen..."
 Tags,Tags
 "MageFan Extensions","MageFan Extensions"
@@ -76,6 +88,11 @@ Tags,Tags
 "Number of Posts","Anzahl der Posts"
 "Display Related Products","Verwandte Produkte anzeigen"
 "Related Products","Unsere Empfehlungen"
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Add to Wish List","Add to Wish List"
+"Add to Compare","Add to Compare"
 "Number of Products","Anzahl der Products"
 Comments,Kommentare
 "Number of Comments","Anzahl der Kommentare"

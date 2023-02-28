@@ -11,6 +11,8 @@ Add New Post,Adauga Postare Noua
 Blog,Blog
 Go to Blog Home Page,Mergi la Prima Pagina a Blog-ului
 Monthly Archives: %s %s,Arhive Lunare: %s %s
+Home,Home
+"Go to Home Page","Go to Home Page"
 "Search ""%1""","Cauta ""%1"""
 Recent Blog Posts,Postari Recente in Blog
 Manage %1,Administreaza %1
@@ -31,12 +33,15 @@ The import process was completed successfully. %1 posts and %2 categories where 
 The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,Importul a fost finalizat cu succes. %1 postari si %2 categorii au fost importate. Unele postari si categorii au fost omise.<br/> %3 %4
 Nothing to import.,Nu e nimic de importat.
 Can not make import.,Nu pot realiza importul.
-Something went wrong:,Ceva nu e in regula:
+Something went wrong: ,Ceva nu e in regula:
+Please enter your name and email,Please enter your name and email
 Blog Import from WordPress,Importa Blog din WordPress
+Comment text is too short.,Comment text is too short.
 Please select,Va rugam alegeti
 Use Facebook Comments,Foloseste Comentararii Facebook
 Use Disqus Comments,Foloseste Comentarii Disqus
 Use Google Comments,Foloseste Comentareii Google
+Featured Blog Posts,Featured Blog Posts
 Yes (With auto trigger),Da (Cu declansare automata)
 Yes (Without auto trigger),Da (Fara declansare automata)
 Parameter %1 is required,E nevoie de parametrul %1
@@ -54,20 +59,33 @@ Categories:,Categorii:
 Tags:,Tag-uri:
 Author:,Autor:
 We can't find posts matching the selection.,Nu gasesc postari pe baza termenilor alesi.
+Read more,Read more
 Read more &#187;,Citeste mai departe &#187;
 See more,Vezi tot
+Email,Email
+Submit,Submit
+Sign In,Sign In
 Read %1,Citeste %1
+Cancel,Cancel
 &larr; Previous,&larr; Anterior
 Previous,Anterior
 Next &rarr;,Urmatorul &rarr;
 Next,Urmatorul
 Related Posts,Postari pe aceeasi tema
+Related Products,Related Products
+Add to Cart,Add to Cart
+In stock,In stock
+Out of stock,Out of stock
+Add to Wish List,Add to Wish List
+Add to Compare,Add to Compare
 Archive,Arhiva
 Archive %s,Arhiva %s
 Recent Posts,Postari Recente
 RSS Feed,RSS Feed
+Search,Search
 Search posts here...,Cauta postari...
 Tags,Tag-uri
+Read more >,Read more >
 MageFan Extensions,Extensii MageFan
 Blog Information,Informatii Blog
 Blog Index Page,Prima Pagina Blog
@@ -172,6 +190,21 @@ Add Selected Posts,Adauga Postarile Selectate
 "Oct","Oct"
 "Nov","Noi"
 "Dec","Dec"
+"Reply","Reply"
+"Show more replies in this thread","Show more replies in this thread"
+"%1 Comment(s)","%1 Comment(s)"
+"Add a comment...","Add a comment..."
+"Add a reply...","Add a reply..."
+"Sign in to add a comment...","Sign in to add a comment..."
+"Sign in to add a reply...","Sign in to add a reply..."
+"Full Name","Full Name"
+"Load more comments","Load more comments"
+"Login to submit comment","Login to submit comment"
+"You cannot post comment. Blog post is not longer exist.","You cannot post comment. Blog post is not longer exist."
+"You cannot reply to this comment. Comment is not longer exist.","You cannot reply to this comment. Comment is not longer exist."
+"You cannot reply to this comment.","You cannot reply to this comment."
+"You submitted your comment for moderation.","You submitted your comment for moderation."
+"Thank you for your comment.","Thank you for your comment."
 "Import Categories","Import Categories"
 "Import Comments","Import Comments"
 "Import Posts","Import Posts"

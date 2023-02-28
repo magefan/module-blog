@@ -11,6 +11,8 @@ Add New Post,Přidat nový příspěvek
 Blog,Blog
 Go to Blog Home Page,Přejděte na domovskou stránku blogu
 Monthly Archives: %s %s,Měsíční archivy: %s %s
+Home,Home
+Go to Home Page,Go to Home Page
 "Search ""%1""","Hledat ""%1"""
 Recent Blog Posts,Nedávné příspěvky na blogu
 Manage %1,Spravovat %1
@@ -31,12 +33,15 @@ The import process was completed successfully. %1 posts and %2 categories where 
 The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,Proces importu byl dokončen. Počet importovaných příspěvků: %1 a %2 kategorií. Některé příspěvky nebo kategorie byly přeskočeny.<br/> %3 %4
 Nothing to import.,Nic k importu.
 Can not make import.,Nelze provést import.
-Something went wrong:,Něco se pokazilo:
+Something went wrong: ,Něco se pokazilo:
+Please enter your name and email,Please enter your name and email
 Blog Import from WordPress,Import blogu z WordPressu
+Comment text is too short.,Comment text is too short.
 Please select,Prosím vyberte
 Use Facebook Comments,Použít Facebook Komentáře
 Use Disqus Comments,Použít Disqus Comments
 Use Google Comments,Použít Google Comments
+Featured Blog Posts,Featured Blog Posts
 Yes (With auto trigger),Ano (s automatickým spouštěním)
 Yes (Without auto trigger),Ano (bez automatického spouštění)
 Parameter %1 is required,Parametr %1 je povinný
@@ -54,20 +59,33 @@ Categories:,Kategorie:
 Tags:,Tagy:
 Author:,Autor:
 We can't find posts matching the selection.,Nemůžeme najít příspěvky odpovídající výběru.
+Read more,Read more
 Read more &#187;,Číst více &#187;
 See more,Vidět víc
+Email,Email
+Submit,Submit
+Sign In,Sign In
 Read %1,Číst %1
+Cancel,Cancel
 &larr; Previous,&larr; Předchozí
 Previous,Předchozí
 Next &rarr;,Další &rarr;
 Next,Další
 Related Posts,Související příspěvky
+Related Products,Related Products
+Add to Cart,Add to Cart
+In stock,In stock
+Out of stock,Out of stock
+Add to Wish List,Add to Wish List
+Add to Compare,Add to Compare
 Archive,Archiv
 Archive %s,Archivovat %s
 Recent Posts,Poslední příspěvky
 RSS Feed,RSS kanál
+Search,Search
 Search posts here...,Hledat příspěvky zde...
 Tags,Tagy
+Read more >,Read more >
 MageFan Extensions,Rozšíření MageFan
 Blog Information,Informace o blogu
 Blog Index Page,Stránka indexu blogu
