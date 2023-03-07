@@ -11,8 +11,6 @@ Post,Post
 Blog,Blog
 "Go to Blog Home Page","Zur Blog-Startseite gehen"
 "Monthly Archives: %s %s","Monatliche Archive: %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","Suche ""%1"""
 "Recent Blog Posts","Neueste Blogposts"
 "Manage %1","%1 verwalten"
@@ -63,13 +61,8 @@ Author:,Autor:
 "Read more","Read more"
 "Read more &#187;","Mehr lesen &#187;"
 "See more","Mehr anzeigen"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","%1 lesen"
-Cancel,Cancel
 "&larr; Previous","&larr; Zurück"
-"Previous","Zurück"
 "Next &rarr;","Weiter &rarr;"
 "Next","Weiter"
 "Related Posts","Verwandte Posts"
@@ -87,9 +80,6 @@ Tags,Tags
 "Display Related Posts","Verwandte Posts anzeigen"
 "Number of Posts","Anzahl der Posts"
 "Display Related Products","Verwandte Produkte anzeigen"
-"Related Products","Unsere Empfehlungen"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
 "Out of stock","Out of stock"
 "Add to Wish List","Add to Wish List"
 "Add to Compare","Add to Compare"
