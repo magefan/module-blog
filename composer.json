@@ -4,7 +4,7 @@
     "require": {
         "magefan/module-community" : ">=2.1.12",
         "magefan/module-blog-graph-ql" : ">=2.1.7",
-        "magefan/module-blog-comments-recaptcha" : ">=2.1.2",
+        "magefan/module-blog-comments-recaptcha" : ">=2.1.3",
         "magefan/module-wysiwyg-advanced" : ">=2.0.14"
     },
    "suggest": {
