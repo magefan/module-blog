@@ -84,7 +84,7 @@
 .c-comments .c-comment {border-bottom: 1px dashed #eee;}
 .c-comments .c-comment:last-child{border-bottom: none}
 .c-post .p-info {margin-bottom: 10px;}
-.c-post .p-name {font-weight: 700;color: #222222;display: inline-block;float: left;margin-right: 10px;font-size: 14px;line-height: 20px;}
+.c-post .p-name {font-weight: 700;/*color: #222222;*/display: inline-block;margin-right: 10px;font-size: 14px;line-height: 20px;}
 .c-post .publish-date {font-size: 11px;color: #bbbbbb;display: inline-block;line-height: 20px;}
 .c-post .p-actions {padding: 8px 0 10px;}
 .c-post .p-actions {font-size: 12px;}
