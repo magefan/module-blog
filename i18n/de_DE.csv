@@ -63,6 +63,7 @@ Author:,Autor:
 "See more","Mehr anzeigen"
 "Read %1","%1 lesen"
 "&larr; Previous","&larr; Zurück"
+"Previous","Zurück"
 "Next &rarr;","Weiter &rarr;"
 "Next","Weiter"
 "Related Posts","Verwandte Posts"
@@ -79,6 +80,7 @@ Tags,Tags
 "Display Related Posts","Verwandte Posts anzeigen"
 "Number of Posts","Anzahl der Posts"
 "Display Related Products","Verwandte Produkte anzeigen"
+"Related Products","Unsere Empfehlungen"
 "Number of Products","Anzahl der Products"
 Comments,Kommentare
 "Number of Comments","Anzahl der Kommentare"
