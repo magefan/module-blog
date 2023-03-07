@@ -21,16 +21,22 @@
             </design>
             <index_page>
                 <title>Blog</title>
+                <meta_title/>
                 <display_mode>0></display_mode>
-                <template></template>
+                <posts_sort_by>0</posts_sort_by>
+                <template/>
+                <posts_per_page/>
+                <post_ids/>
+                <meta_keywords/>
+                <meta_description/>
             </index_page>
             <post_view>
                 <design>
-                    <template></template>
+                    <template/>
                 </design>
                 <related_posts>
                     <enabled>1</enabled>
-                    <template></template>
+                    <template/>
                     <number_of_posts>5</number_of_posts>
                 </related_posts>
                 <related_products>
@@ -41,20 +47,27 @@
                     <type>magefan</type>
                     <number_of_comments>5</number_of_comments>
                     <number_of_replies>5</number_of_replies>
-                    <guest_comments>1</guest_comments>
+                    <fb_app_id/>
                     <fb_app_id_header>1</fb_app_id_header>
+                    <disqus_forum_shortname/>
+                    <guest_comments>1</guest_comments>
                     <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
+                    <default_status>0</default_status>
                     <format_date>M d, Y H:i</format_date>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
-                    <template></template>
+                    <template/>
                 </nextprev>
+                <views_count>
+                    <enabled>0</enabled>
+                </views_count>
             </post_view>
             <post_list>
-                <template></template>
-                <shortcotent_length>1000</shortcotent_length>
+                <template/>
                 <posts_per_page>10</posts_per_page>
+                <shortcotent_length>1000</shortcotent_length>
+                <lazyload_enabled>0</lazyload_enabled>
                 <lazyload_padding>200</lazyload_padding>
             </post_list>
             <tag>
@@ -66,6 +79,7 @@
             <author>
                 <enabled>1</enabled>
                 <page_enabled>1</page_enabled>
+                <template/>
                 <robots>NOINDEX,FOLLOW</robots>
             </author>
             <sidebar>
@@ -81,18 +95,21 @@
                 </categories>
                 <recent_posts>
                     <enabled>1</enabled>
+                    <template/>
                     <display_image>1</display_image>
                     <posts_per_page>5</posts_per_page>
                     <sort_order>30</sort_order>
                 </recent_posts>
                 <featured_posts>
                     <enabled>0</enabled>
+                    <template/>
                     <display_image>1</display_image>
-                    <posts_ids></posts_ids>
+                    <posts_ids/>
                     <sort_order>35</sort_order>
                 </featured_posts>
                 <popular_posts>
                     <enabled>0</enabled>
+                    <template/>
                     <display_image>1</display_image>
                     <posts_per_page>5</posts_per_page>
                     <sort_order>36</sort_order>
@@ -111,13 +128,26 @@
                     <sort_order>45</sort_order>
                     <tag_count>50</tag_count>
                 </tag_claud>
+                <custom>
+                    <enabled>0</enabled>
+                    <sort_order>46</sort_order>
+                    <html/>
+                </custom>
+                <custom2>
+                    <enabled>0</enabled>
+                    <sort_order>47</sort_order>
+                    <html/>
+                </custom2>
                 <rss_feed>
+                    <enabled>0</enabled>
                     <title>Blog Rss</title>
                     <sort_order>50</sort_order>
+                    <description/>
                 </rss_feed>
             </sidebar>
             <product_page>
                 <related_posts_enabled>1</related_posts_enabled>
+                <related_posts_template/>
                 <number_of_related_posts>5</number_of_related_posts>
             </product_page>
             <permalink>
@@ -125,10 +155,16 @@
                 <redirect_to_no_slash>1</redirect_to_no_slash>
                 <type>default</type>
                 <post_route>post</post_route>
+                <post_sufix/>
+                <post_use_categories>0</post_use_categories>
                 <category_route>category</category_route>
+                <category_sufix/>
+                <category_use_categories>0</category_use_categories>
                 <archive_route>archive</archive_route>
                 <tag_route>tag</tag_route>
+                <tag_sufix/>
                 <author_route>author</author_route>
+                <author_sufix/>
                 <search_route>search</search_route>
                 <rss_route>rss</rss_route>
             </permalink>
