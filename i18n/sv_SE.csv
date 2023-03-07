@@ -11,8 +11,6 @@ Post,Inlägg
 Blog,Blogg
 "Go to Blog Home Page","Gå Till Bloggens Startsida"
 "Monthly Archives: %s %s","Månadsarkiv: %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","Sök ""%1"""
 "Recent Blog Posts","Senaste Blogginlägg"
 "Manage %1","Hantera %1"
@@ -62,27 +60,15 @@ Author:,Författare:
 "Read more","Read more"
 "Read more &#187;","Läs mer &#187;"
 "See more","Se mer"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","Läs %1"
-Cancel,Cancel
 "&larr; Previous","&larr; Föregående"
-"Previous","Föregående"
 "Next &rarr;","Nästa &rarr;"
 "Next","Nästa"
 "Related Posts","Relaterade Inlägg"
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 Archive,Arkiv
 "Archive %s","Arkiv %s"
 "Recent Posts","Nya Inlägg"
 "RSS Feed","RSS Flöde"
-Search,Search
 "Search posts here...","Sök inlägg här..."
 Tags,Taggar
 "Read more >","Read more >"

@@ -11,8 +11,6 @@ Add New Post,Adicionar Novo Post
 Blog,Blog
 Go to Blog Home Page,Ir Para Home Page do Blog
 Monthly Archives: %s %s,Arquivo Mensal: %s %s
-Home,Home
-Go to Home Page,Go to Home Page
 "Search ""%1""","Procurar ""%1"""
 Recent Blog Posts,Posts Recentes
 Manage %1,Gerenciar %1
@@ -62,27 +60,15 @@ We can't find posts matching the selection.,Não foi possível encontrar posts q
 Read more,Read more
 Read more &#187;,Leia mais &#187;
 See more,Veja mais
-Email,Email
-Submit,Submit
-Sign In,Sign In
 Read %1,Ler %1
-Cancel,Cancel
 &larr; Previous,&larr; Anterior
-Previous,Anterior
 Next &rarr;,Próximo &rarr;
 Next,Próximo
 Related Posts,Posts Relacionados
-Related Products,Related Products
-Add to Cart,Add to Cart
-In stock,In stock
-Out of stock,Out of stock
-Add to Wish List,Add to Wish List
-Add to Compare,Add to Compare
 Archive,Arquivo
 Archive %s,Arquivo %s
 Recent Posts,Posts Recentes
 RSS Feed,Feed RSS
-Search,Search
 Search posts here...,Procure posts aqui…
 Tags,Tags
 MageFan Extensions,Extensões da MageFan

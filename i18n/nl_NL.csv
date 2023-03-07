@@ -11,8 +11,6 @@ Post,Plaats
 Blog,Blog
 "Go to Blog Home Page","Ga naar Blog Home Pagina"
 "Monthly Archives: %s %s","Maandelijkse Archieven: %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","Zoeken ""%1"""
 "Recent Blog Posts","Recente Blog Berichten"
 "Manage %1","Beheer %1"
@@ -62,27 +60,15 @@ Author:,Auteur:
 "Read more","Read more"
 "Read more &#187;","Lees meer &#187;"
 "See more","Bekijk meer"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","Lees %1"
-Cancel,Cancel
 "&larr; Previous","&larr; Vorige"
-"Previous","Vorige"
 "Next &rarr;","Volgende &rarr;"
 "Next","Volgende"
 "Related Posts","Gerelateerde Berichten"
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 Archive,Archief
 "Archive %s","Archief %s"
 "Recent Posts","Recente Berichten"
 "RSS Feed","RSS Feed"
-Search,Search
 "Search posts here...","Zoek Bericht Hier…"
 Tags,Tags
 "Read more >","Read more >"

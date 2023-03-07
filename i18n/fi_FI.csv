@@ -11,8 +11,6 @@
 "Blog","Blogi"
 "Go to Blog Home Page","Siirry blogin kotisivulle"
 "Monthly Archives: %s %s","Arkisto kuukausittain: : %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Archive","Arkisto"
 "Search ""%1""","Hae ""%1"""
 "Recent Blog Posts","Tuoreimmat artikkelit"
@@ -64,26 +62,14 @@ Home,Home
 "Read more","Read more"
 "Read more &#187;","Lue lisää &#187;"
 "See more","Näytä more"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","Lue %1"
-Cancel,Cancel
 "&larr; Previous","&larr; Edellinen"
-Previous,Previous
 "Next &rarr;","Seuraava &rarr;"
 "Related Posts","Samankaltaiset artikkelit"
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 "Archive","Arkisto"
 "Archive %s","Arkisto %s"
 "Recent Posts","Tuoreimmat artikkelit"
 "RSS Feed","RSS-syöte"
-Search,Search
 "Search posts here...","Hae artikkeleita…"
 "Tags","Tagit"
 "Read more >","Read more >"

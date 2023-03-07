@@ -11,8 +11,6 @@ Post,Articolo
 Blog,Blog
 "Go to Blog Home Page","Vai alla Pagina Principale del Blog"
 "Monthly Archives: %s %s","Archivi Mensili: %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","Cerca ""%1"""
 "Recent Blog Posts","Articoli Recenti"
 "Manage %1","Gestisci %1"
@@ -62,27 +60,15 @@ Author:,Autore:
 "Read more","Read more"
 "Read more &#187;","Leggi di piu' &#187;"
 "See more","Di piu'"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","Leggi %1"
-Cancel,Cancel
 "&larr; Previous","&larr; Precedente"
-"Previous","Precedente"
 "Next &rarr;","Successivo &rarr;"
 "Next","Successivo"
 "Related Posts","Articoli Correlati"
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 Archive,Archivio
 "Archive %s","Archivio %s"
 "Recent Posts","Articoli Recenti"
 "RSS Feed","Feed RSS"
-Search,Search
 "Search posts here...","Ricerca articoli qui..."
 Tags,Tag
 "Read more >","Read more >"

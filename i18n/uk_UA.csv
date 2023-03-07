@@ -11,8 +11,6 @@ Post,Публікація
 Blog,Блог
 "Go to Blog Home Page","Повернутись на головну сторінку блогу"
 "Monthly Archives: %s %s","Архів по місяцям: %s %s"
-Home,Головна
-"Go to Home Page","Перейти на домашню сторінку"
 "Archive","Архів"
 "Search ""%1""","Шукати ""%1"""
 "Recent Blog Posts","Останні публікації"
@@ -63,27 +61,15 @@ Author:,Аутор:
 "We can't find posts matching the selection.","Ми не можемо знайти жодних публікацій тут."
 "Read more &#187;","Дізнатись більше &#187;"
 "See more","Дивітся більше"
-"Email","Електронна пошта"
-"Submit","Надіслати"
-"Sign In","Увійти"
 "Read %1","Читати %1"
-Cancel,Cancel
 "&larr; Previous","&larr; Попередня"
-"Previous","Попередня"
 "Next &rarr;","Наступна &rarr;"
 "Next","Наступна"
 "Related Posts","Пов'язані публікації"
-"Related Products","Супутні товари"
-"Add to Cart","Додати в кошик"
-"In stock","В наявності"
-"Out of stock","Немає на складі"
-"Add to Wish List","Додати до списку бажань"
-"Add to Compare","Додати для порівняння"
 Archive,Архів
 "Archive %s","Архів %s"
 "Recent Posts","Останні публікації"
 "RSS Feed","RSS Feed"
-Search,Пошук
 "Search posts here...","Пошук публікацій..."
 Tags,Теги
 "Read more >","Дізнатись більше >"

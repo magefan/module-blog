@@ -11,8 +11,6 @@ Post,文章
 Blog,博客
 "Go to Blog Home Page","跳转至博客主页"
 "Monthly Archives: %s %s","按月存档: %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","搜索 ""%1"""
 "Recent Blog Posts","最近的博客文章"
 "Manage %1","管理 %1"
@@ -62,27 +60,16 @@ Author:,作者:
 "Read more","Read more"
 "Read more &#187;","完整阅读 &#187;"
 "See more","查看更多"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","读 %1"
-Cancel,Cancel
 "&larr; Previous","&larr; 上一页"
 "Previous","上一页"
 "Next &rarr;","下一页 &rarr;"
 "Next","下一页"
 "Related Posts","最新文章"
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 Archive,存档
 "Archive %s","存档 %s"
 "Recent Posts","最新文章"
 "RSS Feed","RSS Feed"
-Search,Search
 "Search posts here...","这里搜索文章..."
 Tags,Tags
 "Read more >","Read more >"

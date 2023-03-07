@@ -11,8 +11,6 @@ Post,Δημοσίευση
 Blog,Ιστολόγιο
 "Go to Blog Home Page","Πηγαίνετε στην αρχική σελίδα του ιστολόγιου"
 "Monthly Archives: %s %s","Μηνιαία Αρχεία: %s %s"
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","Αναζήτηση ""%1"""
 "Recent Blog Posts","Πρόσφατες Δημοσιεύσεις"
 "Manage %1","Διαχείριση %1"
@@ -62,27 +60,15 @@ Author:,Συντάκτης:
 "Read more","Read more"
 "Read more &#187","Συνέχεια άρθρου &#187"
 "See more","Δείτε περισσότερα"
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 "Read %1","Ανάγνωση %1"
-Cancel,Cancel
 "&larr Previous","&larr Προηγούμενο"
-"Previous","Προηγούμενο"
 "Next &rarr","Επόμενο &rarr"
 "Next","Επόμενο"
 "Related Posts","Σχετικά άρθρα"
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 Archive,Αρχείο
 "Archive %s","Αρχείο %s"
 "Recent Posts","Πρόσφατα άρθρα"
 "RSS Feed","RSS Feed"
-Search,Search
 "Search posts here...","Αναζητήστε άρθρα..."
 Tags,Ετικέτες
 "Read more >","Read more >"

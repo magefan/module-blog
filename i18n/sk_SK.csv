@@ -11,8 +11,6 @@ Add New Post,Pridať nový článok
 Blog,Blog
 Go to Blog Home Page,Prejdite na domovskú stránku blogu
 Monthly Archives: %s %s,Mesačné archívy: %s %s
-Home,Home
-"Go to Home Page","Go to Home Page"
 "Search ""%1""","Hľadať ""%1"""
 Recent Blog Posts,Najnovšie blogové príspevky
 Manage %1,Spravovať %1
@@ -62,27 +60,15 @@ We can't find posts matching the selection.,Nemôžeme nájsť príspevky zodpov
 "Read more","Read more"
 Read more &#187;,Čítaj viac &#187;
 See more,Pozri viac
-Email,Email
-Submit,Submit
-"Sign In","Sign In"
 Read %1,Čítaj %1
-Cancel,Cancel
 &larr; Previous,&larr; Predchádzajúce
-Previous,Predchádzajúce
 Next &rarr;,Ďalšie &rarr;
 Next,Ďalšie
 Related Posts,Súvisiace príspevky
-"Related Products","Related Products"
-"Add to Cart","Add to Cart"
-"In stock","In stock"
-"Out of stock","Out of stock"
-"Add to Wish List","Add to Wish List"
-"Add to Compare","Add to Compare"
 Archive,Archív
 Archive %s,Archív %s
 Recent Posts,Posledné články
 RSS Feed,RSS zdroj
-Search,Search
 Search posts here...,Hľadať príspevky tu...
 Tags,Tagy
 "Read more >","Read more >"
