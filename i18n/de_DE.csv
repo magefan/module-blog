@@ -32,11 +32,14 @@ Blog,Blog
 "Nothing to import.","Nichts zu importieren."
 "Can not make import.","Import nicht möglich."
 "Something went wrong: ","Etwas ist schiefgelaufen: "
+"Please enter your name and email","Please enter your name and email"
 "Blog Import from WordPress","Blog-Import von WordPress"
+"Comment text is too short.","Comment text is too short."
 "Please select","Bitte auswählen"
 "Use Facebook Comments","Facebook-Kommentare verwenden"
 "Use Disqus Comments","Disqus-Kommentare verwenden"
 "Use Google Comments","Google-Kommentare verwenden"
+"Featured Blog Posts","Featured Blog Posts"
 "Yes (With auto trigger)","Ja (mit automatischem Trigger)"
 "Yes (Without auto trigger)","Ja (ohne automatischen Trigger)"
 "Parameter %1 is required","Parameter %1 ist erforderlich"
@@ -52,8 +55,10 @@ Blog,Blog
 Posted:,Verfasst:
 Categories:,Kategorien:
 Tags:,Tags:
+"Read more >","Read more >"
 Author:,Autor:
 "We can't find posts matching the selection.","Wir können keine Posts finden, die der Auswahl entsprechen."
+"Read more","Read more"
 "Read more &#187;","Mehr lesen &#187;"
 "See more","Mehr anzeigen"
 "Read %1","%1 lesen"

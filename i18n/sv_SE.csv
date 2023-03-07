@@ -32,11 +32,14 @@ Blog,Blogg
 "Nothing to import.","Inget att importera."
 "Can not make import.","Kan inte genomföra importen."
 "Something went wrong: ","Något gick fel: "
+"Please enter your name and email","Please enter your name and email"
 "Blog Import from WordPress","Bloggimport från WordPress"
+"Comment text is too short.","Comment text is too short."
 "Please select","Vänligen välj"
 "Use Facebook Comments","Använd Facebook-kommentarer"
 "Use Disqus Comments","Använd Disqus-kommentarer"
 "Use Google Comments","Använd Googles kommentarer"
+"Featured Blog Posts","Featured Blog Posts"
 "Yes (With auto trigger)","Ja (Med automatisk utlösare)"
 "Yes (Without auto trigger)","Ja (Utan automatisk utlösare)"
 "Parameter %1 is required","Parameter %1 krävs"
@@ -54,6 +57,7 @@ Categories:,Kategorier:
 Tags:,Taggar:
 Author:,Författare:
 "We can't find posts matching the selection.","Vi kan inte hitta inlägg som matchar valet."
+"Read more","Read more"
 "Read more &#187;","Läs mer &#187;"
 "See more","Se mer"
 "Read %1","Läs %1"
@@ -68,6 +72,7 @@ Archive,Arkiv
 "RSS Feed","RSS Flöde"
 "Search posts here...","Sök inlägg här..."
 Tags,Taggar
+"Read more >","Read more >"
 "MageFan Extensions","MageFan Tillägg"
 "Blog Information","Blogg Information"
 "Blog Index Page","Blogg Indexsida"

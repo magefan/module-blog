@@ -32,11 +32,14 @@ The import process completed. %1 posts and %2 categories where imported. Some po
 Nothing to import.,Nič na import.
 Can not make import.,Nie je možné vykonať import.
 Something went wrong: ,Niečo sa pokazilo:
+"Please enter your name and email","Please enter your name and email"
 Blog Import from WordPress,Import blogu z WordPress
+"Comment text is too short.","Comment text is too short."
 Please select,Prosím vyber
 Use Facebook Comments,Použite komentáre na Facebooku
 Use Disqus Comments,Použite komentáre Disqus
 Use Google Comments,Použite Google Comments
+"Featured Blog Posts","Featured Blog Posts"
 Yes (With auto trigger),Áno (s automatickým spúšťaním)
 Yes (Without auto trigger),Áno (bez automatického spúšťania)
 Parameter %1 is required,Parameter %1 je povinný
@@ -54,6 +57,7 @@ Categories:,Kategórie:
 Tags:,Tagy:
 Author:,Autor:
 We can't find posts matching the selection.,Nemôžeme nájsť príspevky zodpovedajúce výberu.
+"Read more","Read more"
 Read more &#187;,Čítaj viac &#187;
 See more,Pozri viac
 Read %1,Čítaj %1
@@ -68,6 +72,7 @@ Recent Posts,Posledné články
 RSS Feed,RSS zdroj
 Search posts here...,Hľadať príspevky tu...
 Tags,Tagy
+"Read more >","Read more >"
 MageFan Extensions,Rozšírenia MageFan
 Blog Information,Informácie o blogu
 Blog Index Page,Indexová stránka blogu
