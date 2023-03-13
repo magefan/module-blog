@@ -212,8 +212,9 @@ body.blog-page {
 .widget.blog-search .control {border-top: 0;margin: 0;padding: 0;clear: both;}
 .widget.blog-search input {position: static;padding-right: 35px;margin: 0;left: -300%;}
 .widget.blog-search .action.search {position: absolute;top: 0;right: 0;bottom: 0;height: 100%;z-index: 1;display: inline-block;-moz-box-sizing: content-box;border: 0;box-shadow: none;line-height: inherit;margin: 0;padding: 0 10px;text-decoration: none;text-shadow: none;font-weight: 400;border-radius: 0;}
-.widget.blog-search .action.search:before {-webkit-font-smoothing: antialiased;content: '\e615';font-family: 'icons-blank-theme';font-size: 22px;line-height: 22px;color: #8f8f8f;font-weight: normal;margin: 0;vertical-align: top;display: inline-block;overflow: hidden;speak: none;width: 22px;height: 22px;opacity: 1;background-image: none;}
+.widget.blog-search .action.search:before {-webkit-font-smoothing: antialiased;content: '';margin: 0;vertical-align: top;display: inline-block;overflow: hidden;speak: none;width: 16px;height: 32px;background: url(../images/search-icon-white.svg) no-repeat -10px -7px;background-size: 35px;opacity: 1;}
 .widget.blog-search .action.search > span {border: 0;clip: rect(0, 0, 0, 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}
+.blog-search .actions .action.search {background: #222222;right: 0;padding: 0 10px;border-radius: 0;}
 
 /* Posts List */
 .widget.block-list-posts .post-list .post-item .image-container {flex: 0 0 30%;width: 30%;display: block;order: 0;}
@@ -252,6 +253,3 @@ body.blog-page {
 /* RSS Feed */
 .widget.block-rss .rss-icon {width: 23px;filter: grayscale(100%);vertical-align: middle;}
 /* End Sidebar ********************************************************************************************************/
-
-
-
