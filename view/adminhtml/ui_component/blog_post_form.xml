@@ -222,7 +222,7 @@
                 <item name="config" xsi:type="array">
                     <item name="collapsible" xsi:type="boolean">true</item>
                     <item name="label" xsi:type="string" translate="true">Post Image</item>
-                    <item name="sortOrder" xsi:type="number">22</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
                     <item name="source" xsi:type="string">magefan_blog_post</item>
                 </item>
             </argument>
@@ -513,7 +513,7 @@
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">og_description</item>
-                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
                     <item name="notice" xsi:type="string" translate="true">Leave blank to use Meta Description by default.</item>
                 </item>
             </argument>
