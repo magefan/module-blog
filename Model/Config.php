@@ -109,6 +109,11 @@ class Config
     const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/css_settings/include_product_page';
 
     /**
+     * @var ScopeConfigInterface
+     */
+    protected ScopeConfigInterface $scopeConfig;
+
+    /**
      * Config constructor.
      * @param ScopeConfigInterface $scopeConfig
      */
