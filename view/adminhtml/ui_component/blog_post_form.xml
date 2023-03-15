@@ -217,23 +217,37 @@
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
         </argument>
-        <field name="featured_img">
+        <field name="featured_img" sortOrder="40" formElement="imageUploader">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">string</item>
-                    <item name="source" xsi:type="string">post</item>
-                    <item name="label" xsi:type="string" translate="true">Featured Image</item>
-                    <item name="visible" xsi:type="boolean">true</item>
-                    <item name="formElement" xsi:type="string">fileUploader</item>
-                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
-                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
-                    <item name="required" xsi:type="boolean">false</item>
-                    <item name="uploaderConfig" xsi:type="array">
-                        <item name="url" xsi:type="url" path="blog/post_upload/featuredImg"/>
-                    </item>
-                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Post Image</item>
+                    <item name="sortOrder" xsi:type="number">22</item>
+                    <item name="source" xsi:type="string">magefan_blog_post</item>
                 </item>
             </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Media Gallery</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>false</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="blog/post_upload/featuredImg"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <openDialogTitle>Featured Image</openDialogTitle>
+                        <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
         </field>
         <field name="featured_img_alt">
             <argument name="data" xsi:type="array">
@@ -506,24 +520,34 @@
                 </item>
             </argument>
         </field>
-        <field name="og_img">
+        <field name="og_img" formElement="imageUploader">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">string</item>
                     <item name="source" xsi:type="string">post</item>
-                    <item name="label" xsi:type="string" translate="true">OG Image</item>
-                    <item name="visible" xsi:type="boolean">true</item>
-                    <item name="formElement" xsi:type="string">fileUploader</item>
-                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
-                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
-                    <item name="required" xsi:type="boolean">false</item>
-                    <item name="uploaderConfig" xsi:type="array">
-                        <item name="url" xsi:type="url" path="blog/post_upload/ogImg"/>
-                    </item>
-                    <item name="sortOrder" xsi:type="number">30</item>
-                    <item name="notice" xsi:type="string" translate="true">Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.</item>
                 </item>
             </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">OG Image</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>false</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="blog/post_upload/ogImg"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <openDialogTitle>Media Gallery</openDialogTitle>
+                        <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
         </field>
         <field name="og_type">
             <argument name="data" xsi:type="array">

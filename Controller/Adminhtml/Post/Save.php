@@ -71,6 +71,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
                         $model->setData($key, $image);
                     } else {
+                        if (isset($data[$key][0]['url']) && false != strpos($data[$key][0]['url'], '/media/')){
+                            $index = strpos($data[$key][0]['url'], '/media/');
+                            $result = substr($data[$key][0]['url'],  $index + strlen('/media/'));
+                            $model->setData($key, $result);
+                            continue;
+                        }
+
                         if (isset($data[$key][0]['name'])) {
                             $model->setData($key, $data[$key][0]['name']);
                         }
