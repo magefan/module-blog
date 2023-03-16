@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Controller\Adminhtml\Tag;
 
+use Magento\Framework\Filter\FilterInput;
+
 /**
  * Blog tag save controller
  */
@@ -35,7 +37,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = new FilterInput(
             $filterRules,
             [],
             $data

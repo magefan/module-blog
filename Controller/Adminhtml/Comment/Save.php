@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Controller\Adminhtml\Comment;
 
 use Magefan\Blog\Model\Comment;
+use Magento\Framework\Filter\FilterInput;
 
 /**
  * Blog comment save controller
@@ -37,7 +38,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = new FilterInput(
             $filterRules,
             [],
             $data

@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Controller\Adminhtml\Category;
 
+use Magento\Framework\Filter\FilterInput;
+
 /**
  * Blog category save controller
  */
@@ -51,7 +53,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = new FilterInput(
             $filterRules,
             [],
             $data

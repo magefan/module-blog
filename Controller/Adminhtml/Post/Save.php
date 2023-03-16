@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Controller\Adminhtml\Post;
 
 use Magefan\Blog\Model\Post;
+use Magento\Framework\Filter\FilterInput;
 
 /**
  * Blog post save controller
@@ -176,7 +177,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = new FilterInput(
             $filterRules,
             [],
             $data
