@@ -21,6 +21,11 @@ class Grid extends Collection
      * @var int
      */
     protected $_storeId;
+    
+    /**
+     * @var bool
+     */
+    protected $_previewFlag;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
