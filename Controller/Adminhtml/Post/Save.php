@@ -176,7 +176,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data
