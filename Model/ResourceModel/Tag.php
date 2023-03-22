@@ -142,7 +142,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isNumericPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^[0-9]+$/', $object->getData('identifier'));
+        return preg_match('/^[0-9]+$/', (string)$object->getData('identifier'));
     }
 
     /**
@@ -153,7 +153,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^([^?#<>@!&*()$%^\\+=,{}"\']+)?$/', $object->getData('identifier'));
+        return preg_match('/^([^?#<>@!&*()$%^\\+=,{}"\']+)?$/', (string)$object->getData('identifier'));
     }
 
     /**
