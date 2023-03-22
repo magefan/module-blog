@@ -67,8 +67,8 @@ body.blog-page {
 /*    font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}*/
 /* Read More */
 /*.post-list .post-read-more {display: none;}*/
-.post-read-more a.post-read {display: inline-block;color: #fff;background-color: #4db2ec;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;}
-.post-read-more a.post-read:hover {color: #fff;background: #77bfe9;text-decoration: none;}
+.post-read-more a.post-read {font-weight: 500;}
+.post-read-more a.post-read:hover {text-decoration: none;}
 /*@media (max-width: 1200px) {
     .blog-index-index .post-list /*.post-read-more *//* {display: none;}
 }
