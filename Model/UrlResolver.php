@@ -168,6 +168,18 @@ class UrlResolver implements UrlResolverInterface
                 }
                 if ($pathExist) {
                     if ($postId) {
+                        if ($categoryId) {
+                            if (!$this->url->_getConfig('post_use_categories')) {
+                                return null;
+                            }
+                            $factory = Url::CONTROLLER_POST . 'Factory';
+                            $model = $this->$factory->create()->load($postId);
+
+                            if (!$model->getCategoriesCount() || !$model->getParentCategories()->getItemById($categoryId)) {
+                                return null;
+                            }
+                        }
+
                         $result = ['id' => $postId, 'type' => Url::CONTROLLER_POST];
                         if ($categoryId) {
                             $result['params'] = [
