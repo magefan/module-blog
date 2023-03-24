@@ -440,7 +440,7 @@ class Url
      * @param  string $key
      * @return string || null || int
      */
-    public function _getConfig($key)
+    protected function _getConfig($key)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/permalink/'.$key,
