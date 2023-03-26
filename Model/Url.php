@@ -183,6 +183,7 @@ class Url
             $object->setData('parent_category', null);
         }
 
+        /*
         $storeIds = $object->getStoreIds();
         $useOtherStore = false;
         $currentStore = $this->_storeManager->getStore($object->getStoreId());
@@ -219,6 +220,10 @@ class Url
         if ($storeChanged) {
             $this->stopStoreEmulation();
         }
+        */
+
+        $url = $this->getUrl($object, $object->getControllerName());
+
 
         return $url;
     }
