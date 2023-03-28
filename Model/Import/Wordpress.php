@@ -259,7 +259,7 @@ class Wordpress extends AbstractImport
             $metaResult = $adapter->query($sql)->execute();
             foreach ($metaResult as $metaData) {
 
-                $metaValue = trim($metaData['meta_value']);
+                $metaValue = trim(isset($metaData['meta_value']) ? $metaData['meta_value'] : '');
                 if (!$metaValue) {
                     continue;
                 }
