@@ -29,18 +29,15 @@ $_postName = $block->escapeHtml($_post->getTitle());
                 </a>
             </h2>
 
-          <?php if ($block->displayAddThisToolbox()) : ?>
-              <div class="addthis_toolbox addthis_default_style"
-                   addthis:url="<?= /*@noEscape*/ $_postUrl ?>"
-                   addthis:title="<?= /*@noEscape*/ $_postName ?>"
-                  <?php if ($firstImage = $_post->getFirstImage()) { ?>
-                      addthis:media="<?= $block->escapeHtml($firstImage) ?>"
-                  <?php } ?>>
-                  <a class="addthis_button_facebook"></a>
-                  <a class="addthis_button_twitter"></a>
-                  <a class="addthis_button_compact"></a>
-              </div>
-          <?php endif; ?>
+            <?php if ($block->displayAddThisToolbox()) : ?>
+                <div class="addthis_toolbox addthis_inline_share_toolbox"
+                     addthis:url="<?= /*@noEscape*/ $_postUrl ?>"
+                     addthis:title="<?= /*@noEscape*/ $_postName ?>"
+                    <?php if ($firstImage = $_post->getFirstImage()) { ?>
+                        addthis:media="<?= $block->escapeHtml($firstImage) ?>"
+                    <?php } ?>>
+                </div>
+            <?php endif; ?>
 
         </div>
 
