@@ -14,6 +14,8 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class UrlResolver implements UrlResolverInterface
 {
+    const PERMALINK_POST_USE_CATEGORIES = 'mfblog/permalink/post_use_categories';
+
     /**
      * @var array;
      */
@@ -55,13 +57,19 @@ class UrlResolver implements UrlResolverInterface
     protected $storeId;
 
     /**
+     * @var Config|mixed
+     */
+    private  $config;
+
+    /**
      * UrlResolver constructor.
      * @param Url $url
      * @param PostFactory $postFactory
      * @param CategoryFactory $categoryFactory
-     * @param StoreManagerInterface $storeManager
-     * @param TagFactory $tagFactory
      * @param AuthorInterfaceFactory $authorFactory
+     * @param TagFactory $tagFactory
+     * @param StoreManagerInterface $storeManager
+     * @param Config|null $config
      */
     public function __construct(
         Url $url,
@@ -69,7 +77,8 @@ class UrlResolver implements UrlResolverInterface
         CategoryFactory $categoryFactory,
         AuthorInterfaceFactory $authorFactory,
         TagFactory $tagFactory,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        Config $config = null
     ) {
         $this->url = $url;
         $this->postFactory = $postFactory;
@@ -77,6 +86,9 @@ class UrlResolver implements UrlResolverInterface
         $this->tagFactory = $tagFactory;
         $this->authorFactory = $authorFactory;
         $this->storeManager = $storeManager;
+        $this->config = $config ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Model\Config::class
+        );
     }
 
     /**
@@ -168,6 +180,18 @@ class UrlResolver implements UrlResolverInterface
                 }
                 if ($pathExist) {
                     if ($postId) {
+                        if ($categoryId) {
+                            if (!(bool)$this->config->getConfig(self::PERMALINK_POST_USE_CATEGORIES)) {
+                                return null;
+                            }
+                            $factory = Url::CONTROLLER_POST . 'Factory';
+                            $model = $this->$factory->create()->load($postId);
+
+                            if (!$model->getCategoriesCount() || !$model->getParentCategories()->getItemById($categoryId)) {
+                                return null;
+                            }
+                        }
+
                         $result = ['id' => $postId, 'type' => Url::CONTROLLER_POST];
                         if ($categoryId) {
                             $result['params'] = [
