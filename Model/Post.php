@@ -451,7 +451,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             if (!$image) {
                 $content = $this->getFilteredContent();
                 $match = null;
-                preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $content, $match);
+                preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', (string)$content, $match);
                 if (!empty($match['src'])) {
                     $image = $match['src'];
                 }
