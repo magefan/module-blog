@@ -131,11 +131,11 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
                 /* Do not cut words */
                 while ($len < mb_strlen($content)
-                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"])) {
+                    && !in_array(mb_substr($content, $len, 1), [' ', '<', "\t", "\r", "\n"])) {
                     $len++;
                 }
 
-                $content = mb_strcut($content, 0, $len);
+                $content = mb_substr($content, 0, $len);
                 try {
                     $previousErrorState = libxml_use_internal_errors(true);
                     $dom = new \DOMDocument();
