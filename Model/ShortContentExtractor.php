@@ -130,8 +130,8 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 }
 
                 /* Do not cut words */
-                while ($len < strlen($content)
-                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"])) {
+                while ($len < mb_strlen($content)
+                    && !in_array(mb_substr($content, $len, 1), [' ', '<', "\t", "\r", "\n"])) {
                     $len++;
                 }
 
@@ -139,7 +139,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 try {
                     $previousErrorState = libxml_use_internal_errors(true);
                     $dom = new \DOMDocument();
-                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
+                    $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
                     libxml_use_internal_errors($previousErrorState);
 
                     $body = $dom->getElementsByTagName('body');
