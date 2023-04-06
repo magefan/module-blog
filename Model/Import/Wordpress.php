@@ -284,7 +284,7 @@ class Wordpress extends AbstractImport
             }
             */
 
-            $creationTime = strtotime($data['post_date_gmt']);
+            $creationTime = strtotime((string)$data['post_date_gmt']);
 
             $content = $data['post_content'];
             $content = str_replace('<!--more-->', '<!-- pagebreak -->', $content);
@@ -309,7 +309,7 @@ class Wordpress extends AbstractImport
                 'content' => $content,
                 'short_content' => isset($data['short_content']) ? $data['short_content'] : '',
                 'creation_time' => $creationTime,
-                'update_time' => strtotime($data['post_modified_gmt']),
+                'update_time' => strtotime((string)$data['post_modified_gmt']),
                 'publish_time' => $creationTime,
                 'is_active' => (int)($data['post_status'] == 'publish'),
                 'categories' => $postCategories,

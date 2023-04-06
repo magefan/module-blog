@@ -111,10 +111,10 @@ class Comment extends Template implements IdentityInterface
         );
 
         $gmtDate = $this->getComment()->getPublishDate();
-        $gmtTime = strtotime($gmtDate);
+        $gmtTime = strtotime((string)$gmtDate);
 
         $localTime = strtotime(
-            $this->timezone->date($gmtTime)->format('Y-m-d H:i:s')
+            (string)$this->timezone->date($gmtTime)->format('Y-m-d H:i:s')
         );
 
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
