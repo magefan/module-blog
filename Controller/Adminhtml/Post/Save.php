@@ -72,7 +72,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                         $model->setData($key, $image);
                     } else {
                         if (isset($data[$key][0]['url'])
-                            && false != ($position = strpos($data[$key][0]['url'], '/media/'))) {
+                            && false !== ($position = strpos($data[$key][0]['url'], '/media/'))) {
                             $model->setData(
                                 $key,
                                 substr($data[$key][0]['url'],  $position + strlen('/media/'))
@@ -182,13 +182,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             }
         }
 
-        $inputFilter = $this->getFilterInput(
+/*        $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data
         );
 
-        $data = $inputFilter->getUnescaped();
+        $data = $inputFilter->getUnescaped();*/
 
         return $data;
     }
