@@ -58,7 +58,7 @@
 
 /* Post Title */
 .post-list .post-header .post-title-holder {display: flex;align-items: center;justify-content: space-between;flex-wrap: wrap;}
-.post-list .post-header .post-title {margin: 0;padding: 10px 0;}
+.post-list .post-header .post-title {margin: 0;padding: 10px 10px 10px 0;}
 .post-list .post-header .post-title a {text-decoration: none;font-size: 22px;font-weight: 400;}
 .post-list .post-holder .post-header .addthis_toolbox a {margin-bottom: 0;}
 
@@ -223,3 +223,20 @@
 .mf-blog-icon.mfbi-user {background-image: url('../images/user-icon.svg')}
 .mf-blog-icon.mfbi-views {background-image: url('../images/views-icon.svg')}
 /* END Fix Related Products */
+
+
+/* Post Sharing Top */
+/*.post-sharing-top {padding: 10px 0 10px 0;}*/
+.post-sharing-top .share-elements {display: flex;flex-wrap: wrap;align-items: center;}
+.post-sharing-top .icon-wrapper {display: inline-block;cursor: pointer;margin: 0 4px 0 0;overflow: hidden;border: 0;text-decoration: none;text-transform: none;background-color: transparent;color: inherit;transition: all .2s ease-in-out;border-radius: 0;vertical-align: middle;line-height: 16px;}
+.post-sharing-top .icon-wrapper:last-child {margin-right: 0;}
+.post-sharing-top .icon-wrapper.icon-facebook {background-color: rgb(59, 89, 152);}
+.post-sharing-top .icon-wrapper.icon-twitter {background-color: rgb(29, 161, 242);}
+.post-sharing-top .icon-wrapper .icon {line-height: 16px;height: 16px;width: 16px;display: inline-block;overflow: hidden;vertical-align: top;}
+.post-sharing-top .icon-wrapper .icon svg {width: 16px;height: 16px;line-height: 16px;}
+.post-sharing-top .icon-wrapper:hover {transform: translateY(-2px);}
+
+/*.post-list .post-sharing-top {}*/
+/*.post-view .post-sharing-top .icon-wrapper .icon svg {width: 16px;height: 16px;line-height: 16px;}*/
+/*.post-list.modern {}*/
+/* END Post Sharing Top */
