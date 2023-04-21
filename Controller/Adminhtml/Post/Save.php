@@ -71,12 +71,20 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
                         $model->setData($key, $image);
                     } else {
-                        if (isset($data[$key][0]['url'])
-                            && false != ($position = strpos($data[$key][0]['url'], '/media/'))) {
-                            $model->setData(
-                                $key,
-                                substr($data[$key][0]['url'],  $position + strlen('/media/'))
-                            );
+                        if (isset($data[$key][0]['url']) && false !== strpos($data[$key][0]['url'], '/media/')) {
+                            $url = $data[$key][0]['url'];
+                            
+                            /**
+                             *    $url may have two types of values
+                             *    /media/.renditions/magefan_blog/a.png
+                             *    http://crowdin.dev.magefan.top/media/magefan_blog/tmp/a.png
+                             */
+
+                            $keyString = strpos($url, '/.renditions/') !== false ? '/.renditions/' : '/media/';
+                            $position = strpos($url, $keyString);
+
+                            $model->setData($key, substr($url,  $position + strlen($keyString)));
+
                         } elseif (isset($data[$key][0]['name'])) {
                             $model->setData($key, $data[$key][0]['name']);
                         }
