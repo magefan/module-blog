@@ -92,4 +92,23 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     {
         return __('Search "%1"', $this->getQuery());
     }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    public function getPostTemplateType()
+    {
+        $template = (string)$this->_scopeConfig->getValue(
+            'mfblog/search/template',
+            ScopeInterface::SCOPE_STORE
+        );
+
+        if ($template){
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
 }
