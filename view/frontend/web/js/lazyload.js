@@ -47,28 +47,30 @@
                 $('.mfblog-hide-onload').hide();
 
                 $.ajax({
-                    "url":that.opt.page_url[that.opt.current_page+1],
-                    "cache":true
-                }).success(function (data) {
-                    var $html = $(data);
-                    var ws = that.opt.list_wrapper;
-                    var $nw = $html.find(ws);
-                    if ($nw.length) {
-                        $(ws).append($nw.html());
-                        that.opt.current_page++;
+                    "url": that.opt.page_url[that.opt.current_page + 1],
+                    "cache": true,
+                    "success": function (data) {
+                        var $html = $(data);
+                        var ws = that.opt.list_wrapper;
+                        var $nw = $html.find(ws);
+                        if ($nw.length) {
+                            $(ws).append($nw.html());
+                            that.opt.current_page++;
+                        }
+
+                        if ($html.find('[data-original]').length) {
+                            require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function ($) {
+                                $('.mfblogunveil').mfblogunveil();
+                            });
+                        }
+
+                        endLoading();
+
+                    },
+                    "fail": function (xhr, ajaxOptions, thrownError) {
+                        console.log(thrownError);
+                        endLoading();
                     }
-
-                    if ($html.find('[data-original]').length) {
-                        require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
-                            $('.mfblogunveil').mfblogunveil();
-                        });
-                    }
-
-                    endLoading();
-
-                }).fail(function (xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError);
-                    endLoading();
                 });
             }
         }
