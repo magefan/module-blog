@@ -9,6 +9,7 @@ namespace Magefan\Blog\Cron;
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
 use Magefan\Blog\Model\Config;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+use Magento\Framework\Event\ManagerInterface;
 
 /**
  * ReSave Posts that have PublishTime <= CurrentTime In Order To They Be Visible - Need If FPC Is Enabled
@@ -31,18 +32,26 @@ class ReSaveExistingPosts
     private $date;
 
     /**
+     * @var ManagerInterface
+     */
+    private  $eventManager;
+
+    /**
      * @param Config $config
      * @param PostCollectionFactory $postCollectionFactory
      * @param DateTime $date
+     * @param ManagerInterface $eventManager
      */
     public function __construct(
         Config $config,
         PostCollectionFactory $postCollectionFactory,
-        DateTime $date
+        DateTime $date,
+        ManagerInterface $eventManager
     ) {
         $this->config = $config;
         $this->postCollectionFactory = $postCollectionFactory;
         $this->date = $date;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -60,8 +69,7 @@ class ReSaveExistingPosts
             ->addFieldToFilter('publish_time', ['lteq' => $this->date->gmtDate()]);
 
         foreach ($postCollection as $post) {
-            $post->setOrigData('is_active', 0);
-            $post->afterCommitCallback();
+            $this->eventManager->dispatch('clean_cache_by_tags', ['object' => $post]);
         }
     }
 }
