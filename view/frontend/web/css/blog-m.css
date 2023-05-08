@@ -232,6 +232,7 @@
 .post-sharing-top .icon-wrapper:last-child {margin-right: 0;}
 .post-sharing-top .icon-wrapper.icon-facebook {background-color: rgb(59, 89, 152);}
 .post-sharing-top .icon-wrapper.icon-twitter {background-color: rgb(29, 161, 242);}
+.post-sharing-top .icon-wrapper.icon-pinterest {background-color: rgb(203, 32, 39);}
 .post-sharing-top .icon-wrapper .icon {line-height: 16px;height: 16px;width: 16px;display: inline-block;overflow: hidden;vertical-align: top;}
 .post-sharing-top .icon-wrapper .icon svg {width: 16px;height: 16px;line-height: 16px;}
 .post-sharing-top .icon-wrapper:hover {transform: translateY(-2px);}
