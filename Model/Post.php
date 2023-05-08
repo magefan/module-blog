@@ -512,6 +512,17 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve short filtered content,escaping imgs
+     * @param  mixed $len
+     * @param  mixed $endCharacters
+     * @return string
+     */
+    public function getShortFilteredContentWithEscapedImgs($len = null, $endCharacters = null)
+    {
+        return preg_replace('<img([\w\W]+?)/>', '', $this->getShortFilteredContent($len, $endCharacters));
+    }
+
+    /**
      * Retrieve meta title
      * @return string
      */

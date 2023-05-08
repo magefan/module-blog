@@ -127,6 +127,11 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         return $this->getPost()->getShortFilteredContent($len, $endCharacters);
     }
 
+    public function getShortContentWithEscapedImgs($len = null, $endCharacters = null)
+    {
+        return $this->getPost()->getShortFilteredContentWithEscapedImgs($len, $endCharacters);
+    }
+
     /**
      * Retrieve post content
      *
