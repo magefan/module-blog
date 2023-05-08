@@ -129,6 +129,7 @@
 
         <div class="post-bottom">
 
+            <?php if ($block->displayAddThisToolbox()) : ?>
             <!-- Post Sharing -->
             <div class="post-sharing post-sharing-bottom">
                 <div class="share-elements">
@@ -164,6 +165,7 @@
                 </div>
             </div>
             <!-- END Post Sharing -->
+            <?php endif; ?>
 
             <?= $block->getChildHtml('blog.post.bottom') ?>
         </div>

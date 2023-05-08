@@ -29,6 +29,7 @@ $_postName = $block->escapeHtml($_post->getTitle());
                 </a>
             </h2>
 
+            <?php if ($block->displayAddThisToolbox()) : ?>
             <!-- Post Sharing -->
             <div class="post-sharing post-sharing-top old-post-list-item">
                 <div class="share-elements">
@@ -61,6 +62,8 @@ $_postName = $block->escapeHtml($_post->getTitle());
                 </div>
             </div>
             <!-- END Post Sharing -->
+            <?php endif; ?>
+
         </div>
 
         <?= /*@noEscape*/ $block->getInfoHtml() ?>
