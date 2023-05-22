@@ -191,6 +191,81 @@
                     <item name="default" xsi:type="string">0</item>
                 </item>
             </argument>
+            <settings>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_sort_by</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_list_template</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_per_page</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_sort_by</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_list_template</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_per_page</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="2">
+                            <value>2</value>
+                            <actions>
+                                <action name="0">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_sort_by</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_list_template</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_per_page</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="3">
+                            <value>3</value>
+                            <actions>
+                                <action name="0">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_sort_by</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_list_template</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>blog_category_form.blog_category_form.display_settings.posts_per_page</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
         </field>
         <field name="posts_sort_by">
             <argument name="data" xsi:type="array">
