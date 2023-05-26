@@ -8,7 +8,6 @@
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
-use Magefan\Blog\Model\AdminNotificationFeed;
 use Magefan\Community\Api\GetModuleVersionInterface;
 
 /**
@@ -35,11 +34,6 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     protected $currentVersion;
 
     /**
-     * @var AdminNotificationFeed
-     */
-    protected $adminNotificationFeed;
-
-    /**
      * @var \Magento\Framework\App\CacheInterface
      */
     protected $cacheManager;
@@ -59,7 +53,6 @@ class UpdateInfo extends \Magento\Backend\Block\Template
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\HTTP\Client\Curl $curl
      * @param \Magento\Framework\Json\Helper\Data $jsonHelper
-     * @param AdminNotificationFeed $adminNotificationFeed
      * @param array $data
      * @param GetModuleVersionInterface|null $getModuleVersion
      */
@@ -67,12 +60,10 @@ class UpdateInfo extends \Magento\Backend\Block\Template
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\HTTP\Client\Curl $curl,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
-        AdminNotificationFeed $adminNotificationFeed,
         array $data = [],
         GetModuleVersionInterface $getModuleVersion = null
     ) {
         $this->cacheManager = $context->getCache();
-        $this->adminNotificationFeed = $adminNotificationFeed;
         $this->jsonHelper = $jsonHelper;
         $this->curlClient = $curl;
         $this->getModuleVersion = $getModuleVersion ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
