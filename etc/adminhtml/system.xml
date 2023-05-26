@@ -591,11 +591,12 @@
                 </field>
             </group>
             <group id="social" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Social</label>
+                <label>Social Share Buttons</label>
                 <field id="add_this_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>AddThis Enabled</label>
+                    <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <!--
                 <field id="add_this_pubid" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>AddThis ID</label>
                     <comment><![CDATA[
@@ -607,6 +608,7 @@
                 <field id="add_this_language" type="text" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>AddThis Language</label>
                 </field>
+                -->
             </group>
             <group id="top_menu" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Category Top Navigation</label>
