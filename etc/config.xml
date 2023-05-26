@@ -74,6 +74,7 @@
                 <robots>INDEX,FOLLOW</robots>
             </tag>
             <search>
+                <template/>
                 <robots>NOINDEX,FOLLOW</robots>
             </search>
             <author>

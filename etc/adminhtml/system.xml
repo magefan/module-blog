@@ -289,6 +289,10 @@
             </group>
             <group id="search" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Search</label>
+                <field id="template" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Template</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
+                </field>
                 <field id="robots" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default Robots</label>
                     <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
