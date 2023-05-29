@@ -59,7 +59,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
 
 	public function getPostedOn($post, $format = 'Y-m-d H:i:s')
     {
-        return date($format, strtotime($post->getData('publish_time')));
+        return date($format, strtotime((string)$post->getData('publish_time')));
     }
 	
 	public function getOriginalPostImage($post)

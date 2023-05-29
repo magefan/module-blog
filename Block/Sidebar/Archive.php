@@ -50,7 +50,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
             $this->_months = [];
             $this->_preparePostCollection();
             foreach ($this->_postCollection as $post) {
-                $time = strtotime($post->getData('publish_time'));
+                $time = strtotime((string)$post->getData('publish_time'));
                 $this->_months[date('Y-m', $time)] = $time;
             }
         }

@@ -51,8 +51,8 @@
                                 <img src="<?= $block->escapeUrl($post_image); ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                                 <?php } ?>
                               <div class="post-date">
-                                <span class="day"><?= $block->escapeHtml(date("j", strtotime($postDate))); ?></span>
-                                <span class="month"><?= $block->escapeHtml(date("M", strtotime($postDate))); ?></span>
+                                <span class="day"><?= $block->escapeHtml(date("j", strtotime((string)$postDate))); ?></span>
+                                <span class="month"><?= $block->escapeHtml(date("M", strtotime((string)$postDate))); ?></span>
                               </div>
                            </div>
                         </div>
