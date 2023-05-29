@@ -32,7 +32,7 @@
             </index_page>
             <post_view>
                 <design>
-                    <template/>
+                    <template>modern</template>
                 </design>
                 <related_posts>
                     <enabled>1</enabled>
@@ -57,14 +57,14 @@
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
-                    <template/>
+                    <template>modern</template>
                 </nextprev>
                 <views_count>
                     <enabled>0</enabled>
                 </views_count>
             </post_view>
             <post_list>
-                <template/>
+                <template>list-modern</template>
                 <posts_per_page>10</posts_per_page>
                 <shortcotent_length>1000</shortcotent_length>
                 <lazyload_enabled>0</lazyload_enabled>
