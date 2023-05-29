@@ -517,7 +517,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  mixed $endCharacters
      * @return string
      */
-    public function getShortFilteredContentWithEscapedImgs($len = null, $endCharacters = null)
+    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null)
     {
         return preg_replace('<img([\w\W]+?)/>', '', $this->getShortFilteredContent($len, $endCharacters));
     }
