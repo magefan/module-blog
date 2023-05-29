@@ -122,7 +122,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 
                             <!-- post description -->
                             <div class="post-description mb-4">
-                                <?= /*@noEscape*/ $_post->getShortFilteredContent() ?>
+                                <?= /*@noEscape*/ $_post->getShortFilteredContentWithEscapedImgs() ?>
                             </div>
 
                             <!-- read more -->

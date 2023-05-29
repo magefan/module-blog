@@ -88,7 +88,7 @@ $_postName = $block->escapeHtml($_post->getTitle());
                 </div>
             <?php } ?>
             <div class="post-text-hld clearfix">
-                <?= /*@noEscape*/ $block->getShorContent() ?>
+                <?= /*@noEscape*/ $block->getShortContentWithEscapedImgs() ?>
             </div>
             <a class="post-read-more"
                href="<?= /*@noEscape*/ $_postUrl ?>"
