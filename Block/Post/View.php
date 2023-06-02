@@ -21,7 +21,11 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
      */
     public function getIdentities()
     {
-        return $this->getPost()->getIdentities();
+        if ($this->getPost()) {
+            return $this->getPost()->getIdentities();
+        } else {
+            return [];
+        }
     }
 
     /**
