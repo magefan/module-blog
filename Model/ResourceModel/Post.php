@@ -340,7 +340,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             'cp.post_id = cps.post_id',
             []
         )->where(
-            'cp.identifier = ?',
+            'cp.identifier COLLATE utf8_bin = ?',
             $identifier
         )->where(
             'cps.store_id IN (?)',

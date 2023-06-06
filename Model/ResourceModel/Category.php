@@ -188,7 +188,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             'cp.category_id = cps.category_id',
             []
         )->where(
-            'cp.identifier = ?',
+            'cp.identifier COLLATE utf8_bin = ?',
             $identifier
         )->where(
             'cps.store_id IN (?)',
