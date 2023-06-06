@@ -35,13 +35,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
             }
         }
 
-        $inputFilter = $this->getFilterInput(
+  /*      $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data
         );
 
-        $data = $inputFilter->getUnescaped();
+        $data = $inputFilter->getUnescaped();*/
 
         return $data;
     }

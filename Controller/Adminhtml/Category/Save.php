@@ -50,14 +50,14 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
                 $filterRules[$dateField] = $dateFilter;
             }
         }
-
+/*
         $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data
-        );
+        );*/
 
-        $data = $inputFilter->getUnescaped();
+       // $data = $inputFilter->getUnescaped();
 
         return $data;
     }

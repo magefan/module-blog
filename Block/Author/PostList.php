@@ -52,14 +52,15 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($author->getMetaTitle());
             $this->pageConfig->setKeywords($author->getMetaKeywords());
             $this->pageConfig->setDescription($author->getMetaDescription());
+            $pageParamName = $this->getLayout()->getBlock('post_list_toolbar')->getPageParamName();
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_AUTHOR)) {
 
                 $canonicalUrl = $author->getAuthorUrl();
-                $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+                $page = (int)$this->_request->getParam($pageParamName);
                 if ($page > 1) {
                     $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                        . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                        . $pageParamName . '=' . $page;
                 }
 
                 $this->pageConfig->addRemotePageAsset(

@@ -52,6 +52,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($tag->getMetaTitle());
             $this->pageConfig->setKeywords($tag->getMetaKeywords());
             $this->pageConfig->setDescription($tag->getMetaDescription());
+            $pageParamName = $this->getLayout()->getBlock('post_list_toolbar')->getPageParamName();
             /*
             $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
             if ($page < 2) {
@@ -74,10 +75,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {
 
                 $canonicalUrl = $tag->getTagUrl();
-                $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+                $page = (int)$this->_request->getParam($pageParamName);
                 if ($page > 1) {
                     $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                        . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                        . $pageParamName . '=' . $page;
                 }
 
                 $this->pageConfig->addRemotePageAsset(

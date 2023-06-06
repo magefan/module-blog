@@ -8,11 +8,30 @@
 
 namespace Magefan\Blog\Block\Post\PostList;
 
+use Magefan\Blog\Model\Config;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+
 /**
  * Blog posts list toolbar
  */
 class Toolbar extends \Magento\Framework\View\Element\Template
 {
+    /**
+     * @param Context $context
+     * @param Config $config
+     * @param array $data
+     */
+    public function __construct(
+        Template\Context $context,
+        Config $config,
+        array $data = []
+    )
+    {
+        $this->config = $config;
+        parent::__construct($context, $data);
+    }
+
     /**
      * Page GET parameter name
      */
@@ -84,7 +103,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      */
     public function getCurrentPage()
     {
-        $page = (int) $this->_request->getParam(self::PAGE_PARM_NAME);
+        $page = (int) $this->_request->getParam($this->getPageParamName());
         return $page ? $page : 1;
     }
 
@@ -104,7 +123,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             )->setShowAmounts(
                 false
             )->setPageVarName(
-                self::PAGE_PARM_NAME
+                $this->getPageParamName()
             )->setFrameLength(
                 $this->_scopeConfig->getValue(
                     'design/pagination/pagination_frame',
@@ -141,5 +160,12 @@ class Toolbar extends \Magento\Framework\View\Element\Template
         }
 
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageParamName(){
+        return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }
 }

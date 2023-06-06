@@ -71,6 +71,11 @@ class Config
     const XML_PATH_REDIRECT_TO_NO_SLASH = 'mfblog/permalink/redirect_to_no_slash';
 
     /**
+     * Page pagination type
+     */
+    const XML_PATH_PAGE_PAGINATION_TYPE = 'mfblog/permalink/page_pagination_type';
+
+    /**
      * Redirect to no slash config path (blog+)
      */
     const XML_PATH_REDIRECT_TO_NO_SLASH_BLOG_PLUS = 'mfblog/advanced_permalink/redirect_to_no_slash';
@@ -260,6 +265,18 @@ class Config
     {
         return (bool)$this->getConfig(
             self::XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES,
+            $storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return mixed
+     */
+    public function getPagePaginationType($storeId = null)
+    {
+        return $this->getConfig(
+            self::XML_PATH_PAGE_PAGINATION_TYPE,
             $storeId
         );
     }
