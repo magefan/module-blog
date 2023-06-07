@@ -8,7 +8,6 @@
 
 namespace Magefan\Blog\Block\Post\PostList\Toolbar;
 
-use _PHPStan_76800bfb5\Nette\DI\Extensions\DIExtension;
 use Magefan\Blog\Model\Config\Source\LazyLoad;
 
 /**
