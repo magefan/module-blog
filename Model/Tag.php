@@ -134,7 +134,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     public function checkIdentifier($identifier)
     {
-        return $this->load($identifier)->getId();
+        $tag = $this->load($identifier);
+        if ($tag->getIdentifier() == $identifier) {
+            return $tag->getId();
+        }
+
+        return null;
     }
 
     /**
