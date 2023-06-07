@@ -190,13 +190,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             }
         }
 
-/*        $inputFilter = $this->getFilterInput(
+        $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data
         );
 
-        $data = $inputFilter->getUnescaped();*/
+        $data = $inputFilter->getUnescaped();
 
         return $data;
     }
