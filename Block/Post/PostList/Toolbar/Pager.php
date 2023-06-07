@@ -95,7 +95,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
     }
 
     /**
-     * Retrieve lazyload mod
+     * Get page pagination type
      *
      * @return string
      */
