@@ -59,7 +59,7 @@ class UrlResolver implements UrlResolverInterface
     /**
      * @var Config|mixed
      */
-    private  $config;
+    protected  $config;
 
     /**
      * UrlResolver constructor.
@@ -106,24 +106,14 @@ class UrlResolver implements UrlResolverInterface
         if ($pathInfo[0] != $blogRoute) {
             return;
         }
-        $page = false;
-        if ($this->config->getPagePaginationType() === '2'){
-            foreach ($pathInfo as $key => $item){
-                if ($item === 'page' && isset($pathInfo[$key + 1]) && intval($pathInfo[$key + 1])){
-                    $page = intval($pathInfo[$key + 1]);
-                    unset($pathInfo[$key]);
-                    unset($pathInfo[$key + 1]);
-                }
-            }
-        }
 
         unset($pathInfo[0]);
 
         if (!count($pathInfo)) {
-            return ['id' => 1, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_INDEX];
+            return ['id' => 1, 'type' => Url::CONTROLLER_INDEX];
         } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_RSS)) {
             if (!isset($pathInfo[2]) || in_array($pathInfo[2], ['index', 'feed'])) {
-                return ['id' => 1, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_RSS];
+                return ['id' => 1, 'type' => Url::CONTROLLER_RSS];
             }
         } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_SEARCH)) {
             return ['id' => empty($pathInfo[2]) ? '' : $pathInfo[2], 'params' => ['page' => $page], 'type' => Url::CONTROLLER_SEARCH];
@@ -131,12 +121,12 @@ class UrlResolver implements UrlResolverInterface
             && !empty($pathInfo[2])
             && ($authorId = $this->_getAuthorId($pathInfo[2]))
         ) {
-            return ['id' => $authorId, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_AUTHOR];
+            return ['id' => $authorId, 'type' => Url::CONTROLLER_AUTHOR];
         } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_TAG)
             && !empty($pathInfo[2])
             && $tagId = $this->_getTagId($pathInfo[2])
         ) {
-            return ['id' => $tagId, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_TAG];
+            return ['id' => $tagId, 'type' => Url::CONTROLLER_TAG];
         } else {
             $controllerName = null;
             if (Url::PERMALINK_TYPE_DEFAULT == $this->url->getPermalinkType()) {
@@ -151,15 +141,15 @@ class UrlResolver implements UrlResolverInterface
                 if ((!$controllerName || $controllerName == Url::CONTROLLER_ARCHIVE)
                     && $this->_isArchiveIdentifier($pathInfo[0])
                 ) {
-                    return ['id' => $pathInfo[0], 'params' => ['page' => $page], 'type' => Url::CONTROLLER_ARCHIVE];
+                    return ['id' => $pathInfo[0], 'type' => Url::CONTROLLER_ARCHIVE];
                 } elseif ((!$controllerName || $controllerName == Url::CONTROLLER_POST)
                     && $postId = $this->_getPostId($pathInfo[0])
                 ) {
-                    return ['id' => $postId, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_POST];
+                    return ['id' => $postId, 'type' => Url::CONTROLLER_POST];
                 } elseif ((!$controllerName || $controllerName == Url::CONTROLLER_CATEGORY)
                     && $categoryId = $this->_getCategoryId($pathInfo[0])
                 ) {
-                    return ['id' => $categoryId, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_CATEGORY];
+                    return ['id' => $categoryId, 'type' => Url::CONTROLLER_CATEGORY];
                 }
             } elseif ($pathInfoCount > 1) {
                 $postId = 0;
@@ -205,18 +195,17 @@ class UrlResolver implements UrlResolverInterface
                         $result = ['id' => $postId, 'type' => Url::CONTROLLER_POST];
                         if ($categoryId) {
                             $result['params'] = [
-                                'page' => $page,
                                 'category_id' => $categoryId
                             ];
                         }
                         return $result;
                     } elseif ($categoryId) {
-                        return ['id' => $categoryId, 'page' => $page, 'type' => Url::CONTROLLER_CATEGORY];
+                        return ['id' => $categoryId, 'type' => Url::CONTROLLER_CATEGORY];
                     }
                 } elseif ((!$controllerName || $controllerName == Url::CONTROLLER_POST)
                     && $postId = $this->_getPostId(implode('/', $pathInfo))
                 ) {
-                    return ['id' => $postId, 'params' => ['page' => $page], 'type' => Url::CONTROLLER_POST];
+                    return ['id' => $postId, 'type' => Url::CONTROLLER_POST];
                 }
             }
         }

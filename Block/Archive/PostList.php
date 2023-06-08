@@ -57,7 +57,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $title = $this->_getTitle();
         $this->_addBreadcrumbs($title, 'blog_search');
         $this->pageConfig->getTitle()->set($title);
-        $pageParamName = $this->getLayout()->getBlock('post_list_toolbar')->getPageParamName();
 
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ARCHIVE)) {
 
@@ -65,10 +64,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $this->getYear() . '-' . str_pad($this->getMonth(), 2, '0', STR_PAD_LEFT),
                 \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
             );
-            $page = (int)$this->_request->getParam($pageParamName);
+            $page = (int)$this->_request->getParam($this->getPageParamName());
             if ($page > 1) {
                 $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                    . $pageParamName . '=' . $page;
+                    . $this->getPageParamName() . '=' . $page;
             }
 
             $this->pageConfig->addRemotePageAsset(

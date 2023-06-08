@@ -55,17 +55,16 @@ class View extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->getTitle()->set($category->getMetaTitle());
             $this->pageConfig->setKeywords($category->getMetaKeywords());
             $this->pageConfig->setDescription($category->getMetaDescription());
-            $pageParamName = $this->getLayout()->getBlock('post_list_toolbar')->getPageParamName();
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_CATEGORY)) {
 
                 $layoutUpdate = $category->getData('layout_update_xml') ?: '';
                 if (false === strpos($layoutUpdate, 'rel="canonical"')) {
                     $canonicalUrl = $category->getCanonicalUrl();
-                    $page = (int)$this->_request->getParam($pageParamName);
+                    $page = (int)$this->_request->getParam($this->getPageParamName());
                     if ($page > 1) {
                         $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                            . $pageParamName . '=' . $page;
+                            . $this->getPageParamName() . '=' . $page;
                     }
 
                     $this->pageConfig->addRemotePageAsset(

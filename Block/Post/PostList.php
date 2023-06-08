@@ -33,7 +33,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     protected function _prepareLayout()
     {
-        $page = (int)$this->_request->getParam($this->getLayout()->getBlock('post_list_toolbar')->getPageParamName());
+        $page = (int)$this->_request->getParam($this->getPageParamName());
 
         if ($page > 1) {
             //$this->pageConfig->setRobots('NOINDEX,FOLLOW');

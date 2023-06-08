@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Block\Post\PostList;
 
 use Magefan\Blog\Model\Config;
+use Magento\Framework\View\Element\Template\Context;
 
 /**
  * Blog posts list toolbar
@@ -21,16 +22,15 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     private $config;
 
     /**
-     * @param Template\Context $context
+     * @param Context $context
      * @param array $data
      * @param Config|null $config
      */
     public function __construct(
-        Template\Context $context,
+        Context $context,
         array $data = [],
         Config $config = null
-    )
-    {
+    ){
         parent::__construct($context, $data);
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->config = $config ?: $objectManager->create(Config::class);

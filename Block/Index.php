@@ -31,15 +31,14 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         );
         $this->pageConfig->setKeywords($this->_getConfigValue('meta_keywords'));
         $this->pageConfig->setDescription($this->_getConfigValue('meta_description'));
-        $pageParamName = $this->getLayout()->getBlock('post_list_toolbar')->getPageParamName();
 
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_INDEX)) {
 
             $canonicalUrl = $this->_url->getBaseUrl();
-            $page = (int)$this->_request->getParam($pageParamName);
+            $page = (int)$this->_request->getParam($this->getPageParamName());
             if ($page > 1) {
                 $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                    . $pageParamName . '=' . $page;
+                    . $this->getPageParamName() . '=' . $page;
             }
 
             $this->pageConfig->addRemotePageAsset(
