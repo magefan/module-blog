@@ -73,7 +73,7 @@ class Config
     /**
      * Page pagination type
      */
-    const XML_PATH_PAGE_PAGINATION_TYPE = 'mfblog/permalink/page_pagination_type';
+    const XML_PATH_PAGE_PAGINATION_TYPE = 'mfblog/advanced_permalink/page_pagination_type';
 
     /**
      * Redirect to no slash config path (blog+)

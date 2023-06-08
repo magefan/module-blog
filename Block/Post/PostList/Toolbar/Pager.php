@@ -101,7 +101,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
     public function getPagePaginationType()
     {
         return $this->_scopeConfig->getValue(
-            'mfblog/permalink/page_pagination_type',
+            'mfblog/advanced_permalink/page_pagination_type',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
