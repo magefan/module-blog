@@ -116,7 +116,7 @@ class UrlResolver implements UrlResolverInterface
                 return ['id' => 1, 'type' => Url::CONTROLLER_RSS];
             }
         } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_SEARCH)) {
-            return ['id' => empty($pathInfo[2]) ? '' : $pathInfo[2], 'params' => ['page' => $page], 'type' => Url::CONTROLLER_SEARCH];
+            return ['id' => empty($pathInfo[2]) ? '' : $pathInfo[2], 'type' => Url::CONTROLLER_SEARCH];
         } elseif ($pathInfo[1] == $this->url->getRoute(Url::CONTROLLER_AUTHOR)
             && !empty($pathInfo[2])
             && ($authorId = $this->_getAuthorId($pathInfo[2]))
