@@ -43,12 +43,15 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
             $this->pageConfig->setKeywords($post->getMetaKeywords());
             $this->pageConfig->setDescription($post->getMetaDescription());
 
-            if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_POST)) {
-                $this->pageConfig->addRemotePageAsset(
-                    $post->getCanonicalUrl(),
-                    'canonical',
-                    ['attributes' => ['rel' => 'canonical']]
-                );
+            $layoutUpdate = $post->getData('layout_update_xml') ?: '';
+            if (false === strpos($layoutUpdate, 'rel="canonical"')) {
+                if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_POST)) {
+                    $this->pageConfig->addRemotePageAsset(
+                        $post->getCanonicalUrl(),
+                        'canonical',
+                        ['attributes' => ['rel' => 'canonical']]
+                    );
+                }
             }
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
