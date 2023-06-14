@@ -14,7 +14,7 @@
     require(['jquery', 'domReady!'], function($){
         setTimeout(function(){
             $.ajax({
-                url:"<?= $block->escapeUrl($block->getCounterUrl());?>",
+                url: atob( '<?= base64_encode($block->getCounterUrl()) ?>'),
                 type:'POST',
                 dataType: 'json',
                 success: function(response) { }
