@@ -14,7 +14,7 @@
  */
 ?>
 
-<?php if (true || ($block->needToUpdate() && \Magefan\Community\Model\UrlChecker::showUrl($block->getUrl()))) { ?>
+<?php if ($block->needToUpdate() && \Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
     <div class="messages">
         <div class="message message-notice notice">
             <div data-ui-id="messages-message-error">
