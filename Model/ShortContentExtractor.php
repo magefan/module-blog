@@ -51,8 +51,8 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     public function execute($content, $len = null, $endCharacters = null)
     {
         $content = (string)$content;
-
         $key = md5($content) . $len . $endCharacters;
+
         if (!isset($this->executedContent[$key])) {
 
             $content = $this->filterProvider->getPageFilter()->filter(
@@ -84,6 +84,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                     if (false !== $sp1) {
                         $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
                         $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
+                        $content = $cc;
                         $sp2 = mb_strpos($content, '</style>');
 
                         while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
