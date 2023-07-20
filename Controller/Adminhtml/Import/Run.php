@@ -21,7 +21,7 @@ class Run extends \Magento\Backend\App\Action
     {
         //set_time_limit(0);
 
-        $data = $this->getRequest()->getPost();
+        $data = $this->getRequest()->getParams();
         $type = '';
 
         try {
