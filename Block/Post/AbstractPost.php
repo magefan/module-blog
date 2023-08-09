@@ -67,7 +67,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magefan\Blog\Model\Config $config
      * @param array $data
      * @param null $config
      * @param null $templatePool
