@@ -56,8 +56,7 @@ class Chooser extends \Magento\Backend\App\Action
                 '',
                 ['data' => ['id' => $uniqId]]
             );
-        }
-        else {
+        } else {
             $pagesGrid = $layout->createBlock(
                 \Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured\Grid::class,
                 ''

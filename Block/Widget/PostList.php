@@ -18,8 +18,8 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
      * Block template file
      * @var string
      */
-	protected $_defaultToolbarBlock = 'Magefan\Blog\Block\Post\PostList\Toolbar';
-	
+    protected $_defaultToolbarBlock = 'Magefan\Blog\Block\Post\PostList\Toolbar';
+    
     protected $_sliderData = [];
     
     protected $_show = [];
@@ -27,28 +27,28 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
     protected $_themeHelper;
     
     protected $_isFullHtml;
-	
-	protected function _preparePostCollection()
+    
+    protected function _preparePostCollection()
     {
-		$orderBy = $this->getOrderBy();
-		$order = $this->getOrder();
-		
-		$this->_postCollection = $this->_postCollectionFactory->create()
+        $orderBy = $this->getOrderBy();
+        $order = $this->getOrder();
+        
+        $this->_postCollection = $this->_postCollectionFactory->create()
             ->addActiveFilter()
             ->addStoreFilter($this->_storeManager->getStore()->getId())
             ->setOrder($orderBy, $order);
-		
         
-        if($this->getCategories()){
-			$categories = explode(',', trim($this->getCategories()));
-			$this->_postCollection->addCategoryFilter($categories);
-		}
+        
+        if ($this->getCategories()) {
+            $categories = explode(',', trim($this->getCategories()));
+            $this->_postCollection->addCategoryFilter($categories);
+        }
         
         if ($this->getPostCount()) {
             $this->_postCollection->setPageSize($this->getPostCount());
         }
     }
-	public function getPostCollection()
+    public function getPostCollection()
     {
         if (is_null($this->_postCollection)) {
             $this->_preparePostCollection();
@@ -57,14 +57,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         return $this->_postCollection;
     }
 
-	public function getPostedOn($post, $format = 'Y-m-d H:i:s')
+    public function getPostedOn($post, $format = 'Y-m-d H:i:s')
     {
         return date($format, strtotime((string)$post->getData('publish_time')));
     }
-	
-	public function getOriginalPostImage($post)
-    {		
-		$imgageFile = $post->getPostImage();
+    
+    public function getOriginalPostImage($post)
+    {
+        $imgageFile = $post->getPostImage();
         return $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).$imgageFile;
     }
     /**
@@ -74,7 +74,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
      */
     public function getPostHtml($post)
     {
-    	return $this->getChildBlock('blog.posts.list.item')->setPost($post)->toHtml();
+        return $this->getChildBlock('blog.posts.list.item')->setPost($post)->toHtml();
     }
 
     /**
@@ -119,11 +119,11 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         }
         return parent::_beforeToHtml();
     } */
-	public function getTemplate()
+    public function getTemplate()
     {
         if ($this->isFullHtml()) {
             $template = $this->getData('post_template');
-            if($template == 'custom') {
+            if ($template == 'custom') {
                 return $this->getData('custom_template');
             } else {
                 return $template;
@@ -165,7 +165,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
                 'nav'  => (bool)$this->getData('slider_nav'),
                 'dots' => (bool)$this->getData('slider_dots')
             ];
-            $adapts = array('1900', '1600', '1420', '1280','980','768','480','320','0');
+            $adapts = ['1900', '1600', '1420', '1280','980','768','480','320','0'];
             foreach ($adapts as $adapt) {
                  $this->_sliderData['responsive'][$adapt] = ['items' => (float)$this->getData('items_' . $adapt)];
             }
@@ -177,7 +177,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
     public function subString($str, $strLenght)
     {
         $str = $this->stripTags($str);
-        if(strlen($str) > $strLenght) {
+        if (strlen($str) > $strLenght) {
             $strCutTitle = substr($str, 0, $strLenght);
             $str = substr($strCutTitle, 0, strrpos($strCutTitle, ' '))."&hellip;";
         }
@@ -194,7 +194,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
     
     public function isShow($item)
     {
-    	return in_array($item, $this->getElementShow());
+        return in_array($item, $this->getElementShow());
     }
-    
 }

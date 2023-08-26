@@ -95,6 +95,5 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
                 ['attributes' => ['rel' => 'next']]
             );
         }
-
     }
 }

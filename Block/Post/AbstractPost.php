@@ -245,9 +245,13 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     public function displayAddThisToolbox()
     {
         $isSocialEnabled = $this->_scopeConfig->getValue(
-            'mfblog/social/add_this_enabled', ScopeInterface::SCOPE_STORE);
+            'mfblog/social/add_this_enabled',
+            ScopeInterface::SCOPE_STORE
+        );
         $isSocialIdExist = $this->_scopeConfig->getValue(
-            'mfblog/social/add_this_pubid', ScopeInterface::SCOPE_STORE);
+            'mfblog/social/add_this_pubid',
+            ScopeInterface::SCOPE_STORE
+        );
 
         return $isSocialEnabled && $isSocialIdExist;
     }

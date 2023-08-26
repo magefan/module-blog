@@ -54,7 +54,6 @@ class Index implements ItemProviderInterface
         $this->itemFactory = $itemFactory;
         $this->scopeConfig = $scopeConfig;
         $this->blogUrl = $blogUrl;
-
     }
 
     /**

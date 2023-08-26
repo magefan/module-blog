@@ -131,5 +131,5 @@ abstract class AbstractManagement implements ManagementInterface
      * @param $item
      * @return mixed
      */
-    protected abstract function getDynamicData($item);
+    abstract protected function getDynamicData($item);
 }

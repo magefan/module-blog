@@ -170,5 +170,4 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 
         return parent::toHtml();
     }
-
 }

@@ -57,12 +57,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             if ($page < 2) {
             */
                 $robots = $tag->getData('meta_robots');
-                if ($robots) {
-                    $this->pageConfig->setRobots($robots);
-                } else {
-                    $robots = $this->config->getTagRobots();
-                    $this->pageConfig->setRobots($robots);
-                }
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
+            } else {
+                $robots = $this->config->getTagRobots();
+                $this->pageConfig->setRobots($robots);
+            }
             /*
             }
 

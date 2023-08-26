@@ -19,5 +19,4 @@ interface ShortContentExtractorInterface
      * @throws \Exception
      */
     public function execute($content, $len = null, $endCharacters = null);
-
 }

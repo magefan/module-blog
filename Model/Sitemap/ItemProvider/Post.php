@@ -47,7 +47,6 @@ class Post implements ItemProviderInterface
         $this->sitemapConfig = $sitemapConfig;
         $this->collectionFactory = $collectionFactory;
         $this->itemFactory = $itemFactory;
-
     }
 
     /**

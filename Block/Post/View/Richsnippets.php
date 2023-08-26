@@ -75,7 +75,7 @@ class Richsnippets extends Opengraph
         if ($author = $this->getPost()->getAuthor()) {
             if ($author->getTitle()) {
                 $authorPageEnabled = $this->config->getConfig(
-                      'mfblog/author/page_enabled'
+                    'mfblog/author/page_enabled'
                 );
                 return [
                     '@type' => 'Person',
