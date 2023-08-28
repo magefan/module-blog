@@ -156,6 +156,9 @@
                 <related_posts_template/>
                 <number_of_related_posts>5</number_of_related_posts>
             </product_page>
+            <advanced_permalink>
+                <page_pagination_type>page</page_pagination_type>
+            </advanced_permalink>
             <permalink>
                 <route>blog</route>
                 <redirect_to_no_slash>1</redirect_to_no_slash>
@@ -173,7 +176,6 @@
                 <author_sufix/>
                 <search_route>search</search_route>
                 <rss_route>rss</rss_route>
-                <page_pagination_type>page</page_pagination_type>
             </permalink>
             <seo>
                 <use_canonical_meta_tag_for>all</use_canonical_meta_tag_for>

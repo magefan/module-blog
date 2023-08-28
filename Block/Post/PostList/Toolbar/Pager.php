@@ -8,7 +8,9 @@
 
 namespace Magefan\Blog\Block\Post\PostList\Toolbar;
 
+use Magento\Store\Model\ScopeInterface;
 use Magefan\Blog\Model\Config\Source\LazyLoad;
+use Magefan\Blog\Model\Config;
 
 /**
  * Blog posts list toolbar pager
@@ -76,7 +78,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_list/lazyload_enabled',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE
         );
     }
 
@@ -89,7 +91,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_list/lazyload_padding',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE
         );
     }
 
@@ -100,10 +102,14 @@ class Pager extends \Magento\Theme\Block\Html\Pager
      */
     public function getPagePaginationType()
     {
-        return $this->_scopeConfig->getValue(
-            'mfblog/advanced_permalink/page_pagination_type',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        if ($this->_scopeConfig->getValue(Config::XML_PATH_ADVANCED_PERMALINK_ENABLED, ScopeInterface::SCOPE_STORE)) {
+            return $this->_scopeConfig->getValue(
+                Config::XML_PATH_PAGE_PAGINATION_TYPE,
+                ScopeInterface::SCOPE_STORE
+            );
+        }
+
+        return 'page';
     }
 
     /**

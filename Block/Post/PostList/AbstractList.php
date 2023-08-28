@@ -24,6 +24,7 @@ abstract class AbstractList extends Template implements IdentityInterface
     protected $_filterProvider;
 
     /**
+    /**
      * @var \Magento\Cms\Model\Page
      */
     protected $_post;

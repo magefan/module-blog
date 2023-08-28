@@ -279,9 +279,13 @@ class Config
      */
     public function getPagePaginationType($storeId = null)
     {
-        return $this->getConfig(
-            self::XML_PATH_PAGE_PAGINATION_TYPE,
-            $storeId
-        );
+        if ($this->getConfig(self::XML_PATH_ADVANCED_PERMALINK_ENABLED, $storeId)) {
+            return $this->getConfig(
+                self::XML_PATH_PAGE_PAGINATION_TYPE,
+                $storeId
+            );
+        }
+
+        return 'page';
     }
 }
