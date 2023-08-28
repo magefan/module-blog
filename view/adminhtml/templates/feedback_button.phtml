@@ -14,17 +14,15 @@
  */
 ?>
 <?php
-$reviewProductUrl = 'https://magefan.com/review/product/list/id/1797/
-                     ?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular';
-$contactUrl = 'https://magefan.com/review/product/list/id/1797/
-               ?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular';
+$reviewProductUrl = 'https://magefan.com/magento2-blog-extension/reviews?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular#review-form';
+$contactUrl = 'https://magefan.com/contact?utm_source=m2admin_blog_leave_feedback&utm_medium=link&utm_campaign=regular';
 ?>
 <?php if (\Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
 <div id="blog-feedback-block">
     <div class="blog-leave-feedback blog-leave-review">
         <img  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
         <a target="_blank"
-           href="<?php $reviewProductUrl; ?>">
+           href="<?= $block->escapeUrl($reviewProductUrl); ?>">
             <?= $block->escapeHtml(__('Leave a review about the blog extension')) ?>
         </a>
     </div>
