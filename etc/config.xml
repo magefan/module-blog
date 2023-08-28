@@ -173,6 +173,7 @@
                 <author_sufix/>
                 <search_route>search</search_route>
                 <rss_route>rss</rss_route>
+                <page_pagination_type>page</page_pagination_type>
             </permalink>
             <seo>
                 <use_canonical_meta_tag_for>all</use_canonical_meta_tag_for>

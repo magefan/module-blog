@@ -35,10 +35,10 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_INDEX)) {
 
             $canonicalUrl = $this->_url->getBaseUrl();
-            $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+            $page = (int)$this->_request->getParam($this->getPageParamName());
             if ($page > 1) {
                 $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                    . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                    . $this->getPageParamName() . '=' . $page;
             }
 
             $this->pageConfig->addRemotePageAsset(

@@ -59,7 +59,7 @@ class UrlResolver implements UrlResolverInterface
     /**
      * @var Config|mixed
      */
-    private $config;
+    protected  $config;
 
     /**
      * UrlResolver constructor.

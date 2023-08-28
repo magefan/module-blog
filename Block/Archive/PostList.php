@@ -64,10 +64,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $this->getYear() . '-' . str_pad($this->getMonth(), 2, '0', STR_PAD_LEFT),
                 \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
             );
-            $page = (int)$this->_request->getParam(Toolbar::PAGE_PARM_NAME);
+            $page = (int)$this->_request->getParam($this->getPageParamName());
             if ($page > 1) {
                 $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                    . Toolbar::PAGE_PARM_NAME . '=' . $page;
+                    . $this->getPageParamName() . '=' . $page;
             }
 
             $this->pageConfig->addRemotePageAsset(
