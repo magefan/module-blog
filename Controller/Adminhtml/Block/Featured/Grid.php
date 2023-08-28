@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Block\Featured;
 
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
-class Grid extends \Magento\Framework\App\Action\Action
+class Grid extends \Magento\Backend\App\Action
 {
     /**
      * Authorization level of a basic admin session

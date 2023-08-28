@@ -6,6 +6,8 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model\Sitemap;
 
 use Magefan\Blog\Api\SitemapConfigInterface;
@@ -13,23 +15,27 @@ use Magefan\Blog\Api\SitemapConfigInterface;
 /**
  * Class Sitemap Config Model
  */
-class SitemapConfig implements SitemapConfigInterface
+class SitemapConfig extends \Magefan\Blog\Model\Config implements SitemapConfigInterface
 {
     /**
-     * @param string $page
+     * @param $page
+     * @param $storeId
      * @return bool
      */
-    public function isEnabledSitemap($page)
+    public function isEnabledSitemap($page, $storeId = null) : bool
     {
-        return true;
+        return $this->isEnabled($storeId);
     }
 
     /**
-     * @param string $page
+     * @param $page
+     * @param $storeId
      * @return string
      */
-    public function getFrequency($page)
+    public function getFrequency($page, $storeId = null): string
     {
+        $frequency = '';
+
         switch ($page) {
             case 'index':
                 $frequency = 'daily';
@@ -47,10 +53,11 @@ class SitemapConfig implements SitemapConfigInterface
     }
 
     /**
-     * @param string $page
+     * @param $page
+     * @param $storeId
      * @return float
      */
-    public function getPriority($page)
+    public function getPriority($page, $storeId = null): float
     {
         switch ($page) {
             case 'index':
@@ -65,6 +72,6 @@ class SitemapConfig implements SitemapConfigInterface
             default:
                 $priority = 0.3;
         }
-        return $priority;
+        return (float)$priority;
     }
 }

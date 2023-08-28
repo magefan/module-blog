@@ -53,16 +53,16 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setKeywords($tag->getMetaKeywords());
             $this->pageConfig->setDescription($tag->getMetaDescription());
             /*
-            $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
+            $page = $this->_request->getParam($this->getPageParamName());
             if ($page < 2) {
             */
                 $robots = $tag->getData('meta_robots');
-                if ($robots) {
-                    $this->pageConfig->setRobots($robots);
-                } else {
-                    $robots = $this->config->getTagRobots();
-                    $this->pageConfig->setRobots($robots);
-                }
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
+            } else {
+                $robots = $this->config->getTagRobots();
+                $this->pageConfig->setRobots($robots);
+            }
             /*
             }
 
@@ -72,19 +72,21 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             */
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_TAG)) {
+                $layoutUpdate = $tag->getData('layout_update_xml') ?: '';
+                if (false === strpos($layoutUpdate, 'rel="canonical"')) {
+                    $canonicalUrl = $tag->getTagUrl();
+                    $page = (int)$this->_request->getParam($this->getPageParamName());
+                    if ($page > 1) {
+                        $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                            . $this->getPageParamName() . '=' . $page;
+                    }
 
-                $canonicalUrl = $tag->getTagUrl();
-                $page = (int)$this->_request->getParam($this->getPageParamName());
-                if ($page > 1) {
-                    $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                        . $this->getPageParamName() . '=' . $page;
+                    $this->pageConfig->addRemotePageAsset(
+                        $canonicalUrl,
+                        'canonical',
+                        ['attributes' => ['rel' => 'canonical']]
+                    );
                 }
-
-                $this->pageConfig->addRemotePageAsset(
-                    $canonicalUrl,
-                    'canonical',
-                    ['attributes' => ['rel' => 'canonical']]
-                );
             }
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');

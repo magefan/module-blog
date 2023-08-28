@@ -21,7 +21,6 @@
     <preference for="Magefan\Blog\Api\AuthorRepositoryInterface" type="Magefan\Blog\Model\AuthorRepository" />
     <preference for="Magefan\Blog\Api\CommentRepositoryInterface" type="Magefan\Blog\Model\CommentRepository" />
     <preference for="Magefan\Blog\Api\ShortContentExtractorInterface" type="Magefan\Blog\Model\ShortContentExtractor" />
-    <!-- deprecated <preference for="Magento\Sitemap\Model\Sitemap" type="Magefan\Blog\Model\Sitemap" /> -->
     <preference for="Magefan\Blog\Api\UrlResolverInterface" type="Magefan\Blog\Model\UrlResolver" />
     <virtualType name="Magefan\Blog\ImageUpload" type="Magefan\Blog\Model\ImageUploader">
         <arguments>
@@ -50,27 +49,6 @@
             <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
         </arguments>
     </type>
-
-    <type name="Magento\Sitemap\Model\Sitemap">
-        <plugin name="magento_sitemap_model_sitemap_magefan_blog"
-                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
-    </type>
-
-    <type name="MageWorx\XmlSitemap\Model\Sitemap">
-        <plugin name="mageworks_sitemap_model_sitemap_magefan_blog"
-                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
-    </type>
-
-    <type name="Amasty\XmlSitemap\Model\Sitemap">
-        <plugin name="amasty_sitemap_model_sitemap_magefan_blog"
-                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
-    </type>
-
-    <type name="Amasty\XmlSitemap\Model\XmlGenerator">
-        <plugin name="amasty_sitemap_model_sitemap_magefan_blog"
-                type="Magefan\Blog\Plugin\Magento\Sitemap\AmastySitemapPlugin" sortOrder="10"/>
-    </type>
-
     <type name="Magento\AdminGws\Model\Models">
         <plugin name="magefan_blog_plugin_admingws_model_models_plugin" type="\Magefan\Blog\Plugin\Magento\AdminGws\Model\ModelsPlugin" sortOrder="10"/>
     </type>
@@ -200,6 +178,16 @@
                         <item name="content" xsi:type="boolean">true</item>
                     </item>
                 </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sitemap\Model\ItemProvider\Composite">
+        <arguments>
+            <argument name="itemProviders" xsi:type="array">
+                <item name="mfblogIndexUrlProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Index</item>
+                <item name="mfblogPostProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Post</item>
+                <item name="mfblogCategoryProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Category</item>
             </argument>
         </arguments>
     </type>

@@ -54,22 +54,24 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setDescription($author->getMetaDescription());
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_AUTHOR)) {
+                $layoutUpdate = $author->getData('layout_update_xml') ?: '';
+                if (false === strpos($layoutUpdate, 'rel="canonical"')) {
+                    $canonicalUrl = $author->getAuthorUrl();
+                    $page = (int)$this->_request->getParam($this->getPageParamName());
+                    if ($page > 1) {
+                        $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                            . $this->getPageParamName() . '=' . $page;
+                    }
 
-                $canonicalUrl = $author->getAuthorUrl();
-                $page = (int)$this->_request->getParam($this->getPageParamName());
-                if ($page > 1) {
-                    $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
-                        . $this->getPageParamName() . '=' . $page;
+                    $this->pageConfig->addRemotePageAsset(
+                        $canonicalUrl,
+                        'canonical',
+                        ['attributes' => ['rel' => 'canonical']]
+                    );
                 }
-
-                $this->pageConfig->addRemotePageAsset(
-                    $canonicalUrl,
-                    'canonical',
-                    ['attributes' => ['rel' => 'canonical']]
-                );
             }
             /*
-            $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
+            $page = $this->_request->getParam($this->getPageParamName());
             if ($page < 2) {
             */
                 $robots = $this->config->getAuthorRobots();

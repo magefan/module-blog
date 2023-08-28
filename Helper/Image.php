@@ -115,7 +115,7 @@ class Image extends AbstractHelper
                 $this->_newFile = $path . '/' . $this->_baseFile;
                 if (!$this->fileExists($this->_newFile)) {
                     try {
-                        $this->resizeBaseFile($width, $height, $keepFrame);    
+                        $this->resizeBaseFile($width, $height, $keepFrame);
                     } catch (\Exception $e) {
                         $this->_newFile = $this->_baseFile;
                     }

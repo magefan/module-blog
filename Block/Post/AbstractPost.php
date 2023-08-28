@@ -67,7 +67,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magefan\Blog\Model\Config $config
      * @param array $data
      * @param null $config
      * @param null $templatePool
@@ -246,9 +245,13 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     public function displayAddThisToolbox()
     {
         $isSocialEnabled = $this->_scopeConfig->getValue(
-            'mfblog/social/add_this_enabled', ScopeInterface::SCOPE_STORE);
+            'mfblog/social/add_this_enabled',
+            ScopeInterface::SCOPE_STORE
+        );
         $isSocialIdExist = $this->_scopeConfig->getValue(
-            'mfblog/social/add_this_pubid', ScopeInterface::SCOPE_STORE);
+            'mfblog/social/add_this_pubid',
+            ScopeInterface::SCOPE_STORE
+        );
 
         return $isSocialEnabled && $isSocialIdExist;
     }

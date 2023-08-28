@@ -34,7 +34,7 @@ class ReSaveExistingPosts
     /**
      * @var ManagerInterface
      */
-    private  $eventManager;
+    private $eventManager;
 
     /**
      * @param Config $config

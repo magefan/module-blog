@@ -134,7 +134,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     public function checkIdentifier($identifier)
     {
-        return $this->load($identifier)->getId();
+        $tag = $this->load($identifier);
+        if ($tag->getIdentifier() == $identifier) {
+            return $tag->getId();
+        }
+
+        return null;
     }
 
     /**
@@ -183,11 +188,13 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getShortContentExtractor()->execute($this->getData('content'));
-            $desc = str_replace(['<p>', '</p>'], [' ', ''], $desc);
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 200);
         }
 
-        $desc = strip_tags($desc);
+        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
+        $desc = preg_replace($stylePattern, '', $desc);
+        $desc = trim(strip_tags((string)$desc));
+
         if (mb_strlen($desc) > 200) {
             $desc = mb_substr($desc, 0, 200);
         }

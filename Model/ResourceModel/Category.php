@@ -226,7 +226,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @param string $identifier
      * @param int|array $storeId
-     * @return int
+     * @return false|string
      */
     public function checkIdentifier($identifier, $storeIds)
     {
@@ -235,9 +235,15 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Zend_Db_Select::COLUMNS)->columns('cp.category_id')->order('cps.store_id DESC')->limit(1);
+        $select->reset(\Zend_Db_Select::COLUMNS)->columns(['cp.category_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
 
-        return $this->getConnection()->fetchOne($select);
+        $row = $this->getConnection()->fetchRow($select);
+        if (isset($row['category_id']) && isset($row['identifier'])
+            && $row['identifier'] == $identifier) {
+            return (string)$row['category_id'];
+        }
+
+        return false;
     }
 
     /**

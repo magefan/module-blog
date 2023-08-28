@@ -22,17 +22,23 @@ class Run extends \Magento\Backend\App\Action
         //set_time_limit(0);
 
         $data = $this->getRequest()->getPost();
-        $type = '';
+        $type = (string)$this->getRequest()->getParam('type');
 
         try {
-            if (empty($data['type'])) {
+            if (empty($type)) {
                 throw new \Exception(__('Blog import type is not specified.'), 1);
             }
 
-            $_type = ucfirst($data['type']);
+            if (!isset($data['store_id'])) {
+                $params = $this->getRequest()->getParams();
+                if (isset($params['store_id'])) {
+                    $data['store_id'] = $params['store_id'];
+                }
+            }
+
+            $_type = ucfirst($type);
 
             $import = $this->_objectManager->create('\Magefan\Blog\Model\Import\\'.$_type);
-            $type = $data['type'];
             $import->prepareData($data)->execute();
 
             $stats = $import->getImportStatistic();

@@ -186,6 +186,4 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         return $this->executedContent[$key];
     }
-
-
 }

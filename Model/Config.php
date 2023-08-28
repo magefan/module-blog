@@ -228,7 +228,11 @@ class Config
     public function getDisplayCanonicalTag($pageType)
     {
 
-        $displayFor = explode(',', $this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
+        if ($this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR)) {
+            $displayFor = explode(',', $this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
+        } else {
+            $displayFor = [];
+        }
 
         return in_array($pageType, $displayFor) || in_array(self::CANONICAL_PAGE_TYPE_ALL, $displayFor) ? true : false;
     }

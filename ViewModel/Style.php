@@ -62,6 +62,8 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
             $file = $file . '.css';
         }
 
+        $shortFileName = $file;
+
         $asset = $this->assetRepository->createAsset($file);
 
         $fileContent = '';
@@ -86,11 +88,11 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
         );
 
         if (!trim($fileContent)) {
-            $fileContent = '/* ' .  $file . '.css is empty */';
+            $fileContent = '/* ' .  $shortFileName . '.css is empty */';
         }
 
         return PHP_EOL . '
-        <!-- Start CSS ' . $file . ' ' . ((int)(strlen($fileContent) / 1024)) . 'Kb -->
+        <!-- Start CSS ' . $shortFileName . ' ' . ((int)(strlen($fileContent) / 1024)) . 'Kb -->
         <style>' . $fileContent . '</style>';
     }
 }

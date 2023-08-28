@@ -83,7 +83,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                             $keyString = strpos($url, '/.renditions/') !== false ? '/.renditions/' : '/media/';
                             $position = strpos($url, $keyString);
 
-                            $model->setData($key, substr($url,  $position + strlen($keyString)));
+                            $model->setData($key, substr($url, $position + strlen($keyString)));
 
                         } elseif (isset($data[$key][0]['name'])) {
                             $model->setData($key, $data[$key][0]['name']);
