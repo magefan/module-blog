@@ -103,9 +103,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection() : Grid
     {
+        parent::_prepareCollection();
         $this->setDefaultFilter(['post_id_checkbox' => 1]);
         $this->setCollection($this->postCollectionFactory->create());
-        return parent::_prepareCollection();
+        return $this;
     }
 
     /**
@@ -114,26 +115,26 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getRowInitCallback() : string
     {
         return 'function (grid, element,checked) {
-                if(window.needToReload){
-                    var currentState = ' .
-                    $this->getId() .
-                    '.getElementValue();
-                    
-                    if(!currentState) {
-                        grid.reloadParams = {
-                        "selected_posts[]": ["-1"]
-                        };
-                    }
-                    else {
-                        grid.reloadParams = {
-                            "selected_posts[]": window.postState
-                        };
-                    }
-                       
-                    grid.reload(grid.url);
-                    window.needToReload = false;
+            if(window.needToReload){
+                var currentState = ' .
+                $this->getId() .
+                '.getElementValue();
+
+                if(!currentState) {
+                    grid.reloadParams = {
+                    "selected_posts[]": ["-1"]
+                    };
                 }
-              }
+                else {
+                    grid.reloadParams = {
+                        "selected_posts[]": window.postState
+                    };
+                }
+
+                grid.reload(grid.url);
+                window.needToReload = false;
+            }
+          }
        ';
     }
 
@@ -152,10 +153,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                     grid.targetElement.name === "position",
                 checked = false,
                 checkbox = null;
-                
+
                 var blockId = trElement.down("td").innerHTML.replace(/^\s+|\s+$/g,"");
                 var blockTitle = trElement.down("td").next().innerHTML.replace(/^\s+|\s+$/g,"");
-                      
+
                 var isRepresent = function(Array,character) {
                         for (var i = 0; i < Array.length; i++) {
                             if (Array[i] === character) {
@@ -164,8 +165,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                     }
                     return -1;
                 };
-                
-               
+
                 if (eventElement.tagName === "LABEL" &&
                     trElement.querySelector("#" + eventElement.htmlFor) &&
                     trElement.querySelector("#" + eventElement.htmlFor).type === "checkbox"
@@ -173,7 +173,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                     event.stopPropagation();
                     trElement.querySelector("#" + eventElement.htmlFor).trigger("click");
                 }
-                
+
                 if (trElement && !isInputPosition) {
                     checkbox = Element.getElementsBySelector(trElement, "input");
                     var index = isRepresent(window.postState,blockTitle);
@@ -189,23 +189,21 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                                 window.postState.splice(index, 1);
                             }
                         }
-                       
+
                         if (window.postState.length) {
                             grid.reloadParams = {
                                 "selected_posts[]": window.postState
-                            }; 
+                            };
                         }
                         else {
                             grid.reloadParams = {
                                 "selected_posts[]": ["-1"]
-                            }; 
+                            };
                         }
-                        
+
                         grid.setCheckboxChecked(checkbox[0], checked);
                     }
                 }
-          
-                
             }
         ';
     }
@@ -217,40 +215,40 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getCheckboxCheckCallback() : string
     {
-            return 'function (grid, element,checked) {
-                    var isRepresent = function(Array,character) {
-                        for (var i = 0; i < Array.length; i++) {
-                            if (Array[i] === character) {
-                            return i;
-                        }
-                    }
-                    return -1;
+        return 'function (grid, element,checked) {
+            var isRepresent = function(Array,character) {
+                for (var i = 0; i < Array.length; i++) {
+                    if (Array[i] === character) {
+                    return i;
+                }
+            }
+            return -1;
+            };
+
+            var index = isRepresent(window.postState,element.value);
+
+            if(checked) {
+                if (index === -1 && element.value !== "on") {
+                    window.postState.push(element.value);
+                }
+            }
+            else {
+                if (index !== -1) {
+                    window.postState.splice(index, 1);
+                }
+            }
+
+            if (window.postState.length) {
+                    grid.reloadParams = {
+                        "selected_posts[]": window.postState
                     };
-                    
-                    var index = isRepresent(window.postState,element.value);
-                    
-                    if(checked) {
-                        if (index === -1 && element.value !== "on") {
-                            window.postState.push(element.value);
-                        }
-                    }
-                    else {
-                        if (index !== -1) {
-                            window.postState.splice(index, 1);
-                        }
-                    }
-                  
-                    if (window.postState.length) {
-                            grid.reloadParams = {
-                                "selected_posts[]": window.postState
-                            }; 
-                        }
-                    else {
-                        grid.reloadParams = {
-                            "selected_posts[]": ["-1"]
-                        }; 
-                    }    
-            }';
+                }
+            else {
+                grid.reloadParams = {
+                    "selected_posts[]": ["-1"]
+                };
+            }
+        }';
     }
 
     /**
@@ -315,8 +313,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
         return parent::_prepareColumns();
     }
-
-
 
     /**
      * Get grid url
