@@ -13,28 +13,34 @@
  * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo
  */
 ?>
+
 <?php if ($block->needToUpdate() && \Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
     <div class="messages">
         <div class="message message-notice notice">
             <div data-ui-id="messages-message-error">
                 <?php
-                    $url1 = 'https://magefan.com/magento2-blog-extension'
+                    $url1 = 'https://magefan.com/blog/update-magefan-blog-extension'
                         . '?utm_source=m2admin_blog_updateinfo&utm_medium=link1&utm_campaign=new_blog_version';
-                    $url2 = 'https://magefan.com/contact'
+                    $url2 = 'https://magefan.com/magento2-blog-extension'
+                        . '?utm_source=m2admin_blog_updateinfo&utm_medium=link1&utm_campaign=new_blog_version';
+                    $url3 = 'https://magefan.com/contact'
                         . '?utm_source=m2admin_blog_updateinfo&utm_medium=link2&utm_campaign=new_blog_version';
                 ?>
                 <?= /*@noEscape*/ __(
-                    'Your Blog Extension is out of date. You can update it to the <strong>version %1</strong>
-                     via composer or you can download the new version archive from the 
-                     <a href="%2" target="_blank">Magefan Store</a>.
-                     Please <a href="%3"   target="_blank">contact</a> 
-                     Magefan Team if you have any questions or need help with an update.',
-                    $block->escapeHtml($block->getLatestVersion()),
+                    'Your Blog Extension is out of date. <a href="%1" target="_blank">Use this guide</a> to update it to <strong>version %2</strong>
+                     via composer or download the new version archive from the 
+                     <a href="%3" target="_blank">Magefan Store</a>.
+                     Please <a href="%4"   target="_blank">contact</a> 
+                     the Magefan team if you have any questions or need help with an update.',
                     $url1,
-                    $url2
+                    $block->escapeHtml($block->getLatestVersion()),
+                    $url2,
+                    $url3
                 );
                 ?>
             </div>
         </div>
     </div>
 <?php } ?>
+
+
