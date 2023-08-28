@@ -103,10 +103,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection() : Grid
     {
-        parent::_prepareCollection();
         $this->setDefaultFilter(['post_id_checkbox' => 1]);
         $this->setCollection($this->postCollectionFactory->create());
-        return $this;
+        return parent::_prepareCollection();
     }
 
     /**
