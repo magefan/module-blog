@@ -261,7 +261,8 @@ abstract class AbstractList extends Template implements IdentityInterface
     /**
      * @return string
      */
-    public function getPageParamName(){
+    public function getPageParamName()
+    {
         return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }
 }

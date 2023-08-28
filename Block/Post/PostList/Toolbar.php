@@ -30,7 +30,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
         Context $context,
         array $data = [],
         Config $config = null
-    ){
+    ) {
         parent::__construct($context, $data);
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->config = $config ?: $objectManager->create(Config::class);
@@ -169,7 +169,8 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     /**
      * @return string
      */
-    public function getPageParamName(){
+    public function getPageParamName()
+    {
         return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }
 }

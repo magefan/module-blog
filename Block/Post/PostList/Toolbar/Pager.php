@@ -129,10 +129,10 @@ class Pager extends \Magento\Theme\Block\Html\Pager
         $urlParams['_query'] = $params;
 
         $pageNumber = $params['page'] ?? ($params['p'] ?? null);
-        if ($this->getPagePaginationType() !== '2'){
+        if ($this->getPagePaginationType() !== '2') {
             $urlParams['_query'] = [$this->getPagePaginationType() => $pageNumber];
             $url = $this->getUrl($this->getPath(), $urlParams);
-        }else {
+        } else {
             unset($urlParams['_current']);
             unset($urlParams['_query']);
             unset($urlParams['_fragment']);
@@ -143,11 +143,11 @@ class Pager extends \Magento\Theme\Block\Html\Pager
                 $page = '/page/' . $params['page'];
             }
             $url = $this->getUrl($this->getPath(), $urlParams);
-            if ($parsed = explode('/', parse_url($url)['path'])){
+            if ($parsed = explode('/', parse_url($url)['path'])) {
                 $key = array_search('page', $parsed);
-                if ($key && isset($parsed[$key + 1]) && intval($parsed[$key + 1])){
+                if ($key && isset($parsed[$key + 1]) && intval($parsed[$key + 1])) {
                     $url = str_replace('/page/' . $parsed[$key + 1], $page, $url);
-                }else {
+                } else {
                     $url = $url . $page;
                 }
             }
