@@ -53,7 +53,6 @@
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\PostRelatedProducts" name="blog.sidebar.postrelatedproducts" template="Magefan_Blog::sidebar/post-related-products.phtml" />
                 <block class="Magefan\Blog\Block\Sidebar\Custom" name="blog.sidebar.custom" template="sidebar/custom.phtml" />
                 <block class="Magefan\Blog\Block\Sidebar\CustomTwo" name="blog.sidebar.custom2" template="sidebar/custom.phtml" />
                 <block class="Magefan\Blog\Block\Sidebar\Rss" name="blog.sidebar.rss" template="sidebar/rss.phtml">
