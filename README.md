@@ -26,7 +26,37 @@ Magento 2 Blog  is an extension that allows you to manage your store and blog fr
   
   <a href="https://magefan.com/magento2-blog-extension/pricing">
           <img
-            src="https://magefan.com/media/wysiwyg/products/magefan-blog-pricing.png"
+            src="https://cm.magefan.com/wysiwyg/products/magento-2-blog-pricing.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+<a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://cm.magefan.com/wysiwyg/products/blog-pricing-magento.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+ <a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://cm.magefan.com/wysiwyg/products/pricing-blog-magento.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+ <a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://cm.magefan.com/wysiwyg/products/pricing-blog-magento-2.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+<a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://cm.magefan.com/wysiwyg/products/blog-extension-pricing-magefan.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+<a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://cm.magefan.com/wysiwyg/products/magefan-blog-pricing-for-magento.png"
+            alt="Magento 2 Blog Editions & Pricing" />
+        </a>
+<a href="https://magefan.com/magento2-blog-extension/pricing">
+          <img
+            src="https://cm.magefan.com/wysiwyg/products/magefan-blog-extension-pricing.png"
             alt="Magento 2 Blog Editions & Pricing" />
         </a>
         
