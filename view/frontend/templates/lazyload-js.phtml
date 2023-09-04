@@ -16,8 +16,12 @@ $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
 <?php if (!$helper->isOriginMfLazyLoadEnable()) { ?>
     <script>
         if (window.require) {
-            require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
-                $('.mfblogunveil').mfblogunveil();
+            require(['jquery', 'domReady!'], function($){
+                if ($('.mfblogunveil').length) {
+                    require(['Magefan_Blog/js/lib/mfblogunveil'], function(){
+                        $('.mfblogunveil').mfblogunveil();
+                    });
+                }
             });
         } else {
             /* e.g. hyva theme */
