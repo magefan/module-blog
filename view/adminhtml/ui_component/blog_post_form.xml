@@ -243,6 +243,8 @@
                         <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
                         <openDialogTitle>Featured Image</openDialogTitle>
                         <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
                     </settings>
                 </imageUploader>
             </formElements>
@@ -541,6 +543,8 @@
                         <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
                         <openDialogTitle>Media Gallery</openDialogTitle>
                         <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
                     </settings>
                 </imageUploader>
             </formElements>
