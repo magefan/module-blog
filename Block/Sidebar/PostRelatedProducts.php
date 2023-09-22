@@ -64,6 +64,10 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
     {
         $post = $this->getPost();
 
+        if (!$post) {
+            return $this;
+        }
+
         $this->_itemCollection = $post->getRelatedProducts()
             ->addAttributeToSelect('required_options');
 
