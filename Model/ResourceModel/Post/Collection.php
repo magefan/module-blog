@@ -266,13 +266,27 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     }
                 }
             } else {
+                $allIsNumeric = true;
+                foreach ($categories as $k => $id) {
+                    if (!is_numeric($id)) {
+                        $allIsNumeric = false;
+                        break;
+                    }
+                }
                 $select = $connection->select()
-                    ->from(['t' => $tableName], 'category_id')
-                    ->where(
+                    ->from(['t' => $tableName], 'category_id');
+
+                if ($allIsNumeric) {
+                    $select->where(
+                        $connection->prepareSqlCondition('t.category_id', $categories)
+                    );
+                } else {
+                    $select->where(
                         $connection->prepareSqlCondition('t.identifier', $categories)
                         . ' OR ' .
                         $connection->prepareSqlCondition('t.category_id', $categories)
                     );
+                }
 
                 $categories = [];
                 foreach ($connection->fetchAll($select) as $item) {
@@ -422,13 +436,27 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     }
                 }
             } else {
+                $allIsNumeric = true;
+                foreach ($tag as $k => $id) {
+                    if (!is_numeric($id)) {
+                        $allIsNumeric = false;
+                        break;
+                    }
+                }
                 $select = $connection->select()
-                    ->from(['t' => $tableName], 'tag_id')
-                    ->where(
+                    ->from(['t' => $tableName], 'tag_id');
+
+                if ($allIsNumeric) {
+                    $select->where(
+                        $connection->prepareSqlCondition('t.tag_id', $tag)
+                    );
+                } else {
+                    $select->where(
                         $connection->prepareSqlCondition('t.identifier', $tag)
                         . ' OR ' .
                         $connection->prepareSqlCondition('t.tag_id', $tag)
                     );
+                }
 
                 $tag = [];
                 foreach ($connection->fetchAll($select) as $item) {
