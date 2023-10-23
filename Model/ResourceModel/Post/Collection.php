@@ -269,8 +269,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $allIsNumeric = true;
                 foreach ($categories as $k => $id) {
                     if (!is_numeric($id)) {
-                        $allIsNumeric = false;
-                        break;
+                        if (is_array($id)) {
+                            foreach ($id as $_id) {
+                                if (!is_numeric($_id)) {
+                                    $allIsNumeric = false;
+                                    break 2;
+                                }
+                            }
+                        } else {
+                            $allIsNumeric = false;
+                            break;
+                        }
                     }
                 }
                 $select = $connection->select()
@@ -439,8 +448,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $allIsNumeric = true;
                 foreach ($tag as $k => $id) {
                     if (!is_numeric($id)) {
-                        $allIsNumeric = false;
-                        break;
+                        if (is_array($id)) {
+                            foreach ($id as $_id) {
+                                if (!is_numeric($_id)) {
+                                    $allIsNumeric = false;
+                                    break 2;
+                                }
+                            }
+                        } else {
+                            $allIsNumeric = false;
+                            break;
+                        }
                     }
                 }
                 $select = $connection->select()
