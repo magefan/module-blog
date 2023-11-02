@@ -55,9 +55,8 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         $key = md5($content) . $len . $endCharacters;
         if (!isset($this->executedContent[$key])) {
 
-            $content = $this->filterProvider->getPageFilter()->filter(
-                (string) $content ?: ''
-            );
+            $content = preg_replace('/{{widget[^}]+}}/', '', (string) $content ?: '');
+            $content = $this->filterProvider->getPageFilter()->filter($content);
 
             $isPagebreakDefined = false;
 
