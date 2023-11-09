@@ -801,7 +801,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             }
         }
 
-        if (version_compare($version, '2.11.0.1') < 0) {
+        if (version_compare($version, '2.11.0.2') < 0) {
             /* Add reading time to posts table */
             $connection->addColumn(
                 $setup->getTable('magefan_blog_post'),
