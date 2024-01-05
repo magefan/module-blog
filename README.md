@@ -1,6 +1,6 @@
 # Magento 2 Blog Extension | GitHub Repo | Magefan
 
-[Magento 2 Blog](https://magefan.com/magento2-blog-extension) by Magefan
+Magento 2 Blog is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but also boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
 
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
@@ -9,16 +9,12 @@
 
 <img width="150" height="100" src="https://magefan.com/media/wysiwyg/made_in_ukraine.jpg">
 
-
-Magento 2 Blog  is an extension that allows you to manage your store and blog from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you drive more traffic but boost SEO and improve your Google rating. Our [Magento 2 Blog Module](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 515 000 downloads.
-
-
 <a href="https://magefan.com/magento2-blog-extension"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/download-magefan-extensions.png"></a><a href="https://magefan.com/magento2-blog-extension#live-demo"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/magefan-live-demo.png"></a>
 
 ## Requirements
   * Magento Community 2.3.0-2.4.x (CE, EE, ECE, B2B)
   * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.14. Please install this extension first if you use installation via FTP.
-  * **Note** that extension is free only for the Magento Community (Open Source) Edition. For Magento EE, ECE, B2B you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
+  * **Note** that the extension is free only for the Magento Community (Open Source) Edition. For Magento EE, ECE, and B2B you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
   * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
   
 
@@ -73,11 +69,11 @@ Magento 2 Blog  is an extension that allows you to manage your store and blog fr
   * Next & Previous Post
   * Posts search
   * Posts Lazy Load
-  * Author information and posts by author
+  * Author information and posts by the author
   * Recent Posts, Featured Posts, Archive, Categories, Search From, Tags Cloud sidebar widgets
-  * Import Posts and Categories form WordPress and AW Blog extension for M1
+  * Import Posts and Categories from WordPress and AW Blog extension for M1
   * Posts and Categories duplication
-  * Blog Rss Feed
+  * Blog RSS Feed
   * REST API  
   * 100% Open Source
   * Compatible with [Porto Theme](https://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864?ref=magefan) for Magento 2
@@ -92,7 +88,7 @@ Magento 2 Blog  is an extension that allows you to manage your store and blog fr
 ## Benefits
 **More traffic to your website**
 
-Targeting the top-ranked keywords and writing the compelling content you will ensure more people will find your Magento 2 blog and consequently more people will come to your website.
+Targeting the top-ranked keywords and writing compelling content you will ensure more people will find your Magento 2 blog and consequently more people will come to your website.
 
 **Improved your Magento 2 website SEO**
 
@@ -100,11 +96,11 @@ According to the previous point, the more traffic your Magento 2 blog brings, th
 
 **Improved customer engagement**
 
-The system of Magento 2 blog posts, categories, tags, internal links and sidebar navigation will create a great customer experience and will encourage them to come back and spend more time on your Magento 2 website since it is easy to navigate and pleasant to spend time on.
+The system of Magento 2 blog posts, categories, tags, internal links, and sidebar navigation will create a great customer experience and will encourage them to come back and spend more time on your Magento 2 website since it is easy to navigate and pleasant to spend time on.
 
 **Magento 2 store product promotion**
 
-Magento 2 Blog extension allows you to add related products to your blog posts as well as show the related blog posts in the product descriptions. You can promote your Magento 2 store products in your blog and vice versa. This connection will allow people coming to your website surf through it continuously.
+Magento 2 Blog extension allows you to add related products to your blog posts as well as show the related blog posts in the product descriptions. You can promote your Magento 2 store products in your blog and vice versa. This connection will allow people coming to your website to surf through it continuously.
 
 **Social media promotion**
 
@@ -112,24 +108,24 @@ The best way to make your blog recognized and get even more traffic is to promot
 
 **Worldwide recognition**
 
-Managing a multi-language store would be great since you could reach a wider audience and appeal to more customers. Fortunately, Magento 2 Blog extension supports multiple languages and websites. Thus, you can create stunning content for people from different countries and benefit from improved traffic and worldwide recognition.
+Managing a multi-language store would be great since you could reach a wider audience and appeal to more customers. Fortunately, the Magento 2 Blog extension supports multiple languages and websites. Thus, you can create stunning content for people from different countries and benefit from improved traffic and worldwide recognition.
 
 ## Features
 * **NEW! Blog GraphQL and Rest API Endpoints**
 
-In the mobile era all major websites start to create apps in order to make their customers’ shopping experience better. Magento 2 Blog extension has the GraphQL and Rest API endpoints that allow you to request or add data to your external software. Thus, if you decide to have your Magento 2 store and blog in an app you can easily do this.
+In the mobile era, all major websites have started to create apps to make their customers’ shopping experience better. Magento 2 Blog extension has the GraphQL and Rest API endpoints that allow you to request or add data to your external software. Thus, if you decide to have your Magento 2 store and blog in an app you can easily do this.
 
 * **Unlimited blog posts, multi-level categories, and tags**
 
-Creating interesting and engaging blog posts, adding them into multiple blog categories, and marking them with tags you create a Magento 2 blog people would want to visit and read because of the simplicity of use and navigation.
+By creating interesting and engaging blog posts, adding them to multiple blog categories, and marking them with tags you create a Magento 2 blog people would want to visit and read because of the simplicity of use and navigation.
 
 * **Multilanguage and Multiple Websites Support**
 
-Managing a blog for Magento 2 store in one language is good for traffic and SEO, but managing a blog in multiple languages is even better. Magento 2 Blog extension supports multiple languages so that you can reach the worldwide audience providing them with the content in their local language. This blog module for Magento 2 also supports multiple websites so you can create content for different Magento 2 websites and conveniently manage them from one place.
+Managing a blog for a Magento 2 store in one language is good for traffic and SEO, but managing a blog in multiple languages is even better. Magento 2 Blog extension supports multiple languages so that you can reach the worldwide audience providing them with the content in their local language. This blog module for Magento 2 also supports multiple websites so you can create content for different Magento 2 websites and conveniently manage them from one place.
 
-* **Facebook, Disqus and Magefan Magento Comments**
+* **Facebook, Disqus, and Magefan Magento Comments**
 
-The first step to establishing a good relationship with your customers and get an honest feedback about you blog are comments. Magento 2 Blog extension supports 3 types of comments: Magefan, Facebook and Disqus. You can study the tendencies and things your blog readers like the most and use it for further development of your Magento 2 Blog.
+The first step to establishing a good relationship with your customers and getting honest feedback about your blog are comments. Magento 2 Blog extension supports 3 types of comments: Magefan, Facebook, and Disqus. You can study the tendencies and things your blog readers like the most and use it for further development of your Magento 2 Blog.
 
 * **Related products and posts**
 
@@ -137,7 +133,7 @@ Related products and posts are one of the best ways to make people stay on your 
 
 * **Post media gallery & video**
 
-Adding pictures and videos to your blog posts you make them more diverse and interesting since no one likes reading one-piece texts. Magento 2 blog extension offers you to add plenty of pictures to the blog media gallery to provide the blog readers with more relevant images. 
+Adding pictures and videos to your blog posts make them more diverse and interesting since no one likes reading one-piece texts. Magento 2 blog extension allows you to add plenty of pictures to the blog media gallery to provide the blog readers with more relevant images. 
 
 * **Next & Previous Post**
 
