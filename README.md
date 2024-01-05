@@ -1,6 +1,6 @@
 # Magento 2 Blog Extension | GitHub Repo | Magefan
 
-Magento 2 Blog extension is a solution that allows you to manage your store and blog in Mageneto from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you to create blog posts in Magento, but drive more traffic, boost SEO and improve your Google rating. Our [Magento 2 Blog Extension](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
+Magento 2 Blog extension is a solution that allows you to manage your store and blog in Magento from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you to create blog posts in Magento, but drive more traffic, boost SEO and improve your Google rating. Our [Magento 2 Blog Extension](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
 
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
@@ -24,40 +24,9 @@ Magento 2 Blog extension is a solution that allows you to manage your store and 
   
 <a href="https://magefan.com/magento2-blog-extension/pricing">
           <img
-            src="https://cm.magefan.com/wysiwyg/products/magento-2-blog-pricing.png"
+            src="https://cm.magefan.com/wysiwyg/products/blog-pricing.png"
             alt="Magento 2 Blog Editions & Pricing" />
-        </a>
-<a href="https://magefan.com/magento2-blog-extension/pricing">
-          <img
-            src="https://cm.magefan.com/wysiwyg/products/blog-pricing-magento.png"
-            alt="Magento 2 Blog Editions & Pricing" />
-        </a>
- <a href="https://magefan.com/magento2-blog-extension/pricing">
-          <img
-            src="https://cm.magefan.com/wysiwyg/products/pricing-blog-magento.png"
-            alt="Magento 2 Blog Editions & Pricing" />
-        </a>
- <a href="https://magefan.com/magento2-blog-extension/pricing">
-          <img
-            src="https://cm.magefan.com/wysiwyg/products/pricing-blog-magento-2.png"
-            alt="Magento 2 Blog Editions & Pricing" />
-        </a>
-<a href="https://magefan.com/magento2-blog-extension/pricing">
-          <img
-            src="https://cm.magefan.com/wysiwyg/products/blog-extension-pricing-magefan.png"
-            alt="Magento 2 Blog Editions & Pricing" />
-        </a>
-<a href="https://magefan.com/magento2-blog-extension/pricing">
-          <img
-            src="https://cm.magefan.com/wysiwyg/products/magefan-blog-pricing-for-magento.png"
-            alt="Magento 2 Blog Editions & Pricing" />
-        </a>
-<a href="https://magefan.com/magento2-blog-extension/pricing">
-          <img
-            src="https://cm.magefan.com/wysiwyg/products/magefan-blog-extension-pricing.png"
-            alt="Magento 2 Blog Editions & Pricing" />
-        </a>
-        
+        </a>      
         
 ## Main Features
   * **NEW!** Blog GraphQL
