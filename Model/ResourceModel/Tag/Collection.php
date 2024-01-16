@@ -13,6 +13,10 @@ namespace Magefan\Blog\Model\ResourceModel\Tag;
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * @inheritDoc
+     */
+    protected $_idFieldName = 'tag_id';
 
     /**
      * @var int
