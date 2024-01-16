@@ -14,6 +14,11 @@ class Collection extends AbstractCollection
 {
 
     /**
+     * @inheritDoc
+     */
+    protected $_idFieldName = 'comment_id';
+
+    /**
      * Constructor
      * Configures collection
      *
