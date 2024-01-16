@@ -14,6 +14,11 @@ namespace Magefan\Blog\Model\ResourceModel\Post;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
+     * @inheritDoc
+     */
+    protected $_idFieldName = 'post_id';
+    
+    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
