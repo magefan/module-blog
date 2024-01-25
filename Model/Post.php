@@ -694,6 +694,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve post tags
+     * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
+     */
+    public function getRelatedCoauthors()
+    {
+        return [];
+    }
+
+    /**
      * Retrieve post tags count
      * @return int
      */

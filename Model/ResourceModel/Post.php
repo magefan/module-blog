@@ -227,6 +227,28 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param  Array  $rowData
      * @return void
      */
+    public function updateLinks(
+        \Magento\Framework\Model\AbstractModel $object,
+        array $newRelatedIds,
+        array $oldRelatedIds,
+       $tableName,
+       $field,
+       $rowData = []
+    )
+    {
+        return $this->_updateLinks($object, $newRelatedIds,  $oldRelatedIds, $tableName, $field, $rowData);
+    }
+
+    /**
+     * Update post connections
+     * @param  \Magento\Framework\Model\AbstractModel $object
+     * @param  Array $newRelatedIds
+     * @param  Array $oldRelatedIds
+     * @param  String $tableName
+     * @param  String  $field
+     * @param  Array  $rowData
+     * @return void
+     */
     protected function _updateLinks(
         \Magento\Framework\Model\AbstractModel $object,
         array $newRelatedIds,
@@ -453,6 +475,17 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $this->_lookupIds($postId, 'magefan_blog_post_relatedproduct', 'related_id');
     }
 
+    /**
+     * Get ids to which specified item is assigned
+     * @param  int $postId
+     * @param  string $tableName
+     * @param  string $field
+     * @return array
+     */
+    public function lookupIds($postId, $tableName, $field)
+    {
+        return $this->_lookupIds($postId, $tableName, $field);
+    }
     /**
      * Get ids to which specified item is assigned
      * @param  int $postId
