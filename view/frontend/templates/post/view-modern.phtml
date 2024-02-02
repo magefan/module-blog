@@ -54,7 +54,7 @@
                                 $coAuthors = $_post->getRelatedCoauthors();
                                 $coAuthorsCount = count($coAuthors);
                             ?>
-                            <?php if (count($coAuthors)) { ?>
+                            <?php if ($coAuthorsCount) { ?>
                                 <?= $block->escapeHtml(__('and')) ?>
                                 <?php $z = 0 ?>
                                 <?php foreach($coAuthors as $coAuthor) { ?>
