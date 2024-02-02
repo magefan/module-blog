@@ -47,7 +47,7 @@
             </item>
         </argument>
     </dataSource>
-    <fieldset name="general">
+    <fieldset name="general" sortOrder="0">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="label" xsi:type="string"/>
