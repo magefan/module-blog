@@ -93,6 +93,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
+        $this->_map['fields']['tag'] = 'tag_table.tag_id';
         $this->_map['fields']['relatedproduct'] = 'relatedproduct_table.related_id';
     }
 
@@ -139,6 +140,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $condition = array_shift($condition);
             }
             return $this->addSearchFilter($condition);
+        }
+
+        if ($field == 'authors') {
+            return parent::addFieldToFilter('author_id', $condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -531,7 +536,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 }
             }
 
-            $this->addFilter('author_id', ['in' => $author], 'public');
+            //$this->addFilter('author_id', ['in' => $author], 'public');
+            $this->addFieldToFilter('authors', ['in' => $author]);
             $this->setFlag('author_filter_added', 1);
         }
         return $this;

@@ -100,6 +100,24 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                             <?php } else { ?>
                                                 <?= $block->escapeHtml($_author->getTitle()) ?>
                                             <?php } ?>
+
+                                            <?php
+                                            $coAuthors = $_post->getRelatedCoauthors();
+                                            $coAuthorsCount = count($coAuthors);
+                                            ?>
+                                            <?php if ($coAuthorsCount) { ?>
+                                                <?= $block->escapeHtml(__('and')) ?>
+                                                <?php $z = 0 ?>
+                                                <?php foreach($coAuthors as $coAuthor) { ?>
+                                                    <?php $z++; ?>
+                                                    <?php if ($block->authorPageEnabled()) { ?>
+                                                        <a title="<?= $block->escapeHtml($coAuthor->getTitle()) ?>"
+                                                           href="<?= $block->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $block->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                                    <?php } else { ?>
+                                                        <?= $block->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            <?php } ?>
                                             <span>-</span>
                                         </span>
                                     <?php } ?>
