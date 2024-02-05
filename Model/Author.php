@@ -95,7 +95,7 @@ class Author extends AbstractModel implements AuthorInterface
             $title = $this->getTitle();
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**

@@ -177,7 +177,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
             $title = $this->getData('title');
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**

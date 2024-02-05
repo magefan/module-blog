@@ -384,7 +384,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             $title = $this->getData('title');
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**
