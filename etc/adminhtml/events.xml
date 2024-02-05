@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="magefan_blog_post_save_before">
+        <observer instance="Magefan\Blog\Observer\UpdateUrlRewriteForEntity" name="magefan_blog_observer_blog_post_save_before"/>
+    </event>
+    <event name="magefan_blog_category_save_before">
+        <observer instance="Magefan\Blog\Observer\UpdateUrlRewriteForEntity" name="magefan_blog_observer_blog_category_save_before"/>
+    </event>
+    <event name="magefan_blog_tag_save_before">
+        <observer instance="Magefan\Blog\Observer\UpdateUrlRewriteForEntity" name="magefan_blog_observer_blog_tag_save_before"/>
+    </event>
+</config>
