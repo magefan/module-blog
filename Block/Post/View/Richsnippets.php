@@ -78,9 +78,21 @@ class Richsnippets extends Opengraph
                     'mfblog/author/page_enabled'
                 );
                 return [
+                    '@context' => 'http://schema.org',
                     '@type' => 'Person',
                     'name' => $author->getTitle(),
-                    'url' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl()
+                    'url' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl(),
+                    'sameAs' => [
+                        $author->getData('facebook_page_url')? : '',
+                        $author->getData('twitter_page_url')? : '',
+                        $author->getData('instagram_page_url')? : '',
+                        $author->getData('googleplus_page_url')? : '',
+                        $author->getData('linkedin_page_url')? : ''
+                    ],
+                    'jobTitle' => $author->getData('role')? : '',
+                    'mainEntityOfPage' => [
+                        '@id' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl(),
+                    ]
                 ];
             }
         }
