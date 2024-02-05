@@ -69,6 +69,7 @@ class ReSaveExistingPosts
             ->addFieldToFilter('publish_time', ['lteq' => $this->date->gmtDate()]);
 
         foreach ($postCollection as $post) {
+            $post->setAllIdentifiersFlag(1);
             $this->eventManager->dispatch('clean_cache_by_tags', ['object' => $post]);
         }
     }

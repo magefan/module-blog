@@ -220,6 +220,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         $identities = [];
 
+        $allIdentitiesFlag = (bool)$this->getAllIdentifiersFlag();
+
         if ($this->getId()) {
             $identities[] = self::CACHE_TAG . '_' . $this->getId();
         }
@@ -234,13 +236,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $newCategories = [];
         }
 
-        if ($this->getData('is_active') && $this->getData('is_active') != $this->getOrigData('is_active')) {
+        if ($allIdentitiesFlag
+            || ($this->getData('is_active') && $this->getData('is_active') != $this->getOrigData('is_active'))
+        ) {
             $identities[] = self::CACHE_TAG . '_' . 0;
         }
 
         $isChangedCategories = count(array_diff($oldCategories, $newCategories));
 
-        if ($isChangedCategories) {
+        if ($allIdentitiesFlag || $isChangedCategories) {
             $changedCategories = array_unique(
                 array_merge($oldCategories, $newCategories)
             );
@@ -533,7 +537,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $title = $this->getData('title');
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**
