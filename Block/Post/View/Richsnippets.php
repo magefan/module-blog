@@ -77,23 +77,33 @@ class Richsnippets extends Opengraph
                 $authorPageEnabled = $this->config->getConfig(
                     'mfblog/author/page_enabled'
                 );
-                return [
+
+                $result = [
                     '@context' => 'http://schema.org',
                     '@type' => 'Person',
                     'name' => $author->getTitle(),
                     'url' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl(),
-                    'sameAs' => [
-                        $author->getData('facebook_page_url')? : '',
-                        $author->getData('twitter_page_url')? : '',
-                        $author->getData('instagram_page_url')? : '',
-                        $author->getData('googleplus_page_url')? : '',
-                        $author->getData('linkedin_page_url')? : ''
-                    ],
-                    'jobTitle' => $author->getData('role')? : '',
                     'mainEntityOfPage' => [
                         '@id' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl(),
                     ]
                 ];
+
+                $sameAs = [];
+                foreach (['facebook_page_url', 'twitter_page_url', 'instagram_page_url', 'googleplus_page_url', 'linkedin_page_url'] as $key) {
+                    if ($value = trim($author->getData($key) ?: '')) {
+                        $sameAs[] = $value;
+                    }
+                }
+
+                if ($sameAs) {
+                    $result['sameAs'] = $sameAs;
+                }
+
+                if ($value = trim($author->getData('role') ?: '')) {
+                    $result['jobTitle'] = $value;
+                }
+
+                return $result;
             }
         }
 
