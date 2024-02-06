@@ -7,6 +7,7 @@
  */
 namespace Magefan\Blog\Block\Post\View;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -20,11 +21,22 @@ class Richsnippets extends Opengraph
     protected $_options;
 
     /**
+     * @return array|mixed|null
+     */
+    public function getOptions()
+    {
+        $post = $this->getPost();
+        $structureData = $post->getData('structure_data');
+        return $structureData;
+    }
+
+    /**
      * Retrieve snipet params
      *
      * @return array
+     * @throws LocalizedException
      */
-    public function getOptions()
+    public function getBlogPostOptions()
     {
         if ($this->_options === null) {
             $post = $this->getPost();
@@ -33,35 +45,49 @@ class Richsnippets extends Opengraph
             if (!$logoBlock) {
                 $logoBlock = $this->getLayout()->getBlock('amp.logo');
             }
+            $snippetOption = $this->getOptions();
 
-            $this->_options = [
-                '@context' => 'http://schema.org',
-                '@type' => 'BlogPosting',
-                '@id' => $post->getPostUrl(),
-                'author' => $this->getAuthor(),
-                'headline' => $this->getTitle(),
-                'description' => $this->getDescription(),
-                'datePublished' => $post->getPublishDate('c'),
-                'dateModified' => $post->getUpdateDate('c'),
-                'image' => [
-                    '@type' => 'ImageObject',
-                    'url' => $this->getImage() ?:
-                        ($logoBlock ? $logoBlock->getLogoSrc() : ''),
-                    'width' => 720,
-                    'height' => 720,
-                ],
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => $this->getPublisher(),
-                    'logo' => [
+            switch ($snippetOption) {
+                case '1':
+                    $type = 'NewsArticle';
+                    break;
+                case '2':
+                    $type = null;
+                    break;
+                default:
+                    $type = 'BlogPosting';
+                    break;
+            }
+            if ($type != null){
+                $this->_options = [
+                    '@context' => 'http://schema.org',
+                    '@type' => $type,
+                    '@id' => $post->getPostUrl(),
+                    'author' => $this->getAuthor(),
+                    'headline' => $this->getTitle(),
+                    'description' => $this->getDescription(),
+                    'datePublished' => $post->getPublishDate('c'),
+                    'dateModified' => $post->getUpdateDate('c'),
+                    'image' => [
                         '@type' => 'ImageObject',
-                        'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
+                        'url' => $this->getImage() ?: ($logoBlock ? $logoBlock->getLogoSrc() : ''),
+                        'width' => 720,
+                        'height' => 720,
                     ],
-                ],
-                'mainEntityOfPage' => $this->_url->getBaseUrl(),
-            ];
-        }
+                    'publisher' => [
+                        '@type' => 'Organization',
+                        'name' => $this->getPublisher(),
+                        'logo' => [
+                            '@type' => 'ImageObject',
+                            'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
+                        ],
+                    ],
+                    'mainEntityOfPage' => $this->_url->getBaseUrl(),
+                ];
+            }
 
+        }
+        var_dump($this->_options);exit();
         return $this->_options;
     }
 
@@ -123,8 +149,11 @@ class Richsnippets extends Opengraph
      */
     protected function _toHtml()
     {
+        if(empty($this->getBlogPostOptions())){
+            return '';
+        }
         return '<script type="application/ld+json">'
-            . json_encode($this->getOptions())
+            . json_encode($this->getBlogPostOptions())
             . '</script>';
     }
 }
