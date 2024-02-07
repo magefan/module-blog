@@ -485,14 +485,14 @@
                 </item>
             </argument>
         </field>
-        <field name="structure_data">
+        <field name="structure_data_type">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">int</item>
                     <item name="label" xsi:type="string" translate="true">Rich Snippet / Structured Data</item>
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">post</item>
-                    <item name="dataScope" xsi:type="string">structure_data</item>
+                    <item name="dataScope" xsi:type="string">structure_data_type</item>
                     <item name="sortOrder" xsi:type="number">50</item>
                 </item>
                 <item name="options" xsi:type="array">

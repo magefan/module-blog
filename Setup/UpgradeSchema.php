@@ -803,8 +803,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         if (version_compare($version,'2.11.0.1') < 0) {
             $connection->addColumn(
-                $setup->getTable('magefan_blog_pos'),
-                'structure_data',
+                $setup->getTable('magefan_blog_post'),
+                'structure_data_type',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
                     null,
