@@ -7,7 +7,6 @@
  */
 namespace Magefan\Blog\Block\Post\View;
 
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -26,20 +25,22 @@ class Richsnippets extends Opengraph
      */
     public function getOptions(): array
     {
-        $post = $this->getPost();
-        $snippetOption = $post->getData('structure_data_type');
-        switch ($snippetOption) {
-            case '1':
-                $options = $this->getNewsArticleOptions();
-                break;
-            case '2':
-                $options = [];
-                break;
-            default:
-                $options = $this->getBlogPostOptions();
-                break;
+        if (null === $this->_options) {
+            $post = $this->getPost();
+            $snippetOption = $post->getData('structure_data_type');
+            switch ($snippetOption) {
+                case '1':
+                    $this->_options = $this->getNewsArticleOptions();
+                    break;
+                case '2':
+                    $this->_options = [];
+                    break;
+                default:
+                    $this->_options = $this->getBlogPostOptions();
+                    break;
+            }
         }
-        return $options;
+        return $this->_options;
     }
 
     /**
@@ -49,42 +50,42 @@ class Richsnippets extends Opengraph
      */
     public function getBlogPostOptions()
     {
-        if ($this->_options === null) {
-            $post = $this->getPost();
 
-            $logoBlock = $this->getLayout()->getBlock('logo');
-            if (!$logoBlock) {
-                $logoBlock = $this->getLayout()->getBlock('amp.logo');
-            }
+        $post = $this->getPost();
 
-            $this->_options = [
-                '@context' => 'http://schema.org',
-                '@type' => 'BlogPosting',
-                '@id' => $post->getPostUrl(),
-                'author' => $this->getAuthor(),
-                'headline' => $this->getTitle(),
-                'description' => $this->getDescription(),
-                'datePublished' => $post->getPublishDate('c'),
-                'dateModified' => $post->getUpdateDate('c'),
-                'image' => [
-                    '@type' => 'ImageObject',
-                    'url' => $this->getImage() ?:
-                        ($logoBlock ? $logoBlock->getLogoSrc() : ''),
-                    'width' => 720,
-                    'height' => 720,
-                ],
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => $this->getPublisher(),
-                    'logo' => [
-                        '@type' => 'ImageObject',
-                        'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
-                    ],
-                ],
-                'mainEntityOfPage' => $this->_url->getBaseUrl(),
-            ];
+        $logoBlock = $this->getLayout()->getBlock('logo');
+        if (!$logoBlock) {
+            $logoBlock = $this->getLayout()->getBlock('amp.logo');
         }
-        return $this->_options;
+
+        $options = [
+            '@context' => 'http://schema.org',
+            '@type' => 'BlogPosting',
+            '@id' => $post->getPostUrl(),
+            'author' => $this->getAuthor(),
+            'headline' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'datePublished' => $post->getPublishDate('c'),
+            'dateModified' => $post->getUpdateDate('c'),
+            'image' => [
+                '@type' => 'ImageObject',
+                'url' => $this->getImage() ?:
+                    ($logoBlock ? $logoBlock->getLogoSrc() : ''),
+                'width' => 720,
+                'height' => 720,
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => $this->getPublisher(),
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
+                ],
+            ],
+            'mainEntityOfPage' => $this->_url->getBaseUrl(),
+        ];
+
+        return $options;
     }
 
     /**
@@ -94,42 +95,41 @@ class Richsnippets extends Opengraph
      */
     public function getNewsArticleOptions()
     {
-        if ($this->_options === null) {
-            $post = $this->getPost();
+        $post = $this->getPost();
 
-            $logoBlock = $this->getLayout()->getBlock('logo');
-            if (!$logoBlock) {
-                $logoBlock = $this->getLayout()->getBlock('amp.logo');
-            }
-
-            $this->_options = [
-                '@context' => 'http://schema.org',
-                '@type' => 'NewsArticle',
-                '@id' => $post->getPostUrl(),
-                'author' => $this->getAuthor(),
-                'headline' => $this->getTitle(),
-                'description' => $this->getDescription(),
-                'datePublished' => $post->getPublishDate('c'),
-                'dateModified' => $post->getUpdateDate('c'),
-                'image' => [
-                    '@type' => 'ImageObject',
-                    'url' => $this->getImage() ?:
-                        ($logoBlock ? $logoBlock->getLogoSrc() : ''),
-                    'width' => 720,
-                    'height' => 720,
-                ],
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => $this->getPublisher(),
-                    'logo' => [
-                        '@type' => 'ImageObject',
-                        'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
-                    ],
-                ],
-                'mainEntityOfPage' => $this->_url->getBaseUrl(),
-            ];
+        $logoBlock = $this->getLayout()->getBlock('logo');
+        if (!$logoBlock) {
+            $logoBlock = $this->getLayout()->getBlock('amp.logo');
         }
-        return $this->_options;
+
+        $options = [
+            '@context' => 'http://schema.org',
+            '@type' => 'NewsArticle',
+            '@id' => $post->getPostUrl(),
+            'author' => $this->getAuthor(),
+            'headline' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'datePublished' => $post->getPublishDate('c'),
+            'dateModified' => $post->getUpdateDate('c'),
+            'image' => [
+                '@type' => 'ImageObject',
+                'url' => $this->getImage() ?:
+                    ($logoBlock ? $logoBlock->getLogoSrc() : ''),
+                'width' => 720,
+                'height' => 720,
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => $this->getPublisher(),
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
+                ],
+            ],
+            'mainEntityOfPage' => $this->_url->getBaseUrl(),
+        ];
+
+        return $options;
     }
 
     /**
