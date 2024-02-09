@@ -8,10 +8,11 @@ namespace Magefan\Blog\Model\Sitemap\ItemProvider;
 
 use Magento\Sitemap\Model\SitemapItemInterfaceFactory;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
-use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magefan\Blog\Api\AuthorCollectionInterfaceFactory as CollectionFactory;
 use Magefan\Blog\Api\SitemapConfigInterface;
+use Magento\Framework\Module\Manager;
 
-class Post implements ItemProviderInterface
+class Author implements ItemProviderInterface
 {
     /**
      * Sitemap config
@@ -21,7 +22,7 @@ class Post implements ItemProviderInterface
     private $sitemapConfig;
 
     /**
-     * Blog post collection factory
+     * Blog tag collection factory
      *
      * @var CollectionFactory
      */
@@ -35,18 +36,26 @@ class Post implements ItemProviderInterface
     private $itemFactory;
 
     /**
+     * @var Manager
+     */
+    private $moduleManager;
+
+    /**
      * @param SitemapConfigInterface $sitemapConfig
      * @param CollectionFactory $collectionFactory
      * @param SitemapItemInterfaceFactory $itemFactory
+     * @param Manager $moduleManager
      */
     public function __construct(
         SitemapConfigInterface $sitemapConfig,
         CollectionFactory $collectionFactory,
-        SitemapItemInterfaceFactory $itemFactory
+        SitemapItemInterfaceFactory $itemFactory,
+        Manager $moduleManager
     ) {
         $this->sitemapConfig = $sitemapConfig;
         $this->collectionFactory = $collectionFactory;
         $this->itemFactory = $itemFactory;
+        $this->moduleManager = $moduleManager;
     }
 
     /**
@@ -54,28 +63,27 @@ class Post implements ItemProviderInterface
      */
     public function getItems($storeId)
     {
-        if (!$this->sitemapConfig->isEnabledSitemap(SitemapConfigInterface::POSTS_PAGE, $storeId)) {
+        if (!$this->sitemapConfig->isEnabledSitemap(SitemapConfigInterface::AUTHOR_PAGE, $storeId)) {
             return [];
         }
 
-        $collection = $this->collectionFactory->create()
-            ->addStoreFilter($storeId)
-            ->addActiveFilter()
-            ->getItems();
+        if ($this->moduleManager->isEnabled('Magefan_BlogAuthor')) {
+            $collection = $this->collectionFactory->create()
+                ->addStoreFilter($storeId)
+                ->addActiveFilter()
+                ->getItems();
+        } else {
+            $collection = $this->collectionFactory->create()
+                ->addFieldToFilter('is_active', 1)
+                ->getItems();
+        }
 
         $items = array_map(function ($item) use ($storeId) {
-            $imagesCollection = new \Magento\Framework\DataObject();
-            $featuredImage = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
-            $images = array_merge([$featuredImage], $item->getGalleryImages());
-            $imagesCollection->setTitle($item->getTitle());
-            $imagesCollection->setCollection($images);
-
             return $this->itemFactory->create([
                 'url' => $item->getUrl(),
                 'updatedAt' => $item->getUpdatedAt(),
-                'images' => $imagesCollection,
-                'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::POSTS_PAGE, $storeId),
-                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE, $storeId),
+                'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::AUTHOR_PAGE, $storeId),
+                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::AUTHOR_PAGE, $storeId),
             ]);
         }, $collection);
 

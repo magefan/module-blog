@@ -18,6 +18,8 @@ interface SitemapConfigInterface
     const HOME_PAGE = 'index';
     const CATEGORIES_PAGE = 'category';
     const POSTS_PAGE = 'post';
+    const TAGS_PAGE = 'tag';
+    const AUTHOR_PAGE = 'author';
 
     /**
      * @param $page

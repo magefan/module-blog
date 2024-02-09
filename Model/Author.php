@@ -29,6 +29,11 @@ class Author extends AbstractModel implements AuthorInterface
     protected $shortContentExtractor;
 
     /**
+     * @var Url
+     */
+    protected $_url;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
