@@ -437,18 +437,28 @@
                 <item name="sortOrder" xsi:type="number">30</item>
             </item>
         </argument>
-        <field name="identifier">
+
+        <container name="url_key_group" component="Magento_Ui/js/form/components/group">
             <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">URL Key</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">post</item>
-                    <item name="dataScope" xsi:type="string">identifier</item>
-                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="required" xsi:type="boolean">false</item>
                 </item>
             </argument>
-        </field>
+
+            <field name="identifier">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">URL Key</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">post</item>
+                        <item name="dataScope" xsi:type="string">identifier</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
         <field name="meta_title">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
