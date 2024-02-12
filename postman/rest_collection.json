@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "9dbce1af-ba5c-45d8-9d0b-17d3302c043a",
+		"name": "Magefan Blog Rest Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11714577"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "CreatePost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Post\\\",\\\"featured_img_alt\\\":\\\"\\\",\\\"position\\\":\\\"1\\\",\\\"views_count\\\":\\\"\\\",\\\"identifier\\\":\\\"test-post\\\",\\\"meta_title\\\":\\\" Meta Title\\\",\\\"og_title\\\":\\\"test-og-title\\\",\\\"og_description\\\":\\\" OG Description\\\",\\\"og_type\\\":\\\"\\\",\\\"is_active\\\":\\\"1\\\",\\\"include_in_recent\\\":\\\"1\\\",\\\"publish_time\\\":\\\"2024-02-11\\\",\\\"custom_theme_from\\\":\\\"\\\",\\\"custom_theme_to\\\":\\\"\\\",\\\"tag_input\\\":\\\"test\\\",\\\"meta_keywords\\\":\\\" Meta Keywords\\\",\\\"meta_description\\\":\\\" Meta Description\\\",\\\"layout_update_xml\\\":\\\"\\\",\\\"custom_layout_update_xml\\\":\\\"\\\",\\\"author_id\\\":\\\"1\\\",\\\"page_layout\\\":\\\"\\\",\\\"custom_theme\\\":\\\"\\\",\\\"custom_layout\\\":\\\"\\\",\\\"store_ids\\\":[\\\"0\\\"],\\\"categories\\\":[\\\"1\\\"],\\\"content\\\":\\\"Test Content<\\\\\\/div>\\\",\\\"short_content\\\":\\\"\\\",\\\"featured_img\\\":\\\"magefan_blog\\\\\\/1nl-img-1-4_1_3.png\\\",\\\"form_key\\\":\\\"99EqfPpQYZhTuifM\\\",\\\"links\\\":{\\\"post\\\":[],\\\"product\\\":[]},\\\"featured_list_img\\\":null,\\\"og_img\\\":null,\\\"tags\\\":[\\\"2\\\"]}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post"
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePost",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Post Edited\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePost",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewPostOnStore",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/view/:id/:store_id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								"view",
+								":id",
+								":store_id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "24"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostListByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								"list",
+								":type",
+								":term",
+								":store_id",
+								":page",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "category"
+								},
+								{
+									"key": "term",
+									"value": "lifestyle"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostListByTag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								"list",
+								":type",
+								":term",
+								":store_id",
+								":page",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "tag"
+								},
+								{
+									"key": "term",
+									"value": "hacks"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostListByAuthorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								"list",
+								":type",
+								":term",
+								":store_id",
+								":page",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "author"
+								},
+								{
+									"key": "term",
+									"value": "1"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostListBySearchTerm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								"list",
+								":type",
+								":term",
+								":store_id",
+								":page",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "search"
+								},
+								{
+									"key": "term",
+									"value": "african"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostListByArchiveDate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/post/list/:type/:term/:store_id/:page/:limit",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								"list",
+								":type",
+								":term",
+								":store_id",
+								":page",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "archive"
+								},
+								{
+									"key": "term",
+									"value": "2021-05"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "CreateCategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Category\\\",\\\"position\\\":\\\"1\\\",\\\"posts_per_page\\\":\\\"\\\",\\\"identifier\\\":\\\"test-category\\\",\\\"meta_title\\\":\\\" Meta Title\\\",\\\"is_active\\\":\\\"1\\\",\\\"include_in_menu\\\":\\\"1\\\",\\\"display_mode\\\":\\\"0\\\",\\\"posts_sort_by\\\":\\\"0\\\",\\\"page_layout\\\":\\\"\\\",\\\"custom_theme\\\":\\\"\\\",\\\"custom_layout\\\":\\\"\\\",\\\"store_ids\\\":[\\\"0\\\"],\\\"meta_keywords\\\":\\\" Meta Keywords\\\",\\\"meta_description\\\":\\\" Meta Description\\\",\\\"layout_update_xml\\\":\\\"\\\",\\\"custom_layout_update_xml\\\":\\\"\\\",\\\"custom_theme_from\\\":\\\"\\\",\\\"custom_theme_to\\\":\\\"\\\",\\\"content\\\":\\\"Test Category Content<\\\\\\/div>\\\",\\\"path\\\":\\\"2\\\\\\/1\\\",\\\"form_key\\\":\\\"XCdOVB6nqrPsYINy\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://blog.demo.magefan.top/index.php/rest/V1/blog/category"
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoryById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/category/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Edit\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/category/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/category/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewCategoryOnStore",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/category/view/:id/:store_id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"category",
+								"view",
+								":id",
+								":store_id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoryListBySearchTerm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest//V1/blog/category/list/:type/:term/:store_id/:page/:limit",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"",
+								"V1",
+								"blog",
+								"category",
+								"list",
+								":type",
+								":term",
+								":store_id",
+								":page",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "search"
+								},
+								{
+									"key": "term",
+									"value": "lifestyle"
+								},
+								{
+									"key": "store_id",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetBearer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://blog.demo.magefan.top/index.php/rest/V1/integration/admin/token"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjIsInV0eXBpZCI6MiwiaWF0IjoxNzA3NzIyNjEyLCJleHAiOjE3MDc3MjYyMTJ9.3rGhILlGt2MSOlBLg62Mil0cm5j1Rd_inPC9auBRNWI"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
