@@ -17,7 +17,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @inheritDoc
      */
     protected $_idFieldName = 'category_id';
-    
+
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
@@ -92,6 +92,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
 
         return parent::addFieldToFilter($field, $condition);
+    }
+
+    /**
+     * Add search filter to collection
+     * @param string $term
+     * @return $this
+     */
+    public function addSearchFilter(string $term)
+    {
+        return $this->addFieldToFilter('title', ['like' => '%' . $term . '%']);
     }
 
     /**
