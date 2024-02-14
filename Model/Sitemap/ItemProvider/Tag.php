@@ -8,10 +8,10 @@ namespace Magefan\Blog\Model\Sitemap\ItemProvider;
 
 use Magento\Sitemap\Model\SitemapItemInterfaceFactory;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
-use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory;
 use Magefan\Blog\Api\SitemapConfigInterface;
 
-class Post implements ItemProviderInterface
+class Tag implements ItemProviderInterface
 {
     /**
      * Sitemap config
@@ -21,7 +21,7 @@ class Post implements ItemProviderInterface
     private $sitemapConfig;
 
     /**
-     * Blog post collection factory
+     * Blog tag collection factory
      *
      * @var CollectionFactory
      */
@@ -54,7 +54,7 @@ class Post implements ItemProviderInterface
      */
     public function getItems($storeId)
     {
-        if (!$this->sitemapConfig->isEnabledSitemap(SitemapConfigInterface::POSTS_PAGE, $storeId)) {
+        if (!$this->sitemapConfig->isEnabledSitemap(SitemapConfigInterface::TAGS_PAGE, $storeId)) {
             return [];
         }
 
@@ -64,18 +64,11 @@ class Post implements ItemProviderInterface
             ->getItems();
 
         $items = array_map(function ($item) use ($storeId) {
-            $imagesCollection = new \Magento\Framework\DataObject();
-            $featuredImage = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
-            $images = array_merge([$featuredImage], $item->getGalleryImages());
-            $imagesCollection->setTitle($item->getTitle());
-            $imagesCollection->setCollection($images);
-
             return $this->itemFactory->create([
                 'url' => $item->getUrl(),
                 'updatedAt' => $item->getUpdatedAt(),
-                'images' => $imagesCollection,
-                'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::POSTS_PAGE, $storeId),
-                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE, $storeId),
+                'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::TAGS_PAGE, $storeId),
+                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::TAGS_PAGE, $storeId),
             ]);
         }, $collection);
 

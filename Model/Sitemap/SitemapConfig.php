@@ -46,6 +46,12 @@ class SitemapConfig extends \Magefan\Blog\Model\Config implements SitemapConfigI
             case 'post':
                 $frequency = 'daily';
                 break;
+            case 'tag':
+                $frequency = 'daily';
+                break;
+            case 'author':
+                $frequency = 'daily';
+                break;
             default:
                 $frequency = 'daily';
         }
@@ -67,6 +73,12 @@ class SitemapConfig extends \Magefan\Blog\Model\Config implements SitemapConfigI
                 $priority = 0.8;
                 break;
             case 'post':
+                $priority = 0.5;
+                break;
+            case 'tag':
+                $priority = 0.5;
+                break;
+            case 'author':
                 $priority = 0.5;
                 break;
             default:
