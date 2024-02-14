@@ -13,4 +13,9 @@
         <css src="Magefan_Blog::css/blog-new.css" />
         <css src="Magefan_Blog::css/blog-custom.css" />
     </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magefan\Blog\Block\CustomCss" name="magefan.blog.custom.css" />
+        </referenceContainer>
+    </body>
 </page>

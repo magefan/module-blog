@@ -679,6 +679,9 @@
                             <field id="include_all_pages">0</field>
                         </depends>
                     </field>
+                    <field id="custom_css" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Custom CSS</label>
+                    </field>
                 </group>
             </group>
         </section>
