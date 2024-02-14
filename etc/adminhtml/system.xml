@@ -67,6 +67,9 @@
                 <field id="meta_description" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Meta Description</label>
                 </field>
+                <field id="description" translate="label comment" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Description</label>
+                </field>
             </group>
 
             <group id="post_view" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
