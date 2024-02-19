@@ -99,7 +99,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_storeManager;
 
     /**
-     * @var \Zend\Db\Adapter\Adapter
+     * @var \Laminas\Db\Adapter\Adapter
      */
     protected $dbAdapter;
 
@@ -248,7 +248,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * @return \Zend\Db\Adapter\Adapter
+     * @return \Laminas\Db\Adapter\Adapter
      */
     protected function getDbAdapter()
     {
@@ -265,7 +265,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
                 $connectionConf['host'] = $this->getData('dbhost');
             }
 
-            $this->dbAdapter = new \Zend\Db\Adapter\Adapter($connectionConf);
+            $this->dbAdapter = new \Laminas\Db\Adapter\Adapter($connectionConf);
 
             if (!$this->dbAdapter) {
                 throw  new \Zend_Db_Exception("Failed connect to magento database");
