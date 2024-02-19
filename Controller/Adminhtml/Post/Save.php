@@ -28,6 +28,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
      */
     protected function _beforeSave($model, $request)
     {
+        $postRepository = $this->_objectManager->get(\Magefan\Blog\Api\PostRepositoryInterface::class);
+        $post = $postRepository->getById($model->getId());
+
+        if ($post->getSummaryRating() && $post->getSummaryRating() !== $request->getPost('summary_rating')) {
+            $model->setData('votes_count', 1);
+        }
+
         /* Prepare author */
         if (!$model->getAuthorId()) {
             $authSession = $this->_objectManager->get(\Magento\Backend\Model\Auth\Session::class);

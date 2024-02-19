@@ -109,7 +109,7 @@ class Post extends \Magefan\Blog\App\Action\Action
                 ]));
                 return;
             }
-            
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );

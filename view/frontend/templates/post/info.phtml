@@ -15,6 +15,7 @@
 ?>
 
 <?php $_post = $block->getPost() ?>
+<?php $ratingValues = [1, 2, 3, 4, 5] ?>
 
 <div class="post-info">
     <?php if ($_post->isPublishDateEnabled()) { ?>
@@ -112,4 +113,77 @@
         <?php } ?>
     <?php } ?>
 
+    <?php if (true) { ?>
+        <?php if ($rating = $_post->getSummaryRating()) { ?>
+            <div class="product-reviews-summary<?= !$rating ? ' no-rating' : '' ?>">
+                <?php if ($rating):?>
+                    <div class="rating-summary">
+                        <span class="label"><span><?= $block->escapeHtml(__('Rating')) ?>:</span></span>
+                        <div class="rating-result"
+                             id="rating-result_<?= /* @noEscape */ $_post->getId() ?>"
+                             title="<?= $block->escapeHtmlAttr($rating) ?>%">
+                            <span>
+                                <span>
+                                    <span><?= $block->escapeHtml($rating); ?>
+                                    </span>% of <span>100</span>
+                                </span>
+                            </span>
+                        </div>
+                        <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                            'width:' . $block->escapeHtmlAttr($rating) . '%',
+                            '#rating-result_' . $_post->getId() . ' span'
+                        ) ?>
+                    </div>
+                <?php endif;?>
+                <div class="reviews-actions">
+                    <span><?= $block->escapeHtml($_post->getVotesCount()) ?></span>&nbsp;
+                    <span><?= ($block->getVotesCount() == 1) ? $block->escapeHtml(__('Vote')) :
+                            $block->escapeHtml(__('Votes')) ?>
+                </span>
+                </div>
+            </div>
+            <hr />
+            <form action="<?= $block->escapeUrl($block->getAction()) ?>" class="review-form" method="post" id="mf-rate-form">
+                <?= $block->getBlockHtml('formkey') ?>
+                <fieldset class="fieldset review-fieldset">
+                    <span id="input-message-box"></span>
+                    <fieldset class="field review-field-ratings">
+                        <legend class="label"><span>Your Rating</span></legend><br>
+                        <div class="control">
+                            <div class="nested" id="product-review-table">
+                                <div class="field choice review-field-rating">
+                                    <div class="control review-control-vote">
+                                        <?php foreach ($ratingValues as $rating) { ?>
+                                            <input
+                                                type="radio"
+                                                name="ratings[<?= $_post->getId() ?>]"
+                                                id="Price_<?= $rating ?>"
+                                                value="<?= $rating * 20 ?>"
+                                                class="radio"
+                                            >
+                                            <label
+                                                class="rating-<?= $rating ?>"
+                                                for="Price_<?= $rating ?>"
+                                                title="<?= $block->escapeHtml(__('%1 %2', $rating, $rating > 1 ? __('stars') : __('star'))) ?>"
+                                                id="Price_<?= $rating ?>_label"
+                                            >
+                                                <span><?= $block->escapeHtml(__('%1 %2', $rating, $rating > 1 ? __('stars') : __('star'))) ?></span>
+                                            </label>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </fieldset>
+            </form>
+            <script>
+                require(['jquery'], function($) {
+                    $('#mf-rate-form .radio').click(function() {
+                        $('#mf-rate-form').submit();
+                    });
+                })
+            </script>
+        <?php } ?>
+    <?php } ?>
 </div>
