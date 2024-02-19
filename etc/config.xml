@@ -197,6 +197,7 @@
                     <include_all_pages>1</include_all_pages>
                     <include_home_page>0</include_home_page>
                     <include_product_page>0</include_product_page>
+                    <custom_css/>
                 </css_settings>
             </developer>
         </mfblog>

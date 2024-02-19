@@ -21,6 +21,8 @@ class Richsnippets extends Opengraph
 
 
     /**
+     * Retrieve snipet params
+     *
      * @return array
      */
     public function getOptions(): array
@@ -30,13 +32,13 @@ class Richsnippets extends Opengraph
             $snippetOption = $post->getData('structure_data_type');
             switch ($snippetOption) {
                 case '1':
-                    $this->_options = $this->getNewsArticleOptions();
+                    $this->_options = $this->getOptionsByType('NewsArticle');
                     break;
                 case '2':
                     $this->_options = [];
                     break;
                 default:
-                    $this->_options = $this->getBlogPostOptions();
+                    $this->_options = $this->getOptionsByType('BlogPosting');
                     break;
             }
         }
@@ -44,56 +46,11 @@ class Richsnippets extends Opengraph
     }
 
     /**
-     * Retrieve snipet params
-     *
+     * @param $type
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getBlogPostOptions()
-    {
-
-        $post = $this->getPost();
-
-        $logoBlock = $this->getLayout()->getBlock('logo');
-        if (!$logoBlock) {
-            $logoBlock = $this->getLayout()->getBlock('amp.logo');
-        }
-
-        $options = [
-            '@context' => 'http://schema.org',
-            '@type' => 'BlogPosting',
-            '@id' => $post->getPostUrl(),
-            'author' => $this->getAuthor(),
-            'headline' => $this->getTitle(),
-            'description' => $this->getDescription(),
-            'datePublished' => $post->getPublishDate('c'),
-            'dateModified' => $post->getUpdateDate('c'),
-            'image' => [
-                '@type' => 'ImageObject',
-                'url' => $this->getImage() ?:
-                    ($logoBlock ? $logoBlock->getLogoSrc() : ''),
-                'width' => 720,
-                'height' => 720,
-            ],
-            'publisher' => [
-                '@type' => 'Organization',
-                'name' => $this->getPublisher(),
-                'logo' => [
-                    '@type' => 'ImageObject',
-                    'url' => $logoBlock ? $logoBlock->getLogoSrc() : '',
-                ],
-            ],
-            'mainEntityOfPage' => $this->_url->getBaseUrl(),
-        ];
-
-        return $options;
-    }
-
-    /**
-     * Retrieve snipet params
-     *
-     * @return array
-     */
-    public function getNewsArticleOptions()
+    public function getOptionsByType($type)
     {
         $post = $this->getPost();
 
@@ -104,7 +61,7 @@ class Richsnippets extends Opengraph
 
         $options = [
             '@context' => 'http://schema.org',
-            '@type' => 'NewsArticle',
+            '@type' => $type,
             '@id' => $post->getPostUrl(),
             'author' => $this->getAuthor(),
             'headline' => $this->getTitle(),
