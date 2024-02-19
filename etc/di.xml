@@ -188,8 +188,6 @@
                 <item name="mfblogIndexUrlProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Index</item>
                 <item name="mfblogPostProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Post</item>
                 <item name="mfblogCategoryProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Category</item>
-                <item name="mfblogTagProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Tag</item>
-                <item name="mfblogAuthorProvider" xsi:type="object">Magefan\Blog\Model\Sitemap\ItemProvider\Author</item>
             </argument>
         </arguments>
     </type>
