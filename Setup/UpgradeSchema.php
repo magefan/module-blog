@@ -801,6 +801,21 @@ class UpgradeSchema implements UpgradeSchemaInterface
             }
         }
 
+        if (version_compare($version,'2.11.1') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'structure_data_type',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '0',
+                    'comment' => 'Rich Snippet / Structured Data',
+                    'after' => 'meta_description'
+                ]
+            );
+        }
+
         $setup->endSetup();
     }
 }

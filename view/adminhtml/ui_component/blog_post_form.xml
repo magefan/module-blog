@@ -495,6 +495,32 @@
                 </item>
             </argument>
         </field>
+        <field name="structure_data_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Rich Snippet / Structured Data</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">structure_data_type</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+                <item name="options" xsi:type="array">
+                    <item name="blog_posting" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Blog Posting</item>
+                        <item name="value" xsi:type="number">0</item>
+                    </item>
+                    <item name="news_article" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">News Article</item>
+                        <item name="value" xsi:type="number">1</item>
+                    </item>
+                    <item name="none" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">None</item>
+                        <item name="value" xsi:type="number">2</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="og_metadata">
         <argument name="data" xsi:type="array">

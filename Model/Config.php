@@ -112,6 +112,7 @@ class Config
     const XML_INCLUDE_BLOG_CSS_ALL_PAGES = 'mfblog/developer/css_settings/include_all_pages';
     const XML_INCLUDE_BLOG_CSS_HOME_PAGE = 'mfblog/developer/css_settings/include_home_page';
     const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/css_settings/include_product_page';
+    const XML_BLOG_CUSTOM_CSS = 'mfblog/developer/css_settings/custom_css';
 
     /**
      * @var ScopeConfigInterface
@@ -287,5 +288,14 @@ class Config
         }
 
         return 'page';
+    }
+
+    /**
+     * @param $storeId
+     * @return string
+     */
+    public function getCustomCss($storeId = null): string
+    {
+        return (string)$this->getConfig(self::XML_BLOG_CUSTOM_CSS, $storeId);
     }
 }
