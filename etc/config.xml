@@ -63,6 +63,9 @@
                 <views_count>
                     <enabled>0</enabled>
                 </views_count>
+                <reading_time>
+                    <enabled>0</enabled>
+                </reading_time>
             </post_view>
             <post_list>
                 <template>list-modern</template>

@@ -409,6 +409,18 @@
                 </item>
             </argument>
         </field>
+        <field name="reading_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">integer</item>
+                    <item name="label" xsi:type="string" translate="true">Reading time (In minutes)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                    <item name="dataScope" xsi:type="string">reading_time</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="gallery">
         <argument name="data" xsi:type="array">

@@ -1098,4 +1098,30 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         return $this->shortContentExtractor;
     }
+
+    /**
+     * Retrieve reading time
+     * @return int
+     */
+    public function getReadingTime()
+    {
+        if (!$this->getData('reading_time')) {
+            $wpm = 250;
+            $contentHtml = $this->getFilteredContent();
+            $numberOfImages = substr_count( strtolower( $contentHtml ), '<img ' );
+            $additionalWordsForImages = (int)($numberOfImages * 12) / $wpm;
+            $wordCount = count(preg_split( '/\s+/', strip_tags($contentHtml)));
+
+            $readingTime = 1;
+
+            if (!$wordCount && !$additionalWordsForImages){
+                return $readingTime;
+            }
+            $readingTime = ceil(($wordCount + $additionalWordsForImages) / $wpm);
+
+            $this->setData('reading_time', $readingTime);
+        }
+
+        return (int)$this->getData('reading_time');
+    }
 }

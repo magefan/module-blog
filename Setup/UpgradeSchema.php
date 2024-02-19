@@ -814,6 +814,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'after' => 'meta_description'
                 ]
             );
+
+            /* Add reading time to posts table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'reading_time',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 20,
+                    'nullable' => true,
+                    'comment' => 'Post Reading Time',
+                    'after' => 'views_count'
+                ]
+            );
         }
 
         $setup->endSetup();

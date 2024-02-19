@@ -100,6 +100,14 @@
         <?php } ?>
     <?php } ?>
 
+    <!-- reading time -->
+    <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+        <div class="item post-reading-time">
+            <i class="mf-blog-icon mfbi-reading-time"></i>
+            <span class="value"><?= $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+        </div>
+    <?php } ?>
+
     <?php if ($block->viewsCountEnabled()) { ?>
         <?php if ($viewsCount = $_post->getViewsCount()) { ?>
             <div class="item post-views">
