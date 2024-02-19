@@ -21,15 +21,15 @@
             </design>
             <index_page>
                 <title>Blog</title>
-                <meta_title/>
+                <description/>
                 <display_mode>0></display_mode>
                 <posts_sort_by>0</posts_sort_by>
                 <template/>
                 <posts_per_page/>
                 <post_ids/>
+                <meta_title/>
                 <meta_keywords/>
                 <meta_description/>
-                <description/>
             </index_page>
             <post_view>
                 <design>

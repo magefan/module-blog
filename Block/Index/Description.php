@@ -6,14 +6,16 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Index;
 
 use Magento\Framework\View\Element\Template;
 
 /**
- * Blog index info
+ * Blog index description
  */
-class Info extends Template
+class Description extends Template
 {
     public function getDescription(): string
     {
