@@ -22,7 +22,7 @@
 .post-holder .post-header .post-info {padding: 0 0 20px 0;}
 .post-holder .post-header .post-info .item {display: inline-block}
 .post-holder .post-header .post-info .dash {display: none; /* fix for old templates */}
-.post-holder .post-header .post-info .label {font-weight: 700;}
+.post-holder .post-header .post-info .label {font-weight: 600;}
 .post-holder .post-header .post-info .value {font-style: italic;}
 .post-holder .post-header .post-info .item::after {display: inline-block; content: ' | ';color:#b9b9b9}
 .post-holder .post-header .post-info .item:last-child::after{display: none}
@@ -223,7 +223,7 @@
 .mf-blog-icon.mfbi-tags {background-image: url('../images/tags-icon.svg')}
 .mf-blog-icon.mfbi-user {background-image: url('../images/user-icon.svg')}
 .mf-blog-icon.mfbi-views {background-image: url('../images/views-icon.svg')}
-.mf-blog-icon.mfbi-reading-time {background-image: url('../images/views-icon.svg')}
+.mf-blog-icon.mfbi-reading-time {background-image: url('../images/time-icon.svg')}
 /* END Fix Related Products */
 
 
