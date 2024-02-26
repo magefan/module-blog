@@ -20,7 +20,7 @@ class Collection extends AbstractCollection implements AuthorCollectionInterface
     /**
      * @inheritDoc
      */
-    protected $_idFieldName = 'author_id';
+    protected $_idFieldName = 'user_id';
     
     /**
      * Constructor
