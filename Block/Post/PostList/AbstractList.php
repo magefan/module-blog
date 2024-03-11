@@ -109,7 +109,8 @@ abstract class AbstractList extends Template implements IdentityInterface
         $this->_postCollection = $this->_postCollectionFactory->create()
             ->addActiveFilter()
             ->addStoreFilter($this->_storeManager->getStore()->getId())
-            ->setOrder($this->getCollectionOrderField(), $this->getCollectionOrderDirection());
+            ->setOrder($this->getCollectionOrderField(), $this->getCollectionOrderDirection())
+            ->setOrder('main_table.post_id');
 
         if ($this->getPageSize()) {
             $this->_postCollection->setPageSize($this->getPageSize());
