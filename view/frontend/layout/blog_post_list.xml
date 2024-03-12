@@ -27,7 +27,7 @@
                     </action>
                     <arguments>
                         <argument name="lazyload_js" xsi:type="string">Magefan_Blog/js/lazyload</argument>
-                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list, .blog-list-wrapper .blog-list, .column > [class*=mosaica-], .column >[class*=template-]</argument>
+                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list, .blog-list-wrapper .blog-list, .column > .mosaica-holder, .column >[class*=template-]</argument>
                     </arguments>
                 </block>
             </block>
