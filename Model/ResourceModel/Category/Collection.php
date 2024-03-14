@@ -164,33 +164,21 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         $items = $this->getColumnValues('category_id');
         if (count($items)) {
-            $connection = $this->getConnection();
-            $select = $connection->select()->from(['cps' => $this->getTable('magefan_blog_category_store')])
-                ->where('cps.category_id IN (?)', $items);
 
-            $result = [];
-            foreach ($connection->fetchAll($select) as $item) {
-                if (!isset($result[$item['category_id']])) {
-                    $result[$item['category_id']] = [];
+            foreach ($this as $item) {
+                $categoryId = $item->getData('category_id');
+                $storeIds = $this->getResource()->lookupStoreIds($categoryId);
+                if (!$storeIds) {
+                    continue;
                 }
-                $result[$item['category_id']][] = $item['store_id'];
-            }
-
-            if ($result) {
-                foreach ($this as $item) {
-                    $categoryId = $item->getData('category_id');
-                    if (!isset($result[$categoryId])) {
-                        continue;
-                    }
-                    if ($result[$categoryId] == 0) {
-                        $stores = $this->_storeManager->getStores(false, true);
-                        $storeId = current($stores)->getId();
-                    } else {
-                        $storeId = $result[$item->getData('category_id')];
-                    }
-                    $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_ids', $result[$categoryId]);
+                if (in_array(0, $storeIds)) {
+                    $stores = $this->_storeManager->getStores(false, true);
+                    $storeId = current($stores)->getId();
+                } else {
+                    $storeId = $storeIds[0];
                 }
+                $item->setData('_first_store_id', $storeId);
+                $item->setData('store_ids', $storeIds);
             }
 
             if ($this->_storeId) {

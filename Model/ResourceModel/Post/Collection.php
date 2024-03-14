@@ -17,7 +17,17 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @inheritDoc
      */
     protected $_idFieldName = 'post_id';
-    
+
+    /**
+     * @inheritDoc
+     */
+    protected $_eventPrefix = 'mfblog_post_collection';
+
+    /**
+     * @inheritDoc
+     */
+    protected $_eventObject = 'blog_post_collection';
+
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */

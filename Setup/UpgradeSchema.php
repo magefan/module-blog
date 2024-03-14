@@ -801,6 +801,48 @@ class UpgradeSchema implements UpgradeSchemaInterface
             }
         }
 
+        if (version_compare($version, '2.11.3') < 0) {
+            if ($connection->isTableExists($setup->getTable('magefan_blog_category'))) {
+                $connection->addIndex(
+                    $setup->getTable('magefan_blog_category'),
+                    $setup->getIdxName(
+                        $setup->getTable('magefan_blog_category'),
+                        ['is_active']
+                    ),
+                    ['is_active']
+                );
+            }
+
+            if ($connection->isTableExists($setup->getTable('magefan_blog_post'))) {
+                $connection->addIndex(
+                    $setup->getTable('magefan_blog_post'),
+                    $setup->getIdxName(
+                        $setup->getTable('magefan_blog_post'),
+                        ['is_active']
+                    ),
+                    ['is_active']
+                );
+
+                $connection->addIndex(
+                    $setup->getTable('magefan_blog_post'),
+                    $setup->getIdxName(
+                        $setup->getTable('magefan_blog_post'),
+                        ['include_in_recent']
+                    ),
+                    ['include_in_recent']
+                );
+
+                $connection->addIndex(
+                    $setup->getTable('magefan_blog_post'),
+                    $setup->getIdxName(
+                        $setup->getTable('magefan_blog_post'),
+                        ['publish_time']
+                    ),
+                    ['publish_time']
+                );
+            }
+        }
+
         $setup->endSetup();
     }
 }
