@@ -321,10 +321,14 @@ class UrlResolver implements UrlResolverInterface
     protected function _isArchiveIdentifier($identifier)
     {
         $info = explode('-', $identifier);
-        return count($info) == 2
+        if (!empty($info[1])) {
+            $month = strlen($info[1]) == 2 && is_numeric($info[1]);
+        } else {
+            $month = true;
+        }
+        return (count($info) == 2 || count($info) == 1)
             && strlen($info[0]) == 4
-            && strlen($info[1]) == 2
             && is_numeric($info[0])
-            && is_numeric($info[1]);
+            && $month;
     }
 }

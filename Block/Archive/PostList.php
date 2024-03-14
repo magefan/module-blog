@@ -59,9 +59,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $this->pageConfig->getTitle()->set($title);
 
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ARCHIVE)) {
-
+            $month = '';
+            if (!empty($this->getMonth())) {
+                $month = '-' . str_pad($this->getMonth(), 2, '0', STR_PAD_LEFT);
+            }
             $canonicalUrl = $this->_url->getUrl(
-                $this->getYear() . '-' . str_pad($this->getMonth(), 2, '0', STR_PAD_LEFT),
+                $this->getYear() . $month,
                 \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
             );
             $page = (int)$this->_request->getParam($this->getPageParamName());
@@ -94,11 +97,19 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     protected function _getTitle()
     {
-        $time = strtotime($this->getYear().'-'.$this->getMonth().'-01');
-        return sprintf(
-            __('Monthly Archives: %s %s'),
-            __(date('F', $time)),
-            date('Y', $time)
-        );
+        if (!empty($this->getMonth())) {
+            $time = strtotime($this->getYear().'-'.$this->getMonth().'-01');
+            return sprintf(
+                __('Monthly Archives: %s %s'),
+                __(date('F', $time)),
+                date('Y', $time)
+            );
+        } else {
+            $time = strtotime($this->getYear().'-01-01');
+            return sprintf(
+                __('Yearly Archives: %s'),
+                date('Y', $time)
+            );
+        }
     }
 }

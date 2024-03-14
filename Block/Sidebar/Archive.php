@@ -42,16 +42,18 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve available months
+     * @param false $onlyYears
      * @return array
      */
-    public function getMonths()
+    public function getMonths($onlyYears = false)
     {
         if (null === $this->_months) {
             $this->_months = [];
             $this->_preparePostCollection();
+            $format = empty($onlyYears) ? 'Y-m' : 'Y';
             foreach ($this->_postCollection as $post) {
                 $time = strtotime((string)$post->getData('publish_time'));
-                $this->_months[date('Y-m', $time)] = $time;
+                $this->_months[date($format, $time)] = $time;
             }
         }
 
@@ -81,12 +83,14 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     /**
      * Retrieve archive url by time
      * @param  int $time
+     * @param false $onlyYears
      * @return string
      */
-    public function getTimeUrl($time)
+    public function getTimeUrl($time, $onlyYears = false)
     {
+        $format = empty($onlyYears) ? 'Y-m' : 'Y';
         return $this->_url->getUrl(
-            date('Y-m', $time),
+            date($format, $time),
             \Magefan\Blog\Model\Url::CONTROLLER_ARCHIVE
         );
     }
@@ -114,5 +118,13 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
         );
 
         return \Magefan\Blog\Helper\Data::getTranslatedDate($format, $time);
+    }
+
+    public function getGroupBy()
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/sidebar/archive/group_by',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
 }
