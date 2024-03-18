@@ -336,11 +336,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param int $month
      * @return $this
      */
-    public function addArchiveFilter($year, $month = 0)
+    public function addArchiveFilter($year, $month)
     {
         $this->getSelect()
             ->where('YEAR(publish_time) = ?', $year);
-        if (!empty($month)) {
+        if ($month) {
             $this->getSelect()->where('MONTH(publish_time) = ?', $month);
         }
 
