@@ -29,13 +29,14 @@ class View extends \Magefan\Blog\App\Action\Action
         $date[2] = '01';
         $time = strtotime(implode('-', $date));
 
-        if (!$time || count($date) != 3) {
+        if (!$time || (count($date) != 3 && !empty($date[1]))) {
             return $this->_forwardNoroute();
         }
 
         $registry = $this->_objectManager->get(\Magento\Framework\Registry::class);
+        $month = !empty($date[1]) ? $date[1] : 0;
         $registry->register('current_blog_archive_year', (int)$date[0]);
-        $registry->register('current_blog_archive_month', (int)$date[1]);
+        $registry->register('current_blog_archive_month', $month);
 
         $this->_view->loadLayout();
         $this->_view->renderLayout();
