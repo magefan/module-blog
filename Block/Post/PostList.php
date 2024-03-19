@@ -37,9 +37,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
         if ($page > 1) {
             //$this->pageConfig->setRobots('NOINDEX,FOLLOW');
-
-            $title = (__('Page') . ' ' . $page) . ' - ' . $this->pageConfig->getTitle()->getShortHeading();
-            $this->pageConfig->getTitle()->set($title);
+            $prefix = (__('Page') . ' ' . $page) . ' - ';
+            $this->pageConfig->getTitle()->set(
+                $prefix . $this->pageConfig->getTitle()->getShortHeading()
+            );
+            if ($description = $this->pageConfig->getDescription()) {
+                $this->pageConfig->setDescription($prefix . $description);
+            }
         }
 
         return parent::_prepareLayout();
