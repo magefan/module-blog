@@ -64,31 +64,31 @@ class Post implements ItemProviderInterface
             ->getItems();
 
         $items = array_map(function ($item) use ($storeId) {
+            
+            $data = [
+                'url' => $item->getUrl(),
+                'updatedAt' => $item->getUpdatedAt(),
+                'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::POSTS_PAGE, $storeId),
+                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE, $storeId),
+            ];
+
             $images = [];
             if ($item->getFeaturedImage()) {
-                $featuredImage = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
-                $images[] = $featuredImage;
+                $images[] = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
             }
-            $images = array_merge(
-                $images,
-                $item->getGalleryImages()
-            );
+            if ($item->getGalleryImages()) {
+                $images = array_merge( $images, $item->getGalleryImages());
+            }
 
             if ($images) {
                 $imagesCollection = new \Magento\Framework\DataObject();
                 $imagesCollection->setTitle($item->getTitle());
+                $imagesCollection->setThumbnail($images[0]->getUrl());
                 $imagesCollection->setCollection($images);
-            } else {
-                $imagesCollection = null;
+                $data['images'] = $imagesCollection;
             }
 
-            return $this->itemFactory->create([
-                'url' => $item->getUrl(),
-                'updatedAt' => $item->getUpdatedAt(),
-                'images' => $imagesCollection,
-                'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::POSTS_PAGE, $storeId),
-                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE, $storeId),
-            ]);
+            return $this->itemFactory->create($data);
         }, $collection);
 
         return $items;
