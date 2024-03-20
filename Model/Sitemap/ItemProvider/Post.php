@@ -64,11 +64,23 @@ class Post implements ItemProviderInterface
             ->getItems();
 
         $items = array_map(function ($item) use ($storeId) {
-            $imagesCollection = new \Magento\Framework\DataObject();
-            $featuredImage = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
-            $images = array_merge([$featuredImage], $item->getGalleryImages());
-            $imagesCollection->setTitle($item->getTitle());
-            $imagesCollection->setCollection($images);
+            $images = [];
+            if ($item->getFeaturedImage()) {
+                $featuredImage = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
+                $images[] = $featuredImage;
+            }
+            $images = array_merge(
+                $images,
+                $item->getGalleryImages()
+            );
+
+            if ($images) {
+                $imagesCollection = new \Magento\Framework\DataObject();
+                $imagesCollection->setTitle($item->getTitle());
+                $imagesCollection->setCollection($images);
+            } else {
+                $imagesCollection = null;
+            }
 
             return $this->itemFactory->create([
                 'url' => $item->getUrl(),
