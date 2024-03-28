@@ -267,9 +267,12 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
 
             $this->dbAdapter = new \Laminas\Db\Adapter\Adapter($connectionConf);
 
-            if (!$this->dbAdapter) {
-                throw  new \Zend_Db_Exception("Failed connect to magento database");
+            try {
+                $this->dbAdapter->query('SELECT 1')->execute();    
+            } catch (\Exception $e) {
+                throw  new \Exception("Failed connect to the database.");
             }
+            
         }
         return $this->dbAdapter;
     }
