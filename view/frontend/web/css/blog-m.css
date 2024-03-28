@@ -49,7 +49,8 @@
 .post-content .post-description .post-ftimg-hld {margin: 0 0 10px 0;}
 .post-content .post-description .post-ftimg-hld img {width:100%; padding:0; margin:0;}
 
-.post-content .post-description .mfblog-contents-toc {list-style: decimal;}
+.post-content .post-description .mfblog-contents-toc ol {list-style: none;}
+.post-content .post-description .mfblog-contents-toc > ol {list-style: decimal;}
 .post-content .post-description .mfblog-contents-toc li {margin-bottom: 1rem;}
 .post-content .post-description .mfblog-contents-toc li > ol {margin-top: 1rem;}
 .post-content .post-description .mfblog-contents-toc li:before {content: none;}
