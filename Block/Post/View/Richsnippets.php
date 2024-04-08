@@ -35,6 +35,9 @@ class Richsnippets extends Opengraph
                     $this->_options = $this->getOptionsByType('NewsArticle');
                     break;
                 case '2':
+                    $this->_options = $this->getOptionsByType('Article');
+                    break;
+                case '3':
                     $this->_options = [];
                     break;
                 default:
