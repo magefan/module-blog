@@ -1,5 +1,7 @@
 # Magento 2 Blog Extension | GitHub Repo | Magefan
 
+<img align="right" width="120" height="120" src="https://cm.magefan.com/mf_webp/jpg/media/catalog/product/cache/28b407cef1668fd0bdd6f36db3e8e2f0/i/c/icon-blog-ext_1.webp">
+
 Magento 2 Blog extension is a solution that allows you to manage your store and blog in Magento from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you to create blog posts in Magento, but drive more traffic, boost SEO and improve your Google rating. Our [Magento 2 Blog Extension](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
 
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
@@ -283,13 +285,13 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 
 ### [Magento 2 Marketing Automation Extensions](https://magefan.com/magento-2-extensions/magento-marketing-automation)
 
+* [Magento 2 Product Labels Extension](https://magefan.com/magento-2-product-labels)
 * [Magento 2 Dynamic Categories](https://magefan.com/magento-2-dynamic-categories)
 * [Magento 2 CMS Display Rules Extension](https://magefan.com/magento-2-cms-display-rules-extension)
 * [Magento 2 Automatic Related Products](https://magefan.com/magento-2-automatic-related-products)
 * [Magento 2 Price History](https://magefan.com/magento-2-price-history)
 * [Magento 2 Mautic Integration Extension](https://magefan.com/magento-2-mautic-extension)
-* [Magento 2 YouTube Widget Extension](https://magefan.com/magento2-youtube-extension)
-    
+* [Magento 2 YouTube Widget Extension](https://magefan.com/magento2-youtube-extension)  
  
 ### [Magento 2 Cart Extensions](https://magefan.com/magento-2-extensions/cart-extensions)
 
