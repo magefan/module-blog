@@ -1,4 +1,4 @@
-# Magento 2 Blog Extension | GitHub Repo | Magefan
+# Magento 2 Blog Extension
 
 <img align="right" width="120" height="120" src="https://cm.magefan.com/mf_webp/jpg/media/catalog/product/cache/28b407cef1668fd0bdd6f36db3e8e2f0/i/c/icon-blog-ext_1.webp">
 
