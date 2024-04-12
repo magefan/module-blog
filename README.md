@@ -291,20 +291,18 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 
 ### [Magento 2 Blog Extensions](https://magefan.com/magento-2-extensions/blog-extensions)
 
-  * [Magento 2 Blog Plus Extension](https://magefan.com/magento2-blog-extension/pricing)
-  * [Magento 2 Blog Extra Extension](https://magefan.com/magento2-blog-extension/pricing)
   * [Magento 2 Multi Blog Extension](https://magefan.com/magento-2-multi-blog-extension)
   * [Magento 2 Product Widget Advanced Extension](https://magefan.com/magento-2-product-widget)
 
 ### [Magento 2 Marketing Automation Extensions](https://magefan.com/magento-2-extensions/magento-marketing-automation)
 
-* [Magento 2 Product Labels Extension](https://magefan.com/magento-2-product-labels)
+* [Magento 2 Product Labels](https://magefan.com/magento-2-product-labels)
 * [Magento 2 Dynamic Categories](https://magefan.com/magento-2-dynamic-categories)
 * [Magento 2 CMS Display Rules Extension](https://magefan.com/magento-2-cms-display-rules-extension)
 * [Magento 2 Automatic Related Products](https://magefan.com/magento-2-automatic-related-products)
 * [Magento 2 Price History](https://magefan.com/magento-2-price-history)
 * [Magento 2 Mautic Integration Extension](https://magefan.com/magento-2-mautic-extension)
-* [Magento 2 YouTube Widget Extension](https://magefan.com/magento2-youtube-extension)  
+* [Magento 2 YouTube Widget Extension](https://magefan.com/magento2-youtube-extension)    
  
 ### [Magento 2 Cart Extensions](https://magefan.com/magento-2-extensions/cart-extensions)
 
@@ -326,7 +324,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 GeoIP Switcher Extension](https://magefan.com/magento-2-geoip-switcher-extension)
   * [Magento 2 Translation Extension](https://magefan.com/magento-2-translation-extension)
 
-### Developers Tools
+### [Developers Tools](https://magefan.com/magento-2-extensions/developer-tools)
 
   * [Magento 2 Zero Downtime Deployment](https://magefan.com/blog/magento-2-zero-downtime-deployment)
   * [Magento 2 Cron Schedule](https://magefan.com/magento-2-cron-schedule)
@@ -341,12 +339,8 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 
   * [Optimized Magento 2 Theme](https://magefan.com/optimized-magento-2-theme)
    
-  ### Shopify Apps
+  ### [Shopify Apps](https://magefan.com/shopify/apps)
 
   * [Shopify Login As Customer](https://apps.shopify.com/login-as-customer)
   * [Shopify Blog](https://apps.shopify.com/magefan-blog)
-  
-  ### Shopware Extensions
-  
-  * [Shopware WebP Extension](https://magefan.com/shopware/extensions/webp)
-  * [Shopware Blog Extension](https://magefan.com/shopware/extensions/blog)
+  * [Shopify Size Chart](https://magefan.com/shopify/apps/size-chart)
