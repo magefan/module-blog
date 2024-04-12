@@ -1,8 +1,10 @@
+<meta name="title" content="Magento 2 Blog Extension | GitHub"/>
+
 # Magento 2 Blog Extension
 
 <img align="right" width="120" height="120" src="https://cm.magefan.com/mf_webp/jpg/media/catalog/product/cache/28b407cef1668fd0bdd6f36db3e8e2f0/i/c/icon-blog-ext_1.webp">
 
-Magento 2 Blog extension is a solution that allows you to manage your store and blog in Magento from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you to create blog posts in Magento, but drive more traffic, boost SEO and improve your Google rating. Our [Magento 2 Blog Extension](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
+Magento 2 Blog extension is a solution that allows you to manage your store and blog in Magento from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you to create blog posts in Magento, but drive more traffic, boost SEO, and improve your Google rating. Our [Magento 2 Blog Extension](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
 
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
