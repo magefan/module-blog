@@ -19,6 +19,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected $dateTime;
 
     /**
+     * @var array
+     */
+    protected static $allStoreIds;
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
@@ -254,16 +259,28 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     public function lookupStoreIds($categoryId)
     {
-        $adapter = $this->getConnection();
+        if (null === self::$allStoreIds) {
+            $adapter = $this->getConnection();
 
-        $select = $adapter->select()->from(
-            $this->getTable('magefan_blog_category_store'),
-            'store_id'
-        )->where(
-            'category_id = ?',
-            (int)$categoryId
-        );
+            $select = $adapter->select()->from(
+                $this->getTable('magefan_blog_category_store'),
+            );
 
-        return $adapter->fetchCol($select);
+            $result = [];
+            foreach ($adapter->fetchAll($select) as $item) {
+                if (!isset($result[$item['category_id']])) {
+                    $result[$item['category_id']] = [];
+                }
+                $result[$item['category_id']][] = $item['store_id'];
+            }
+
+            self::$allStoreIds = $result;
+        }
+
+        if (isset(self::$allStoreIds[$categoryId])) {
+            return self::$allStoreIds[$categoryId];
+        }
+
+        return [];
     }
 }

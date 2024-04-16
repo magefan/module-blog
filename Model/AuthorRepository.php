@@ -51,6 +51,11 @@ class AuthorRepository implements AuthorRepositoryInterface
     private $collectionProcessor;
 
     /**
+     * @var array
+     */
+    private $instances;
+
+    /**
      * AuthorRepository constructor.
      * @param AuthorInterface $authorFactory
      * @param AuthorResourceModel $authorResourceModel
@@ -120,12 +125,16 @@ class AuthorRepository implements AuthorRepositoryInterface
      */
     public function getById($authorId, $editMode = false, $storeId = null, $forceReload = false)
     {
-        $author = $this->authorFactory->create();
-        $this->authorResourceModel->load($author, $authorId);
-        if (!$author->getId()) {
-            throw new NoSuchEntityException(__('Requested item doesn\'t exist'));
+        $cacheKey = implode('_', func_get_args());
+        if (!isset($this->instances[$cacheKey])) {
+            $author = $this->authorFactory->create();
+            $this->authorResourceModel->load($author, $authorId);
+            if (!$author->getId()) {
+                throw new NoSuchEntityException(__('Requested item doesn\'t exist'));
+            }
+            $this->instances[$cacheKey] = $author;
         }
-        return $author;
+        return $this->instances[$cacheKey];
     }
 
     /**

@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
 use Magefan\Blog\Api\ShortContentExtractorInterface;
 
@@ -151,22 +152,34 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $shortContentExtractor;
 
     /**
-     * Initialize dependencies.
-     *
+     * @var \Magefan\Blog\Api\AuthorRepositoryInterface|mixed
+     */
+    protected $authorRepository;
+
+    /**
+     * @var \Magefan\Blog\Api\CategoryRepositoryInterface|mixed
+     */
+    protected $categoryRepository;
+
+    /**
+     * Post constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Math\Random $random
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magefan\Blog\Model\Url $url
+     * @param ImageFactory $imageFactory
      * @param \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
-     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
-     * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory
+     * @param ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param ResourceModel\Tag\CollectionFactory $tagCollectionFactory
+     * @param ResourceModel\Comment\CollectionFactory $commentCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param array $data
+     * @param \Magefan\Blog\Api\AuthorRepositoryInterface|null $authorRepository
+     * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -183,7 +196,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
-        array $data = []
+        array $data = [],
+        \Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
+        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -198,6 +213,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $this->_commentCollectionFactory = $commentCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_relatedPostsCollection = clone($this->getCollection());
+        $this->authorRepository = $authorRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\AuthorRepositoryInterface::class
+        );
+        $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\CategoryRepositoryInterface::class
+        );
     }
 
     /**
@@ -396,7 +417,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Set media gallery images url
      *
      * @param array $images
-     * @return this
+     * @return $this
      */
     public function setGalleryImages(array $images)
     {
@@ -636,19 +657,36 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post parent categories
-     * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
+     * @return array
      */
     public function getParentCategories()
     {
         if (null === $this->_parentCategories) {
-            $this->_parentCategories = $this->_categoryCollectionFactory->create()
-                ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
-                ->addStoreFilter($this->getStoreId())
-                ->addActiveFilter()
-                ->setOrder('position');
+            $this->_parentCategories = [];
+            if ($this->getCategories()) {
+                foreach ($this->getCategories() as $categoryId) {
+                    try {
+                        $category = $this->categoryRepository->getById($categoryId);
+                        if ($category->getId() && $category->isVisibleOnStore($this->getStoreId())) {
+                            $this->_parentCategories[] = $category;
+                        }
+                    } catch (NoSuchEntityException $e) { }
+                }
+                usort($this->_parentCategories, [$this, 'sortByPositionDesc']);
+            }
         }
 
         return $this->_parentCategories;
+    }
+
+    /**
+     * Sort by position param
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    public function sortByPositionDesc($a, $b) {
+        return strcmp($b->getPosition(), $a->getPosition());
     }
 
     /**
@@ -813,12 +851,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->hasData('author')) {
             $author = false;
             if ($authorId = $this->getData('author_id')) {
-                $_author = $this->_authorFactory->create();
-                $_author->load($authorId);
 
-                if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
-                    $author = $_author;
-                }
+                try {
+                    $_author = $this->authorRepository->getById($authorId);
+                    if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
+                        $author = $_author;
+                    }
+                } catch (NoSuchEntityException $e) { }
             }
             $this->setData('author', $author);
         }
