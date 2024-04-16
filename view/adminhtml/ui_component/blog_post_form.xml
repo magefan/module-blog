@@ -528,11 +528,11 @@
                     </item>
                     <item name="article" xsi:type="array">
                         <item name="label" xsi:type="string" translate="true">Article</item>
-                        <item name="value" xsi:type="number">2</item>
+                        <item name="value" xsi:type="number">3</item>
                     </item>
                     <item name="none" xsi:type="array">
                         <item name="label" xsi:type="string" translate="true">None</item>
-                        <item name="value" xsi:type="number">3</item>
+                        <item name="value" xsi:type="number">2</item>
                     </item>
                 </item>
             </argument>
