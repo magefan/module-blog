@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\Import;
 
 use Magento\Framework\Config\ConfigOptionsListConstants;
-use Zend\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Adapter;
 
 /**
  * Aw2 import model

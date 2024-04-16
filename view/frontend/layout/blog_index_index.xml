@@ -12,6 +12,7 @@
     <update handle="blog_post_list"/>
     <body>
         <referenceContainer name="content">
+            <block class="Magefan\Blog\Block\Index\Description" name="blog.posts.description" template="Magefan_Blog::index/description.phtml" before="blog.posts.list" />
             <block class="Magefan\Blog\Block\Index" name="blog.posts.list" template="post/list.phtml" />
         </referenceContainer>
     </body>

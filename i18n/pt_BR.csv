@@ -21,107 +21,107 @@ Create %1,Criar %1
 Something went wrong while saving this %1. %2,Ocorreu um erro ao salvar isso %1. %2
 We can't delete %1 right now. %2,Não é possível deletar %1 no momento. %2
 %1 have been deleted.,%1 foi deletado.
-"Parameter ""Status"" missing in request data.","Parameter ""Status"" missing in request data."
-Status Field Name is not specified.,O nome do campo status não foi especificado.
-We can't change status of %1 right now. %2,Não é possível alterar o status de %1 nesse momento. %2
-%1 status have been changed.,%1 status foi alterado.
+"Parameter ""Status"" missing in request data.","Parâmetro ""Status"" ausente nos dados da solicitação."
+Status Field Name is not specified.,O nome do campo de status não está especificado.
+We can't change status of %1 right now. %2,Não podemos alterar o status de %1 no momento. %2
+%1 status have been changed.,O status de %1 foi alterado.
 Blog Import,Importar Blog
-Blog import type is not specified.,O tipo de blog a importar não foi especificado.
-The import process was completed successfully. %1 posts and %2 categories where imported.,O processo de importação foi conluído com êxito. %1 posts e %2 categorias foram importados.
-The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,O processo de importação foi conluído. %1 posts e %2 categorias foram importados. Alguns posts ou categorias faltaram.<br/> %3 %4
+Blog import type is not specified.,O tipo de importação do blog não está especificado.
+The import process was completed successfully. %1 posts and %2 categories where imported.,O processo de importação foi concluído com sucesso. %1 postagens e %2 categorias foram importadas.
+The import process completed. %1 posts and %2 categories where imported. Some posts or categories where skipped.<br/> %3 %4,O processo de importação foi concluído. %1 postagens e %2 categorias foram importadas. Algumas postagens ou categorias foram ignoradas.<br/> %3 %4
 Nothing to import.,Nada para importar.
-Can not make import.,Não foi possível importar.
-Something went wrong: ,Ocorreu um erro:
-Please enter your name and email,Please enter your name and email
-Blog Import from WordPress,Importar Blog do Wordpress
-Comment text is too short.,Comment text is too short.
-Please select,Selecione
+Can not make import.,Não é possível fazer a importação.
+Something went wrong: ,Algo deu errado:
+Please enter your name and email,Por favor, digite seu nome e email
+Blog Import from WordPress,Importar Blog do WordPress
+Comment text is too short.,O texto do comentário é muito curto.
+Please select,Por favor, selecione
 Use Facebook Comments,Usar Comentários do Facebook
 Use Disqus Comments,Usar Comentários do Disqus
 Use Google Comments,Usar Comentários do Google
-Featured Blog Posts,Featured Blog Posts
-Yes (With auto trigger),Sim (Automaticamente)
-Yes (Without auto trigger),Yes (Manualmente)
-Parameter %1 is required,O parâmetro %1 é requerido
-AheadWorks Blog Extension not detected.,A extensão Blog da AheadWorks não foi detectada.
-The category URL key contains disallowed symbols.,A URL key da categoria contém letras maiúsculas ou símbolos não permitidos.
-The category URL key cannot be made of only numbers.,A URL key da categoria não pode ser contituida apenas de números.
-The post URL key contains disallowed symbols.,A URL key do post contém letras maiúsculas ou símbolos não permitidos.
-The post URL key cannot be made of only numbers.,A URL key do post não pode ser contituida apenas de números.
+Featured Blog Posts,Postagens em Destaque
+Yes (With auto trigger),Sim (Com acionamento automático)
+Yes (Without auto trigger),Sim (Sem acionamento automático)
+Parameter %1 is required,O parâmetro %1 é obrigatório
+AheadWorks Blog Extension not detected.,Extensão de Blog AheadWorks não detectada.
+The category URL key contains disallowed symbols.,A chave de URL da categoria contém símbolos não permitidos.
+The category URL key cannot be made of only numbers.,A chave de URL da categoria não pode ser composta apenas por números.
+The post URL key contains disallowed symbols.,A chave de URL da postagem contém símbolos não permitidos.
+The post URL key cannot be made of only numbers.,A chave de URL da postagem não pode ser composta apenas por números.
 The tag is already exist.,A tag já existe.
-The tag URL key contains disallowed symbols.,A URL key da tag contém letras maiúsculas ou símbolos não permitidos.
-The tag URL key cannot be made of only numbers.,A URL key da tag não pode ser contituida apenas de números.
-Related posts,Posts relacionados
+The tag URL key contains disallowed symbols.,A chave de URL da tag contém símbolos não permitidos.
+The tag URL key cannot be made of only numbers.,A chave de URL da tag não pode ser composta apenas por números.
+Related posts,Postagens relacionadas
 Posted:,Publicado:
 Categories:,Categorias:
 Tags:,Tags:
 Author:,Autor:
-We can't find posts matching the selection.,Não foi possível encontrar posts que se enquadrem na seleção.
-Read more,Read more
-Read more &#187;,Leia mais &#187;
+We can't find posts matching the selection.,Não foi possível encontrar postagens que correspondam à seleção.
+Read more,Leia mais
+Read more »,Leia mais »
 See more,Veja mais
-Read %1,Ler %1
-&larr; Previous,&larr; Anterior
+Read %1,Leia %1
+← Previous,← Anterior
 Previous,Anterior
-Next &rarr;,Próximo &rarr;
+Next →,Próximo →
 Next,Próximo
-Related Posts,Posts Relacionados
+Related Posts,Postagens relacionadas
 Archive,Arquivo
 Archive %s,Arquivo %s
-Recent Posts,Posts Recentes
+Recent Posts,Postagens recentes
 RSS Feed,Feed RSS
-Search posts here...,Procure posts aqui…
+Search posts here...,Procure postagens aqui...
 Tags,Tags
-MageFan Extensions,Extensões da MageFan
+MageFan Extensions,Extensões MageFan
 Blog Information,Informações do Blog
-Blog Index Page,Página Index do Blog
-Post View,Visualização do Post
-Display Related Posts,Mostrar Posts Relacionados
-Number of Posts,Número de Posts
-Display Related Products,Mostrar Produtos Relacionados
+Blog Index Page,Página de Índice do Blog
+Post View,Visualização da Postagem
+Display Related Posts,Exibir postagens relacionadas
+Number of Posts,Número de Postagens
+Display Related Products,Exibir produtos relacionados
 Number of Products,Número de Produtos
 Comments,Comentários
 Number of Comments,Número de Comentários
-Facebook Application ID,ID da Aplicação Facebook
-Preview and Next Post,Post Anterior e Próximo
-Display Prev. & Next Post Links,Mostrar Links Ant. & Próx. Nos Posts
-Post List,Lista de Posts
-Posts Per Page,Posts Por Página
-Use Lazy Loading,Usar Lazy Loading
-Automatically load more posts on page.,Carrega mais posts na página automaticamente.
-Auto Triger Padding (px),Ativar Padding Automaticamente (px)
+Facebook Application ID,ID do Aplicativo do Facebook
+Preview and Next Post,Visualizar e Próxima Postagem
+Display Prev. & Next Post Links,Exibir links de postagem anterior e próxima
+Post List,Lista de Postagens
+Posts Per Page,Postagens por página
+Use Lazy Loading,Usar carregamento preguiçoso
+Automatically load more posts on page.,Carregar mais postagens automaticamente na página.
+Auto Triger Padding (px),Preenchimento de acionamento automático (px)
 Author,Autor
-Display Author Information,Mostras Informações do Autor
-Display Post List By Author,Mostrar a Lista de Posts por Autor
-Sidebar,Barra Lateral
-Search Form Widget,Widget Formulário de Busca
-Categories Widget,Widget Categorias
-Recent Posts Widget,Widget Posts Recentes
-Posts Number,Número dos Posts
-Archive Widget,Widget Arquivo
-Tag Claud Widget,Widget Nuvem de Tags
+Display Author Information,Exibir informações do autor
+Display Post List By Author,Exibir lista de postagens por autor
+Sidebar,Barra lateral
+Search Form Widget,Widget de formulário de pesquisa
+Categories Widget,Widget de categorias
+Recent Posts Widget,Widget de postagens recentes
+Posts Number,Número de Postagens
+Archive Widget,Widget de arquivo
+Tag Cloud Widget,Widget de nuvem de tags
 Rss Feed,Feed RSS
 Feed Title,Título do Feed
 Feed Description,Descrição do Feed
 Product Page,Página do Produto
-Permalink Settings,Configurações do Permalink
+Permalink Settings,Configurações de permalink
 Blog Route,Rota do Blog
-Permalink Type,Tipo do Permalink
-Post Route,Rota do Post
+Permalink Type,Tipo de Permalink
+Post Route,Rota da Postagem
 Category Route,Rota da Categoria
 Archive Route,Rota do Arquivo
 Tag Route,Rota da Tag
 Author Route,Rota do Autor
-Search Route,Rota da Busca
+Search Route,Rota de Pesquisa
 Social,Social
-AddThis Enabled,Ativar AddThis
+AddThis Enabled,AddThis Habilitado
 AddThis ID,ID do AddThis
 AddThis Language,Idioma do AddThis
-Category Top Navigation,Navegação Superior da Categoria
-Display Blog Link,Mostrar Link do Blog
+Category Top Navigation,Navegação Superior de Categoria
+Display Blog Link,Exibir link do blog
 Blog Category,Categoria do Blog
-Leave blank to display posts from all categories.,Deixe em branco para mostrar posts de todas as categorias.
-Custom Template,Template Personalizado
+Leave blank to display posts from all categories.,Deixe em branco para exibir postagens de todas as categorias.
+Custom Template,Modelo Personalizado
 Published,Publicado
 Category Information,Informações da Categoria
 Enable Category,Ativar Categoria
@@ -139,16 +139,16 @@ Publish Date,Data de Publicação
 New Tag,Nova Tag
 Open Graph Metadata,Metadata do Open Graph
 OG Title,Título do OG
-Leave blank to use Meta Title by default.,Deixa em branco para usar os metadados por padrão.
+Leave blank to use Meta Title by default.,Deixe em branco para usar os metadados por padrão.
 OG Description,Descrição do OG
-Leave blank to use Meta Description by default.,Deixa em branco para usar os metadados por padrão.
+Leave blank to use Meta Description by default.,Deixe em branco para usar os metadados por padrão.
 OG Image,Imagem do OG
-"Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Deixe em branco para usar a Imagem Destaque por padrão. Formatos permitidos de imagem: jpg, jpeg, gif, png."
+Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.,Deixe em branco para usar a Imagem Destaque por padrão. Formatos permitidos de imagem: jpg, jpeg, gif, png.
 OG Type,Tipo do OG
-"Leave blank to use ""article"" type by default.",Deixe em branco para usar “artigo” como tipo padrão.
+Leave blank to use "article" type by default.,Deixe em branco para usar “artigo” como tipo padrão.
 Post in Websites,Post em Websites
 Related Posts and Products,Posts e Produtos Relacionados
-Related posts are shown to customers in addition to the item the customer is looking at.,"Posts relacionados são mostrados ao consumidor, além do produto que ele está visualizando."
+Related posts are shown to customers in addition to the item the customer is looking at.,Posts relacionados são mostrados ao consumidor, além do produto que ele está visualizando.
 Add Related Post,Adicionar Post Relacionado
 Add Related Posts,Adicionar Posts Relacionados
 Add Selected Posts,Adicionar Posts Selecionados
@@ -176,30 +176,30 @@ Sep,Set
 Oct,Out
 Nov,Nov
 Dec,Dez
-"Reply","Reply"
-"Show more replies in this thread","Show more replies in this thread"
-"%1 Comment(s)","%1 Comment(s)"
-"Add a comment...","Add a comment..."
-"Add a reply...","Add a reply..."
-"Sign in to add a comment...","Sign in to add a comment..."
-"Sign in to add a reply...","Sign in to add a reply..."
-"Full Name","Full Name"
-"Load more comments","Load more comments"
-"Login to submit comment","Login to submit comment"
-"You cannot post comment. Blog post is not longer exist.","You cannot post comment. Blog post is not longer exist."
-"You cannot reply to this comment. Comment is not longer exist.","You cannot reply to this comment. Comment is not longer exist."
-"You cannot reply to this comment.","You cannot reply to this comment."
-"You submitted your comment for moderation.","You submitted your comment for moderation."
-"Thank you for your comment.","Thank you for your comment."
+"Reply","Responder"
+"Show more replies in this thread","Mostrar mais respostas neste tópico"
+"%1 Comment(s)","%1 Comentário(s)"
+"Add a comment...","Adicionar um comentário..."
+"Add a reply...","Adicionar uma resposta..."
+"Sign in to add a comment...","Faça login para adicionar um comentário..."
+"Sign in to add a reply...","Faça login para adicionar uma resposta..."
+"Full Name","Nome Completo"
+"Load more comments","Carregar mais comentários"
+"Login to submit comment","Faça login para enviar um comentário"
+"You cannot post comment. Blog post is not longer exist.","Você não pode postar um comentário. A postagem do blog não existe mais."
+"You cannot reply to this comment. Comment is not longer exist.","Você não pode responder a este comentário. O comentário não existe mais."
+"You cannot reply to this comment.","Você não pode responder a este comentário."
+"You submitted your comment for moderation.","Você enviou seu comentário para moderação."
+"Thank you for your comment.","Obrigado pelo seu comentário."
 Read more >,Leia mais >
-"Import Categories","Import Categories"
-"Import Comments","Import Comments"
-"Import Posts","Import Posts"
-"Import from aheadWorks Blog Extension","Import from aheadWorks Blog Extension"
-"Import from Joomla","Import from Joomla"
-"Import from Blogger.com","Import from Blogger.com"
-"Import from Drupal","Import from Drupal"
-"Import from CSV","Import from CSV"
-"Import from XML","Import from XML"
-"Yes, I have read the %1 and agree to the processing of my personal data.","Yes, I have read the %1 and agree to the processing of my personal data."
-"privacy policy","privacy policy"
+"Import Categories","Importar Categorias"
+"Import Comments","Importar Comentários"
+"Import Posts","Importar Postagens"
+"Import from aheadWorks Blog Extension","Importar da Extensão de Blog da aheadWorks"
+"Import from Joomla","Importar do Joomla"
+"Import from Blogger.com","Importar do Blogger.com"
+"Import from Drupal","Importar do Drupal"
+"Import from CSV","Importar de CSV"
+"Import from XML","Importar de XML"
+"Yes, I have read the %1 and agree to the processing of my personal data.","Sim, eu li o %1 e concordo com o processamento dos meus dados pessoais."
+"privacy policy","política de privacidade"

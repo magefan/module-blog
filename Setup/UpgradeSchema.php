@@ -801,6 +801,34 @@ class UpgradeSchema implements UpgradeSchemaInterface
             }
         }
 
+        if (version_compare($version,'2.11.1') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'structure_data_type',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    null,
+                    'nullable' => false,
+                    'default' => '0',
+                    'comment' => 'Rich Snippet / Structured Data',
+                    'after' => 'meta_description'
+                ]
+            );
+
+            /* Add reading time to posts table */
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'reading_time',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 20,
+                    'nullable' => true,
+                    'comment' => 'Post Reading Time',
+                    'after' => 'views_count'
+                ]
+            );
+        }
+      
         if (version_compare($version, '2.11.3') < 0) {
             if ($connection->isTableExists($setup->getTable('magefan_blog_category'))) {
                 $connection->addIndex(

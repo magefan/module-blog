@@ -146,4 +146,16 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
         }
         return parent::getTemplate();
     }
+
+    /**
+     * Retrieve 1 if display reading time is enabled
+     * @return int
+     */
+    public function readingTimeEnabled()
+    {
+        return (int) $this->_scopeConfig->getValue(
+            'mfblog/post_view/reading_time/enabled',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 }

@@ -36,11 +36,13 @@ class Mageplaza extends AbstractImport
                     t.category_id as old_id,
                     t.name as title,
                     t.url_key as identifier,
-                    t.position as position,
+                    t.position as position, ' .
+                    /*
                     t.meta_title as meta_title,
                     t.meta_keywords as meta_keywords,
                     t.meta_description as meta_description,
-                    t.description as content,
+                    */ 
+                    't.description as content,
                     t.parent_id as parent_id,
                     t.enabled as is_active,
                     t.store_ids as store_ids
@@ -115,11 +117,13 @@ class Mageplaza extends AbstractImport
                     t.tag_id as old_id,
                     t.name as title,
                     t.url_key as identifier, 
-                    t.description as content,
+                    t.description as content, ' .
+                    /*
                     t.meta_title as meta_title,
                     t.meta_description as meta_description,  
                     t.meta_keywords as meta_keywords,    
-                    t.enabled as is_active
+                    */
+                    't.enabled as is_active
                 FROM ' . $_pref . 'mageplaza_blog_tag t';
 
         $result = $adapter->query($sql)->execute();
@@ -195,9 +199,9 @@ class Mageplaza extends AbstractImport
                 'old_id'            => $data['post_id'],
                 'store_ids'         => $data['store_ids'],
                 'title'             => $data['name'],
-                'meta_title'        => $data['meta_title'],
-                'meta_keywords'     => $data['meta_keywords'],
-                'meta_description'  => $data['meta_description'],
+                //'meta_title'        => $data['meta_title'],
+                //'meta_keywords'     => $data['meta_keywords'],
+                //'meta_description'  => $data['meta_description'],
                 'identifier'        => $data['url_key'],
                 'content_heading'   => '',
                 'content'           => $data['post_content'],

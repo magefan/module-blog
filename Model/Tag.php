@@ -130,16 +130,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * return tag id if tag exists
      *
      * @param string $identifier
+     * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier)
+    public function checkIdentifier($identifier, $storeId)
     {
-        $tag = $this->load($identifier);
-        if ($tag->getIdentifier() == $identifier) {
-            return $tag->getId();
-        }
-
-        return null;
+        return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
 
     /**

@@ -11,14 +11,6 @@ body.blog-page {
     --border-color: #d5d6da;
 }
 
-.fav-color-green {color: #28a745;}
-.fav-color-yellow {color: #ffc107;}
-.fav-color-blue {color: #4db2ec;}
-.fav-color-black {color: #222222;}
-.fav-color-gray {color: #6c757d;}
-.fav-color-red {color: #dc3545;}
-
-
 /* Buttons */
 .btn-white {background-color: #fff !important;color: #7d7d7d !important;border: 1px solid #bbb !important;}
 .btn-white:hover {background-color: #4db2ec !important;color: #fff !important; border: 1px solid #4db2ec !important;}
@@ -70,17 +62,10 @@ body.blog-page {
 /* Post View */
 .post-list .post-view {display: block;background: #000;color: #fff;font-size: 10px;font-weight: 600;text-align: center;line-height: 11px;position: relative;top: -5px;padding: 4px 6px;}
 .post-list .post-view:after {position: absolute;left: 0;bottom: -3px;content: '';width: 0;height: 0;border-style: solid;border-width: 3px 3px 0 0;border-color: #000 transparent transparent;}
-/*.post-list .post-view {display: block;background: #000;color: #fff;font-size: 10px;font-weight: 600;text-align: center;line-height: 11px;position: relative;top: -5px;padding: 4px 6px;}*/
-/*.post-list .post-view:before {display: inline-block;content: "\f06e";width: 10px;height: 10px;text-align: center;margin-right: 3px;*/
-/*    font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}*/
 /* Read More */
-/*  .post-list .post-read-more {display: none;}  */
 .post-read-more a.post-read {display: inline-block;color: #fff;background-color: #4db2ec;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;}
-.post-read-more a.post-read:hover {color: #fff;/*background: #222222;*/text-decoration: none;}
-/*@media (max-width: 1200px) {
-    .blog-index-index .post-list /*.post-read-more *//* {display: none;}
-}
-*/
+.post-read-more a.post-read:hover {color: #fff; text-decoration: none;}
+
 @media (max-width: 768px) {
     .post-list .post-item.post-holder {margin-bottom: 1.5rem;}
 }

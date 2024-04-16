@@ -64,19 +64,31 @@ class Post implements ItemProviderInterface
             ->getItems();
 
         $items = array_map(function ($item) use ($storeId) {
-            $imagesCollection = new \Magento\Framework\DataObject();
-            $featuredImage = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
-            $images = array_merge([$featuredImage], $item->getGalleryImages());
-            $imagesCollection->setTitle($item->getTitle());
-            $imagesCollection->setCollection($images);
-
-            return $this->itemFactory->create([
+            
+            $data = [
                 'url' => $item->getUrl(),
                 'updatedAt' => $item->getUpdatedAt(),
-                'images' => $imagesCollection,
                 'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::POSTS_PAGE, $storeId),
                 'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::POSTS_PAGE, $storeId),
-            ]);
+            ];
+
+            $images = [];
+            if ($item->getFeaturedImage()) {
+                $images[] = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
+            }
+            if ($item->getGalleryImages()) {
+                $images = array_merge( $images, $item->getGalleryImages());
+            }
+
+            if ($images) {
+                $imagesCollection = new \Magento\Framework\DataObject();
+                $imagesCollection->setTitle($item->getTitle());
+                $imagesCollection->setThumbnail($images[0]->getUrl());
+                $imagesCollection->setCollection($images);
+                $data['images'] = $imagesCollection;
+            }
+
+            return $this->itemFactory->create($data);
         }, $collection);
 
         return $items;
