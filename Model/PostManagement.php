@@ -56,16 +56,18 @@ class PostManagement extends AbstractManagement
                 case 'archive':
                     $term = explode('-', $term);
                     if (count($term) < 2) {
-                        return false;
+                        $year = (int) $term;
+                        $month = 0;
+                    } else {
+                        list($year, $month) = $term;
+                        $year = (int) $year;
+                        $month = (int) $month;
                     }
-                    list($year, $month) = $term;
-                    $year = (int) $year;
-                    $month = (int) $month;
 
                     if ($year < 1970) {
                         return false;
                     }
-                    if ($month < 1 || $month > 12) {
+                    if ($month < 0 || $month > 12) {
                         return false;
                     }
 
