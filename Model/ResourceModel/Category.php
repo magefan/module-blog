@@ -263,7 +263,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $adapter = $this->getConnection();
 
             $select = $adapter->select()->from(
-                $this->getTable('magefan_blog_category_store'),
+                $this->getTable('magefan_blog_category_store')
             );
 
             $result = [];
