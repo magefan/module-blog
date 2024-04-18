@@ -37,13 +37,15 @@
     </div>
 </div>
 
+<script type="text/javascript" src="<?= $this->getViewFileUrl('Magefan_Blog::js/tagcanvas.min.js') ?>" ></script>
 <script>
-    require(['jquery', 'domReady!'], function($) {
-        require(['Magefan_Blog/js/jquery.tagcanvas.min'], function(){
-            if (  ! $('#blogSidebarCloudCanvas').tagcanvas(<?= /*@noEscape*/ $block->getAnimationConfig() ?>)) {
-                $('#blogSidebarCloudCanvasContainer').hide();
-            }
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            TagCanvas.Start('blogSidebarCloudCanvas', null, <?= /*@noEscape*/ $block->getAnimationConfig() ?>);
+        } catch (e) {
+            /* something went wrong, hide the canvas container */
+            document.getElementById('blogSidebarCloudCanvasContainer').style.display = 'none';
+        }
     });
 </script>
 <?php } ?>
