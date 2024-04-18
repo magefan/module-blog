@@ -32,13 +32,13 @@ class InfoBlogPlus extends InfoPlan
             'mfblog_post_view_related_products_autorelated_black_words',
             'mfblog_post_view_related_posts_autorelated_black_words',
             'mfblog_design',
-            'mfblog_advanced_permalink'
+            'mfblog_advanced_permalink',
+            'mfblog_sitemap'
         ]);
         return $sections;
     }
     protected function getText(): string
     {
-        return 'This option is available in <strong>Plus</strong> plan only.';
-
+        return 'Google Ads options are available in <strong>Plus or Extra</strong> plans only.';
     }
 }

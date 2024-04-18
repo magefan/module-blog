@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd"
+>
+  <template
+    id="mfblog_post_view_comments_email_template"
+    label="Magefan BlogExtra Customer Comment Notification Template"
+    file="mfblog_post_view_comments_email_template.html"
+    type="html"
+    module="Magefan_BlogExtra"
+    area="frontend"
+  />
+  <template
+      id="mfblog_post_view_comments_admin_email_template"
+      label="Magefan BlogExtra Admin Comment Notification Template"
+      file="mfblog_post_view_comments_admin_email_template.html"
+      type="html"
+      module="Magefan_BlogExtra"
+      area="frontend"
+    />
+</config>

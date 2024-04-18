@@ -21,8 +21,11 @@
                 <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\Info</frontend_model>
                 </field>
-                <field id="info" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="infoPlus" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogPlus</frontend_model>
+                </field>
+                <field id="infoExtra" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogExtra</frontend_model>
                 </field>
                 <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Extension</label>
@@ -86,6 +89,26 @@
                     </field>
                 </group>
 
+                <group id="category_posts" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Posts From The Same Category (BlogExtra)</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Posts From The Same Category</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplate</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="number_of_posts" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number of Posts</label>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
                 <group id="related_posts" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Related Posts</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -108,7 +131,6 @@
                     </field>
                     <field id="autorelated_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enable Auto Related Posts (Blog+)</label>
-<!--                        <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoTest</frontend_model>-->
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="enabled">1</field>
@@ -139,7 +161,6 @@
                     </field>
                     <field id="autorelated_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enable Auto Related Products (Blog+)</label>
-<!--                        <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogPlus</frontend_model>-->
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="enabled">1</field>
@@ -233,13 +254,65 @@
                     </field>
                     <field id="format_date" translate="label comment" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Comments Date Format (Blog+)</label>
-<!--                        <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogPlus</frontend_model>-->
                         <depends>
                             <field id="type">magefan</field>
                         </depends>
                         <comment><![CDATA[
                             For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
                         ]]></comment>
+                    </field>
+                    <field id="enabled"  translate="label comment" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Email Notifications (BlogExtra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment>If enabled email notification will be sent to a customer when someone replies to his/her comment or write a new comment on a post customer interested in.</comment>
+                    </field>
+                    <field id="sender_form" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="email_template"  translate="label comment" type="select" sortOrder="75"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                        <comment>This email template will be used to sent a notification of reply to a customer's comment</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin_enable_comment_notification" translate="label comment" type="select" sortOrder="85" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Admin Email Notifications (BlogExtra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment>If enabled email notification will be sent to Administrator about new comments which need approvement.</comment>
+                    </field>
+                    <field id="admin_send_from" translate="label comment" type="select" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                        <depends>
+                            <field id="admin_enable_comment_notification">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin_send_to" translate="label comment" type="text" sortOrder="105" showInDefault="1"  showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Send To</label>
+                        <comment>Enter email of admin which will receive notification about new comment.</comment>
+                        <depends>
+                            <field id="admin_enable_comment_notification">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin_email_template" translate="label comment" type="select" sortOrder="115" showInDefault="1" showInWebsite="1"  showInStore="1" canRestore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                        <comment>This email template will be used to sent a notification about new customer comment.</comment>
+                        <depends>
+                            <field id="admin_enable_comment_notification">1</field>
+                        </depends>
                     </field>
                 </group>
 
@@ -355,10 +428,27 @@
                     <comment>This will be included before head closing tag in page HTML.</comment>
                 </field>
             </group>
+            <group id="blog_search" translate="label" type="text" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Blog Search (Blog Extra)</label>
+                <field id="enable_blog_search" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Include Blog Search Into Catalog Search (BlogExtra)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
             <group id="sidebar" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Sidebar</label>
                 <group id="search" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Search Form Widget</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sort Order</label>
+                    </field>
+                </group>
+                <group id="contents" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Post Contents Widget</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -676,9 +766,6 @@
             </group>
             <group id="advanced_permalink" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Advanced Permalink Settings (Blog+)</label>
-<!--                <field id="info" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">-->
-<!--                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoTest</frontend_model>-->
-<!--                </field>-->
                 <attribute type="expanded">0</attribute>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable Advanced Permalink Settings</label>
@@ -755,7 +842,7 @@
             <group id="sitemap" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>XML Sitemap</label>
                 <field id="info" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                                        <frontend_model>Magefan\BlogPlus\Block\Adminhtml\Config\Form\SitemapInfo</frontend_model>
+                    <frontend_model>Magefan\BlogPlus\Block\Adminhtml\Config\Form\SitemapInfo</frontend_model>
                 </field>
                 <group id="index" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Blog Index Page</label>
@@ -830,9 +917,6 @@
             </group>
             <group id="design" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Design (Blog+)</label>
-<!--                <field id="info" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">-->
-<!--                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogPlus</frontend_model>-->
-<!--                </field>-->
                 <field id="index_page_layout" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Blog Index Page Layout</label>
                     <source_model>Magefan\BlogPlus\Model\Config\Source\PageLayout</source_model>
