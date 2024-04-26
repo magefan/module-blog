@@ -187,7 +187,8 @@ class UrlResolver implements UrlResolverInterface
                             $factory = Url::CONTROLLER_POST . 'Factory';
                             $model = $this->$factory->create()->load($postId);
 
-                            if (!$model->getCategoriesCount() || !$model->getParentCategories()->getItemById($categoryId)) {
+                            $parentCategories = $model->getParentCategories();
+                            if (!count($parentCategories) || !isset($parentCategories[$categoryId])) {
                                 return null;
                             }
                         }

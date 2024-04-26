@@ -668,11 +668,11 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     try {
                         $category = $this->categoryRepository->getById($categoryId);
                         if ($category->getId() && $category->isVisibleOnStore($this->getStoreId())) {
-                            $this->_parentCategories[] = $category;
+                            $this->_parentCategories[$categoryId] = $category;
                         }
                     } catch (NoSuchEntityException $e) { }
                 }
-                usort($this->_parentCategories, [$this, 'sortByPositionDesc']);
+                uasort($this->_parentCategories, [$this, 'sortByPositionDesc']);
             }
         }
 
