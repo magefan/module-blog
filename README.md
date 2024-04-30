@@ -340,6 +340,12 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   ### Magento 2 Theme
 
   * [Optimized Magento 2 Theme](https://magefan.com/optimized-magento-2-theme)
+     
+  ### [Shopify Apps](https://magefan.com/shopify/apps)
+
+  * [Shopify Login As Customer](https://apps.shopify.com/login-as-customer)
+  * [Shopify Blog](https://apps.shopify.com/magefan-blog)
+  * [Shopify Size Chart](https://magefan.com/shopify/apps/size-chart)
    
   ### [Shopify Apps](https://magefan.com/shopify/apps)
 
