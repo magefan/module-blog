@@ -17,6 +17,8 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
 use Magefan\Blog\Model\Config;
+use Magefan\Community\Model\HyvaThemeDetection;
+
 class HyvaThemeChecker extends Template
 {
     /**
@@ -38,6 +40,11 @@ class HyvaThemeChecker extends Template
      * @var ThemeProviderInterface
      */
     protected $themeProvider;
+
+    /**
+     * @var HyvaThemeDetection
+     */
+    protected $hyvaThemeDetection;
 
     /**
      * @var Config
@@ -62,6 +69,7 @@ class HyvaThemeChecker extends Template
         ScopeConfigInterface $scopeConfig,
         ThemeProviderInterface $themeProvider,
         Config $config,
+        HyvaThemeDetection $hyvaThemeDetection,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -69,6 +77,7 @@ class HyvaThemeChecker extends Template
         $this->storeManager = $storeManager;
         $this->scopeConfig = $scopeConfig;
         $this->themeProvider = $themeProvider;
+        $this->hyvaThemeDetection =$hyvaThemeDetection;
         $this->config = $config;
     }
 
@@ -102,37 +111,6 @@ class HyvaThemeChecker extends Template
     }
 
     /**
-     * @return bool
-     */
-    private function isHyvaThemeInUse(): bool
-    {
-        $hyvaThemeEnabled = $this->moduleManager->isEnabled('Hyva_Theme');
-//        $hyvaThemeEnabled = true;
-        if ($hyvaThemeEnabled) {
-            $stores = $this->storeManager->getStores();
-
-            foreach ($stores as $store) {
-                $storeId = $store->getId();
-                $themeId = $this->scopeConfig->getValue(
-                    \Magento\Framework\View\DesignInterface::XML_PATH_THEME_ID,
-                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-                    $storeId
-                );
-                if ($themeId) {
-                    $theme = $this->themeProvider->getThemeById($themeId);
-                    $theme->getThemePath();
-                    $themePath = $theme->getThemePath();
-                    if (false !== stripos($themePath, 'hyva')) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Produce and return block's html output
      *
      * This method should not be overridden. You can override _toHtml() method in descendants if needed.
@@ -142,7 +120,7 @@ class HyvaThemeChecker extends Template
     public function toHtml()
     {
         if ($this->config->isEnabled()){
-            if (!$this->isHyvaThemeInUse()) {
+            if (!$this->hyvaThemeDetection->execute()) {
                 return '';
             }
 
