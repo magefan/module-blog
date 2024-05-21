@@ -74,9 +74,7 @@ class Richsnippets extends Opengraph
             'image' => [
                 '@type' => 'ImageObject',
                 'url' => $this->getImage() ?:
-                    ($logoBlock ? $logoBlock->getLogoSrc() : ''),
-                'width' => 720,
-                'height' => 720,
+                    ($logoBlock ? $logoBlock->getLogoSrc() : '')
             ],
             'publisher' => [
                 '@type' => 'Organization',
@@ -171,5 +169,52 @@ class Richsnippets extends Opengraph
         return '<script type="application/ld+json">'
             . json_encode($options)
             . '</script>';
+    }
+
+
+    /**
+     * Retrieve page title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->stripTags(
+            $this->getPost()->getMetaTitle()
+        );
+    }
+
+    /**
+     * Retrieve page short description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->stripTags(
+            $this->getPost()->getMetaDescription()
+        );
+    }
+
+    /**
+     * Retrieve page main image
+     *
+     * @return string | null
+     */
+    public function getImage()
+    {
+        $image = null;
+
+        if (!$image) {
+            $image = $this->getPost()->getFeaturedImage();
+        }
+
+        if (!$image) {
+            $image = $this->getPost()->getFirstImage();
+        }
+
+        if ($image) {
+            return $this->stripTags($image);
+        }
     }
 }
