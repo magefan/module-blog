@@ -128,6 +128,6 @@ class View extends \Magefan\Blog\Block\Post\PostList
      */
     public function getIdentities()
     {
-        return $this->getCategory()->getIdentities();
+        return $this->getCategory() ? $this->getCategory()->getIdentities() : [];
     }
 }
