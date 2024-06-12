@@ -73,7 +73,11 @@
             <argument name="modelRepository" xsi:type="object">Magefan\Blog\Api\AuthorRepositoryInterface</argument>
         </arguments>
     </virtualType>
-
+    <virtualType name="Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_latest_from_category</argument>
+        </arguments>
+    </virtualType>
     <type name="Magefan\Blog\Model\TemplatePool">
         <arguments>
             <argument name="templates" xsi:type="array">
