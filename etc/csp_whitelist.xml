@@ -16,6 +16,7 @@
             <policy id="script-src">
                 <values>
                     <value id="magefan-blog-addthis-buttons" type="host">s7.addthis.com</value>
+                    <value id="lazy-loading-js-inline" type="hash" algorithm="sha256">YmHiQ3j6KIQVPjC0Q1NzBMB6tw2OyiYYFYt1uornYeU=</value>
                 </values>
             </policy>
         </policies>
