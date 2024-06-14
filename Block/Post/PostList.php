@@ -44,6 +44,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
             if ($description = $this->pageConfig->getDescription()) {
                 $this->pageConfig->setDescription($prefix . $description);
             }
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $prefix . $pageMainTitle->getPageTitle()
+                );
+            }
         }
 
         return parent::_prepareLayout();
