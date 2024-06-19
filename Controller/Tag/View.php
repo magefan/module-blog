@@ -7,6 +7,7 @@
  */
 namespace Magefan\Blog\Controller\Tag;
 
+use Magento\Framework\App\Action\Context;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -22,6 +23,19 @@ class View extends \Magefan\Blog\App\Action\Action
     private $_storeManager;
 
     /**
+     * @var \Magefan\Blog\Model\Url
+     */
+    protected $url;
+
+    public function __construct(
+        Context $context,
+        \Magefan\Blog\Model\Url $url = null
+    ) {
+        parent::__construct($context);
+        $this->url = $url ?: $this->_objectManager->get(\Magefan\Blog\Model\Url::class);
+    }
+
+    /**
      * View blog author action
      *
      * @return \Magento\Framework\Controller\ResultInterface
@@ -34,7 +48,10 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $tag = $this->_initTag();
         if (!$tag) {
-            return $this->_forwardNoroute();
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setHttpResponseCode(301);
+            $resultRedirect->setPath($this->url->getBaseUrl());
+            return $resultRedirect;
         }
 
         $this->_objectManager->get(\Magento\Framework\Registry::class)->register('current_blog_tag', $tag);
