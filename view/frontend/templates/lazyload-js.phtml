@@ -7,7 +7,9 @@
  */
 ?>
 <?php
-/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $block \Magento\Framework\View\Element\Template
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ */
 ?>
 <?php
 $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
@@ -46,5 +48,6 @@ $script = '';
             });
         }";
     ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>
 
