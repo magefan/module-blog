@@ -8,20 +8,23 @@
 
 /**
  * @var \Magefan\Blog\Block\ViewsCount $block
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
-<script>
+<?php $script = ''; ?>
+
+<?php
+$script .= "
     require(['jquery', 'domReady!'], function($){
         setTimeout(function(){
             $.ajax({
-                url: atob( '<?= base64_encode($block->getCounterUrl()) ?>'),
+                url: atob( '" . base64_encode($block->getCounterUrl()) . "'),
                 type:'POST',
                 dataType: 'json',
                 success: function(response) { }
             })
         }, 5000);
     });
+"; ?>
 
-</script>
-
-
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

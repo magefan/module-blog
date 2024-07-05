@@ -11,14 +11,18 @@
  * Blog post comments template
  *
  * @var $block \Magefan\Blog\Block\Post\View\Comments
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
+<?php $script = '';?>
 <script src="https://apis.google.com/js/plusone.js"></script>
 <div id="mfblog_gcomments" data-width="100%" height="200px"></div>
-<script>
-    gapi.comments.render('mfblog_gcomments', {
-        href: '<?= $block->escapeUrl($block->getPost()->getPostUrl()) ?>',
+
+<?php $script .= "    gapi.comments.render('mfblog_gcomments', {
+        href: '" .  $block->escapeUrl($block->getPost()->getPostUrl()) ."',
         first_party_property: 'BLOGGER',
         view_type: 'FILTERED_POSTMOD'
     });
-</script>
+    ";?>
+
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

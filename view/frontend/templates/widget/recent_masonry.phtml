@@ -11,12 +11,14 @@
  * Blog recent posts widget
  *
  * @var $block \Magefan\Blog\Block\Widget\Recent
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 
 <?php
 $width = (int)$block->getBackgroundImageWidth() ?: 700;
 $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$script = '';
 ?>
 
 <?php
@@ -104,7 +106,8 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
         <?php } ?>
     </ul>
 </div>
-<script>
+
+<?php $script .= "
 requirejs( [ 'require', 'jquery', 'Magefan_Blog/js/lib/masonry.pkgd.min' ],
 function( require, $, Masonry ) {
     require( [ 'jquery-bridget/jquery-bridget' ],
@@ -116,7 +119,7 @@ function( require, $, Masonry ) {
         })
     });
 });
+"; ?>
     <?php /* more info http://masonry.desandro.com/extras.html */ ?>
-</script>
-
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>

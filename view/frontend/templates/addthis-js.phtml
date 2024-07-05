@@ -8,7 +8,10 @@
 ?>
 <?php
 /** @var $block \Magefan\Blog\Block\Social\AddThis */
+/** @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface */
 ?>
+
+<?php $script = ''; ?>
 <?php /*
 <script type="text/javascript">
     var addthis_config = {
@@ -20,10 +23,11 @@
         src="<?= '/' . '/' ?>s7.addthis.com/js/300/addthis_widget.js#pubid=<?= $block->escapeUrl($block->getAddThisPubId()) ?>"></script>
 */ ?>
 
-<script>
-    function mfShareWindowOpen(url, type) {
+<?php
+    $script .= "
+        function mfShareWindowOpen(url, type) {
         function reverse(s){
-            return s.split("").reverse().join("");
+            return s.split(\"\").reverse().join(\"\");
         }
 
         var u;
@@ -39,7 +43,10 @@
                 break;
         }
         if (u) {
-            window.open (u, null, "width=600,height=400");
+            window.open (u, null, \"width=600,height=400\");
         }
     }
-</script>
+    ";
+?>
+
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

@@ -11,9 +11,10 @@
  * Blog sidebar search form template
  *
  * @var $block \Magefan\Blog\Block\Sidebar\Search
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
-
+<?php $script = '';?>
 <div class="widget block blog-search" data-bind="scope: 'blog-search'">
     <div class="block-content">
         <form class="form" id="blog_search_mini_form"
@@ -47,7 +48,8 @@
         </form>
     </div>
 </div>
-<script type="text/javascript">
+
+<?php $script .= "
     function goBlogSearch(e)
     {
         var value = document.getElementById('blog_search').value;
@@ -57,4 +59,6 @@
         }
         return false;
     }
-</script>
+    ";?>
+
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', ['type' => 'type="text/javascript'], $script, false) ?>

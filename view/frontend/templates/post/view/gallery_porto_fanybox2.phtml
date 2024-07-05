@@ -13,12 +13,14 @@
  * app/design/frontend/Smartwave/theme-name/Magefan_Blog/templates/post/view/gallery.phtml
  *
  * @var $block \Magefan\Blog\Block\Post\View\Gallery
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 
 <?php
     $post = $block->getPost();
     $galleryImages = $post->getGalleryImages();
+    $script = '';
 ?>
 
 <?php if (count($galleryImages)) { ?>
@@ -31,13 +33,16 @@
             </a>
         <?php } ?>
     </div>
-    <script>
-    require(['jquery', 'domReady!'], function($){
+
+    <?php $script .= "
+        require(['jquery', 'domReady!'], function($){
         require(['fancybox/js/jquery.fancybox'], function(){
             $(document).ready(function() {
                 $('.gallery-image-hld').fancybox();
             });
         });
     });
-</script>
+    ";?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+
 <?php } ?>

@@ -11,17 +11,22 @@
  * Blog post comments template
  *
  * @var $block \Magefan\Blog\Block\Post\View\Comments
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
-
+<?php $script = ''; ?>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+
+<?php $script .= "
+(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "<?= $block->escapeJs($block->getFbSdkJsUrl()) ?>";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    js.src = " . $block->escapeJs($block->getFbSdkJsUrl()) . ";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+";?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <div class="post-comments clear">
     <div class="fb-comments"
          data-href="<?= $block->escapeUrl($block->getPost()->getPostUrl()) ?>"

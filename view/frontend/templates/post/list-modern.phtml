@@ -11,12 +11,14 @@
  * Blog post list template
  *
  * @var $block \Magefan\Blog\Block\Post\PostList
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 <?php
 $_postCollection = $block->getPostCollection();
 $width = (int)$block->getBackgroundImageWidth() ?: 350;
 $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$script = "";
 ?>
 <?php if (!$_postCollection->count()): ?>
     <div class="message info empty">
@@ -154,11 +156,13 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                 </li>
             <?php endforeach; ?>
             <li class="hidden">
-                <script type="text/javascript">
-                    if (window.addthis) {
-                        addthis.toolbox('.addthis_toolbox');
-                    }
-                </script>
+
+            <?php $script .= "                    
+                if (window.addthis) {
+                    addthis.toolbox('.addthis_toolbox');
+                }"?>
+
+                <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', ['type' => 'text/javascript'], $script, false) ?>
             </li>
         </ol>
     </div>

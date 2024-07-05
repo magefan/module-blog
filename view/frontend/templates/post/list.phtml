@@ -11,10 +11,12 @@
  * Blog post list template
  *
  * @var $block \Magefan\Blog\Block\Post\PostList
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 <?php
 $_postCollection = $block->getPostCollection();
+$script = '';
 ?>
 <?php if (!$_postCollection->count()): ?>
     <div class="message info empty">
@@ -31,11 +33,12 @@ $_postCollection = $block->getPostCollection();
                 <?= $block->getPostHtml($_post) ?>
             <?php endforeach; ?>
             <li class="hidden">
-                <script type="text/javascript">
+                <?php $script .= "
                     if (window.addthis) {
                         addthis.toolbox('.addthis_toolbox');
                     }
-                </script>
+                "; ?>
+                <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', ['type' => 'text/javascript'], $script, false) ?>
             </li>
         </ol>
     </div>
