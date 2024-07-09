@@ -8,13 +8,15 @@
 ?>
 <?php
 /** @var $block \Magento\Framework\View\Element\Template */
+/** @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface*/
 ?>
 <?php
 $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
+$script = '';
 ?>
 
 <?php if (!$helper->isOriginMfLazyLoadEnable()) { ?>
-    <script>
+    <?php $script .= "
         if (window.require) {
             require(['jquery', 'domReady!'], function($){
                 if ($('.mfblogunveil').length) {
@@ -25,7 +27,7 @@ $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
             });
         } else {
             /* e.g. hyva theme */
-            document.addEventListener("DOMContentLoaded", function(){
+            document.addEventListener('DOMContentLoaded', function(){
                 var items =  document.getElementsByClassName('mfblogunveil');
                 var el, url;
                 if (items.length) {
@@ -38,12 +40,14 @@ $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
                         if ('IMG' == el.tagName) {
                             el.src = url;
                         } else {
-                            el.style.backgroundImage = "url('" + url  + "')";
+                            el.style.backgroundImage = \"url('\" + url  + \"')\";
                         }
                     }
                 }
             });
         }
-    </script>
+"; ?>
+
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>
 

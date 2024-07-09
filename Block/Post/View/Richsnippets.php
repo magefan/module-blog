@@ -8,6 +8,7 @@
 namespace Magefan\Blog\Block\Post\View;
 
 use Magento\Store\Model\ScopeInterface;
+use \Magefan\Community\Api\SecureHtmlRendererInterface;
 
 /**
  * Blog post view rich snippets
@@ -18,6 +19,25 @@ class Richsnippets extends Opengraph
      * @param array
      */
     protected $_options;
+
+    protected $secureRenderer;
+
+    public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
+        \Magefan\Blog\Model\Post $post,
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        \Magefan\Blog\Model\PostFactory $postFactory,
+        \Magefan\Blog\Model\Url $url,
+        array $data = [],
+        $config = null,
+        $templatePool = null,
+        SecureHtmlRendererInterface $secureRenderer = null
+    ) {
+        parent::__construct($context, $post, $coreRegistry, $filterProvider, $postFactory, $url, $data, $config, $templatePool);
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->secureRenderer = $secureRenderer ? $secureRenderer : $objectManager->get(\Magefan\Community\Api\SecureHtmlRendererInterface::class);
+    }
 
 
     /**
@@ -166,9 +186,10 @@ class Richsnippets extends Opengraph
         if (!$options){
             return '';
         }
-        return '<script type="application/ld+json">'
-            . json_encode($options)
-            . '</script>';
+        $script = json_encode($options);
+        $script = /* @noEscape */ $this->secureRenderer->renderTag('script', ['type' => 'text/x-magento-init'], $script, false);
+
+        return $script;
     }
 
 

@@ -7,8 +7,30 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid;
 
+use \Magefan\Community\Api\SecureHtmlRendererInterface;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
 class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
 {
+    /**
+     * @var SecureHtmlRenderer|null
+     */
+    private $secureRenderer;
+
+    /**
+     * Chooser constructor.
+     * @param \Magento\Backend\Block\Template\Context $context
+     * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
+     * @param \Magento\Framework\Data\Form\Element\Factory $elementFactory
+     * @param array $data
+     * @param SecureHtmlRenderer|null $secureRenderer
+     */
+    public function __construct(\Magento\Backend\Block\Template\Context $context, \Magento\Framework\Json\EncoderInterface $jsonEncoder, \Magento\Framework\Data\Form\Element\Factory $elementFactory, array $data = [], ?SecureHtmlRenderer $secureRenderer = null)
+    {
+        parent::__construct($context, $jsonEncoder, $elementFactory, $data, $secureRenderer);
+        $this->secureRenderer = $secureRenderer;
+    }
+
     /**
      * @param  string $chooserId
      * @return string
@@ -85,6 +107,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                   }
                  );
         ';
+        $js = /* @noEscape */ $this->secureRenderer->renderTag('script', [], $js, false);
         return $js;
     }
 
@@ -165,6 +188,47 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
 
         // render label and chooser scripts
         $configJson = $this->_jsonEncoder->encode($config->getData());
+        $script = '
+                        function keyupFunctionMf() {
+                    var inputV = document.getElementById("' . $chooserId . '_input").value;
+                    ' . $chooserId . '.setElementValue(inputV);
+                    ' . $chooserId . '.setElementLabel(inputV);    
+                }
+                require(["prototype", "mage/adminhtml/wysiwyg/widget"], function(){
+                (function() {
+                    var instantiateChooser = function() {
+                      
+                       window.' .
+            $chooserId .
+            ' = new WysiwygWidget.chooser(
+                            "' .
+            $chooserId .
+            '",
+                            "' .
+            $this->getSourceUrl() .
+            '",
+                            ' .
+            $configJson .
+            '
+                        );
+                        if ($("' .
+            $chooserId .
+            'value")) {
+                            $("' .
+            $chooserId .
+            'value").advaiceContainer = "' .
+            $chooserId .
+            'advice-container";
+                        }
+                    }
+                    
+                    jQuery(instantiateChooser);   
+                })();
+            });
+        ';
+
+        $script = /* @noEscape */ $this->secureRenderer->renderTag('script', [], $script, false);
+
 
         return '
             <input id="'. $chooserId . '_input" class="widget-option input-text admin__control-text" 
@@ -178,46 +242,6 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             <div id="' .
             $chooserId .
             'advice-container" class="hidden"></div>' .
-            '<script>' .
-                '
-                function keyupFunctionMf() {
-                    var inputV = document.getElementById("' . $chooserId . '_input").value;
-                    ' . $chooserId . '.setElementValue(inputV);
-                    ' . $chooserId . '.setElementLabel(inputV);    
-                }
-                require(["prototype", "mage/adminhtml/wysiwyg/widget"], function(){
-            //<![CDATA[
-                (function() {
-                    var instantiateChooser = function() {
-                      
-                       window.' .
-                $chooserId .
-                ' = new WysiwygWidget.chooser(
-                            "' .
-                $chooserId .
-                '",
-                            "' .
-                $this->getSourceUrl() .
-                '",
-                            ' .
-                $configJson .
-                '
-                        );
-                        if ($("' .
-                $chooserId .
-                'value")) {
-                            $("' .
-                $chooserId .
-                'value").advaiceContainer = "' .
-                $chooserId .
-                'advice-container";
-                        }
-                    }
-                    
-                    jQuery(instantiateChooser);   
-                })();
-            //]]>
-            });
-            ' . '</script>';
+            $script;
     }
 }
