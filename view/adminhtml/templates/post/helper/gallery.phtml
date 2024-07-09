@@ -8,9 +8,11 @@
 
 
 /** @var $block \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content */
+/** @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface */
 $elementName = $block->getElement()->getName() . '[images]';
 $formName = $block->getFormName();
 ?>
+<?php $script = ''; ?>
 <div id="<?= $block->getHtmlId() ?>"
      class="gallery"
      data-mage-init='{"Magefan_Blog/js/post-gallery":{"template":"#<?= $block->getHtmlId() ?>-template"}}'
@@ -29,68 +31,72 @@ $formName = $block->getFormName();
         </div>
     <?php } ?>
 
-    <script id="<?= $block->getHtmlId() ?>-template" type="text/x-magento-template">
-        <div class="image item<% if (data.disabled == 1) { %> hidden-for-front<% } %>"
-             data-role="image">
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][position]"
-                   value="<%- data.position %>"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   class="position"/>
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][file]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   value="<%- data.file %>"/>
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][value_id]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   value="<%- data.value_id %>"/>
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][label]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   value="<%- data.label %>"/>
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][disabled]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   value="<%- data.disabled %>"/>
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][media_type]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   value="image"/>
-            <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][removed]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
-                   value=""
-                   class="is-removed"/>
+    <?php $script .= "
+            <div class=\"image item<% if (data.disabled == 1) { %> hidden-for-front<% } %>\"
+             data-role=\"image\">
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][position]\"
+                   value=\"<%- data.position %>\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   class=\"position\"/>
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][file]\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   value=\"<%- data.file %>\"/>
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][value_id]\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   value=\"<%- data.value_id %>\"/>
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][label]\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   value=\"<%- data.label %>\"/>
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][disabled]\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   value=\"<%- data.disabled %>\"/>
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][media_type]\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   value=\"image\"/>
+            <input type=\"hidden\"
+                   name=\"" . $block->escapeHtml($elementName) . "[<%- data.file_id %>][removed]\"
+                   data-form-part=\"" . $block->escapeHtml($formName) . "\"
+                   value=\"\"
+                   class=\"is-removed\"/>
 
-            <div class="product-image-wrapper">
-                <img class="product-image"
-                     data-role="image-element"
-                     src="<%- data.url %>"
-                     alt="<%- data.label %>"/>
+            <div class=\"product-image-wrapper\">
+                <img class=\"product-image\"
+                     data-role=\"image-element\"
+                     src=\"<%- data.url %>\"
+                     alt=\"<%- data.label %>\"/>
 
-                <div class="actions">
-                    <button type="button"
-                            class="action-remove"
-                            data-role="delete-button"
-                            title="<?= $block->escapeHtml(__('Delete image')) ?>">
+                <div class=\"actions\">
+                    <button type=\"button\"
+                            class=\"action-remove\"
+                            data-role=\"delete-button\"
+                            title=\"" . $block->escapeHtml(__('Delete image')) . "\">
                     <span>
                         <?= $block->escapeHtml(__('Delete image')) ?>
                     </span>
                     </button>
-                    <div class="draggable-handle"></div>
+                    <div class=\"draggable-handle\"></div>
                 </div>
-                <div class="image-fade">
-                    <span><?= $block->escapeHtml(__('Hidden')) ?></span>
+                <div class=\"image-fade\">
+                    <span>" .$block->escapeHtml(__('Hidden')) . "</span>
                 </div>
             </div>
 
-            <div class="item-description">
-                <div class="item-title" data-role="img-title"><%- data.label %></div>
+            <div class=\"item-description\">
+                <div class=\"item-title\" data-role=\"img-title\"><%- data.label %></div>
             </div>
         </div>
-    </script>
+    "; ?>
+
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', ['type' => 'text/x-magento-template', 'id' => $block->getHtmlId() . '-template'], $script, false) ?>
 </div>
-<script>
-    jQuery('body').trigger('contentUpdated');
-</script>
+
+<?php $script = "
+ jQuery('body').trigger('contentUpdated');
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

@@ -11,10 +11,13 @@
  * Post tag autocomplete template
  *
  * @var $block \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 
-<script>
+<?php $script = ''; ?>
+
+<?php $script .= "
     require(['jquery', 'domReady!'], function ($) {
         require(['Magefan_Blog/js/jquery.tagsinput'], function(){
 
@@ -28,15 +31,15 @@
             function escapeHtml(unsafe)
             {
                 return unsafe
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
+                    .replace(/&/g, \"&amp;\")
+                    .replace(/</g, \"&lt;\")
+                    .replace(/>/g, \"&gt;\")
+                    .replace(/\"/g, \"&quot;\")
+                    .replace(/'/g, \"&#039;\");
             }
 
             var intr = setInterval(function() {
-                var $el = $('[name*="tag_input"]');
+                var $el = $('[name*=\"tag_input\"]');
                 if (!$el.length) {
                     return;
                 }
@@ -73,7 +76,7 @@
                         'maxChars' : 0,
                     });
 
-                    var linkedTags = <?= /*@noEscape*/ $block->getLinkedTags() ?>;
+                    var linkedTags = " . /*@noEscape*/ $block->getLinkedTags() . ";
 
                     for (var i=0; i<linkedTags.length;i++) {
                         if (!$tags.tagExist(linkedTags[i])) {
@@ -83,31 +86,31 @@
 
                     $('#' + $tags.attr('id') + '_tag').autocomplete({
                         source: function (request, response) {
-                            var searchTag = extractLast(request.term);
-                            $.ajax({
-                                url: '<?= $block->escapeUrl($block->getAutocompleteUrl()) ?>',
+                                var searchTag = extractLast(request.term);
+                                $.ajax({
+                                url: '" . $block->escapeUrl($block->getAutocompleteUrl()) . "',
                                 type: 'post',
-                                dataType: "json",
+                                dataType: 'json',
                                 data: {
-                                    search: searchTag,
+        search: searchTag,
                                 },
                                 success: function (data) {
-                                    response(data);
-                                }
+        response(data);
+    }
                             });
                         },
                         'select': function( event, ui ) {
-                            var tag = ui.item.label;
-                            $tags.removeTag(tag);
-                            $tags.addTag(tag);
-                            return false;
-                        }
+    var tag = ui.item.label;
+    $tags.removeTag(tag);
+    $tags.addTag(tag);
+    return false;
+}
                     });
 
                     try {
-                        $('#' + $tags.attr('id') + '_tag').data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                            return $( "<li></li>" ).data("item.autocomplete", item)
-                                .append( "<a>" + escapeHtml(item.label) + "</a>")
+                        $('#' + $tags.attr('id') + '_tag').data( 'ui-autocomplete' )._renderItem = function( ul, item ) {
+                            return $( '<li></li>' ).data('item.autocomplete', item)
+                                .append( '<a>' + escapeHtml(item.label) + '</a>')
                                 .appendTo( ul );
                         };
                     } catch (e) {
@@ -117,5 +120,6 @@
             }, 1000);
         })
     });
-</script>
+"; ?>
 
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', ['type' => 'text/x-magento-init'], $script, false) ?>
