@@ -30,13 +30,6 @@ $_postCollection = $block->getPostCollection();
             <?php foreach ($_postCollection as $_post): ?>
                 <?= $block->getPostHtml($_post) ?>
             <?php endforeach; ?>
-            <li class="hidden">
-                <script type="text/javascript">
-                    if (window.addthis) {
-                        addthis.toolbox('.addthis_toolbox');
-                    }
-                </script>
-            </li>
         </ol>
     </div>
 
