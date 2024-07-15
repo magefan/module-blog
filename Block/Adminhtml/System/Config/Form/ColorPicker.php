@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
+use Magefan\Community\Api\SecureHtmlRendererInterface;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
@@ -17,6 +18,25 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class ColorPicker extends Field
 {
     /**
+     * @var SecureHtmlRenderer|null
+     */
+    private $mfSecureRenderer;
+
+    /**
+     * @param \Magento\Backend\Block\Template\Context $context
+     * @param SecureHtmlRendererInterface $mfSecureRenderer
+     * @param array $data
+     */
+    public function __construct(
+        \Magento\Backend\Block\Template\Context $context,
+        SecureHtmlRendererInterface $mfSecureRenderer,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->mfSecureRenderer = $mfSecureRenderer;
+    }
+
+    /**
      * @param AbstractElement $element
      * @return string
      */
@@ -25,7 +45,7 @@ class ColorPicker extends Field
         $html = $element->getElementHtml();
         $value = $this->escapeHtml($element->getData('value'));
 
-        $html .= '<script>
+        $script = '
             require(["jquery", "jquery/colorpicker/js/colorpicker", "domReady!"], function ($) {
                 var el = $("#' . $element->getHtmlId() . '");
                 
@@ -42,7 +62,8 @@ class ColorPicker extends Field
                     el.css("background-color", "#" + value);
                 });
             });
-            </script>';
+            ';
+        $html .= $this->mfSecureRenderer->renderTag('script', [], $script, false);
 
         return $html;
     }

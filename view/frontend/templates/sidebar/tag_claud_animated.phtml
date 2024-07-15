@@ -11,6 +11,7 @@
  * Blog tag claud sidebar template
  *
  * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 <?php $tags = $block->getTags(); ?>
@@ -38,16 +39,15 @@
 </div>
 
 <script type="text/javascript" src="<?= $this->getViewFileUrl('Magefan_Blog::js/tagcanvas.min.js') ?>" ></script>
-<script>
+<?php $script = "
     document.addEventListener('DOMContentLoaded', function() {
         try {
-            TagCanvas.Start('blogSidebarCloudCanvas', null, <?= /*@noEscape*/ $block->getAnimationConfig() ?>);
+            TagCanvas.Start('blogSidebarCloudCanvas', null, " . /*@noEscape*/ $block->getAnimationConfig() . ");
         } catch (e) {
             /* something went wrong, hide the canvas container */
             document.getElementById('blogSidebarCloudCanvasContainer').style.display = 'none';
         }
     });
-</script>
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>
-
-

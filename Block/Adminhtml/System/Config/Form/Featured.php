@@ -7,10 +7,30 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
+use Magefan\Community\Api\SecureHtmlRendererInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
 class Featured extends \Magento\Config\Block\System\Config\Form\Field
 {
+    /**
+     * @var SecureHtmlRenderer|null
+     */
+    private $mfSecureRenderer;
+
+    /**
+     * @param \Magento\Backend\Block\Template\Context $context
+     * @param SecureHtmlRendererInterface $mfSecureRenderer
+     * @param array $data
+     */
+    public function __construct(
+        \Magento\Backend\Block\Template\Context $context,
+        SecureHtmlRendererInterface $mfSecureRenderer,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->mfSecureRenderer = $mfSecureRenderer;
+    }
+
     /**
      * @return string
      */
@@ -127,6 +147,7 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
     public function render(AbstractElement $element) : string
     {
         $columns = ($this->getRequest()->getParam('website')) || ($this->getRequest()->getParam('store')) ? 5 : 4;
-        return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->toHtml() . '<div id="post_ids_grid"></div><script>'.$this->getJs().'</script>');
+        $js = $this->mfSecureRenderer->renderTag('script', [], $this->getJs(), false);
+        return $this->_decorateRowHtml($element, "<td colspan='{$columns}'>" . $this->toHtml() . '<div id="post_ids_grid"></div>' . $js);
     }
 }

@@ -6,8 +6,11 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+/**
+ * @var $block \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ */
 
-/** @var $block \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content */
 $elementName = $block->getElement()->getName() . '[images]';
 $formName = $block->getFormName();
 ?>
@@ -91,6 +94,7 @@ $formName = $block->getFormName();
         </div>
     </script>
 </div>
-<script>
+<?php $script = "
     jQuery('body').trigger('contentUpdated');
-</script>
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

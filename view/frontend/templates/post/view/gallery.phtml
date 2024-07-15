@@ -11,15 +11,14 @@
  * Blog post media gallery images template
  *
  * @var $block \Magefan\Blog\Block\Post\View\Gallery
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
-
 <?php
     $post = $block->getPost();
     $galleryImages = $post->getGalleryImages();
     $viewFileUrl = $block->getViewFileUrl("Magefan_Blog::css/jquery.fancybox.min.css");
 ?>
-
 <?php if (count($galleryImages)) { ?>
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
@@ -31,14 +30,15 @@
             </a>
         <?php } ?>
     </div>
-    <script>
+    <?php $script = "
     require(['jquery', 'domReady!'], function($){
         /* Deferer fancybox css loading */
-        $("head").append(
-            $("<link rel='stylesheet' href='<?= $block->escapeUrl($viewFileUrl) ?>' type='text/css' media='screen' />")
+        $('head').append(
+            $(\"<link rel='stylesheet' href='" . $block->escapeUrl($viewFileUrl) . "' type='text/css' media='screen' />\")
         );
         /* Deferer fancybox js loading */
         require(['Magefan_Blog/js/jquery.fancybox.min'], function(){});
     });
-</script>
+    "; ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>

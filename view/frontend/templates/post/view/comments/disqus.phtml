@@ -11,19 +11,19 @@
  * Blog post comments template
  *
  * @var $block \Magefan\Blog\Block\Post\View\Comments
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 <div id="disqus_thread"></div>
-<script>
+<?php $script = "
     var disqus_config = function () {
-        this.page.url = "<?= $block->escapeUrl($block->getPost()->getPostUrl()) ?>";
-        <?php /*this.page.identifier = "<?= $block->escapeHtml($block->getPost()->getUrl()) ?>" */ ?>
+        this.page.url = '" . $block->escapeUrl($block->getPost()->getPostUrl()) . "';
     };
-
     (function() {
         var d = document, s = d.createElement('script');
-        s.src = '<?= $block->escapeHtml('/' . '/' .  $block->getDisqusShortname()) ?>.disqus.com/embed.js';
+        s.src = '" . $block->escapeHtml('/' . '/' .  $block->getDisqusShortname()) . ".disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
-</script>
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

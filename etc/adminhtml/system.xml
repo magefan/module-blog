@@ -631,19 +631,6 @@
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <!--
-                <field id="add_this_pubid" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>AddThis ID</label>
-                    <comment><![CDATA[
-                            <a href="http://www.addthis.com/academy/using-profiles-in-your-addthis-account/" target="_blank">
-                                How do I get a AddThis ID?
-                            </a>
-                        ]]></comment>
-                </field>
-                <field id="add_this_language" type="text" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>AddThis Language</label>
-                </field>
-                -->
             </group>
             <group id="top_menu" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Category Top Navigation</label>

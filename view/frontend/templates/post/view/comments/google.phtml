@@ -9,16 +9,7 @@
 <?php
 /**
  * Blog post comments template
- *
+ * @deprecated
  * @var $block \Magefan\Blog\Block\Post\View\Comments
  */
 ?>
-<script src="https://apis.google.com/js/plusone.js"></script>
-<div id="mfblog_gcomments" data-width="100%" height="200px"></div>
-<script>
-    gapi.comments.render('mfblog_gcomments', {
-        href: '<?= $block->escapeUrl($block->getPost()->getPostUrl()) ?>',
-        first_party_property: 'BLOGGER',
-        view_type: 'FILTERED_POSTMOD'
-    });
-</script>

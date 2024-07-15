@@ -11,10 +11,10 @@
  * Post tag autocomplete template
  *
  * @var $block \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
-
-<script>
+<?php $script = "
     require(['jquery', 'domReady!'], function ($) {
         require(['Magefan_Blog/js/jquery.tagsinput'], function(){
 
@@ -28,16 +28,16 @@
             function escapeHtml(unsafe)
             {
                 return unsafe
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
+                    .replace(/&/g, \"&amp;\")
+                    .replace(/</g, \"&lt;\")
+                    .replace(/>/g, \"&gt;\")
+                    .replace(/\"/g, \"&quot;\")
+                    .replace(/'/g, \"&#039;\");
             }
 
             var intr = setInterval(function() {
-                var $el = $('[name*="tag_input"]');
-                if (!$el.length) {
+                var el = $('[name*=\"tag_input\"]');
+                if (!el.length) {
                     return;
                 }
                 clearInterval(intr);
@@ -45,7 +45,7 @@
                 var oAddTag = $.fn.addTag;
                 $.fn.addTag = function() {
                     setTimeout(function(){
-                        $el.change();
+                        el.change();
                     }, 500);
 
                     return oAddTag.apply(this, arguments);
@@ -54,16 +54,15 @@
                 var oRemoveTag = $.fn.removeTag;
                 $.fn.removeTag = function() {
                     setTimeout(function(){
-                        $el.change();
+                        el.change();
                     }, 500);
 
                     return oRemoveTag.apply(this, arguments);
                 };
 
-                $el.each(function () {
+                el.each(function () {
 
-                    var $e = $(this);
-                    var $tags = $e.tagsInput({
+                    var tags = $(this).tagsInput({
                         'height':'200px',
                         'width':'768px',
                         'interactive':true,
@@ -73,21 +72,21 @@
                         'maxChars' : 0,
                     });
 
-                    var linkedTags = <?= /*@noEscape*/ $block->getLinkedTags() ?>;
+                    var linkedTags = " . $block->getLinkedTags() . ";
 
                     for (var i=0; i<linkedTags.length;i++) {
-                        if (!$tags.tagExist(linkedTags[i])) {
-                            $tags.addTag(linkedTags[i]);
+                        if (!tags.tagExist(linkedTags[i])) {
+                            tags.addTag(linkedTags[i]);
                         }
                     }
 
-                    $('#' + $tags.attr('id') + '_tag').autocomplete({
+                    $('#' + tags.attr('id') + '_tag').autocomplete({
                         source: function (request, response) {
                             var searchTag = extractLast(request.term);
                             $.ajax({
-                                url: '<?= $block->escapeUrl($block->getAutocompleteUrl()) ?>',
+                                url: '" . $block->escapeUrl($block->getAutocompleteUrl()) . "',
                                 type: 'post',
-                                dataType: "json",
+                                dataType: 'json',
                                 data: {
                                     search: searchTag,
                                 },
@@ -98,17 +97,17 @@
                         },
                         'select': function( event, ui ) {
                             var tag = ui.item.label;
-                            $tags.removeTag(tag);
-                            $tags.addTag(tag);
+                            tags.removeTag(tag);
+                            tags.addTag(tag);
                             return false;
                         }
                     });
 
                     try {
-                        $('#' + $tags.attr('id') + '_tag').data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                            return $( "<li></li>" ).data("item.autocomplete", item)
-                                .append( "<a>" + escapeHtml(item.label) + "</a>")
-                                .appendTo( ul );
+                        $('#' + tags.attr('id') + '_tag').data('ui-autocomplete')._renderItem = function( ul, item ) {
+                            return $('<li></li>').data('item.autocomplete', item)
+                                .append('<a>' + escapeHtml(item.label) + '</a>')
+                                .appendTo(ul);
                         };
                     } catch (e) {
                         console.log('Autocomplete error: ' + e);
@@ -117,5 +116,6 @@
             }, 1000);
         })
     });
-</script>
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 

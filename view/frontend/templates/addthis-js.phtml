@@ -7,39 +7,32 @@
  */
 ?>
 <?php
-/** @var $block \Magefan\Blog\Block\Social\AddThis */
+/**
+ * @var $block \Magefan\Blog\Block\Social\AddThi
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ */
 ?>
-<?php /*
-<script type="text/javascript">
-    var addthis_config = {
-        "ui_language": '<?= $block->escapeHtml($block->getAddThisLanguage()) ?>',
-        "data_track_clickback":false
-    }
-</script>
-<script type="text/javascript" async
-        src="<?= '/' . '/' ?>s7.addthis.com/js/300/addthis_widget.js#pubid=<?= $block->escapeUrl($block->getAddThisPubId()) ?>"></script>
-*/ ?>
-
-<script>
+<?php $script = "
     function mfShareWindowOpen(url, type) {
         function reverse(s){
-            return s.split("").reverse().join("");
+            return s.split('').reverse().join('');
         }
 
         var u;
         switch (type) {
             case 'facebook':
-                u = reverse('<?= strrev('https://www.facebook.com/sharer/sharer.php?u=') ?>') + url;
+                u = reverse('" . strrev('https://www.facebook.com/sharer/sharer.php?u=') . "') + url;
                 break;
             case 'pinterest':
-                u = reverse('<?= strrev('https://pinterest.com/pin/create/button/?url=') ?>') + url;
+                u = reverse('" . strrev('https://pinterest.com/pin/create/button/?url=') . "') + url;
                 break;
             case 'twitter':
-                u =reverse('<?= strrev('http://twitter.com/share?url=') ?>') + url;
+                u =reverse('" . strrev('http://twitter.com/share?url=') . "') + url;
                 break;
         }
         if (u) {
-            window.open (u, null, "width=600,height=400");
+            window.open (u, null, 'width=600,height=400');
         }
     }
-</script>
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

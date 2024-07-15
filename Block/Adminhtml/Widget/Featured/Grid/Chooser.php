@@ -7,8 +7,33 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Widget\Featured\Grid;
 
+use Magefan\Community\Api\SecureHtmlRendererInterface;
+
 class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
 {
+    /**
+     * @var SecureHtmlRendererInterface
+     */
+    private $mfSecureRenderer;
+
+    /**
+     * @param \Magento\Backend\Block\Template\Context $context
+     * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
+     * @param \Magento\Framework\Data\Form\Element\Factory $elementFactory
+     * @param SecureHtmlRendererInterface $mfSecureRenderer
+     * @param array $data
+     */
+    public function __construct(
+        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Framework\Json\EncoderInterface $jsonEncoder,
+        \Magento\Framework\Data\Form\Element\Factory $elementFactory,
+        SecureHtmlRendererInterface $mfSecureRenderer,
+        array $data = []
+    ) {
+        parent::__construct($context, $jsonEncoder, $elementFactory, $data);
+        $this->mfSecureRenderer = $mfSecureRenderer;
+    }
+
     /**
      * @param  string $chooserId
      * @return string
@@ -158,15 +183,15 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             $buttons['open']
         )->setOnclick(
             $this->onClickJs($chooserId)
-            /* )->setDisabled(
-            $element->getReadonly()*/
+        /* )->setDisabled(
+        $element->getReadonly()*/
         );
         $chooser->setData('after_element_html', $hiddenHtml . $chooseButton->toHtml());
 
         // render label and chooser scripts
         $configJson = $this->_jsonEncoder->encode($config->getData());
 
-        return '
+        $html = '
             <input id="'. $chooserId . '_input" class="widget-option input-text admin__control-text" 
             onkeyup="keyupFunctionMf()"
             value="' . ($this->getLabel() ? $this->escapeHtml($this->getLabel()) : '') .'" />
@@ -177,10 +202,9 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             '</label>
             <div id="' .
             $chooserId .
-            'advice-container" class="hidden"></div>' .
-            '<script>' .
-                '
-                function keyupFunctionMf() {
+            'advice-container" class="hidden"></div>';
+
+        $script = 'function keyupFunctionMf() {
                     var inputV = document.getElementById("' . $chooserId . '_input").value;
                     ' . $chooserId . '.setElementValue(inputV);
                     ' . $chooserId . '.setElementLabel(inputV);    
@@ -191,26 +215,26 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                     var instantiateChooser = function() {
                       
                        window.' .
-                $chooserId .
-                ' = new WysiwygWidget.chooser(
+            $chooserId .
+            ' = new WysiwygWidget.chooser(
                             "' .
-                $chooserId .
-                '",
+            $chooserId .
+            '",
                             "' .
-                $this->getSourceUrl() .
-                '",
+            $this->getSourceUrl() .
+            '",
                             ' .
-                $configJson .
-                '
+            $configJson .
+            '
                         );
                         if ($("' .
-                $chooserId .
-                'value")) {
+            $chooserId .
+            'value")) {
                             $("' .
-                $chooserId .
-                'value").advaiceContainer = "' .
-                $chooserId .
-                'advice-container";
+            $chooserId .
+            'value").advaiceContainer = "' .
+            $chooserId .
+            'advice-container";
                         }
                     }
                     
@@ -218,6 +242,9 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                 })();
             //]]>
             });
-            ' . '</script>';
+            ';
+        $html .= $this->mfSecureRenderer->renderTag('script', [], $script, false);
+
+        return $html;
     }
 }

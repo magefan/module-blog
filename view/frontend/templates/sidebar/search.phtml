@@ -11,6 +11,7 @@
  * Blog sidebar search form template
  *
  * @var $block \Magefan\Blog\Block\Sidebar\Search
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 
@@ -38,7 +39,6 @@
             </div>
             <div class="actions">
                 <button type="submit"
-                        onclick="return goBlogSearch(this);"
                         title="<?= $block->escapeHtml(__('Search')) ?>"
                         class="action search">
                     <span><?= $block->escapeHtml(__('Search')) ?></span>
@@ -47,14 +47,19 @@
         </form>
     </div>
 </div>
-<script type="text/javascript">
-    function goBlogSearch(e)
-    {
-        var value = document.getElementById('blog_search').value;
-        if (value) {
-            var a = e.form.action;
-            window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
-        }
-        return false;
-    }
-</script>
+<?php $script = "
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('blog_search_mini_form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var value = document.getElementById('blog_search').value;
+            if (value) {
+                var a = form.action;
+                window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
+            }
+            return false;
+        });
+    }); 
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+

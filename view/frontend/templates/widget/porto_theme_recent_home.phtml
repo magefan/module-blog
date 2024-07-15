@@ -11,6 +11,7 @@
  * Blog sidebar recent posts template
  *
  * @var $block \Magefan\Blog\Block\Sidebar\Recent
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 
@@ -62,12 +63,12 @@
         </div>
     <?php } ?>
     </div>
-    <script>
+    <?php $script = "
         require([
             'jquery',
             'owl.carousel/owl.carousel.min'
         ], function ($) {
-            var owl_5 = $(".recent-posts .owl-carousel").owlCarousel({
+            var owl_5 = $('.recent-posts .owl-carousel').owlCarousel({
                 items: 2,
                 autoplay: true,
                 autoplayTimeout: 5000,
@@ -79,7 +80,7 @@
                 loop: false,
                 nav: false,
                 dots: false,
-                navText: ["<em class='porto-icon-chevron-left'></em>","<em class='porto-icon-chevron-right'></em>"],
+                navText: [\"<em class='porto-icon-chevron-left'></em>\",\"<em class='porto-icon-chevron-right'></em>\"],
 
                 responsive: {
                     0: {
@@ -97,6 +98,7 @@
                 }
             });
         });
-    </script>
+    "; ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 </div>
 <?php } ?>
