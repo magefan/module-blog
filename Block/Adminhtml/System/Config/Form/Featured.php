@@ -13,7 +13,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class Featured extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
-     * @var SecureHtmlRenderer|null
+     * @var SecureHtmlRendererInterface
      */
     private $mfSecureRenderer;
 

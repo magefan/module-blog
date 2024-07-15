@@ -18,7 +18,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class ColorPicker extends Field
 {
     /**
-     * @var SecureHtmlRenderer|null
+     * @var SecureHtmlRendererInterface
      */
     private $mfSecureRenderer;
 

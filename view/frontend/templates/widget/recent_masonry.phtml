@@ -106,7 +106,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
     </ul>
 </div>
 <?php $script = "
-require( [ 'require', 'jquery', 'Magefan_Blog/js/lib/masonry.pkgd.min' ],
+requirejs( [ 'require', 'jquery', 'Magefan_Blog/js/lib/masonry.pkgd.min' ],
 function( require, $, Masonry ) {
     require( [ 'jquery-bridget/jquery-bridget' ],
     function( jQueryBridget ) {
