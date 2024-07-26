@@ -40,7 +40,7 @@ $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
                         url = el.getAttribute('data-original');
                         if (!url) {
                             continue;
-                        }
+                        };
                         if ('IMG' == el.tagName) {
                             el.src = url;
                         } else {
@@ -49,7 +49,7 @@ $helper = $this->helper(\Magefan\Blog\Helper\Data::class);
                     }
                 }
             });
-        }
+        };
         "; ?>
     <?php } ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
