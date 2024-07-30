@@ -114,7 +114,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
-        $oldStoreIds = $this->lookupStoreIds($object->getId());
+        $oldStoreIds = $this->lookupStoreIds($object->getId(), false);
         $newStoreIds = (array)$object->getStoreIds();
         if (!$newStoreIds || in_array(0, $newStoreIds)) {
             $newStoreIds = [0];
@@ -254,12 +254,13 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get store ids to which specified item is assigned
      *
-     * @param int $categoryId
-     * @return array
+     * @param $categoryId
+     * @param bool $useCache
+     * @return array|mixed
      */
-    public function lookupStoreIds($categoryId)
+    public function lookupStoreIds($categoryId, $useCache = true)
     {
-        if (null === self::$allStoreIds) {
+        if (null === self::$allStoreIds || !$useCache) {
             $adapter = $this->getConnection();
 
             $select = $adapter->select()->from(
