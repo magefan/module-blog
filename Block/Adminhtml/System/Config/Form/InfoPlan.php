@@ -35,7 +35,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
     public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
         if ($this->getModuleVersion->execute($this->getModuleName() . $this->getMinPlan())) {
-         //   return '';
+            return '';
         }
 
         $html = '';
