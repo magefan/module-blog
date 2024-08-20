@@ -325,7 +325,6 @@
                     </field>
                     <field id="email_template"  translate="label comment" type="select" sortOrder="75"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Email Template</label>
-                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                         <comment>This email template will be used to sent a notification of reply to a customer's comment</comment>
                         <depends>
                             <field id="enabled">1</field>
@@ -355,7 +354,6 @@
                     </field>
                     <field id="admin_email_template" translate="label comment" type="select" sortOrder="115" showInDefault="1" showInWebsite="1"  showInStore="1" canRestore="1">
                         <label>Email Template</label>
-                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                         <comment>This email template will be used to sent a notification about new customer comment.</comment>
                         <depends>
                             <field id="admin_enable_comment_notification">1</field>

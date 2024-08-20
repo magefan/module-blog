@@ -73,6 +73,14 @@
                     <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
                     <default_status>0</default_status>
                     <format_date>M d, Y H:i</format_date>
+
+                    <enabled>0</enabled>
+                    <sender_form>general</sender_form>
+                    <email_template></email_template>
+                    <admin_enable_comment_notification>0</admin_enable_comment_notification>
+                    <admin_send_from>general</admin_send_from>
+                    <admin_send_to/>
+                    <admin_email_template></admin_email_template>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
@@ -116,16 +124,6 @@
                 <template/>
                 <robots>NOINDEX,FOLLOW</robots>
             </author>
-
-            <comments>
-                <enabled>0</enabled>
-                <sender_form>general</sender_form>
-                <email_template>mfblog_post_view_comments_email_template</email_template>
-                <admin_enable_comment_notification>0</admin_enable_comment_notification>
-                <admin_send_from>general</admin_send_from>
-                <admin_send_to/>
-                <admin_email_template>mfblog_post_view_comments_admin_email_template</admin_email_template>
-            </comments>
 
             <blog_search>
                 <enable_blog_search>0</enable_blog_search>

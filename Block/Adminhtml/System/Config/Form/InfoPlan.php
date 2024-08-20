@@ -76,7 +76,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
                                     });
                                     if (section.data('mbdisabled')) return;
                                     section.data('mbdisabled', 1);
-                                    var customHtml = '<div style=\"padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;\">" . $this->getText() . "<a style=\"color: #ef672f; text-decoration: underline;\" href=\"https://magefan.com/magento2-blog-extension/pricing?utm_source=gtm_config&utm_medium=link&utm_campaign=regular\" target=\"_blank\">" . __( 'Read more') . "</a>.</div>';
+                                    var customHtml = '<div style=\"padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;\">" . $this->getText() . " <a style=\"color: #ef672f; text-decoration: underline;\" href=\"https://magefan.com/magento2-blog-extension/pricing?utm_source=gtm_config&utm_medium=link&utm_campaign=regular\" target=\"_blank\"> ". __( 'Read more') . "</a>.</div>';
                                     console.log(section.find([id$=\"state\"]).parent('.section-config'));
                                     $(section.find('fieldset')).prepend(customHtml);
 
