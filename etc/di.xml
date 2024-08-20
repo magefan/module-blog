@@ -192,4 +192,10 @@
         </arguments>
     </type>
 
+    <virtualType name="Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_latest_from_category</argument>
+        </arguments>
+    </virtualType>
+
 </config>
