@@ -570,4 +570,22 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
         return $this->shortContentExtractor;
     }
+
+    /**
+     * @return array|mixed|null
+     */
+    public function getCategoryImg()
+    {
+        if (!$this->hasData('category_image')) {
+            if ($file = $this->getData('category_img')) {
+                $image = $this->_url->getMediaUrl($file);
+
+            } else {
+                $image = false;
+            }
+            $this->setData('category_image', $image);
+        }
+
+        return $this->getData('category_image');
+    }
 }

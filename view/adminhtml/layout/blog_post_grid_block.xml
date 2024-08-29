@@ -148,6 +148,16 @@
                             <argument name="column_css_class" xsi:type="string">col-status</argument>
                         </arguments>
                     </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="img">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Post Image</argument>
+                            <argument name="index" xsi:type="string">featured_img</argument>
+                            <argument name="header_css_class" xsi:type="string">col-img</argument>
+                            <argument name="column_css_class" xsi:type="string">col-img</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="renderer" xsi:type="string">Magefan\Blog\Block\Adminhtml\Renderer\Image</argument>
+                        </arguments>
+                    </block>
                 </block>
             </block>
         </referenceBlock>
