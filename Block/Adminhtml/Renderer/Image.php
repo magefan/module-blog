@@ -32,7 +32,7 @@ class Image extends AbstractRenderer
     {
         $imageUrl = $row->getData($this->getColumn()->getIndex());
         if ($imageUrl) {
-            return '<img src="' . $this->_url->getMediaUrl($imageUrl) . '" alt="" width="75"/>';
+            return '<img src="' .  $this->escapeHtml($this->_url->getMediaUrl($imageUrl)) . '" alt="" width="75"/>';
         }
         return '';
     }
