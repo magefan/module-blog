@@ -19,17 +19,17 @@
 <?php if (count($tags)) { ?>
 <div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__('Tags')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__('Tags')) ?></strong>
     </div>
 
     <div id="blogSidebarCloudCanvasContainer">
-        <canvas style="width:100%" height="<?= $block->escapeHtml($block->getConfigValue($block::CLOUD_HEIGHT)) ?>" id="blogSidebarCloudCanvas">
+        <canvas style="width:100%" height="<?= $escaper->escapeHtml($block->getConfigValue($block::CLOUD_HEIGHT)) ?>" id="blogSidebarCloudCanvas">
             <div class="tagclaud-hld">
                 <?php foreach ($tags as $tag) { ?>
                     <?php $title = $tag->getTitle() ?>
-                    <span class="<?= $block->escapeHtml($block->getTagClass($tag)) ?>">
-                        <a href="<?= $block->escapeUrl($tag->getTagUrl()) ?>" title="<?= $block->escapeHtml($title) ?>">
-                            <?= $block->escapeHtml($title) ?>
+                    <span class="<?= $escaper->escapeHtml($block->getTagClass($tag)) ?>">
+                        <a href="<?= $escaper->escapeUrl($tag->getTagUrl()) ?>" title="<?= $escaper->escapeHtml($title) ?>">
+                            <?= $escaper->escapeHtml($title) ?>
                          </a>
                     </span>
                 <?php } ?>

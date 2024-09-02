@@ -18,18 +18,18 @@
 <div class="widget block blog-search" data-bind="scope: 'blog-search'">
     <div class="block-content">
         <form class="form" id="blog_search_mini_form"
-              action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+              action="<?= $escaper->escapeUrl($block->getFormUrl()) ?>"
               method="get">
             <div class="field search">
                 <label class="label" for="blog_search">
-                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Search')) ?></span>
                 </label>
                 <div class="control">
                     <input id="blog_search"
                            type="text"
                            name="q"
-                           value="<?= $block->escapeHtml($block->getQuery()) ?>"
-                           placeholder="<?= $block->escapeHtml(__('Search posts here...')) ?>"
+                           value="<?= $escaper->escapeHtml($block->getQuery()) ?>"
+                           placeholder="<?= $escaper->escapeHtml(__('Search posts here...')) ?>"
                            class="input-text"
                            maxlength="128" role="combobox"
                            aria-haspopup="false"
@@ -39,9 +39,9 @@
             </div>
             <div class="actions">
                 <button type="submit"
-                        title="<?= $block->escapeHtml(__('Search')) ?>"
+                        title="<?= $escaper->escapeHtml(__('Search')) ?>"
                         class="action search">
-                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Search')) ?></span>
                 </button>
             </div>
         </form>

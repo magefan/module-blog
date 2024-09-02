@@ -17,12 +17,12 @@
     <div class="block-title">
         <strong>
             <a target="_blank"
-               href="<?= $block->escapeUrl($block->getUrl('blog/rss/feed')) ?>">
-                <?= $block->escapeHtml(__('RSS Feed')) ?>
+               href="<?= $escaper->escapeUrl($block->getUrl('blog/rss/feed')) ?>">
+                <?= $escaper->escapeHtml(__('RSS Feed')) ?>
             </a>
         </strong>
         <img width="17" height="17" class="rss-icon"
-             src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/rss-icon.png')) ?>"
-             alt="<?= $block->escapeHtml(__('RSS Feed')) ?>" >
+             src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/rss-icon.png')) ?>"
+             alt="<?= $escaper->escapeHtml(__('RSS Feed')) ?>" >
     </div>
 </div>

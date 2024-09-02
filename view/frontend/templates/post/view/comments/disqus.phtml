@@ -17,11 +17,11 @@
 <div id="disqus_thread"></div>
 <?php $script = "
     var disqus_config = function () {
-        this.page.url = '" . $block->escapeUrl($block->getPost()->getPostUrl()) . "';
+        this.page.url = '" . $escaper->escapeUrl($block->getPost()->getPostUrl()) . "';
     };
     (function() {
         var d = document, s = d.createElement('script');
-        s.src = '" . $block->escapeHtml('/' . '/' .  $block->getDisqusShortname()) . ".disqus.com/embed.js';
+        s.src = '" . $escaper->escapeHtml('/' . '/' .  $block->getDisqusShortname()) . ".disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

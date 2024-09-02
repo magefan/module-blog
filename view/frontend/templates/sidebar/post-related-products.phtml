@@ -20,22 +20,22 @@ $image = 'product_thumbnail_image';
 ?>
 
 <?php if (count($items)) { ?>
-<div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
+<div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Related Products')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Related Products')) ?></strong>
     </div>
 
     <ol class="product-items">
         <?php foreach ($items as $_item) { ?>
         <li class="product-item">
             <div class="product-item-info" >
-                <a class="product-item-photo" href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" title="<?= $block->escapeHtml($_item->getName()) ?>">
+                <a class="product-item-photo" href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>" title="<?= $escaper->escapeHtml($_item->getName()) ?>">
                     <?= $block->getImage($_item, $image)->toHtml(); ?>
                 </a>
                 <div class="product-item-details">
                     <strong class="product-item-name">
-                        <a class="product-item-link" href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"  title="<?= $block->escapeHtml($_item->getName()) ?>">
-                            <span data-bind="text: product_name"><?= $block->escapeHtml($_item->getName()) ?></span>
+                        <a class="product-item-link" href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"  title="<?= $escaper->escapeHtml($_item->getName()) ?>">
+                            <span data-bind="text: product_name"><?= $escaper->escapeHtml($_item->getName()) ?></span>
                         </a>
                     </strong>
                     <?= /*@noEscape*/ $block->getProductPrice($_item); ?>

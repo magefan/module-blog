@@ -19,7 +19,7 @@ $_postCollection = $block->getPostCollection();
 <?php if (!$_postCollection->count()): ?>
     <div class="message info empty">
         <div>
-            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+            <?= $escaper->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
         </div>
     </div>
 <?php else: ?>
