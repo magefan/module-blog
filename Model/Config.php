@@ -114,6 +114,8 @@ class Config
     const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/css_settings/include_product_page';
     const XML_BLOG_CUSTOM_CSS = 'mfblog/developer/css_settings/custom_css';
 
+    const XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI = 'mfblog/developer/css_settings/include_bootstrap_custom_mini';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -297,5 +299,17 @@ class Config
     public function getCustomCss($storeId = null): string
     {
         return (string)$this->getConfig(self::XML_BLOG_CUSTOM_CSS, $storeId);
+    }
+
+    /**
+     * @param $storeId
+     * @return bool
+     */
+    public function getIncludeBootstrapCustomMini($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI,
+            $storeId
+        );
     }
 }

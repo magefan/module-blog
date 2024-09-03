@@ -684,6 +684,10 @@
                     <field id="custom_css" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Custom CSS</label>
                     </field>
+                    <field id="include_bootstrap_custom_mini" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Include Bootstrap v4.4.1 Custom Mini</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
                 </group>
             </group>
         </section>

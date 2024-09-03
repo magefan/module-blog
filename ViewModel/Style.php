@@ -10,7 +10,7 @@ namespace Magefan\Blog\ViewModel;
 
 use Magento\Framework\View\Asset\Source;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
-
+use Magefan\Blog\Model\Config;
 /**
  * Class AbstractCss
  */
@@ -32,16 +32,23 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
     private $done = [];
 
     /**
-     * Style constructor.
+     * @var Config
+     */
+    private $config;
+
+    /**
      * @param Source $source
      * @param AssetRepository $assetRepository
+     * @param Config $config
      */
     public function __construct(
         Source $source,
-        AssetRepository $assetRepository
+        AssetRepository $assetRepository,
+        Config $config
     ) {
         $this->source = $source;
         $this->assetRepository = $assetRepository;
+        $this->config = $config;
     }
 
     /**
@@ -49,6 +56,10 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
      */
     public function getStyle($file)
     {
+        if (strpos($file, 'bootstrap-4.4.1-custom-min.css') !== false && !$this->config->getIncludeBootstrapCustomMini()) {
+            return '';
+        }
+
         if (isset($this->done[$file])) {
             return '';
         }
