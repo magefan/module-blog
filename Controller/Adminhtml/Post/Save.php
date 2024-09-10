@@ -34,6 +34,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
             $model->setAuthorId($authSession->getUser()->getId());
         }
 
+        /* Prepare empty categories and coauthors */
+        foreach(['categories', 'coauthors'] as $key) {
+            if (!$request->getPost($key)) {
+                $model->setData($key, []);
+            }
+        }
+
         /* Prepare relative links */
         $data = $request->getPost('data');
         $links = isset($data['links']) ? $data['links'] : ['post' => [], 'product' => []];
