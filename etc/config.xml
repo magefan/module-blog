@@ -287,6 +287,7 @@
                     <include_home_page>0</include_home_page>
                     <include_product_page>0</include_product_page>
                     <custom_css/>
+                    <include_bootstrap_custom_mini>1</include_bootstrap_custom_mini>
                 </css_settings>
             </developer>
         </mfblog>
