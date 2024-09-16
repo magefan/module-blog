@@ -266,4 +266,22 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
         return $this->shortContentExtractor;
     }
+
+    /**
+     * @return array|mixed|null
+     */
+    public function getTagImg()
+    {
+        if (!$this->hasData('tag_image')) {
+            if ($file = $this->getData('tag_img')) {
+                $image = $this->_url->getMediaUrl($file);
+
+            } else {
+                $image = false;
+            }
+            $this->setData('tag_image', $image);
+        }
+
+        return $this->getData('tag_image');
+    }
 }
