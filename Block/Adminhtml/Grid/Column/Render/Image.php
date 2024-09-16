@@ -1,6 +1,6 @@
 <?php
 
-namespace Magefan\Blog\Block\Adminhtml\Renderer;
+namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Render;
 
 use Magefan\Blog\Model\Url;
 use Magento\Backend\Block\Context;
@@ -30,9 +30,9 @@ class Image extends AbstractRenderer
      */
     public function render(DataObject $row)
     {
-        $imageUrl = $row->getData($this->getColumn()->getIndex());
-        if ($imageUrl) {
-            return '<img src="' .  $this->escapeHtml($this->_url->getMediaUrl($imageUrl)) . '" alt="" width="75"/>';
+        $imagePath = $row->getData($this->getColumn()->getIndex());
+        if ($imagePath) {
+            return '<img src="' .  $this->escapeHtml($this->_url->getMediaUrl($imagePath)) . '" alt="" width="75"/>';
         }
         return '';
     }

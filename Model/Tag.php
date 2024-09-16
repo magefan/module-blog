@@ -270,7 +270,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     /**
      * @return array|mixed|null
      */
-    public function getTagImg()
+    public function getTagImage()
     {
         if (!$this->hasData('tag_image')) {
             if ($file = $this->getData('tag_img')) {

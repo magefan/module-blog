@@ -79,16 +79,22 @@ class TagDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         /** @var $tag \Magefan\Blog\Model\Tag */
         foreach ($items as $tag) {
             $tag = $tag->load($tag->getId()); //temporary fix
-            $this->loadedData[$tag->getId()] = $tag->getData();
+
             $data = $tag->getData();
-            $key = 'tag_img';
-            $name = $data[$key];
-            unset($data[$key]);
-            $data[$key][0] = [
-                'name' => $name,
-                'url' => $tag->getTagImg(),
+            /* Prepare Featured Image */
+            $map = [
+                'tag_img' => 'getTagImage',
             ];
-//            var_dump($tag->getTagImg());exit();
+            foreach ($map as $key => $method) {
+                if (isset($data[$key])) {
+                    $name = $data[$key];
+                    unset($data[$key]);
+                    $data[$key][0] = [
+                        'name' => $name,
+                        'url' => $tag->$method(),
+                    ];
+                }
+            }
             $this->loadedData[$tag->getId()] = $data;
         }
 
