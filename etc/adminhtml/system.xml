@@ -38,7 +38,7 @@
             </group>
 
             <group id="design" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Design (Blog+)</label>
+                <label>Design (Blog Plus)</label>
                 <field id="index_page_layout" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Blog Index Page Layout</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
@@ -132,7 +132,7 @@
                 </group>
 
                 <group id="category_posts" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Posts From The Same Category (BlogExtra)</label>
+                    <label>Posts From The Same Category (Blog Extra)</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Posts From The Same Category</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -174,7 +174,7 @@
                     </field>
 
                     <field id="autorelated_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Enable Auto Related Posts (Blog+)</label>
+                        <label>Enable Auto Related Posts (Blog Plus)</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="enabled">1</field>
@@ -205,7 +205,7 @@
                     </field>
 
                     <field id="autorelated_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Enable Auto Related Products (Blog+)</label>
+                        <label>Enable Auto Related Products (Blog Plus)</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="enabled">1</field>
@@ -299,7 +299,7 @@
                     </field>
 
                     <field id="format_date" translate="label comment" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Comments Date Format (Blog+)</label>
+                        <label>Comments Date Format (Blog Plus)</label>
                         <depends>
                             <field id="type">magefan</field>
                         </depends>
@@ -309,7 +309,7 @@
                     </field>
 
                     <field id="enabled"  translate="label comment" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Enable Email Notifications (BlogExtra)</label>
+                        <label>Enable Email Notifications (Blog Extra)</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="type">magefan</field>
@@ -331,7 +331,7 @@
                         </depends>
                     </field>
                     <field id="admin_enable_comment_notification" translate="label comment" type="select" sortOrder="85" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Enable Admin Email Notifications (BlogExtra)</label>
+                        <label>Enable Admin Email Notifications (Blog Extra)</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="type">magefan</field>
@@ -628,7 +628,7 @@
                         <source_model>Magefan\Blog\Model\Config\Source\ArchiveGroupBy</source_model>
                     </field>
                     <field id="format_date" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Date Format (Blog+)</label>
+                        <label>Date Format (Blog Plus)</label>
                         <comment><![CDATA[
                             For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
                         ]]></comment>
@@ -755,7 +755,7 @@
 
             <group id="advanced_permalink" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
 
-                <label>Advanced Permalink Settings (Blog+)</label>
+                <label>Advanced Permalink Settings (Blog Plus)</label>
                 <attribute type="expanded">0</attribute>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable Advanced Permalink Settings</label>
@@ -1037,7 +1037,7 @@
             <group id="blog_search" translate="label" type="text" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Blog Search (Blog Extra)</label>
                 <field id="enable_blog_search" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Include Blog Search Into Catalog Search (BlogExtra)</label>
+                    <label>Include Blog Search Into Catalog Search (Blog Extra)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>

@@ -27,6 +27,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
      */
     abstract protected function getText(): string;
 
+
     /**
      * Return info block html
      * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
@@ -39,61 +40,63 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
         }
 
         $html = '';
-        $script = '';
 
-        $script .= "
-                    require(['jquery', 'Magento_Ui/js/modal/alert', 'domReady!'], function($, alert){
-                        setInterval(function(){
-                            let sections = JSON.parse('" . $this->getSectionsJson() . "');
-                            sections.forEach(function(element) {
-                                var section = $('#' + element + '-state').parent('.section-config');
-                                var formatDateField = $('#' + element);
+        if ($text = $this->getText()) {
+            $textHtml = '<div style="padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;">';
+            $textHtml .= $text . ' <a style="color: #ef672f; text-decoration: underline;" href="https://magefan.com/magento2-blog-extension/pricing?utm_source=blog_config&utm_medium=link&utm_campaign=regular" target="_blank">Read more</a>.';
+            $textHtml .= '</div>';
+        }
 
-                                function disableField(field) {
-                                    field.attr('readonly', 'readonly');
-                                    field.removeAttr('disabled');
-                                    if (field.data('mbdisabled')) return;
-                                    field.data('mbdisabled', 1);
-                                    field.click(function(){
-                                        alert({
-                                            title: 'You can not change this option.',
-                                            content: '" . ($this->getMinPlan() == "Extra" ? __("This option is available in <strong>%1</strong> plan only.", 'Extra') : __("This option is available in <strong>%1</strong> plans only.", 'Plus or Extra')) . "',
-                                            buttons: [{
-                                                text: '" . __('Upgrade Plan Now') . "',
-                                                class: 'action primary accept',
-                                                click: function () {
-                                                    window.open('https://magefan.com/magento2-blog-extension/pricing?utm_source=gtm_config&utm_medium=link&utm_campaign=regular');
-                                                }
-                                            }]
-                                        });
-                                    });
+        $optionAvailableInText = ($this->getMinPlan() == 'Extra')
+            ? 'This option is available in <strong>Extra</strong> plan only.'
+            : 'This option is available in <strong>Plus or Extra</strong> plans only.';
+
+        $script = '
+                require(["jquery", "Magento_Ui/js/modal/alert", "domReady!"], function($, alert){
+                    setInterval(function(){
+                        var sections = ' . $this->getSectionsJson() . ';
+                        
+                        sections.forEach(function(sectionId) {
+                            var $section = $("#" + sectionId + "-state").parent(".section-config");
+                            if (!$section.length) {
+                                $section = $("#" + sectionId).parents("tr:first");
+                            } else {
+                                var $fieldset = $section.find("fieldset:first");
+                                if (!$fieldset.data("mfftext")) {
+                                    $fieldset.data("mfftext", 1);
+                                    $fieldset.prepend(\'' . $textHtml . '\');
                                 }
-
-                                if (section.length) {
-                                    section.find('.use-default').css('visibility', 'hidden');
-                                    section.find('input,select').each(function(){
-                                        disableField($(this));
+                            }
+                            
+                            $section.find(".use-default").css("visibility", "hidden");
+                            $section.find("input,select").each(function(){
+                                $(this).attr("readonly", "readonly");
+                                $(this).removeAttr("disabled");
+                                if ($(this).data("mffdisabled")) return;
+                                $(this).data("mffdisabled", 1);
+                                $(this).click(function(){
+                                    $(this).val($(this).data("mfOldValue")).trigger("change");     
+                                    alert({
+                                        title: "You cannot use this option.",
+                                        content: "' . $optionAvailableInText . '",
+                                        buttons: [{
+                                            text: "Upgrade Plan Now",
+                                            class: "action primary accept",
+                                            click: function () {
+                                                window.open("https://magefan.com/magento2-blog-extension/pricing?utm_source=blog_config&utm_medium=link&utm_campaign=regular");
+                                            }
+                                        }]
                                     });
-                                    if (section.data('mbdisabled')) return;
-                                    section.data('mbdisabled', 1);
-                                    var customHtml = '<div style=\"padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;\">" . $this->getText() . " <a style=\"color: #ef672f; text-decoration: underline;\" href=\"https://magefan.com/magento2-blog-extension/pricing?utm_source=gtm_config&utm_medium=link&utm_campaign=regular\" target=\"_blank\"> ". __( 'Read more') . "</a>.</div>';
-                                    console.log(section.find([id$=\"state\"]).parent('.section-config'));
-                                    $(section.find('fieldset')).prepend(customHtml);
-
-                                } else {
-                                    $('#row_' + element).find('.use-default').css('visibility', 'hidden');
-                                    disableField(formatDateField);
-                                }
+                                }).on("focus", function() {
+                                    $(this).data("mfOldValue", $(this).val());
+                                });
                             });
+                        });
+                    }, 1000);
+                });
+        ';
 
-                        }, 1000);
-                    });";
-
-
-        /* @noEscape */
-        $script = $this->mfSecureRenderer->renderTag('script', [], $script, false);
-
-        $html .= $script;
+        $html .= $this->mfSecureRenderer->renderTag('script', [], $script, false);
 
         return $html;
     }
