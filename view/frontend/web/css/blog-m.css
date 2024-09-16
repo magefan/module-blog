@@ -16,6 +16,7 @@
     margin-bottom: 20px;
 }
 .blog-page-list .post-holder {border-bottom: 1px solid #eee}
+.blog-page-list .blog-top-image {padding-bottom: 20px}
 
 .post-holder .post-header {position:relative;}
 
