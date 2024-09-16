@@ -19,13 +19,13 @@
     $_postCollection = $block->getPostCollection();
 ?>
 <?php if ($_postCollection->count()) { ?>
-<h2 style="margin:0 0 18px 0;font-size:18px;font-weight:600;text-align:center" class="theme-color a-center"><?= $block->escapeHtml($block->getTitle()) ?></h2>
+<h2 style="margin:0 0 18px 0;font-size:18px;font-weight:600;text-align:center" class="theme-color a-center"><?= $escaper->escapeHtml($block->getTitle()) ?></h2>
 <div class="recent-posts">
     <div class="owl-carousel">
     <?php foreach ($_postCollection as $_post) { ?>
         <?php
-            $_postUrl = $block->escapeUrl($_post->getPostUrl());
-            $_postName = $block->escapeHtml($_post->getTitle());
+            $_postUrl = $escaper->escapeUrl($_post->getPostUrl());
+            $_postName = $escaper->escapeHtml($_post->getTitle());
         ?>
         <div class="item">
             <div class="row">
@@ -39,25 +39,25 @@
                                 $featuredImgAlt = $_postName;
                             }
                         ?>
-                           <img src="<?= $block->escapeHtml($featuredImage) ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                           <img src="<?= $escaper->escapeHtml($featuredImage) ?>" alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
                     <?php } ?>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="post-date">
-                        <span class="day"><?= $block->escapeHtml($_post->getPublishDate('j')) ?></span>
-                        <span class="month"><?= $block->escapeHtml($_post->getPublishDate('M')) ?></span>
+                        <span class="day"><?= $escaper->escapeHtml($_post->getPublishDate('j')) ?></span>
+                        <span class="month"><?= $escaper->escapeHtml($_post->getPublishDate('M')) ?></span>
                     </div>
                     <div class="postTitle">
                         <h2><a href="<?= $_postUrl ?>" ><?= $_postName ?></a></h2>
                     </div>
-                    <?php 
+                    <?php
                         $content = $block->getShorContent($_post);
                         $content = preg_replace("/<img[^>]+\>/i", "", $content);
                         $content = preg_replace("#<iframe[^>]+>.*?</iframe>#is", "", $content);
                     ?>
                     <div class="postContent"><?= /*@noEscape*/ $content ?></div>
-                    <a class="readmore" href="<?= $_postUrl ?>"><?= $block->escapeHtml(__('Read more &#187;')) ?></a>
+                    <a class="readmore" href="<?= $_postUrl ?>"><?= $escaper->escapeHtml(__('Read more &#187;')) ?></a>
                 </div>
             </div>
         </div>

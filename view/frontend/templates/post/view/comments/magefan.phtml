@@ -22,24 +22,24 @@
 ?>
 <div id="post-comments">
     <div class="c-count">
-        <strong><?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?></strong>
+        <strong><?= $escaper->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?></strong>
     </div>
     <!-- reply form -->
     <div class="c-reply cf">
         <?php if ($image = $block->getCustomerImage()) { ?>
         <div class="c-img">
-            <img src="<?= $block->escapeUrl($image) ?>" alt="<?= $block->escapeHtml($block->getCustomerName()) ?>">
+            <img src="<?= $escaper->escapeUrl($image) ?>" alt="<?= $escaper->escapeHtml($block->getCustomerName()) ?>">
         </div>
         <?php } ?>
         <div class="c-replyform <?php if ($canPost) {  echo 'no-active'; } ?>">
             <form class="comment-form-blog-recaptcha"
-                  action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+                  action="<?= $escaper->escapeUrl($block->getFormUrl()) ?>"
                   method="post"
                   data-mage-init='{"validation":{}}'>
                 <?= $block->getBlockHtml('formkey') ?>
                 <input type="hidden" name="post_id" value="<?= (int)($block->getPost()->getId()) ?>" />
                 <textarea name="text"
-                          placeholder="<?= $canPost ? $block->escapeHtml(__('Add a comment...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
+                          placeholder="<?= $canPost ? $escaper->escapeHtml(__('Add a comment...')) : $escaper->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
                           disabled="disabled"<?php } ?>
                           data-validate="{required:true}"></textarea>
                 <div class="c-btn-hld">
@@ -50,7 +50,7 @@
                             <input type="text"
                                    name="author_nickname"
                                    value=""
-                                   placeholder="<?= $block->escapeHtml(__('Full Name')) ?>"
+                                   placeholder="<?= $escaper->escapeHtml(__('Full Name')) ?>"
                                    class="input-text required-entry"
                                    data-validate="{required:true}"
                                    autocomplete="off"
@@ -61,7 +61,7 @@
                                    name="author_email"
                                    autocomplete="email"
                                    value=""
-                                   placeholder="<?= $block->escapeHtml(__('Email')) ?>"
+                                   placeholder="<?= $escaper->escapeHtml(__('Email')) ?>"
                                    class="input-text"
                                    data-validate="{required:true, 'validate-email':true}"
                                    aria-required="true">
@@ -77,11 +77,11 @@
                     <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
 
                     <?php if ($canPost) { ?>
-                        <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
+                        <button type="submit"><?= $escaper->escapeHtml(__('Submit')) ?></button>
                     <?php } else { ?>
                         <button type="button"
-                                onclick="window.location='<?= $block->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
-                            <?= $block->escapeHtml(__('Sign In')) ?>
+                                onclick="window.location='<?= $escaper->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
+                            <?= $escaper->escapeHtml(__('Sign In')) ?>
                         </button>
                     <?php } ?>
 
@@ -104,22 +104,22 @@ if ($commentsCount) {
             <?= $block->getCommentHtml($comment) ?>
         <?php } ?>
         <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
-            <a href="#" class="c-allcomments more-comments-action" data-comment="0"><?= $block->escapeHtml(__('Load more comments')) ?></a>
+            <a href="#" class="c-allcomments more-comments-action" data-comment="0"><?= $escaper->escapeHtml(__('Load more comments')) ?></a>
         <?php } ?>
     </div>
 
     <!-- reply comment form -->
     <div id="c-replyform-comment" class="c-replyform c-replyform-comment" style="display:none">
         <form class="reply-form-blog-recaptcha"
-              action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+              action="<?= $escaper->escapeUrl($block->getFormUrl()) ?>"
               method="post"
               data-mage-init='{"validation":{}}'>
             <?= $block->getBlockHtml('formkey') ?>
-            <input type="hidden" name="post_id" value="<?= $block->escapeHtml($block->getPost()->getId()) ?>" />
+            <input type="hidden" name="post_id" value="<?= $escaper->escapeHtml($block->getPost()->getId()) ?>" />
             <input type="hidden" name="parent_id" value="" />
             <textarea class="refresh-value"
                       name="text"
-                      placeholder="<?= $canPost ? $block->escapeHtml(__('Add a reply...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
+                      placeholder="<?= $canPost ? $escaper->escapeHtml(__('Add a reply...')) : $escaper->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
                       disabled="disabled"<?php } ?>
                       data-validate="{required:true}"></textarea>
             <div class="c-btn-hld">
@@ -130,7 +130,7 @@ if ($commentsCount) {
                         <input type="text"
                                name="author_nickname"
                                value=""
-                               placeholder="<?= $block->escapeHtml(__('Full Name')) ?>"
+                               placeholder="<?= $escaper->escapeHtml(__('Full Name')) ?>"
                                class="input-text required-entry refresh-value"
                                data-validate="{required:true}"
                                autocomplete="off"
@@ -141,16 +141,16 @@ if ($commentsCount) {
                                name="author_email"
                                autocomplete="email"
                                value=""
-                               placeholder="<?= $block->escapeHtml(__('Email')) ?>"
+                               placeholder="<?= $escaper->escapeHtml(__('Email')) ?>"
                                class="input-text required-entry refresh-value"
                                data-validate="{required:true, 'validate-email':true}"
                                aria-required="true">
                     </div>
                 </div>
                 <?php } ?>
-                <button type="button" class="cancel reply-cancel-action" ><?= $block->escapeHtml(__('Cancel')) ?></button>
+                <button type="button" class="cancel reply-cancel-action" ><?= $escaper->escapeHtml(__('Cancel')) ?></button>
             <?php if ($canPost) { ?>
-                    <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
+                    <button type="submit"><?= $escaper->escapeHtml(__('Submit')) ?></button>
                     <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
                     <?php } ?>
@@ -159,8 +159,8 @@ if ($commentsCount) {
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
                     <?php } ?>
                     <button type="button"
-                            onclick="window.location='<?= $block->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
-                        <?= $block->escapeHtml(__('Sign In')) ?>
+                            onclick="window.location='<?= $escaper->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
+                        <?= $escaper->escapeHtml(__('Sign In')) ?>
                     </button>
                 <?php } ?>
                 <div class="clearfix"></div>

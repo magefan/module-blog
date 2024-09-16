@@ -22,8 +22,8 @@ $subCategoriesCollection = $block->getSubCategories();
         <ul class="subcategory-links">
             <?php foreach ($subCategoriesCollection as $category) { ?>
                 <li>
-                    <?php $categoryTitle = $block->escapeHtml($category->getTitle()) ?>
-                    <a href="<?= $block->escapeUrl($category->getCategoryUrl()) ?>"
+                    <?php $categoryTitle = $escaper->escapeHtml($category->getTitle()) ?>
+                    <a href="<?= $escaper->escapeUrl($category->getCategoryUrl()) ?>"
                        title="<?= /*@noEscape*/ $categoryTitle ?>">
                         <?= /*@noEscape*/ $categoryTitle ?>
                     </a>

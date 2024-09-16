@@ -21,22 +21,22 @@
     <?php if ($comment->getIsHidden()) { echo 'style="display:none"'; } ?>>
     <?php if ($authorImage = $comment->getAuthorImage()) { ?>
     <div class="c-img">
-        <img src="<?= $block->escapeUrl($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
+        <img src="<?= $escaper->escapeUrl($authorImage) ?>" alt="<?= $escaper->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
     <div class="c-post c-post-<?= (int)$comment->getId() ?>" id="c-post-<?= (int)$comment->getId() ?>">
         <div class="p-info">
-            <div class="p-name"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
-            <div class="publish-date"><?php echo $block->escapeHtml($block->getPublishDate()) ?></div>
+            <div class="p-name"><?= $escaper->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+            <div class="publish-date"><?= $escaper->escapeHtml($block->getPublishDate()) ?></div>
         </div>
 
-        <div class="p-text"><?= /*@noEscape*/ nl2br($block->escapeHtml($comment->getText())) ?></div>
+        <div class="p-text"><?= /*@noEscape*/ nl2br($escaper->escapeHtml($comment->getText())) ?></div>
         <div class="p-actions">
             <a href="#" class="reply-action"
                data-comment="<?= $comment->isReply() ?
                    (int)$comment->getParentId() :
                    (int)$comment->getId() ?>"
-               title="<?= $block->escapeHtml(__('Reply')) ?>"><?= $block->escapeHtml(__('Reply')) ?></a>
+               title="<?= $escaper->escapeHtml(__('Reply')) ?>"><?= $escaper->escapeHtml(__('Reply')) ?></a>
         </div>
         <?php
             $replies = $block->getRepliesCollection();
@@ -55,7 +55,7 @@
 
                 <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
                 <div class="c-more more-comments-action" data-comment="<?= (int)$comment->getId() ?>">
-                    <a href="#" ><?= $block->escapeHtml(__('Show more replies in this thread')) ?><i></i></a>
+                    <a href="#" ><?= $escaper->escapeHtml(__('Show more replies in this thread')) ?><i></i></a>
                 </div>
                 <?php } ?>
             </div>

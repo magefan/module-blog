@@ -23,15 +23,15 @@
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 ?>
 <?php if ($_postCollection->count()) { ?>
-<div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
+<div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
     </div>
     <div class="block-content">
         <?php foreach ($_postCollection as $_post) { ?>
             <?php
-                $_postUrl = $block->escapeUrl($_post->getPostUrl());
-                $_postName = $block->escapeHtml($_post->getTitle());
+                $_postUrl = $escaper->escapeUrl($_post->getPostUrl());
+                $_postName = $escaper->escapeHtml($_post->getTitle());
             ?>
             <div class="item clearfix">
                 <?php if ($block->getDisplayImage()) { ?>
@@ -51,8 +51,8 @@
                                     $featuredImageUrl = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
                                 }
                             ?>
-                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $block->escapeUrl($featuredImageUrl) ?>"
-                                 alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
+                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
                         </a>
                     </div>
                 <?php } ?>
@@ -63,7 +63,7 @@
 
                 <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>
                     <div class="post-item-date">
-                        <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                        <span class="value"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
                     </div>
                 <?php } ?>
             </div>

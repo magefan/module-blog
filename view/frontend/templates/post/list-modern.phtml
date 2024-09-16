@@ -21,7 +21,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 <?php if (!$_postCollection->count()): ?>
     <div class="message info empty">
         <div>
-            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+            <?= $escaper->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
         </div>
     </div>
 <?php else: ?>
@@ -33,8 +33,8 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
         <ol class="post-list modern">
             <?php foreach ($_postCollection as $_post): ?>
                 <?php
-                    $_postUrl = $block->escapeUrl($_post->getPostUrl());
-                    $_postName = $block->escapeHtml($_post->getTitle());
+                    $_postUrl = $escaper->escapeUrl($_post->getPostUrl());
+                    $_postName = $escaper->escapeHtml($_post->getTitle());
                 ?>
                 <li class="post-item post-holder post-holder-<?= (int)$_post->getId() ?>">
 
@@ -58,7 +58,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                             $featuredImgAlt = $_postName;
                                         }
                                         ?>
-                                        <div class="animation-type-zoom bg-img mfblogunveil" data-original="<?= $block->escapeHtml($featuredImage) ?>"></div>
+                                        <div class="animation-type-zoom bg-img mfblogunveil" data-original="<?= $escaper->escapeHtml($featuredImage) ?>"></div>
                                         <?php /* <img class="" src="<?= $block->escapeHtml($featuredImage) ?>" alt=""> */ ?>
                                     <?php } ?>
                                 </a>
@@ -67,9 +67,9 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                 <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
                                     <span class="post-category">
                                         <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
-                                               title="<?= $block->escapeHtml($ct->getTitle()) ?>">
-                                                <?= $block->escapeHtml($ct->getTitle()) ?>
+                                            <a class="category-name" href="<?= $escaper->escapeUrl($ct->getCategoryUrl()) ?>"
+                                               title="<?= $escaper->escapeHtml($ct->getTitle()) ?>">
+                                                <?= $escaper->escapeHtml($ct->getTitle()) ?>
                                             </a>
                                         <?php } ?>
                                     </span>
@@ -94,11 +94,11 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                     <?php if ($_author = $_post->getAuthor()) { ?>
                                         <span class="post-author-name">
                                             <?php if ($block->authorPageEnabled()) { ?>
-                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                                                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
+                                                <a title="<?= $escaper->escapeHtml($_author->getTitle()) ?>"
+                                                   href="<?= $escaper->escapeUrl($_author->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($_author->getTitle()) ?>
                                                 </a>
                                             <?php } else { ?>
-                                                <?= $block->escapeHtml($_author->getTitle()) ?>
+                                                <?= $escaper->escapeHtml($_author->getTitle()) ?>
                                             <?php } ?>
 
                                             <?php
@@ -106,15 +106,15 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                             $coAuthorsCount = count($coAuthors);
                                             ?>
                                             <?php if ($coAuthorsCount) { ?>
-                                                <?= $block->escapeHtml(__('and')) ?>
+                                                <?= $escaper->escapeHtml(__('and')) ?>
                                                 <?php $z = 0 ?>
-                                                <?php foreach($coAuthors as $coAuthor) { ?>
+                                                <?php foreach ($coAuthors as $coAuthor) { ?>
                                                     <?php $z++; ?>
                                                     <?php if ($block->authorPageEnabled()) { ?>
-                                                        <a title="<?= $block->escapeHtml($coAuthor->getTitle()) ?>"
-                                                           href="<?= $block->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $block->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                                        <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
+                                                           href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
                                                     <?php } else { ?>
-                                                        <?= $block->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                                        <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
                                                     <?php } ?>
                                                 <?php } ?>
                                             <?php } ?>
@@ -125,14 +125,14 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 
                                 <!-- post date -->
                                 <?php if ($_post->isPublishDateEnabled()) { ?>
-                                    <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                    <span class="post-date"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
                                 <?php } ?>
 
                                 <!-- post view -->
                                 <?php if ($block->viewsCountEnabled()) { ?>
                                     <?php if ($viewsCount = $_post->getViewsCount()) { ?>
                                         <span class="post-view float-right d-none d-md-block">
-                                            <?= $block->escapeHtml($viewsCount)?>
+                                            <?= $escaper->escapeHtml($viewsCount)?>
                                         </span>
                                     <?php } ?>
                                 <?php } ?>
@@ -146,7 +146,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                             <!-- read more -->
                             <div class="post-read-more">
                                 <a class="action primary" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
-                                    <?= $block->escapeHtml(__('Read more')) ?>
+                                    <?= $escaper->escapeHtml(__('Read more')) ?>
                                 </a>
                             </div>
                         </div>
