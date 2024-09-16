@@ -21,6 +21,12 @@
                 <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\Info</frontend_model>
                 </field>
+                <field id="infoPlus" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogPlus</frontend_model>
+                </field>
+                <field id="infoExtra" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\InfoBlogExtra</frontend_model>
+                </field>
                 <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Extension</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -30,6 +36,48 @@
                     <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\ProductKeyField</frontend_model>
                 </field>
             </group>
+
+            <group id="design" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Design (Blog+)</label>
+                <field id="index_page_layout" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Blog Index Page Layout</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
+                </field>
+                <field id="post_page_layout" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Blog Post Page Layout</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
+                </field>
+                <field id="category_page_layout" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Blog Category Page Layout</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
+                </field>
+                <field id="tag_page_layout" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Blog Tag Page Layout</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
+                </field>
+                <field id="author_page_layout" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Blog Author Page Layout</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
+                </field>
+                <field id="search_page_layout" translate="label comment" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Blog Search Page Layout</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PageLayout</source_model>
+                </field>
+                <field id="publication_date" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Posts Publication Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="format_date" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Posts Publication Date Format</label>
+                    <depends>
+                        <field id="publication_date">1</field>
+                    </depends>
+                    <comment><![CDATA[
+                            For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
+                        ]]></comment>
+                </field>
+            </group>
+
             <group id="index_page" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Blog Index Page</label>
 
@@ -83,6 +131,27 @@
                     </field>
                 </group>
 
+                <group id="category_posts" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Posts From The Same Category (BlogExtra)</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Posts From The Same Category</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplate</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="number_of_posts" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number of Posts</label>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+
                 <group id="related_posts" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Related Posts</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -103,6 +172,22 @@
                             <field id="enabled">1</field>
                         </depends>
                     </field>
+
+                    <field id="autorelated_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Auto Related Posts (Blog+)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="autorelated_black_words" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Black Words For Auto Related</label>
+                        <comment>Blog extension uses words from title and description to automatically define related posts. Enter words separated by comma you want to ignore. </comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="autorelated_enabled">1</field>
+                        </depends>
+                    </field>
                 </group>
 
                 <group id="related_products" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -116,6 +201,22 @@
                         <label>Number of Products</label>
                         <depends>
                             <field id="enabled">1</field>
+                        </depends>
+                    </field>
+
+                    <field id="autorelated_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Auto Related Products (Blog+)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="autorelated_black_words" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Black Words For Auto Related</label>
+                        <comment>Blog extension uses words from title and description to automatically define related products. Enter words separated by comma you want to ignore. </comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="autorelated_enabled">1</field>
                         </depends>
                     </field>
                 </group>
@@ -196,6 +297,68 @@
                             <field id="type">magefan</field>
                         </depends>
                     </field>
+
+                    <field id="format_date" translate="label comment" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Comments Date Format (Blog+)</label>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment><![CDATA[
+                            For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
+                        ]]></comment>
+                    </field>
+
+                    <field id="enabled"  translate="label comment" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Email Notifications (BlogExtra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment>If enabled email notification will be sent to a customer when someone replies to his/her comment or write a new comment on a post customer interested in.</comment>
+                    </field>
+                    <field id="sender_form" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="email_template"  translate="label comment" type="select" sortOrder="75"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Email Template</label>
+                        <comment>This email template will be used to sent a notification of reply to a customer's comment</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin_enable_comment_notification" translate="label comment" type="select" sortOrder="85" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Admin Email Notifications (BlogExtra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="type">magefan</field>
+                        </depends>
+                        <comment>If enabled email notification will be sent to Administrator about new comments which need approvement.</comment>
+                    </field>
+                    <field id="admin_send_from" translate="label comment" type="select" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                        <depends>
+                            <field id="admin_enable_comment_notification">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin_send_to" translate="label comment" type="text" sortOrder="105" showInDefault="1"  showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Send To</label>
+                        <comment>Enter email of admin which will receive notification about new comment.</comment>
+                        <depends>
+                            <field id="admin_enable_comment_notification">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin_email_template" translate="label comment" type="select" sortOrder="115" showInDefault="1" showInWebsite="1"  showInStore="1" canRestore="1">
+                        <label>Email Template</label>
+                        <comment>This email template will be used to sent a notification about new customer comment.</comment>
+                        <depends>
+                            <field id="admin_enable_comment_notification">1</field>
+                        </depends>
+                    </field>
                 </group>
 
                 <group id="nextprev" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -226,6 +389,42 @@
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Reading Time</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+                <group id="reading_progress_bar" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reading Progress Bar</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="position" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Position</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\ReadingProgressBarPosition</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="width" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Width/Height</label>
+                        <validate>validate-not-negative-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="highlight_color" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Color</label>
+                        <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\ColorPicker</frontend_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="highlight_color_opacity" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Opacity</label>
+                        <validate>validate-not-negative-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
                     </field>
                 </group>
             </group>
@@ -322,6 +521,18 @@
                         <label>Sort Order</label>
                     </field>
                 </group>
+
+                <group id="contents" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Post Contents Widget</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sort Order</label>
+                    </field>
+                </group>
+
                 <group id="categories" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Categories Widget</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -415,6 +626,12 @@
                     <field id="group_by" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Archive Group By</label>
                         <source_model>Magefan\Blog\Model\Config\Source\ArchiveGroupBy</source_model>
+                    </field>
+                    <field id="format_date" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Date Format (Blog+)</label>
+                        <comment><![CDATA[
+                            For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
+                        ]]></comment>
                     </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
@@ -513,7 +730,6 @@
                 </group>
             </group>
 
-
             <group id="product_page" translate="label" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Product Page</label>
                 <field id="related_posts_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -537,12 +753,92 @@
                 </field>
             </group>
 
+            <group id="advanced_permalink" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+
+                <label>Advanced Permalink Settings (Blog+)</label>
+                <attribute type="expanded">0</attribute>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Advanced Permalink Settings</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="redirect_to_no_slash" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto-redirect to No-Slash URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[E.g. auto 301 redirect from <b>http://example.com/blog/</b> to <b>http://example.com/blog</b>]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="blog_route" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Blog Route</label>
+                    <validate>required-entry</validate>
+                    <comment>E.g.:"myblog" will make the blog accessible from https://mystore.com/myblog</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="post_path_schema" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Post Path Schema</label>
+                    <comment><![CDATA[Available variables: {{blog_route}}, {{parent_category}}, {{id}}, {{year}}, {{month}}, {{url_key}}.<br/><br/><b>Attantion!</b> Keep <b>{{url_key}}</b> as a last variable in all schemas.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="category_path_schema" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Category Path Schema</label>
+                    <comment><![CDATA[Available variables: {{blog_route}}, {{parent_category}}, {{id}}, {{url_key}}.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="tag_path_schema" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Tag Path Schema</label>
+                    <comment><![CDATA[Available variables: {{blog_route}}, {{id}}, {{url_key}}.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="author_path_schema" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Author Path Schema</label>
+                    <comment><![CDATA[Available variables: {{blog_route}}, {{id}}, {{url_key}}.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="archive_path_schema" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Archive Path Schema</label>
+                    <comment><![CDATA[Available variables: {{blog_route}}, {{url_key}}.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="search_path_schema" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Search Path Schema</label>
+                    <comment><![CDATA[Available variables: {{blog_route}}, {{url_key}}.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="page_pagination_type" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Page Pagination Type</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\PagePaginationType</source_model>
+                    <comment></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
             <group id="permalink" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Permalink Settings</label>
                 <field id="route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Blog Route</label>
                     <validate>required-entry</validate>
                     <comment>E.g.: "blog" will make the blog accessible from mystore.com/blog</comment>
+                </field>
+                <field id="version_plus" translate="label comment" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\PermalinkSettingsMessage</frontend_model>
                 </field>
                 <field id="redirect_to_no_slash" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Auto-redirect to No-Slash URL</label>
@@ -625,6 +921,84 @@
                     <source_model>Magefan\Blog\Model\Config\Source\BlogPages</source_model>
                 </field>
             </group>
+
+            <group id="sitemap" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>XML Sitemap</label>
+                <field id="info" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\SitemapInfo</frontend_model>
+                </field>
+                <group id="index" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Index Page</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="frequency" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Frequency</label>
+                        <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                    </field>
+                    <field id="priority" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Priority</label>
+                    </field>
+                </group>
+                <group id="category" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Categories</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="frequency" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Frequency</label>
+                        <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                    </field>
+                    <field id="priority" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Priority</label>
+                    </field>
+                </group>
+                <group id="post" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Posts</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="frequency" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Frequency</label>
+                        <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                    </field>
+                    <field id="priority" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Priority</label>
+                    </field>
+                </group>
+                <group id="author" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Authors</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="frequency" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Frequency</label>
+                        <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                    </field>
+                    <field id="priority" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Priority</label>
+                    </field>
+                </group>
+                <group id="tag" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blog Tags</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="frequency" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Frequency</label>
+                        <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                    </field>
+                    <field id="priority" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Priority</label>
+                    </field>
+                </group>
+            </group>
+
             <group id="social" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Social Share Buttons</label>
                 <field id="add_this_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -659,6 +1033,15 @@
                     </depends>
                 </field>
             </group>
+
+            <group id="blog_search" translate="label" type="text" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Blog Search (Blog Extra)</label>
+                <field id="enable_blog_search" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Include Blog Search Into Catalog Search (BlogExtra)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
             <group id="developer" translate="label" type="text" sortOrder="990" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Developer</label>
                 <group id="css_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
