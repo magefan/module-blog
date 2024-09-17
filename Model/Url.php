@@ -37,7 +37,7 @@ class Url
     protected $_registry;
 
     /**
-     * @var \Magento\Framework\UrlInterface
+     * @var \Magento\Framework\Url
      */
     protected $_url;
 
@@ -65,16 +65,14 @@ class Url
     protected $originalStore;
 
     /**
-     * Initialize dependencies.
-     *
      * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\UrlInterface $url
+     * @param \Magento\Framework\Url $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         \Magento\Framework\Registry $registry,
-        \Magento\Framework\UrlInterface $url,
+        \Magento\Framework\Url $url,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
