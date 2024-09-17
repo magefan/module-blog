@@ -290,6 +290,13 @@
                     <include_bootstrap_custom_mini>1</include_bootstrap_custom_mini>
                 </css_settings>
             </developer>
+            <ai_writer>
+                <enabled_ai_writer>1</enabled_ai_writer>
+                <default_prompt_template>Write an article about {{post_topic}}, use these seo keywords: {{keywords}}</default_prompt_template>
+                <generate_post_image>1</generate_post_image>
+                <default_image_prompt_template>A vibrant and modern illustration representing the {{post_topic}}</default_image_prompt_template>
+                <post_ai_image_size>1024x1024</post_ai_image_size>
+            </ai_writer>
         </mfblog>
         <system>
             <media_storage_configuration>
@@ -300,5 +307,6 @@
                 </allowed_resources>
             </media_storage_configuration>
         </system>
+
     </default>
 </config>

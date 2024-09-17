@@ -489,6 +489,48 @@
                     <comment>This will be included before head closing tag in page HTML.</comment>
                 </field>
             </group>
+            <group id="ai_writer" translate="label" type="text" sortOrder="69" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>AI Writer (Blog Extra)</label>
+                <field id="enabled_ai_writer" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="chat_gpt_api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Chat-GPT API Key (Blog Extra)</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+                <field id="default_prompt_template" translate="label comment"  type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Prompt Template (Blog Extra)</label>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+                <field id="generate_post_image" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Generate Post Image (Blog Extra)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+                <field id="default_image_prompt_template" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Image Prompt Template (Blog Extra)</label>
+                    <depends>
+                        <field id="generate_post_image">1</field>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+                <field id="post_ai_image_size" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Image Size (Blog Extra)</label>
+                    <source_model>Magefan\BlogExtra\Model\Config\Source\ImageSizeOptions</source_model>
+                    <depends>
+                        <field id="generate_post_image">1</field>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+            </group>
             <group id="tag" translate="label" type="text" sortOrder="67" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Tag</label>
                 <field id="robots" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
