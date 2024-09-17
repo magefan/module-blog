@@ -393,7 +393,7 @@
                 </group>
 
                 <group id="reading_progress_bar" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Reading Progress Bar</label>
+                    <label>Reading Progress Bar (Blog Extra)</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -523,7 +523,7 @@
                 </group>
 
                 <group id="contents" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Post Contents Widget</label>
+                    <label>Post Contents Widget (Blog Extra)</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
