@@ -9,7 +9,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-
         <section id="mfblog" translate="label" type="text" sortOrder="9920237670" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Blog</label>
@@ -494,37 +493,42 @@
                 <field id="enabled_ai_writer" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled it will use the gpt-4o-mini model to generate content.</comment>
                 </field>
                 <field id="chat_gpt_api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Chat-GPT API Key (Blog Extra)</label>
+                    <label>Chat-GPT API Key</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <depends>
                         <field id="enabled_ai_writer">1</field>
                     </depends>
+                    <comment><![CDATA[
+                            <a href="https://www.google.com/search?q=how+to+find+Chat-GPT+API+Key" title="Where to find Tag ID?" target="_blank" rel="nofollow noopener">Where to find Chat-GPT API Key</a>? Or ask <a title="ChatGPT" href="https://chatgpt.com/" target="_blank" rel="nofollow noopener">ChatGPT</a> itself.</a></p>
+                        ]]>
+                    </comment>
                 </field>
                 <field id="default_prompt_template" translate="label comment"  type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Default Prompt Template (Blog Extra)</label>
+                    <label>Default Prompt Template</label>
                     <depends>
                         <field id="enabled_ai_writer">1</field>
                     </depends>
                 </field>
                 <field id="generate_post_image" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Generate Post Image (Blog Extra)</label>
+                    <label>Generate Post Image</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="enabled_ai_writer">1</field>
                     </depends>
                 </field>
                 <field id="default_image_prompt_template" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Default Image Prompt Template (Blog Extra)</label>
+                    <label>Default Image Prompt Template</label>
                     <depends>
                         <field id="generate_post_image">1</field>
                         <field id="enabled_ai_writer">1</field>
                     </depends>
                 </field>
                 <field id="post_ai_image_size" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Default Image Size (Blog Extra)</label>
-                    <source_model>Magefan\BlogExtra\Model\Config\Source\ImageSizeOptions</source_model>
+                    <label>Default Image Size</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\ImageSizeOptions</source_model>
                     <depends>
                         <field id="generate_post_image">1</field>
                         <field id="enabled_ai_writer">1</field>

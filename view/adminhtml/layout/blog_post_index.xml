@@ -13,7 +13,8 @@
     <update handle="blog_post_grid_block"/>
     <body>
         <referenceContainer name="content">
-           <block class="Magefan\Blog\Block\Adminhtml\Post" name="blog.post.container"/>
+            <block class="Magefan\Blog\Block\Adminhtml\Post" name="blog.post.container"/>
+            <block class="Magefan\Blog\Block\Adminhtml\AiButton" name="blog.post.ai.button" />
         </referenceContainer>
     </body>
 </page>
