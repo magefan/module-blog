@@ -520,6 +520,19 @@
                     <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
+
+                    <field id="display_filters" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Filters (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="available_filters" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Available Filters (Blog Extra)</label>
+                        <source_model>Magefan\BlogExtra\Model\Config\Source\AvailableFilters</source_model>
+                        <depends>
+                            <field id="display_filters">1</field>
+                        </depends>
+                    </field>
+
                 </group>
 
                 <group id="contents" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -1039,6 +1052,21 @@
                 <field id="enable_blog_search" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Include Blog Search Into Catalog Search (BlogExtra)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_filters" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Filters (Blog Extra)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_blog_search">1</field>
+                    </depends>
+                </field>
+                <field id="available_filters" translate="label" type="multiselect" sortOrder="145" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Available Filters (Blog Extra)</label>
+                    <source_model>Magefan\BlogExtra\Model\Config\Source\AvailableFilters</source_model>
+                    <depends>
+                        <field id="enable_blog_search">1</field>
+                        <field id="display_filters">1</field>
+                    </depends>
                 </field>
             </group>
 

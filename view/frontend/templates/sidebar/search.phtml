@@ -15,6 +15,43 @@
  */
 ?>
 
+<!--<div class="widget block blog-search" data-bind="scope: 'blog-search'">
+    <div class="block-content">
+        <form class="form" id="blog_search_mini_form"
+              action="<?php /*= $block->escapeUrl($block->getFormUrl()) */?>"
+              method="get">
+            <div class="field search">
+                <label class="label" for="blog_search">
+                    <span><?php /*= $block->escapeHtml(__('Search')) */?></span>
+                </label>
+                <div class="control">
+                    <input id="blog_search"
+                           type="text"
+                           name="q"
+                           value="<?php /*= $block->escapeHtml($block->getQuery()) */?>"
+                           placeholder="<?php /*= $block->escapeHtml(__('Search posts here...')) */?>"
+                           class="input-text"
+                           maxlength="128" role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                        title="<?php /*= $block->escapeHtml(__('Search')) */?>"
+                        class="action search">
+                    <span><?php /*= $block->escapeHtml(__('Search')) */?></span>
+                </button>
+            </div>
+            <div>
+
+                <?php /*= $block->getChildHtml('blog_sidebar_search_filters') */?>
+            </div>
+        </form>
+    </div>
+</div>-->
+
 <div class="widget block blog-search" data-bind="scope: 'blog-search'">
     <div class="block-content">
         <form class="form" id="blog_search_mini_form"
@@ -35,6 +72,7 @@
                            aria-haspopup="false"
                            aria-autocomplete="both"
                            autocomplete="off">
+                    <?= $block->getChildHtml('blog_sidebar_search_filters') ?>
                 </div>
             </div>
             <div class="actions">
@@ -44,22 +82,29 @@
                     <span><?= $block->escapeHtml(__('Search')) ?></span>
                 </button>
             </div>
+
         </form>
     </div>
 </div>
+<style>
+    .control {
+        display: flex; flex-direction: row-reverse;
+    }
+</style>
 <?php $script = "
-    document.addEventListener('DOMContentLoaded', function() {
+    /*document.addEventListener('DOMContentLoaded', function() {
         var form = document.getElementById('blog_search_mini_form');
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             var value = document.getElementById('blog_search').value;
             if (value) {
                 var a = form.action;
+                console.log(a);
                 window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
             }
             return false;
         });
-    }); 
+    });*/
 "; ?>
 <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 

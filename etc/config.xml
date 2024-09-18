@@ -127,12 +127,16 @@
 
             <blog_search>
                 <enable_blog_search>0</enable_blog_search>
+                <display_filters>0</display_filters>
+                <available_filters>category,author,tag,publication_date</available_filters>
             </blog_search>
 
             <sidebar>
                 <search>
                     <enabled>1</enabled>
                     <sort_order>10</sort_order>
+                    <display_filters>0</display_filters>
+                    <available_filters>category,author,tag,publication_date</available_filters>
                 </search>
                 <categories>
                     <enabled>1</enabled>

@@ -15,6 +15,22 @@ use Magento\Store\Model\ScopeInterface;
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList
 {
+
+    public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
+        \Magefan\Blog\Model\Url $url,
+        \Magento\Framework\Event\Manager $eventManager,
+        array $data = [],
+        $config = null,
+        $templatePool = null)
+    {
+        $this->eventManager = $eventManager;
+        parent::__construct($context, $coreRegistry, $filterProvider, $postCollectionFactory, $url,$data, $config, $templatePool);
+    }
+
     /**
      * Retrieve query
      * @return string
@@ -39,6 +55,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             self::POSTS_SORT_FIELD_BY_PUBLISH_TIME,
             \Magento\Framework\Api\SortOrder::SORT_DESC
         );
+        $this->eventManager->dispatch('blog_search_prepare_post_collection_after',['post_collection' => $this->_postCollection]);
     }
 
     /**
@@ -80,7 +97,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $this->escapeHtml($title)
             );
         }
-
         return parent::_prepareLayout();
     }
 
