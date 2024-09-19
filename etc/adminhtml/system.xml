@@ -529,6 +529,7 @@
                         <label>Available Filters (Blog Extra)</label>
                         <source_model>Magefan\BlogExtra\Model\Config\Source\AvailableFilters</source_model>
                         <depends>
+                            <field id="enabled">1</field>
                             <field id="display_filters">1</field>
                         </depends>
                     </field>

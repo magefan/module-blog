@@ -19,7 +19,6 @@ class Index extends \Magefan\Blog\App\Action\Action
      */
     public function execute()
     {
-        var_dump($this->getRequest()->getParams());
         if (!$this->moduleEnabled()) {
             return $this->_forwardNoroute();
         }
