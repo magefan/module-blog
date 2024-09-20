@@ -24,7 +24,7 @@
                 <label class="label" for="blog_search">
                     <span><?= $block->escapeHtml(__('Search')) ?></span>
                 </label>
-                <div class="control">
+                <div class="control mfsearch">
                     <input id="blog_search"
                            type="text"
                            name="q"
@@ -51,19 +51,20 @@
 </div>
 
 <?php $script = "
-    /*document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         var form = document.getElementById('blog_search_mini_form');
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            var value = document.getElementById('blog_search').value;
+            var bs = document.getElementById('blog_search');
+            var value = bs.value;
             if (value) {
+                bs.remove();
                 var a = form.action;
-                console.log(a);
-                window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
+                form.action = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
             }
-            return false;
+            form.submit()
         });
-    });*/
+    });
 "; ?>
 <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 
