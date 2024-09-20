@@ -147,14 +147,6 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->dataPersistor->clear('blog_post_form_data');
         }
 
-        $dataAi = $this->dataPersistor->get('blog_ai_writer_form_data');
-        if (!empty($dataAi)) {
-            $post = $this->collection->getNewEmptyItem();
-            $post->setData($dataAi);
-            $this->loadedData[$post->getId()] = $post->getData();
-            $this->dataPersistor->clear('blog_post_form_data');
-        }
-
         return $this->loadedData;
     }
 }
