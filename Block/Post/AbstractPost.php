@@ -259,9 +259,12 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     /**
      * @return array
      */
-    public function getAllowedSocialNetworks()
+    public function getAllowedSocialNetworks(): array
     {
-        $socialNetworks = $this->_scopeConfig->getValue('mfblog/social/use_social_networks', ScopeInterface::SCOPE_STORE);
-        return explode(',',$socialNetworks);
+        $socialNetworks = (string)$this->_scopeConfig->getValue('mfblog/social/use_social_networks', ScopeInterface::SCOPE_STORE);
+        if ($socialNetworks) {
+            return explode(',', $socialNetworks);
+        }
+        return [];
     }
 }
