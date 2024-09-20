@@ -16,11 +16,9 @@
         <attribute name="class" value="blog-page" />
         <referenceContainer name="sidebar.additional">
             <block class="Magefan\Blog\Block\Sidebar" name="blog.sidebar" template="sidebar.phtml">
-
                 <block class="Magefan\Blog\Block\Sidebar\Search" name="blog.sidebar.search" template="sidebar/search.phtml" >
-                    <container name="blog.sidebar.search.filters" as="blog_sidebar_search_filters"/>
+                    <container name="blog.sidebar.form.additional" as="form_additional"/>
                 </block>
-
                 <block class="Magefan\Blog\Block\Sidebar\Categories" name="blog.sidebar.category" template="sidebar/categories.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
