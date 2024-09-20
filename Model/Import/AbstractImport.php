@@ -268,7 +268,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             $this->dbAdapter = new \Laminas\Db\Adapter\Adapter($connectionConf);
 
             try {
-                $this->dbAdapter->query('SELECT 1')->execute();    
+                $this->dbAdapter->query('SELECT 1')->execute();
             } catch (\Exception $e) {
                 throw  new \Exception("Failed connect to the database.");
             }

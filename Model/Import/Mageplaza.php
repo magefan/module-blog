@@ -41,7 +41,7 @@ class Mageplaza extends AbstractImport
                     t.meta_title as meta_title,
                     t.meta_keywords as meta_keywords,
                     t.meta_description as meta_description,
-                    */ 
+                    */
                     't.description as content,
                     t.parent_id as parent_id,
                     t.enabled as is_active,
@@ -120,8 +120,8 @@ class Mageplaza extends AbstractImport
                     t.description as content, ' .
                     /*
                     t.meta_title as meta_title,
-                    t.meta_description as meta_description,  
-                    t.meta_keywords as meta_keywords,    
+                    t.meta_description as meta_description,
+                    t.meta_keywords as meta_keywords,
                     */
                     't.enabled as is_active
                 FROM ' . $_pref . 'mageplaza_blog_tag t';

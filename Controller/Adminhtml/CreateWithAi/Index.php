@@ -41,12 +41,11 @@ class Index extends \Magento\Backend\App\Action
      * @param Config $config
      * @param Context $context
      */
-     public function __construct(
-         PageFactory $resultPageFactory,
-         Config $config,
-         Context $context
-     )
-    {
+    public function __construct(
+        PageFactory $resultPageFactory,
+        Config $config,
+        Context $context
+    ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->config = $config;
         parent::__construct($context);

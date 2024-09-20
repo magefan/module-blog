@@ -35,7 +35,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
         }
 
         /* Prepare empty categories and coauthors */
-        foreach(['categories', 'coauthors'] as $key) {
+        foreach (['categories', 'coauthors'] as $key) {
             if (!$request->getPost($key)) {
                 $model->setData($key, []);
             }

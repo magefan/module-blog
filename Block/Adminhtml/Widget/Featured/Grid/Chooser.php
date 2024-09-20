@@ -183,8 +183,8 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             $buttons['open']
         )->setOnclick(
             $this->onClickJs($chooserId)
-        /* )->setDisabled(
-        $element->getReadonly()*/
+            /* )->setDisabled(
+            $element->getReadonly()*/
         );
         $chooser->setData('after_element_html', $hiddenHtml . $chooseButton->toHtml());
 

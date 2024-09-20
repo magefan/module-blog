@@ -24,8 +24,7 @@ class AiButton extends \Magento\Backend\Block\Widget\Grid\Container
         Config $config,
         Context $context,
         array $data = []
-    )
-    {
+    ) {
         $this->config = $config;
         parent::__construct($context, $data);
     }
@@ -49,5 +48,4 @@ class AiButton extends \Magento\Backend\Block\Widget\Grid\Container
         }
         return $this;
     }
-
 }

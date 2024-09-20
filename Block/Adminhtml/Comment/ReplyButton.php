@@ -36,6 +36,6 @@ class ReplyButton extends GenericButton implements ButtonProviderInterface
      */
     public function getBackUrl()
     {
-        return $this->getUrl('*/*/addreply/',['id' => $this->getObjectId()]);
+        return $this->getUrl('*/*/addreply/', ['id' => $this->getObjectId()]);
     }
 }

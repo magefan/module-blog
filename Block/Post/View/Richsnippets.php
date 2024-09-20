@@ -163,7 +163,7 @@ class Richsnippets extends Opengraph
     protected function _toHtml()
     {
         $options = $this->getOptions();
-        if (!$options){
+        if (!$options) {
             return '';
         }
         return '<script type="application/ld+json">'

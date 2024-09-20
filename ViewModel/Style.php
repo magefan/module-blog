@@ -11,6 +11,7 @@ namespace Magefan\Blog\ViewModel;
 use Magento\Framework\View\Asset\Source;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Magefan\Blog\Model\Config;
+
 /**
  * Class AbstractCss
  */

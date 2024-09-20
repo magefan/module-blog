@@ -18,8 +18,8 @@ class Image extends AbstractRenderer
     public function __construct(
         Url $url,
         Context $context,
-        array $data = [])
-    {
+        array $data = []
+    ) {
         $this->_url = $url;
         parent::__construct($context, $data);
     }

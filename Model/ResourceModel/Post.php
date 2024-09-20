@@ -231,12 +231,11 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         \Magento\Framework\Model\AbstractModel $object,
         array $newRelatedIds,
         array $oldRelatedIds,
-       $tableName,
-       $field,
-       $rowData = []
-    )
-    {
-        return $this->_updateLinks($object, $newRelatedIds,  $oldRelatedIds, $tableName, $field, $rowData);
+        $tableName,
+        $field,
+        $rowData = []
+    ) {
+        return $this->_updateLinks($object, $newRelatedIds, $oldRelatedIds, $tableName, $field, $rowData);
     }
 
     /**

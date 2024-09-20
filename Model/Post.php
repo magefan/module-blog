@@ -670,7 +670,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         if ($category->getId() && $category->isVisibleOnStore($this->getStoreId())) {
                             $this->_parentCategories[$categoryId] = $category;
                         }
-                    } catch (NoSuchEntityException $e) { }
+                    } catch (NoSuchEntityException $e) {
+
+                    }
                 }
                 uasort($this->_parentCategories, [$this, 'sortByPositionDesc']);
             }
@@ -685,7 +687,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param $b
      * @return int
      */
-    public function sortByPositionDesc($a, $b) {
+    public function sortByPositionDesc($a, $b)
+    {
         return strcmp($b->getPosition(), $a->getPosition());
     }
 
@@ -857,7 +860,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
                         $author = $_author;
                     }
-                } catch (NoSuchEntityException $e) { }
+                } catch (NoSuchEntityException $e) {
+
+                }
             }
             $this->setData('author', $author);
         }
@@ -1147,13 +1152,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->getData('reading_time')) {
             $wpm = 250;
             $contentHtml = $this->getFilteredContent();
-            $numberOfImages = substr_count( strtolower( $contentHtml ), '<img ' );
+            $numberOfImages = substr_count(strtolower($contentHtml), '<img ');
             $additionalWordsForImages = (int)($numberOfImages * 12) / $wpm;
-            $wordCount = count(preg_split( '/\s+/', strip_tags($contentHtml)));
+            $wordCount = count(preg_split('/\s+/', strip_tags($contentHtml)));
 
             $readingTime = 1;
 
-            if (!$wordCount && !$additionalWordsForImages){
+            if (!$wordCount && !$additionalWordsForImages) {
                 return $readingTime;
             }
             $readingTime = ceil(($wordCount + $additionalWordsForImages) / $wpm);

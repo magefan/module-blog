@@ -77,7 +77,7 @@ class Post implements ItemProviderInterface
                 $images[] = new \Magento\Framework\DataObject(['url' => $item->getFeaturedImage()]);
             }
             if ($item->getGalleryImages()) {
-                $images = array_merge( $images, $item->getGalleryImages());
+                $images = array_merge($images, $item->getGalleryImages());
             }
 
             if ($images) {

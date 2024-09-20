@@ -54,8 +54,8 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
         Session                $session,
         Context                $context,
         Manager                $manager,
-        DataPersistorInterface $dataPersistor)
-    {
+        DataPersistorInterface $dataPersistor
+    ) {
         $this->comment = $comment;
         $this->session = $session;
         $this->manager = $manager;
@@ -106,5 +106,4 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
 
         return $resultRedirect;
     }
-
 }
