@@ -527,7 +527,7 @@
                     </field>
                     <field id="available_filters" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Available Filters (Blog Extra)</label>
-                        <source_model>Magefan\BlogExtra\Model\Config\Source\AvailableFilters</source_model>
+                        <source_model>Magefan\Blog\Model\Config\Source\AvailableFilters</source_model>
                         <depends>
                             <field id="enabled">1</field>
                             <field id="display_filters">1</field>
@@ -1063,7 +1063,7 @@
                 </field>
                 <field id="available_filters" translate="label" type="multiselect" sortOrder="145" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Available Filters (Blog Extra)</label>
-                    <source_model>Magefan\BlogExtra\Model\Config\Source\AvailableFilters</source_model>
+                    <source_model>Magefan\Blog\Model\Config\Source\AvailableFilters</source_model>
                     <depends>
                         <field id="enable_blog_search">1</field>
                         <field id="display_filters">1</field>
