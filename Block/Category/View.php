@@ -75,6 +75,11 @@ class View extends \Magefan\Blog\Block\Post\PostList
                 }
             }
 
+            $robots = $category->getData('meta_robots');
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
+            }
+
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
             if ($pageMainTitle) {
                 $pageMainTitle->setPageTitle(
@@ -120,7 +125,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
             ]);
         }
     }
-    
+
     /**
      * Retrieve identities
      *
