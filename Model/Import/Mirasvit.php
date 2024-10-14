@@ -24,9 +24,12 @@ class Mirasvit extends AbstractImport
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
 
-        $sql = 'SELECT * FROM ' . $_pref . 'mst_blog_post_entity LIMIT 1';
+        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $select = $sql->select();
+        $select->from($_pref . 'mst_blog_post_entity')->limit(1);
+
         try {
-            $adapter->query($sql)->execute();
+            $sql->prepareStatementForSqlObject($select)->execute();
         } catch (\Exception $e) {
             throw new \Exception(__('Mirasvit Blog Extension not detected.'), 1);
         }
@@ -35,12 +38,19 @@ class Mirasvit extends AbstractImport
         $oldCategories = [];
 
         /* Import categories */
-        $sql = 'SELECT
-                    t.entity_id as old_id,
-                    t.position as position,
-                    t.parent_id as parent_id
-                FROM ' . $_pref . 'mst_blog_category_entity t';
-        $result = $adapter->query($sql)->execute();
+
+        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $select = $sql->select();
+        $select->from(['t' => $_pref . 'mst_blog_category_entity'])
+            ->columns([
+                'old_id' => 'entity_id',
+                'position' => 'position',
+                'parent_id' => 'parent_id'
+            ]);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -117,14 +127,18 @@ class Mirasvit extends AbstractImport
         $oldTags = [];
         $existingTags = [];
 
-        $sql = 'SELECT
-                    t.tag_id as old_id,
-                    t.name as title,
-                    t.url_key as identifier,    
-                    1 as is_active
-                FROM ' . $_pref . 'mst_blog_tag t';
+        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $select = $sql->select();
+        $select->from(['t' => $_pref . 'mst_blog_tag'])
+            ->columns([
+                'old_id' => 'tag_id',
+                'title' => 'name',
+                'identifier' => 'url_key',
+                'is_active' => new \Laminas\Db\Sql\Predicate\Literal('1')
+            ]);
 
-        $result = $adapter->query($sql)->execute();
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -159,15 +173,22 @@ class Mirasvit extends AbstractImport
         }
 
         /* Import posts */
-        $sql = 'SELECT
-                    t.entity_id as old_id,
-                    t.author_id as author_id,
-                    t.created_at as creation_time,
-                    t.created_at as publish_time,
-                    t.updated_at as update_time  
-                FROM ' . $_pref . 'mst_blog_post_entity t WHERE type="post"';
 
-        $result = $adapter->query($sql)->execute();
+        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $select = $sql->select();
+        $select->from(['t' => $_pref . 'mst_blog_post_entity'])
+            ->columns([
+                'old_id' => 'entity_id',
+                'author_id' => 'author_id',
+                'creation_time' => 'created_at',
+                'publish_time' => 'created_at',
+                'update_time' => 'updated_at',
+            ])
+            ->where(['type' => 'post']);
+
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+
+
         foreach ($result as $data) {
 
             $map = [
@@ -202,13 +223,15 @@ class Mirasvit extends AbstractImport
 
             /* Find post categories*/
             $postCategories = [];
-            $c_sql = 'SELECT 
-                          category_id 
-                      FROM 
-                          ' . $_pref . 'mst_blog_category_post 
-                      WHERE 
-                          post_id = "'.$data['old_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+
+            $c_sql = new \Laminas\Db\Sql\Sql($adapter);
+            $select = $c_sql->select();
+            $select->from(['c' => $_pref . 'mst_blog_category_post'])
+                ->columns(['category_id'])
+                ->where(['post_id' => $data['old_id']]);
+
+            $c_result = $c_sql->prepareStatementForSqlObject($select)->execute();
+
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -220,9 +243,13 @@ class Mirasvit extends AbstractImport
 
             /* Find post tags*/
             $postTags = [];
-            $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mst_blog_tag_post WHERE post_id = "'.$data['old_id'].'"';
+            $t_sql = new \Laminas\Db\Sql\Sql($adapter);
+            $select = $t_sql->select();
+            $select->from(['tp' => $_pref . 'mst_blog_tag_post'])
+                ->columns(['tag_id'])
+                ->where(['post_id' => $data['old_id']]);
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_result = $t_sql->prepareStatementForSqlObject($select)->execute();
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -236,9 +263,14 @@ class Mirasvit extends AbstractImport
             /* Find post products*/
             $data['links'] = [];
             $postProducts = [];
-            $t_sql = 'SELECT product_id FROM ' . $_pref . 'mst_blog_post_product WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_sql = new \Laminas\Db\Sql\Sql($adapter);
+            $select = $t_sql->select();
+            $select->from($_pref . 'mst_blog_post_product')
+                ->columns(['product_id'])
+                ->where(['post_id' => $data['old_id']]);
+
+            $t_result = $t_sql->prepareStatementForSqlObject($select)->execute();
 
             foreach ($t_result as $t_data) {
                 $id = $t_data['product_id'];
@@ -251,8 +283,14 @@ class Mirasvit extends AbstractImport
 
             /* Find store ids */
             $storeIds = [];
-            $sql2 = 'SELECT store_id FROM  ' . $_pref . 'mst_blog_store_post WHERE post_id=' . $data['old_id'];
-            $result2 = $adapter->query($sql2)->execute();
+
+            $sql2 = new \Laminas\Db\Sql\Sql($adapter);
+            $select = $sql2->select();
+            $select->from($_pref . 'mst_blog_store_post')
+                ->columns(['store_id'])
+                ->where(['post_id' => $data['old_id']]);
+
+            $result2 = $sql2->prepareStatementForSqlObject($select)->execute();
             foreach ($result2 as $data2) {
                 $storeIds[] = $data2['store_id'];
             }
@@ -279,11 +317,14 @@ class Mirasvit extends AbstractImport
         $_pref = $this->getPrefix();
 
         if (!isset($this->entityTypeId[$entitytTypeCode])) {
-            $sql = 'SELECT
-                    entity_type_id
-                FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code="' . $entitytTypeCode . '"';
+            $sql = new \Laminas\Db\Sql\Sql($adapter);
+            $select = $sql->select();
+            $select->from($_pref . 'eav_entity_type')
+                ->columns(['entity_type_id'])
+                ->where(['entity_type_code' => $entitytTypeCode]);
 
-            $result = $adapter->query($sql)->execute();
+            $result = $sql->prepareStatementForSqlObject($select)->execute();
+
             if (count($result)) {
                 foreach ($result as $data) {
                     $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
@@ -302,10 +343,14 @@ class Mirasvit extends AbstractImport
 
         if (!isset($this->entityTypeAttributes[$entitytTypeCode])) {
             $this->entityTypeAttributes[$entitytTypeCode] = [];
-            $sql = 'SELECT
-                    *
-                FROM ' . $_pref . 'eav_attribute WHERE entity_type_id=' . $entityTypeId;
-            $result = $adapter->query($sql)->execute();
+
+            $sql = new \Laminas\Db\Sql\Sql($adapter);
+            $select = $sql->select();
+            $select->from($_pref . 'eav_attribute')
+                ->where(['entity_type_id' => $entityTypeId]);
+
+            $result = $sql->prepareStatementForSqlObject($select)->execute();
+
             foreach ($result as $data) {
                 $this->entityTypeAttributes[$entitytTypeCode][$data['attribute_code']] = $data;
             }
@@ -317,12 +362,20 @@ class Mirasvit extends AbstractImport
 
         $attribute = $this->entityTypeAttributes[$entitytTypeCode][$attributeCode];
 
-        $sql = 'SELECT
-                    value
-                FROM ' . $_pref . 'mst_'.$entitytTypeCode.'_entity_' . $attribute['backend_type'] . ' WHERE store_id = 0
-                   AND attribute_id = ' . $attribute['attribute_id'] . '
-                   AND entity_id=' . $entitytId;
-        $result = $adapter->query($sql)->execute();
+        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $select = $sql->select();
+
+        $select->from($_pref . 'mst_' . $entitytTypeCode . '_entity_' . $attribute['backend_type'])
+            ->columns(['value'])
+            ->where([
+                'store_id' => 0,
+                'attribute_id' => $attribute['attribute_id'],
+                'entity_id' => $entitytId,
+            ]);
+
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+
+
         if (count($result)) {
             foreach ($result as $data) {
                 return $data['value'];
