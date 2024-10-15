@@ -241,49 +241,21 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      */
     public function getPrefix()
     {
-        $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
+
+        $_pref = '';
+
         if ($this->getData('prefix')) {
-            $_pref = $adapter->getPlatform()->quoteValue(
-                $this->getData('prefix')
-            );
+            $_pref = $connection->quote($this->getData('prefix'));
             $_pref = trim($_pref, "'");
-        } else {
-            $_pref = '';
         }
 
         return $_pref;
     }
 
     /**
-     * @return \Laminas\Db\Adapter\Adapter
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
-    protected function getDbAdapter()
-    {
-        if (null === $this->dbAdapter) {
-            $connectionConf = [
-                'driver' => 'Pdo_Mysql',
-                'database' => $this->getData('dbname'),
-                'username' => $this->getData('uname'),
-                'password' => $this->getData('pwd'),
-                'charset' => 'utf8',
-            ];
-
-            if ($this->getData('dbhost')) {
-                $connectionConf['host'] = $this->getData('dbhost');
-            }
-
-            $this->dbAdapter = new \Laminas\Db\Adapter\Adapter($connectionConf);
-
-            try {
-                $this->dbAdapter->query('SELECT 1')->execute();
-            } catch (\Exception $e) {
-                throw  new \Exception("Failed connect to the database.");
-            }
-            
-        }
-        return $this->dbAdapter;
-    }
-
     protected function getDbConnection()
     {
         $connectionConf = [
