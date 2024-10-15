@@ -122,7 +122,7 @@ class Mageplaza extends AbstractImport
             ]);
 
         $result = $connection->fetchAll($select);
-//var_dump($result);
+
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -141,7 +141,6 @@ class Mageplaza extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
-//                    var_dump($data);exit();
                     $tag->setData($data)->save();
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
