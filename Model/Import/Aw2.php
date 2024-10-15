@@ -21,14 +21,14 @@ class Aw2 extends AbstractImport
     public function execute()
     {
         $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from($_pref . 'aw_blog_category')->limit(1);
+        $select = $connection->select()
+            ->from($_pref . 'aw_blog_category')->limit(1);
 
         try {
-            $sql->prepareStatementForSqlObject($select)->execute();
+            $connection->fetchAll($select);
         } catch (\Exception $e) {
             throw new \Exception(__('AheadWorks Blog Extension not detected.'), 1);
         }
@@ -39,18 +39,17 @@ class Aw2 extends AbstractImport
 
         /* Import categories */
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from(['t' => $_pref . 'aw_blog_category'])
-            ->columns([
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'aw_blog_category'],[
                 'old_id' => 'id',
                 'title' => 'name',
                 'identifier' => 'url_key',
                 'position' => 'sort_order',
                 'meta_description' => 'meta_description'
-            ]);
+            ])
+            ->columns();
 
-        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $result = $connection->fetchAll($select);
 
         foreach ($result as $data) {
             /* Prepare category data */
@@ -58,14 +57,11 @@ class Aw2 extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
 
-            $s_sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $s_sql->select();
-            $select->from($_pref . 'aw_blog_category_store')
-                ->columns([
-                    'store_id'
-                ])->where(['category_id' => ((int)$data['old_id'])]);
+            $s_select = $connection->select()
+                ->from($_pref . 'aw_blog_category_store', ['store_id'])
+                ->where('category_id = ?', (int)$data['old_id']);
 
-            $s_result = $s_sql->prepareStatementForSqlObject($select)->execute();
+            $s_result = $connection->fetchAll($s_select);
 
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
@@ -107,15 +103,13 @@ class Aw2 extends AbstractImport
         $oldTags = [];
         $existingTags = [];
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from(['t' => $_pref . 'aw_blog_tag'])
-            ->columns([
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'aw_blog_tag'], [
                 'old_id' => 'id',
                 'title' => 'name'
             ]);
 
-        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $result = $connection->fetchAll($select);
 
         foreach ($result as $data) {
             /* Prepare tag data */
@@ -152,24 +146,20 @@ class Aw2 extends AbstractImport
 
         /* Import posts */
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from($_pref . 'aw_blog_post')
-            ->columns(['*']);
+        $select = $connection->select();
+        $select->from($_pref . 'aw_blog_post', ['*']);
 
-        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $result = $connection->fetchAll($select);
 
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
 
-            $c_sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $c_sql->select();
-            $select->from($_pref . 'aw_blog_post_category')
-                ->columns(['category_id'])
-                ->where(['post_id = ?' => (int)$data['id']]);
+            $c_select = $connection->select()
+                ->from($_pref . 'aw_blog_post_category', ['category_id'])
+                ->where('post_id = ?', (int)$data['id']);
 
-            $c_result = $c_sql->prepareStatementForSqlObject($select)->execute();
+            $c_result = $connection->fetchAll($c_select);
 
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
@@ -182,13 +172,11 @@ class Aw2 extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
 
-            $s_sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $s_sql->select();
-            $select->from($_pref . 'aw_blog_post_store')
-                ->columns(['store_id'])
-                ->where(['post_id = ?' => (int)$data['id']]);
+            $s_select = $connection->select()
+                ->from($_pref . 'aw_blog_post_store', ['store_id'])
+                ->where('post_id = ?', (int)$data['id']);
 
-            $s_result = $s_sql->prepareStatementForSqlObject($select)->execute();
+            $s_result = $connection->fetchAll($s_select);
 
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];

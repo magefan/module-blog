@@ -19,14 +19,13 @@ class Mageplaza extends AbstractImport
     public function execute()
     {
         $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from($_pref . 'mageplaza_blog_category')
+        $select = $connection->select()->from($_pref . 'mageplaza_blog_category')
             ->limit(1);
         try {
-            $sql->prepareStatementForSqlObject($select)->execute();
+            $connection->fetchAll($select);
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
@@ -35,12 +34,9 @@ class Mageplaza extends AbstractImport
         $oldCategories = [];
 
         /* Import categories */
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
 
-        $select = $sql->select();
-
-        $select->from(['t' => $_pref . 'mageplaza_blog_category'])
-            ->columns([
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mageplaza_blog_category'], [
                 'old_id' => 'category_id',
                 'title' => 'name',
                 'identifier' => 'url_key',
@@ -50,7 +46,7 @@ class Mageplaza extends AbstractImport
                 'is_active' => 'enabled',
                 'store_ids' => 'store_ids',
             ]);
-        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $result = $connection->fetchAll($select);;
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -116,18 +112,17 @@ class Mageplaza extends AbstractImport
         $oldTags = [];
         $existingTags = [];
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from(['t' => $_pref . 'mageplaza_blog_tag'])
-            ->columns([
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mageplaza_blog_tag'], [
                 'old_id' => 'tag_id',
                 'title' => 'name',
                 'identifier' => 'url_key',
                 'content' => 'description',
-                'is_active' => 'enabled',
+                'is_active' => 'enabled'
             ]);
-        $result = $sql->prepareStatementForSqlObject($select)->execute();
 
+        $result = $connection->fetchAll($select);
+//var_dump($result);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -146,6 +141,7 @@ class Mageplaza extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
+//                    var_dump($data);exit();
                     $tag->setData($data)->save();
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
@@ -163,21 +159,17 @@ class Mageplaza extends AbstractImport
 
         /* Import posts */
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from($_pref . 'mageplaza_blog_post');
-        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $select = $connection->select()->from($_pref . 'mageplaza_blog_post');
+        $result = $connection->fetchAll($select);
 
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
 
-            $c_sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $c_sql->select();
-            $select->from($_pref . 'mageplaza_blog_post_category')
-            ->columns(['category_id'])
-            ->where(['post_id = ?' => $data['post_id']]);
-            $c_result = $c_sql->prepareStatementForSqlObject($select)->execute();
+            $select = $connection->select()
+                ->from($_pref . 'mageplaza_blog_post_category',['category_id'])
+                ->where('post_id = ?', $data['post_id']);
+            $c_result = $connection->fetchAll($select);
 
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
@@ -189,12 +181,9 @@ class Mageplaza extends AbstractImport
 
             /* Find post tags*/
             $postTags = [];
-            $t_sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $t_sql->select();
-            $select->from($_pref . 'mageplaza_blog_post_tag')
-                ->columns(['tag_id'])
-                ->where(['post_id = ?' => $data['post_id']]);
-            $t_result = $t_sql->prepareStatementForSqlObject($select)->execute();
+            $t_select = $connection->select()->from($_pref . 'mageplaza_blog_post_tag',['tag_id'])
+                ->where('post_id = ?', $data['post_id']);
+            $t_result = $connection->fetchAll($t_select);
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -236,11 +225,9 @@ class Mageplaza extends AbstractImport
 
                 /* find post comment s*/
 
-                $sql = new \Laminas\Db\Sql\Sql($adapter);
-                $select = $sql->select();
-                $select->from($_pref . 'mageplaza_blog_comment')
-                    ->where(['post_id = ?' => $post->getOldId()]);
-                $resultComments = $sql->prepareStatementForSqlObject($select)->execute();
+                $select = $connection->select()->from($_pref . 'mageplaza_blog_comment')
+                    ->where('post_id = ?' , $post->getOldId());
+                $resultComments = $connection->fetchAll($select);
 
                 foreach ($resultComments as $comments) {
                     $commentData = [

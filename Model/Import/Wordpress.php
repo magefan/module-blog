@@ -18,6 +18,7 @@ class Wordpress extends AbstractImport
     public function execute()
     {
         $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
         $categories = [];
@@ -25,24 +26,20 @@ class Wordpress extends AbstractImport
 
         /* Import categories */
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from(['t' => $_pref.'terms'])
-            ->columns([
+        $select = $connection->select()
+            ->from(['t' => $_pref.'terms'], [
                 'old_id' => 'term_id',
                 'title' => 'name',
                 'identifier' => 'slug'
             ])
-            ->join(
+            ->joinLeft(
                 ['tt' => $_pref.'term_taxonomy'],
                 't.term_id = tt.term_id',
-                ['parent_id' => 'parent'],
-                $select::JOIN_LEFT
+                ['parent_id' => 'parent']
             )
-            ->where(['tt.taxonomy' => 'category'])
-            ->where->notEqualTo('t.slug', 'uncategorized');
-//        $result = $adapter->query($sql)->execute();
-        $result = $adapter->query($sql->buildSqlString($select))->execute();
+            ->where('tt.taxonomy = ?', 'category')
+            ->where('t.slug != ?', 'uncategorized');
+        $result = $connection->fetchAll($select);
         foreach ($result as $data) {
             /* Prepare category data */
             /*
@@ -113,24 +110,22 @@ class Wordpress extends AbstractImport
         $tags = [];
         $oldTags = [];
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from(['t' => $_pref.'terms'])
-            ->columns([
+
+        $select = $connection->select()
+            ->from(['t' => $_pref.'terms'], [
                 'old_id' => 'term_id',
                 'title' => 'name',
                 'identifier' => 'slug'
             ])
-            ->join(
+            ->joinLeft(
                 ['tt' => $_pref.'term_taxonomy'],
                 't.term_id = tt.term_id',
-                ['parent_id' => 'parent'],
-                $select::JOIN_LEFT
+                ['parent_id' => 'parent']
             )
-            ->where(['tt.taxonomy' => 'post_tag'])
-            ->where->notEqualTo('t.slug', 'uncategorized');
+            ->where('tt.taxonomy = ?', 'post_tag')
+            ->where('t.slug != ?', 'uncategorized');
 
-        $result = $adapter->query($sql->buildSqlString($select))->execute();
+        $result = $connection->fetchAll($select);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -165,31 +160,26 @@ class Wordpress extends AbstractImport
 
         /* Import posts */
 
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
-        $select = $sql->select();
-        $select->from($_pref.'posts')
-            ->where(['post_type' => 'post']);
+        $select = $connection->select()
+            ->from($_pref.'posts')
+            ->where('post_type = ?', 'post');
 
-        $result = $adapter->query($sql->buildSqlString($select))->execute();
+        $result = $connection->fetchAll($select);
         foreach ($result as $data) {
             /* find post categories*/
             $postCategories = [];
 
-            $sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $sql->select();
-            $select->from(['tr' => $_pref . 'term_relationships'])
-                ->columns(['term_id' => 'tt.term_id'])
+            $select2 = $connection->select()
+                ->from(['tr' => $_pref . 'term_relationships'], ['term_id' => 'tt.term_id'])
                 ->join(
                     ['tt' => $_pref . 'term_taxonomy'],
                     'tr.term_taxonomy_id = tt.term_taxonomy_id',
                     []
                 )
-                ->where([
-                    'tr.object_id' => $data['ID'],
-                    'tt.taxonomy' => 'category'
-                ]);
+              ->where('tr.object_id = ?', $data['ID'])
+              ->where('tt.taxonomy = ?', 'category');
 
-            $result2 = $adapter->query($sql->buildSqlString($select))->execute();
+            $result2 = $connection->fetchAll($select2);
             foreach ($result2 as $data2) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldCategories[$oldTermId])) {
@@ -200,21 +190,17 @@ class Wordpress extends AbstractImport
             /* find post tags*/
             $postTags = [];
 
-            $sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $sql->select();
-            $select->from(['tr' => $_pref . 'term_relationships'])
-                ->columns(['term_id' => 'tt.term_id'])
+            $select2 = $connection->select()
+                ->from(['tr' => $_pref . 'term_relationships'],['term_id' => 'tt.term_id'])
                 ->join(
                     ['tt' => $_pref . 'term_taxonomy'],
                     'tr.term_taxonomy_id = tt.term_taxonomy_id',
                     []
                 )
-                ->where([
-                    'tr.object_id' => $data['ID'],
-                    'tt.taxonomy' => 'post_tag'
-                ]);
+                ->where('tr.object_id = ?', $data['ID'])
+                ->where('tt.taxonomy = ?', 'post_tag');
 
-            $result2 = $adapter->query($sql->buildSqlString($select))->execute();
+            $result2 = $connection->fetchAll($select2);
             foreach ($result2 as $data2) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldTags[$oldTermId])) {
@@ -224,10 +210,8 @@ class Wordpress extends AbstractImport
 
             $data['featured_img'] = '';
 
-            $sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $sql->select();
-            $select->from(['p1' => $_pref . 'posts'])
-                ->columns(['featured_img' => 'wm2.meta_value'])
+            $select2 = $connection->select()
+                ->from(['p1' => $_pref . 'posts'],['featured_img' => 'wm2.meta_value'])
                 ->join(
                     ['wm1' => $_pref . 'postmeta'],
                     'wm1.post_id = p1.id AND wm1.meta_value IS NOT NULL AND wm1.meta_key = "_thumbnail_id"',
@@ -238,13 +222,11 @@ class Wordpress extends AbstractImport
                     'wm1.meta_value = wm2.post_id AND wm2.meta_key = "_wp_attached_file" AND wm2.meta_value IS NOT NULL',
                     []
                 )
-                ->where([
-                    'p1.ID = ?' => $data['ID'],
-                    'p1.post_type = ?' => 'post'
-                ])
+                ->where('p1.ID = ?', $data['ID'])
+                ->where('p1.post_type = ?', 'post')
                 ->order('p1.post_date DESC');
 
-            $result2 = $adapter->query($sql->buildSqlString($select))->execute();
+            $result2 = $connection->fetchAll($select2);
             foreach ($result2 as $data2) {
                 if ($data2['featured_img']) {
                     $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $data2['featured_img'];
@@ -254,22 +236,18 @@ class Wordpress extends AbstractImport
 
             if (empty($data['featured_img'])) {
 
-                $sql = new \Laminas\Db\Sql\Sql($adapter);
-                $select = $sql->select();
-                $select->from(['p1' => $_pref . 'posts'])
-                    ->columns(['featured_img' => 'wm1.meta_value'])
+                $select2 = $connection->select()
+                    ->from(['p1' => $_pref . 'posts'], ['featured_img' => 'wm1.meta_value'])
                     ->join(
                         ['wm1' => $_pref . 'postmeta'],
                         'wm1.post_id = p1.id AND wm1.meta_value IS NOT NULL AND wm1.meta_key = "dfiFeatured"',
                         []
                     )
-                    ->where([
-                        'p1.ID = ?' => $data['ID'],
-                        'p1.post_type = ?' => 'post'
-                    ])
+                    ->where('p1.ID = ?', $data['ID'])
+                    ->where('p1.post_type = ?', 'post')
                     ->order('p1.post_date DESC');
 
-                $result2 = $adapter->query($sql->buildSqlString($select))->execute();
+                $result2 = $connection->fetchAll($select2);
                 foreach ($result2 as $data2) {
                     if ($data2['featured_img']) {
                         $serializeInterface = \Magento\Framework\App\ObjectManager::getInstance()
@@ -293,12 +271,11 @@ class Wordpress extends AbstractImport
 
             /* Find Meta Data */
 
-            $sql = new \Laminas\Db\Sql\Sql($adapter);
-            $select = $sql->select();
-            $select->from($_pref . 'postmeta')
-                ->where(['post_id = ?' => (int)$data['ID']]);
+            $select = $connection->select()
+                ->from($_pref . 'postmeta')
+                ->where('post_id = ?', (int)$data['ID']);
 
-            $metaResult = $adapter->query($sql->buildSqlString($select))->execute();
+            $metaResult = $connection->fetchAll($select);
             foreach ($metaResult as $metaData) {
 
                 $metaValue = trim(isset($metaData['meta_value']) ? $metaData['meta_value'] : '');
@@ -368,13 +345,12 @@ class Wordpress extends AbstractImport
 
                 /* find post comment s*/
 
-                $sql = new \Laminas\Db\Sql\Sql($adapter);
-                $select = $sql->select();
-                $select->from($_pref . 'comments')
-                    ->where(['comment_approved = ?' => 1])
-                    ->where(['comment_post_ID = ?' => $wordpressPostId]);
+                $select = $connection->select()
+                    ->from($_pref . 'comments')
+                    ->where('comment_approved = ?', 1)
+                    ->where('comment_post_ID = ?', $wordpressPostId);
 
-                $resultComments = $adapter->query($sql->buildSqlString($select))->execute();
+                $resultComments = $connection->fetchAll($select);
 
                 $commentParents = [];
 
