@@ -99,11 +99,6 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_storeManager;
 
     /**
-     * @var \Laminas\Db\Adapter\Adapter
-     */
-    protected $dbAdapter;
-
-    /**
      * @var \Magefan\BlogAuthor\Model\AuthorFactory
      */
     protected $_authorFactory;

@@ -19,7 +19,6 @@ class Aw extends AbstractImport
 
     public function execute()
     {
-        $adapter = $this->getDbAdapter();
         $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
@@ -268,6 +267,5 @@ class Aw extends AbstractImport
             unset($post);
         }
         /* end */
-        $adapter->getDriver()->getConnection()->disconnect();
     }
 }

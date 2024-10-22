@@ -30,7 +30,6 @@ class Mageplaza1 extends AbstractImport
      */
     public function execute()
     {
-        $adapter = $this->getDbAdapter();
         $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
@@ -313,7 +312,6 @@ class Mageplaza1 extends AbstractImport
             unset($post);
         }
         /* end */
-        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     /**
@@ -324,7 +322,6 @@ class Mageplaza1 extends AbstractImport
      */
     private function getPostAttrValue($postId, $attributeCode)
     {
-        $adapter = $this->getDbAdapter();
         $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
@@ -351,7 +348,6 @@ class Mageplaza1 extends AbstractImport
     private function getBlogEntityId()
     {
         if (null === $this->blogEntityId) {
-            $adapter = $this->getDbAdapter();
             $connection = $this->getDbConnection();
             $_pref = $this->getPrefix();
 
@@ -383,7 +379,6 @@ class Mageplaza1 extends AbstractImport
         if (!isset($this->blogAttributes[$attributeCode])) {
             $this->blogAttributes[$attributeCode] = [];
 
-            $adapter = $this->getDbAdapter();
             $connection = $this->getDbConnection();
             $_pref = $this->getPrefix();
 

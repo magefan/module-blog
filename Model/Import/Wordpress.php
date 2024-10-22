@@ -17,7 +17,6 @@ class Wordpress extends AbstractImport
 
     public function execute()
     {
-        $adapter = $this->getDbAdapter();
         $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
@@ -401,8 +400,6 @@ class Wordpress extends AbstractImport
             unset($post);
         }
         /* end */
-
-        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     protected function wordpressOutoutWrap($pee, $br = true)

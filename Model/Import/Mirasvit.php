@@ -21,7 +21,6 @@ class Mirasvit extends AbstractImport
 
     public function execute()
     {
-        $adapter = $this->getDbAdapter();
         $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
@@ -293,12 +292,10 @@ class Mirasvit extends AbstractImport
             unset($post);
         }
         /* end */
-        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     protected function getAttributValue($entitytTypeCode, $entitytId, $attributeCode)
     {
-        $adapter = $this->getDbAdapter();
         $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
