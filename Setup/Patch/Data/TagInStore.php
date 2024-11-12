@@ -2,43 +2,54 @@
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
- *
- * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Setup;
+declare(strict_types=1);
 
-use Magento\Framework\Setup\UpgradeDataInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
+namespace Magefan\Blog\Setup\Patch\Data;
+
 use Magefan\Blog\Model\ResourceModel\Comment;
+use Magento\Framework\Module\ModuleResource;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
-class UpgradeData implements UpgradeDataInterface
+class TagInStore implements DataPatchInterface, PatchRevertableInterface
 {
+    /**
+     * @var Comment
+     */
     protected $commentResource;
 
-    protected $_commentCollection;
+    /**
+     * @var ModuleResource
+     */
+    private $moduleResource;
 
+    /**
+     * @param Comment $commentResource
+     * @param ModuleContextInterface $context
+     */
     public function __construct(
-        Comment $commentResource
+        Comment $commentResource,
+        ModuleResource $moduleResource
     ) {
         $this->commentResource = $commentResource;
+        $this->moduleResource = $moduleResource;
     }
 
-    public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public static function getDependencies()
     {
-        $version = $context->getVersion();
-        if (version_compare($version, '2.9.1') < 0) {
-            $connection = $this->commentResource->getConnection();
-            $postSelect = $connection->select()->from(
-                [$this->commentResource->getTable('magefan_blog_post')]
-            )
-                ->where('is_active = ?', 1);
-            $posts = $connection->fetchAll($postSelect);
-            foreach ($posts as $post) {
-                $this->commentResource->updatePostCommentsCount($post['post_id']);
-            }
-        }
+        return[];
+    }
+
+    public function getAliases()
+    {
+        return[];
+    }
+
+    public function apply()
+    {
+        $version = $this->moduleResource->getDbVersion('Magefan_Blog');
 
         if (version_compare($version, '2.9.8') < 0) {
             $connection = $this->commentResource->getConnection();
@@ -72,5 +83,9 @@ class UpgradeData implements UpgradeDataInterface
                 }
             }
         }
+    }
+
+    public function revert()
+    {
     }
 }
