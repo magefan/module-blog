@@ -10,10 +10,10 @@ namespace Magefan\Blog\Setup\Patch\Data;
 
 use Magento\Framework\Module\ModuleResource;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 use Magefan\Blog\Model\ResourceModel\Comment;
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
 
-class UpdatePostCommentsCount implements DataPatchInterface, PatchRevertableInterface
+class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * @var Comment
@@ -30,40 +30,43 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchRevertableInte
      * @param ModuleContextInterface $context
      */
     public function __construct(
-        Comment $commentResource,
+        Comment        $commentResource,
         ModuleResource $moduleResource
-    ) {
+    )
+    {
         $this->commentResource = $commentResource;
         $this->moduleResource = $moduleResource;
     }
 
     public static function getDependencies()
     {
-        return[];
+        return [];
     }
 
     public function getAliases()
     {
-        return[];
+        return [];
     }
 
     public function apply()
     {
-        $version = $this->moduleResource->getDbVersion('Magefan_Blog');
-        if (version_compare($version, '2.9.1') < 0) {
-            $connection = $this->commentResource->getConnection();
-            $postSelect = $connection->select()->from(
-                [$this->commentResource->getTable('magefan_blog_post')]
-            )
-                ->where('is_active = ?', 1);
-            $posts = $connection->fetchAll($postSelect);
-            foreach ($posts as $post) {
-                $this->commentResource->updatePostCommentsCount($post['post_id']);
-            }
+        $connection = $this->commentResource->getConnection();
+        $postSelect = $connection->select()->from(
+            [$this->commentResource->getTable('magefan_blog_post')]
+        )
+            ->where('is_active = ?', 1);
+        $posts = $connection->fetchAll($postSelect);
+        foreach ($posts as $post) {
+            $this->commentResource->updatePostCommentsCount($post['post_id']);
         }
     }
 
     public function revert()
     {
+    }
+
+    public static function getVersion()
+    {
+        return '2.9.1';
     }
 }
