@@ -9,9 +9,10 @@ declare(strict_types=1);
 namespace Magefan\Blog\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
-class CreateDefaultPost implements DataPatchInterface, PatchRevertableInterface
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
+
+class CreateDefaultPost implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * Post factory
@@ -32,6 +33,7 @@ class CreateDefaultPost implements DataPatchInterface, PatchRevertableInterface
      */
     private $scopeConfig;
 
+
     public function __construct(
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magento\Framework\App\State $state,
@@ -42,13 +44,8 @@ class CreateDefaultPost implements DataPatchInterface, PatchRevertableInterface
         $this->scopeConfig = $scopeConfig;
     }
 
-
     public function apply()
     {
-        /*if (version_compare($version, '2.9.1') < 0) {
-            return;
-        }*/
-
         try {
             $this->state->setAreaCode('adminhtml');
         } catch (\Exception $e) {
@@ -119,7 +116,8 @@ class CreateDefaultPost implements DataPatchInterface, PatchRevertableInterface
         return[];
     }
 
-    public function revert()
+    public static function getVersion()
     {
+        return '2.11.3';
     }
 }

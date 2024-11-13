@@ -9,11 +9,10 @@ declare(strict_types=1);
 namespace Magefan\Blog\Setup\Patch\Data;
 
 use Magefan\Blog\Model\ResourceModel\Comment;
-use Magento\Framework\Module\ModuleResource;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchRevertableInterface;
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
 
-class TagInStore implements DataPatchInterface, PatchRevertableInterface
+class TagInStore implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * @var Comment
@@ -21,71 +20,61 @@ class TagInStore implements DataPatchInterface, PatchRevertableInterface
     protected $commentResource;
 
     /**
-     * @var ModuleResource
-     */
-    private $moduleResource;
-
-    /**
      * @param Comment $commentResource
-     * @param ModuleContextInterface $context
      */
     public function __construct(
-        Comment $commentResource,
-        ModuleResource $moduleResource
-    ) {
+        Comment $commentResource
+    )
+    {
         $this->commentResource = $commentResource;
-        $this->moduleResource = $moduleResource;
     }
 
     public static function getDependencies()
     {
-        return[];
+        return [];
     }
 
     public function getAliases()
     {
-        return[];
+        return [];
     }
 
     public function apply()
     {
-        $version = $this->moduleResource->getDbVersion('Magefan_Blog');
+        $connection = $this->commentResource->getConnection();
 
-        if (version_compare($version, '2.9.8') < 0) {
-            $connection = $this->commentResource->getConnection();
+        $connection->delete(
+            $this->commentResource->getTable('magefan_blog_tag_store'),
+            ['store_id = ?' => 0]
+        );
 
-            $connection->delete(
-                $this->commentResource->getTable('magefan_blog_tag_store'),
-                ['store_id = ?' => 0]
-            );
+        $tagSelect = $connection->select()->from(
+            [$this->commentResource->getTable('magefan_blog_tag')]
+        );
+        $tags = $connection->fetchAll($tagSelect);
 
-            $tagSelect = $connection->select()->from(
-                [$this->commentResource->getTable('magefan_blog_tag')]
-            );
-            $tags = $connection->fetchAll($tagSelect);
+        $count = count($tags);
+        if ($count) {
+            $data = [];
+            foreach ($tags as $i => $tag) {
+                $data[] = [
+                    'tag_id' => $tag['tag_id'],
+                    'store_id' => 0,
+                ];
 
-            $count = count($tags);
-            if ($count) {
-                $data = [];
-                foreach ($tags as $i => $tag) {
-                    $data[] = [
-                        'tag_id' => $tag['tag_id'],
-                        'store_id' => 0,
-                    ];
-
-                    if (count($data) == 100 || $i == $count - 1) {
-                        $connection->insertMultiple(
-                            $this->commentResource->getTable('magefan_blog_tag_store'),
-                            $data
-                        );
-                        $data = [];
-                    }
+                if (count($data) == 100 || $i == $count - 1) {
+                    $connection->insertMultiple(
+                        $this->commentResource->getTable('magefan_blog_tag_store'),
+                        $data
+                    );
+                    $data = [];
                 }
             }
         }
     }
 
-    public function revert()
+    public static function getVersion()
     {
+        return '2.9.8';
     }
 }
