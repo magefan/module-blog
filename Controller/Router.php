@@ -10,6 +10,7 @@ namespace Magefan\Blog\Controller;
 
 use Magefan\Blog\Model\Url;
 use Magefan\Blog\Api\UrlResolverInterface;
+use Magefan\Blog\Model\Config;
 
 /**
  * Blog Controller Router
@@ -95,6 +96,11 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $urlResolver;
 
     /**
+     * @var Config|mixed
+     */
+    protected $config;
+
+    /**
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magefan\Blog\Model\Url $url
@@ -105,6 +111,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\ResponseInterface $response
      * @param UrlResolverInterface $urlResolver
+     * @param Config $config
      */
     public function __construct(
         \Magento\Framework\App\ActionFactory $actionFactory,
@@ -116,7 +123,8 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response,
-        UrlResolverInterface $urlResolver = null
+        UrlResolverInterface $urlResolver = null,
+        Config $config = null
     ) {
 
         $this->actionFactory = $actionFactory;
@@ -131,6 +139,9 @@ class Router implements \Magento\Framework\App\RouterInterface
         $this->urlResolver = $urlResolver ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\UrlResolverInterface::class
         );
+        $this->config = $config ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            Config::class
+        );
     }
 
     /**
@@ -141,6 +152,9 @@ class Router implements \Magento\Framework\App\RouterInterface
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {
+        if (!$this->config->isEnabled()) {
+            return null;
+        }
         /*
         $_identifier = trim($request->getPathInfo(), '/');
         $_identifier = urldecode($_identifier);
