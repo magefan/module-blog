@@ -386,13 +386,26 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
         $tagPostIds = array_unique($tagPostIds);
 
+        /* Field => Weigth */
+        $searchFields = [
+            'title' => 3,
+            'content' => 1
+        ];
+        $likeTerm = ['like' => '%' . $term . '%'];
+
+        $formatMatchSql = '0 ';
+        foreach ($searchFields as $field => $fieldWeight) {
+            $formatMatchSql .= '+ FORMAT(MATCH (' . $field . ') AGAINST ('
+                . $this->getConnection()->quote($term)
+                . '), 4) * ' . $fieldWeight . ' ';
+        }
+
         if ($tagPostIdsCount = count($tagPostIds)) {
             $this->addFieldToFilter(
-                ['title', 'short_content', 'content', 'post_id'],
+                array_merge(array_keys($searchFields), ['post_id']),
                 [
-                    ['like' => '%' . $term . '%'],
-                    ['like' => '%' . $term . '%'],
-                    ['like' => '%' . $term . '%'],
+                    $likeTerm,
+                    $likeTerm,
                     ['in' => $tagPostIds]
                 ]
             );
@@ -401,10 +414,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $tagPostIds = array_slice($tagPostIds, 0, 200);
             }
 
-            $fullExpression = '(0 ' .
-                '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ('
-                . $this->getConnection()->quote($term)
-                . '), 4) ' .
+            $fullExpression = '(' .
+                $formatMatchSql .
                 '+ IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))';
 
             $fullExpression = new \Zend_Db_Expr($fullExpression);
@@ -412,18 +423,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             //$this->expressionFieldsToSelect['search_rate'] = $fullExpression;
         } else {
             $this->addFieldToFilter(
-                ['title', 'short_content', 'content'],
+                array_keys($searchFields),
                 [
-                    ['like' => '%' . $term . '%'],
-                    ['like' => '%' . $term . '%'],
-                    ['like' => '%' . $term . '%']
+                    $likeTerm,
+                    $likeTerm
                 ]
             );
 
-            $fullExpression = '(0 ' .
-                '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ('
-                . $this->getConnection()->quote($term)
-                . '), 4))';
+            $fullExpression = '(' . $formatMatchSql . ')';
 
             $fullExpression = new \Zend_Db_Expr($fullExpression);
             $this->getSelect()->columns(['search_rate' => $fullExpression]);
