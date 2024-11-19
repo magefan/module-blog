@@ -137,6 +137,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Filesystem $filesystem,
+        \Magento\Framework\Filesystem\Io\File $file,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
@@ -149,6 +150,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
         $this->fileSystem = $filesystem;
+        $this->file = $file;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_authorFactory = $authorFactory ?: $objectManager->get(\Magefan\Blog\Api\AuthorInterfaceFactory::class);
         $this->productRepository = $productRepository ?: $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
@@ -281,7 +283,8 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected function getFeaturedImgBySrc($src)
     {
         $mediaPath = $this->fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath() . '/magefan_blog';
-        @mkdir($mediaPath, 0777, true);
+
+        $this->file->mkdir($mediaPath, 0775);
 
         $imageName = explode('?', $src);
         $imageName = explode('/', $imageName[0]);
@@ -289,14 +292,14 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $imageName = str_replace(['%20', ' '], '-', $imageName);
         $imageName = urldecode($imageName);
         $imagePath = $mediaPath . '/' . $imageName;
-        if (!file_exists($imagePath)) {
+        if (!$this->file->fileExists($imagePath)) {
 
-            if ($imageSource = @file_get_contents($src)) {
-                file_put_contents(
-                    $imagePath,
-                    $imageSource
-                );
-            }
+            $ch = curl_init($src);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $imageData = curl_exec($ch);
+            curl_close($ch);
+
+            $this->file->write($imagePath, $imageData);
         } else {
             $imageSource = true;
         }
