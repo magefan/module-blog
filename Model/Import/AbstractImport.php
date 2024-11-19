@@ -136,6 +136,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
@@ -147,7 +148,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_tagFactory = $tagFactory;
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
-
+        $this->fileSystem = $filesystem;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_authorFactory = $authorFactory ?: $objectManager->get(\Magefan\Blog\Api\AuthorInterfaceFactory::class);
         $this->productRepository = $productRepository ?: $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
@@ -276,4 +277,36 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         }
         return $this->dbAdapter;
     }
+
+    protected function getFeaturedImgBySrc($src)
+    {
+        $mediaPath = $this->fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath() . '/magefan_blog';
+        @mkdir($mediaPath, 0777, true);
+
+        $imageName = explode('?', $src);
+        $imageName = explode('/', $imageName[0]);
+        $imageName = end($imageName);
+        $imageName = str_replace(['%20', ' '], '-', $imageName);
+        $imageName = urldecode($imageName);
+        $imagePath = $mediaPath . '/' . $imageName;
+        if (!file_exists($imagePath)) {
+
+            if ($imageSource = @file_get_contents($src)) {
+                file_put_contents(
+                    $imagePath,
+                    $imageSource
+                );
+            }
+        } else {
+            $imageSource = true;
+        }
+
+        if ($imageSource) {
+            return 'magefan_blog/' . $imageName;
+        } else {
+            return false;
+        }
+    }
+
+
 }
