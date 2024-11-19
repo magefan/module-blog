@@ -293,12 +293,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $imageName = urldecode($imageName);
         $imagePath = $mediaPath . '/' . $imageName;
         if (!$this->file->fileExists($imagePath)) {
-
-            $ch = curl_init($src);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $imageData = curl_exec($ch);
-            curl_close($ch);
-
+            $imageData = $this->file->read($src);
             $this->file->write($imagePath, $imageData);
         } else {
             $imageSource = true;
