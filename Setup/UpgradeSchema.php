@@ -828,7 +828,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
-      
+
         if (version_compare($version, '2.11.3') < 0) {
             if ($connection->isTableExists($setup->getTable('magefan_blog_category'))) {
                 $connection->addIndex(
@@ -869,6 +869,42 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     ['publish_time']
                 );
             }
+        }
+
+        if (version_compare($version, '2.11.4') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'meta_robots',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Default Robots',
+                    'after' => 'meta_description'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'meta_robots',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Default Robots',
+                    'after' => 'meta_description'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_author'),
+                'meta_robots',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Tag Default Robots',
+                    'after' => 'meta_description'
+                ]
+            );
         }
 
         $setup->endSetup();
