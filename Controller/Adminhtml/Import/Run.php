@@ -46,7 +46,7 @@ class Run extends \Magento\Backend\App\Action
             if ($stats->getData('imported_count')) {
                 if (!$stats->getData('skipped_count')) {
                     $this->messageManager->addSuccess(__(
-                        'The import process was completed successfully. 
+                        'The import process was completed successfully.
                         %1 posts, %2 categories, %3 tags, %4 authors and %5 comments where imported.',
                         $stats->getData('imported_posts_count'),
                         $stats->getData('imported_categories_count'),
@@ -56,8 +56,8 @@ class Run extends \Magento\Backend\App\Action
                     ));
                 } else {
                     $this->messageManager->addNotice(__(
-                        'The import process completed. %1 posts, %2 categories, %3 tags, %4 authors and %5 comments where imported. 
-                        Some posts or categories or tags or comments where skipped. %5 %6 %7 %8 %9',
+                        'The import process completed. %1 posts, %2 categories, %3 tags, %4 authors and %5 comments where imported.
+                        Some posts or categories or tags or authors or comments where skipped. %6 %7 %8 %9 %10',
                         $stats->getData('imported_posts_count'),
                         $stats->getData('imported_categories_count'),
                         $stats->getData('imported_tags_count'),
