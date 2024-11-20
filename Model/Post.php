@@ -12,6 +12,7 @@ use Magefan\Blog\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
 use Magefan\Blog\Api\ShortContentExtractorInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * Post model
@@ -162,6 +163,11 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $categoryRepository;
 
     /**
+     * @var TimezoneInterface|mixed
+     */
+    protected $timezone;
+
+    /**
      * Post constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
@@ -198,7 +204,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
         \Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
-        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
+        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -218,6 +225,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         );
         $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\CategoryRepositoryInterface::class
+        );
+        $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Framework\Stdlib\DateTime\TimezoneInterface::class
         );
     }
 
@@ -514,7 +524,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         /* Fix for custom themes that send wrong parameters to this function, and that brings the error */
         if (is_object($len)) {
-             $len = null;
+            $len = null;
         }
         /* End fix */
 
@@ -907,10 +917,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
-        return \Magefan\Blog\Helper\Data::getTranslatedDate(
-            $format,
-            $this->getData('publish_time')
-        );
+        $publishDate = $this->timezone->date($this->getData('publish_time'))->format($format);
+
+        return $publishDate;
     }
 
     /**
@@ -976,10 +985,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
             $this->$method();
         }
 
@@ -1013,10 +1022,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         foreach ($keys as $key) {
             if (null === $fields || array_key_exists($key, $fields)) {
                 $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                        '_',
+                        '',
+                        ucwords($key, '_')
+                    );
                 $data[$key] = $this->$method();
             }
         }
@@ -1025,7 +1034,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $tags = [];
             foreach ($this->getRelatedTags() as $tag) {
                 $tags[] = $tag->getDynamicData(
-                    // isset($fields['tags']) ? $fields['tags'] : null
+                // isset($fields['tags']) ? $fields['tags'] : null
                 );
             }
             $data['tags'] = $tags;
@@ -1065,7 +1074,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (null === $fields || array_key_exists('author', $fields)) {
             if ($author = $this->getAuthor()) {
                 $data['author'] = $author->getDynamicData(
-                    //isset($fields['author']) ? $fields['author'] : null
+                //isset($fields['author']) ? $fields['author'] : null
                 );
             }
         }

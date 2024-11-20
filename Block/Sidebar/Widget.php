@@ -54,4 +54,17 @@ trait Widget
     {
         return $this->_widgetKey;
     }
+
+    /**
+     * Get cache key informative items
+     *
+     * @return array
+     */
+    public function getCacheKeyInfo()
+    {
+        $result = parent::getCacheKeyInfo();
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $result['customer_group_id'] = $objectManager->get(\Magento\Customer\Model\Session::class)->getCustomerGroupId();
+        return $result;
+    }
 }
