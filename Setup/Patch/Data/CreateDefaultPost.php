@@ -2,23 +2,17 @@
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
- *
- * Glory to Ukraine! Glory to the heroes!
  */
 
-namespace Magefan\Blog\Setup;
+declare(strict_types=1);
 
-use Magefan\Blog\Model\Post;
-use Magefan\Blog\Model\PostFactory;
-use Magento\Framework\Module\Setup\Migration;
-use Magento\Framework\Setup\InstallDataInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
+namespace Magefan\Blog\Setup\Patch\Data;
 
-/**
- * @codeCoverageIgnore
- */
-class InstallData implements InstallDataInterface
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
+
+class CreateDefaultPost implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * Post factory
@@ -39,11 +33,7 @@ class InstallData implements InstallDataInterface
      */
     private $scopeConfig;
 
-    /**
-     * Init
-     *
-     * @param \Magefan\Blog\Model\PostFactory $postFactory
-     */
+
     public function __construct(
         \Magefan\Blog\Model\PostFactory $postFactory,
         \Magento\Framework\App\State $state,
@@ -54,11 +44,7 @@ class InstallData implements InstallDataInterface
         $this->scopeConfig = $scopeConfig;
     }
 
-    /**
-     * {@inheritdoc}
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function apply()
     {
         try {
             $this->state->setAreaCode('adminhtml');
@@ -83,7 +69,7 @@ class InstallData implements InstallDataInterface
             'content_heading' => 'Magento 2 Blog Post Sample',
             'content' =>
                 $useLinks
-                ? '<p>Welcome to 
+                    ? '<p>Welcome to 
                     <a title="Magento Blog" 
                        href="https://magefan.com/magento2-blog-extension" 
                        target="_blank">Magento Blog</a> by
@@ -110,12 +96,28 @@ class InstallData implements InstallDataInterface
                     <a href="https://www.facebook.com/magefan/"  title="Magefan at Facebook"
                        target="_blank">Magefan at Facebook</a>
                 </p>'
-                : '<p>Welcome to Magento 2 Blog extension by Magefan.
+                    : '<p>Welcome to Magento 2 Blog extension by Magefan.
                         This is your first post. Edit or delete it, then start blogging!
                 </p>',
             'store_ids' => [0]
         ];
 
         $this->_postFactory->create()->setData($data)->save();
+
+    }
+
+    public static function getDependencies()
+    {
+        return[];
+    }
+
+    public function getAliases()
+    {
+        return[];
+    }
+
+    public static function getVersion()
+    {
+        return '2.11.3';
     }
 }
