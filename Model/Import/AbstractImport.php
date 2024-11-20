@@ -99,11 +99,6 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_storeManager;
 
     /**
-     * @var \Laminas\Db\Adapter\Adapter
-     */
-    protected $dbAdapter;
-
-    /**
      * @var \Magefan\BlogAuthor\Model\AuthorFactory
      */
     protected $_authorFactory;
@@ -112,6 +107,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @var \Magento\Catalog\Model\ProductRepository|mixed
      */
     protected $productRepository;
+
+    /**
+     * @var \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactory
+     */
+    protected $connectionFactory;
 
     /**
      * AbstractImport constructor.
@@ -136,6 +136,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactory $connectionFactory,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
@@ -147,6 +148,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_tagFactory = $tagFactory;
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
+        $this->connectionFactory = $connectionFactory;
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_authorFactory = $authorFactory ?: $objectManager->get(\Magefan\Blog\Api\AuthorInterfaceFactory::class);
@@ -234,46 +236,36 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      */
     public function getPrefix()
     {
-        $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
+
+        $_pref = '';
+
         if ($this->getData('prefix')) {
-            $_pref = $adapter->getPlatform()->quoteValue(
-                $this->getData('prefix')
-            );
+            $_pref = $connection->quote($this->getData('prefix'));
             $_pref = trim($_pref, "'");
-        } else {
-            $_pref = '';
         }
 
         return $_pref;
     }
 
     /**
-     * @return \Laminas\Db\Adapter\Adapter
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
-    protected function getDbAdapter()
+    protected function getDbConnection()
     {
-        if (null === $this->dbAdapter) {
-            $connectionConf = [
-                'driver' => 'Pdo_Mysql',
-                'database' => $this->getData('dbname'),
-                'username' => $this->getData('uname'),
-                'password' => $this->getData('pwd'),
-                'charset' => 'utf8',
-            ];
+        $connectionConf = [
+            'driver' => 'Pdo_Mysql',
+            'dbname' => $this->getData('dbname'),
+            'username' => $this->getData('uname'),
+            'password' => $this->getData('pwd'),
+            'charset' => 'utf8',
+        ];
 
-            if ($this->getData('dbhost')) {
-                $connectionConf['host'] = $this->getData('dbhost');
-            }
-
-            $this->dbAdapter = new \Laminas\Db\Adapter\Adapter($connectionConf);
-
-            try {
-                $this->dbAdapter->query('SELECT 1')->execute();
-            } catch (\Exception $e) {
-                throw  new \Exception("Failed connect to the database.");
-            }
-            
+        if ($this->getData('dbhost')) {
+            $connectionConf['host'] = $this->getData('dbhost');
         }
-        return $this->dbAdapter;
+
+        return $this->connectionFactory->create($connectionConf);
     }
+
 }
