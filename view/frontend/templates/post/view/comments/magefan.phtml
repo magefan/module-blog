@@ -31,7 +31,7 @@
             <img src="<?= $block->escapeUrl($image) ?>" alt="<?= $block->escapeHtml($block->getCustomerName()) ?>">
         </div>
         <?php } ?>
-        <div class="c-replyform <?php if ($canPost) {  echo 'no-active'; } ?>">
+        <div class="c-replyform <?php if (!$canPost) {  echo 'no-active'; } ?>">
             <form class="comment-form-blog-recaptcha"
                   action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
                   method="post"
