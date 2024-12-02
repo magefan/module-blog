@@ -292,9 +292,15 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $imageName = str_replace(['%20', ' '], '-', $imageName);
         $imageName = urldecode($imageName);
         $imagePath = $mediaPath . '/' . $imageName;
+        $imageSource = false;
         if (!$this->file->fileExists($imagePath)) {
-            $imageData = $this->file->read($src);
-            $this->file->write($imagePath, $imageData);
+            try {
+                $imageData = $this->file->read($src);
+                $this->file->write($imagePath, $imageData);
+                $imageSource = true;
+            } catch (\Exception $e) {
+                $imageSource = false;
+            }
         } else {
             $imageSource = true;
         }
