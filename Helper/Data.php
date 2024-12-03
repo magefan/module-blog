@@ -17,6 +17,7 @@ use Magento\Store\Model\ScopeInterface;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     const XML_PATH_MFLAZYLOAD_ENABLED = 'mflazyzoad/general/enabled';
+    const XML_PATH_MFLAZYLOAD_METHOD = 'mflazyzoad/general/method';
 
     /**
      * Retrieve translated & formated date
@@ -41,7 +42,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $date;
     }
-    
+
     /**
      * Retrieve store config value
      * @param string $path
@@ -62,6 +63,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isOriginMfLazyLoadEnable()
     {
-        return $this->getConfig(self::XML_PATH_MFLAZYLOAD_ENABLED);
+        return $this->getConfig(self::XML_PATH_MFLAZYLOAD_ENABLED) && ($this->getConfig(self::XML_PATH_MFLAZYLOAD_METHOD) == 0) && $this->_moduleManager->isEnabled('Magefan_LazyLoad');
     }
 }
