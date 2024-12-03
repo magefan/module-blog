@@ -102,7 +102,12 @@
                     <width>5px</width>
                     <highlight_color>28a745</highlight_color>
                     <highlight_color_opacity>0.9</highlight_color_opacity>
-                </reading_progress_bar>
+                </reading_progress_bar> 
+                <latest_posts_by_author>
+                    <enabled>0</enabled>
+                    <template/>
+                    <number_of_posts>5</number_of_posts>
+                </latest_posts_by_author>
             </post_view>
             <post_list>
                 <template>list-modern</template>
@@ -122,7 +127,8 @@
                 <enabled>1</enabled>
                 <page_enabled>1</page_enabled>
                 <template/>
-                <robots>NOINDEX,FOLLOW</robots>
+                <robots>NOINDEX,FOLLOW</robots>   
+                <author_block_enabled>0</author_block_enabled>
             </author>
 
             <blog_search>
@@ -201,6 +207,10 @@
                     <enabled>0</enabled>
                     <sort_order>15</sort_order>
                 </contents>
+                <authors_link>
+                    <enabled>0</enabled>
+                    <sort_order>60</sort_order>
+                </authors_link>
             </sidebar>
             <product_page>
                 <related_posts_enabled>1</related_posts_enabled>
@@ -304,6 +314,13 @@
                 <allowed_resources>
                     <media_gallery_image_folders>
                         <magefan_blog>magefan_blog</magefan_blog>
+                    </media_gallery_image_folders>
+                </allowed_resources>
+            </media_storage_configuration>
+            <media_storage_configuration>
+                <allowed_resources>
+                    <media_gallery_image_folders>
+                        <magefan_blogauthor>magefan_blogauthor</magefan_blogauthor>
                     </media_gallery_image_folders>
                 </allowed_resources>
             </media_storage_configuration>

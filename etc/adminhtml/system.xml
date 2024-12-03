@@ -426,6 +426,26 @@
                         </depends>
                     </field>
                 </group>
+                <group id="latest_posts_by_author" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Latest Posts By Author (Blog Extra)</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Latest Posts By Author</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\LatestPostByAuthorTemplate</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="number_of_posts" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number of Posts</label>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
             </group>
 
             <group id="post_list" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -486,6 +506,14 @@
                     </depends>
                     <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
                     <comment>This will be included before head closing tag in page HTML.</comment>
+                </field>
+                <field id="author_block_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Author Block (Blog Extra)</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled block with author photo, bio, social links will be displayed.</comment>
                 </field>
             </group>
             <group id="ai_writer" translate="label" type="text" sortOrder="69" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -772,6 +800,19 @@
                     </field>
                     <field id="description" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Feed Description</label>
+                    </field>
+                </group>
+                <group id="authors_link" translate="label" type="text" sortOrder="9999" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Authors Link (Blog Extra)</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sort Order</label>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
                     </field>
                 </group>
             </group>
