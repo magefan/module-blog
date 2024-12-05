@@ -291,6 +291,18 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $imageName = end($imageName);
         $imageName = str_replace(['%20', ' '], '-', $imageName);
         $imageName = urldecode($imageName);
+
+        $hasFormat = false;
+        foreach (['jpg','jpeg', 'png', 'gif', 'webp'] as $format) {
+            if (false !== stripos($imageName, $format)) {
+                $hasFormat = true;
+                break;
+            }
+        }
+        if (!$hasFormat) {
+            $imageName .= '.jpg';
+        }
+        
         $imagePath = $mediaPath . '/' . $imageName;
         $imageSource = false;
         if (!$this->file->fileExists($imagePath)) {
