@@ -135,7 +135,8 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                     $len++;
                 }
 
-                $content = mb_substr($content, 0, $len);
+                $content = mb_substr(strip_tags($content), 0, $len);
+                $content = '<p>' . $content . '</p>';
                 try {
                     $previousErrorState = libxml_use_internal_errors(true);
                     $dom = new \DOMDocument('1.0', 'utf-8');
