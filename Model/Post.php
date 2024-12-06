@@ -572,7 +572,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->hasData($key)) {
             $desc = $this->getData('meta_description');
             if (!$desc) {
-                $desc = $this->getShortFilteredContent(200);
+                $desc = $this->getShortFilteredContent(2000);
             }
 
             $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";

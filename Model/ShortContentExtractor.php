@@ -138,18 +138,18 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 $content = mb_substr($content, 0, $len);
                 try {
                     $previousErrorState = libxml_use_internal_errors(true);
-                    $dom = new \DOMDocument();
+                    $dom = new \DOMDocument('1.0', 'utf-8');
                     $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
                     libxml_use_internal_errors($previousErrorState);
 
                     $body = $dom->getElementsByTagName('body');
                     if ($body && $body->length > 0) {
                         $body = $body->item(0);
-                        $_content = new \DOMDocument;
+                        $_content = new \DOMDocument('1.0', 'utf-8');
                         foreach ($body->childNodes as $child) {
                             $_content->appendChild($_content->importNode($child, true));
                         }
-                        $content = $_content->saveHTML();
+                        $content = $_content->saveHTML($_content->documentElement);
                     }
                 } catch (\Exception $e) {
                     /* Do nothing, it's OK */

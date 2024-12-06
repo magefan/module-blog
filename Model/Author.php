@@ -112,7 +112,7 @@ class Author extends AbstractModel implements AuthorInterface
         $desc = $this->getData('meta_description');
 
         if (!$desc) {
-            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 200);
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 2000);
         }
 
         $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
