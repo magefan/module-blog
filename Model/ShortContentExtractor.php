@@ -176,7 +176,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
                     if ($textLength + mb_strlen($word, 'utf-8') >= $len && !$pageBreakInserted) {
                         $newText .= '<!-- pagebreak -->';
-                        $pageBreakInserted = true; // Only insert the page break once
+                        $pageBreakInserted = true;
                     }
 
                     $textLength += mb_strlen($word, 'utf-8');
