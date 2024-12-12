@@ -148,7 +148,6 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         $content = str_replace('<!-- pagebreak -->', '', $content);
 
         $previousErrorState = libxml_use_internal_errors(true);
-        $dom = new \DOMDocument();
         $dom = new \DOMDocument('1.0', 'utf-8');
         $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
         libxml_use_internal_errors($previousErrorState);
