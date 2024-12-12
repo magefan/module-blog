@@ -190,6 +190,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         }
 
         $content = $dom->saveHTML($dom->documentElement);
+
         return str_replace( '&lt;!-- pagebreak --&gt;', '<!-- pagebreak -->', $content);
     }
 }
