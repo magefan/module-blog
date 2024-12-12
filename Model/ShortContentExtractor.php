@@ -166,12 +166,11 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 $newText = '';
 
                 foreach ($words as $word) {
+                    $newText .= $word;
+
                     if (trim($word) === '') {
-                        $newText .= $word;
                         continue;
                     }
-
-                    $newText .= $word;
 
                     if ($textLength + mb_strlen($word, 'utf-8') >= $len && !$pageBreakInserted) {
                         $newText .= '<!-- pagebreak -->';
