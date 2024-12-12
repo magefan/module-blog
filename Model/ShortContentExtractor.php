@@ -59,14 +59,12 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 (string) $content ?: ''
             );
 
-            $isPagebreakDefined = false;
+            $content = $this->setPageBreakOnLen($len, $content);
 
             if (!$len) {
                 $pageBraker = '<!-- pagebreak -->';
                 $len = mb_strpos($content, $pageBraker);
-                if ($len) {
-                    $isPagebreakDefined = true;
-                } else {
+                if(!$len) {
                     $len = (int)$this->scopeConfig->getValue(
                         'mfblog/post_list/shortcotent_length',
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -75,60 +73,6 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             }
 
             if ($len) {
-
-                if (!$isPagebreakDefined) {
-
-                    $oLen = $len;
-                    /* Skip <style> tags at the begining of string in calculations */
-                    $sp1 = mb_strpos($content, '<style>');
-                    if (false !== $sp1) {
-                        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
-                        $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
-                        $sp2 = mb_strpos($content, '</style>');
-
-                        while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
-                            $len = $oLen + $sp2 + 8;
-                            $sp1 = mb_strpos($content, '<style>', $sp2 + 1);
-                            $sp2 = mb_strpos($content, '</style>', $sp2 + 1);
-                        }
-
-                        $l = mb_strlen($content);
-                        if ($len < $l) {
-                            $sp2 = mb_strrpos($content, '</style>', $len - $l);
-                            if ($len < $oLen + $sp2 + 8) {
-                                $len = $oLen + $sp2 + 8;
-                            }
-                        }
-
-                    } else {
-                        $cc = $content;
-                    }
-
-                    /* Skip long HTML */
-                    $stcc = trim(strip_tags((string)$cc));
-                    //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
-                    if ($stcc && $len < mb_strlen($content)) {
-                        $str = '';
-                        $start = false;
-                        foreach (explode(' ', $stcc) as $s) {
-                            $str .= ($str ? ' ' : '') . $s;
-
-                            $pos = mb_strpos($content, $str);
-                            if (false !== $pos) {
-                                $start = $pos;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        if (false !== $start) {
-                            if ($len < $start + $oLen) {
-                                $len = $start + $oLen;
-                            }
-                        }
-                    }
-                }
-
                 /* Do not cut words */
                 while ($len < mb_strlen($content)
                     && !in_array(mb_substr($content, $len, 1), [' ', '<', "\t", "\r", "\n"])) {
@@ -185,5 +129,68 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         }
 
         return $this->executedContent[$key];
+    }
+
+    /**
+     * @param $len
+     * @param string $content
+     * @return string
+     */
+    protected function setPageBreakOnLen($len, string $content): string
+    {
+        if (!$len) {
+            $len = (int)$this->scopeConfig->getValue(
+                'mfblog/post_list/shortcotent_length',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ) ?: 2000;
+        }
+
+        $content = str_replace('<!-- pagebreak -->', '', $content);
+
+        $previousErrorState = libxml_use_internal_errors(true);
+        $dom = new \DOMDocument('1.0', 'utf-8');
+        $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
+        libxml_use_internal_errors($previousErrorState);
+
+        $textLength = 0;
+
+        $processNode = function($node) use (&$textLength, $len, $dom, &$pageBreakInserted, &$processNode) {
+            foreach ($node->childNodes as $child) {
+                $processNode($child);
+            }
+
+            if ($node->nodeType === XML_TEXT_NODE) {
+
+                $text = $node->nodeValue;
+                $words = preg_split('/(\s+)/u', $text, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+                $newText = '';
+
+                foreach ($words as $word) {
+                    $newText .= $word;
+
+                    if (trim($word) === '') {
+                        continue;
+                    }
+
+                    if ($textLength + mb_strlen($word, 'utf-8') >= $len && !$pageBreakInserted) {
+                        $newText .= '<!-- pagebreak -->';
+                        $pageBreakInserted = true;
+                    }
+
+                    $textLength += mb_strlen($word, 'utf-8');
+                }
+
+                $node->nodeValue = $newText;
+            }
+        };
+
+        $body = $dom->getElementsByTagName('body')->item(0);
+        if ($body) {
+            $processNode($body);
+        }
+
+        $content = $dom->saveHTML($dom->documentElement);
+
+        return str_replace( '&lt;!-- pagebreak --&gt;', '<!-- pagebreak -->', $content);
     }
 }
