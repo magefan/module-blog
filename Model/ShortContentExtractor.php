@@ -59,11 +59,14 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 (string) $content ?: ''
             );
 
+            $content = $this->setPageBreakOnLen($len, $content);
+
             $isPagebreakDefined = false;
 
             if (!$len) {
                 $pageBraker = '<!-- pagebreak -->';
                 $len = mb_strpos($content, $pageBraker);
+
                 if ($len) {
                     $isPagebreakDefined = true;
                 } else {
@@ -75,7 +78,6 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             }
 
             if ($len) {
-
                 if (!$isPagebreakDefined) {
 
                     $oLen = $len;
@@ -185,5 +187,69 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         }
 
         return $this->executedContent[$key];
+    }
+
+    /**
+     * @param $len
+     * @param string $content
+     * @return string
+     */
+    protected function setPageBreakOnLen($len, string $content): string
+    {
+        if (!$len) {
+            $len = (int)$this->scopeConfig->getValue(
+                'mfblog/post_list/shortcotent_length',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ) ?: 2000;
+        }
+
+        $content = str_replace('<!-- pagebreak -->', '', $content);
+
+        $previousErrorState = libxml_use_internal_errors(true);
+        $dom = new \DOMDocument();
+        $dom = new \DOMDocument('1.0', 'utf-8');
+        $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
+        libxml_use_internal_errors($previousErrorState);
+
+        $textLength = 0;
+
+        $processNode = function($node) use (&$textLength, $len, $dom, &$pageBreakInserted, &$processNode) {
+            foreach ($node->childNodes as $child) {
+                $processNode($child);
+            }
+
+            if ($node->nodeType === XML_TEXT_NODE) {
+
+                $text = $node->nodeValue;
+                $words = preg_split('/(\s+)/u', $text, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+                $newText = '';
+
+                foreach ($words as $word) {
+                    if (trim($word) === '') {
+                        $newText .= $word;
+                        continue;
+                    }
+
+                    $newText .= $word;
+
+                    if ($textLength + mb_strlen($word, 'utf-8') >= $len && !$pageBreakInserted) {
+                        $newText .= '<!-- pagebreak -->';
+                        $pageBreakInserted = true; // Only insert the page break once
+                    }
+
+                    $textLength += mb_strlen($word, 'utf-8');
+                }
+
+                $node->nodeValue = $newText;
+            }
+        };
+
+        $body = $dom->getElementsByTagName('body')->item(0);
+        if ($body) {
+            $processNode($body);
+        }
+
+        $content = $dom->saveHTML($dom->documentElement);
+        return str_replace( '&lt;!-- pagebreak --&gt;', '<!-- pagebreak -->', $content);
     }
 }
