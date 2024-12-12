@@ -61,15 +61,10 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
             $content = $this->setPageBreakOnLen($len, $content);
 
-            $isPagebreakDefined = false;
-
             if (!$len) {
                 $pageBraker = '<!-- pagebreak -->';
                 $len = mb_strpos($content, $pageBraker);
-
-                if ($len) {
-                    $isPagebreakDefined = true;
-                } else {
+                if(!$len) {
                     $len = (int)$this->scopeConfig->getValue(
                         'mfblog/post_list/shortcotent_length',
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -78,59 +73,6 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             }
 
             if ($len) {
-                if (!$isPagebreakDefined) {
-
-                    $oLen = $len;
-                    /* Skip <style> tags at the begining of string in calculations */
-                    $sp1 = mb_strpos($content, '<style>');
-                    if (false !== $sp1) {
-                        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
-                        $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
-                        $sp2 = mb_strpos($content, '</style>');
-
-                        while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
-                            $len = $oLen + $sp2 + 8;
-                            $sp1 = mb_strpos($content, '<style>', $sp2 + 1);
-                            $sp2 = mb_strpos($content, '</style>', $sp2 + 1);
-                        }
-
-                        $l = mb_strlen($content);
-                        if ($len < $l) {
-                            $sp2 = mb_strrpos($content, '</style>', $len - $l);
-                            if ($len < $oLen + $sp2 + 8) {
-                                $len = $oLen + $sp2 + 8;
-                            }
-                        }
-
-                    } else {
-                        $cc = $content;
-                    }
-
-                    /* Skip long HTML */
-                    $stcc = trim(strip_tags((string)$cc));
-                    //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
-                    if ($stcc && $len < mb_strlen($content)) {
-                        $str = '';
-                        $start = false;
-                        foreach (explode(' ', $stcc) as $s) {
-                            $str .= ($str ? ' ' : '') . $s;
-
-                            $pos = mb_strpos($content, $str);
-                            if (false !== $pos) {
-                                $start = $pos;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        if (false !== $start) {
-                            if ($len < $start + $oLen) {
-                                $len = $start + $oLen;
-                            }
-                        }
-                    }
-                }
-
                 /* Do not cut words */
                 while ($len < mb_strlen($content)
                     && !in_array(mb_substr($content, $len, 1), [' ', '<', "\t", "\r", "\n"])) {
