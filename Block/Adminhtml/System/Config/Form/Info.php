@@ -32,4 +32,28 @@ class Info extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
     {
         return 'Blog Extension';
     }
+
+    /**
+     * Return extension image
+     * @return string
+     */
+    protected function getModuleImage() {
+        return 'http://mage' . 'fan.com/media/catalog/product/i/c/icon-blog-ext_1.jpg';
+    }
+
+    /**
+     * Return extension Key
+     * @return string
+     */
+    protected function getModuleKey() {
+        return 'Blog';
+    }
+
+    /**
+     * Return extension Max Plan
+     * @return string
+     */
+    protected function getModuleMaxPlan() {
+        return 'Extra';
+    }
 }
