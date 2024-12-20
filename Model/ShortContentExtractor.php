@@ -91,12 +91,14 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                         foreach ($body->childNodes as $child) {
                             $_content->appendChild($_content->importNode($child, true));
                         }
-                        $content = $_content->saveHTML($_content->documentElement);
+                        $content = $_content->saveHTML($_content->getElementsByTagName('body')[0]);
+                        $content = preg_replace('#^<body>|</body>$#', '', $content);
                     }
                 } catch (\Exception $e) {
                     /* Do nothing, it's OK */
                 }
             }
+
 
             if ($endCharacters === null) {
                 $endCharacters = $this->scopeConfig->getValue(
@@ -156,6 +158,11 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         $textLength = 0;
 
         $processNode = function($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode) {
+
+            if ($pageBreakInserted) {
+                return;
+            }
+
             foreach ($node->childNodes as $child) {
                 $processNode($child);
             }
@@ -190,9 +197,11 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             $processNode($body);
         }
 
-        $content = $dom->saveHTML($dom->documentElement);
+        $content = $dom->saveHTML($dom->getElementsByTagName('body')[0]);
+        $content = preg_replace('#^<body>|</body>$#', '', $content);
+        $content = str_replace( '&lt;!-- pagebreak --&gt;', $pageBreaker, $content);
 
-        return str_replace( '&lt;!-- pagebreak --&gt;', $pageBreaker, $content);
+        return $content;
     }
 
     /**
