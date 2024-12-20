@@ -59,16 +59,13 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 (string) $content ?: ''
             );
 
-            $content = $this->setPageBreakOnLen($len, $content);
+            $content = $this->setPageBreakOnLen($content, $len);
 
             if (!$len) {
-                $pageBraker = '<!-- pagebreak -->';
-                $len = mb_strpos($content, $pageBraker);
-                if(!$len) {
-                    $len = (int)$this->scopeConfig->getValue(
-                        'mfblog/post_list/shortcotent_length',
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-                    ) ?: 2000;
+                $pageBreaker = '<!-- pagebreak -->';
+                $len = mb_strpos($content, $pageBreaker);
+                if (!$len) {
+                    $len = $this->getDefaultShortContentLength();
                 }
             }
 
@@ -80,6 +77,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 }
 
                 $content = mb_substr($content, 0, $len);
+
                 try {
                     $previousErrorState = libxml_use_internal_errors(true);
                     $dom = new \DOMDocument('1.0', 'utf-8');
@@ -132,20 +130,23 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     }
 
     /**
-     * @param $len
      * @param string $content
+     * @param $len
      * @return string
      */
-    protected function setPageBreakOnLen($len, string $content): string
+    private function setPageBreakOnLen(string $content, $len): string
     {
-        if (!$len) {
-            $len = (int)$this->scopeConfig->getValue(
-                'mfblog/post_list/shortcotent_length',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            ) ?: 2000;
+        $pageBreaker = '<!-- pagebreak -->';
+        if (!$len && false !== mb_strpos($content, $pageBreaker)) {
+            /* No length and already has page breaker */
+            return $content;
         }
 
-        $content = str_replace('<!-- pagebreak -->', '', $content);
+        if (!$len) {
+            $len = $this->getDefaultShortContentLength();
+        }
+
+        $content = str_replace($pageBreaker, '', $content);
 
         $previousErrorState = libxml_use_internal_errors(true);
         $dom = new \DOMDocument('1.0', 'utf-8');
@@ -154,7 +155,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         $textLength = 0;
 
-        $processNode = function($node) use (&$textLength, $len, $dom, &$pageBreakInserted, &$processNode) {
+        $processNode = function($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode) {
             foreach ($node->childNodes as $child) {
                 $processNode($child);
             }
@@ -173,11 +174,11 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                     }
 
                     if ($textLength + mb_strlen($word, 'utf-8') >= $len && !$pageBreakInserted) {
-                        $newText .= '<!-- pagebreak -->';
+                        $newText .= $pageBreaker;
                         $pageBreakInserted = true;
                     }
 
-                    $textLength += mb_strlen($word, 'utf-8');
+                    $textLength += mb_strlen($word, 'utf-8') + 1;
                 }
 
                 $node->nodeValue = $newText;
@@ -191,6 +192,17 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         $content = $dom->saveHTML($dom->documentElement);
 
-        return str_replace( '&lt;!-- pagebreak --&gt;', '<!-- pagebreak -->', $content);
+        return str_replace( '&lt;!-- pagebreak --&gt;', $pageBreaker, $content);
+    }
+
+    /**
+     * @return int
+     */
+    private function getDefaultShortContentLength(): int
+    {
+        return (int)$this->scopeConfig->getValue(
+            'mfblog/post_list/shortcotent_length',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) ?: 2000;
     }
 }
