@@ -871,7 +871,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             }
         }
 
-        if (version_compare($version, '2.11.4') < 0) {
+        if (version_compare($version, '2.12.1') < 0) {
             $connection->addColumn(
                 $setup->getTable('magefan_blog_post'),
                 'meta_robots',
@@ -879,7 +879,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 255,
                     'nullable' => true,
-                    'comment' => 'Tag Default Robots',
+                    'comment' => 'Default Robots',
                     'after' => 'meta_description'
                 ]
             );
@@ -890,18 +890,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 255,
                     'nullable' => true,
-                    'comment' => 'Tag Default Robots',
-                    'after' => 'meta_description'
-                ]
-            );
-            $connection->addColumn(
-                $setup->getTable('magefan_blog_author'),
-                'meta_robots',
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length' => 255,
-                    'nullable' => true,
-                    'comment' => 'Tag Default Robots',
+                    'comment' => 'Default Robots',
                     'after' => 'meta_description'
                 ]
             );
