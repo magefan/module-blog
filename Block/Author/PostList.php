@@ -74,8 +74,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $page = $this->_request->getParam($this->getPageParamName());
             if ($page < 2) {
             */
+            $robots = $author->getData('meta_robots');
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
+            } else {
                 $robots = $this->config->getAuthorRobots();
                 $this->pageConfig->setRobots($robots);
+            }
             /*
             }
 
