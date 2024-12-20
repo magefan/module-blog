@@ -184,12 +184,13 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 2000);
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 500);
         }
 
         $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
         $desc = preg_replace($stylePattern, '', $desc);
         $desc = trim(strip_tags((string)$desc));
+        $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
 
         if (mb_strlen($desc) > 200) {
             $desc = mb_substr($desc, 0, 200);

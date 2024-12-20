@@ -582,12 +582,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->hasData($key)) {
             $desc = $this->getData('meta_description');
             if (!$desc) {
-                $desc = $this->getShortFilteredContent(2000);
+                $desc = $this->getShortFilteredContent(500);
             }
 
             $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
             $desc = preg_replace($stylePattern, '', $desc);
             $desc = trim(strip_tags((string)$desc));
+            $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
 
             if (mb_strlen($desc) > 200) {
                 $desc = mb_substr($desc, 0, 200);
