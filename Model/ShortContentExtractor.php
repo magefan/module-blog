@@ -61,44 +61,37 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
             $content = $this->setPageBreakOnLen($content, $len);
 
+            $pageBreaker = '<!-- pagebreak -->';
+            $len = mb_strpos($content, $pageBreaker);
             if (!$len) {
-                $pageBreaker = '<!-- pagebreak -->';
-                $len = mb_strpos($content, $pageBreaker);
-                if (!$len) {
-                    $len = $this->getDefaultShortContentLength();
-                }
+                return $content;
             }
 
-            if ($len) {
-                /* Do not cut words */
-                while ($len < mb_strlen($content)
-                    && !in_array(mb_substr($content, $len, 1), [' ', '<', "\t", "\r", "\n"])) {
-                    $len++;
-                }
-
-                $content = mb_substr($content, 0, $len);
-
-                try {
-                    $previousErrorState = libxml_use_internal_errors(true);
-                    $dom = new \DOMDocument('1.0', 'utf-8');
-                    $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
-                    libxml_use_internal_errors($previousErrorState);
-
-                    $body = $dom->getElementsByTagName('body');
-                    if ($body && $body->length > 0) {
-                        $body = $body->item(0);
-                        $_content = new \DOMDocument('1.0', 'utf-8');
-                        foreach ($body->childNodes as $child) {
-                            $_content->appendChild($_content->importNode($child, true));
-                        }
-                        $content = $_content->saveHTML($_content->getElementsByTagName('body')[0]);
-                        $content = preg_replace('#^<body>|</body>$#', '', $content);
-                    }
-                } catch (\Exception $e) {
-                    /* Do nothing, it's OK */
-                }
+            /* Do not cut words *
+            while ($len < mb_strlen($content)
+                && !in_array(mb_substr($content, $len, 1), [' ', '<', "\t", "\r", "\n"])) {
+                $len++;
             }
+            */
 
+            $content = mb_substr($content, 0, $len);
+
+            try {
+                /* Add closing html tags */
+                $previousErrorState = libxml_use_internal_errors(true);
+                $dom = new \DOMDocument('1.0', 'utf-8');
+                $dom->loadHTML('<?xml encoding="UTF-8">' . '<body>' . $content . '</body>');
+                libxml_use_internal_errors($previousErrorState);
+
+                $body = $dom->getElementsByTagName('body');
+                if ($body && $body->length > 0) {
+                    $body = $body->item(0);
+                    $content = $dom->saveHTML($body);
+                    $content = preg_replace('#^<body>|</body>$#', '', $content);
+                }
+            } catch (\Exception $e) {
+                /* Do nothing, it's OK */
+            }
 
             if ($endCharacters === null) {
                 $endCharacters = $this->scopeConfig->getValue(
@@ -107,7 +100,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 );
             }
 
-            if ($len && $endCharacters) {
+            if ($endCharacters) {
                 $trimMask = " \t\n\r\0\x0B,.!?";
                 if ($p = strrpos($content, '</')) {
                     $p2 = $p;
@@ -197,10 +190,10 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             $processNode($body);
         }
 
-        $content = $dom->saveHTML($dom->getElementsByTagName('body')[0]);
+        $content = $dom->saveHTML($body);
+
         $content = preg_replace('#^<body>|</body>$#', '', $content);
         $content = str_replace( '&lt;!-- pagebreak --&gt;', $pageBreaker, $content);
-
         return $content;
     }
 
