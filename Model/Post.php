@@ -12,7 +12,6 @@ use Magefan\Blog\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
 use Magefan\Blog\Api\ShortContentExtractorInterface;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * Post model
@@ -163,12 +162,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $categoryRepository;
 
     /**
-     * @var TimezoneInterface|mixed
-     */
-    protected $timezone;
-
-    /**
-     * Post constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Math\Random $random
@@ -204,8 +197,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
         \Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
-        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
+        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -225,9 +217,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         );
         $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\CategoryRepositoryInterface::class
-        );
-        $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
-            \Magento\Framework\Stdlib\DateTime\TimezoneInterface::class
         );
     }
 
@@ -918,9 +907,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
-        $publishDate = $this->timezone->date($this->getData('publish_time'))->format($format);
-
-        return $publishDate;
+        return \Magefan\Blog\Helper\Data::getTranslatedDate(
+            $format,
+            $this->getData('publish_time')
+        );
     }
 
     /**
