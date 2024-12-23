@@ -5,9 +5,6 @@
  */
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
-/**
- * Class SitemapInfo
- */
 class SitemapInfo extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
 {
     /**

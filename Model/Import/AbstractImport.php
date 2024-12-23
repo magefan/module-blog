@@ -323,6 +323,4 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             return false;
         }
     }
-
-
 }

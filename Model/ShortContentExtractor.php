@@ -150,7 +150,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         $textLength = 0;
 
-        $processNode = function($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode) {
+        $processNode = function ($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode) {
 
             if ($pageBreakInserted) {
                 return;
@@ -193,7 +193,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         $content = $dom->saveHTML($body);
 
         $content = preg_replace('#^<body>|</body>$#', '', $content);
-        $content = str_replace( '&lt;!-- pagebreak --&gt;', $pageBreaker, $content);
+        $content = str_replace('&lt;!-- pagebreak --&gt;', $pageBreaker, $content);
         return $content;
     }
 

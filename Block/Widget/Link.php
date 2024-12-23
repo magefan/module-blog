@@ -11,9 +11,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magefan\Blog\Model\Url;
 
-/**
- * Class Link
- */
 class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 {
     /**

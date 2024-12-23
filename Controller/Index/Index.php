@@ -8,6 +8,7 @@
 namespace Magefan\Blog\Controller\Index;
 
 use Magento\Framework\Controller\ResultFactory;
+
 /**
  * Blog home page view
  */

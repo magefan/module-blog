@@ -10,10 +10,6 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
-/**
- * ArchiveGroupBy
- *
- */
 class ArchiveGroupBy implements \Magento\Framework\Option\ArrayInterface
 {
     /**
