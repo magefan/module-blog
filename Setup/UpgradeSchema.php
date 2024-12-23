@@ -894,6 +894,31 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'after' => 'meta_description'
                 ]
             );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'include_in_sidebar_tree',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '1',
+                    'comment' => 'Category In Sidebar Tree',
+                    'after' => 'include_in_menu'
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_category'),
+                $setup->getIdxName(
+                    'magefan_blog_category',
+                    ['include_in_sidebar_tree'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_INDEX
+                ),
+                ['include_in_sidebar_tree'],
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_INDEX
+            );
+
         }
 
         $setup->endSetup();
