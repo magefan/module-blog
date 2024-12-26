@@ -156,8 +156,10 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 return;
             }
 
-            foreach ($node->childNodes as $child) {
-                $processNode($child);
+            if ($node->childNodes) {
+                foreach ($node->childNodes as $child) {
+                    $processNode($child);
+                }
             }
 
             if ($node->nodeType === XML_TEXT_NODE) {
