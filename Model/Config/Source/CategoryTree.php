@@ -81,6 +81,7 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
     {
         if ($this->_childs === null) {
             $this->_childs =  $this->_categoryCollectionFactory->create()
+                ->setOrder('position')
                 ->getGroupedChilds();
         }
         return $this->_childs;
