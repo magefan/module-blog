@@ -535,6 +535,33 @@
                     </depends>
                 </field>
             </group>
+            <group id="archive" translate="label" type="text" sortOrder="66" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Archive</label>
+                <field id="title" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                    <comment><![CDATA[Available variables: {{month}}, {{year}}]]></comment>
+                </field>
+                <field id="description" translate="label comment" type="textarea" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Description</label>
+                    <comment><![CDATA[Available variables: {{month}}, {{year}}]]></comment>
+                </field>
+                <field id="meta_title" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Title</label>
+                    <comment><![CDATA[Available variables: {{month}}, {{year}}]]></comment>
+                </field>
+                <field id="meta_keywords" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Keywords</label>
+                    <comment><![CDATA[Enter words separated by comma. Available variables: {{month}}, {{year}}]]></comment>
+                </field>
+                <field id="meta_description" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Description</label>
+                    <comment><![CDATA[Available variables: {{month}}, {{year}}]]></comment>
+                </field>
+                <field id="robots" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Robots</label>
+                    <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
+                </field>
+            </group>
             <group id="tag" translate="label" type="text" sortOrder="67" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Tag</label>
                 <field id="robots" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
