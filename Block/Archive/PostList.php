@@ -101,21 +101,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     protected function _getTitle()
     {
         return (string)$this->replaceVars($this->_getConfigValue('meta_title') ?: $this->_getConfigValue('title'));
-
-        /*if ($this->getMonth()) {
-            $time = strtotime($this->getYear() . '-' . $this->getMonth() . '-01');
-            return sprintf(
-                __('Monthly Archives: %s %s'),
-                __(date('F', $time)),
-                date('Y', $time)
-            );
-        } else {
-            $time = strtotime($this->getYear() . '-01-01');
-            return sprintf(
-                __('Yearly Archives: %s'),
-                date('Y', $time)
-            );
-        }*/
     }
 
 
