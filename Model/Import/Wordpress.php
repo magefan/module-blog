@@ -150,7 +150,7 @@ class Wordpress extends AbstractImport
         $oldAuthors = [];
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         if ($objectManager->get(\Magento\Framework\Module\Manager::class)->isEnabled('Magefan_BlogAuthor')) {
-            $sql = 'SELECT p.ID, p.post_author, u.user_nicename as identifier, u.user_email as email, u.display_name FROM ' . $_pref . 'posts p
+            $sql = 'SELECT p.post_author, u.user_nicename as identifier, u.user_email as email, u.display_name FROM ' . $_pref . 'posts p
                 LEFT JOIN ' . $_pref . 'users u on p.post_author = u.ID
                 WHERE p.post_type = "post" GROUP BY p.post_author';
 
