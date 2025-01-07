@@ -171,7 +171,7 @@ class Wordpress extends AbstractImport
                     $this->_importedAuthorsCount++;
                     $oldAuthors[$data['post_author']] = $author;
                 } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                    unset($tag);
+                    unset($author);
                     $this->_logger->debug('Blog Author Import [' . $data['identifier'] . ']: ' . $e->getMessage());
                 }
             }
