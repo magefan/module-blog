@@ -55,17 +55,24 @@ class ScopeConfigInterfacePlugin
      */
     public function afterGetValue($subject, $result, $path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null) {
         if ($path == 'mageworx_seo/base/canonical/canonical_ignore_pages' &&  $this->request->getModuleName() == 'blog') {
-            $blogPages = $this->config->getConfig(Config::XML_PATH_DISPLAY_CANONICAL_TAG_FOR);
-            if ($blogPages == "all") {
-                $result =  $result . PHP_EOL. implode(PHP_EOL, $this->blogRoutes);
+            $blogPages = explode(",", $this->config->getConfig(Config::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
+
+            if (in_array('all', $blogPages)) {
+                if (!empty($result)) {
+                    $result .= PHP_EOL;
+                }
+                $result .= implode(PHP_EOL, $this->blogRoutes);
             } else {
-                $blogPages = explode(",", $blogPages);
-                foreach ($blogPages as $page) {
+                foreach ($blogPages as $key => $page) {
                     if (isset($this->blogRoutes[$page])) {
-                        $result .= PHP_EOL . $this->blogRoutes[$page];
+                        if (!empty($result)) {
+                            $result .= PHP_EOL;
+                        }
+                        $result .= $this->blogRoutes[$page];
                     }
                 }
             }
+            var_dump($result);exit();
         }
         return $result;
     }
