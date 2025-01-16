@@ -52,6 +52,9 @@
     <type name="Magento\AdminGws\Model\Models">
         <plugin name="magefan_blog_plugin_admingws_model_models_plugin" type="\Magefan\Blog\Plugin\Magento\AdminGws\Model\ModelsPlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Framework\App\Config\ScopeConfigInterface">
+        <plugin name="magefan_blog_plugin_framework_app_config_scopeconfiginterface" type="\Magefan\Blog\Plugin\Magento\Framework\App\Config\ScopeConfigInterfacePlugin" sortOrder="10"/>
+    </type>
 
     <virtualType name="Magefan\Blog\Block\Widget\PostLink" type="Magefan\Blog\Block\Widget\Link">
         <arguments>
