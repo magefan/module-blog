@@ -72,7 +72,6 @@ class ScopeConfigInterfacePlugin
                     }
                 }
             }
-            var_dump($result);exit();
         }
         return $result;
     }
