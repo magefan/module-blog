@@ -160,7 +160,7 @@ class Wordpress extends AbstractImport
                 if (!empty($data['display_name'])) {
                     $data['display_name'] = explode(' ', $data['display_name'], 2);
                     $data['firstname'] = !empty($data['display_name'][0]) ? $data['display_name'][0] : '';
-                    $data['lastname'] = !empty($data['display_name'][1]) ? $data['display_name'][0] : '';
+                    $data['lastname'] = !empty($data['display_name'][1]) ? $data['display_name'][1] : '';
                 }
 
                 $data['identifier'] = $this->prepareIdentifier($data['identifier']);
