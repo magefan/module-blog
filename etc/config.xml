@@ -282,6 +282,10 @@
                 <include_categories>1</include_categories>
                 <max_depth>0</max_depth>
             </top_menu>
+            <draft_autosave>
+                <enabled>1</enabled>
+                <draft_lifetime>1</draft_lifetime>
+            </draft_autosave>
             <developer>
                 <css_settings>
                     <include_all_pages>1</include_all_pages>
