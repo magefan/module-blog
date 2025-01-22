@@ -29,6 +29,7 @@ define(['jquery'], function($) {
                 }
                 
                 var style = this.getAttribute('style') ? (this.getAttribute('style') + '; ') : '';
+                source = source.replace('"', '\\"', source);
                 style = style + 'background-image: url("' + source + '");'
                 this.setAttribute('style', style);
 
