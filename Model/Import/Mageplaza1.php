@@ -30,12 +30,13 @@ class Mageplaza1 extends AbstractImport
      */
     public function execute()
     {
-        $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
-        $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_betterblog_post LIMIT 1';
+        $select = $connection->select()->from($_pref . 'mageplaza_betterblog_post')->limit(1);
+
         try {
-            $adapter->query($sql)->execute();
+            $connection->fetchAll($select);
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
@@ -44,19 +45,21 @@ class Mageplaza1 extends AbstractImport
         $oldCategories = [];
 
         /* Import categories */
-        $sql = 'SELECT
-                    t.entity_id as old_id,
-                    t.name as title,
-                    t.url_key as identifier,
-                    t.position as position,
-                    t.meta_title as meta_title,
-                    t.meta_keywords as meta_keywords,
-                    t.meta_description as meta_description,
-                    t.description as content,
-                    t.parent_id as parent_id,
-                    t.status as is_active
-                FROM ' . $_pref . 'mageplaza_betterblog_category t';
-        $result = $adapter->query($sql)->execute();
+
+        $select = $connection->select()->from(['t' => $_pref . 'mageplaza_betterblog_category'], [
+                'old_id' => 'entity_id',
+                'title' => 'name',
+                'identifier' => 'url_key',
+                'position' => 'position',
+                'meta_title' => 'meta_title',
+                'meta_keywords' => 'meta_keywords',
+                'meta_description' => 'meta_description',
+                'content' => 'description',
+                'parent_id' => 'parent_id',
+                'is_active' => 'status',
+            ]);
+        $result = $connection->fetchAll($select);
+
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -70,8 +73,13 @@ class Mageplaza1 extends AbstractImport
 
             /* Find store ids */
             $data['store_ids'] = [];
-            $s_sql = 'SELECT store_id FROM '.$_pref.'mageplaza_betterblog_category_store WHERE category_id = "'.$data['old_id'].'"';
-            $s_result =  $adapter->query($s_sql)->execute();
+
+            $s_select = $connection->select()->from($_pref . 'mageplaza_betterblog_category_store', ['store_id'])
+                ->columns()
+                ->where('category_id = ?', (int)$data['old_id']);
+
+            $s_result = $connection->fetchAll($s_select);
+
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -132,18 +140,19 @@ class Mageplaza1 extends AbstractImport
         $oldTags = [];
         $existingTags = [];
 
-        $sql = 'SELECT
-                    t.entity_id as old_id,
-                    t.name as title,
-                    t.url_key as identifier, 
-                    t.description as content,
-                    t.meta_title as meta_title,
-                    t.meta_description as meta_description,  
-                    t.meta_keywords as meta_keywords,    
-                    t.status as is_active
-                FROM ' . $_pref . 'mageplaza_betterblog_tag t';
+        $select = $connection->select()->from(['t' => $_pref . 'mageplaza_betterblog_tag'], [
+                'old_id' => 'entity_id',
+                'title' => 'name',
+                'identifier' => 'url_key',
+                'content' => 'description',
+                'meta_title' => 'meta_title',
+                'meta_description' => 'meta_description',
+                'meta_keywords' => 'meta_keywords',
+                'is_active' => 'status',
+            ]);
 
-        $result = $adapter->query($sql)->execute();
+        $result = $connection->fetchAll($select);
+
         foreach ($result as $data) {
 
             if (!$data['title']) {
@@ -153,8 +162,12 @@ class Mageplaza1 extends AbstractImport
 
             /* Find store ids */
             $data['store_ids'] = [];
-            $s_sql = 'SELECT store_id FROM '.$_pref.'mageplaza_betterblog_tag_store WHERE tag_id = "'.$data['old_id'].'"';
-            $s_result =  $adapter->query($s_sql)->execute();
+
+            $select = $connection->select()->from($_pref . 'mageplaza_betterblog_tag_store', ['store_id'])
+                ->where('tag_id = ?', (int)$data['old_id']);
+
+            $s_result = $connection->fetchAll($select);
+
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -179,14 +192,26 @@ class Mageplaza1 extends AbstractImport
         }
 
         /* Import posts */
-        $sql = 'SELECT entity_id as post_id, created_at, updated_at  FROM ' . $_pref . 'mageplaza_betterblog_post';
-        $result = $adapter->query($sql)->execute();
+
+        $select = $connection->select()
+            ->from($_pref . 'mageplaza_betterblog_post', [
+                'post_id' => 'entity_id',
+                'created_at',
+                'updated_at'
+            ]);
+
+        $result = $connection->fetchAll($select);
+
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
-            $c_sql = 'SELECT category_id FROM ' . $_pref .
-                     'mageplaza_betterblog_post_category WHERE post_id = "'.$data['post_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+
+            $select = $connection->select()
+                ->from($_pref . 'mageplaza_betterblog_post_category', ['category_id'])
+                ->where('post_id = ?', (int)$data['post_id']);
+
+            $c_result = $connection->fetchAll($select);
+
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -197,9 +222,11 @@ class Mageplaza1 extends AbstractImport
 
             /* Find post tags*/
             $postTags = [];
-            $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mageplaza_betterblog_post_tag WHERE post_id = "'.$data['post_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $select = $connection->select()->from($_pref . 'mageplaza_betterblog_post_tag', ['tag_id'])
+                ->where('post_id = ?', (int)$data['post_id']);
+
+            $t_result = $connection->fetchAll($select);
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -240,9 +267,11 @@ class Mageplaza1 extends AbstractImport
                 $post->setData($data)->save();
 
                 /* find post comment s*/
-                $sql = 'SELECT * FROM ' . $_pref .
-                       'mageplaza_betterblog_post_comment WHERE `post_id` = ' . $post->getOldId();
-                $resultComments = $adapter->query($sql)->execute();
+
+                $select = $connection->select()->from($_pref . 'mageplaza_betterblog_post_comment', ['*'])
+                    ->where('post_id = ?', (int)$post->getOldId());
+
+                $resultComments = $connection->fetchAll($select);
 
                 foreach ($resultComments as $comments) {
                     $commentData = [
@@ -283,7 +312,6 @@ class Mageplaza1 extends AbstractImport
             unset($post);
         }
         /* end */
-        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     /**
@@ -294,14 +322,18 @@ class Mageplaza1 extends AbstractImport
      */
     private function getPostAttrValue($postId, $attributeCode)
     {
-        $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
         $attribute = $this->getBlogAttributeId($attributeCode);
 
-        $sql = 'SELECT value FROM ' . $_pref . 'mageplaza_betterblog_post_' . $attribute['backend_type'] . ' WHERE entity_id = "' . ((int)$postId) . '"
-            AND attribute_id = "' . ((int)$attribute['attribute_id']) . '" LIMIT 1';
-        $result = $adapter->query($sql)->execute();
+        $select = $connection->select()->from($_pref . 'mageplaza_betterblog_post_' . $attribute['backend_type'], ['value'])
+            ->where('entity_id = ?', (int)$postId)
+            ->where('attribute_id = ?', (int)$attribute['attribute_id'])
+            ->limit(1);
+
+        $result = $connection->fetchAll($select);
+
         foreach ($result as $data) {
             return $data['value'];
         }
@@ -316,11 +348,15 @@ class Mageplaza1 extends AbstractImport
     private function getBlogEntityId()
     {
         if (null === $this->blogEntityId) {
-            $adapter = $this->getDbAdapter();
+            $connection = $this->getDbConnection();
             $_pref = $this->getPrefix();
 
-            $sql = 'SELECT entity_type_id FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code = "mageplaza_betterblog_post" LIMIT 1';
-            $result = $adapter->query($sql)->execute();
+            $select = $connection->select()->from($_pref . 'eav_entity_type', ['entity_type_id'])
+                ->where('entity_type_code = ?', 'mageplaza_betterblog_post')
+                ->limit(1);
+
+            $result = $connection->fetchAll($select);
+
             foreach ($result as $data) {
                 $this->blogEntityId = (int)$data['entity_type_id'];
                 break;
@@ -343,12 +379,17 @@ class Mageplaza1 extends AbstractImport
         if (!isset($this->blogAttributes[$attributeCode])) {
             $this->blogAttributes[$attributeCode] = [];
 
-            $adapter = $this->getDbAdapter();
+            $connection = $this->getDbConnection();
             $_pref = $this->getPrefix();
 
-            $sql = 'SELECT * FROM ' . $_pref . 'eav_attribute WHERE entity_type_id = "' . $this->getBlogEntityId() . '" 
-                 AND attribute_code = "' . $attributeCode . '" LIMIT 1';
-            $result = $adapter->query($sql)->execute();
+            $select = $connection->select()
+                ->from($_pref . 'eav_attribute')
+                ->where('entity_type_id = ?', $this->getBlogEntityId())
+                ->where('attribute_code = ?', $attributeCode)
+                ->limit(1);
+
+            $result = $connection->fetchAll($select);
+
             foreach ($result as $data) {
                 $this->blogAttributes[$attributeCode] = $data;
                 break;

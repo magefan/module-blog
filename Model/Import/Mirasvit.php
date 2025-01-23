@@ -21,12 +21,14 @@ class Mirasvit extends AbstractImport
 
     public function execute()
     {
-        $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
-        $sql = 'SELECT * FROM ' . $_pref . 'mst_blog_post_entity LIMIT 1';
+        $select = $connection->select()
+            ->from($_pref . 'mst_blog_post_entity')->limit(1);
+
         try {
-            $adapter->query($sql)->execute();
+            $connection->fetchAll($select);
         } catch (\Exception $e) {
             throw new \Exception(__('Mirasvit Blog Extension not detected.'), 1);
         }
@@ -35,12 +37,15 @@ class Mirasvit extends AbstractImport
         $oldCategories = [];
 
         /* Import categories */
-        $sql = 'SELECT
-                    t.entity_id as old_id,
-                    t.position as position,
-                    t.parent_id as parent_id
-                FROM ' . $_pref . 'mst_blog_category_entity t';
-        $result = $adapter->query($sql)->execute();
+
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mst_blog_category_entity'], [
+                'old_id' => 'entity_id',
+                'position' => 'position',
+                'parent_id' => 'parent_id'
+            ]);
+        $result = $connection->fetchAll($select);
+
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -117,14 +122,16 @@ class Mirasvit extends AbstractImport
         $oldTags = [];
         $existingTags = [];
 
-        $sql = 'SELECT
-                    t.tag_id as old_id,
-                    t.name as title,
-                    t.url_key as identifier,    
-                    1 as is_active
-                FROM ' . $_pref . 'mst_blog_tag t';
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mst_blog_tag'], [
+                'old_id' => 'tag_id',
+                'title' => 'name',
+                'identifier' => 'url_key',
+                'is_active' => new \Zend_Db_Expr('1')
+            ]);
 
-        $result = $adapter->query($sql)->execute();
+        $result = $connection->fetchAll($select);
+
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -159,15 +166,20 @@ class Mirasvit extends AbstractImport
         }
 
         /* Import posts */
-        $sql = 'SELECT
-                    t.entity_id as old_id,
-                    t.author_id as author_id,
-                    t.created_at as creation_time,
-                    t.created_at as publish_time,
-                    t.updated_at as update_time  
-                FROM ' . $_pref . 'mst_blog_post_entity t WHERE type="post"';
 
-        $result = $adapter->query($sql)->execute();
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mst_blog_post_entity'], [
+            'old_id' => 'entity_id',
+                'author_id' => 'author_id',
+                'creation_time' => 'created_at',
+                'publish_time' => 'created_at',
+                'update_time' => 'updated_at',
+            ])
+            ->where('type = ?', 'post');
+
+        $result = $connection->fetchAll($select);
+
+
         foreach ($result as $data) {
 
             $map = [
@@ -202,13 +214,13 @@ class Mirasvit extends AbstractImport
 
             /* Find post categories*/
             $postCategories = [];
-            $c_sql = 'SELECT 
-                          category_id 
-                      FROM 
-                          ' . $_pref . 'mst_blog_category_post 
-                      WHERE 
-                          post_id = "'.$data['old_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+
+            $c_select = $connection->select()
+                ->from(['c' => $_pref . 'mst_blog_category_post'], ['category_id'])
+                ->where('post_id = ?', $data['old_id']);
+
+            $c_result = $connection->fetchAll($c_select);
+
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -220,9 +232,12 @@ class Mirasvit extends AbstractImport
 
             /* Find post tags*/
             $postTags = [];
-            $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mst_blog_tag_post WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_select = $connection->select()
+                ->from(['tp' => $_pref . 'mst_blog_tag_post'], ['tag_id'])
+                ->where('post_id = ?', $data['old_id']);
+
+            $t_result = $connection->fetchAll($t_select);
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -236,9 +251,12 @@ class Mirasvit extends AbstractImport
             /* Find post products*/
             $data['links'] = [];
             $postProducts = [];
-            $t_sql = 'SELECT product_id FROM ' . $_pref . 'mst_blog_post_product WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_select = $connection->select()
+                ->from($_pref . 'mst_blog_post_product', ['product_id'])
+                ->where('post_id = ?', $data['old_id']);
+
+            $t_result = $connection->fetchAll($t_select);
 
             foreach ($t_result as $t_data) {
                 $id = $t_data['product_id'];
@@ -251,8 +269,12 @@ class Mirasvit extends AbstractImport
 
             /* Find store ids */
             $storeIds = [];
-            $sql2 = 'SELECT store_id FROM  ' . $_pref . 'mst_blog_store_post WHERE post_id=' . $data['old_id'];
-            $result2 = $adapter->query($sql2)->execute();
+
+            $select2 = $connection->select()
+                ->from($_pref . 'mst_blog_store_post', ['store_id'])
+                ->where('post_id = ?', $data['old_id']);
+
+            $result2 = $connection->fetchAll($select2);
             foreach ($result2 as $data2) {
                 $storeIds[] = $data2['store_id'];
             }
@@ -270,20 +292,21 @@ class Mirasvit extends AbstractImport
             unset($post);
         }
         /* end */
-        $adapter->getDriver()->getConnection()->disconnect();
     }
 
     protected function getAttributValue($entitytTypeCode, $entitytId, $attributeCode)
     {
-        $adapter = $this->getDbAdapter();
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
         if (!isset($this->entityTypeId[$entitytTypeCode])) {
-            $sql = 'SELECT
-                    entity_type_id
-                FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code="' . $entitytTypeCode . '"';
 
-            $result = $adapter->query($sql)->execute();
+            $select = $connection->select()
+                ->from($_pref . 'eav_entity_type', ['entity_type_id'])
+                ->where('entity_type_code = ?', $entitytTypeCode);
+
+            $result = $connection->fetchAll($select);
+
             if (count($result)) {
                 foreach ($result as $data) {
                     $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
@@ -302,10 +325,13 @@ class Mirasvit extends AbstractImport
 
         if (!isset($this->entityTypeAttributes[$entitytTypeCode])) {
             $this->entityTypeAttributes[$entitytTypeCode] = [];
-            $sql = 'SELECT
-                    *
-                FROM ' . $_pref . 'eav_attribute WHERE entity_type_id=' . $entityTypeId;
-            $result = $adapter->query($sql)->execute();
+
+            $select = $connection->select()
+                ->from($_pref . 'eav_attribute')
+                ->where('entity_type_id = ?', $entityTypeId);
+
+            $result = $connection->fetchAll($select);
+
             foreach ($result as $data) {
                 $this->entityTypeAttributes[$entitytTypeCode][$data['attribute_code']] = $data;
             }
@@ -317,12 +343,14 @@ class Mirasvit extends AbstractImport
 
         $attribute = $this->entityTypeAttributes[$entitytTypeCode][$attributeCode];
 
-        $sql = 'SELECT
-                    value
-                FROM ' . $_pref . 'mst_'.$entitytTypeCode.'_entity_' . $attribute['backend_type'] . ' WHERE store_id = 0
-                   AND attribute_id = ' . $attribute['attribute_id'] . '
-                   AND entity_id=' . $entitytId;
-        $result = $adapter->query($sql)->execute();
+        $select = $connection->select()
+            ->from($_pref . 'mst_' . $entitytTypeCode . '_entity_' . $attribute['backend_type'], ['value'])
+            ->where('store_id = ?', 0)
+            ->where('attribute_id = ?', $attribute['attribute_id'])
+            ->where('entity_id = ?', $entitytId);
+
+        $result = $connection->fetchAll($select);
+
         if (count($result)) {
             foreach ($result as $data) {
                 return $data['value'];
