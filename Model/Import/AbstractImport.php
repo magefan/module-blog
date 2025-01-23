@@ -275,7 +275,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             } catch (\Exception $e) {
                 throw  new \Exception("Failed connect to the database.");
             }
-            
+
         }
         return $this->dbAdapter;
     }
@@ -302,7 +302,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         if (!$hasFormat) {
             $imageName .= '.jpg';
         }
-        
+
         $imagePath = $mediaPath . '/' . $imageName;
         $imageSource = false;
         if (!$this->file->fileExists($imagePath)) {
@@ -322,5 +322,68 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         } else {
             return false;
         }
+    }
+
+    protected function parseContent($content)
+    {
+
+        $content = str_replace('<!--more-->', '<!-- pagebreak -->', $content);
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+        $fileSystem = $objectManager->create(\Magento\Framework\Filesystem::class);
+        $mediaPath = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath() . '/wysiwyg/blog';
+        @mkdir($mediaPath, 0777, true);
+
+        foreach (['/src="(.*)"/Ui', '/src=\'(.*)\'/Ui'] as $patern) {
+
+            $matches = [];
+            preg_match_all($patern, $content, $matches);
+
+
+            if (!empty($matches[1])) {
+
+                foreach ($matches[1] as $src) {
+                    //$src = $matches[1];
+                    $imageName = explode('?', $src);
+                    $imageName = explode('/', $imageName[0]);
+                    $imageName = end($imageName);
+                    $imageName = str_replace(['%20', ' '], '-', $imageName);
+                    $imageName = urldecode($imageName);
+                    $imagePath = $mediaPath . '/' . $imageName;
+                    if (!file_exists($imagePath)) {
+
+                        if ($imageSource = @file_get_contents($src)) {
+                            file_put_contents(
+                                $imagePath,
+                                $imageSource
+                            );
+                        }
+                    } else {
+                        $imageSource = true;
+                    }
+
+                    if ($imageSource) {
+                        $content = str_replace($src, '{{media url=\'wysiwyg/blog/' . $imageName . '\'}}', $content);
+                    } else {
+                        $content = str_replace($src, 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', $content);
+                    }
+                }
+            }
+
+        }
+
+        $content = preg_replace(
+            '/(srcset=".*")/Ui',
+            's',
+            $content
+        );
+        $content = preg_replace(
+            '/(srcset=\'.*\')/Ui',
+            's',
+            $content
+        );
+
+        return $content;
     }
 }

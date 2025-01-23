@@ -318,7 +318,7 @@ class Wordpress extends AbstractImport
             $creationTime = strtotime((string)$data['post_date_gmt']);
 
             $content = $data['post_content'];
-            $content = str_replace('<!--more-->', '<!-- pagebreak -->', $content);
+            $content = $this->parseContent($content);
 
             $content = preg_replace(
                 '/src=[\'"]((http:\/\/|https:\/\/|\/\/)(.*)|(\s|"|\')|(\/[\d\w_\-\.]*))\/wp-content\/uploads(.*)((\.jpg|\.jpeg|\.gif|\.png|\.tiff|\.tif|\.svg)|(\s|"|\'))[\'"\s]/Ui',
