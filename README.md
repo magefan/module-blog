@@ -306,6 +306,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 
 ### [Magento 2 Marketing Automation Extensions](https://magefan.com/magento-2-extensions/magento-marketing-automation)
 
+  * [Magento 2 Cookie Consent](https://magefan.com/magento-2-cookie-consent)
   * [Magento 2 Product Labels](https://magefan.com/magento-2-product-labels)
   * [Magento 2 Base Price](https://magefan.com/magento-2-base-price)
   * [Magento 2 Dynamic Categories](https://magefan.com/magento-2-dynamic-categories)
@@ -342,4 +343,4 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Shopify Blog](https://apps.shopify.com/magefan-blog)
   * [Shopify Size Chart](https://magefan.com/shopify/apps/size-chart)
   * [Shopify Google Indexer](https://magefan.com/shopify/apps/google-indexing)
-   
+  * [Shopify Product Feeds](https://magefan.com/shopify/apps/product-feed)   

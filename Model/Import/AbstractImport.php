@@ -137,6 +137,8 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactory $connectionFactory,
+        \Magento\Framework\Filesystem $filesystem,
+        \Magento\Framework\Filesystem\Io\File $file,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
@@ -149,7 +151,8 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         $this->_commentFactory = $commentFactory;
         $this->_storeManager = $storeManager;
         $this->connectionFactory = $connectionFactory;
-
+        $this->fileSystem = $filesystem;
+        $this->file = $file;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_authorFactory = $authorFactory ?: $objectManager->get(\Magefan\Blog\Api\AuthorInterfaceFactory::class);
         $this->productRepository = $productRepository ?: $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
@@ -267,5 +270,4 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
 
         return $this->connectionFactory->create($connectionConf);
     }
-
 }

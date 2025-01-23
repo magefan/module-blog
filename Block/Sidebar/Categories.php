@@ -55,6 +55,7 @@ class Categories extends Template implements IdentityInterface
             $array = $this->_categoryCollection
                 ->addActiveFilter()
                 ->addStoreFilter($this->_storeManager->getStore()->getId())
+                ->addFieldToFilter('include_in_sidebar_tree', 1)
                 ->setOrder('position')
                 ->getTreeOrderedArray();
             foreach ($array as $key => $item) {

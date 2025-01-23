@@ -54,6 +54,11 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
                 }
             }
 
+            $robots = $post->getData('meta_robots');
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
+            }
+
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
             if ($pageMainTitle) {
                 $pageMainTitle->setPageTitle(

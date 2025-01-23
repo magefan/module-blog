@@ -8,9 +8,6 @@
 
 namespace Magefan\Blog\Plugin\Magento\AdminGws\Model;
 
-/**
- * Class ModelsPlugin class
- */
 class ModelsPlugin
 {
     /**

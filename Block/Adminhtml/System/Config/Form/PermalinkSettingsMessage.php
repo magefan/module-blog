@@ -6,9 +6,6 @@
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
-/**
- * Class PermalinkSettingsMessage
- */
 class PermalinkSettingsMessage extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
 {
     /**

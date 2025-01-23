@@ -152,7 +152,7 @@
                 <div class="share-elements">
                     <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
                         <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
-                            <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Titter' ? "X" : $network)) ?>">
+                            <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                                 <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                             </div>
                             <div class="label"><?= $block->escapeHtml(__('Share on %1',  $network == 'Twitter' ? "X" : $network)) ?></div>

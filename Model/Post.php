@@ -162,7 +162,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $categoryRepository;
 
     /**
-     * Post constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Math\Random $random
@@ -514,7 +513,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         /* Fix for custom themes that send wrong parameters to this function, and that brings the error */
         if (is_object($len)) {
-             $len = null;
+            $len = null;
         }
         /* End fix */
 
@@ -572,12 +571,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->hasData($key)) {
             $desc = $this->getData('meta_description');
             if (!$desc) {
-                $desc = $this->getShortFilteredContent(200);
+                $desc = $this->getShortFilteredContent(500);
             }
 
             $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
             $desc = preg_replace($stylePattern, '', $desc);
             $desc = trim(strip_tags((string)$desc));
+            $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
 
             if (mb_strlen($desc) > 200) {
                 $desc = mb_substr($desc, 0, 200);
@@ -1025,7 +1025,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $tags = [];
             foreach ($this->getRelatedTags() as $tag) {
                 $tags[] = $tag->getDynamicData(
-                    // isset($fields['tags']) ? $fields['tags'] : null
+                // isset($fields['tags']) ? $fields['tags'] : null
                 );
             }
             $data['tags'] = $tags;
@@ -1065,7 +1065,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (null === $fields || array_key_exists('author', $fields)) {
             if ($author = $this->getAuthor()) {
                 $data['author'] = $author->getDynamicData(
-                    //isset($fields['author']) ? $fields['author'] : null
+                //isset($fields['author']) ? $fields['author'] : null
                 );
             }
         }

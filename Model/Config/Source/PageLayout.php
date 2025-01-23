@@ -8,9 +8,6 @@ namespace Magefan\Blog\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class PageLayout
- */
 class PageLayout implements OptionSourceInterface
 {
     /**

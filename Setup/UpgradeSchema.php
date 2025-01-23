@@ -828,7 +828,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
-      
+
         if (version_compare($version, '2.11.3') < 0) {
             if ($connection->isTableExists($setup->getTable('magefan_blog_category'))) {
                 $connection->addIndex(
@@ -869,6 +869,56 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     ['publish_time']
                 );
             }
+        }
+
+        if (version_compare($version, '2.12.1') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'meta_robots',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Default Robots',
+                    'after' => 'meta_description'
+                ]
+            );
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'meta_robots',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Default Robots',
+                    'after' => 'meta_description'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_category'),
+                'include_in_sidebar_tree',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'default' => '1',
+                    'comment' => 'Category In Sidebar Tree',
+                    'after' => 'include_in_menu'
+                ]
+            );
+
+            $connection->addIndex(
+                $setup->getTable('magefan_blog_category'),
+                $setup->getIdxName(
+                    'magefan_blog_category',
+                    ['include_in_sidebar_tree'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_INDEX
+                ),
+                ['include_in_sidebar_tree'],
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_INDEX
+            );
+
         }
 
         $setup->endSetup();

@@ -157,6 +157,37 @@ class Wordpress extends AbstractImport
             }
         }
 
+        /* Import authors */
+        $oldAuthors = [];
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        if ($objectManager->get(\Magento\Framework\Module\Manager::class)->isEnabled('Magefan_BlogAuthor')) {
+            $sql = 'SELECT p.post_author, u.user_nicename as identifier, u.user_email as email, u.display_name FROM ' . $_pref . 'posts p
+                LEFT JOIN ' . $_pref . 'users u on p.post_author = u.ID
+                WHERE p.post_type = "post" GROUP BY p.post_author';
+
+            $result = $adapter->query($sql)->execute();
+            foreach ($result as $data) {
+                /* Prepare author data */
+                if (!empty($data['display_name'])) {
+                    $data['display_name'] = explode(' ', $data['display_name'], 2);
+                    $data['firstname'] = !empty($data['display_name'][0]) ? $data['display_name'][0] : '';
+                    $data['lastname'] = !empty($data['display_name'][1]) ? $data['display_name'][1] : '';
+                }
+
+                $data['identifier'] = $this->prepareIdentifier($data['identifier']);
+                $author = $this->_authorFactory->create();
+                try {
+                    /* Initial saving */
+                    $author->setData($data)->save();
+                    $this->_importedAuthorsCount++;
+                    $oldAuthors[$data['post_author']] = $author;
+                } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                    unset($author);
+                    $this->_logger->debug('Blog Author Import [' . $data['identifier'] . ']: ' . $e->getMessage());
+                }
+            }
+        }
+
         /* Import posts */
 
         $select = $connection->select()
@@ -305,7 +336,7 @@ class Wordpress extends AbstractImport
             $creationTime = strtotime((string)$data['post_date_gmt']);
 
             $content = $data['post_content'];
-            $content = str_replace('<!--more-->', '<!-- pagebreak -->', $content);
+            $content = $this->parseContent($content);
 
             $content = preg_replace(
                 '/src=[\'"]((http:\/\/|https:\/\/|\/\/)(.*)|(\s|"|\')|(\/[\d\w_\-\.]*))\/wp-content\/uploads(.*)((\.jpg|\.jpeg|\.gif|\.png|\.tiff|\.tif|\.svg)|(\s|"|\'))[\'"\s]/Ui',
@@ -333,6 +364,7 @@ class Wordpress extends AbstractImport
                 'categories' => $postCategories,
                 'tags' => $postTags,
                 'featured_img' => $data['featured_img'],
+                'author_id' => (isset($data['post_author']) && isset($oldAuthors[$data['post_author']])) ? $oldAuthors[$data['post_author']]->getId() : null,
             ];
 
             $data['identifier'] = $this->prepareIdentifier($data['identifier']);
