@@ -1092,6 +1092,18 @@
                 </field>
             </group>
 
+            <group id="draft_autosave" translate="label" type="text" sortOrder="990" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Draft Autosave (Blog Extra)</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[When enabled blog entity changes will be saved automatically as a draft before pressing the save button.]]></comment>
+                </field>
+                <field id="draft_lifetime" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Draft Lifetime (in hours)</label>
+                </field>
+            </group>
+
             <group id="developer" translate="label" type="text" sortOrder="990" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Developer</label>
                 <group id="css_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
