@@ -114,6 +114,16 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $connectionFactory;
 
     /**
+     * @var \Magento\Framework\Filesystem
+     */
+    protected $fileSystem;
+
+    /**
+     * @var \Magento\Framework\Filesystem\Io\File
+     */
+    protected $file;
+
+    /**
      * AbstractImport constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
@@ -122,6 +132,9 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactory $connectionFactory
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Framework\Filesystem\Io\File $file
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param array $data
@@ -269,5 +282,119 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         }
 
         return $this->connectionFactory->create($connectionConf);
+    }
+
+    protected function getFeaturedImgBySrc($src)
+    {
+        $mediaPath = $this->fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath() . '/magefan_blog';
+
+        $this->file->mkdir($mediaPath, 0775);
+
+        $imageName = explode('?', $src);
+        $imageName = explode('#', $src);
+        $imageName = explode('/', $imageName[0]);
+        $imageName = end($imageName);
+        $imageName = str_replace(['%20', ' '], '-', $imageName);
+        $imageName = urldecode($imageName);
+
+        $hasFormat = false;
+        foreach (['jpg','jpeg', 'png', 'gif', 'webp'] as $format) {
+            if (false !== stripos($imageName, $format)) {
+                $hasFormat = true;
+                break;
+            }
+        }
+        if (!$hasFormat) {
+            $imageName .= '.jpg';
+        }
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $formatIdentifier = $objectManager->get(\Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator::class);
+        $imageNameWithoutFormat = explode('.', $imageName);
+        $preparedImageName = $formatIdentifier->formatIdentifier($imageNameWithoutFormat[0]);
+        $imageName = $preparedImageName . '.' . $imageNameWithoutFormat[1];
+
+        $imagePath = $mediaPath . '/' . $imageName;
+        $imageSource = false;
+        if (!$this->file->fileExists($imagePath)) {
+            try {
+                $imageData = $this->file->read($src);
+                $this->file->write($imagePath, $imageData);
+                $imageSource = true;
+            } catch (\Exception $e) {
+                $imageSource = false;
+            }
+        } else {
+            $imageSource = true;
+        }
+
+        if ($imageSource) {
+            return 'magefan_blog/' . $imageName;
+        } else {
+            return false;
+        }
+    }
+
+    protected function parseContent($content)
+    {
+        $content = str_replace('<!--more-->', '<!-- pagebreak -->', $content);
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+        $fileSystem = $objectManager->create(\Magento\Framework\Filesystem::class);
+        $mediaPath = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath() . '/wysiwyg/blog';
+        @mkdir($mediaPath, 0777, true);
+
+        foreach (['/src="(.*)"/Ui', '/src=\'(.*)\'/Ui'] as $patern) {
+
+            $matches = [];
+            preg_match_all($patern, $content, $matches);
+
+
+            if (!empty($matches[1])) {
+
+                foreach ($matches[1] as $src) {
+                    //$src = $matches[1];
+                    $imageName = explode('?', $src);
+                    $imageName = explode('#', $src);
+                    $imageName = explode('/', $imageName[0]);
+                    $imageName = end($imageName);
+                    $imageName = str_replace(['%20', ' '], '-', $imageName);
+                    $imageName = urldecode($imageName);
+                    $imagePath = $mediaPath . '/' . $imageName;
+                    if (!file_exists($imagePath)) {
+
+                        if ($imageSource = @file_get_contents($src)) {
+                            file_put_contents(
+                                $imagePath,
+                                $imageSource
+                            );
+                        }
+                    } else {
+                        $imageSource = true;
+                    }
+
+                    if ($imageSource) {
+                        $content = str_replace($src, '{{media url=\'wysiwyg/blog/' . $imageName . '\'}}', $content);
+                    } else {
+                        $content = str_replace($src, 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', $content);
+                    }
+                }
+            }
+
+        }
+
+        $content = preg_replace(
+            '/(srcset=".*")/Ui',
+            's',
+            $content
+        );
+        $content = preg_replace(
+            '/(srcset=\'.*\')/Ui',
+            's',
+            $content
+        );
+
+        return $content;
     }
 }
