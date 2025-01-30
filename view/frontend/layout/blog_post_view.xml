@@ -61,6 +61,7 @@
                     <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
                 </container>
             </block>
+            <block class="Magefan\Blog\Block\Post\CustomCss" name="magefan.blog.post.custom.css" />
         </referenceContainer>
     </body>
 </page>
