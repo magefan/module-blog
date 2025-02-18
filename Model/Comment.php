@@ -149,6 +149,16 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
+     * Retrieve if is visible on store
+     * @return bool
+     */
+    public function isVisibleOnStore($storeId)
+    {
+        return $this->isActive()
+            && (null === $storeId || array_intersect([0, $storeId], [$this->getStoreId()]));
+    }
+
+    /**
      * Retrieve post
      * @return \Magefan\Blog\Model\Post | false
      */
