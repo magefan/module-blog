@@ -12,6 +12,9 @@
     <update handle="editor"/>
     <update handle="blog_update_info"/>
     <body>
+        <referenceContainer name="after.body.start">
+            <block name="mf_versions" template="Magefan_Blog::form/versionsManager.phtml"/>
+        </referenceContainer>
         <referenceContainer name="content">
             <uiComponent name="blog_category_form"/>
             <block name="mfblog.tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />

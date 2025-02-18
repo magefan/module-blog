@@ -1,0 +1,146 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ *  @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ */
+?>
+<?php $script = ''; ?>
+
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$getModuleVersion = $objectManager->get(\Magefan\Community\Api\GetModuleVersionInterface::class);
+
+$currentPlan = 'Basic';
+
+if ($getModuleVersion->execute('Magefan_BlogExtra')) {
+    return;
+} elseif ($getModuleVersion->execute('Magefan_BlogPlus')) {
+    $currentPlan = 'Plus';
+}
+?>
+
+<?php
+$script .= "
+    var versionsManager = {
+        _currentPlan: '" . $currentPlan . "',
+        _selector: {
+            'Extra': [
+                '[name=\"end_time\"]',
+                '[data-index=\"coauthors\"]',
+                '[name=\"posts_sort_by\"]',
+                '[name=\"posts_list_template\"]'
+            ],";
+
+if ($currentPlan != 'Plus') {
+    $script .= "
+            'Plus': [
+                '[name=\"publish_time\"]',
+                '[data-index=\"groups\"]',//
+                '[name=\"featured_list_img_alt\"]',
+                '[data-index=\"enable_comments\"]',//
+                '[name=\"url_key_create_redirect\"]',
+                '[upload-area-id=\"featured_list_img\"]',
+                '#blog_post_formrule_conditions_fieldset_',
+                '[data-index=\"display_on_product\"]',
+                '[data-index=\"display_on_post\"]',
+                '[data-index=\"auto_related\"]',
+                '[data-index=\"related_by_rule\"]',
+                '[data-index=\"bottom_content\"]',
+                '.admin__fieldset-section.category',
+                '[upload-area-id=\"category_img\"]',
+                '[upload-area-id=\"tag_img\"]',
+                '[name=\"category_img_alt\"]',
+                '[name=\"tag_img_alt\"]'
+            ]";
+}
+
+$script .= "
+        },
+
+        initListener: function () {
+            var uploadElements = [
+                '[upload-area-id=\"featured_list_img\"]',
+                '[upload-area-id=\"category_img\"]',
+                '[upload-area-id=\"tag_img\"]'
+            ];
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    for (let plan in versionsManager._selector) {
+                        let planFeatures = versionsManager._selector[plan];
+
+                        planFeatures.forEach(selector => {
+                            var elements = document.querySelectorAll(selector);
+                            if (elements.length > 0) {
+                                elements.forEach(element => {
+
+                                    if (uploadElements.includes(selector)) {
+                                        const clonedElement = element.cloneNode(true);
+                                        element.parentNode.replaceChild(clonedElement, element);
+                                        element = clonedElement;
+                                    }
+                                    const handleEvent = function (event) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                        if (element.tagName === 'SELECT') {
+                                            var selectedOptionText = this.options[this.selectedIndex].text;
+                                            if (selectedOptionText.includes('Blog '+ plan)) {
+                                                versionsManager.showAlert(plan);
+                                                this.selectedIndex = 0;
+                                                this.dispatchEvent(new Event('change', { bubbles: true }));
+                                            }
+                                        } else {
+                                            this.value = '';
+                                            if (versionsManager._currentPlan !== plan) {
+                                                versionsManager.showAlert(plan);
+                                            }
+                                        }
+                                    };
+
+                                    if (element.tagName === 'SELECT') {
+                                        element.addEventListener('change', handleEvent);
+                                    } else {
+                                        element.addEventListener('click', handleEvent);
+                                    }
+                                });
+
+                                versionsManager._selector[plan] = versionsManager._selector[plan].filter(item => item !== selector);
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+        },
+
+        showAlert: function (extensionPlan) {
+            require(['jquery', 'Magento_Ui/js/modal/alert'], function($, alert) {
+                if (extensionPlan === 'Plus') {
+                    extensionPlan = 'Plus or Extra';
+                }
+                alert({
+                    title: 'You cannot use this option.',
+                    content: 'This feature is available in' + ' <strong>' + extensionPlan + '</strong> plan only.',
+                    buttons: [{
+                        text: 'Upgrade Plan Now',
+                        class: 'action primary accept',
+                        click: function () {
+                            window.open('https://magefan.com');
+                        }
+                    }]
+                });
+            });
+        }
+    };
+
+    versionsManager.initListener();
+
+   ";
+?>
+
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
