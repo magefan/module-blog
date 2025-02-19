@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Magefan\Blog\Model;
 
 use Magefan\Community\Api\GetModuleVersionInterface;
-use Magento\Framework\Escaper;
 use Magefan\Blog\Api\VersionInterface;
 
 /**
@@ -25,26 +24,13 @@ class Version implements VersionInterface
     protected $getModuleVersion;
 
     /**
-     * @var Escaper
-     */
-    protected $_escaper;
-
-    /**
-     * @var string
-     */
-    protected $_moduleName;
-
-    /**
      * Version constructor.
      * @param GetModuleVersionInterface $getModuleVersion
-     * @param Escaper $escaper
      */
     public function __construct(
-        GetModuleVersionInterface $getModuleVersion,
-        Escaper $escaper
+        GetModuleVersionInterface $getModuleVersion
     ) {
         $this->getModuleVersion = $getModuleVersion;
-        $this->_escaper = $escaper;
     }
 
     /**
