@@ -12,11 +12,12 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Community\Api\GetModuleVersionInterface;
 use Magento\Framework\Escaper;
+use Magefan\Blog\Api\VersionInterface;
 
 /**
  * Version model
  */
-class Version
+class Version implements VersionInterface
 {
     /**
      * @var GetModuleVersionInterface
