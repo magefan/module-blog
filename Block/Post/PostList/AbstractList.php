@@ -265,4 +265,16 @@ abstract class AbstractList extends Template implements IdentityInterface
     {
         return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }
+
+    /**
+     * Retrieve 1 if display reading time is enabled
+     * @return int
+     */
+    public function readingTimeEnabled()
+    {
+        return (int) $this->_scopeConfig->getValue(
+            'mfblog/post_view/reading_time/enabled',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 }
