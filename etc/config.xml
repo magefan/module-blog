@@ -108,6 +108,7 @@
                 <template>list-modern</template>
                 <posts_per_page>10</posts_per_page>
                 <shortcotent_length>1000</shortcotent_length>
+                <html_allowed>1</html_allowed>
                 <lazyload_enabled>0</lazyload_enabled>
                 <lazyload_padding>200</lazyload_padding>
             </post_list>

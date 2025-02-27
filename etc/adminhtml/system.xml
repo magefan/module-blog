@@ -440,6 +440,10 @@
                 <field id="shortcotent_length" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default Short Content Length</label>
                 </field>
+                <field id="html_allowed" translate="label comment" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow HTML Tags In Short Content</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
                 <field id="lazyload_enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Use Lazy Loading</label>
                     <source_model>Magefan\Blog\Model\Config\Source\LazyLoad</source_model>

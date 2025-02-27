@@ -59,6 +59,18 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                 (string) $content ?: ''
             );
 
+            $htmlAllowed = $this->scopeConfig->getValue(
+                'mfblog/post_list/html_allowed',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$htmlAllowed) {
+                foreach (['style', 'script'] as $tagToRemove) {
+                    $content = preg_replace("~\<" . $tagToRemove . "(.*)\>(.*)\<\/" . $tagToRemove . "\>~", '', $content);
+                }
+                $content = trim(strip_tags((string)$content));
+            }
+
             $content = $this->setPageBreakOnLen($content, $len);
 
             $pageBreaker = '<!-- pagebreak -->';
