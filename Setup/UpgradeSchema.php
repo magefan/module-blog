@@ -920,7 +920,18 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
 
         }
-
+        if (version_compare($version, '2.12.3') < 0) {
+            $connection->addColumn(
+                $setup->getTable('magefan_blog_post'),
+                'custom_css',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'nullable' => true,
+                    'comment' => 'Custom CSS',
+                    'after' => 'layout_update_xml'
+                ]
+            );
+        }
         $setup->endSetup();
     }
 }
