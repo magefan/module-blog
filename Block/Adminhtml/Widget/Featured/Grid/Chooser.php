@@ -204,7 +204,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             $chooserId .
             'advice-container" class="hidden"></div>';
 
-        $script = 'function keyupFunctionMf() {
+        $script = 'window.keyupFunctionMf = function() {
                     var inputV = document.getElementById("' . $chooserId . '_input").value;
                     ' . $chooserId . '.setElementValue(inputV);
                     ' . $chooserId . '.setElementLabel(inputV);    
@@ -244,6 +244,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             });
             ';
         $html .= $this->mfSecureRenderer->renderTag('script', [], $script, false);
+//        $html .= $script;
 
         return $html;
     }
