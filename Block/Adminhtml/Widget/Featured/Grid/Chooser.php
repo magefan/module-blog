@@ -244,7 +244,6 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             });
             ';
         $html .= $this->mfSecureRenderer->renderTag('script', [], $script, false);
-//        $html .= $script;
 
         return $html;
     }
