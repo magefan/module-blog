@@ -118,14 +118,13 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                                     <?php } ?>
                                                 <?php } ?>
                                             <?php } ?>
-                                            <span>-</span>
                                         </span>
                                     <?php } ?>
                                 <?php } ?>
 
                                 <!-- post date -->
                                 <?php if ($_post->isPublishDateEnabled()) { ?>
-                                    <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                    <span class="post-date"><span>-</span> <?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                                 <?php } ?>
 
                                 <!-- post view -->
