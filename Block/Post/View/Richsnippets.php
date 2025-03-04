@@ -109,6 +109,7 @@ class Richsnippets extends Opengraph
                     'name' => $author->getTitle(),
                     'url' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl(),
                     'mainEntityOfPage' => [
+                        '@type' => 'WebPage',
                         '@id' => $authorPageEnabled ? $author->getAuthorUrl() : $this->getUrl(),
                     ]
                 ];
