@@ -192,8 +192,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
         $desc = trim(strip_tags((string)$desc));
         $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
 
-        if (mb_strlen($desc) > 200) {
-            $desc = mb_substr($desc, 0, 200);
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 0, 160);
+            $lastSpace = mb_strrpos($desc, ' ');
+            if ($lastSpace !== false) {
+                $desc = mb_substr($desc, 0, $lastSpace) . '...';
+            }
         }
 
         return trim($desc);
