@@ -114,4 +114,113 @@
             <resource ref="anonymous" />
         </resources>
     </route>
+
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/tag" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"value_1\",\"param_2\":\"value_2\",\"param_n\":\"value_n\"}"}' -->
+    <route url="/V1/blog/tag" method="POST">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/tag/:id" \
+          -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+          -H "Content-Type:application/json" \
+          -d '{"data":"{\"param_1\":\"new_value_1\",\"param_2\":\"new_value_2\",\"param_n\":\"new_value_n\"}"}' -->
+    <route url="/V1/blog/tag/:id" method="PUT">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag_save"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X DELETE "http://mystore.com/index.php/rest/V1/blog/tag/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/tag/:id" method="DELETE">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag_delete"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/tag/:id" method="GET">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/view/:id/:store_id" -->
+    <route url="/V1/blog/tag/view/:id/:store_id" method="GET">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="view"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/list/:type/:term/:store_id/:page/:limit" -->
+    <route url="/V1/blog/tag/list/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/comment" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"value_1\",\"param_2\":\"value_2\",\"param_n\":\"value_n\"}"}' -->
+    <route url="/V1/blog/comment" method="POST">
+        <service class="Magefan\Blog\Api\CommentManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Magefan_Blog::comment"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/comment/:id" \
+         -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+         -H "Content-Type:application/json" \
+         -d '{"data":"{\"param_1\":\"new_value_1\",\"param_2\":\"new_value_2\",\"param_n\":\"new_value_n\"}"}' -->
+    <route url="/V1/blog/comment/:id" method="PUT">
+        <service class="Magefan\Blog\Api\CommentManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magefan_Blog::comment_save"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X DELETE "http://mystore.com/index.php/rest/V1/blog/comment/:id" \
+          -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/comment/:id" method="DELETE">
+        <service class="Magefan\Blog\Api\CommentManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Magefan_Blog::comment_delete"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/comment/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/comment/:id" method="GET">
+        <service class="Magefan\Blog\Api\CommentManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::comment"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/comment/view/:id/:store_id" -->
+    <route url="/V1/blog/comment/view/:id/:store_id" method="GET">
+        <service class="Magefan\Blog\Api\CommentManagementInterface" method="view"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/comment/:type/:term/:store_id/:page/:limit" -->
+    <route url="/V1/blog/comment/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\CommentManagementInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/version" -->
+    <route url="/V1/blog/version" method="GET">
+        <service class="Magefan\Blog\Api\VersionInterface" method="getVersion"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
 </routes>
