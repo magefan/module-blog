@@ -412,7 +412,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['post_id']) && isset($row['identifier'])
-            && $row['identifier'] == $identifier) {
+            && strcasecmp($row['identifier'], $identifier) === 0) {
             return (string)$row['post_id'];
         }
 
