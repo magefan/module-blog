@@ -398,7 +398,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 500);
         }
 
-        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
+        $stylePattern = "~<style\b[^>]*>.*?</style>~is";
         $desc = preg_replace($stylePattern, '', $desc);
         $desc = trim(strip_tags((string)$desc));
         $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
