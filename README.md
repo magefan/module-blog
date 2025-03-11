@@ -269,7 +269,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Google Shopping Feed](https://magefan.com/magento-2-google-shopping-feed-extension)
   * [Magento 2 Google Customer Reviews](https://magefan.com/magento-2-google-customer-reviews)
 
-### [Magento 2 SEO Extensions](https://magefan.com/magento-2-extensions/magento-2-seo-extensions)
+### Magento 2 SEO Extensions
 
   * [Magento 2 SEO Extension](https://magefan.com/magento-2-seo-extension)
   * [Magento 2 Rich Snippets](https://magefan.com/magento-2-rich-snippets)
@@ -304,7 +304,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Multi Blog](https://magefan.com/magento-2-multi-blog-extension)
   * [Magento 2 Product Widget](https://magefan.com/magento-2-product-widget)
 
-### [Magento 2 Marketing Automation Extensions](https://magefan.com/magento-2-extensions/magento-marketing-automation)
+### [Magento 2 Marketing Automation Extensions](https://magefan.com/magento-2-extensions/marketing-automation)
 
   * [Magento 2 Cookie Consent](https://magefan.com/magento-2-cookie-consent)
   * [Magento 2 Product Labels](https://magefan.com/magento-2-product-labels)
