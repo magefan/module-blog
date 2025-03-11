@@ -299,7 +299,7 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Admin Email Notifications](https://magefan.com/magento-2-admin-email-notifications)
   * [Magento 2 Login As Customer](https://magefan.com/login-as-customer-magento-2-extension)
 
-### [Magento 2 Blog Extensions](https://magefan.com/magento-2-extensions/blog-extensions)
+### Magento 2 Blog Extensions
 
   * [Magento 2 Multi Blog](https://magefan.com/magento-2-multi-blog-extension)
   * [Magento 2 Product Widget](https://magefan.com/magento-2-product-widget)
