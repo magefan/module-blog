@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="breeze.js">
+            <arguments>
+                <argument name="bundles" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="items" xsi:type="array">
+                            <item name="Magefan_Blog/js/magefan-comments" xsi:type="array">
+                                <item name="path" xsi:type="string">Magefan_Blog/js/magefan-comments</item>
+                            </item>
+                            <item name="Magefan_Blog/js/lib/mfblogunveil" xsi:type="array">
+                                <item name="path" xsi:type="string">Magefan_Blog/js/lib/mfblogunveil</item>
+                                <item name="import" xsi:type="array">
+                                    <item name="modal" xsi:type="string">modal</item>
+                                </item>
+                            </item>
+                            <item name="Magefan_Blog/js/lazyload" xsi:type="array">
+                                <item name="path" xsi:type="string">Magefan_Blog/js/lazyload</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

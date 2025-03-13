@@ -34,7 +34,7 @@
          * Init options
          * @type {Object}
          */
-        that.opt = $.extend(that.default, options);
+        that.opt = $.extend(that.default ? that.default : {}, options);
 
         /**
          * Load new content
