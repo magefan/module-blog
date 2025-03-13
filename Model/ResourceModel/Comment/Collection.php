@@ -19,6 +19,11 @@ class Collection extends AbstractCollection
     protected $_idFieldName = 'comment_id';
 
     /**
+     * @var int
+     */
+    protected $_storeId;
+
+    /**
      * Constructor
      * Configures collection
      *
@@ -155,7 +160,7 @@ class Collection extends AbstractCollection
                 }
             }
 
-            $this->addFilter('post_id', ['in' => $post], 'public');
+            $this->addFilter('main_table.post_id', ['in' => $post], 'public');
             $this->setFlag('post_filter_added', 1);
         }
         return $this;

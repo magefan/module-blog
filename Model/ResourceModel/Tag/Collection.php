@@ -54,12 +54,22 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $condition = isset($condition[0]) ? $condition[0] : $condition;
             }
         }
-        
+
         if ($field === 'store_id' || $field === 'store_ids') {
             return $this->addStoreFilter($condition);
         }
 
         return parent::addFieldToFilter($field, $condition);
+    }
+
+    /**
+     * Add search filter to collection
+     * @param string $term
+     * @return $this
+     */
+    public function addSearchFilter(string $term)
+    {
+        return $this->addFieldToFilter('title', ['like' => '%' . $term . '%']);
     }
 
     /**
