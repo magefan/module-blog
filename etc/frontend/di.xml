@@ -19,4 +19,8 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\App\Config\ScopeConfigInterface">
+        <plugin name="magefan_blog_plugin_framework_app_config_scopeconfiginterface" type="\Magefan\Blog\Plugin\Magento\Framework\App\Config\ScopeConfigInterfacePlugin" sortOrder="10"/>
+    </type>
 </config>
