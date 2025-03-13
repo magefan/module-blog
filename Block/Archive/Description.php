@@ -33,8 +33,7 @@ class Description extends Template
         Template\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $coreRegistry;
     }

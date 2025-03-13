@@ -91,5 +91,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             ScopeInterface::SCOPE_STORE
         );
     }
-
 }

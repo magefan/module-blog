@@ -63,7 +63,7 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
             foreach ($childs[$itemId] as $item) {
                 $data = [
                     'label' => $item->getTitle() .
-                        (' (ID: ' . $item->getId() . ')') . 
+                        (' (ID: ' . $item->getId() . ')') .
                         ($item->getIsActive() ? '' : ' ('.__('Disabled').')'),
                     'value' => $item->getId(),
                 ];
