@@ -122,20 +122,21 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     private function replaceVars($content)
     {
+        if (!$content) {
+            return '';
+        }
         $vars = ['year', 'month'];
         $values = [];
         foreach ($vars as $var) {
             $schemaVar = '{{' . $var . '}}';
             if ($content && strpos($content, $schemaVar) !== false) {
-                if (!isset($values[$var])) {
-                    switch ($var) {
-                        case 'year':
-                            $values[$var] = date('Y', strtotime($this->getYear() . '-01-01'));
-                            break;
-                        case 'month':
-                            $values[$var] = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
-                            break;
-                    }
+                switch ($var) {
+                    case 'year':
+                        $values[$var] = date('Y', strtotime($this->getYear() . '-01-01'));
+                        break;
+                    case 'month':
+                        $values[$var] = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
+                        break;
                 }
                 $content = str_replace($schemaVar, $values[$var] ?? '', $content);
             }
