@@ -127,6 +127,11 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                     <span class="post-date"><span>-</span> <?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                                 <?php } ?>
 
+                                <!-- reading time -->
+                                <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+                                    <span class="reading-time"><?= ' - ' . $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+                                <?php } ?>
+
                                 <!-- post view -->
                                 <?php if ($block->viewsCountEnabled()) { ?>
                                     <?php if ($viewsCount = $_post->getViewsCount()) { ?>
