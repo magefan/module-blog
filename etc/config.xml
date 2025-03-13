@@ -112,6 +112,14 @@
                 <lazyload_enabled>0</lazyload_enabled>
                 <lazyload_padding>200</lazyload_padding>
             </post_list>
+            <archive>
+                <title>Monthly Archives: {{month}} {{year}}</title>
+                <description/>
+                <meta_title/>
+                <meta_keywords/>
+                <meta_description/>
+                <robots>NOINDEX,FOLLOW</robots>
+            </archive>
             <tag>
                 <robots>INDEX,FOLLOW</robots>
             </tag>

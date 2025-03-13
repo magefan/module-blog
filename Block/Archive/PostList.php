@@ -31,7 +31,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Get archive month
-     * @return string
+     * @return int
      */
     public function getMonth()
     {
@@ -40,7 +40,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Get archive year
-     * @return string
+     * @return int
      */
     public function getYear()
     {
@@ -57,6 +57,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         $title = $this->_getTitle();
         $this->_addBreadcrumbs($title, 'blog_search');
         $this->pageConfig->getTitle()->set($title);
+
+        $this->pageConfig->setKeywords($this->replaceVars($this->_getConfigValue('meta_keywords')));
+        $this->pageConfig->setDescription($this->replaceVars($this->_getConfigValue('meta_description')));
 
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ARCHIVE)) {
             $month = '';
@@ -79,7 +82,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 ['attributes' => ['rel' => 'canonical']]
             );
         }
-        $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+        $this->pageConfig->setRobots($this->_getConfigValue('robots'));
 
         $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
         if ($pageMainTitle) {
@@ -97,19 +100,48 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     protected function _getTitle()
     {
-        if ($this->getMonth()) {
-            $time = strtotime($this->getYear() . '-' . $this->getMonth() . '-01');
-            return sprintf(
-                __('Monthly Archives: %s %s'),
-                __(date('F', $time)),
-                date('Y', $time)
-            );
-        } else {
-            $time = strtotime($this->getYear() . '-01-01');
-            return sprintf(
-                __('Yearly Archives: %s'),
-                date('Y', $time)
-            );
+        return (string)$this->replaceVars($this->_getConfigValue('meta_title') ?: $this->_getConfigValue('title'));
+    }
+
+
+    /**
+     * @param $param
+     * @return mixed
+     */
+    protected function _getConfigValue($param)
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/archive/'.$param,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * @param $content
+     * @return array|mixed|string|string[]
+     */
+    private function replaceVars($content)
+    {
+        if (!$content) {
+            return '';
         }
+        $vars = ['year', 'month'];
+        $values = [];
+        foreach ($vars as $var) {
+            $schemaVar = '{{' . $var . '}}';
+            if ($content && strpos($content, $schemaVar) !== false) {
+                switch ($var) {
+                    case 'year':
+                        $values[$var] = date('Y', strtotime($this->getYear() . '-01-01'));
+                        break;
+                    case 'month':
+                        $values[$var] = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
+                        break;
+                }
+                $content = str_replace($schemaVar, $values[$var] ?? '', $content);
+            }
+
+        }
+        return $content;
     }
 }
