@@ -1075,6 +1075,17 @@
                 </item>
             </argument>
         </field>
+        <field name="custom_css">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Custom CSS</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">custom_css</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="custom_design_update">
         <argument name="data" xsi:type="array">
