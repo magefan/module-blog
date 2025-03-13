@@ -193,7 +193,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
 
         $html = '
             <input id="'. $chooserId . '_input" class="widget-option input-text admin__control-text" 
-            onkeyup="keyupFunctionMf()"
+            onkeyup="keyupFunctionMfSelectPostIds()"
             value="' . ($this->getLabel() ? $this->escapeHtml($this->getLabel()) : '') .'" />
             <label class="widget-option-label" style="display: none" id="' .
             $chooserId .
@@ -204,7 +204,7 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
             $chooserId .
             'advice-container" class="hidden"></div>';
 
-        $script = 'window.keyupFunctionMf = function() {
+        $script = 'window.keyupFunctionMfSelectPostIds = function() {
                     var inputV = document.getElementById("' . $chooserId . '_input").value;
                     ' . $chooserId . '.setElementValue(inputV);
                     ' . $chooserId . '.setElementLabel(inputV);    

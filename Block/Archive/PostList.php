@@ -8,7 +8,6 @@
 
 namespace Magefan\Blog\Block\Archive;
 
-use Magefan\Blog\Block\Post\PostList\Toolbar;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -16,6 +15,8 @@ use Magento\Store\Model\ScopeInterface;
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList
 {
+    use Archive;
+
     /**
      * Prepare posts collection
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
@@ -30,36 +31,21 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
-     * Get archive month
-     * @return int
-     */
-    public function getMonth()
-    {
-        return (int)$this->_coreRegistry->registry('current_blog_archive_month');
-    }
-
-    /**
-     * Get archive year
-     * @return int
-     */
-    public function getYear()
-    {
-        return (int)$this->_coreRegistry->registry('current_blog_archive_year');
-    }
-
-    /**
      * Preparing global layout
      *
      * @return $this
      */
     protected function _prepareLayout()
     {
-        $title = $this->_getTitle();
+        $title = $this->filterContent((string)$this->_getConfigValue('title'));
         $this->_addBreadcrumbs($title, 'blog_search');
-        $this->pageConfig->getTitle()->set($title);
 
-        $this->pageConfig->setKeywords($this->replaceVars($this->_getConfigValue('meta_keywords')));
-        $this->pageConfig->setDescription($this->replaceVars($this->_getConfigValue('meta_description')));
+        $this->pageConfig->getTitle()->set(
+            $this->_getConfigValue('meta_title') ? $this->filterContent($this->_getConfigValue('meta_title')) : $title
+        );
+
+        $this->pageConfig->setKeywords($this->filterContent((string)$this->_getConfigValue('meta_keywords')));
+        $this->pageConfig->setDescription($this->filterContent((string)$this->_getConfigValue('meta_description')));
 
         if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_ARCHIVE)) {
             $month = '';
@@ -95,16 +81,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
-     * Retrieve title
-     * @return string
-     */
-    protected function _getTitle()
-    {
-        return (string)$this->replaceVars($this->_getConfigValue('meta_title') ?: $this->_getConfigValue('title'));
-    }
-
-
-    /**
      * @param $param
      * @return mixed
      */
@@ -116,32 +92,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         );
     }
 
-    /**
-     * @param $content
-     * @return array|mixed|string|string[]
-     */
-    private function replaceVars($content)
-    {
-        if (!$content) {
-            return '';
-        }
-        $vars = ['year', 'month'];
-        $values = [];
-        foreach ($vars as $var) {
-            $schemaVar = '{{' . $var . '}}';
-            if ($content && strpos($content, $schemaVar) !== false) {
-                switch ($var) {
-                    case 'year':
-                        $values[$var] = date('Y', strtotime($this->getYear() . '-01-01'));
-                        break;
-                    case 'month':
-                        $values[$var] = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
-                        break;
-                }
-                $content = str_replace($schemaVar, $values[$var] ?? '', $content);
-            }
-
-        }
-        return $content;
-    }
 }
