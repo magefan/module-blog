@@ -43,29 +43,28 @@ class Description extends Template
     public function getDescription(): string
     {
         $description = $this->_scopeConfig->getValue(
-            'mfblog/archive/meta_description',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        ) ?: $this->_scopeConfig->getValue(
             'mfblog/archive/description',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+
+        if (!$description) {
+            return '';
+        }
 
         $vars = ['year', 'month'];
         $values = [];
 
         foreach ($vars as $var) {
             $schemaVar = '{{' . $var . '}}';
-            if ($description && strpos($description, $schemaVar) !== false) {
-                if (!isset($values[$var])) {
-                    switch ($var) {
-                        case 'year':
-                            $values[$var] = date('Y', strtotime((int)$this->_coreRegistry->registry('current_blog_archive_year') . '-01-01'));
-                            break;
-                        case 'month':
-                            $data = (int)$this->_coreRegistry->registry('current_blog_archive_year') . '-' . (int)$this->_coreRegistry->registry('current_blog_archive_month') . '-01';
-                            $values[$var] = date('F', strtotime($data));
-                            break;
-                    }
+            if (strpos($description, $schemaVar) !== false) {
+                switch ($var) {
+                    case 'year':
+                        $values[$var] = date('Y', strtotime((int)$this->_coreRegistry->registry('current_blog_archive_year') . '-01-01'));
+                        break;
+                    case 'month':
+                        $data = (int)$this->_coreRegistry->registry('current_blog_archive_year') . '-' . (int)$this->_coreRegistry->registry('current_blog_archive_month') . '-01';
+                        $values[$var] = date('F', strtotime($data));
+                        break;
                 }
                 $description = str_replace($schemaVar, $values[$var] ?? '', $description);
             }
