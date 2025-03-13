@@ -35,7 +35,7 @@ class TemplatePlugin
      */
     public function aroundGetTemplate(\Magento\Framework\View\Element\Template $subject, callable $proceed)
     {
-        if ($this->moduleManager->isEnabled('Amasty_Base') && $subject->getNameInLayout() === 'aminfotab.conflicts') {
+        if ('aminfotab.conflicts' === $subject->getNameInLayout() && $this->moduleManager->isEnabled('Amasty_Base')) {
             foreach ($conflictsMessages = $subject->getConflictsMessages() as $key => $conflictsMessage) {
                 if (strpos($conflictsMessage,'Magefan')) {
                     return '';
