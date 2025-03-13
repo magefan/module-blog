@@ -29,7 +29,7 @@ body.blog-page {
 
 .post-holder {margin-bottom: 40px;border-radius: 0;}
 
-
+.blog-page-list .index-description {margin-bottom: 15px}
 
 /* Blog Post List *****************************************************************************************************/
 .post-list {margin-top: 0;margin-bottom: 20px;list-style: none;padding-left: 0}

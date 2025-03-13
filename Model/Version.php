@@ -36,7 +36,7 @@ class Version implements VersionInterface
     /**
      * @return false|string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         try {
             $moduleName = 'Blog';
@@ -53,7 +53,7 @@ class Version implements VersionInterface
             $data = ['version' => $currentVersion, 'edition' => $edition];
             return json_encode($data);
         } catch (\Exception $e) {
-            return false;
+            return json_encode(['error' => true, 'message' => $e->getMessage()]);
         }
     }
 }

@@ -17,6 +17,8 @@ use Magento\Framework\View\Element\Template;
  */
 class Description extends Template
 {
+    use Archive;
+
     /**
      * @var \Magento\Framework\Registry
      */
@@ -42,7 +44,7 @@ class Description extends Template
      */
     public function getDescription(): string
     {
-        $description = $this->_scopeConfig->getValue(
+        $description = (string)$this->_scopeConfig->getValue(
             'mfblog/archive/description',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
@@ -51,25 +53,8 @@ class Description extends Template
             return '';
         }
 
-        $vars = ['year', 'month'];
-        $values = [];
+        $description = $this->filterContent($description);
 
-        foreach ($vars as $var) {
-            $schemaVar = '{{' . $var . '}}';
-            if (strpos($description, $schemaVar) !== false) {
-                switch ($var) {
-                    case 'year':
-                        $values[$var] = date('Y', strtotime((int)$this->_coreRegistry->registry('current_blog_archive_year') . '-01-01'));
-                        break;
-                    case 'month':
-                        $data = (int)$this->_coreRegistry->registry('current_blog_archive_year') . '-' . (int)$this->_coreRegistry->registry('current_blog_archive_month') . '-01';
-                        $values[$var] = date('F', strtotime($data));
-                        break;
-                }
-                $description = str_replace($schemaVar, $values[$var] ?? '', $description);
-            }
-
-        }
         return (string)$description;
     }
 }

@@ -13,8 +13,8 @@ class ScopeConfigInterfacePlugin
      */
     private $blogRoutes = [
         "index" => 'blog_index_index',
-        "category" => 'blog_category_view',
         "post" => 'blog_post_view',
+        "category" => 'blog_category_view',
         "author" => 'blog_author_view',
         "archive" =>'blog_archive_view',
         'tag' => 'blog_tag_view'
