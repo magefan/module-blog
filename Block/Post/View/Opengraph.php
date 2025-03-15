@@ -76,6 +76,10 @@ class Opengraph extends \Magefan\Blog\Block\Post\AbstractPost
         }
 
         if (!$image) {
+            $image = $this->getPost()->getFeaturedListImage();
+        }
+
+        if (!$image) {
             $image = $this->getPost()->getFirstImage();
         }
 
