@@ -127,6 +127,30 @@ class Image extends AbstractHelper
     }
 
     /**
+     * @return array
+     */
+    public function getWidthAndHeigth(): array
+    {
+        $file = $this->_newFile ?: $this->_baseFile;
+        if (!$file) {
+            return [];
+        }
+
+        if ($this->fileExists($file)) {
+            $file = $this->_mediaDirectory->getAbsolutePath($file);
+            $imageSize = @getimagesize($file);
+            if ($imageSize) {
+                return [
+                    'width' => (int)$imageSize[0],
+                    'height' => (int)$imageSize[1]
+                ];
+            }
+        }
+
+        return [];
+    }
+
+    /**
      * @param $width
      * @param $height
      * @return $this
