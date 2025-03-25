@@ -292,7 +292,7 @@
                 <max_depth>0</max_depth>
             </top_menu>
             <draft_autosave>
-                <enabled>1</enabled>
+                <enabled>0</enabled>
                 <draft_lifetime>1</draft_lifetime>
             </draft_autosave>
             <developer>
