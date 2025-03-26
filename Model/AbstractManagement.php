@@ -214,10 +214,8 @@ abstract class AbstractManagement implements ManagementInterface
      */
     public function getError($massage) {
         $data = ['error' => 'true'];
-
-        if ($massage) {
-            $data['message'] = $massage;
-        }
+        
+        $data['message'] = $massage ?? '';
 
         return json_encode($data);
     }
