@@ -67,12 +67,11 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
             $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
         );
 
-        $html = parent::_toHtml();
-
         foreach ($this->getPostCollection() as $item) {
             self::$processedIds[$item->getId()] = $item->getId();
         }
-        return $html;
+
+        return parent::_toHtml();
     }
 
     /**
