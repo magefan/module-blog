@@ -3,42 +3,42 @@
     <table name="magefan_blog_post" resource="default" engine="innodb" comment="Magefan Blog Post Table">
         <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Post ID"/>
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Post Title"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Post Meta Title"/>
         <column xsi:type="text" name="meta_keywords" nullable="true" comment="Post Meta Keywords"/>
         <column xsi:type="text" name="meta_description" nullable="true" comment="Post Meta Description"/>
+        <column xsi:type="varchar" name="meta_robots" nullable="true" length="255" comment="Default Robots"/>
+        <column xsi:type="smallint" name="structure_data_type" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Rich Snippet / Structured Data"/>
         <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Post String Identifier"/>
+        <column xsi:type="varchar" name="og_title" nullable="true" length="255" comment="Post OG Title"/>
+        <column xsi:type="varchar" name="og_description" nullable="true" length="255" comment="Post OG Description"/>
+        <column xsi:type="varchar" name="og_img" nullable="true" length="255" comment="Post OG Img"/>
+        <column xsi:type="varchar" name="og_type" nullable="true" length="255" comment="Post OG Type"/>
         <column xsi:type="varchar" name="content_heading" nullable="true" length="255" comment="Post Content Heading"/>
         <column xsi:type="mediumtext" name="content" nullable="true" comment="Post Content"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="true" comment="Post Creation Time"/>
         <column xsi:type="timestamp" name="update_time" on_update="false" nullable="true" comment="Post Modification Time"/>
         <column xsi:type="timestamp" name="publish_time" on_update="false" nullable="true" comment="Post Publish Time"/>
         <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Is Post Active"/>
+        <column xsi:type="smallint" name="include_in_recent" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Include in Recent Posts"/>
+        <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Position"/>
         <column xsi:type="varchar" name="featured_img" nullable="true" length="255" comment="Thumbnail Image"/>
+        <column xsi:type="varchar" name="featured_img_alt" nullable="true" length="255" comment="Featured Image Alt"/>
         <column xsi:type="int" name="author_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Author ID"/>
         <column xsi:type="varchar" name="page_layout" nullable="true" length="255" comment="Post Layout"/>
         <column xsi:type="text" name="layout_update_xml" nullable="true" comment="Post Layout Update Content"/>
+        <column xsi:type="text" name="custom_css" nullable="true" comment="Custom CSS"/>
         <column xsi:type="varchar" name="custom_theme" nullable="true" length="100" comment="Post Custom Theme"/>
         <column xsi:type="varchar" name="custom_layout" nullable="true" length="255" comment="Post Custom Template"/>
         <column xsi:type="text" name="custom_layout_update_xml" nullable="true" comment="Post Custom Layout Update Content"/>
         <column xsi:type="date" name="custom_theme_from" comment="Post Custom Theme Active From Date"/>
         <column xsi:type="date" name="custom_theme_to" comment="Post Custom Theme Active To Date"/>
-        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Post Meta Title"/>
-        <column xsi:type="varchar" name="og_type" nullable="true" length="255" comment="Post OG Type"/>
-        <column xsi:type="varchar" name="og_img" nullable="true" length="255" comment="Post OG Img"/>
-        <column xsi:type="varchar" name="og_description" nullable="true" length="255" comment="Post OG Description"/>
-        <column xsi:type="varchar" name="og_title" nullable="true" length="255" comment="Post OG Title"/>
         <column xsi:type="mediumtext" name="media_gallery" nullable="true" comment="Media Gallery"/>
         <column xsi:type="varchar" name="secret" nullable="true" length="32" comment="Post Secret"/>
         <column xsi:type="int" name="views_count" padding="11" unsigned="false" nullable="true" identity="false" comment="Post Views Count"/>
+        <column xsi:type="int" name="reading_time" padding="20" unsigned="false" nullable="true" identity="false" comment="Post Reading Time"/>
         <column xsi:type="smallint" name="is_recent_posts_skip" padding="6" unsigned="false" nullable="true" identity="false" comment="Is Post Skipped From Recent Posts"/>
         <column xsi:type="mediumtext" name="short_content" nullable="true" comment="Post Short Content"/>
-        <column xsi:type="smallint" name="include_in_recent" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Include in Recent Posts"/>
-        <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Position"/>
-        <column xsi:type="varchar" name="featured_img_alt" nullable="true" length="255" comment="Featured Image Alt"/>
         <column xsi:type="int" name="comments_count" padding="11" unsigned="false" nullable="true" identity="false" comment="Post Comment Counts"/>
-        <column xsi:type="smallint" name="structure_data_type" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Rich Snippet / Structured Data"/>
-        <column xsi:type="int" name="reading_time" padding="20" unsigned="false" nullable="true" identity="false" comment="Post Reading Time"/>
-        <column xsi:type="varchar" name="meta_robots" nullable="true" length="255" comment="Default Robots"/>
-        <column xsi:type="text" name="custom_css" nullable="true" comment="Custom CSS"/>
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="post_id"/>
@@ -105,14 +105,20 @@
     <table name="magefan_blog_category" resource="default" engine="innodb" comment="Magefan Blog Category Table">
         <column xsi:type="int" name="category_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Category ID"/>
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Category Title"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Category Meta Title"/>
         <column xsi:type="text" name="meta_keywords" nullable="true" comment="Category Meta Keywords"/>
         <column xsi:type="text" name="meta_description" nullable="true" comment="Category Meta Description"/>
+        <column xsi:type="varchar" name="meta_robots" nullable="true" length="255" comment="Default Robots"/>
         <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Category String Identifier"/>
         <column xsi:type="varchar" name="content_heading" nullable="true" length="255" comment="Category Content Heading"/>
         <column xsi:type="mediumtext" name="content" nullable="true" comment="Category Content"/>
         <column xsi:type="varchar" name="path" nullable="true" length="255" comment="Category Path"/>
         <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="false" identity="false" comment="Category Position"/>
+        <column xsi:type="smallint" name="posts_sort_by" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Post Sort By"/>
+        <column xsi:type="smallint" name="include_in_menu" padding="6" unsigned="false" nullable="true" identity="false" comment="Category In Menu"/>
+        <column xsi:type="varchar" name="include_in_sidebar_tree" nullable="true" length="255" default="1" comment="Category In Sidebar Tree"/>
         <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Is Category Active"/>
+        <column xsi:type="smallint" name="display_mode" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Display Mode"/>
         <column xsi:type="varchar" name="page_layout" nullable="true" length="255" comment="Post Layout"/>
         <column xsi:type="text" name="layout_update_xml" nullable="true" comment="Post Layout Update Content"/>
         <column xsi:type="varchar" name="custom_theme" nullable="true" length="100" comment="Post Custom Theme"/>
@@ -120,14 +126,8 @@
         <column xsi:type="text" name="custom_layout_update_xml" nullable="true" comment="Post Custom Layout Update Content"/>
         <column xsi:type="date" name="custom_theme_from" comment="Post Custom Theme Active From Date"/>
         <column xsi:type="date" name="custom_theme_to" comment="Post Custom Theme Active To Date"/>
-        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Category Meta Title"/>
-        <column xsi:type="smallint" name="include_in_menu" padding="6" unsigned="false" nullable="true" identity="false" comment="Category In Menu"/>
-        <column xsi:type="smallint" name="display_mode" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Display Mode"/>
-        <column xsi:type="smallint" name="posts_sort_by" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Post Sort By"/>
         <column xsi:type="int" name="posts_per_page" padding="11" unsigned="false" nullable="true" identity="false" comment="Posts Per Page"/>
         <column xsi:type="varchar" name="posts_list_template" nullable="true" length="100" comment="Posts List Template"/>
-        <column xsi:type="varchar" name="meta_robots" nullable="true" length="255" comment="Default Robots"/>
-        <column xsi:type="varchar" name="include_in_sidebar_tree" nullable="true" length="255" default="1" comment="Category In Sidebar Tree"/>
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
           <column name="category_id"/>
@@ -240,20 +240,20 @@
     <table name="magefan_blog_tag" resource="default" engine="innodb" comment="Magefan Blog Tag Table">
         <column xsi:type="int" name="tag_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Tag ID"/>
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Tag Title"/>
+        <column xsi:type="varchar" name="meta_robots" nullable="true" length="255" comment="Tag Default Robots"/>
+        <column xsi:type="varchar" name="meta_description" nullable="true" length="255" comment="Tag Meta Description"/>
+        <column xsi:type="varchar" name="meta_keywords" nullable="true" length="255" comment="Tag Meta Keywords"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Tag Meta Title"/>
         <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Tag String Identifier"/>
         <column xsi:type="varchar" name="page_layout" nullable="true" length="255" comment="Tag Layout"/>
         <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Is Tag Active"/>
         <column xsi:type="mediumtext" name="content" nullable="true" comment="Tag Content"/>
-        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Tag Meta Title"/>
-        <column xsi:type="varchar" name="meta_keywords" nullable="true" length="255" comment="Tag Meta Keywords"/>
-        <column xsi:type="varchar" name="meta_description" nullable="true" length="255" comment="Tag Meta Description"/>
         <column xsi:type="text" name="layout_update_xml" nullable="true" comment="Tag Layout Update Content"/>
         <column xsi:type="varchar" name="custom_theme" nullable="true" length="100" comment="Tag Custom Theme"/>
         <column xsi:type="varchar" name="custom_layout" nullable="true" length="255" comment="Tag Custom Template"/>
         <column xsi:type="text" name="custom_layout_update_xml" nullable="true" comment="Tag Custom Layout Update Content"/>
         <column xsi:type="date" name="custom_theme_from" comment="Tag Custom Theme Active From Date"/>
         <column xsi:type="date" name="custom_theme_to" comment="Tag Custom Theme Active To Date"/>
-        <column xsi:type="varchar" name="meta_robots" nullable="true" length="255" comment="Tag Default Robots"/>
         <column xsi:type="int" name="posts_per_page" padding="11" unsigned="false" nullable="true" identity="false" comment="Posts Per Page"/>
         <column xsi:type="varchar" name="posts_list_template" nullable="true" length="100" comment="Posts List Template"/>
 
