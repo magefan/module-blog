@@ -220,21 +220,29 @@
       </index>
   </table>
 
-  <table name="magefan_blog_post_relatedpost" resource="default" engine="innodb" comment="Magefan Blog Post To Post Linkage Table">
-      <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Post ID"/>
-      <column xsi:type="int" name="related_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Related Post ID"/>
-      <column xsi:type="int" name="position" padding="11" unsigned="false" nullable="false" identity="false" comment="Position"/>
+    <table name="magefan_blog_post_relatedpost" resource="default" engine="innodb" comment="Magefan Blog Post To Post Linkage Table">
+        <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Post ID"/>
+        <column xsi:type="int" name="related_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Related Post ID"/>
+        <column xsi:type="int" name="position" padding="11" unsigned="false" nullable="false" identity="false" comment="Position"/>
 
-      <constraint xsi:type="primary" referenceId="PRIMARY">
-          <column name="post_id"/>
-          <column name="related_id"/>
-      </constraint>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="related_id"/>
+        </constraint>
 
-      <constraint xsi:type="foreign" referenceId="MAGEFAN_BLOG_POST_RELATEDPOST_POST_ID" table="magefan_blog_post_relatedpost" column="post_id" referenceTable="magefan_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGEFAN_BLOG_POST_RELATEDPOST_POST_ID_FK"
+                    table="magefan_blog_post_relatedpost" column="post_id"
+                    referenceTable="magefan_blog_post" referenceColumn="post_id"
+                    onDelete="CASCADE"/>
 
-      <index referenceId="MAGEFAN_BLOG_POST_RELATEDPRODUCT_RELATED_ID" indexType="btree">
-          <column name="related_id"/>
-      </index>
+        <constraint xsi:type="foreign" referenceId="MAGEFAN_BLOG_POST_RELATEDPOST_RELATED_ID_FK"
+                    table="magefan_blog_post_relatedpost" column="related_id"
+                    referenceTable="magefan_blog_post" referenceColumn="post_id"
+                    onDelete="CASCADE"/>
+
+        <index indexType="btree" referenceId="MAGEFAN_BLOG_POST_RELATEDPOST_RELATED_ID">
+            <column name="related_id"/>
+        </index>
     </table>
 
     <table name="magefan_blog_tag" resource="default" engine="innodb" comment="Magefan Blog Tag Table">
