@@ -9,36 +9,47 @@ declare(strict_types=1);
 namespace Magefan\Blog\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchVersionInterface;
+use Magefan\Blog\Model\PostFactory;
+use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
+use Magento\Framework\App\State;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
-class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
+class CreateSamplePost implements DataPatchInterface
 {
     /**
-     * Post factory
-     *
-     * @var \Magefan\Blog\Model\PostFactory
+     * @var PostFactory
      */
     private $_postFactory;
 
     /**
-     * State
-     *
-     * @var \Magento\Framework\App\State
+     * @var PostCollectionFactory
+     */
+    private $postCollection;
+
+    /**
+     * @var State
      */
     private $state;
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     * @var ScopeConfigInterface
      */
     private $scopeConfig;
 
-
+    /**
+     * @param PostFactory $postFactory
+     * @param PostCollectionFactory $postCollection
+     * @param State $state
+     * @param ScopeConfigInterface $scopeConfig
+     */
     public function __construct(
-        \Magefan\Blog\Model\PostFactory $postFactory,
-        \Magento\Framework\App\State $state,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        PostFactory $postFactory,
+        PostCollectionFactory $postCollection,
+        State $state,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->_postFactory = $postFactory;
+        $this->postCollection = $postCollection;
         $this->state = $state;
         $this->scopeConfig = $scopeConfig;
     }
@@ -51,58 +62,20 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
             /* Do nothing, it's OK */
         }
 
-        $url =  $this->scopeConfig
-            ->getValue(
-                'web/unsecure/base_url',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-                0
-            );
-        $useLinks = \Magefan\Community\Model\UrlChecker::showUrl($url);
-        $useLinks = false;
+        if (!$this->postCollection->create()->getSize()) {
 
-        $data = [
-            'title' => 'Magento 2 Blog Post Sample',
-            'meta_keywords' => 'magento 2 blog sample',
-            'meta_description' => 'Magento 2 blog default post.',
-            'identifier' => 'magento-2-blog-post-sample',
-            'content_heading' => 'Magento 2 Blog Post Sample',
-            'content' =>
-                $useLinks
-                    ? '<p>Welcome to 
-                    <a title="Magento Blog" 
-                       href="https://magefan.com/magento2-blog-extension" 
-                       target="_blank">Magento Blog</a> by
-                    <a title="Magento 2 Extensions" 
-                       href="https://magefan.com/magento-2-extensions"
-                       target="_blank">Magefan</a>. 
-                       This is your first post. Edit or delete it, then start blogging!
-                </p>
-                <p><!-- pagebreak --></p>
-                <p>Please also read&nbsp;
-                    <a title="Magento 2 Blog online documentation" 
-                       href="https://magefan.com/blog/magento-2-blog-extension-documentation" 
-                       target="_blank">Magento 2 Blog online documentation</a>&nbsp;and&nbsp;
-                    <a href="https://magefan.com/blog/add-read-more-tag-to-blog-post-content" 
-                       target="_blank">How to add "read more" tag to post content</a>
-                </p>
-                <p>Follow Magefan on:</p>
-                <p>
-                    <a title="Magento 2 Blog Extension GitHub" 
-                       href="https://github.com/magefan/module-blog" 
-                       target="_blank">Magento 2 Blog Extension GitHub</a>&nbsp;|&nbsp;
-                    <a href="https://twitter.com/magento2fan" title="Magefan at Twitter"
-                       target="_blank">Magefan at Twitter</a>&nbsp;|&nbsp;
-                    <a href="https://www.facebook.com/magefan/"  title="Magefan at Facebook"
-                       target="_blank">Magefan at Facebook</a>
-                </p>'
-                    : '<p>Welcome to Magento 2 Blog extension by Magefan.
-                        This is your first post. Edit or delete it, then start blogging!
-                </p>',
-            'store_ids' => [0]
-        ];
+            $data = [
+                'title' => 'Magento 2 Blog Post Sample',
+                'meta_keywords' => 'magento 2 blog sample',
+                'meta_description' => 'Magento 2 blog default post.',
+                'identifier' => 'magento-2-blog-post-sample',
+                'content_heading' => 'Magento 2 Blog Post Sample',
+                'content' => '<p>Welcome to Magento 2 Blog extension by Magefan. This is your first post. Edit or delete it, then start blogging!</p>',
+                'store_ids' => [0]
+            ];
 
-        $this->_postFactory->create()->setData($data)->save();
-
+            $this->_postFactory->create()->setData($data)->save();
+        }
     }
 
     public static function getDependencies()
@@ -113,10 +86,5 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     public function getAliases()
     {
         return[];
-    }
-
-    public static function getVersion()
-    {
-        return '2.12.3';
     }
 }
