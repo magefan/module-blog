@@ -54,16 +54,6 @@
           <column name="meta_description"/>
           <column name="identifier"/>
           <column name="content"/>
-          <column name="title"/>
-          <column name="meta_keywords"/>
-          <column name="meta_description"/>
-          <column name="identifier"/>
-          <column name="content"/>
-          <column name="title"/>
-          <column name="meta_keywords"/>
-          <column name="meta_description"/>
-          <column name="identifier"/>
-          <column name="content"/>
         </index>
 
         <index referenceId="MAGEFAN_BLOG_POST_AUTHOR_ID" indexType="btree">
@@ -138,16 +128,6 @@
         </index>
 
         <index referenceId="FTI_B76AD11A0A06CC3327BA3A86A016134F" indexType="fulltext">
-            <column name="title"/>
-            <column name="meta_keywords"/>
-            <column name="meta_description"/>
-            <column name="identifier"/>
-            <column name="content"/>
-            <column name="title"/>
-            <column name="meta_keywords"/>
-            <column name="meta_description"/>
-            <column name="identifier"/>
-            <column name="content"/>
             <column name="title"/>
             <column name="meta_keywords"/>
             <column name="meta_description"/>
