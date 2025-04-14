@@ -1,4 +1,12 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="magefan_blog_post" resource="default" engine="innodb" comment="Magefan Blog Post Table">
         <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Post ID"/>

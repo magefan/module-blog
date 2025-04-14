@@ -103,7 +103,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
-        $this->_map['fields']['tag'] = 'tag_table.tag_id';
         $this->_map['fields']['relatedproduct'] = 'relatedproduct_table.related_id';
     }
 
