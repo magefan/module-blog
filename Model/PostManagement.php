@@ -101,7 +101,7 @@ class PostManagement extends AbstractManagement
 
             return json_encode($result);
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 

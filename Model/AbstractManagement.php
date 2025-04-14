@@ -100,7 +100,7 @@ abstract class AbstractManagement implements ManagementInterface
             $item->setData($data)->save();
             return json_encode($item->getData());
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -118,7 +118,7 @@ abstract class AbstractManagement implements ManagementInterface
             $item->load($id);
 
             if (!$item->getId()) {
-                return false;
+                return $this->getError('Item not found');
             }
             $data = json_decode($data, true);
             foreach ($this->_imagesMap as $key) {
@@ -133,7 +133,7 @@ abstract class AbstractManagement implements ManagementInterface
             $item->addData($data)->save();
             return json_encode($item->getData());
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -152,9 +152,9 @@ abstract class AbstractManagement implements ManagementInterface
                 $item->delete();
                 return true;
             }
-            return false;
+            return $this->getError('Something went wrong');
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -171,11 +171,11 @@ abstract class AbstractManagement implements ManagementInterface
             $item->load($id);
 
             if (!$item->getId()) {
-                return false;
+                return $this->getError('Item not found');
             }
             return json_encode($item->getData());
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -193,12 +193,12 @@ abstract class AbstractManagement implements ManagementInterface
             $item->getResource()->load($item, $id);
 
             if (!$item->isVisibleOnStore($storeId)) {
-                return false;
+                return $this->getError('Item is not visible on this store.');
             }
 
             return json_encode($this->getDynamicData($item));
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -207,4 +207,16 @@ abstract class AbstractManagement implements ManagementInterface
      * @return mixed
      */
     abstract protected function getDynamicData($item);
+
+    /**
+     * @param $massage
+     * @return false|string
+     */
+    public function getError($massage) {
+        $data = ['error' => 'true'];
+        
+        $data['message'] = $massage ?? '';
+
+        return json_encode($data);
+    }
 }
