@@ -52,7 +52,7 @@ class ScopeConfigInterfacePlugin
      * @param $scopeCode
      * @return mixed|string
      */
-    public function afterGetValue(\Magento\Framework\App\Config\ScopeConfigInterface $subject, $result, $path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
+    public function afterGetValue($subject, $result, $path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
     {
         if ($path == 'mageworx_seo/base/canonical/canonical_ignore_pages' && $this->request->getModuleName() == 'blog' && $this->config->isEnabled()) {
             $blogPages = explode(",", $this->config->getConfig(Config::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
