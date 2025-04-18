@@ -527,4 +527,12 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         return $adapter->fetchAll($select);
     }
+
+    /**
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return 'post';
+    }
 }
