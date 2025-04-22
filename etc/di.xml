@@ -138,6 +138,11 @@
             <argument name="templateType" xsi:type="string">blog_post_list</argument>
         </arguments>
     </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\PostListTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_list_new</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Magefan\Blog\Model\Config\Source\PostViewTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view</argument>
