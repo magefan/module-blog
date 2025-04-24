@@ -127,6 +127,11 @@ class CategoryRepository implements CategoryRepositoryInterface
         $cacheKey = implode('_', func_get_args());
         if (!isset($this->instances[$cacheKey])) {
             $category = $this->categoryFactory->create();
+
+            if ($storeId) {
+                $category->setStoreId($storeId);
+            }
+
             $this->categoryResourceModel->load($category, $categoryId);
             if (!$category->getId()) {
                 throw new NoSuchEntityException(__('Requested item doesn\'t exist'));
