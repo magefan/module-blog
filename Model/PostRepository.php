@@ -120,7 +120,13 @@ class PostRepository implements PostRepositoryInterface
     public function getById($postId, $editMode = false, $storeId = null, $forceReload = false)
     {
         $post = $this->postFactory->create();
+
+        if ($storeId) {
+            $post->setStoreId($storeId);
+        }
+
         $this->postResourceModel->load($post, $postId);
+
         if (!$post->getId()) {
             throw new NoSuchEntityException(__('Requested item doesn\'t exist'));
         }
