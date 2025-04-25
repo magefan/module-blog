@@ -46,6 +46,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
 
+
+    const TREE_ROOT_ID = 1;
+
     /**
      * Prefix of model events names
      *
@@ -339,6 +342,15 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     public function getLevel()
     {
         return count($this->getParentIds());
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getPathIds()
+    {
+        return $this->getParentIds();
     }
 
     /**
