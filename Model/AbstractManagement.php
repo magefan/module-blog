@@ -175,8 +175,11 @@ abstract class AbstractManagement implements ManagementInterface
     public function get($id, $storeId = 0)
     {
         try {
-            $item = $this->_itemFactory->create()
-                ->setStoreId($storeId);
+            $item = $this->_itemFactory->create();
+
+            if ($storeId) {
+                $item->setStoreId((int)$storeId);
+            }
 
             $item->load($id);
 
@@ -200,6 +203,11 @@ abstract class AbstractManagement implements ManagementInterface
     {
         try {
             $item = $this->_itemFactory->create();
+
+            if ($storeId) {
+                $item->setStoreId((int)$storeId);
+            }
+
             $item->getResource()->load($item, $id);
 
             if (!$item->isVisibleOnStore($storeId)) {
