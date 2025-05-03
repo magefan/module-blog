@@ -147,6 +147,7 @@ body.blog-page {
 .post-sharing-bottom .share-elements .icon-wrapper.icon-twitter {background-color: rgb(0, 0, 0);}
 .post-sharing-bottom .share-elements .icon-wrapper.icon-pinterest {background-color: rgb(203, 32, 39);}
 .post-sharing-bottom .share-elements .icon-wrapper.icon-linkedin {background-color: rgb(2, 136, 209);}
+.post-sharing-bottom .icon-wrapper.icon-bluesky {background-color: rgb(32, 139, 254);}
 .post-sharing-bottom .share-elements .icon-wrapper .icon {line-height: 48px;height: 48px;width: 48px;display: inline-block;overflow: hidden;vertical-align: top;}
 .post-sharing-bottom .share-elements .icon-wrapper .label {font-size: 13px;line-height: 48px;height: 48px;color: #ffffff;display: inline-block;padding: 0 15px 0 3px;vertical-align: top;}
 .post-sharing-bottom .share-elements .icon-wrapper:hover {transform: translateY(-4px);}
