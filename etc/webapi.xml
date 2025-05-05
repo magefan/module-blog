@@ -49,6 +49,14 @@
             <resource ref="Magefan_Blog::post"/>
         </resources>
     </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/:id/:store_id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/post/:id/:store_id" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
     <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/view/:id/:store_id" -->
     <route url="/V1/blog/post/view/:id/:store_id" method="GET">
         <service class="Magefan\Blog\Api\PostManagementInterface" method="view"/>
@@ -100,6 +108,14 @@
             <resource ref="Magefan_Blog::category"/>
         </resources>
     </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/:id/:store_id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/category/:id/:store_id" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
     <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/view/:id/:store_id" -->
     <route url="/V1/blog/category/view/:id/:store_id" method="GET">
         <service class="Magefan\Blog\Api\CategoryManagementInterface" method="view"/>
@@ -144,8 +160,16 @@
         </resources>
     </route>
     <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/:id" \
-      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+     -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
     <route url="/V1/blog/tag/:id" method="GET">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag"/>
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/:id/:store_id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/tag/:id/:store_id" method="GET">
         <service class="Magefan\Blog\Api\TagManagementInterface" method="get"/>
         <resources>
             <resource ref="Magefan_Blog::tag"/>

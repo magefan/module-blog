@@ -29,6 +29,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_eventObject = 'blog_post_collection';
 
     /**
+     * @var string[]
+     */
+    protected $_ftiCollumns = ['title', 'meta_keywords', 'meta_description', 'identifier', 'content'];
+
+    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -102,7 +107,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['post_id'] = 'main_table.post_id';
         $this->_map['fields']['store'] = 'store_table.store_id';
         $this->_map['fields']['category'] = 'category_table.category_id';
-        $this->_map['fields']['tag'] = 'tag_table.tag_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
         $this->_map['fields']['relatedproduct'] = 'relatedproduct_table.related_id';
     }
@@ -401,10 +405,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $tagPostIds = array_slice($tagPostIds, 0, 200);
             }
 
-            $fullExpression = '(0 ' .
-                '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ('
-                . $this->getConnection()->quote($term)
-                . '), 4) ' .
+            $fullExpression = $this->getSearchRateExpression($term, $this->_ftiCollumns) .
                 '+ IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))';
 
             $fullExpression = new \Zend_Db_Expr($fullExpression);
@@ -420,17 +421,23 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 ]
             );
 
-            $fullExpression = '(0 ' .
-                '+ FORMAT(MATCH (title, meta_keywords, meta_description, identifier, content) AGAINST ('
-                . $this->getConnection()->quote($term)
-                . '), 4))';
-
-            $fullExpression = new \Zend_Db_Expr($fullExpression);
+            $fullExpression = new \Zend_Db_Expr($this->getSearchRateExpression($term, $this->_ftiCollumns));
             $this->getSelect()->columns(['search_rate' => $fullExpression]);
+
             //$this->expressionFieldsToSelect['search_rate'] = $fullExpression;
         }
 
         return $this;
+    }
+
+    /**
+     * @param $term
+     * @param array $columns
+     * @return string
+     */
+    public function getSearchRateExpression($term, array $columns): string
+    {
+        return '(0 + FORMAT(MATCH (' . implode(',', $columns) . ') AGAINST (' . $this->getConnection()->quote($term) . '), 4)) ';
     }
 
     /**

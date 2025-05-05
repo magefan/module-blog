@@ -16,6 +16,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * @inheritDoc
      */
+    protected $_eventPrefix = 'mfblog_category_collection';
+
+    /**
+     * @inheritDoc
+     */
+    protected $_eventObject = 'blog_category_collection';
+
+    /**
+     * @inheritDoc
+     */
     protected $_idFieldName = 'category_id';
 
     /**
