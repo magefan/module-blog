@@ -68,7 +68,7 @@ class AuthorRepository implements AuthorRepositoryInterface
         AuthorResourceModel $authorResourceModel,
         AuthorCollectionInterfaceFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->authorFactory = $authorFactory;
         $this->authorResourceModel = $authorResourceModel;

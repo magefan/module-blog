@@ -40,7 +40,7 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         NoSlashUrlRedirect $noSlashUrlRedirect,
-        SlashUrlRedirect $slashUrlRedirect = null
+        ?SlashUrlRedirect $slashUrlRedirect = null
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->noSlashUrlRedirect = $noSlashUrlRedirect;
