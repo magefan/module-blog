@@ -14,6 +14,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Adminhtml\Category\Tree" name="category.tree" template="Magento_Catalog::catalog/category/tree.phtml"/>
+            <block name="category.edit" template="Magefan_Blog::category/edit.phtml" />
 
             <uiComponent name="blog_category_form"/>
             <block name="mfblog.tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />

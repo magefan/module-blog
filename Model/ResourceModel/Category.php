@@ -292,4 +292,105 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         return 'category';
     }
+
+    /**
+     * Move category to another parent node
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @param \Magefan\Blog\Model\Category $newParent
+     * @param null|int $afterCategoryId
+     * @return $this
+     */
+    public function changeParent(
+        \Magefan\Blog\Model\Category $category,
+        \Magefan\Blog\Model\Category $newParent,
+        $afterCategoryId = null
+    ) {
+        $table = $this->getMainTable();
+        $connection = $this->getConnection();
+        $levelField = $connection->quoteIdentifier('level');
+        $pathField = $connection->quoteIdentifier('path');
+
+        $position = $this->_processPositions($category, $newParent, $afterCategoryId);
+
+        $newPath = sprintf('%s/%s', $newParent->getPath(), $category->getId());
+        $newLevel = $newParent->getLevel() + 1;
+        $levelDisposition = $newLevel - $category->getLevel();
+
+        /**
+         * Update children nodes path
+         */
+        $connection->update(
+            $table,
+            [
+                'path' => new \Zend_Db_Expr(
+                    'REPLACE(' . $pathField . ',' . $connection->quote(
+                        $category->getPath() . '/'
+                    ) . ', ' . $connection->quote(
+                        $newPath . '/'
+                    ) . ')'
+                ),
+                'level' => new \Zend_Db_Expr($levelField . ' + ' . $levelDisposition)
+            ],
+            [$pathField . ' LIKE ?' => $category->getPath() . '/%']
+        );
+        /**
+         * Update moved category data
+         */
+        $data = [
+            'path' => $newPath,
+            'level' => $newLevel,
+            'position' => $position,
+            'parent_id' => $newParent->getId(),
+        ];
+        $connection->update($table, $data, ['category_id = ?' => $category->getId()]);
+
+        // Update category object to new data
+        $category->addData($data);
+        $category->unsetData('path_ids');
+
+        return $this;
+    }
+
+
+    /**
+     * Process positions of old parent category children and new parent category children.
+     *
+     * Get position for moved category
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @param \Magefan\Blog\Model\Category $newParent
+     * @param null|int $afterCategoryId
+     * @return int
+     */
+    protected function _processPositions($category, $newParent, $afterCategoryId)
+    {
+        $table = $this->getMainTable();
+        $connection = $this->getConnection();
+        $positionField = $connection->quoteIdentifier('position');
+
+        $bind = ['position' => new \Zend_Db_Expr($positionField . ' - 1')];
+        $where = [
+            'parent_id = ?' => $category->getParentId(),
+            $positionField . ' > ?' => $category->getPosition(),
+        ];
+        $connection->update($table, $bind, $where);
+
+        /**
+         * Prepare position value
+         */
+        if ($afterCategoryId) {
+            $select = $connection->select()->from($table, 'position')->where('category_id = :category_id');
+            $position = $connection->fetchOne($select, ['category_id' => $afterCategoryId]);
+            $position = (int)$position + 1;
+        } else {
+            $position = 1;
+        }
+
+        $bind = ['position' => new \Zend_Db_Expr($positionField . ' + 1')];
+        $where = ['parent_id = ?' => $newParent->getId(), $positionField . ' >= ?' => $position];
+        $connection->update($table, $bind, $where);
+
+        return $position;
+    }
 }

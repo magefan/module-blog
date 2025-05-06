@@ -116,7 +116,7 @@ class Tree extends Dbp
                 Dbp::ID_FIELD => 'category_id',
                 Dbp::PATH_FIELD => 'path',
                 Dbp::ORDER_FIELD => 'position',
-                Dbp::LEVEL_FIELD => 'category_id'
+                Dbp::LEVEL_FIELD => 'level'
             ]
         );
         $this->_eventManager = $eventManager;
@@ -192,8 +192,8 @@ class Tree extends Dbp
             if ($disabledIds) {
                 $collection->addFieldToFilter('category_id', ['nin' => $disabledIds]);
             }
-            $collection->addAttributeToFilter('is_active', 1);
-            $collection->addAttributeToFilter('include_in_menu', 1);
+            $collection->addFieldToFilter('is_active', 1);
+            $collection->addFieldToFilter('include_in_menu', 1);
         }
 
         if ($this->_joinUrlRewriteIntoCollection) {
@@ -297,7 +297,18 @@ class Tree extends Dbp
      */
     protected function _getInactiveItemIds($collection, $storeId)
     {
-        return [9,10];
+        $idsSelect = clone $collection->getSelect();
+
+        $idsSelect->reset(\Magento\Framework\DB\Select::ORDER);
+        $idsSelect->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
+        $idsSelect->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+        $idsSelect->reset(\Magento\Framework\DB\Select::COLUMNS);
+        $idsSelect->reset(\Magento\Framework\DB\Select::GROUP);
+        $idsSelect->columns('category_id');
+      //  $idsSelect->where('is_active = ?', 0);
+        /////////////////////// $storeId
+
+        return $this->_conn->fetchCol($idsSelect);
     }
 
     /**
