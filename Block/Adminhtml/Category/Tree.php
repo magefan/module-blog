@@ -98,7 +98,7 @@ class Tree extends AbstractCategory
      */
     protected function _prepareLayout()
     {
-        $addUrl = $this->getUrl("*/*/add", ['_current' => false, 'id' => null, '_query' => false]);
+        $addUrl = $this->getUrl("*/*/new", ['_current' => false, 'id' => null, '_query' => false]);
         if ($this->getStore()->getId() == Store::DEFAULT_STORE_ID) {
             $this->addChild(
                 'add_sub_button',
