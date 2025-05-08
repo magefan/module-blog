@@ -23,7 +23,7 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     public function _toHtml()
     {
         $this->setTemplate(
-            $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
+            $this->getCustomTemplate()
         );
 
         return \Magento\Framework\View\Element\Template::_toHtml();
@@ -71,5 +71,35 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     public function getTemplate()
     {
         return \Magefan\Blog\Block\Post\PostList\AbstractList::getTemplate();
+    }
+
+	/**
+	 * @return mixed
+	 */
+    public function getElementClass(){
+        return 'featured';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomTemplate() {
+        $designVersion = $this->_scopeConfig->getValue('mfblog/design/version', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        if ($designVersion === '2025-04' && $this->getTemplate() && strpos($this->getTemplate(), 'article.phtml') !== false) {
+			return $this->getTemplate();
+		}
+        if ($this->getData('mf_template')) {
+            if ($designVersion == '2025-04') {
+                $this->setNewDesignType($this->getData('mf_template'));
+                return 'Magefan_BlogExtra::widget/blog-widget-2025-04.phtml';
+            }
+
+            if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getData('mf_template'))) {
+                return $template;
+            }
+        } elseif ($this->getData('custom_template')) {
+            return $this->getData('custom_template');
+        }
+        return 'Magefan_Blog::widget/recent.phtml';
     }
 }

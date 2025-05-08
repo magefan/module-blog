@@ -47,7 +47,25 @@
                 <label translate="true">Posts Publish Date To</label>
                 <description translate="true">Leave blank or use date format YYYY-MM-DD.</description>
             </parameter>
-            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="80" >
+            <parameter name="template_type" xsi:type="select"  visible="true" sort_order="80" >
+                <label translate="true">TemplateType</label>
+                <description translate="true">Choose the template type to use.</description>
+                <options>
+                    <option name="mf" value="mf">
+                        <label>Magefan Templates</label>
+                    </option>
+                    <option name="custom" value="custom" >
+                        <label>Custom Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="mf_template" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\PostListTemplate" visible="true" sort_order="81" >
+                <label translate="true">Magefan Templates</label>
+                <depends>
+                    <parameter name="template_type" value="mf" />
+                </depends>
+            </parameter>
+            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="82" >
                 <label translate="true">Custom Template</label>
                 <description translate="true"><![CDATA[
                     Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>
@@ -78,6 +96,9 @@
                     Magefan_BlogExtra::post/list/block-5-3.phtml
                     <pre>
                 ]]></description>
+                <depends>
+                    <parameter name="template_type" value="custom" />
+                </depends>
             </parameter>
         </parameters>
     </widget>
@@ -99,7 +120,25 @@
                     </data>
                 </block>
             </parameter>
-            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
+            <parameter name="template_type" xsi:type="select"  visible="true" sort_order="22" >
+                <label translate="true">TemplateType</label>
+                <description translate="true">Choose the template type to use.</description>
+                <options>
+                    <option name="mf" value="mf">
+                        <label>Magefan Templates</label>
+                    </option>
+                    <option name="custom" value="custom" >
+                        <label>Custom Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="mf_template" xsi:type="select" source_model="Magefan\Blog\Model\Config\Source\PostListTemplate" visible="true" sort_order="25" >
+                <label translate="true">Magefan Templates</label>
+                <depends>
+                    <parameter name="template_type" value="mf" />
+                </depends>
+            </parameter>
+            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="26" >
                 <label translate="true">Custom Template</label>
                 <description translate="true"><![CDATA[
                     Leave blank to use default template <em>Magefan_Blog::widget/recent.phtml</em>.<br/>
@@ -130,6 +169,9 @@
                     Magefan_BlogExtra::post/list/block-5-3.phtml
                     <pre>
                 ]]></description>
+                <depends>
+                    <parameter name="template_type" value="custom" />
+                </depends>
             </parameter>
         </parameters>
     </widget>

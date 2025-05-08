@@ -138,6 +138,11 @@
             <argument name="templateType" xsi:type="string">blog_post_list</argument>
         </arguments>
     </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\PostListTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_list_2025_04</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Magefan\Blog\Model\Config\Source\PostViewTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view</argument>
@@ -156,6 +161,16 @@
     <virtualType name="Magefan\Blog\Model\Config\Source\SidebarPostsTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_related_post_2025_04</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_sidebar_posts_2025_04</argument>
         </arguments>
     </virtualType>
 
@@ -198,6 +213,11 @@
     <virtualType name="Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view_latest_from_category</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_latest_from_category_2025_04</argument>
         </arguments>
     </virtualType>
 

@@ -59,6 +59,11 @@ abstract class AbstractList extends Template implements IdentityInterface
      */
     protected $templatePool;
 
+    /**
+     * @var
+     */
+    protected $templateType ;
+    
     const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'main_table.publish_time';
     const POSTS_SORT_FIELD_BY_POSITION = 'position';
     const POSTS_SORT_FIELD_BY_TITLE = 'main_table.title';
@@ -276,5 +281,42 @@ abstract class AbstractList extends Template implements IdentityInterface
             'mfblog/post_view/reading_time/enabled',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Set template type for new design
+     *
+     * @return mixed
+     */
+    public function getNewDesignType() {
+        if (!$this->templateType) {
+            if (!empty($this->templatePool->getAll('blog_post_list_2025_04')[$this->getPostTemplateType()])) {
+                $this->setNewDesignType($this->getPostTemplateType());
+            } else if ($this->getRequest()->getFullActionName() == 'blog_index_index') {
+                $this->setNewDesignType(
+                    $this->_scopeConfig->getValue('mfblog/index_page/templates_new',
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
+                );
+                return $this->templateType;
+            } else {
+                $this->setNewDesignType(
+                    $this->_scopeConfig->getValue('mfblog/post_list/templates_new',
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
+                );
+            }
+        }
+
+        return $this->templateType;
+    }
+
+    /**
+     * Get template type for new design
+     *
+     * @param $templateType
+     * @return $this
+     */
+    public function setNewDesignType($templateType) {
+        $this->templateType = $templateType;
+        return $this;
     }
 }
