@@ -107,15 +107,30 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getPostTemplateType()
     {
+        $designVersion = (string)$this->_scopeConfig->getValue(
+            'mfblog/design/version',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        $template = (string)$this->getAuthor()->getData('posts_list_template');
+        if (!empty($this->templatePool->getAll('blog_post_list' . ($designVersion == '2025-04' ? '_2025_04' : ''))[$template])) {
+            if ($template) {
+                return $template;
+            }
+        }
         $template = (string)$this->_scopeConfig->getValue(
             'mfblog/author/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
-        if ($template) {
-            return $template;
+
+
+        if ($designVersion == '2025-04') {
+            $template = $this->_scopeConfig->getValue(
+                'mfblog/author/templates_new',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
         }
 
-        $template = (string)$this->getAuthor()->getData('posts_list_template');
         if ($template) {
             return $template;
         }

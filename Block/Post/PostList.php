@@ -27,10 +27,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $toolbarBlock;
 
     /**
-     * @var 
-     */
-	protected $templateType ;
-    /**
      * Preparing global layout
      *
      * @return $this
@@ -77,21 +73,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        /*if ($this->_scopeConfig->getValue('mfblog/developer/version',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE) == '2025-04') {
-            $this->_template = 'Magefan_BlogExtra::post/article.phtml';
-
-            if (!empty($this->templatePool->getAll('blog_post_list_new')[$this->getPostTemplateType()])) {
-                $this->setNewDesignType($this->getPostTemplateType());
-            } else {
-                $this->setNewDesignType(
-                    $this->_scopeConfig->getValue('mfblog/post_list/templates_new',
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
-                );
-            }
-            return parent::getTemplate();
-        }*/
-
 		if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])) {
 			/* If template was not customized in layout */
 			return parent::getTemplate();
@@ -217,36 +198,4 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
     {
         return $this->getLayout()->getBlock('breadcrumbs');
     }
-
-    /**
-     * Set template type for new design
-     *
-     * @return mixed
-     */
-	public function getNewDesignType() {
-        if (!$this->templateType) {
-            if (!empty($this->templatePool->getAll('blog_post_list_new')[$this->getPostTemplateType()])) {
-                $this->setNewDesignType($this->getPostTemplateType());
-            } else {
-                $this->setNewDesignType(
-                    $this->_scopeConfig->getValue('mfblog/post_list/templates_new',
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
-                );
-            }
-        }
-
-		return $this->templateType;
-	}
-
-    /**
-     * Get template type for new design
-     *
-     * @param $templateType
-     * @return $this
-     */
-	public function setNewDesignType($templateType) {
-		$this->templateType = $templateType;
-        return $this;
-	}
-
 }

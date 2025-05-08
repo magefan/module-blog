@@ -24,6 +24,7 @@
                 <autopublish_categories>0</autopublish_categories>
             </publish_post_on_fb>
             <design>
+                <version>2024-12</version>
                 <format_date>F d, Y</format_date>
                 <publication_date>1</publication_date>
                 <index_page_layout/>

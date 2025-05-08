@@ -8,7 +8,7 @@
 #post-comments * {box-sizing: border-box;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;}
 
 /* Styles For All Blocks*/
-.c-count {margin-bottom: 15px;font-weight: 700;padding-bottom: 10px;font-size: 16px;border-bottom: 1px solid #bbbbbb;color: #222;}
+.c-count {margin-bottom: 15px;font-weight: 700;padding-bottom: 10px;font-size: 16px;color: #0B0B0B;}
 .c-img {width: 48px;position: absolute; left: 0;top: 0;z-index: 5;}
 .c-img img {width: 100%;}
 .c-reply, .c-comment {position: relative;margin-bottom: 18px;}
@@ -19,11 +19,13 @@
 
 /* Reply Form */
 .c-replyform textarea,
-.c-replyform input {color: #222;background: #fff !important;display: block;}
-.c-replyform textarea {padding: 8px;height: 70px;border: 1px solid #bbbbbb;}
+.c-replyform input {color: #222;background: #fff !important;display: block;border-radius: 8px;padding: 12px 14px;border: 1px solid #bbbbbb;}
+.c-replyform textarea {height: 132px;}
+.c-replyform input {height: 52px;}
 .c-replyform.no-active textarea {border-bottom: 1px solid #bbbbbb;height: 60px;}
 .c-replyform textarea:focus,
 .c-replyform input:focus {box-shadow:none;}
+.c-replyform .actions {display: flex;align-items: center;justify-content: flex-end;margin-top: 24px;}
 .c-replyform button {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
 .c-replyform button:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
 
@@ -34,9 +36,10 @@
 /* Form */
 .c-replyform .c-btn-hld {margin-top: 20px;}
 .c-replyform.no-active .c-btn-hld {display: none;}
-.c-replyform .c-btn-hld .lr-hld {
+.c-replyform .lr-hld {
     display: -webkit-flex;display: -ms-flexbox;display: flex;
     -webkit-justify-content: center;-ms-flex-pack: justify;justify-content: space-between;
+    margin-bottom: 24px;
 }
 .c-replyform .left-hld,
 .c-replyform .right-hld {
@@ -65,7 +68,7 @@
 
 
 /* Button */
-.c-replyform button {display: inline-block;color: #fff;background-color: #4db2ec;border: none;border-radius: 0;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;margin-top: 20px;}
+.c-replyform button {display: inline-block;color: #fff;background-color: #4db2ec;border: none;border-radius: 0;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;}
 .c-replyform button:hover {color: #ffffff;background-color: #222222;}
 .c-replyform button.cancel {background-color: #f6f7f9;border-color: #ced0d4;color: #4b4f56;}
 .c-replyform button.cancel:hover {background-color: #e9ebee;}
@@ -81,8 +84,8 @@
 
 /* Comment */
 .c-comments {margin-top: 20px;border-top: 1px solid #ddd;padding-top: 30px;padding-left: 25px;}
-.c-comments .c-comment {border-bottom: 1px dashed #eee;}
-.c-comments .c-comment:last-child{border-bottom: none}
+/*.c-comments .c-comment {border-bottom: 1px dashed #eee;}*/
+.c-comments .c-comment:last-child {border-bottom: none}
 .c-post .p-info {margin-bottom: 10px;}
 .c-post .p-name {font-weight: 700;/*color: #222222;*/display: inline-block;margin-right: 10px;font-size: 14px;line-height: 20px;}
 .c-post .publish-date {font-size: 11px;color: #bbbbbb;display: inline-block;line-height: 20px;}

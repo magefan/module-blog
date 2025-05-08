@@ -38,13 +38,8 @@
                   data-mage-init='{"validation":{}}'>
                 <?= $block->getBlockHtml('formkey') ?>
                 <input type="hidden" name="post_id" value="<?= (int)($block->getPost()->getId()) ?>" />
-                <textarea name="text"
-                          placeholder="<?= $canPost ? $block->escapeHtml(__('Add a comment...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
-                          disabled="disabled"<?php } ?>
-                          data-validate="{required:true}"></textarea>
-                <div class="c-btn-hld">
 
-                    <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
+				<?php if ($canPost && !$session->getCustomerGroupId()) { ?>
                     <div class="lr-hld">
                         <div class="left-hld">
                             <input type="text"
@@ -67,7 +62,13 @@
                                    aria-required="true">
                         </div>
                     </div>
-                    <?php } ?>
+				<?php } ?>
+
+                <textarea name="text"
+                          placeholder="<?= $canPost ? $block->escapeHtml(__('Add a comment...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
+                          disabled="disabled"<?php } ?>
+                          data-validate="{required:true}"></textarea>
+                <div class="c-btn-hld">
 
                     <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
@@ -76,15 +77,17 @@
 
                     <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
 
-                    <?php if ($canPost) { ?>
-                        <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
-                    <?php } else { ?>
-                        <button type="button"
-                                onclick="window.location='<?= $block->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
-                            <?= $block->escapeHtml(__('Sign In')) ?>
-                        </button>
-                    <?php } ?>
-
+                    <div class="actions">
+						<?php if ($canPost) { ?>
+                            <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
+						<?php } else { ?>
+                            <button type="button"
+                                    onclick="window.location='<?= $block->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
+								<?= $block->escapeHtml(__('Sign In')) ?>
+                            </button>
+						<?php } ?>
+                    </div>
+                    
                 </div>
             </form>
         </div>

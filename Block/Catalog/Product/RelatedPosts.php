@@ -75,12 +75,49 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * @return string
+     */
+    public function getBlockKey() {
+        return 'related-posts';
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlockTitle() {
+        return 'Related Posts';
+    }
+
+    /**
      * Get relevant path to template
      *
      * @return string
      */
     public function getTemplate()
     {
+        $designVersion = (string)$this->_scopeConfig->getValue(
+            'mfblog/design/version',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        if ($designVersion == '2025-04') {
+            $template = (string)$this->_scopeConfig->getValue(
+                'mfblog/product_page/related_posts_template_new',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+            if ($template == 'default') {
+                return parent::getTemplate();
+            }
+            if ($template == 'article-slider') {
+                return 'Magefan_BlogExtra::post/list/carousel-2025-04.phtml';
+            }
+            if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
+                return parent::getTemplate();
+            }
+
+            return 'Magefan_BlogExtra::post/view/post-bottom-2025-04.phtml';
+        }
+
         $templateName = (string)$this->_scopeConfig->getValue(
             'mfblog/product_page/related_posts_template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
