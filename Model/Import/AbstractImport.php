@@ -138,8 +138,8 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\Filesystem\Io\File $file,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
         $authorFactory = null,
         $productRepository = null
@@ -275,7 +275,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             } catch (\Exception $e) {
                 throw  new \Exception("Failed connect to the database.");
             }
-            
+
         }
         return $this->dbAdapter;
     }
@@ -302,7 +302,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         if (!$hasFormat) {
             $imageName .= '.jpg';
         }
-        
+
         $imagePath = $mediaPath . '/' . $imageName;
         $imageSource = false;
         if (!$this->file->fileExists($imagePath)) {

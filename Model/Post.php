@@ -199,12 +199,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
-        \Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
-        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
+        ?\Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
+        ?\Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
+        ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 

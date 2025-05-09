@@ -102,7 +102,7 @@
     </table>
     <table name="magefan_blog_category" resource="default" engine="innodb" comment="Magefan Blog Category Table">
         <column xsi:type="int" name="category_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Category ID"/>
-        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false" default="0" comment="Parent Category ID"/>
+<!--        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false" default="0" comment="Parent Category ID"/>-->
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Category Title"/>
         <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Category Meta Title"/>
         <column xsi:type="text" name="meta_keywords" nullable="true" comment="Category Meta Keywords"/>

@@ -48,7 +48,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     const STATUS_DISABLED = 0;
 
 
-    const TREE_ROOT_ID = 999999999;
+    const TREE_ROOT_ID = 0;
 
     /**
      * Prefix of model events names

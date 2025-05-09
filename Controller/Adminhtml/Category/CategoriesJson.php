@@ -48,7 +48,7 @@ class CategoriesJson extends \Magefan\Blog\Controller\Adminhtml\Category impleme
         DataPersistorInterface $dataPersistor,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\View\LayoutFactory $layoutFactory,
-        \Magento\Backend\Model\Auth\Session $authSession = null
+        ?\Magento\Backend\Model\Auth\Session $authSession = null
     ) {
         parent::__construct($context, $dataPersistor);
         $this->resultJsonFactory = $resultJsonFactory;

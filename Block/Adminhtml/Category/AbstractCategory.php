@@ -73,11 +73,15 @@ class AbstractCategory extends \Magento\Backend\Block\Template
     public function getCategory()
     {
         $categoryId = (int)$this->getRequest()->getParam('id');
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
-        $catRepo = $objectManager->create( \Magefan\Blog\Api\CategoryRepositoryInterface::class);
+        if ($categoryId) {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
-        return $catRepo->getById($categoryId);
+            $catRepo = $objectManager->create( \Magefan\Blog\Api\CategoryRepositoryInterface::class);
+            return $catRepo->getById($categoryId);
+        }
+
+        return null;
     }
 
     /**

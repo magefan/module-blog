@@ -36,6 +36,30 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 
     protected function _beforeSave($model, $request)
     {
+        $categoryPostData = $request->getPostValue();
+
+        $isNewCategory = empty($categoryPostData['category_id']);
+        $parentId = $categoryPostData['parent'] ?? null;
+
+        if ($parentId) {
+            $model->setParentId($parentId);
+        }
+
+        if ($isNewCategory) {
+            $storeId = 0;
+            $parentCategory = $this->getParentCategory($parentId, $storeId);
+
+            $path = $parentCategory->getPath();
+
+            if ($parentId) {
+                $path .= '/' . $parentId;
+            }
+
+            $model->setPath($path);
+            $model->setParentId($parentCategory->getId());
+            $model->setLevel(null);
+        }
+
         /* Prepare images */
         $this->prepareImagesBeforeSave($model, ['category_img']);
     }
@@ -66,5 +90,30 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
         $data = $inputFilter->getUnescaped();
 
         return $data;
+    }
+
+
+    /**
+     * Get parent category
+     *
+     * @param int $parentId
+     * @param int $storeId
+     *
+     * @return \Magefan\Blog\Model\Category
+     */
+    protected function getParentCategory($parentId, $storeId)
+    {
+        if (!$parentId) {
+            if ($storeId) {
+                //$parentId = $this->storeManager->getStore($storeId)->getRootCategoryId();
+            } else {
+                $parentId = \Magento\Catalog\Model\Category::TREE_ROOT_ID;
+                return $this->_objectManager->create(\Magefan\Blog\Model\Category::class)
+                    ->setId($parentId)
+                    ->setPath('');
+            }
+        }
+
+        return $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($parentId);
     }
 }

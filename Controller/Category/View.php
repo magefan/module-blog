@@ -33,7 +33,7 @@ class View extends \Magefan\Blog\App\Action\Action
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magefan\Blog\Model\Url $url = null
+        ?\Magefan\Blog\Model\Url $url = null
     ) {
         parent::__construct($context);
         $this->_storeManager = $storeManager;

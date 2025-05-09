@@ -29,7 +29,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     public function __construct(
         Context $context,
         array $data = [],
-        Config $config = null
+        ?Config $config = null
     ) {
         parent::__construct($context, $data);
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
