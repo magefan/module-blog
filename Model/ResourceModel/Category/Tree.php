@@ -5,23 +5,12 @@ namespace Magefan\Blog\Model\ResourceModel\Category;
 use Magefan\Blog\Model\ResourceModel\Category\Collection;
 use Magento\Framework\Data\Tree\Dbp;
 use Magefan\Blog\Api\Data\CategoryManagementInterface;
+use Magento\Framework\Data\Tree\Node;
 use Magento\Framework\EntityManager\MetadataPool;
 
-/**
- * @api
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @since 100.0.2
- */
+
 class Tree extends Dbp
 {
-    public const ID_FIELD = 'id';
-
-    public const PATH_FIELD = 'path';
-
-    public const ORDER_FIELD = 'order';
-
-    public const LEVEL_FIELD = 'level';
-
     /**
      * @var array
      */
@@ -31,7 +20,6 @@ class Tree extends Dbp
      * @var \Magento\Framework\Event\ManagerInterface
      */
     private $_eventManager;
-
 
 
     /**
@@ -122,6 +110,141 @@ class Tree extends Dbp
         $this->_eventManager = $eventManager;
         $this->_collectionFactory = $collectionFactory;
     }
+
+
+    /**
+     * Load tree
+     *
+     * @param   int|Node|string $parentNode
+     * @param   int $recursionLevel
+     * @return  $this
+     */
+    public function load($parentNode = null, $recursionLevel = 0)
+    {
+        if (!$this->_loaded) {
+            $startLevel = 1;
+            $parentPath = '';
+
+            if ($parentNode instanceof Node) {
+                $parentPath = $parentNode->getData($this->_pathField);
+                $startLevel = $parentNode->getData($this->_levelField);
+            } elseif (is_numeric($parentNode)) {
+                $select = $this->_conn->select()
+                    ->from($this->_table, [$this->_pathField, $this->_levelField])
+                    ->where("{$this->_idField} = ?", $parentNode);
+                $parent = $this->_conn->fetchRow($select);
+
+                $startLevel = $parent[$this->_levelField];
+                $parentPath = $parent[$this->_pathField];
+                $parentNode = null;
+            } elseif (is_string($parentNode)) {
+                $parentPath = $parentNode;
+                $startLevel = count(explode(',', $parentPath)) - 1;
+                $parentNode = null;
+            }
+
+            $select = clone $this->_select;
+
+            $select->order($this->_table . '.' . $this->_orderField . ' ASC');
+            if ($parentPath) {
+                $pathField = $this->_conn->quoteIdentifier([$this->_table, $this->_pathField]);
+                $select->where("{$pathField} LIKE ?", "{$parentPath}/%");
+            }
+            if ($recursionLevel != 0) {
+                $levelField = $this->_conn->quoteIdentifier([$this->_table, $this->_levelField]);
+                $select->where("{$levelField} <= ?", $startLevel + $recursionLevel);
+            }
+
+            $arrNodes = $this->_conn->fetchAll($select);
+
+            $childrenItems = [];
+
+            $dataRoot = [
+                'category_id' => 0
+            ];
+
+            array_unshift($arrNodes, $dataRoot);
+
+            foreach ($arrNodes as $nodeInfo) {
+                if (!empty($nodeInfo['category_id'])) {
+                    if (empty($nodeInfo['path'])) {
+                        $nodeInfo['path'] = $nodeInfo['category_id'];
+                    } else {
+                        $nodeInfo['path'] .= '/'. $nodeInfo['category_id'];
+                    }
+                }
+
+                $pathToParent = explode('/', $nodeInfo[$this->_pathField] ?? '');
+                array_pop($pathToParent);
+                $pathToParent = implode('/', $pathToParent);
+
+                if (isset($nodeInfo['level']) && $pathToParent == '') {
+                    $pathToParent = '0';
+                }
+
+                $childrenItems[$pathToParent][] = $nodeInfo;
+            }
+
+            $this->addChildNodes($childrenItems, $parentPath, $parentNode);
+
+            $this->_loaded = true;
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * Load ensured nodes
+     *
+     * @param object $category
+     * @param Node $rootNode
+     * @return void
+     */
+    public function loadEnsuredNodes($category, $rootNode)
+    {
+        $pathIds = $category->getPathIds();
+        $rootNodeId = $rootNode->getId();
+        $rootNodePath = $rootNode->getData($this->_pathField);
+
+        $select = clone $this->_select;
+        $select->order($this->_table . '.' . $this->_orderField . ' ASC');
+
+        if ($pathIds) {
+            $condition = $this->_conn->quoteInto("{$this->_table}.{$this->_idField} in (?)", $pathIds);
+            $select->where($condition);
+        }
+
+        $arrNodes = $this->_conn->fetchAll($select);
+
+        if ($arrNodes) {
+            $childrenItems = [];
+            foreach ($arrNodes as $nodeInfo) {
+
+                if (!empty($nodeInfo['category_id'])) {
+                    if (empty($nodeInfo['path'])) {
+                        $nodeInfo['path'] = $nodeInfo['category_id'];
+                    } else {
+                        $nodeInfo['path'] .= '/'. $nodeInfo['category_id'];
+                    }
+                }
+
+                $nodeId = $nodeInfo[$this->_idField];
+                if ($nodeId <= $rootNodeId) {
+                    continue;
+                }
+
+                $pathToParent = explode('/', $nodeInfo[$this->_pathField] ?? '');
+                array_pop($pathToParent);
+                $pathToParent = implode('/', $pathToParent);
+                $childrenItems[$pathToParent][] = $nodeInfo;
+            }
+
+            $this->_addChildNodes($childrenItems, $rootNodePath, $rootNode, true);
+        }
+    }
+
+
 
     /**
      * Set store id
