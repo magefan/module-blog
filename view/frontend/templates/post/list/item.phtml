@@ -18,6 +18,9 @@ $_post = $block->getPost();
 $_postUrl = $block->escapeUrl($_post->getPostUrl());
 $_postImage = $_post->getOgImage()? $_post->getOgImage() : $_post->getFeaturedImage();
 $_postName = $block->escapeHtml($_post->getTitle());
+
+$imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$imageWidth = (int)$block->getFeaturedImageWidth() ?: 722;
 ?>
 <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
     <div class="post-header">
@@ -56,6 +59,8 @@ $_postName = $block->escapeHtml($_post->getTitle());
             <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
             <?php if ($featuredImage) { ?>
                 <?php
+                $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);
+                $widthAndHeight = $imageHelper->getWidthAndHeigth();
                 $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
                 if (!$featuredImgAlt) {
                     $featuredImgAlt = $_postName;
@@ -64,7 +69,8 @@ $_postName = $block->escapeHtml($_post->getTitle());
                 <div class="post-ftimg-hld">
                     <a href="<?= /*@noEscape*/ $_postUrl ?>"
                        title="<?= /*@noEscape*/ $_postName ?>">
-                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>" <?php if ($widthAndHeight)
+                            echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </a>
                 </div>

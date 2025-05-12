@@ -47,11 +47,13 @@
                             <?php
                                 if ($featuredImage) {
                                     $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
+                                    $widthAndHeight = $imageHelper->getWidthAndHeigth();
                                 } else {
                                     $featuredImageUrl = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
                                 }
                             ?>
                             <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $block->escapeUrl($featuredImageUrl) ?>"
+                                <?php if ($widthAndHeight) echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
                                  alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                         </a>
                     </div>
