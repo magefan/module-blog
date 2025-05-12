@@ -52,6 +52,11 @@ class Tree extends Dbp
     protected $_blogCategory;
 
     /**
+     * @var null
+     */
+    protected $categoryPostsCount = null;
+
+    /**
      * Tree constructor.
      * @param \Magefan\Blog\Model\ResourceModel\Category $blogCategory
      * @param \Magento\Framework\App\CacheInterface $cache
@@ -149,6 +154,8 @@ class Tree extends Dbp
                     }
                 }
 
+                $nodeInfo['post_count'] = $this->getCategoryPostsCount((int)$nodeInfo['category_id']);
+
                 $pathToParent = explode('/', $nodeInfo[$this->_pathField] ?? '');
                 array_pop($pathToParent);
                 $pathToParent = implode('/', $pathToParent);
@@ -167,7 +174,6 @@ class Tree extends Dbp
 
         return $this;
     }
-
 
     /**
      * Load ensured nodes
@@ -212,6 +218,7 @@ class Tree extends Dbp
                 $pathToParent = explode('/', $nodeInfo[$this->_pathField] ?? '');
                 array_pop($pathToParent);
                 $pathToParent = implode('/', $pathToParent);
+
                 $childrenItems[$pathToParent][] = $nodeInfo;
             }
 
@@ -219,6 +226,25 @@ class Tree extends Dbp
         }
     }
 
+    /**
+     * @param int $categoryId
+     * @return int
+     */
+    private function getCategoryPostsCount(int $categoryId): int
+    {
+        if (null === $this->categoryPostsCount) {
+            $select = $this->_conn->select()
+                ->from(
+                    $this->_coreResource->getTableName('magefan_blog_post_category'),
+                    ['category_id', 'post_count' => new \Zend_Db_Expr('COUNT(post_id)')]
+                )
+                ->group('category_id');
+
+            $this->categoryPostsCount = $this->_conn->fetchPairs($select);
+        }
+
+        return $this->categoryPostsCount[$categoryId] ?? 0;
+    }
 
 
     /**
