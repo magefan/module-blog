@@ -61,9 +61,14 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * @return string
+     */
     public function getWidgetKey() {
         return (string)$this->_widgetKey;
     }
+    
     /**
      * Retrieve true if display the post image is enabled in the config
      * @return bool

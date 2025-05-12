@@ -46,8 +46,20 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
      */
     protected function getPostIdsConfigValue()
     {
-        return (string)$this->getData('posts_ids');
+        $postsIds = (string) $this->getData('posts_ids');
+        $registeredPostsIds = $this->_coreRegistry->registry('posts_ids');
+
+        if ($postsIds !== '' && $postsIds !== $registeredPostsIds) {
+            if ($registeredPostsIds !== null) {
+                $this->_coreRegistry->unregister('posts_ids');
+            }
+            $this->_coreRegistry->register('posts_ids', $postsIds);
+        }
+
+        return $this->_coreRegistry->registry('posts_ids');
     }
+
+
 
     /**
      * Retrieve post short content
