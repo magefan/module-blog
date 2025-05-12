@@ -269,36 +269,6 @@ class Tree extends AbstractCategory
     }
 
     /**
-     * Get JSON of array of categories, that are breadcrumbs for specified category path
-     *
-     * @param string $path
-     * @param string $javascriptVarName
-     * @return string
-     */
-    public function getBreadcrumbsJavascript($path, $javascriptVarName)
-    {
-        if (empty($path)) {
-            return '';
-        }
-
-        $categories = $this->_categoryTree->setStoreId($this->getStore()->getId())->loadBreadcrumbsArray($path);
-        if (empty($categories)) {
-            return '';
-        }
-        foreach ($categories as $key => $category) {
-            $categories[$key] = $this->_getNodeJson($category);
-        }
-        $scriptString = 'require(["prototype"], function(){' . $javascriptVarName . ' = ' . $this->_jsonEncoder->encode(
-                $categories
-            ) .
-            ';' .
-            ($this->canAddSubCategory() ? '$("add_subcategory_button").show();' : '$("add_subcategory_button").hide();')
-            . '});';
-
-        return /* @noEscape */ $this->secureRenderer->renderTag('script', [], $scriptString, false);
-    }
-
-    /**
      * Get JSON of a tree node or an associative array
      *
      * @param Node|array $node

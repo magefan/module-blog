@@ -18,6 +18,9 @@ use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
  */
 class AbstractCategory extends \Magento\Backend\Block\Template
 {
+
+    protected $currentCategory = null;
+
     /**
      * Core registry
      *
@@ -66,22 +69,22 @@ class AbstractCategory extends \Magento\Backend\Block\Template
     }
 
     /**
-     * Retrieve current category instance
-     *
-     * @return array|null
+     * @return mixed|null
      */
     public function getCategory()
     {
-        $categoryId = (int)$this->getRequest()->getParam('id');
+        if (null === $this->currentCategory) {
+            $categoryId = (int)$this->getRequest()->getParam('id');
 
-        if ($categoryId) {
-            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            if ($categoryId) {
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
-            $catRepo = $objectManager->create( \Magefan\Blog\Api\CategoryRepositoryInterface::class);
-            return $catRepo->getById($categoryId);
+                $catRepo = $objectManager->create( \Magefan\Blog\Api\CategoryRepositoryInterface::class);
+                $this->currentCategory = $catRepo->getById($categoryId);
+            }
         }
 
-        return null;
+        return $this->currentCategory;
     }
 
     /**
@@ -94,6 +97,7 @@ class AbstractCategory extends \Magento\Backend\Block\Template
         if ($this->getCategory()) {
             return $this->getCategory()->getId();
         }
+
         return \Magefan\Blog\Model\Category::TREE_ROOT_ID;
     }
 
@@ -117,6 +121,7 @@ class AbstractCategory extends \Magento\Backend\Block\Template
         if ($this->getCategory()) {
             return $this->getCategory()->getPath();
         }
+
         return \Magefan\Blog\Model\Category::TREE_ROOT_ID;
     }
 
@@ -161,14 +166,15 @@ class AbstractCategory extends \Magento\Backend\Block\Template
 
         $root = $this->_coreRegistry->registry('root');
         if ($root === null) {
-            $storeId = (int)$this->getRequest()->getParam('store');
+            /*$storeId = (int)$this->getRequest()->getParam('store');
 
             if ($storeId) {
                 $store = $this->_storeManager->getStore($storeId);
                 $rootId = $store->getRootCategoryId();
             } else {
                 $rootId = \Magefan\Blog\Model\Category::TREE_ROOT_ID;
-            }
+            }*/
+            $rootId = \Magefan\Blog\Model\Category::TREE_ROOT_ID;
 
             $tree = $this->_categoryTree->load(null, $recursionLevel);
 
@@ -186,7 +192,6 @@ class AbstractCategory extends \Magento\Backend\Block\Template
                     $root->setName(__('Root'));
                 }
             }
-
 
             $this->_coreRegistry->register('root', $root);
         }
@@ -224,36 +229,6 @@ class AbstractCategory extends \Magento\Backend\Block\Template
             $this->setData('category_collection', $collection);
         }
         return $collection;
-    }
-
-    /**
-     * Get and register categories root by specified categories IDs
-     *
-     * IDs can be arbitrary set of any categories ids.
-     * Tree with minimal required nodes (all parents and neighbours) will be built.
-     * If ids are empty, default tree with depth = 2 will be returned.
-     *
-     * @param array $ids
-     * @return mixed
-     */
-    public function getRootByIds($ids)
-    {
-        $root = $this->_coreRegistry->registry('root');
-        if (null === $root) {
-            $ids = $this->_categoryTree->getExistingCategoryIdsBySpecifiedIds($ids);
-            $tree = $this->_categoryTree->loadByIds($ids);
-            $rootId = \Magefan\Blog\Model\Category::TREE_ROOT_ID;
-            $root = $tree->getNodeById($rootId);
-            if ($root && $rootId != \Magefan\Blog\Model\Category::TREE_ROOT_ID) {
-                $root->setIsVisible(true);
-            } elseif ($root && $root->getId() == \Magefan\Blog\Model\Category::TREE_ROOT_ID) {
-                $root->setName(__('Root'));
-            }
-
-            $tree->addCollectionData($this->getCategoryCollection());
-            $this->_coreRegistry->register('root', $root);
-        }
-        return $root;
     }
 
     /**
@@ -312,14 +287,6 @@ class AbstractCategory extends \Magento\Backend\Block\Template
      */
     public function getRootIds()
     {
-        $ids = $this->getData('root_ids');
-        if ($ids === null) {
-            $ids = [\Magefan\Blog\Model\Category::TREE_ROOT_ID];
-            foreach ($this->_storeManager->getGroups() as $store) {
-                $ids[] = $store->getRootCategoryId();
-            }
-            $this->setData('root_ids', $ids);
-        }
-        return $ids;
+        return  [\Magefan\Blog\Model\Category::TREE_ROOT_ID];
     }
 }
