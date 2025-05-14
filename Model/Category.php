@@ -345,13 +345,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         return count($this->getParentIds());
     }
 
-
     /**
      * @return array
      */
     public function getPathIds()
     {
-        return $this->getParentIds();
+        $pathIds = $this->getParentIds();
+        $pathIds[] = $this->getId();
+        return $pathIds;
     }
 
     /**

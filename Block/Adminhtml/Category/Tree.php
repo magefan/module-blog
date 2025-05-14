@@ -279,12 +279,6 @@ class Tree extends AbstractCategory
      */
     protected function _getNodeJson($node, $level = 0)
     {
-  /*      echo PHP_EOL. '_getNodeJson';
-        echo 'TITLE: ' . $node->getTitle() . PHP_EOL;
-        echo 'LVL: ' . $level . PHP_EOL;
-        echo ' hasChildren: ' .  ( $node->hasChildren() ? 'yes' : 'no'   ) . PHP_EOL;
-*/
-
         // create a node from data array
         if (is_array($node)) {
             $node = new Node($node, 'entity_id', new \Magento\Framework\Data\Tree());
@@ -298,26 +292,22 @@ class Tree extends AbstractCategory
         $item['id'] = $node->getId();
         $item['store'] = (int)$this->getStore()->getId();
         $item['path'] = $node->getData('path');
-
+        $item['a_attr'] = ['class' => $node->getIsActive() ? 'active-category' : 'not-active-category'];
         $item['cls'] = 'folder ' . ($node->getIsActive() ? 'active-category' : 'no-active-category');
-        //$item['allowDrop'] = ($level<3) ? true : false;
+
         $allowMove = $this->_isCategoryMoveable($node);
         $item['allowDrop'] = $allowMove;
         // disallow drag if it's first level and category is root of a store
 
         $item['allowDrag'] = $allowMove && ($node->getLevel() == 1 && $rootForStores ? false : true);
 
-        if ((int)$node->getChildrenCount() > 0) {
-            $item['children'] = [];
-        }
-
         $isParent = $this->_isParentSelectedCategory($node);
+
+        $item['children'] = [];
 
         if ($node->hasChildren()) {
             $item['children'] = [];
             if (!($this->getUseAjax() && $node->getLevel() > 1 && !$isParent)) {
-                //echo 'COUNT getChildren: ' .  count($node->getChildren()) . PHP_EOL;
-
                 foreach ($node->getChildren() as $child) {
                     $item['children'][] = $this->_getNodeJson($child, $level + 1);
                 }

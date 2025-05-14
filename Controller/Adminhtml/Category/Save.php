@@ -52,7 +52,11 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
             $path = $parentCategory->getPath();
 
             if ($parentId) {
-                $path .= '/' . $parentId;
+                if ($path) {
+                    $path .= '/' . $parentId;
+                } else {
+                    $path = $parentId;
+                }
             }
 
             $model->setPath($path);

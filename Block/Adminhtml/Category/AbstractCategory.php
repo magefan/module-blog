@@ -242,6 +242,7 @@ class AbstractCategory extends \Magento\Backend\Block\Template
     {
         $nodeId = $parentNodeCategory->getId();
         $node = $this->_categoryTree->loadNode($nodeId);
+
         $node->loadChildren($recursionLevel);
 
         if ($node && $nodeId != \Magefan\Blog\Model\Category::TREE_ROOT_ID) {

@@ -128,7 +128,12 @@ class Tree extends Dbp
             $select->order($this->_table . '.' . $this->_orderField . ' ASC');
             if ($parentPath) {
                 $pathField = $this->_conn->quoteIdentifier([$this->_table, $this->_pathField]);
-                $select->where("{$pathField} LIKE ?", "{$parentPath}/%");
+
+                $like = explode('/', $parentPath);
+                array_pop($like);
+                $like = implode('/', $like);
+
+                $select->where("{$pathField} LIKE ?", "{$like}/%");
             }
             if ($recursionLevel != 0) {
                 $levelField = $this->_conn->quoteIdentifier([$this->_table, $this->_levelField]);
