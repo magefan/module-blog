@@ -62,7 +62,7 @@ class TagRepository implements TagRepositoryInterface
         TagResourceModel $tagResourceModel,
         CollectionFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->tagFactory = $tagFactory;
         $this->tagResourceModel = $tagResourceModel;

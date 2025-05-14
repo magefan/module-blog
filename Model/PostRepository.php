@@ -62,7 +62,7 @@ class PostRepository implements PostRepositoryInterface
         PostResourceModel $postResourceModel,
         CollectionFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->postFactory = $postFactory;
         $this->postResourceModel = $postResourceModel;

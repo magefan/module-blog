@@ -82,8 +82,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
-        \Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
+        ?\Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_date = $date;

@@ -67,7 +67,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         CategoryResourceModel $categoryResourceModel,
         CollectionFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->categoryFactory = $categoryFactory;
         $this->categoryResourceModel = $categoryResourceModel;

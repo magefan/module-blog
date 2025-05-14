@@ -33,7 +33,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
      */
     public function __construct(
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig = null
+        ?\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig = null
     ) {
         $this->filterProvider = $filterProvider;
         $this->scopeConfig = $scopeConfig ?: \Magento\Framework\App\ObjectManager::getInstance()

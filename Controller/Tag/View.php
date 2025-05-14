@@ -29,7 +29,7 @@ class View extends \Magefan\Blog\App\Action\Action
 
     public function __construct(
         Context $context,
-        \Magefan\Blog\Model\Url $url = null
+        ?\Magefan\Blog\Model\Url $url = null
     ) {
         parent::__construct($context);
         $this->url = $url ?: $this->_objectManager->get(\Magefan\Blog\Model\Url::class);

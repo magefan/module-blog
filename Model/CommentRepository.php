@@ -62,7 +62,7 @@ class CommentRepository implements CommentRepositoryInterface
         CommentResourceModel $commentResourceModel,
         CollectionFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->commentFactory = $commentFactory;
         $this->commentResourceModel = $commentResourceModel;

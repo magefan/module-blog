@@ -78,7 +78,7 @@ class UrlResolver implements UrlResolverInterface
         AuthorInterfaceFactory $authorFactory,
         TagFactory $tagFactory,
         StoreManagerInterface $storeManager,
-        Config $config = null
+        ?Config $config = null
     ) {
         $this->url = $url;
         $this->postFactory = $postFactory;
