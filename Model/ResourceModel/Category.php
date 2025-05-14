@@ -104,13 +104,13 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         if ($object->isObjectNew()) {
-
             if ($object->getPosition() === null) {
                 $object->setPosition($this->_getMaxPosition($object->getPath()) + 1);
             }
 
             $path = explode('/', (string)$object->getPath());
-            $level = count($path)+1  - ($object->getId() ? 1 : 0);
+            $level = $object->getPath() ? count($path) + 1 : 1;
+
             $toUpdateChild = array_diff($path, [$object->getId()]);
 
             if (!$object->hasPosition()) {
@@ -119,7 +119,6 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             if (!$object->hasLevel()) {
                 $object->setLevel($level);
             }
-
 /*
             var_dump($object->getData('level'));
             var_dump($object->getData('position'));
