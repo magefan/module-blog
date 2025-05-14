@@ -292,20 +292,19 @@ abstract class AbstractList extends Template implements IdentityInterface
         if (!$this->templateType) {
             if (!empty($this->templatePool->getAll('blog_post_list_2025_04')[$this->getPostTemplateType()])) {
                 $this->setNewDesignType($this->getPostTemplateType());
-            } else if ($this->getRequest()->getFullActionName() == 'blog_index_index') {
-                $this->setNewDesignType(
-                    $this->_scopeConfig->getValue('mfblog/index_page/templates_new',
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
-                );
-                return $this->templateType;
             } else {
                 $this->setNewDesignType(
                     $this->_scopeConfig->getValue('mfblog/post_list/templates_new',
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
                 );
             }
+            if ($this->getRequest()->getFullActionName() == 'blog_index_index') {
+                $this->setNewDesignType(
+                    $this->_scopeConfig->getValue('mfblog/index_page/templates_new',
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
+                );
+            }
         }
-
         return $this->templateType;
     }
 
