@@ -57,6 +57,11 @@ class Tree extends Dbp
     protected $categoryPostsCount = null;
 
     /**
+     * @var null
+     */
+    protected $categoryChildrenCount = null;
+
+    /**
      * Tree constructor.
      * @param \Magefan\Blog\Model\ResourceModel\Category $blogCategory
      * @param \Magento\Framework\App\CacheInterface $cache
@@ -160,6 +165,7 @@ class Tree extends Dbp
                 }
 
                 $nodeInfo['post_count'] = $this->getCategoryPostsCount((int)$nodeInfo['category_id']);
+                $nodeInfo['children_count'] = $this->getCategoryChildrenCount((int)$nodeInfo['category_id']);
 
                 $pathToParent = explode('/', $nodeInfo[$this->_pathField] ?? '');
                 array_pop($pathToParent);
@@ -251,6 +257,49 @@ class Tree extends Dbp
         return $this->categoryPostsCount[$categoryId] ?? 0;
     }
 
+    /**
+     * @param int $categoryId
+     * @return int
+     */
+    private function getCategoryChildrenCount(int $categoryId): int
+    {
+        if (null === $this->categoryChildrenCount) {
+            $tableName = $this->_coreResource->getTableName('magefan_blog_category');
+
+            // Fetch all categories with their path
+            $select = $this->_conn->select()
+                ->from($tableName, ['category_id', 'path']);
+
+            $rows = $this->_conn->fetchAll($select);
+
+            $collectData = [];
+
+            foreach ($rows as $row) {
+                $path = (string)$row['path'];
+                $parts = explode('/', $path);
+
+                foreach ($parts as $level => $catId) {
+                    if (isset($collectData[$level][$catId])) {
+                        $collectData[$level][$catId]++;
+                    } else {
+                        $collectData[$level][$catId] = 0;
+                    }
+                }
+            }
+
+            foreach ($collectData as $level => $categories) {
+                foreach ($categories as $catId => $count) {
+                    if (isset($this->categoryChildrenCount[$catId])) {
+                        $this->categoryChildrenCount[$catId] += $count;
+                    } else {
+                        $this->categoryChildrenCount[$catId] = $count;
+                    }
+                }
+            }
+        }
+
+        return $this->categoryChildrenCount[$categoryId] ?? 0;
+    }
 
     /**
      * Set store id

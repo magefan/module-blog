@@ -303,7 +303,11 @@ class Tree extends AbstractCategory
 
         $isParent = $this->_isParentSelectedCategory($node);
 
-        $item['children'] = [];
+        // used to identify if children may be loaded via ajax in jstree
+        // if you face some issue with child display - remove condition and just add  $item['children'] = [];
+        if ((int)$node->getChildrenCount() > 0) {
+            $item['children'] = [];
+        }
 
         if ($node->hasChildren()) {
             $item['children'] = [];
