@@ -230,7 +230,8 @@ abstract class AbstractManagement implements ManagementInterface
      * @param $massage
      * @return false|string
      */
-    public function getError($massage) {
+    public function getError($massage)
+    {
         $data = ['error' => 'true'];
         
         $data['message'] = $massage ?? '';
