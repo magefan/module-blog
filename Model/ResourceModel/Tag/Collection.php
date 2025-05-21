@@ -211,4 +211,12 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         }
         parent::_renderFiltersBefore();
     }
+
+    /**
+     * @return int
+     */
+    public function getStoreId():int
+    {
+        return (int)$this->_storeId;
+    }
 }
