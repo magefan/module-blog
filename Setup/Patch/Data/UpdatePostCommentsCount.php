@@ -38,7 +38,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * @return void
+     * {@inheritdoc}
      */
     public function apply()
     {
@@ -54,7 +54,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * @return array|string[]
+     * {@inheritdoc}
      */
     public static function getDependencies()
     {
@@ -62,7 +62,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * @return array|string[]
+     * {@inheritdoc}
      */
     public function getAliases()
     {
@@ -70,7 +70,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public static function getVersion()
     {

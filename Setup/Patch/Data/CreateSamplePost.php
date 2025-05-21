@@ -46,6 +46,9 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function apply()
     {
         try {
@@ -67,18 +70,24 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
         $this->_postFactory->create()->setData($data)->save();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getDependencies()
     {
         return[];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAliases()
     {
         return[];
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public static function getVersion()
     {
