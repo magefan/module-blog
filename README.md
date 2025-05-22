@@ -23,8 +23,9 @@ Magento 2 Blog extension is a solution that allows you to manage your store and 
 ## Requirements
   * Magento Community 2.3.0-2.4.x (CE, EE, ECE, B2B)
   * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.14. Please install this extension first if you use installation via FTP.
-  * **Note** that the extension is free only for the Magento Community (Open Source) Edition. For Magento EE, ECE, and B2B you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
+  * **Note** that the extension is free only for the Magento Community (Open Source) Edition before version 2.12.4. For Magento EE, ECE, and B2B or Blog extension version higher 2.12.4 you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
   * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
+  * **ATTENTION!** Latest free version for Magento Open Source is Blog v2.12.4
 
 ## Editions & Pricing
   
