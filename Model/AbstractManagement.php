@@ -120,6 +120,8 @@ abstract class AbstractManagement implements ManagementInterface
             if (!empty($data['store_id'])) {
                 $item->setStoreId((int)$data['store_id']);
                 $item->setData('data_to_update', $data);
+            } else {
+                $item->setStoreId(0);
             }
 
             $item->load($id);
@@ -176,11 +178,7 @@ abstract class AbstractManagement implements ManagementInterface
     {
         try {
             $item = $this->_itemFactory->create();
-
-            if ($storeId) {
-                $item->setStoreId((int)$storeId);
-            }
-
+            $item->setStoreId((int)$storeId);
             $item->load($id);
 
             if (!$item->getId()) {
@@ -203,11 +201,7 @@ abstract class AbstractManagement implements ManagementInterface
     {
         try {
             $item = $this->_itemFactory->create();
-
-            if ($storeId) {
-                $item->setStoreId((int)$storeId);
-            }
-
+            $item->setStoreId((int)$storeId);
             $item->getResource()->load($item, $id);
 
             if (!$item->isVisibleOnStore($storeId)) {
