@@ -352,7 +352,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addArchiveFilter($year, $month)
     {
-       $this->getSelect()
+        $this->getSelect()
             ->where('YEAR(main_table.publish_time) = ?', $year);
         if ($month) {
             $this->getSelect()->where('MONTH(main_table.publish_time) = ?', $month);
