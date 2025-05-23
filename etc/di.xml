@@ -91,6 +91,133 @@
                         <item name="value" xsi:type="string">list-modern</item>
                         <item name="template" xsi:type="string">Magefan_Blog::post/list-modern.phtml</item>
                     </item>
+                    <item name="block-0-1-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-0-1-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-0-1-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-0-1-full.phtml</item>
+                    </item>
+                    <item name="block-0-2-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-0-2-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-0-2-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-0-2-full.phtml</item>
+                    </item>
+                    <item name="block-0-4-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-0-4-row-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-0-4-row-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-0-4-row-full.phtml</item>
+                    </item>
+                    <item name="block-0-5-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-0-5-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-0-5-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-0-5-full.phtml</item>
+                    </item>
+                    <item name="block-0-6-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-0-6-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-0-6-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-0-6-full.phtml</item>
+                    </item>
+                    <item name="block-1-1-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-1-1-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-1-1-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-1-1-full.phtml</item>
+                    </item>
+                    <item name="block-1-2-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-1-2-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-1-2-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-1-2-full.phtml</item>
+                    </item>
+                    <item name="block-1-3-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-1-3-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-1-3-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-1-3-full.phtml</item>
+                    </item>
+                    <item name="block-2-1-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-2-1-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-2-1-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-2-1-full.phtml</item>
+                    </item>
+                    <item name="block-2-2-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-2-2-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-2-2-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-2-2-full.phtml</item>
+                    </item>
+                    <item name="block-2-3" xsi:type="array">
+                        <item name="label" xsi:type="string">block-2-3 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-2-3</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-2-3.phtml</item>
+                    </item>
+
+                    <item name="block-2-1-shortcontent" xsi:type="array">
+                        <item name="label" xsi:type="string">block-2-1-shortcontent - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-2-1-shortcontent</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-2-1-shortcontent.phtml</item>
+                    </item>
+                    <item name="block-2-2-shortcontent" xsi:type="array">
+                        <item name="label" xsi:type="string">block-2-2-shortcontent - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-2-2-shortcontent</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-2-2-shortcontent.phtml</item>
+                    </item>
+                    <item name="block-2-3-shortcontent" xsi:type="array">
+                        <item name="label" xsi:type="string">block-2-3-shortcontent - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-2-3-shortcontent</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-2-3-shortcontent.phtml</item>
+                    </item>
+
+                    <item name="block-3-1-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-3-1-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-3-1-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-3-1-full.phtml</item>
+                    </item>
+                    <item name="block-3-2" xsi:type="array">
+                        <item name="label" xsi:type="string">block-3-2 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-3-2</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-3-2.phtml</item>
+                    </item>
+                    <item name="block-3-3" xsi:type="array">
+                        <item name="label" xsi:type="string">block-3-3 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-3-3</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-3-3.phtml</item>
+                    </item>
+                    <item name="block-3-4" xsi:type="array">
+                        <item name="label" xsi:type="string">block-3-4 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-3-4</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-3-4-full.phtml</item>
+                    </item>
+                    <item name="block-3-5" xsi:type="array">
+                        <item name="label" xsi:type="string">block-3-5 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-3-5</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-3-5-full.phtml</item>
+                    </item>
+                    <item name="block-3-6" xsi:type="array">
+                        <item name="label" xsi:type="string">block-3-6 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-3-6</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-3-6.phtml</item>
+                    </item>
+                    <item name="block-4-1" xsi:type="array">
+                        <item name="label" xsi:type="string">block-4-1 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-4-1</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-4-1.phtml</item>
+                    </item>
+                    <item name="block-4-2-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-4-2-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-4-2-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-4-2-full.phtml</item>
+                    </item>
+                    <item name="block-5-1-full" xsi:type="array">
+                        <item name="label" xsi:type="string">block-5-1-full - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-5-1-full</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-5-1-full.phtml</item>
+                    </item>
+                    <item name="block-5-2" xsi:type="array">
+                        <item name="label" xsi:type="string">block-5-2 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-5-2</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-5-2.phtml</item>
+                    </item>
+                    <item name="block-5-3" xsi:type="array">
+                        <item name="label" xsi:type="string">block-5-3 - Blog Extra</item>
+                        <item name="value" xsi:type="string">block-5-3</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/block-5-3.phtml</item>
+                    </item>
                 </item>
                 <item name="blog_post_view" xsi:type="array">
                     <item name="default" xsi:type="array">
@@ -122,12 +249,39 @@
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string"></item>
                     </item>
+                    <item name="modern" xsi:type="array">
+                        <item name="label" xsi:type="string">Modern - Blog Extra</item>
+                        <item name="value" xsi:type="string">modern</item>
+                    <item name="template" xsi:type="string">Magefan_BlogExtra::post/view/relatedposts-modern.phtml</item>
+                </item>
                 </item>
                 <item name="blog_post_sidebar_posts" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string"></item>
+                    </item>
+                    <item name="carousel" xsi:type="array">
+                        <item name="label" xsi:type="string">Carousel Slider - Blog Extra</item>
+                        <item name="value" xsi:type="string">carousel</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/list/carousel-slider.phtml</item>
+                    </item>
+                    <item name="modern" xsi:type="array">
+                        <item name="label" xsi:type="string">Modern - Blog Extra</item>
+                        <item name="value" xsi:type="string">modern</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::sidebar/recent-modern.phtml</item>
+                    </item>
+                </item>
+                <item name="blog_post_view_latest_from_category" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Use System Settings</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string"></item>
+                    </item>
+                    <item name="modern" xsi:type="array">
+                        <item name="label" xsi:type="string">Modern - Blog Extra</item>
+                        <item name="value" xsi:type="string">modern</item>
+                        <item name="template" xsi:type="string">Magefan_BlogExtra::post/view/categoryposts-modern.phtml</item>
                     </item>
                 </item>
             </argument>
