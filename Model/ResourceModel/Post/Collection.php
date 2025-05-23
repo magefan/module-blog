@@ -369,6 +369,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function addSearchFilter($term)
     {
+        if (!$term) {
+            $term = '__EMPTY_SEARCH_VALUE__';
+        }
+
         $tagPostIds = [];
         $connection = $this->getConnection();
         $select = $connection->select()
