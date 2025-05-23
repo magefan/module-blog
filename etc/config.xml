@@ -222,6 +222,7 @@
             <product_page>
                 <related_posts_enabled>1</related_posts_enabled>
                 <related_posts_template/>
+                <related_posts_template_new>default</related_posts_template_new>
                 <number_of_related_posts>5</number_of_related_posts>
             </product_page>
             <advanced_permalink>
