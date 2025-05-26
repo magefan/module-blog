@@ -51,7 +51,7 @@
                      <div class="row">
                         <div class="col-sm-5">
                            <div class="post-image">
-                              <?php if ($post_image = $_post->getFeaturedImage()) { ?>
+                              <?php if ($post_image = $_post->getFeaturedImg()) { ?>
                                   <?php
                                   $post_image = $imageHelper->init($post_image)->resize($imageWidth, null, false);
                                   $widthAndHeight = $imageHelper->getWidthAndHeigth();

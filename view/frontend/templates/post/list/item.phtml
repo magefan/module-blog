@@ -16,7 +16,7 @@
 <?php
 $_post = $block->getPost();
 $_postUrl = $block->escapeUrl($_post->getPostUrl());
-$_postImage = $_post->getOgImage()? $_post->getOgImage() : $_post->getFeaturedImage();
+$_postImage = $_post->getFeaturedImg();
 $_postName = $block->escapeHtml($_post->getTitle());
 
 $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
@@ -38,7 +38,7 @@ $imageWidth = (int)$block->getFeaturedImageWidth() ?: 722;
             <div class="post-sharing post-sharing-top old-post-list-item">
                 <div class="share-elements">
                     <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                        <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>', '<?= $_postImage ?>')">
+                        <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
                             <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                                 <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                             </div>
@@ -56,7 +56,7 @@ $imageWidth = (int)$block->getFeaturedImageWidth() ?: 722;
 
     <div class="post-content">
         <div class="post-description clearfix">
-            <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+            <?php $featuredImage = $_post->getFeaturedListImg() ?: $_post->getFeaturedImg(); ?>
             <?php if ($featuredImage) { ?>
                 <?php
                 $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);

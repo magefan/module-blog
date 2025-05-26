@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="post-image">
-                    <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                    <?php $featuredImage = $_post->getFeaturedListImg() ?: $_post->getFeaturedImg(); ?>
                     <?php if ($featuredImage) { ?>
                         <?php
                             $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);

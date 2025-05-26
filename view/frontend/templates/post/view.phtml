@@ -16,7 +16,7 @@
 <?php
 $_post = $block->getPost();
 $_postUrl = $_post->getPostUrl();
-$_postImage = $_post->getOgImage()? $_post->getOgImage() : $_post->getFeaturedImage();
+$_postImage = $_post->getFeaturedImg();
 $_postName = $block->escapeHtml($_post->getTitle(), null);
 
 $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
@@ -48,7 +48,7 @@ $imageWidth = (int)$block->getFeaturedImageWidth() ?: 722;
 
         <div class="post-content">
             <div class="post-description clearfix">
-                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                <?php if ($featuredImage = $_post->getFeaturedImg()) { ?>
                     <?php
                     $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);
                     $widthAndHeight = $imageHelper->getWidthAndHeigth();
