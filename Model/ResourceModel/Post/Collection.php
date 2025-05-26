@@ -410,8 +410,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $tagPostIds = array_slice($tagPostIds, 0, 200);
             }
 
-            $fullExpression = $this->getSearchRateExpression($term, $this->_ftiCollumns) .
-                '+ IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))';
+            $fullExpression = $this->getSearchRateExpression($term, $this->_ftiCollumns);
+            $fullExpression = substr($fullExpression, 0, strrpos($fullExpression, ')'));
+            $fullExpression = $fullExpression .
+                ' + IF(main_table.post_id IN (' . implode(',', $tagPostIds) . '), "1", "0"))';
 
             $fullExpression = new \Zend_Db_Expr($fullExpression);
             $this->getSelect()->columns(['search_rate' => $fullExpression]);
