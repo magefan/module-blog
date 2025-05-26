@@ -32,6 +32,9 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
      */
     protected $_category;
 
+
+    protected $mfTemplate = null;
+
     /**
      * Construct
      *
@@ -64,7 +67,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     public function _toHtml()
     {
         $this->setTemplate(
-            $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
+            $this->getCustomTemplate()
         );
 
         foreach ($this->getPostCollection() as $item) {
@@ -206,5 +209,37 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
         }
 
         return parent::getCollectionOrderDirection();
+    }
+
+	/**
+	 * @return mixed
+	 */
+	public function getElementClass(){
+		return 'recent';
+	}
+
+    /**
+     * @return string
+     */
+    public function getCustomTemplate() {
+        $designVersion = $this->_scopeConfig->getValue('mfblog/design/version', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        if ($designVersion === '2025-04' && $this->getTemplate()
+            && strpos($this->getTemplate(), 'article.phtml') !== false
+        ) {
+            return $this->getTemplate();
+		}
+        if ($this->getData('mf_template')) {
+            if ($designVersion === '2025-04') {
+                $this->setNewDesignType($this->getData('mf_template'));
+                return 'Magefan_BlogExtra::widget/blog-widget-2025-04.phtml';
+            }
+
+            if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getData('mf_template'))) {
+                return $template;
+            }
+        } elseif ($this->getData('custom_template')) {
+            return $this->getData('custom_template');
+        }
+        return 'Magefan_Blog::widget/recent.phtml';
     }
 }

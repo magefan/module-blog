@@ -66,6 +66,7 @@
 .post-list .hidden {display:none;}
 .post-view .post-bottom {margin-top:30px;}
 
+/* Next Prev */
 .post-view .post-nextprev-hld  {margin-bottom: 30px;}
 .post-view .post-nextprev-hld .nextprev-link {font-weight: 700;}
 .post-view .post-nextprev-hld .prev-link {float:left}
