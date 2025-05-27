@@ -110,6 +110,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_map['fields']['category'] = 'category_table.category_id';
         $this->_map['fields']['tag'] = 'tag_table.tag_id';
         $this->_map['fields']['relatedproduct'] = 'relatedproduct_table.related_id';
+        $this->_map['fields']['publish_time'] = 'main_table.publish_time';
+        $this->_map['fields']['author_id'] = 'main_table.author_id';
+        $this->_map['fields']['include_in_recent'] = 'main_table.include_in_recent';
+        $this->_map['fields']['end_time'] = 'main_table.end_time';
     }
 
     /**
