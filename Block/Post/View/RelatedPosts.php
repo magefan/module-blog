@@ -96,11 +96,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
             if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
                 return parent::getTemplate();
             }
-
-            if ($template == 'default') {
-                return parent::getTemplate();
-            }
-
+			
             if ($template = $this->templatePool->getTemplate('blog_post_view_related_post_2025_04', $template)) {
                 return $template;
             }
