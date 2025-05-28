@@ -2,30 +2,36 @@
 
 # Magento 2 Blog Extension
 
+[![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
+[![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
+
 <img align="right" width="120" height="120" src="https://cm.magefan.com/mf_webp/jpg/media/catalog/product/cache/28b407cef1668fd0bdd6f36db3e8e2f0/i/c/icon-blog-ext_1.webp">
 
 Magento 2 Blog extension is a solution that allows you to manage your store and blog in Magento from one place without having to rely on some third-party platforms. This blog extension for Magento 2 is a multifunctional marketing tool that will not only help you to create blog posts in Magento, but drive more traffic, boost SEO, and improve your Google rating. Our [Magento 2 Blog Extension](https://magefan.com/magento2-blog-extension) is one of the best Magento 2 extensions with more than 1 250 000 downloads.
 
-[![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
-[![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
+<img  align="right" width="120" height="70" src="https://magefan.com/media/wysiwyg/made_in_ukraine.jpg">
 
-<a href="https://savelife.in.ua/en/donate-en/#donate-army-card-monthly"><img width="830" height="208" src="https://cm.magefan.com/blog/support-ukraine.png"></a>
+<a href="https://magefan.com/magento2-blog-extension"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/download-magefan-extensions.png"></a>
 
-<img width="150" height="100" src="https://magefan.com/media/wysiwyg/made_in_ukraine.jpg">
+## Useful Links
+  * [User Guide](https://magefan.com/blog/magento-2-blog-extension-documentation)
+  * [Change Log](https://magefan.com/magento2-blog-extension/change-log)
+  * [FAQs](https://magefan.com/magento2-blog-extension#pattr-faq)
 
-<a href="https://magefan.com/magento2-blog-extension"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/download-magefan-extensions.png"></a><a href="https://magefan.com/magento2-blog-extension#live-demo"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/magefan-live-demo.png"></a>
+## 🇺🇦 Stand with Ukraine! [How can you help?](https://magefan.com/blog/join-our-donations)
 
 ## Requirements
   * Magento Community 2.3.0-2.4.x (CE, EE, ECE, B2B)
   * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.14. Please install this extension first if you use installation via FTP.
-  * **Note** that the extension is free only for the Magento Community (Open Source) Edition. For Magento EE, ECE, and B2B you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
+  * **Note** that the extension is free only for the Magento Community (Open Source) Edition before version 2.12.4. For Magento EE, ECE, and B2B or Blog extension version higher 2.12.4 you need to purchase the license for [Blog Base or go with Blog Plus, Blog Extra](https://magefan.com/magento2-blog-extension/pricing).
   * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
+  * **ATTENTION!** Latest free version for Magento Open Source is Blog v2.12.4
 
 ## Editions & Pricing
   
 <a href="https://magefan.com/magento2-blog-extension/pricing">
           <img
-            src="https://cm.magefan.com/wysiwyg/products/blog-pricing.png"
+            src="https://cm.magefan.com/wysiwyg/products/blog-magefan-plans-features.png"
             alt="Magento 2 Blog Editions & Pricing" />
         </a>      
         
@@ -196,7 +202,7 @@ Try out our open demo and if you like our extension **please give us some star o
       <td align="center" valign="middle">
         <a href="http://blog.demo.magefan.top/admin/">
           <img
-            src="https://magefan.com/static/version1520969775/frontend/Magefan/new/en_US/images/product-tab-demo-2.jpg"
+            src="https://cs.magefan.com/version1732118579/frontend/Magefan/next/en_US/Magefan_CssOptimizer/images/product-tab-demo-2.jpg"
             alt="Magento 2 Blog Extension Admin Panel Demo"
             height="220"
           >
@@ -223,26 +229,6 @@ Try out our open demo and if you like our extension **please give us some star o
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
   * [Blog Integration with Plumrocker AMP Extension](https://github.com/magefan/module-blog-amp)
   * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
-
-
-## Online Documentation
-https://magefan.com/blog/magento-2-blog-extension-documentation
-
-
-## Installation Instruction
-https://magefan.com/blog/magento2-blog-extension-installation
-
-## Magento 2 Blog Management
-* [How to Create Blog Post?](https://magefan.com/blog/new-blog-post-in-magento-2)
-* [How to Create Blog Category?](https://magefan.com/blog/new-blog-category-in-magento-2)
-* [How to Create Blog Tag?](https://magefan.com/magento2-blog-extension/new-tag)
-* [How to Create Blog Author?](https://magefan.com/magento-2-blog-extension/manage-author)
-* [How to Configure Magento 2 Blog Sidebar?](https://magefan.com/magento2-blog-extension/sidebar)
-* [How to Configure Blog Index Page?](https://magefan.com/magento-2-blog-extension/blog-index-page)
-* [How to Configure Blog Comments?](https://magefan.com/magento2-blog-extension/comments-configuration)
-* [How to Configure Blog Design?](https://magefan.com/magento2-blog-extension/design-configuration)
-* [How to Configure Blog Permalink Setting?](https://magefan.com/blog/manage-magento-2-blog-permalink-settings)
-* [How to Configure Magento 2 Blog Autopublication on Facebook?](https://magefan.com/magento2-blog-extension/facebook-auto-publishing)
 
 ## Support
 If you have any issues, please [contact us](mailto:support@magefan.com)
@@ -288,6 +274,8 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
 
   ### [Magento 2 Admin Panel Extensions](https://magefan.com/magento-2-extensions/admin-extensions)
 
+  * [Magento 2 Size Chart Extension](https://magefan.com/magento-2-size-chart)
+  * [Magento 2 Security Extension](https://magefan.com/magento-2-security-extension)
   * [Magento 2 Admin Action Log](https://magefan.com/magento-2-admin-action-log)
   * [Magento 2 Order Editor](https://magefan.com/magento-2-edit-order-extension)
   * [Magento 2 Better Order Grid](https://magefan.com/magento-2-better-order-grid-extension)

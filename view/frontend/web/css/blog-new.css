@@ -165,8 +165,8 @@ body.blog-page {
 
 /* Block Related */
 .blog-post-view .post-bottom .block.related {margin-bottom: 0;}
-.blog-post-view .post-bottom .block.related .block-title {margin: 0 0 25px;padding: 5px 0;border-bottom: 1px solid #222222;line-height: 1.42857143;}
-.blog-post-view .post-bottom .block.related .block-title strong {border-bottom: 3px solid #222222;padding-bottom: 2px;font-weight: 400;font-size: 18px;}
+.blog-post-view .post-bottom .block.related .block-title {margin: 0 0 25px;padding: 0;border-bottom: 1px solid #222222;line-height: 1.42857143;}
+.blog-post-view .post-bottom .block.related .block-title strong {border-bottom: 3px solid #222222;padding-bottom: 2px;font-weight: 400;font-size: 18px;display: inline-block;margin: 0;}
 
 /* Related Posts */
 .mfblog-related-posts-block.block.related .post-list {display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;

@@ -9,9 +9,10 @@ declare(strict_types=1);
 namespace Magefan\Blog\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
 use Magento\Framework\App\ResourceConnection;
 
-class TagInStore implements DataPatchInterface
+class TagInStore implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * @var ResourceConnection
@@ -27,16 +28,33 @@ class TagInStore implements DataPatchInterface
         $this->resourceConnection = $resourceConnection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getDependencies()
     {
         return [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAliases()
     {
         return [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public static function getVersion()
+    {
+        return '2.9.8';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function apply()
     {
         $connection = $this->resourceConnection->getConnection();

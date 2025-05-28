@@ -10,9 +10,10 @@ namespace Magefan\Blog\Setup\Patch\Data;
 
 use Magento\Framework\Module\ModuleResource;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
 use Magefan\Blog\Model\ResourceModel\Comment;
 
-class UpdatePostCommentsCount implements DataPatchInterface
+class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * @var Comment
@@ -36,6 +37,9 @@ class UpdatePostCommentsCount implements DataPatchInterface
         $this->moduleResource = $moduleResource;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function apply()
     {
         $connection = $this->commentResource->getConnection();
@@ -49,13 +53,27 @@ class UpdatePostCommentsCount implements DataPatchInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getDependencies()
     {
         return [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAliases()
     {
         return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getVersion()
+    {
+        return '2.9.1';
     }
 }

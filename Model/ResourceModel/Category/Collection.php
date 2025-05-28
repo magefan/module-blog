@@ -275,4 +275,12 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             }
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getStoreId():int
+    {
+        return (int)$this->_storeId;
+    }
 }

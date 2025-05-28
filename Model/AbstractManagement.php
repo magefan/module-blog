@@ -100,7 +100,7 @@ abstract class AbstractManagement implements ManagementInterface
             $item->setData($data)->save();
             return json_encode($item->getData());
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -114,13 +114,22 @@ abstract class AbstractManagement implements ManagementInterface
     public function update($id, $data)
     {
         try {
+            $data = json_decode($data, true);
             $item = $this->_itemFactory->create();
+
+            if (!empty($data['store_id'])) {
+                $item->setStoreId((int)$data['store_id']);
+                $item->setData('data_to_update', $data);
+            } else {
+                $item->setStoreId(0);
+            }
+
             $item->load($id);
 
             if (!$item->getId()) {
-                return false;
+                return $this->getError('Item not found');
             }
-            $data = json_decode($data, true);
+
             foreach ($this->_imagesMap as $key) {
                 if (empty($data[$key . '_name']) || empty($data[$key . '_content'])) {
                     unset($data[$key . '_name']);
@@ -133,7 +142,7 @@ abstract class AbstractManagement implements ManagementInterface
             $item->addData($data)->save();
             return json_encode($item->getData());
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -152,9 +161,9 @@ abstract class AbstractManagement implements ManagementInterface
                 $item->delete();
                 return true;
             }
-            return false;
+            return $this->getError('Something went wrong');
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -162,20 +171,22 @@ abstract class AbstractManagement implements ManagementInterface
      * Get item by id
      *
      * @param  int $id
+     * @param  int|null $storeId
      * @return bool
      */
-    public function get($id)
+    public function get($id, $storeId = 0)
     {
         try {
             $item = $this->_itemFactory->create();
+            $item->setStoreId((int)$storeId);
             $item->load($id);
 
             if (!$item->getId()) {
-                return false;
+                return $this->getError('Item not found');
             }
             return json_encode($item->getData());
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -190,15 +201,16 @@ abstract class AbstractManagement implements ManagementInterface
     {
         try {
             $item = $this->_itemFactory->create();
+            $item->setStoreId((int)$storeId);
             $item->getResource()->load($item, $id);
 
             if (!$item->isVisibleOnStore($storeId)) {
-                return false;
+                return $this->getError('Item is not visible on this store.');
             }
 
             return json_encode($this->getDynamicData($item));
         } catch (\Exception $e) {
-            return false;
+            return $this->getError($e->getMessage());
         }
     }
 
@@ -207,4 +219,17 @@ abstract class AbstractManagement implements ManagementInterface
      * @return mixed
      */
     abstract protected function getDynamicData($item);
+
+    /**
+     * @param $massage
+     * @return false|string
+     */
+    public function getError($massage)
+    {
+        $data = ['error' => 'true'];
+        
+        $data['message'] = $massage ?? '';
+
+        return json_encode($data);
+    }
 }
