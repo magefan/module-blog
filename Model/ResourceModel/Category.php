@@ -33,7 +33,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         \Magento\Framework\Stdlib\DateTime $dateTime,
-        $resourcePrefix = null
+                                                          $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
         $this->dateTime = $dateTime;
@@ -81,7 +81,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
-                ->create(\Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator::class);
+            ->create(\Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator::class);
         $identifierGenerator->generate($object);
 
         if (!$this->isValidPageIdentifier($object)) {
@@ -102,6 +102,30 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 __('URL key is already in use by another blog item.')
             );
         }
+
+        if ($object->isObjectNew()) {
+            if ($object->getPosition() === null) {
+                $object->setPosition($this->_getMaxPosition($object->getPath()) + 1);
+            }
+
+            $path = explode('/', (string)$object->getPath());
+            $level = $object->getPath() ? count($path) + 1 : 1;
+
+            $toUpdateChild = array_diff($path, [$object->getId()]);
+
+            if (!$object->hasPosition()) {
+                $object->setPosition($this->_getMaxPosition(implode('/', $toUpdateChild)) + 1);
+            }
+            if (!$object->hasLevel()) {
+                $object->setLevel($level);
+            }
+/*
+            var_dump($object->getData('level'));
+            var_dump($object->getData('position'));
+            var_dump($object->getData('path'));
+            exit();*/
+        }
+
 
         return parent::_beforeSave($object);
     }
@@ -292,4 +316,140 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         return 'category';
     }
+
+    /**
+     * Get maximum position of child categories by specific tree path
+     *
+     * @param string $path
+     * @return int
+     */
+    protected function _getMaxPosition($path)
+    {
+        $connection = $this->getConnection();
+        $positionField = $connection->quoteIdentifier('position');
+        $level = count(explode('/', (string)$path));
+        $bind = ['c_level' => $level, 'c_path' => $path . '/%'];
+        $select = $connection->select()->from(
+            $this->getTable($this->getMainTable()),
+            'MAX(' . $positionField . ')'
+        )->where(
+            $connection->quoteIdentifier('path') . ' LIKE :c_path'
+        )->where(
+            $connection->quoteIdentifier('level') . ' = :c_level'
+        );
+
+        $position = $connection->fetchOne($select, $bind);
+        if (!$position) {
+            $position = 0;
+        }
+        return $position;
+    }
+
+    /**
+     * Move category to another parent node
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @param \Magefan\Blog\Model\Category $newParent
+     * @param null|int $afterCategoryId
+     * @return $this
+     */
+    public function changeParent(
+        \Magefan\Blog\Model\Category $category,
+        \Magefan\Blog\Model\Category $newParent,
+                                     $afterCategoryId = null
+    ) {
+        $table = $this->getMainTable();
+        $connection = $this->getConnection();
+        $levelField = $connection->quoteIdentifier('level');
+        $pathField = $connection->quoteIdentifier('path');
+
+        $position = $this->_processPositions($category, $newParent, $afterCategoryId);
+
+        $newPath = sprintf('%s/%s', $newParent->getPath(), $newParent->getId());
+
+        $newLevel = $newParent->getLevel() + 2;
+        $levelDisposition = $newLevel - $category->getLevel();
+
+        /**
+         * Update children nodes path
+         */
+        $connection->update(
+            $table,
+            [
+                'path' => new \Zend_Db_Expr(
+                    'REPLACE(' . $pathField . ',' . $connection->quote(
+                        $category->getPath() . '/'
+                    ) . ', ' . $connection->quote(
+                        $newPath . '/'
+                    ) . ')'
+                ),
+                'level' => new \Zend_Db_Expr($levelField . ' + ' . $levelDisposition)
+            ],
+            [$pathField . ' LIKE ?' => $category->getPath() . '/%']
+        );
+        /**
+         * Update moved category data
+         */
+        $data = [
+            'path' => $newPath,
+            'level' => $newLevel,
+            'position' => $position,
+       //     'parent_id' => $newParent->getId(),
+        ];
+        $connection->update($table, $data, ['category_id = ?' => $category->getId()]);
+
+        // Update category object to new data
+        $category->addData($data);
+        $category->unsetData('path_ids');
+
+        return $this;
+    }
+
+    /**
+     * Process positions of old parent category children and new parent category children.
+     *
+     * Get position for moved category
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @param \Magefan\Blog\Model\Category $newParent
+     * @param null|int $afterCategoryId
+     * @return int
+     */
+    protected function _processPositions($category, $newParent, $afterCategoryId)
+    {
+        $table = $this->getMainTable();
+        $connection = $this->getConnection();
+        $positionField = $connection->quoteIdentifier('position');
+
+        $bind = ['position' => new \Zend_Db_Expr($positionField . ' - 1')];
+        $where = [
+            'path LIKE ?' => "%\\{$category->getParentId()}",
+            $positionField . ' > ?' => $category->getPosition(),
+        ];
+        $connection->update($table, $bind, $where);
+
+        /**
+         * Prepare position value
+         */
+        if ($afterCategoryId) {
+            $select = $connection->select()->from($table, 'position')->where('category_id = :category_id');
+            $position = $connection->fetchOne($select, ['category_id' => $afterCategoryId]);
+            $position = (int)$position + 1;
+        } else {
+            $position = 1;
+        }
+
+        $bind = ['position' => new \Zend_Db_Expr($positionField . ' + 1')];
+        $where = [
+        //    'parent_id = ?' => $newParent->getId(),
+            'path LIKE ?' => "%\\{$newParent->getId()}",
+            $positionField . ' >= ?' => $position
+        ];
+        $connection->update($table, $bind, $where);
+
+        return $position;
+    }
+
+
+
 }
