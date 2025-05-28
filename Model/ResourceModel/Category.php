@@ -365,10 +365,16 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $position = $this->_processPositions($category, $newParent, $afterCategoryId);
 
-        $newPath = sprintf('%s/%s', $newParent->getPath(), $newParent->getId());
+        $newPath = $newParent->getPath()
+            ? sprintf('%s/%s', $newParent->getPath(), $newParent->getId())
+            : $newParent->getId();
 
         $newLevel = $newParent->getLevel() + 2;
-        $levelDisposition = $newLevel - $category->getLevel();
+        $levelDisposition = $newLevel - ($category->getLevel() + 1);
+
+        $childrenNodesPath = $category->getPath()
+            ? $category->getPath() . '/' . $category->getId()
+            : $category->getPath();
 
         /**
          * Update children nodes path
@@ -385,7 +391,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 ),
                 'level' => new \Zend_Db_Expr($levelField . ' + ' . $levelDisposition)
             ],
-            [$pathField . ' LIKE ?' => $category->getPath() . '/%']
+            [
+                $connection->quoteInto($pathField . ' = ?', $childrenNodesPath) .
+                ' OR ' .
+                $connection->quoteInto($pathField . ' LIKE ?', $childrenNodesPath . '/%')
+            ]
         );
         /**
          * Update moved category data
