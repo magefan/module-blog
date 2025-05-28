@@ -54,6 +54,18 @@
                 <item name="sortOrder" xsi:type="number">10</item>
             </item>
         </argument>
+
+        <field name="store" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+            </settings>
+        </field>
+
         <field name="category_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -65,8 +77,6 @@
                 </item>
             </argument>
         </field>
-
-
 
         <field name="parent" formElement="hidden">
             <argument name="data" xsi:type="array">

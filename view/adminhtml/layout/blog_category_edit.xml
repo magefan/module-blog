@@ -12,6 +12,15 @@
     <update handle="editor"/>
     <update handle="blog_update_info"/>
     <body>
+
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Adminhtml\Category\Tree" name="category.tree" template="Magento_Catalog::catalog/category/tree.phtml"/>
             <block name="category.edit" template="Magefan_Blog::category/edit.phtml" />
