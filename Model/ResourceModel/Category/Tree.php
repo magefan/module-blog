@@ -112,6 +112,10 @@ class Tree extends Dbp
 
             if ($parentNode instanceof Node) {
                 $parentPath = $parentNode->getData($this->_pathField);
+                $parentPath = $parentPath
+                    ? $parentPath . '/' . $parentNode->getId()
+                    : $parentNode->getId();
+
                 $startLevel = $parentNode->getData($this->_levelField);
             } elseif (is_numeric($parentNode)) {
                 $select = $this->_conn->select()
