@@ -119,12 +119,17 @@ class Tree extends Dbp
                 $startLevel = $parentNode->getData($this->_levelField);
             } elseif (is_numeric($parentNode)) {
                 $select = $this->_conn->select()
-                    ->from($this->_table, [$this->_pathField, $this->_levelField])
+                    ->from($this->_table, [$this->_idField, $this->_pathField, $this->_levelField])
                     ->where("{$this->_idField} = ?", $parentNode);
                 $parent = $this->_conn->fetchRow($select);
 
                 $startLevel = $parent[$this->_levelField];
                 $parentPath = $parent[$this->_pathField];
+
+                $parentPath = $parentPath
+                    ? $parentPath . '/' . $parent[$this->_idField]
+                    : $parent[$this->_idField];
+
                 $parentNode = null;
             } elseif (is_string($parentNode)) {
                 $parentPath = $parentNode;
@@ -134,7 +139,7 @@ class Tree extends Dbp
 
             $select = clone $this->_select;
 
-            $select->order($this->_table . '.' . $this->_orderField . ' ASC');
+            $select->order($this->_table . '.' . $this->_orderField . ' DESC');
             if ($parentPath) {
                 $pathField = $this->_conn->quoteIdentifier([$this->_table, $this->_pathField]);
 
@@ -204,7 +209,7 @@ class Tree extends Dbp
         $rootNodePath = $rootNode->getData($this->_pathField);
 
         $select = clone $this->_select;
-        $select->order($this->_table . '.' . $this->_orderField . ' ASC');
+        $select->order($this->_table . '.' . $this->_orderField . ' DESC');
 
         if ($pathIds) {
             $condition = $this->_conn->quoteInto("{$this->_table}.{$this->_idField} in (?)", $pathIds);

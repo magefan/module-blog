@@ -104,26 +104,16 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         if ($object->isObjectNew()) {
-            if ($object->getPosition() === null) {
+            if (!$object->getPosition()) {
                 $object->setPosition($this->_getMaxPosition($object->getPath()) + 1);
             }
 
             $path = explode('/', (string)$object->getPath());
             $level = $object->getPath() ? count($path) + 1 : 1;
 
-            $toUpdateChild = array_diff($path, [$object->getId()]);
-
-            if (!$object->hasPosition()) {
-                $object->setPosition($this->_getMaxPosition(implode('/', $toUpdateChild)) + 1);
-            }
             if (!$object->hasLevel()) {
                 $object->setLevel($level);
             }
-/*
-            var_dump($object->getData('level'));
-            var_dump($object->getData('position'));
-            var_dump($object->getData('path'));
-            exit();*/
         }
 
 
@@ -327,8 +317,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $connection = $this->getConnection();
         $positionField = $connection->quoteIdentifier('position');
-        $level = count(explode('/', (string)$path));
-        $bind = ['c_level' => $level, 'c_path' => $path . '/%'];
+        $level = count(explode('/', (string)$path)) + 1;
+        $bind = ['c_level' => $level, 'c_path' => $path];
         $select = $connection->select()->from(
             $this->getTable($this->getMainTable()),
             'MAX(' . $positionField . ')'
@@ -427,6 +417,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _processPositions($category, $newParent, $afterCategoryId)
     {
+        $this->makePositionValuesUnique($category);
+
         $table = $this->getMainTable();
         $connection = $this->getConnection();
         $positionField = $connection->quoteIdentifier('position');
@@ -436,17 +428,23 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             'path LIKE ?' => "%\\{$category->getParentId()}",
             $positionField . ' > ?' => $category->getPosition(),
         ];
+
+
         $connection->update($table, $bind, $where);
 
-        /**
-         * Prepare position value
-         */
-        if ($afterCategoryId) {
-            $select = $connection->select()->from($table, 'position')->where('category_id = :category_id');
-            $position = $connection->fetchOne($select, ['category_id' => $afterCategoryId]);
-            $position = (int)$position + 1;
+        if (!((int)$afterCategoryId)) {
+            $position = $this->_getMaxPosition($category->getPath()) + 1;
         } else {
-            $position = 1;
+            /**
+             * Prepare position value
+             */
+            if ($afterCategoryId) {
+                $select = $connection->select()->from($table, 'position')->where('category_id = :category_id');
+                $position = $connection->fetchOne($select, ['category_id' => $afterCategoryId]);
+                $position = (int)$position;
+            } else {
+                $position = 0;
+            }
         }
 
         $bind = ['position' => new \Zend_Db_Expr($positionField . ' + 1')];
@@ -460,6 +458,46 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $position;
     }
 
+    /**
+     * @param \Magefan\Blog\Model\Category $category
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    protected function makePositionValuesUnique(\Magefan\Blog\Model\Category $category): void
+    {
+        $connection = $this->getConnection();
 
+        $select = $connection->select()
+            ->from($this->getMainTable(), ['category_id', 'position'])
+            ->where('path LIKE ?', "%\\{$category->getParentId()}");
 
+        $rows = $connection->fetchAll($select);
+
+        // Group by position
+        $positions = [];
+        foreach ($rows as $row) {
+            $pos = (int)$row['position'];
+            if (!isset($positions[$pos])) {
+                $positions[$pos] = [];
+            }
+            $positions[$pos][] = $row['category_id'];
+        }
+
+        $duplicates = array_filter($positions, function ($ids) {
+            return count($ids) > 1;
+        });
+
+        if (!empty($duplicates)) {
+            // Reassign positions sequentially (3,2,1..)
+            $i = count($rows);
+            foreach ($rows as $row) {
+                $connection->update(
+                    $this->getMainTable(),
+                    ['position' => $i],
+                    ['category_id = ?' => $row['category_id']]
+                );
+                $i--;
+            }
+        }
+    }
 }
