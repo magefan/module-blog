@@ -19,12 +19,12 @@
 
 /* Reply Form */
 .c-replyform textarea,
-.c-replyform input {color: #222;background: #fff !important;display: block;border-radius: 8px;padding: 12px 14px;border: 1px solid #bbbbbb;}
+.c-replyform input.input-text {color: #222;background: #fff !important;display: block;border-radius: 8px;padding: 12px 14px;border: 1px solid #bbbbbb;}
 .c-replyform textarea {height: 132px;}
-.c-replyform input {height: 52px;}
+.c-replyform input.input-text {height: 52px;}
 .c-replyform.no-active textarea {border-bottom: 1px solid #bbbbbb;height: 60px;}
 .c-replyform textarea:focus,
-.c-replyform input:focus {box-shadow:none;}
+.c-replyform input.input-text:focus {box-shadow:none;}
 .c-replyform .actions {display: flex;align-items: center;justify-content: flex-end;margin-top: 24px;}
 .c-replyform button {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
 .c-replyform button:hover {-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}

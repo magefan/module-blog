@@ -188,7 +188,7 @@ if ($commentsCount) {
 
             _deepestScroll = document.documentElement.scrollTop;
 
-            let commentElement = document.querySelector('.post-view .comments');
+            let commentElement = document.querySelector('#post-comments');
             let offset = 50;
 
             let isCommentElementVisible = ((commentElement.getBoundingClientRect().top - offset) < window.innerHeight);
