@@ -11,6 +11,8 @@
  * Blog post comments template
  *
  * @var $block \Magefan\Blog\Block\Post\View\Comments
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var $mfBreezeThemeDetection \Magefan\Community\Api\BreezeThemeDetectionInterface
  */
 ?>
 <?php
@@ -174,10 +176,43 @@ if ($commentsCount) {
 <?php } ?>
 </div>
 
-<script type="text/x-magento-init">
-{
-    "#post-comments": {
-        "Magento_Ui/js/core/app": <?= /*@noEscape*/ $block->getJsLayout() ?>
+<?php if ($mfBreezeThemeDetection->execute()) {?>
+    <?php
+    $script = "
+        var _deepestScroll = 0;
+
+        function initCommentsJs(firstCheck) {
+            if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
+                return;
+            }
+
+            _deepestScroll = document.documentElement.scrollTop;
+
+            let commentElement = document.querySelector('.post-view .comments');
+            let offset = 50;
+
+            let isCommentElementVisible = ((commentElement.getBoundingClientRect().top - offset) < window.innerHeight);
+
+            if (isCommentElementVisible) {
+                document.removeEventListener('scroll', initCommentsJs);
+
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-coments-breeze.js')) . "';
+                document.head.append(script);
+            }
+        }
+
+        initCommentsJs(true);
+        document.addEventListener('scroll', initCommentsJs);";
+    ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+<?php } else { ?>
+    <script type="text/x-magento-init">
+        {
+            "#post-comments": {
+                "Magento_Ui/js/core/app": <?= /*@noEscape*/ $block->getJsLayout() ?>
+        }
     }
-}
-</script>
+    </script>
+<?php } ?>
