@@ -299,7 +299,7 @@ class Tree extends AbstractCategory
         $item['allowDrop'] = $allowMove;
         // disallow drag if it's first level and category is root of a store
 
-        $item['allowDrag'] = $allowMove && ($node->getLevel() == 1 && $rootForStores ? false : true);
+        $item['allowDrag'] = $allowMove; //&& ($node->getLevel() == 1 && $rootForStores ? false : true);
 
         $isParent = $this->_isParentSelectedCategory($node);
 
