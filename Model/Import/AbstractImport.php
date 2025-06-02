@@ -275,7 +275,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
             } catch (\Exception $e) {
                 throw  new \Exception("Failed connect to the database.");
             }
-            
+
         }
         return $this->dbAdapter;
     }
@@ -302,7 +302,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         if (!$hasFormat) {
             $imageName .= '.jpg';
         }
-        
+
         $imagePath = $mediaPath . '/' . $imageName;
         $imageSource = false;
         if (!$this->file->fileExists($imagePath)) {

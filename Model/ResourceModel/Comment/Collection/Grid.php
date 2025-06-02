@@ -21,7 +21,7 @@ class Grid extends Collection
      * @var int
      */
     protected $_storeId;
-    
+
     /**
      * @var bool
      */
