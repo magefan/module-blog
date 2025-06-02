@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Model\ResourceModel;
 
+use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
+
 /**
  * Blog category resource model
  */
@@ -24,19 +26,25 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected static $allStoreIds;
 
     /**
-     * Construct
-     *
+     * @var CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
-     * @param string|null $resourcePrefix
+     * @param CollectionFactory $collectionFactory
+     * @param $resourcePrefix
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         \Magento\Framework\Stdlib\DateTime $dateTime,
-                                                          $resourcePrefix = null
+        CollectionFactory $collectionFactory,
+        $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
         $this->dateTime = $dateTime;
+        $this->collectionFactory = $collectionFactory;
     }
 
     /**
@@ -63,7 +71,31 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->getConnection()->delete($this->getTable('magefan_blog_category_store'), $condition);
         $this->getConnection()->delete($this->getTable('magefan_blog_post_category'), $condition);
 
+        $this->deleteChildren($object);
+
         return parent::_beforeDelete($object);
+    }
+
+    /**
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return void
+     */
+    protected function deleteChildren(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $categories = $this->collectionFactory->create();
+        $path = $object->getFullPath();
+
+        $categories->addFieldToFilter(
+            'path',
+            [
+                ['like' => $path],
+                ['like' => $path . '/%']
+            ]
+        );
+
+        foreach ($categories as $category) {
+            $category->delete();
+        }
     }
 
     /**
@@ -362,9 +394,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $newLevel = $newParent->getLevel() + 2;
         $levelDisposition = $newLevel - ($category->getLevel() + 1);
 
-        $childrenNodesPath = $category->getPath()
-            ? $category->getPath() . '/' . $category->getId()
-            : $category->getPath();
+        $childrenNodesPath = $category->getFullPath();
 
         /**
          * Update children nodes path

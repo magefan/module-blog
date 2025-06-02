@@ -229,6 +229,16 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * @return mixed|string
+     */
+    public function getFullPath()
+    {
+        return $this->getPath()
+            ? $this->getPath() . '/' . $this->getId()
+            : $this->getId();
+    }
+
+    /**
      * Retrieve parent category ids
      * @return array
      */
