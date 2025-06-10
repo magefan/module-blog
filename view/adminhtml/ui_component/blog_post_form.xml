@@ -290,6 +290,150 @@
                 </item>
             </argument>
         </field>
+        <field name="featured_list_img" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Featured List Image (Blog Plus)</item>
+                    <item name="sortOrder" xsi:type="number">16</item>
+                    <item name="source" xsi:type="string">magefan_blog_post</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Media Gallery (Blog Plus)</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>false</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="blogplus/post_upload/featuredListImg"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <openDialogTitle>Featured List Image (Blog Plus)</openDialogTitle>
+                        <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="featured_list_img_alt">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Featured List Image Alt (Blog Plus)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">featured_list_img_alt</item>
+                    <item name="sortOrder" xsi:type="number">17</item>
+                </item>
+            </argument>
+        </field>
+        <field name="publish_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Publish Date (Blog Plus)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">publish_time</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="options" xsi:type="array">
+                        <!--
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        -->
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="groups">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CustomerGroups</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog Plus)</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">groups</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="enable_comments">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Comments (Blog Plus)</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">enable_comments</item>
+                    <item name="fit" xsi:type="boolean">true</item>
+                    <item name="default" xsi:type="string">1</item>
+                    <item name="sortOrder" xsi:type="string">65</item>
+                </item>
+            </argument>
+        </field>
+        <field name="end_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">End Date (Blog Extra)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">end_time</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                    <item name="notice"  xsi:type="string" translate="true">You can set an end date of the publication. The post will not be available for reading after this date.</item>
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <container name="container_coauthors">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataScope" xsi:type="string"></item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="sortOrder" xsi:type="number">34</item>
+                </item>
+            </argument>
+            <field name="coauthors">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\Authors</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Co-Authors (Blog Extra)</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="component" xsi:type="string">Magefan_Blog/js/components/new-category</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="dataScope" xsi:type="string">coauthors</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="chipsEnabled" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="sortOrder" xsi:type="number">35</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="index=create_category:responseData" xsi:type="string">setParsed</item>
+                            <item name="newOption" xsi:type="string">toggleOptionSelected</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+        </container>
         <!--
         <container name="container_tags">
             <argument name="data" xsi:type="array">
@@ -473,6 +617,22 @@
                         <item name="sortOrder" xsi:type="number">10</item>
                     </item>
                 </argument>
+            </field>
+            <field name="url_key_create_redirect" component="Magefan_Blog/js/components/url-key-handle-changes" formElement="checkbox">
+                <settings>
+                    <dataType>boolean</dataType>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <description translate="true">Create Permanent Redirect for old URL (Blog Plus)</description>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                        </settings>
+                    </checkbox>
+                </formElements>
             </field>
         </container>
         <field name="meta_title">
@@ -853,6 +1013,20 @@
                             </item>
                         </argument>
                     </field>
+                    <field name="auto_related">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Auto Related (Blog Plus)</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="dataScope" xsi:type="string">auto_related</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="default" xsi:type="string">0</item>
+                                <item name="sortOrder" xsi:type="string">33</item>
+                            </item>
+                        </argument>
+                    </field>
                 </container>
             </dynamicRows>
         </fieldset>
@@ -1044,9 +1218,79 @@
                             </item>
                         </argument>
                     </field>
+                    <field name="display_on_product">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\NoYes</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Display Post On Product Page (Blog Plus)</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="dataScope" xsi:type="string">display_on_product</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="default" xsi:type="string">0</item>
+                                <item name="sortOrder" xsi:type="string">31</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="display_on_post">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\NoYes</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Display Product On Post Page (Blog Plus)</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="dataScope" xsi:type="string">display_on_post</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="default" xsi:type="string">0</item>
+                                <item name="sortOrder" xsi:type="string">32</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="auto_related">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Auto Related (Blog Plus)</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="dataScope" xsi:type="string">auto_related</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="default" xsi:type="string">0</item>
+                                <item name="sortOrder" xsi:type="string">33</item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="related_by_rule">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string" translate="true">Related By Rule (Blog Plus)</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="dataScope" xsi:type="string">related_by_rule</item>
+                                <item name="fit" xsi:type="boolean">true</item>
+                                <item name="default" xsi:type="string">0</item>
+                                <item name="sortOrder" xsi:type="string">34</item>
+                            </item>
+                        </argument>
+                    </field>
                 </container>
             </dynamicRows>
         </fieldset>
+    </fieldset>
+    <fieldset name="rp_conditions_serialized" sortOrder="60">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Related Product Rules (Blog Plus)</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">59</item>
+            </item>
+        </argument>
+        <container name="conditions_apply_to" sortOrder="10">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magefan\Blog\Block\Adminhtml\Post\RelatedProductsRule</argument>
+            </htmlContent>
+        </container>
     </fieldset>
     <fieldset name="design">
         <argument name="data" xsi:type="array">

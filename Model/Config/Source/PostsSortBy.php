@@ -29,6 +29,16 @@ class PostsSortBy implements \Magento\Framework\Option\ArrayInterface
     const TITLE = 2;
 
     /**
+     * @const int
+     */
+    const END_DATE_ASC = 100;
+
+    /**
+     * @const int
+     */
+    const END_DATE_DESC = 101;
+
+    /**
      * Options int
      *
      * @return array
@@ -39,6 +49,8 @@ class PostsSortBy implements \Magento\Framework\Option\ArrayInterface
             ['value' => self::PUBLISH_DATE, 'label' => __('Publish Date (default)')],
             ['value' => self::POSITION, 'label' => __('Position')],
             ['value' => self::TITLE, 'label' => __('Title')],
+            ['value' => self::END_DATE_ASC, 'label' => __('End Date - Ascending orde - Blog Extra')],
+            ['value' => self::END_DATE_DESC, 'label' => __('End Date - Descending order - Blog Extra')]
         ];
     }
 
