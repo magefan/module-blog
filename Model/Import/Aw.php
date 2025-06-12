@@ -110,7 +110,7 @@ class Aw extends AbstractImport
                 continue;
             }
 
-            $data['title'] = trim($data['title']);
+            $data['title'] = mb_strtolower(trim($data['title']));
 
             try {
                 /* Initial saving */
@@ -167,6 +167,55 @@ class Aw extends AbstractImport
                 $data['store_ids'] = 0;
             }
 
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $moduleManager = $objectManager->get(\Magento\Framework\Module\Manager::class);
+            if ($moduleManager->isEnabled('Magefan_BlogAuthor')) {
+                /* Import author */
+                if (!empty($data['user'])) {
+                    $authorInfo = explode(' ', $data['user']);
+                    $authorData['firstname'] = $authorInfo[0];
+                    $authorData['lastname'] = isset($authorInfo[1]) ? $authorInfo[1] : $authorInfo[0];
+
+                    $author = $this->_authorFactory->create();
+                    $existingAuthor = $author->getCollection()
+                        ->addFieldTofilter('firstname', $authorData['firstname'])
+                        ->addFieldTofilter('lastname', $authorData['lastname'])
+                        ->setPageSize(1)
+                        ->getFirstItem();
+
+                    if ($existingAuthor->getId()) {
+                        $author = $existingAuthor;
+                    } else {
+                        try {
+                            /* Author saving */
+                            $author->setData($authorData)->save();
+                            $this->_importedAuthorsCount++;
+                        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                            /* echo $e->getMessage(); */
+                        }
+                    }
+
+                    if ($author->getId()) {
+                        $data['author_id'] = $author->getId();
+                    }
+                }
+            }
+
+            /* Find post tags */
+            $postTags = [];
+            if (!empty($data['tags'])) {
+                $t_result = explode(',', mb_strtolower($data['tags']));
+                foreach ($t_result as $t_data) {
+                    if (!empty($oldTags)) {
+                        foreach ($oldTags as $oldTag) {
+                            if ($oldTag->getTitle() === $t_data) {
+                                $postTags[$oldTag->getId()] = $oldTag->getId();
+                            }
+                        }
+                    }
+                }
+            }
+
             /* Prepare post data */
             $data = [
                 'old_id' => $data['post_id'],
@@ -184,6 +233,8 @@ class Aw extends AbstractImport
                 'is_active' => (int)($data['status'] == 1),
                 'categories' => $postCategories,
                 'featured_img' => !empty($data['featured_image']) ? 'magefan_blog/' . $data['featured_image'] : '',
+                'tags' => $postTags,
+                'author_id' => !empty($data['author_id']) ? $data['author_id'] : null,
             ];
             $data['identifier'] = trim(strtolower($data['identifier']));
 
