@@ -389,7 +389,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getPostId($identifier, $checkSufix = true)
+    protected function _getPostId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_postFactory,
@@ -405,7 +405,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getCategoryId($identifier, $checkSufix = true)
+    protected function _getCategoryId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_categoryFactory,
@@ -422,7 +422,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getAuthorId($identifier, $checkSufix = true)
+    protected function _getAuthorId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_authorFactory,
@@ -439,7 +439,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getTagId($identifier, $checkSufix = true)
+    protected function _getTagId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_tagFactory,

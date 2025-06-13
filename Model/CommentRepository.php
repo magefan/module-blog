@@ -154,7 +154,7 @@ class CommentRepository implements CommentRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($commentId)
+    public function deleteById($commentId): bool
     {
         return $this->delete($this->getById($commentId));
     }

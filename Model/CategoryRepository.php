@@ -168,7 +168,7 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($categoryId)
+    public function deleteById($categoryId): bool
     {
         return $this->delete($this->getById($categoryId));
     }

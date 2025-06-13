@@ -118,7 +118,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param $time
      * @return string
      */
-    public function getTranslatedDate($time)
+    public function getTranslatedDate($time): string|array
     {
         if ($this->getGroupBy() == 'year') {
             $time = is_numeric($time) ? $time : strtotime((string)$time);

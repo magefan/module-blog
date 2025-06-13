@@ -84,7 +84,7 @@ class Author extends AbstractModel implements AuthorInterface
      * Retrieve author name (used in identifier generation)
      * @return string | null
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getName();
     }

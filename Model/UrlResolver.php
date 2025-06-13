@@ -227,7 +227,7 @@ class UrlResolver implements UrlResolverInterface
      * @param  string $identifier
      * @return int
      */
-    protected function _getPostId($identifier, $checkSufix = true)
+    protected function _getPostId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->postFactory,
@@ -242,7 +242,7 @@ class UrlResolver implements UrlResolverInterface
      * @param  string $identifier
      * @return int
      */
-    protected function _getCategoryId($identifier, $checkSufix = true)
+    protected function _getCategoryId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->categoryFactory,
@@ -258,7 +258,7 @@ class UrlResolver implements UrlResolverInterface
      * @param bool $checkSufix
      * @return int
      */
-    protected function _getAuthorId($identifier, $checkSufix = true)
+    protected function _getAuthorId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->authorFactory,
@@ -274,7 +274,7 @@ class UrlResolver implements UrlResolverInterface
      * @param bool $checkSufix
      * @return int
      */
-    protected function _getTagId($identifier, $checkSufix = true)
+    protected function _getTagId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->tagFactory,

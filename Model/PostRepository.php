@@ -160,7 +160,7 @@ class PostRepository implements PostRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($postId)
+    public function deleteById($postId): bool
     {
         return $this->delete($this->getById($postId));
     }

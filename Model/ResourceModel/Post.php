@@ -232,7 +232,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         array $newRelatedIds,
         array $oldRelatedIds,
         $tableName,
-        $field,
+        string $field,
         $rowData = []
     ) {
         return $this->_updateLinks($object, $newRelatedIds, $oldRelatedIds, $tableName, $field, $rowData);

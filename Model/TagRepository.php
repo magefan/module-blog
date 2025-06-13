@@ -159,7 +159,7 @@ class TagRepository implements TagRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($tagId)
+    public function deleteById($tagId): bool
     {
         return $this->delete($this->getById($tagId));
     }

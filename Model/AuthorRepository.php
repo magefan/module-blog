@@ -169,7 +169,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($authorId)
+    public function deleteById($authorId): bool
     {
         return $this->delete($this->getById($authorId));
     }

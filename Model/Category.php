@@ -219,7 +219,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId)
+    public function checkIdentifier($identifier, $storeId): string|false
     {
         return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
@@ -327,7 +327,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param  self  $category
      * @return boolean
      */
-    public function isChild($category)
+    public function isChild($category): bool
     {
         return $category->isParent($this);
     }

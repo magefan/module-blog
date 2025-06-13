@@ -105,7 +105,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    public function getPostTemplateType()
+    public function getPostTemplateType(): string
     {
         $template = (string)$this->_scopeConfig->getValue(
             'mfblog/author/template',
