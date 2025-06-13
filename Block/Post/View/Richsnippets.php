@@ -53,7 +53,7 @@ class Richsnippets extends Opengraph
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getOptionsByType($type)
+    public function getOptionsByType($type): array
     {
         $post = $this->getPost();
 

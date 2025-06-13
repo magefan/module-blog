@@ -147,7 +147,7 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Category $category)
+    public function delete(Category $category): bool
     {
         try {
             $this->categoryResourceModel->delete($category);

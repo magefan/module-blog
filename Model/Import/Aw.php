@@ -17,7 +17,7 @@ class Aw extends AbstractImport
 {
     protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
 
-    public function execute()
+    public function execute(): void
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();

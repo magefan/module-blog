@@ -66,8 +66,8 @@ class ProductDataProvider extends DataProvider
         RequestInterface $request,
         ProductRepositoryInterface $productRepository,
         ProductLinkRepositoryInterface $productLinkRepository,
-        $addFieldStrategies,
-        $addFilterStrategies,
+        array $addFieldStrategies,
+        array $addFilterStrategies,
         array $meta = [],
         array $data = []
     ) {
@@ -105,7 +105,7 @@ class ProductDataProvider extends DataProvider
      * @param Collection $collection
      * @return Collection
      */
-    protected function addCollectionFilters(Collection $collection)
+    protected function addCollectionFilters(Collection $collection): Collection
     {
         return $collection;
     }

@@ -102,7 +102,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $result;
     }
 
-    public function updatePostCommentsCount($postId)
+    public function updatePostCommentsCount($postId): void
     {
         $connection = $this->getConnection();
 

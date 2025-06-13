@@ -13,7 +13,7 @@ class PermalinkSettingsMessage extends \Magefan\Community\Block\Adminhtml\System
      * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return string
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element): string
     {
 
         $html = '<div id="advencedNotification" style="display:none;padding:10px;background-color:#fffbbb;border:1px solid #ddd;margin-bottom:7px;">

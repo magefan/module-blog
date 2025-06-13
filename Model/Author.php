@@ -93,7 +93,7 @@ class Author extends AbstractModel implements AuthorInterface
      * Retrieve meta title
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -107,7 +107,7 @@ class Author extends AbstractModel implements AuthorInterface
      * Retrieve meta description
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
@@ -134,7 +134,7 @@ class Author extends AbstractModel implements AuthorInterface
      * Retrieve author identifier
      * @return string | null
      */
-    public function getIdentifier()
+    public function getIdentifier(): ?string
     {
         return preg_replace(
             "/[^A-Za-z0-9\-]/",
@@ -186,7 +186,7 @@ class Author extends AbstractModel implements AuthorInterface
      * @param string $separator
      * @return string
      */
-    public function getName($separator = ' ')
+    public function getName(string $separator = ' '): string
     {
         return $this->getFirstname() . $separator . $this->getLastname();
     }

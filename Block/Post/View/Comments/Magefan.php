@@ -151,7 +151,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
      *
      * @return string
      */
-    public function canPost()
+    public function canPost(): bool
     {
         return $this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::GUEST_COMMENT,

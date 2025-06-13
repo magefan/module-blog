@@ -23,7 +23,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
      *
      * @return string
      */
-    public function getPagesUrls()
+    public function getPagesUrls(): array
     {
         $urls = [];
         for ($page = $this->getCurrentPage() + 1; $page <= $this->getLastPageNum(); $page++) {
@@ -38,7 +38,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
      *
      * @return bool
      */
-    public function useLazyload()
+    public function useLazyload(): bool
     {
         $lastPage = $this->getLastPageNum();
         $currentPage = $this->getCurrentPage();
@@ -74,7 +74,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
      *
      * @return int
      */
-    public function getLazyloadMode()
+    public function getLazyloadMode(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_list/lazyload_enabled',
@@ -87,7 +87,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
      *
      * @return int
      */
-    public function getLazyloadPadding()
+    public function getLazyloadPadding(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_list/lazyload_padding',

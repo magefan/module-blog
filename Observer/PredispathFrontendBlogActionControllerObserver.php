@@ -52,7 +52,7 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
      * @param \Magento\Framework\Event\Observer $observer
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         $advancedPermalinkEnabled =  $this->scopeConfig->getValue(
             Config::XML_PATH_ADVANCED_PERMALINK_ENABLED,

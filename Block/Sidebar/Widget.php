@@ -17,7 +17,7 @@ trait Widget
      * Retrieve block sort order
      * @return int
      */
-    public function getSortOrder()
+    public function getSortOrder(): int
     {
         if (!$this->hasData('sort_order')) {
             $this->setData('sort_order', $this->_scopeConfig->getValue(

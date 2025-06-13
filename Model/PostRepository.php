@@ -139,7 +139,7 @@ class PostRepository implements PostRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Post $post)
+    public function delete(Post $post): bool
     {
         try {
             $this->postResourceModel->delete($post);

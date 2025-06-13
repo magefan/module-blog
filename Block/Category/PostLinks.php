@@ -30,7 +30,7 @@ class PostLinks extends \Magefan\Blog\Block\Category\PostList
      *
      * @return bool
      */
-    protected function canDisplay()
+    protected function canDisplay(): bool
     {
         $displayMode = $this->getCategory()->getData('display_mode');
         return ($displayMode == CategoryDisplayMode::POSTS_AND_SUBCATEGORIES_LINKS ||
@@ -45,7 +45,7 @@ class PostLinks extends \Magefan\Blog\Block\Category\PostList
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return void
      */
-    protected function _addBreadcrumbs($title = null, $key = null)
+    protected function _addBreadcrumbs($title = null, $key = null): null
     {
         return null;
     }

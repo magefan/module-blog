@@ -54,7 +54,7 @@ class ReadingProgressBarPosition implements \Magento\Framework\Option\ArrayInter
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

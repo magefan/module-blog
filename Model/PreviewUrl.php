@@ -36,7 +36,7 @@ class PreviewUrl extends Url
      * @param  string $controllerName
      * @return string
      */
-    public function getUrl($object, $controllerName)
+    public function getUrl($object, $controllerName): string
     {
         $storeIds = $object->getStoreIds();
         if (count($storeIds)) {

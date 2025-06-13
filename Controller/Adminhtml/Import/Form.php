@@ -24,7 +24,7 @@ class Form extends \Magento\Backend\App\Action
      * Prepare wordpress import
      * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function execute()
+    public function execute(): void
     {
         try {
             if (!$this->getConfig()->isEnabled()) {

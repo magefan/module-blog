@@ -28,7 +28,7 @@ class Mageplaza1 extends AbstractImport
     /**
      * @throws \Zend_Db_Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
@@ -292,7 +292,7 @@ class Mageplaza1 extends AbstractImport
      * @return |null
      * @throws \Zend_Db_Exception
      */
-    private function getPostAttrValue($postId, $attributeCode)
+    private function getPostAttrValue($postId, string $attributeCode)
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
@@ -338,7 +338,7 @@ class Mageplaza1 extends AbstractImport
      * @return int
      * @throws \Zend_Db_Exception
      */
-    private function getBlogAttributeId($attributeCode)
+    private function getBlogAttributeId(string $attributeCode)
     {
         if (!isset($this->blogAttributes[$attributeCode])) {
             $this->blogAttributes[$attributeCode] = [];

@@ -25,7 +25,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param  string $dateOrTime
      * @return string
      */
-    public static function getTranslatedDate($format, $dateOrTime)
+    public static function getTranslatedDate($format, $dateOrTime): string|array
     {
         $time = is_numeric($dateOrTime) ? $dateOrTime : strtotime((string)$dateOrTime);
         $month = ['F' => '%1', 'M' => '%2'];
@@ -61,7 +61,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
-    public function isOriginMfLazyLoadEnable()
+    public function isOriginMfLazyLoadEnable(): bool
     {
         return $this->getConfig(self::XML_PATH_MFLAZYLOAD_ENABLED) && ($this->getConfig(self::XML_PATH_MFLAZYLOAD_METHOD) == 0) && $this->_moduleManager->isEnabled('Magefan_LazyLoad');
     }

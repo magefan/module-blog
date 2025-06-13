@@ -40,7 +40,7 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
      * @param \Magento\Framework\Event\Observer $observer
      * @return $this|void
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         $availableActions = [
             'blog_archive_view',

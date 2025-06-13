@@ -37,7 +37,7 @@ class PageIdentifierGenerator
     /**
      * @param $identifier
      */
-    public function formatIdentifier($identifier)
+    public function formatIdentifier($identifier): string
     {
         $identifier = (string)$identifier;
         $from = [
@@ -70,7 +70,7 @@ class PageIdentifierGenerator
         return $identifier;
     }
 
-    public function generate(\Magento\Framework\DataObject $object)
+    public function generate(\Magento\Framework\DataObject $object): void
     {
         if ($object->getData('identifier')) {
             return;

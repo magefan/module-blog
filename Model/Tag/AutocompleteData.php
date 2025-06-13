@@ -34,7 +34,7 @@ class AutocompleteData
      * @param $search
      * @return array
      */
-    public function getItems($search)
+    public function getItems(string $search): array
     {
         $collection = $this->collectionFactory->create();
         $collection

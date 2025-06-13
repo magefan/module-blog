@@ -17,7 +17,7 @@ class Index extends \Magento\Backend\App\Action
      * Start available import execute
      * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function execute()
+    public function execute(): void
     {
         $this->_view->loadLayout();
         $this->_setActiveMenu('Magefan_Blog::import');

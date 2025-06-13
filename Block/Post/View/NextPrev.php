@@ -75,7 +75,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
      *
      * @return boolean
      */
-    public function displayLinks()
+    public function displayLinks(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/post_view/nextprev/enabled',

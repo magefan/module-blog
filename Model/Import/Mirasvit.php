@@ -19,7 +19,7 @@ class Mirasvit extends AbstractImport
     protected $entityTypeId = [];
     protected $entityTypeAttributes = [];
 
-    public function execute()
+    public function execute(): void
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
@@ -273,7 +273,7 @@ class Mirasvit extends AbstractImport
         $adapter->getDriver()->getConnection()->disconnect();
     }
 
-    protected function getAttributValue($entitytTypeCode, $entitytId, $attributeCode)
+    protected function getAttributValue(string $entitytTypeCode, string $entitytId, $attributeCode)
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();

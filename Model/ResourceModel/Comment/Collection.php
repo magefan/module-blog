@@ -80,7 +80,7 @@ class Collection extends AbstractCollection
      * @param boolean $withAdmin
      * @return $this
      */
-    public function addStoreFilter($store, $withAdmin = true)
+    public function addStoreFilter($store, $withAdmin = true): static
     {
         if ($store === null) {
             return $this;
@@ -116,7 +116,7 @@ class Collection extends AbstractCollection
      * @param array|int|string|\Magefan\Blog\Model\Post  $post
      * @return $this
      */
-    public function addPostFilter($post)
+    public function addPostFilter($post): static
     {
         if (!$this->getFlag('post_filter_added')) {
             if ($post instanceof \Magefan\Blog\Model\Post) {

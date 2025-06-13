@@ -217,7 +217,7 @@ class UrlResolver implements UrlResolverInterface
     /**
      * @param $storeId
      */
-    public function setStoreId($storeId)
+    public function setStoreId($storeId): void
     {
         $this->storeId = $storeId;
     }
@@ -291,7 +291,7 @@ class UrlResolver implements UrlResolverInterface
      * @param bool $checkSufix
      * @return mixed
      */
-    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
         $storeId = $this->storeId ?: $this->storeManager->getStore()->getId();
         $key =  $storeId . '-' . $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
@@ -319,7 +319,7 @@ class UrlResolver implements UrlResolverInterface
      * @param  string  $identifier
      * @return boolean
      */
-    protected function _isArchiveIdentifier($identifier)
+    protected function _isArchiveIdentifier($identifier): bool
     {
         $info = explode('-', $identifier);
         if (!empty($info[1])) {

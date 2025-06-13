@@ -100,7 +100,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * Retrieve true if tag is active
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getIsActive() == self::STATUS_ENABLED);
     }
@@ -109,7 +109,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * Retrieve if is visible on store
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->getIsActive()
             && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
@@ -120,7 +120,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Tags' : 'Tag';
     }
@@ -166,7 +166,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * Retrieve meta title
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -180,7 +180,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * Retrieve meta description
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
@@ -218,7 +218,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      *
      * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return (string)$this->getData('identifier');
     }

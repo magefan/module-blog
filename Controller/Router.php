@@ -457,7 +457,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return mixed
      * @deprecated Use URL resolver interface instead
      */
-    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
         $key =  $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
         if (!isset($this->ids[$key])) {
@@ -485,7 +485,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return boolean
      * @deprecated Use URL resolver interface instead
      */
-    protected function _isArchiveIdentifier($identifier)
+    protected function _isArchiveIdentifier($identifier): bool
     {
         $info = explode('-', $identifier);
         return count($info) == 2

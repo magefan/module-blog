@@ -91,7 +91,7 @@ class Categories extends Template implements IdentityInterface
      * Retrieve categories maximum depth
      * @return int
      */
-    public function maxDepth()
+    public function maxDepth(): int
     {
         $maxDepth = $this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/max_depth',

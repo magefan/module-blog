@@ -59,7 +59,7 @@ class LayoutLoadBeforeObserver implements ObserverInterface
      * @return void
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         if ($this->config->isEnabled()) {
             $post = $this->registry->registry('current_blog_post');

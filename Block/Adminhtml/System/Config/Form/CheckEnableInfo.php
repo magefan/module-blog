@@ -67,7 +67,7 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     /**
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         foreach ($this->_storeManager->getWebsites() as $website) {
             foreach ($website->getGroups() as $group) {
@@ -90,7 +90,7 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     /**
      * @return bool
      */
-    public function isKeyMissing()
+    public function isKeyMissing(): bool
     {
         $section = ObjectManager::getInstance()->create(Section::class, ['name' => 'mfblog']);
         return !$this->config->getConfig(self::XML_PATH_KEY)

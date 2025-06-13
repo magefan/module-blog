@@ -80,7 +80,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return bool
      */
-    protected function canDisplay()
+    protected function canDisplay(): bool
     {
         $displayMode = $this->getCategory()->getData('display_mode');
         return ($displayMode == CategoryDisplayMode::POSTS);

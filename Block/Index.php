@@ -146,7 +146,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
      * Retrieve blog title
      * @return string
      */
-    protected function _getConfigValue($param)
+    protected function _getConfigValue(string $param)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/index_page/'.$param,

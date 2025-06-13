@@ -69,7 +69,7 @@ class Notification
      * Check if any pending blog comment exists
      * @return void
      */
-    public function checkComments()
+    public function checkComments(): void
     {
         if (!$this->backendSession->isLoggedIn()) {
             return; // Isn't logged in

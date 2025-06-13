@@ -45,7 +45,7 @@ class Search extends \Magento\Framework\View\Element\Template
      * Retrieve query
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return urldecode($this->getRequest()->getParam('q', ''));
     }

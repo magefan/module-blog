@@ -60,7 +60,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      * Premare block data
      * @return $this
      */
-    protected function _prepareCollection()
+    protected function _prepareCollection(): static
     {
         $post = $this->getPost();
 

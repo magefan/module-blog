@@ -79,7 +79,7 @@ class Image extends \Magento\Framework\DataObject
      * Retrieve image url
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getUrl();
     }

@@ -54,7 +54,10 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
         return $this->_options;
     }
 
-    protected function _getOptions($itemId = 0)
+    /**
+     * @return array<mixed, array<'label'|'optgroup'|'value', mixed>>
+     */
+    protected function _getOptions($itemId = 0): array
     {
         $childs =  $this->_getChilds();
         $options = [];

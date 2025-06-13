@@ -60,7 +60,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\Data\Collection $collection
      * @return $this
      */
-    public function setCollection($collection)
+    public function setCollection($collection): static
     {
         $this->_collection = $collection;
 
@@ -105,7 +105,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      *
      * @return int
      */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
         $page = (int) $this->_request->getParam($this->getPageParamName());
         return $page ? $page : 1;
@@ -114,7 +114,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     /**
      * @return bool|\Magento\Framework\DataObject|\Magento\Framework\View\Element\AbstractBlock|\Magento\Theme\Block\Html\Pager
      */
-    public function getPagerBlock()
+    public function getPagerBlock(): \Magento\Framework\DataObject|false
     {
         $pagerBlock = $this->getChildBlock('post_list_toolbar_pager');
         if ($pagerBlock instanceof \Magento\Framework\DataObject) {
@@ -169,7 +169,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     /**
      * @return string
      */
-    public function getPageParamName()
+    public function getPageParamName(): string
     {
         return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }

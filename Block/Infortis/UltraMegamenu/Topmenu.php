@@ -79,7 +79,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         return $html;
     }
 
-    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0)
+    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0): string
     {
         $html = '';
 

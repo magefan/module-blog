@@ -121,7 +121,7 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     /**
      * @return bool
      */
-    public function needToUpdate()
+    public function needToUpdate(): bool
     {
         return (version_compare($this->getCurrentVersion(), $this->getLatestVersion()) < 0);
     }

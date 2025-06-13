@@ -68,7 +68,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param  int $time
      * @return string
      */
-    public function getYear($time)
+    public function getYear($time): string
     {
         return date('Y', $time);
     }
@@ -109,7 +109,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return array
      */
-    public function getIdentities()
+    public function getIdentities(): array
     {
         return [];
     }

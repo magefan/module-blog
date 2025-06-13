@@ -148,7 +148,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(AuthorInterface $author)
+    public function delete(AuthorInterface $author): bool
     {
         try {
             $this->authorResourceModel->delete($author);

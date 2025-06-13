@@ -88,7 +88,7 @@ class Image extends AbstractHelper
      * @param $baseFile
      * @return $this
      */
-    public function init($baseFile)
+    public function init($baseFile): static
     {
         $this->_newFile = '';
         $this->_baseFile = $baseFile;
@@ -100,7 +100,7 @@ class Image extends AbstractHelper
      * @param null $height
      * @return $this
      */
-    public function resize($width, $height = null, $keepFrame = null)
+    public function resize(string $width, $height = null, $keepFrame = null): static
     {
         if ($this->_baseFile) {
             $pathinfo = pathinfo(($this->_baseFile));
@@ -155,7 +155,7 @@ class Image extends AbstractHelper
      * @param $height
      * @return $this
      */
-    protected function resizeBaseFile($width, $height, $keepFrame)
+    protected function resizeBaseFile($width, $height, $keepFrame): static
     {
         if (!$this->fileExists($this->_baseFile)) {
             $this->_baseFile = null;
@@ -197,7 +197,7 @@ class Image extends AbstractHelper
      * @return string
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function __toString()
+    public function __toString(): string
     {
         $url = "";
         if ($this->_baseFile) {

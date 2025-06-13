@@ -16,7 +16,7 @@ class Author extends \Magento\Backend\Block\Widget\Grid\Column
     /**
      * @return void
      */
-    public function _construct()
+    public function _construct(): void
     {
         parent::_construct();
         $this->_rendererTypes['author'] = \Magefan\Blog\Block\Adminhtml\Grid\Column\Render\Author::class;

@@ -39,7 +39,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve true if Display Related Posts enabled
      * @return boolean
      */
-    public function displayPosts()
+    public function displayPosts(): bool
     {
         return (bool) $this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::XML_RELATED_POSTS_ENABLED,

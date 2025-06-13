@@ -133,7 +133,7 @@ class CommentRepository implements CommentRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Comment $comment)
+    public function delete(Comment $comment): bool
     {
         try {
             $this->commentResourceModel->delete($comment);

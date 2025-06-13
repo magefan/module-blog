@@ -15,7 +15,7 @@ class Wordpress extends AbstractImport
 {
     protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
 
-    public function execute()
+    public function execute(): void
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
@@ -387,7 +387,7 @@ class Wordpress extends AbstractImport
         $adapter->getDriver()->getConnection()->disconnect();
     }
 
-    protected function wordpressOutoutWrap($pee, $br = true)
+    protected function wordpressOutoutWrap($pee, $br = true): string|array|null
     {
         $pre_tags = [];
 

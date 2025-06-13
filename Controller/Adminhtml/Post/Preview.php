@@ -13,7 +13,7 @@ namespace Magefan\Blog\Controller\Adminhtml\Post;
  */
 class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
 {
-    public function execute()
+    public function execute(): void
     {
         try {
             $post = $this->_getModel();

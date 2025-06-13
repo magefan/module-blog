@@ -81,7 +81,7 @@ class Comments extends \Magento\Framework\View\Element\Template
      * Retrieve number of comments to display
      * @return int
      */
-    public function getNumberOfComments()
+    public function getNumberOfComments(): int
     {
         return (int)$this->_scopeConfig->getValue(
             'mfblog/post_view/comments/number_of_comments',

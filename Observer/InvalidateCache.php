@@ -48,7 +48,7 @@ class InvalidateCache implements ObserverInterface
      * @return void
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         if ($this->_config->isEnabled()) {
             $this->_typeList->invalidate(

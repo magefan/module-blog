@@ -57,12 +57,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         return $this->_postCollection;
     }
 
-    public function getPostedOn($post, $format = 'Y-m-d H:i:s')
+    public function getPostedOn($post, $format = 'Y-m-d H:i:s'): string
     {
         return date($format, strtotime((string)$post->getData('publish_time')));
     }
     
-    public function getOriginalPostImage($post)
+    public function getOriginalPostImage($post): string
     {
         $imgageFile = $post->getPostImage();
         return $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).$imgageFile;
@@ -192,7 +192,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         return $this->_show;
     }
     
-    public function isShow($item)
+    public function isShow($item): bool
     {
         return in_array($item, $this->getElementShow());
     }

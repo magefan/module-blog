@@ -123,7 +123,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
      * Retrieve tag class
      * @return array
      */
-    public function getTagClass($tag)
+    public function getTagClass($tag): string
     {
         $maxCount = $this->getMaxCount();
         $percent = floor(($tag->getCount() / $maxCount) * 100);

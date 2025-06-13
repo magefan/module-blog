@@ -19,7 +19,7 @@ class Info extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
      * Return extension url
      * @return string
      */
-    protected function getModuleUrl()
+    protected function getModuleUrl(): string
     {
         return 'https://mage' . 'fan.com/magento2-blog-extension';
     }
@@ -28,7 +28,7 @@ class Info extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
      * Return extension title
      * @return string
      */
-    protected function getModuleTitle()
+    protected function getModuleTitle(): string
     {
         return 'Blog Extension';
     }

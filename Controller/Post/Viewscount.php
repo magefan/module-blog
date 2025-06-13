@@ -18,7 +18,7 @@ class Viewscount extends View
      * @return $this|\Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
-    public function execute()
+    public function execute(): void
     {
         $post = parent::_initPost();
         if ($post && $post->getId()) {

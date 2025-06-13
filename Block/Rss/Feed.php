@@ -61,7 +61,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param  \Magefan\Blog\Model\Post $post
      * @return string
      */
-    public function getPostContent($post)
+    public function getPostContent($post): string|array|null
     {
         $content = $post->getFilteredContent();
         /* Remove iframes */

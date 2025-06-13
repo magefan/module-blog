@@ -62,7 +62,7 @@ abstract class AbstractManagement implements ManagementInterface
      * @param $fileDriver
      * @return string
      */
-    protected function getUniqueFileName($directory, $fileName, $fileDriver)
+    protected function getUniqueFileName(string $directory, $fileName, $fileDriver)
     {
         $name = pathinfo($fileName, PATHINFO_FILENAME);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);

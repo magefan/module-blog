@@ -90,7 +90,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return string
      */
-    protected function getPostTemplateType()
+    protected function getPostTemplateType(): string
     {
         return (string)$this->_scopeConfig->getValue(
             'mfblog/post_list/template',

@@ -17,7 +17,7 @@ class Run extends \Magento\Backend\App\Action
      * Run import
      * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function execute()
+    public function execute(): void
     {
         //set_time_limit(0);
 

@@ -115,7 +115,7 @@ class Content extends \Magento\Backend\Block\Widget
     /**
      * @return string
      */
-    public function getJsObjectName()
+    public function getJsObjectName(): string
     {
         return $this->getHtmlId() . 'JsObject';
     }
@@ -160,7 +160,7 @@ class Content extends \Magento\Backend\Block\Widget
     private function sortImagesByPosition($images)
     {
         if (is_array($images)) {
-            usort($images, function ($imageA, $imageB) {
+            usort($images, function (array $imageA, array $imageB): int {
                 return ($imageA['position'] < $imageB['position']) ? -1 : 1;
             });
         }

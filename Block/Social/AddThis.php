@@ -11,7 +11,7 @@ class AddThis extends \Magento\Framework\View\Element\Template
      *
      * @return boolean
      */
-    public function getAddThisEnabled()
+    public function getAddThisEnabled(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/social/add_this_enabled',

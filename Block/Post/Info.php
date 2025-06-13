@@ -36,7 +36,7 @@ class Info extends \Magento\Framework\View\Element\Template
      * Retrieve 1 if display author information is enabled
      * @return int
      */
-    public function authorEnabled()
+    public function authorEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/author/enabled',
@@ -48,7 +48,7 @@ class Info extends \Magento\Framework\View\Element\Template
      * Retrieve 1 if author page is enabled
      * @return int
      */
-    public function authorPageEnabled()
+    public function authorPageEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/author/page_enabled',
@@ -60,7 +60,7 @@ class Info extends \Magento\Framework\View\Element\Template
      * Retrieve true if magefan comments are enabled
      * @return bool
      */
-    public function magefanCommentsEnabled()
+    public function magefanCommentsEnabled(): bool
     {
         return $this->_scopeConfig->getValue(
             'mfblog/post_view/comments/type',
@@ -71,7 +71,7 @@ class Info extends \Magento\Framework\View\Element\Template
     /**
      * @return bool
      */
-    public function viewsCountEnabled()
+    public function viewsCountEnabled(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/post_view/views_count/enabled',
@@ -83,7 +83,7 @@ class Info extends \Magento\Framework\View\Element\Template
      * Retrieve 1 if display reading time is enabled
      * @return int
      */
-    public function readingTimeEnabled()
+    public function readingTimeEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_view/reading_time/enabled',

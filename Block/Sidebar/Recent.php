@@ -49,7 +49,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve true if display the post image is enabled in the config
      * @return bool
      */
-    public function getDisplayImage()
+    public function getDisplayImage(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/display_image',

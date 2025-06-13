@@ -84,7 +84,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      * @param $param
      * @return mixed
      */
-    protected function _getConfigValue($param)
+    protected function _getConfigValue(string $param)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/archive/'.$param,

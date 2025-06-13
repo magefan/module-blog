@@ -14,7 +14,7 @@ trait Archive
      * Get archive month
      * @return int
      */
-    public function getMonth()
+    public function getMonth(): int
     {
         return (int)$this->_coreRegistry->registry('current_blog_archive_month');
     }
@@ -23,7 +23,7 @@ trait Archive
      * Get archive year
      * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return (int)$this->_coreRegistry->registry('current_blog_archive_year');
     }

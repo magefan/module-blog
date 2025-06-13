@@ -138,7 +138,7 @@ class TagRepository implements TagRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Tag $tag)
+    public function delete(Tag $tag): bool
     {
         try {
             $this->tagResourceModel->delete($tag);

@@ -103,7 +103,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         $column_width = 12,
         $menu_type = 'fullwidth',
         $columns = null
-    ) {
+    ): string {
         $html = '';
 
         if (!$max_level ||
