@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Social;
 
 use Magento\Store\Model\ScopeInterface;
