@@ -14,11 +14,11 @@ trait Archive
 {
     /**
      * Get archive month
-     * @return int
+     * @return string
      */
-    public function getMonth(): int
+    public function getMonth(): string
     {
-        return (int)$this->_coreRegistry->registry('current_blog_archive_month');
+        return (string)$this->_coreRegistry->registry('current_blog_archive_month');
     }
 
     /**

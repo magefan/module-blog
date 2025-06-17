@@ -99,8 +99,9 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param $width
-     * @param null $height
+     * @param string $width
+     * @param $height
+     * @param $keepFrame
      * @return $this
      */
     public function resize(string $width, $height = null, $keepFrame = null): static

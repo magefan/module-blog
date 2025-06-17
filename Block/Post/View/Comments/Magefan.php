@@ -164,11 +164,11 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     /**
      * Retrieve number of comments to display
      *
-     * @return string
+     * @return int
      */
     public function getNumberOfComments(): int
     {
-        return $this->_scopeConfig->getValue(
+        return (int)$this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::NUMBER_OF_COMMENTS,
             ScopeInterface::SCOPE_STORE
         );

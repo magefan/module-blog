@@ -67,11 +67,11 @@ class Image extends \Magento\Framework\DataObject
 
     /**
      * Resize image
-     * @param int $width
-     * @param int $height
+     * @param string $width
+     * @param string|null $height
      * @return string
      */
-    public function resize($width, $height = null)
+    public function resize(string $width, ?string $height = null)
     {
         return $this->imageHelper->init($this->getFile())
             ->resize($width, $height);
