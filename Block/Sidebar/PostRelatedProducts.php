@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 use \Magento\Catalog\Block\Product\AbstractProduct;
@@ -60,7 +62,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      * Premare block data
      * @return $this
      */
-    protected function _prepareCollection()
+    protected function _prepareCollection(): static
     {
         $post = $this->getPost();
 

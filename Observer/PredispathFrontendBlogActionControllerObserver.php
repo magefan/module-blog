@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -52,7 +55,7 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
      * @param \Magento\Framework\Event\Observer $observer
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         $advancedPermalinkEnabled =  $this->scopeConfig->getValue(
             Config::XML_PATH_ADVANCED_PERMALINK_ENABLED,

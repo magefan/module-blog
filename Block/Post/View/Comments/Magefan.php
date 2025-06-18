@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Post\View\Comments;
 
 use Magento\Store\Model\ScopeInterface;
@@ -151,7 +153,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
      *
      * @return string
      */
-    public function canPost()
+    public function canPost(): bool
     {
         return $this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::GUEST_COMMENT,
@@ -162,11 +164,11 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     /**
      * Retrieve number of comments to display
      *
-     * @return string
+     * @return int
      */
-    public function getNumberOfComments()
+    public function getNumberOfComments(): int
     {
-        return $this->_scopeConfig->getValue(
+        return (int)$this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::NUMBER_OF_COMMENTS,
             ScopeInterface::SCOPE_STORE
         );

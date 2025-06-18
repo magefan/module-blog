@@ -49,7 +49,7 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     /**
      * {@inheritdoc}
      */
-    public function apply()
+    public function apply(): void
     {
         try {
             $this->state->setAreaCode('adminhtml');

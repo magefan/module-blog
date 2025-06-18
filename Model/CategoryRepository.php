@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -147,7 +150,7 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Category $category)
+    public function delete(Category $category): bool
     {
         try {
             $this->categoryResourceModel->delete($category);
@@ -168,7 +171,7 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($categoryId)
+    public function deleteById($categoryId): bool
     {
         return $this->delete($this->getById($categoryId));
     }

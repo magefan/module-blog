@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\Tag;
 
 use Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory;
@@ -34,7 +36,7 @@ class AutocompleteData
      * @param $search
      * @return array
      */
-    public function getItems($search)
+    public function getItems(string $search): array
     {
         $collection = $this->collectionFactory->create();
         $collection

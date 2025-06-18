@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -217,7 +220,7 @@ class UrlResolver implements UrlResolverInterface
     /**
      * @param $storeId
      */
-    public function setStoreId($storeId)
+    public function setStoreId($storeId): void
     {
         $this->storeId = $storeId;
     }
@@ -227,7 +230,7 @@ class UrlResolver implements UrlResolverInterface
      * @param  string $identifier
      * @return int
      */
-    protected function _getPostId($identifier, $checkSufix = true)
+    protected function _getPostId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->postFactory,
@@ -242,7 +245,7 @@ class UrlResolver implements UrlResolverInterface
      * @param  string $identifier
      * @return int
      */
-    protected function _getCategoryId($identifier, $checkSufix = true)
+    protected function _getCategoryId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->categoryFactory,
@@ -258,7 +261,7 @@ class UrlResolver implements UrlResolverInterface
      * @param bool $checkSufix
      * @return int
      */
-    protected function _getAuthorId($identifier, $checkSufix = true)
+    protected function _getAuthorId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->authorFactory,
@@ -274,7 +277,7 @@ class UrlResolver implements UrlResolverInterface
      * @param bool $checkSufix
      * @return int
      */
-    protected function _getTagId($identifier, $checkSufix = true)
+    protected function _getTagId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->tagFactory,
@@ -291,7 +294,7 @@ class UrlResolver implements UrlResolverInterface
      * @param bool $checkSufix
      * @return mixed
      */
-    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
         $storeId = $this->storeId ?: $this->storeManager->getStore()->getId();
         $key =  $storeId . '-' . $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
@@ -319,7 +322,7 @@ class UrlResolver implements UrlResolverInterface
      * @param  string  $identifier
      * @return boolean
      */
-    protected function _isArchiveIdentifier($identifier)
+    protected function _isArchiveIdentifier($identifier): bool
     {
         $info = explode('-', $identifier);
         if (!empty($info[1])) {

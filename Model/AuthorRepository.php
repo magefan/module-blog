@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -148,7 +151,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(AuthorInterface $author)
+    public function delete(AuthorInterface $author): bool
     {
         try {
             $this->authorResourceModel->delete($author);
@@ -169,7 +172,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($authorId)
+    public function deleteById($authorId): bool
     {
         return $this->delete($this->getById($authorId));
     }

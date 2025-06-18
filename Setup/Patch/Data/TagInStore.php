@@ -55,7 +55,7 @@ class TagInStore implements DataPatchInterface, PatchVersionInterface
     /**
      * {@inheritdoc}
      */
-    public function apply()
+    public function apply(): void
     {
         $connection = $this->resourceConnection->getConnection();
 

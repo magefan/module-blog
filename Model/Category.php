@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
@@ -187,7 +189,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Categories' : 'Category';
     }
@@ -197,7 +199,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Retrieve true if category is active
      * @return boolean [description]
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getIsActive() == self::STATUS_ENABLED);
     }
@@ -206,7 +208,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Retrieve available category statuses
      * @return array
      */
-    public function getAvailableStatuses()
+    public function getAvailableStatuses(): array
     {
         return [self::STATUS_DISABLED => __('Disabled'), self::STATUS_ENABLED => __('Enabled')];
     }
@@ -219,7 +221,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId)
+    public function checkIdentifier($identifier, $storeId): string|false
     {
         return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
@@ -282,7 +284,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param  self  $category
      * @return boolean
      */
-    public function isParent($category)
+    public function isParent($category): bool
     {
         if (is_object($category)) {
             $category = $category->getId();
@@ -327,7 +329,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param  self  $category
      * @return boolean
      */
-    public function isChild($category)
+    public function isChild($category): bool
     {
         return $category->isParent($this);
     }
@@ -336,7 +338,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Retrieve category depth level
      * @return int
      */
-    public function getLevel()
+    public function getLevel(): int
     {
         return count($this->getParentIds());
     }
@@ -377,7 +379,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Retrieve meta title
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -391,7 +393,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Retrieve meta description
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
@@ -418,7 +420,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Retrieve if is visible on store
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->getIsActive()
             && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
@@ -450,7 +452,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @return self
      * @deprecated replaced with getDynamicData
      */
-    public function initDinamicData()
+    public function initDinamicData(): static
     {
         $keys = [
             'meta_description',
