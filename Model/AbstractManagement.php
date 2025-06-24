@@ -241,7 +241,7 @@ abstract class AbstractManagement implements ManagementInterface
     }
 
     /**
-     * if request contain store code - get store id
+     * if request url contain store code - get store id
      * @return int
      */
     private function getStoreIdFromRestRequest(): int
