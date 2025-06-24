@@ -121,7 +121,17 @@ abstract class AbstractManagement implements ManagementInterface
                 $item->setStoreId((int)$data['store_id']);
                 $item->setData('data_to_update', $data);
             } else {
-                $item->setStoreId(0);
+                $storeId = 0;
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                $appState = $objectManager->get(\Magento\Framework\App\State::class);
+
+                if (\Magento\Framework\App\Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
+                    $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+                    $storeId = (int)$storeManager->getStore()->getId();
+                    $item->setData('data_to_update', $data);
+                }
+
+                $item->setStoreId($storeId);
             }
 
             $item->load($id);
@@ -227,7 +237,7 @@ abstract class AbstractManagement implements ManagementInterface
     public function getError($massage)
     {
         $data = ['error' => 'true'];
-        
+
         $data['message'] = $massage ?? '';
 
         return json_encode($data);
