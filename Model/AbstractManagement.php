@@ -122,12 +122,9 @@ abstract class AbstractManagement implements ManagementInterface
                 $item->setData('data_to_update', $data);
             } else {
                 $storeId = 0;
-                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                $appState = $objectManager->get(\Magento\Framework\App\State::class);
 
-                if (\Magento\Framework\App\Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
-                    $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
-                    $storeId = (int)$storeManager->getStore()->getId();
+                if ($storeIdFromRestRequest = $this->getStoreIdFromRestRequest()) {
+                    $storeId = $storeIdFromRestRequest;
                     $item->setData('data_to_update', $data);
                 }
 
@@ -241,5 +238,32 @@ abstract class AbstractManagement implements ManagementInterface
         $data['message'] = $massage ?? '';
 
         return json_encode($data);
+    }
+
+    /**
+     * if request contain store code - get store id
+     * @return int
+     */
+    private function getStoreIdFromRestRequest(): int
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $appState = $objectManager->get(\Magento\Framework\App\State::class);
+        $request = $objectManager->get(\Magento\Framework\App\RequestInterface::class);
+        $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+
+        $storeId = 0;
+
+        if (\Magento\Framework\App\Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
+            $storeCode = $storeManager->getStore()->getCode();
+
+            // /rest/ua/V1/blog/post/2 or /ua/rest/V1/blog/post/2
+            $path = explode('/', trim($request->getRequestUri(), '/'));
+
+            if ('rest' === $path[0] && $path[1] === $storeCode || 'rest' === $path[1] && $path[0] === $storeCode) {
+                $storeId = (int)$storeManager->getStore()->getId();
+            }
+        }
+
+        return $storeId;
     }
 }
