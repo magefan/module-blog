@@ -73,10 +73,11 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])) {
-            /* If template was not customized in layout */
-            return parent::getTemplate();
-        }
+		if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])) {
+			/* If template was not customized in layout */
+			return parent::getTemplate();
+		}
+
 
         if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getPostTemplateType())) {
             $this->_template = $template;

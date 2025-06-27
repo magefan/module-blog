@@ -52,7 +52,7 @@ class Comments extends \Magento\Framework\View\Element\Template
      * Block template file
      * @var string
      */
-    protected $_template = 'post/view/comments.phtml';
+    protected $_template = 'Magefan_Blog::post/view/comments.phtml';
 
     /**
      * Retrieve comments type
