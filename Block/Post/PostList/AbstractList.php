@@ -290,7 +290,7 @@ abstract class AbstractList extends Template implements IdentityInterface
      */
     public function getNewDesignType() {
         if (!$this->templateType) {
-            if (!empty($this->templatePool->getAll('blog_post_list_2025_04')[$this->getPostTemplateType()])) {
+            if (!empty($this->templatePool->getAll('blog_post_list_2025_07')[$this->getPostTemplateType()])) {
                 $this->setNewDesignType($this->getPostTemplateType());
             } else {
                 $this->setNewDesignType(

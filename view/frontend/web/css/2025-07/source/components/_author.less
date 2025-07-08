@@ -1,0 +1,119 @@
+// Post Author
+// _____________________________________________________________________________________________________________________
+
+.blog-page {
+    .block-author {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0;
+        margin-bottom: 40px;
+        .author {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--border-color);
+            .block-info {
+                display: flex;
+                .block-img {
+                    width: 10%;
+                    flex: 0 0 80px;
+                    margin-right: 16px;
+                    img {
+                        width: 80px;
+                        height: auto;
+                        border-radius: 50%;
+                    }
+                }
+                .block-data {
+                    flex: 1 1;
+                    .author-name {
+                        font-size: 20px;
+                        line-height: 16px;
+                        font-weight: 700;
+                        margin: 0;
+                        .author-link {
+                            display: inline-block;
+                            color: var(--primary-color);
+                            text-decoration: none;
+                            .transition;
+                            &:hover {
+                                color: var(--secondary-color);
+                                .transition;
+                            }
+                        }
+                        .status {
+                            color: #98A2B3;
+                            font-weight: 500;
+                            padding-left: 3px;
+                        }
+                    }
+                    .author-position {
+                        font-size: 16px;
+                        line-height: 16px;
+                        margin: 10px 0 0;
+                        font-weight: 600;
+                    }
+                    .author-content,
+                    .author-short-content {
+                        margin: 12px 0 0;
+                        p {
+                            margin: 0;
+                        }
+                    }
+                }
+                .author-info {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            .social-icons {
+                display: flex;
+                align-self: flex-start;
+                gap: 6px;
+                .icon {
+                    width: 40px;
+                    height: 40px;
+                    padding: 10px !important;
+                    border-radius: 6px;
+                    background: #F0F1F3;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    .transition;
+                    &:hover {
+                        transform: translateY(-4px);
+                        .transition;
+                    }
+                    a {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        vertical-align: top;
+                    }
+                    img {
+                        width: 20px !important;
+                        height: 20px !important;
+                    }
+                }
+            }
+
+            .author-content {
+                width: 100%;
+                font-size: 18px;
+                line-height: 20px;
+                color: var(--primary-color-alt);
+            }
+        }
+    }
+}
+
+
+// Author Page
+// _____________________________________________________________________________________________________________________
+.blog-author-view {
+    .block-author {
+
+    }
+}

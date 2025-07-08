@@ -209,7 +209,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
      *
      * @return string
      */
-    public function getTemplate()
+    /*public function getTemplate()
     {
         $templateName = (string)$this->_scopeConfig->getValue(
             'mfblog/post_view/nextprev/template',
@@ -219,5 +219,5 @@ class NextPrev extends \Magento\Framework\View\Element\Template
             $this->_template = $template;
         }
         return parent::getTemplate();
-    }
+    }*/
 }

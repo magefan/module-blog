@@ -14,6 +14,7 @@
                 <enabled>0</enabled>
                 <mfmodule>Blog</mfmodule>
                 <mftype>1</mftype>
+                <design_version>2015-11</design_version>
             </general>
             <publish_post_on_fb>
                 <enabled>0</enabled>
@@ -24,7 +25,6 @@
                 <autopublish_categories>0</autopublish_categories>
             </publish_post_on_fb>
             <design>
-                <version>2024-12</version>
                 <format_date>F d, Y</format_date>
                 <publication_date>1</publication_date>
                 <index_page_layout/>
@@ -48,9 +48,6 @@
                 <meta_description/>
             </index_page>
             <post_view>
-                <design>
-                    <template>modern</template>
-                </design>
                 <related_posts>
                     <enabled>1</enabled>
                     <template/>
@@ -86,7 +83,6 @@
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
-                    <template>modern</template>
                 </nextprev>
                 <views_count>
                     <enabled>0</enabled>

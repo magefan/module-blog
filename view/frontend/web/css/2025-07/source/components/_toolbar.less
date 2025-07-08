@@ -1,0 +1,114 @@
+
+// Toolbar
+.blog-page {
+    .toolbar {
+        width: 100%;
+        margin: 30px 0 50px;
+        justify-content: center;
+        .pages {
+            margin: 0;
+            .display-center;
+            .items {
+                .display-center;
+                flex-wrap: wrap;
+                gap: 10px;
+                font-size: 0;
+                line-height: 0;
+                margin: 0;
+                padding: 0;
+                list-style: none none;
+                font-weight: 400;
+                .item {
+                    .display-center;
+                    width: 40px;
+                    height: 40px;
+                    border: 1px solid var(--border-color);
+                    border-radius: 10px;
+                    line-height: 38px;
+                    margin: 0;
+                    box-sizing: border-box;
+                    transition: none;
+                    strong.page {
+                        .display-center;
+                        justify-content: center;
+                        font-size: 18px;
+                        letter-spacing: normal;
+                        font-weight: 700;
+                        color: var(--color-toolbar-item-strong);
+                    }
+                    .page {
+                        width: 38px;
+                        height: 38px;
+                        border: none;
+                        background: none;
+                        cursor: pointer;
+                        color: currentColor;
+                        font-size: 18px;
+                        transition: none;
+                    }
+                    .action {
+                        .display-center;
+                        width: 38px;
+                        height: 38px;
+                        border: none;
+                        background: none;
+                        margin: 0;
+                        padding: 0 8px;
+                        cursor: pointer;
+                        box-shadow: none;
+                    }
+                    .action.previous {
+                        &:before {
+                            display: block;
+                            height: 38px;
+                            line-height: 26px;
+                            content: '\2039';
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            font-size: 35px;
+                            color: #7d7d7d;
+                            margin: 0;
+                            font-weight: 400;
+                            overflow: hidden;
+                            speak: none;
+                            text-align: center;
+                        }
+                        &:hover:before {
+                            color: #ffffff;
+                        }
+                    }
+                    .action.next {
+                        border: none;
+                        &:before {
+                            display: block;
+                            height: 38px;
+                            line-height: 26px;
+                            content: '\203A';
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            font-size: 35px;
+                            color: var(--color-icon);
+                            margin: 0;
+                            font-weight: 400;
+                            overflow: hidden;
+                            speak: none;
+                            text-align: center;
+                        }
+                        &:hover:before {
+                            color: #ffffff;
+                        }
+                    }
+                    &:hover {
+                        background: var(--color-toolbar-pages-item);
+                        color: #ffffff;
+                        //border-color: var(--color-toolbar-pages-item);
+                    }
+                    &.current {
+                        background: var(--primary-color-alt);
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+    }
+}

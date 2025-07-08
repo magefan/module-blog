@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
+use Magefan\Blog\Model\Config\Source\DesignVersion;
+
 /**
  * Blog sidebar categories block
  */
@@ -75,12 +77,7 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getDisplayImage()
     {
-        $designVersion = (string)$this->_scopeConfig->getValue(
-            'mfblog/design/version',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-
-        if ($designVersion == '2025-04') {
+        if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
             return false;
         }
         return (bool)$this->_scopeConfig->getValue(
@@ -103,17 +100,12 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $designVersion = (string)$this->_scopeConfig->getValue(
-            'mfblog/design/version',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-
         $templateName = (string)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
-        if ($designVersion == '2025-04') {
+        if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
             $template = $this->_scopeConfig->getValue(
                 'mfblog/sidebar/'.$this->_widgetKey.'/template_new',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -124,7 +116,7 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
             if ($template == 'default') {
                 $templateName = 'modern';
             } else {
-                return 'Magefan_BlogExtra::sidebar/recent_2025_04.phtml';
+                return 'Magefan_Blog::2025-07/sidebar/recent.phtml';
             }
         }
 

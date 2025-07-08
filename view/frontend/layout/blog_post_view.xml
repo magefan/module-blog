@@ -20,7 +20,7 @@
         </referenceBlock>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Post\View\ViewsCount" name="blog.posts.views.count" template="post/view/views_count.phtml"></block>
-            <block class="Magefan\Blog\Block\Post\View" name="blog.post" template="post/view.phtml">
+            <block class="Magefan\Blog\Block\Post\View" name="blog.post" template="Magefan_Blog::post/view.phtml">
                 <block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
                 <action method="setPostInfoBlockName">
                     <argument name="name" xsi:type="string">blog.post.info</argument>

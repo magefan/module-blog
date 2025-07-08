@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Catalog\Product;
 
+use Magefan\Blog\Model\Config\Source\DesignVersion;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\Framework\View\Element\AbstractBlock;
 
@@ -95,12 +96,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $designVersion = (string)$this->_scopeConfig->getValue(
-            'mfblog/design/version',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-
-        if ($designVersion == '2025-04') {
+        if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
             $template = (string)$this->_scopeConfig->getValue(
                 'mfblog/product_page/related_posts_template_new',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -109,13 +105,13 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
                 return parent::getTemplate();
             }
             if ($template == 'article-slider') {
-                return 'Magefan_BlogExtra::post/list/carousel-2025-04.phtml';
+                return 'Magefan_Blog::2025-07/post/list/carousel-slider.phtml';
             }
             if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
                 return parent::getTemplate();
             }
 
-            return 'Magefan_BlogExtra::post/view/post-bottom-2025-04.phtml';
+            return 'Magefan_Blog::2025-07/post/view/post-bottom.phtml';
         }
 
         $templateName = (string)$this->_scopeConfig->getValue(

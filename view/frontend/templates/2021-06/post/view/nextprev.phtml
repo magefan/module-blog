@@ -1,0 +1,49 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post next and prev post links
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\NextPrev
+ */
+?>
+
+<?php if ($block->displayLinks()) { ?>
+    <?php
+        $prevPost = $block->getPrevPost();
+        $nextPost = $block->getNextPost();
+    ?>
+    <?php if ($prevPost || $nextPost) { ?>
+        <div class="post-nextprev clearfix row-cols-2">
+            <div class="post-prev">
+                <?php if ($prevPost) { ?>
+                    <?php $title = $prevPost->getTitle() ?>
+                    <a class="nextprev-link prev-link float-left"
+                       href="<?= $block->escapeUrl($prevPost->getPostUrl()) ?>"
+                       title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
+                        <span class="text-left"><?= $block->escapeHtml(__('Previous')) ?></span>
+                        <?= $block->escapeHtml($title) ?>
+                    </a>
+                <?php } ?>
+            </div>
+
+            <div class="post-next">
+                <?php if ($nextPost) { ?>
+                    <?php $title = $nextPost->getTitle() ?>
+                    <a class="nextprev-link next-link float-right"
+                       href="<?= $block->escapeUrl($nextPost->getPostUrl()) ?>"
+                       title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
+                        <span class="text-right"><?= $block->escapeHtml(__('Next')) ?></span>
+                        <?= $block->escapeHtml($title) ?>
+                    </a>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } ?>
+<?php } ?>

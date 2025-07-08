@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Block\Author;
 
 use Magefan\Blog\Block\Post\PostList\Toolbar;
+use Magefan\Blog\Model\Config\Source\DesignVersion;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -107,13 +108,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getPostTemplateType()
     {
-        $designVersion = (string)$this->_scopeConfig->getValue(
-            'mfblog/design/version',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $designVersion = $this->config->getDesignVersion();
 
         $template = (string)$this->getAuthor()->getData('posts_list_template');
-        if (!empty($this->templatePool->getAll('blog_post_list' . ($designVersion == '2025-04' ? '_2025_04' : ''))[$template])) {
+        if (!empty($this->templatePool->getAll('blog_post_list' . ($designVersion == DesignVersion::VALOR  ? '_2025_07' : ''))[$template])) {
             if ($template) {
                 return $template;
             }
@@ -124,7 +122,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         );
 
 
-        if ($designVersion == '2025-04') {
+        if ($designVersion == DesignVersion::VALOR ) {
             $template = $this->_scopeConfig->getValue(
                 'mfblog/author/templates_new',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE

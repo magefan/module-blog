@@ -92,7 +92,17 @@
                         <item name="template" xsi:type="string">Magefan_Blog::post/list-modern.phtml</item>
                     </item>
                 </item>
-                <item name="blog_post_view" xsi:type="array">
+                <item name="blog_post_list_2025_07" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Use System Settings</item>
+                        <item name="value" xsi:type="string">article-grid</item>
+                    </item>
+                    <item name="article-list" xsi:type="array">
+                        <item name="label" xsi:type="string">List</item>
+                        <item name="value" xsi:type="string">article-list</item>
+                    </item>
+                </item>
+                <!--<item name="blog_post_view" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
@@ -115,12 +125,13 @@
                         <item name="value" xsi:type="string">modern</item>
                         <item name="template" xsi:type="string">Magefan_Blog::post/view/nextprev-modern.phtml</item>
                     </item>
-                </item>
+                </item>-->
                 <item name="blog_post_view_related_post" xsi:type="array">
                     <item name="default" xsi:type="array">
-                        <item name="label" xsi:type="string">Use System Settings</item>
+                        <item name="label" xsi:type="string">Use System Settings (List)</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string"></item>
+                        <item name="template" xsi:type="string">Magefan_Blog::2015-11/post/view/relatedposts.phtml</item>
+                        <item name="template2025-07" xsi:type="string">Magefan_Blog::post/view/relatedposts.phtml</item>
                     </item>
                 </item>
                 <item name="blog_post_sidebar_posts" xsi:type="array">
@@ -128,6 +139,20 @@
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string"></item>
+                    </item>
+                </item>
+                <item name="blog_post_sidebar_posts_2025_07" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Default</item>
+                        <item name="value" xsi:type="string">default</item>
+                    </item>
+                    <item name="sidebar-article-grid" xsi:type="array">
+                        <item name="label" xsi:type="string">Grid</item>
+                        <item name="value" xsi:type="string">sidebar-article-grid</item>
+                    </item>
+                    <item name="sidebar-article-list" xsi:type="array">
+                        <item name="label" xsi:type="string">List</item>
+                        <item name="value" xsi:type="string">sidebar-article-list</item>
                     </item>
                 </item>
             </argument>
@@ -140,10 +165,10 @@
     </virtualType>
     <virtualType name="Magefan\Blog\Model\Config\Source\PostListTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
-            <argument name="templateType" xsi:type="string">blog_post_list_2025_04</argument>
+            <argument name="templateType" xsi:type="string">blog_post_list_2025_07</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Magefan\Blog\Model\Config\Source\PostViewTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+    <!--<virtualType name="Magefan\Blog\Model\Config\Source\PostViewTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view</argument>
         </arguments>
@@ -152,7 +177,7 @@
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view_next_prev</argument>
         </arguments>
-    </virtualType>
+    </virtualType>-->
     <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view_related_post</argument>
@@ -163,14 +188,9 @@
             <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
-        <arguments>
-            <argument name="templateType" xsi:type="string">blog_post_view_related_post_2025_04</argument>
-        </arguments>
-    </virtualType>
     <virtualType name="Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
-            <argument name="templateType" xsi:type="string">blog_post_sidebar_posts_2025_04</argument>
+            <argument name="templateType" xsi:type="string">blog_post_sidebar_posts_2025_07</argument>
         </arguments>
     </virtualType>
 
@@ -213,11 +233,6 @@
     <virtualType name="Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view_latest_from_category</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="Magefan\Blog\Model\Config\Source\LatestFromCategoryTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
-        <arguments>
-            <argument name="templateType" xsi:type="string">blog_post_view_latest_from_category_2025_04</argument>
         </arguments>
     </virtualType>
 

@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+$_post = $block->getPost();
+$_postUrl = $_post->getPostUrl();
+$_postName = $block->escapeHtml($_post->getTitle(), null);
+?>
+<div class="post-view">
+    <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+
+        <?php if ($block->displayAddThisToolbox()) : ?>
+            <div class="post-header">
+
+                <!-- Post Sharing -->
+                <div class="post-sharing post-sharing-top old-post-view">
+                    <div class="share-elements">
+                        <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
+                            <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
+                                <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                    <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <!-- END Post Sharing -->
+
+                <?= $block->getInfoHtml() ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="post-content">
+            <div class="post-description clearfix">
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                    <?php
+                    $featuredImgAlt = $_post->getData('featured_img_alt');
+                    if (!$featuredImgAlt) {
+                        $featuredImgAlt = $_postName;
+                    }
+                    ?>
+                    <div class="post-ftimg-hld">
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    </div>
+                <?php } ?>
+                <div class="post-text-hld">
+                    <?= /*@noEscape*/ $block->getContent() ?>
+                    <div class="clear clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+            <?= $block->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

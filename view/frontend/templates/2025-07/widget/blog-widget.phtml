@@ -1,0 +1,26 @@
+<?php
+$_postCollection = $block->getPostCollection();
+?>
+<?php if (!$_postCollection->count()) {
+	return '';
+} ?>
+
+<?php //= $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/style-widget-templates-1.css') ?>
+<?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
+
+<div class="widget block <?= $block->getElementClass()?>">
+    <?php if ($title = $block->getTitle()) { ?>
+        <div class="block-title title">
+            <strong><?= $title ?></strong>
+        </div>
+    <?php } ?>
+	<div class="block-content">
+		<?=
+		$block->getLayout()
+			->createBlock(get_class($block))
+			->setNewDesignType($block->getNewDesignType())
+			->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
+		?>
+	</div>
+</div>
+

@@ -8,6 +8,8 @@
 
 namespace Magefan\Blog\Block\Widget;
 
+use Magefan\Blog\Model\Config\Source\DesignVersion;
+
 /**
  * Blog featured posts widget
  */
@@ -96,14 +98,14 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
      * @return string
      */
     public function getCustomTemplate() {
-        $designVersion = $this->_scopeConfig->getValue('mfblog/design/version', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        if ($designVersion === '2025-04' && $this->getTemplate() && strpos($this->getTemplate(), 'article.phtml') !== false) {
+        $designVersion = $this->config->getDesignVersion();
+        if ($designVersion === DesignVersion::VALOR  && $this->getTemplate() && strpos($this->getTemplate(), 'article.phtml') !== false) {
 			return $this->getTemplate();
 		}
         if ($this->getData('mf_template')) {
-            if ($designVersion == '2025-04') {
+            if ($designVersion == DesignVersion::VALOR ) {
                 $this->setNewDesignType($this->getData('mf_template'));
-                return 'Magefan_BlogExtra::widget/blog-widget-2025-04.phtml';
+                return 'Magefan_Blog::2025-07/widget/blog-widget.phtml';
             }
 
             if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getData('mf_template'))) {
