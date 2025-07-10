@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
-use Magefan\Blog\Model\Config\Source\DesignVersion;
-
 /**
  * Blog sidebar categories block
  */
@@ -77,20 +75,12 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getDisplayImage()
     {
-        if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
-            return false;
-        }
-        return (bool)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->_getConfigValue('display_image');
     }
 
     public function getClass() {
-        return (string)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/template_new',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $templateName = (string)$this->_getConfigValue('template');
+        return $this->templatePool->getTemplateClass('blog_post_sidebar_posts', $templateName);
     }
 
     /**
@@ -100,30 +90,27 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $templateName = (string)$this->_getConfigValue('template');
 
-        if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
-            $template = $this->_scopeConfig->getValue(
-                'mfblog/sidebar/'.$this->_widgetKey.'/template_new',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            );
-            if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
-                return parent::getTemplate();
-            }
-            if ($template == 'default') {
-                $templateName = 'modern';
-            } else {
-                return 'Magefan_Blog::2025-07/sidebar/recent.phtml';
-            }
+        if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
+            return parent::getTemplate();
         }
 
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }
-
         return parent::getTemplate();
+    }
+
+    /**
+     * @param $param
+     * @return mixed
+     */
+    protected function _getConfigValue($param)
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey . '/' . $param,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
 }

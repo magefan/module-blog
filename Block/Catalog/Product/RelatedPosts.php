@@ -8,10 +8,6 @@
 
 namespace Magefan\Blog\Block\Catalog\Product;
 
-use Magefan\Blog\Model\Config\Source\DesignVersion;
-use Magento\Catalog\Model\ResourceModel\Product\Collection;
-use Magento\Framework\View\Element\AbstractBlock;
-
 /**
  * Blog post related posts block
  */
@@ -96,24 +92,9 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
-            $template = (string)$this->_scopeConfig->getValue(
-                'mfblog/product_page/related_posts_template_new',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            );
-            if ($template == 'default') {
-                return parent::getTemplate();
-            }
-            if ($template == 'article-slider') {
-                return 'Magefan_Blog::2025-07/post/list/carousel-slider.phtml';
-            }
-            if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
-                return parent::getTemplate();
-            }
-
-            return 'Magefan_Blog::2025-07/post/view/post-bottom.phtml';
+        if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
+            return parent::getTemplate();
         }
-
         $templateName = (string)$this->_scopeConfig->getValue(
             'mfblog/product_page/related_posts_template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE

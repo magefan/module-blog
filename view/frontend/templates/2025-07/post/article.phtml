@@ -8,6 +8,7 @@
         preg_match('/templates-\d+/', $templateType, $matches);
         $style = $matches[0] ?? '';
     }
+    $displayImage = $this->getData('display_image') ?? true;
 ?>
 <?php
     $_postCollection = $block->getPostCollection();
@@ -21,7 +22,7 @@
             <div class="article-post">
 
                 <?php /* Post Image Container */ ?>
-                <?php if ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg() )): ?>
+                <?php if (($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
                 <div class="article-post__image-container animation-type--zoom">
                     <?php
                         $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);

@@ -101,16 +101,11 @@
                 <field id="template" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
-                    <!--<depends>
-                        <field id="mfblog/general/design_version">2024-12</field>
-                    </depends>-->
                 </field>
                 <field id="templates_new" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template New</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
-                    <!--<depends>
-                        <field id="mfblog/general/design_version">2025-04</field>
-                    </depends>-->
+
                 </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Per Page</label>
@@ -430,16 +425,10 @@
                 <field id="template" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
-                    <!--<depends>
-                        <field id="mfblog/general/design_version">2024-12</field>
-                    </depends>-->
                 </field>
                 <field id="templates_new" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template New</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
-                    <!--<depends>
-                        <field id="mfblog/general/design_version">2025-04</field>
-                    </depends>-->
                 </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Per Page</label>
@@ -488,7 +477,6 @@
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
                     <depends>
                         <field id="page_enabled">1</field>
-<!--                        <field id="mfblog/general/design_version">2024-12</field>-->
                     </depends>
                 </field>
                 <field id="templates_new" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -496,7 +484,6 @@
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
                     <depends>
                         <field id="page_enabled">1</field>
-<!--                        <field id="mfblog/general/design_version">2025-04</field>-->
                     </depends>
                 </field>
                 <field id="robots" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -595,16 +582,10 @@
                 <field id="template" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
-                   <!-- <depends>
-                        <field id="mfblog/general/design_version">2024-12</field>
-                    </depends>-->
                 </field>
                 <field id="templates_new" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template New</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
-                    <!--<depends>
-                        <field id="mfblog/general/design_version">2025-04</field>
-                    </depends>-->
                 </field>
                 <field id="robots" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default Robots</label>
@@ -662,23 +643,14 @@
                     <field id="template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
-                       <!-- <depends>
-                            <field id="mfblog/general/design_version">2024-12</field>
-                        </depends>-->
                     </field>
-                    <field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <!--<field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew</source_model>
-                       <!-- <depends>
-                            <field id="mfblog/general/design_version">2025-04</field>
-                        </depends>-->
-                    </field>
+                    </field>-->
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                        <!--<depends>
-                            <field id="mfblog/general/design_version">2024-12</field>
-                        </depends>-->
                     </field>
                     <field id="posts_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Posts Number</label>
@@ -696,17 +668,11 @@
                     <field id="template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
-                        <!--<depends>
-                            <field id="mfblog/general/design_version">2024-12</field>
-                        </depends>-->
                     </field>
-                    <field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <!--<field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew</source_model>
-                        <!--<depends>
-                            <field id="mfblog/general/design_version">2025-04</field>
-                        </depends>-->
-                    </field>
+                    </field>-->
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -731,17 +697,11 @@
                     <field id="template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
-                       <!-- <depends>
-                            <field id="mfblog/general/design_version">2024-12</field>
-                        </depends>-->
                     </field>
-                    <field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <!--<field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew</source_model>
-<!--                        <depends>-->
-<!--                            <field id="mfblog/general/design_version">2025-04</field>-->
-<!--                        </depends>-->
-                    </field>
+                    </field>-->
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -878,18 +838,8 @@
                     <source_model>Magefan\Blog\Model\Config\Source\RelatedPostTemplate</source_model>
                     <depends>
                         <field id="enabled">1</field>
-<!--                        <field id="mfblog/general/design_version">2024-12</field>-->
                     </depends>
                 </field>
-                <!--<field id="related_posts_template_new" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Template</label>
-                    <source_model>Magefan\Blog\Model\Config\Source\RelatedPostTemplateNew</source_model>
-                    <depends>
-                        <field id="enabled">1</field>
-&lt;!&ndash;                        <field id="mfblog/general/design_version">2025-04</field>&ndash;&gt;
-                    </depends>
-                </field>-->
-
                 <field id="number_of_related_posts" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Number of Posts</label>
                     <depends>

@@ -69,7 +69,11 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
 
             $newTemplate = str_replace('::', '::' . $this->config->getDesignVersion() . '/', $result);
             $newTemplate = str_replace('-modern', '', $newTemplate);
-            if ( $this->config->getDesignVersion() == DesignVersion::VALOR && strpos($newTemplate, 'widget') !== false) {
+            if ($this->config->getDesignVersion() == DesignVersion::VALOR
+                && strpos($newTemplate, 'widget') !== false
+                && strpos($newTemplate, 'recent-post-slider') == false
+                && strpos($newTemplate, 'authors-list') == false
+            ) {
                 $newTemplate = preg_replace(
                     '#(widget/)[^/]+(\.phtml)$#',
                     '${1}blog-widget${2}',
@@ -104,6 +108,11 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
                 if ($filePath && $this->fileDriver->isExists($filePath)) {
                     $result = $newTemplate;
                 }
+            }
+
+            $filePath = $this->getTemplateFile(str_replace(['Extra','Plus'], '', $newTemplate));
+            if ($filePath && $this->fileDriver->isExists($filePath)) {
+                $result = str_replace(['Extra','Plus'], '', $newTemplate);
             }
             if (strpos((string) $result, 'article.phtml') !== false) {
                 return $result;

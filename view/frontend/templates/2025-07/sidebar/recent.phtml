@@ -32,7 +32,7 @@
 
 		<?= $block->getLayout()
             ->createBlock(get_class($block))
-            ->setNewDesignType($block->getClass())
+            ->setNewDesignType($block->getClass())->setData('display_image', $block->getDisplayImage())
             ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
 		?>
 
