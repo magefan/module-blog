@@ -7,9 +7,10 @@
 declare(strict_types=1);
 
 namespace Magefan\Blog\Setup\Patch\Data;
-
+use \Magento\Config\Controller\Adminhtml\System\Config\Save;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;
+use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magefan\Blog\Model\Config as BlogConfig;
 
@@ -56,7 +57,18 @@ class SetDesignVersion implements DataPatchInterface
      */
     public function apply()
     {
-        $defaultStoreValue = '';
+        $defaultStoreValue = $this->blogConfig->getConfig(
+            $this->postViewDsign
+        );
+
+        if ($defaultStoreValue === 'modern') {
+            $this->configWriter->save(
+                $this->dsignVersion,
+                \Magefan\Blog\Model\Config\Source\DesignVersion::MODERN,
+                \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+            );
+        }
+
         foreach ($this->storeManager->getStores() as $store) {
             $storeId = $store->getId();
             $value = $this->blogConfig->getConfig(
@@ -68,11 +80,7 @@ class SetDesignVersion implements DataPatchInterface
                 continue;
             }
 
-            if (!$defaultStoreValue) {
-                $defaultStoreValue = $value;
-            }
-
-            if ($value == 'modern') {
+            if ($value === 'modern') {
                 $this->configWriter->save(
                     $this->dsignVersion,
                     \Magefan\Blog\Model\Config\Source\DesignVersion::MODERN,

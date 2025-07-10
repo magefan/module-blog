@@ -54,7 +54,7 @@
                     <option name="mf" value="mf">
                         <label>Magefan Templates</label>
                     </option>
-                    <option name="custom" value="custom" >
+                    <option name="custom" value="custom" selected="true">
                         <label>Custom Template</label>
                     </option>
                 </options>

@@ -48,6 +48,9 @@
                 <meta_description/>
             </index_page>
             <post_view>
+                <design>
+                    <template>modern</template>
+                </design>
                 <related_posts>
                     <enabled>1</enabled>
                     <template/>
