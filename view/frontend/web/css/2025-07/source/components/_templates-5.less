@@ -121,8 +121,15 @@
 
 .article-templates-5-3 {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    //grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 12px;
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
     .article-post {
         //.article-post-vertical;
         .mf-media {

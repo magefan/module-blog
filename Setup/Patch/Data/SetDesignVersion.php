@@ -73,7 +73,7 @@ class SetDesignVersion implements DataPatchInterface
             $storeId = $store->getId();
             $value = $this->blogConfig->getConfig(
                 $this->postViewDsign,
-                $store->getId()
+                $storeId
             );
 
             if ($defaultStoreValue === $value) {
@@ -85,7 +85,7 @@ class SetDesignVersion implements DataPatchInterface
                     $this->dsignVersion,
                     \Magefan\Blog\Model\Config\Source\DesignVersion::MODERN,
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-                    $store->getId()
+                    $storeId
                 );
             }
         }

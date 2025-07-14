@@ -19,7 +19,7 @@
 
 /* Reply Form */
 .c-replyform textarea,
-.c-replyform input.input-text {color: #222;background: #fff !important;display: block;border-radius: 8px;padding: 12px 14px;border: 1px solid #bbbbbb;}
+.c-replyform input.input-text {color: #222;background: #fff !important;display: block;border-radius: 0;padding: 12px 14px;border: 1px solid #bbbbbb;}
 .c-replyform textarea {height: 132px;}
 .c-replyform input.input-text {height: 52px;}
 .c-replyform.no-active textarea {border-bottom: 1px solid #bbbbbb;height: 60px;}
