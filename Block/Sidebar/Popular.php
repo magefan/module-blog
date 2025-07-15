@@ -28,12 +28,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function _construct()
     {
-        $this->setPageSize(
-            (int) $this->_scopeConfig->getValue(
-                'mfblog/sidebar/'.$this->_widgetKey.'/posts_per_page',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            )
-        );
+        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
         return parent::_construct();
     }
 
@@ -67,6 +62,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
+        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
         $templateName = (string)$this->_getConfigValue('template');
 
         if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {

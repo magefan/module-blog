@@ -230,8 +230,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
             return $this->getTemplate();
 		}
         if ($this->getData('mf_template')) {
-            if ($designVersion === DesignVersion::VALOR ) {
-                $this->setNewDesignType($this->getData('mf_template'));
+            if ($designVersion === DesignVersion::VALOR) {
                 return 'Magefan_Blog::widget/blog-widget.phtml';
             }
 

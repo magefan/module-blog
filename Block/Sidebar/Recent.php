@@ -61,6 +61,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
+        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
         $templateName = (string)$this->_getConfigValue('template');
 
         if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {

@@ -102,11 +102,6 @@
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
                 </field>
-                <field id="templates_new" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Template New</label>
-                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
-
-                </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Per Page</label>
                 </field>
@@ -426,10 +421,6 @@
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
                 </field>
-                <field id="templates_new" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Template New</label>
-                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
-                </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Per Page</label>
                 </field>
@@ -475,13 +466,6 @@
                 <field id="template" translate="label comment" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Post List Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
-                    <depends>
-                        <field id="page_enabled">1</field>
-                    </depends>
-                </field>
-                <field id="templates_new" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Template New</label>
-                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
                     <depends>
                         <field id="page_enabled">1</field>
                     </depends>
@@ -583,10 +567,6 @@
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
                 </field>
-                <field id="templates_new" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Template New</label>
-                    <source_model>Magefan\Blog\Model\Config\Source\PostListTemplateNew</source_model>
-                </field>
                 <field id="robots" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default Robots</label>
                     <source_model>Magento\Config\Model\Config\Source\Design\Robots</source_model>
@@ -644,10 +624,6 @@
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
                     </field>
-                    <!--<field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew</source_model>
-                    </field>-->
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -669,10 +645,6 @@
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
                     </field>
-                    <!--<field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew</source_model>
-                    </field>-->
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -698,10 +670,6 @@
                         <label>Template</label>
                         <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplate</source_model>
                     </field>
-                    <!--<field id="template_new" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew</source_model>
-                    </field>-->
                     <field id="display_image" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Post Image</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

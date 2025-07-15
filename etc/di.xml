@@ -92,16 +92,6 @@
                         <item name="template" xsi:type="string">Magefan_Blog::post/list-modern.phtml</item>
                     </item>
                 </item>
-                <item name="blog_post_list_2025_07" xsi:type="array">
-                    <item name="default" xsi:type="array">
-                        <item name="label" xsi:type="string">Use System Settings</item>
-                        <item name="value" xsi:type="string">article-grid</item>
-                    </item>
-                    <item name="article-list" xsi:type="array">
-                        <item name="label" xsi:type="string">List</item>
-                        <item name="value" xsi:type="string">article-list</item>
-                    </item>
-                </item>
                 <item name="blog_post_view_related_post" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings (List)</item>
@@ -118,31 +108,12 @@
                         <item name="class" xsi:type="string">sidebar-article-list</item>
                     </item>
                 </item>
-                <!--<item name="blog_post_sidebar_posts_2025_07" xsi:type="array">
-                    <item name="default" xsi:type="array">
-                        <item name="label" xsi:type="string">Default</item>
-                        <item name="value" xsi:type="string">default</item>
-                    </item>
-                    <item name="sidebar-article-grid" xsi:type="array">
-                        <item name="label" xsi:type="string">Grid</item>
-                        <item name="value" xsi:type="string">sidebar-article-grid</item>
-                    </item>
-                    <item name="sidebar-article-list" xsi:type="array">
-                        <item name="label" xsi:type="string">List</item>
-                        <item name="value" xsi:type="string">sidebar-article-list</item>
-                    </item>
-                </item>-->
             </argument>
         </arguments>
     </type>
     <virtualType name="Magefan\Blog\Model\Config\Source\PostListTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_list</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="Magefan\Blog\Model\Config\Source\PostListTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
-        <arguments>
-            <argument name="templateType" xsi:type="string">blog_post_list_2025_07</argument>
         </arguments>
     </virtualType>
     <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplate" type="Magefan\Blog\Model\Config\Source\Template">
@@ -155,11 +126,6 @@
             <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
         </arguments>
     </virtualType>
-    <!--<virtualType name="Magefan\Blog\Model\Config\Source\SidebarPostsTemplateNew" type="Magefan\Blog\Model\Config\Source\Template">
-        <arguments>
-            <argument name="templateType" xsi:type="string">blog_post_sidebar_posts_2025_07</argument>
-        </arguments>
-    </virtualType>-->
 
     <type name="Magento\PageBuilder\Model\UpgradableEntitiesPool">
         <arguments>

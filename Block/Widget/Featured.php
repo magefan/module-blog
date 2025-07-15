@@ -104,7 +104,6 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
 		}
         if ($this->getData('mf_template')) {
             if ($designVersion == DesignVersion::VALOR ) {
-                $this->setNewDesignType($this->getData('mf_template'));
                 return 'Magefan_Blog::widget/blog-widget.phtml';
             }
 

@@ -3,7 +3,15 @@ $_postCollection = $block->getPostCollection();
 ?>
 <?php if (!$_postCollection->count()) {
 	return '';
-} ?>
+}
+$templateType = 'article-grid';
+if ($block->getData('mf_template')) {
+    $templateType = $block->getData('mf_template');
+    if (strpos($block->getData('mf_template'), 'list') !== false){
+        $templateType = 'article-list';
+    }
+}
+?>
 
 <?php //= $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/style-widget-templates-1.css') ?>
 <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
@@ -18,7 +26,7 @@ $_postCollection = $block->getPostCollection();
 		<?=
 		$block->getLayout()
 			->createBlock(get_class($block))
-			->setNewDesignType($block->getNewDesignType())
+			->setData('template_type', $templateType)
 			->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
 		?>
 	</div>

@@ -27,7 +27,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 				<?=
                     $block->getLayout()
                         ->createBlock(get_class($block))
-                        ->setNewDesignType('article-items')
+                        ->setData('template_type', 'article-items')
                         ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
                 ?>
 

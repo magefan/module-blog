@@ -57,12 +57,12 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
     /**
      * @param Template $subject
      * @param $result
-     * @return array|string|string[]|null
+     * @return array|mixed|string|string[]|null
      * @throws \Magento\Framework\Exception\FileSystemException
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
     {
-        if ($result && strpos($result, 'Magefan_Blog') !== false) {
+        if ($this->config->isEnabled() && $result && strpos($result, 'Magefan_Blog') !== false) {
             if (strpos($result, $this->config->getDesignVersion() . '/') !== false) {
                 return $result;
             }
@@ -80,23 +80,6 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
                     $newTemplate
                 );
             }
-
-            /*if (isset(self::deprecatedPaths[$newTemplate])) {
-                $filePath = $this->getTemplateFile(self::deprecatedPaths[$newTemplate]);
-                if ($filePath && $this->fileDriver->isExists($filePath)) {
-                    $result = self::deprecatedPaths[$newTemplate];
-                } else {
-                    $filePath = $this->getTemplateFile($newTemplate);
-                    if ($filePath && $this->fileDriver->isExists($filePath)) {
-                        $result = $newTemplate;
-                    }
-                }
-            } else {
-                $filePath = $this->getTemplateFile($newTemplate);
-                if ($filePath && $this->fileDriver->isExists($filePath)) {
-                    $result = $newTemplate;
-                }
-            }*/
 
             $template = self::deprecatedPaths[$newTemplate] ?? $newTemplate;
             $filePath = $this->getTemplateFile($template);
