@@ -16,6 +16,11 @@
                     <item name="disable" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="string">60</item>
                 </item>
+                <item name="blog_router_after" xsi:type="array">
+                    <item name="class" xsi:type="string">Magefan\Blog\Controller\RouterAfter</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">61</item>
+                </item>
             </argument>
         </arguments>
     </type>
