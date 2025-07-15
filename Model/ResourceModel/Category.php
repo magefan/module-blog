@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\ResourceModel;
 
 /**
@@ -209,7 +211,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
      */
-    protected function isNumericPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
+    protected function isNumericPageIdentifier(\Magento\Framework\Model\AbstractModel $object): int|false
     {
         return preg_match('/^[0-9]+$/', (string)$object->getData('identifier'));
     }
@@ -220,7 +222,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
      */
-    protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
+    protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object): int|false
     {
         return preg_match('/^([^?#<>@!&*()$%^\\+=,{}"\']+)?$/', (string)$object->getData('identifier'));
     }
@@ -233,7 +235,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int|array $storeId
      * @return false|string
      */
-    public function checkIdentifier($identifier, $storeIds)
+    public function checkIdentifier($identifier, $storeIds): string|false
     {
         if (!is_array($storeIds)) {
             $storeIds = [$storeIds];
@@ -288,7 +290,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * @return string
      */
-    public function getEntityType()
+    public function getEntityType(): string
     {
         return 'category';
     }

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Ui\DataProvider\Post\Related;
 
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -66,8 +68,8 @@ class ProductDataProvider extends DataProvider
         RequestInterface $request,
         ProductRepositoryInterface $productRepository,
         ProductLinkRepositoryInterface $productLinkRepository,
-        $addFieldStrategies,
-        $addFilterStrategies,
+        array $addFieldStrategies,
+        array $addFilterStrategies,
         array $meta = [],
         array $data = []
     ) {
@@ -105,7 +107,7 @@ class ProductDataProvider extends DataProvider
      * @param Collection $collection
      * @return Collection
      */
-    protected function addCollectionFilters(Collection $collection)
+    protected function addCollectionFilters(Collection $collection): Collection
     {
         return $collection;
     }

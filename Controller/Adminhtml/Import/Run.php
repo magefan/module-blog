@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Adminhtml\Import;
 
 /**
@@ -26,7 +28,7 @@ class Run extends \Magento\Backend\App\Action
 
         try {
             if (empty($type)) {
-                throw new \Exception(__('Blog import type is not specified.'), 1);
+                throw new \Exception((string)__('Blog import type is not specified.'), 1);
             }
 
             if (!isset($data['store_id'])) {
@@ -42,10 +44,10 @@ class Run extends \Magento\Backend\App\Action
             $import->prepareData($data)->execute();
 
             $stats = $import->getImportStatistic();
-
+var_dump($stats->getData('skipped_count'));
             if ($stats->getData('imported_count')) {
                 if (!$stats->getData('skipped_count')) {
-                    $this->messageManager->addSuccess(__(
+                    $this->messageManager->addSuccess((string)__(
                         'The import process was completed successfully.
                         %1 posts, %2 categories, %3 tags, %4 authors and %5 comments where imported.',
                         $stats->getData('imported_posts_count'),
@@ -55,7 +57,7 @@ class Run extends \Magento\Backend\App\Action
                         $stats->getData('imported_comments_count')
                     ));
                 } else {
-                    $this->messageManager->addNotice(__(
+                    $this->messageManager->addNotice((string)__(
                         'The import process completed. %1 posts, %2 categories, %3 tags, %4 authors and %5 comments where imported.
                         Some posts or categories or tags or authors or comments where skipped. %6 %7 %8 %9 %10',
                         $stats->getData('imported_posts_count'),
@@ -79,7 +81,7 @@ class Run extends \Magento\Backend\App\Action
                 if (!$stats->getData('skipped_count')) {
                     $this->messageManager->addNotice(__('Nothing to import.'));
                 } else {
-                    throw new \Exception(__('Can not make import.'), 1);
+                    throw new \Exception((string)__('Can not make import.'), 1);
                 }
             }
 

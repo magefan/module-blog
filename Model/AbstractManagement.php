@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\ManagementInterface;
@@ -62,7 +64,7 @@ abstract class AbstractManagement implements ManagementInterface
      * @param $fileDriver
      * @return string
      */
-    protected function getUniqueFileName($directory, $fileName, $fileDriver)
+    protected function getUniqueFileName(string $directory, $fileName, $fileDriver)
     {
         $name = pathinfo($fileName, PATHINFO_FILENAME);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);

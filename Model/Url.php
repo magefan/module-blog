@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 /**
@@ -373,7 +375,7 @@ class Url
      * Retrieve post url sufix
      * @return string
      */
-    public function getUrlSufix($controllerName)
+    public function getUrlSufix(string $controllerName): string
     {
         return trim((string)$this->_getConfig($controllerName . '_sufix'));
     }
@@ -383,7 +385,7 @@ class Url
      * @param string $file
      * @return string
      */
-    public function getMediaUrl($file)
+    public function getMediaUrl(string $file): string
     {
         return $this->_storeManager->getStore()
             ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
@@ -401,7 +403,7 @@ class Url
      * @param $storeId
      * @return $this
      */
-    public function setStoreId($storeId)
+    public function setStoreId($storeId): static
     {
         $this->storeId = $storeId;
         return $this;
@@ -412,7 +414,7 @@ class Url
      * @param $store
      * @throws \Exception
      */
-    public function startStoreEmulation($store)
+    public function startStoreEmulation($store): void
     {
         if (null !== $this->originalStore) {
             throw new \Exception('Cannot start Blog URL store emulation, emulation already started.');
@@ -426,7 +428,7 @@ class Url
     /**
      * Stop blog URL store emulation
      */
-    public function stopStoreEmulation()
+    public function stopStoreEmulation(): void
     {
         if ($this->originalStore) {
             $this->setStoreId($this->originalStore->getId());
@@ -443,7 +445,7 @@ class Url
      * @param  string $key
      * @return string || null || int
      */
-    protected function _getConfig($key)
+    protected function _getConfig(string $key)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/permalink/'.$key,

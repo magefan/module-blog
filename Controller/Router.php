@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller;
 
 use Magefan\Blog\Model\Url;
@@ -389,7 +391,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getPostId($identifier, $checkSufix = true)
+    protected function _getPostId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_postFactory,
@@ -405,7 +407,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getCategoryId($identifier, $checkSufix = true)
+    protected function _getCategoryId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_categoryFactory,
@@ -422,7 +424,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getAuthorId($identifier, $checkSufix = true)
+    protected function _getAuthorId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_authorFactory,
@@ -439,7 +441,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return int
      * @deprecated Use URL resolver interface instead
      */
-    protected function _getTagId($identifier, $checkSufix = true)
+    protected function _getTagId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_tagFactory,
@@ -457,7 +459,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return mixed
      * @deprecated Use URL resolver interface instead
      */
-    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
         $key =  $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
         if (!isset($this->ids[$key])) {
@@ -485,7 +487,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @return boolean
      * @deprecated Use URL resolver interface instead
      */
-    protected function _isArchiveIdentifier($identifier)
+    protected function _isArchiveIdentifier($identifier): bool
     {
         $info = explode('-', $identifier);
         return count($info) == 2

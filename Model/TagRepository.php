@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -138,7 +141,7 @@ class TagRepository implements TagRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Tag $tag)
+    public function delete(Tag $tag): bool
     {
         try {
             $this->tagResourceModel->delete($tag);
@@ -159,7 +162,7 @@ class TagRepository implements TagRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($tagId)
+    public function deleteById($tagId): bool
     {
         return $this->delete($this->getById($tagId));
     }

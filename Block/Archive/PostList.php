@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Archive;
 
 use Magento\Store\Model\ScopeInterface;
@@ -84,7 +86,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      * @param $param
      * @return mixed
      */
-    protected function _getConfigValue($param)
+    protected function _getConfigValue(string $param)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/archive/'.$param,
