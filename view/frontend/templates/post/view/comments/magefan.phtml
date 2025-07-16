@@ -19,6 +19,9 @@
     $session = $block->getCustomerSession();
 
     $canPost = $block->canPost();
+
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+    $imageWidth = (int)$block->getFeaturedImageWidth() ?: '';
 ?>
 <div id="post-comments">
     <div class="c-count">
@@ -27,8 +30,15 @@
     <!-- reply form -->
     <div class="c-reply cf">
         <?php if ($image = $block->getCustomerImage()) { ?>
+            <?php
+            $image = $imageHelper->init($image)->resize($imageWidth, null, false);
+            $widthAndHeight = $imageHelper->getWidthAndHeigth();
+            ?>
+
         <div class="c-img">
-            <img src="<?= $block->escapeUrl($image) ?>" alt="<?= $block->escapeHtml($block->getCustomerName()) ?>">
+            <img src="<?= $block->escapeUrl($image) ?>" <?php if ($widthAndHeight)
+                echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
+                 alt="<?= $block->escapeHtml($block->getCustomerName()) ?>">
         </div>
         <?php } ?>
         <div class="c-replyform <?php if ($canPost) {  echo 'no-active'; } ?>">
