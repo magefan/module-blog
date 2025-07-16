@@ -14,9 +14,9 @@
                 <argument name="bundles" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="items" xsi:type="array">
-                            <item name="Magefan_Blog/js/magefan-comments" xsi:type="array">
+                            <!--<item name="Magefan_Blog/js/magefan-comments" xsi:type="array">
                                 <item name="path" xsi:type="string">Magefan_Blog/js/magefan-comments</item>
-                            </item>
+                            </item>-->
                             <item name="Magefan_Blog/js/lib/mfblogunveil" xsi:type="array">
                                 <item name="path" xsi:type="string">Magefan_Blog/js/lib/mfblogunveil</item>
                                 <item name="import" xsi:type="array">
