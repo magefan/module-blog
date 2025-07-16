@@ -8,12 +8,12 @@
 ?>
 <?php
 /**
- * @var $block \Magefan\Blog\Block\Social\AddThi
+ * @var $block \Magefan\Blog\Block\Social\AddThis
  * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
  */
 ?>
 <?php $script = "
-    function mfShareWindowOpen(url, type) {
+    function mfShareWindowOpen(url, type, image) {
         function reverse(s){
             return s.split('').reverse().join('');
         }
@@ -24,7 +24,7 @@
                 u = reverse('" . strrev('https://www.facebook.com/sharer/sharer.php?u=') . "') + url;
                 break;
             case 'pinterest':
-                u = reverse('" . strrev('https://pinterest.com/pin/create/button/?url=') . "') + url;
+                u = reverse('" . strrev('https://pinterest.com/pin/create/button/?url=') . "') + url + '&media='+ image;
                 break;
             case 'twitter':
                 u =reverse('" . strrev('http://twitter.com/share?url=') . "') + url;
