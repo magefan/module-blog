@@ -179,6 +179,47 @@
 					"response": []
 				},
 				{
+					"name": "UpdatePostOnStoreByCodeInUrl",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Post Edited\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/default/V1/blog/post/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DeletePost",
 					"request": {
 						"method": "DELETE",
@@ -688,6 +729,47 @@
 					"response": []
 				},
 				{
+					"name": "UpdateCategoryOnStoreByCodeInUrl",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Edit\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/default/V1/blog/category/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DeleteCategory",
 					"request": {
 						"method": "DELETE",
@@ -960,6 +1042,47 @@
 						},
 						"url": {
 							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/tag/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"tag",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTagOnStoreByCodeInUrl",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"title\\\":\\\"Test Edit\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/default/V1/blog/tag/:id",
 							"protocol": "https",
 							"host": [
 								"blog",
@@ -1440,6 +1563,47 @@
 						},
 						"url": {
 							"raw": "https://blog.demo.magefan.top/index.php/rest/V1/blog/author/:id",
+							"protocol": "https",
+							"host": [
+								"blog",
+								"demo",
+								"magefan",
+								"top"
+							],
+							"path": [
+								"index.php",
+								"rest",
+								"V1",
+								"blog",
+								"author",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAuthorOnStoreByCodeInUrl",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":\"{\\\"content\\\":\\\"Test Edit Content\\\"}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://blog.demo.magefan.top/index.php/rest/default/V1/blog/author/:id",
 							"protocol": "https",
 							"host": [
 								"blog",
