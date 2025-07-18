@@ -204,6 +204,7 @@
 							"path": [
 								"index.php",
 								"rest",
+								"default",
 								"V1",
 								"blog",
 								"post",
@@ -754,6 +755,7 @@
 							"path": [
 								"index.php",
 								"rest",
+								"default",
 								"V1",
 								"blog",
 								"category",
@@ -1093,6 +1095,7 @@
 							"path": [
 								"index.php",
 								"rest",
+								"default",
 								"V1",
 								"blog",
 								"tag",
@@ -1614,6 +1617,7 @@
 							"path": [
 								"index.php",
 								"rest",
+								"default",
 								"V1",
 								"blog",
 								"author",
