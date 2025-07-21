@@ -45,10 +45,12 @@
                 <li>
                     <a title="<?= $block->escapeHtml($item->getTitle()) ?>" href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
                         <?= $block->escapeHtml($item->getTitle()) ?>
+
+						<?php if ($block->showPostsCount()) { ?>
+                            <span>(<?= $block->escapeHtml($item->getPostsCount()) ?>)</span>
+						<?php } ?>
                     </a>
-                    <?php if ($block->showPostsCount()) { ?>
-                        (<?= $block->escapeHtml($item->getPostsCount()) ?>)
-                    <?php } ?>
+                    
                     <?php
                     $level = $newLevel;
                     $first = false;

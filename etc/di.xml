@@ -86,11 +86,12 @@
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string"></item>
                     </item>
-                    <item name="list" xsi:type="array">
+                    <!--<item name="list" xsi:type="array">
                         <item name="label" xsi:type="string">Modern (List)</item>
                         <item name="value" xsi:type="string">list-modern</item>
                         <item name="template" xsi:type="string">Magefan_Blog::post/list-modern.phtml</item>
-                    </item>
+                        <item name="group" xsi:type="string">list</item>
+                    </item>-->
                 </item>
                 <item name="blog_post_view_related_post" xsi:type="array">
                     <item name="default" xsi:type="array">
