@@ -6,7 +6,10 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Sidebar;
+
 
 /**
  * Blog sidebar categories block
@@ -25,12 +28,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function _construct()
     {
-        $this->setPageSize(
-            (int) $this->_scopeConfig->getValue(
-                'mfblog/sidebar/'.$this->_widgetKey.'/posts_per_page',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            )
-        );
+        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
         return parent::_construct();
     }
 
@@ -50,12 +48,13 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getDisplayImage()
     {
-        return (bool)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->_getConfigValue('display_image');
     }
 
+    public function getClass() {
+        $templateName = (string)$this->_getConfigValue('template');
+        return $this->templatePool->getTemplateClass('blog_post_sidebar_posts', $templateName);
+    }
     /**
      * Get relevant path to template
      *
@@ -63,13 +62,28 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
+        $templateName = (string)$this->_getConfigValue('template');
+
+        if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
+            return parent::getTemplate();
+        }
+
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }
         return parent::getTemplate();
+    }
+
+    /**
+     * @param $param
+     * @return mixed
+     */
+    protected function _getConfigValue($param)
+    {
+        return $this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey . '/' . $param,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
 }

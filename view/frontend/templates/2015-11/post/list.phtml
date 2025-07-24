@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList
+ */
+?>
+<?php
+$_postCollection = $block->getPostCollection();
+?>
+<?php if (!$_postCollection->count()): ?>
+    <div class="message info empty">
+        <div>
+            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+        </div>
+    </div>
+<?php else: ?>
+    <?= $block->getAdditionalHtml() ?>
+    <div class="post-list-wrapper">
+        <?php $iterator = 1; ?>
+        <ol class="post-list">
+            <?php foreach ($_postCollection as $_post): ?>
+                <?= $block->getPostHtml($_post) ?>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getChildHtml('addthisJs'); ?>
+<?php endif; ?>

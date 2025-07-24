@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Observer;
 
+use Magefan\Blog\Model\Config\Source\DesignVersion;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Data\Tree\Node;
 use Magento\Store\Model\ScopeInterface;
@@ -77,6 +78,10 @@ class LayoutLoadBeforeObserver implements ObserverInterface
                 }
             } else {
                 $layout->getUpdate()->addHandle('blog_css');
+            }
+
+            if ($this->config->getDesignVersion() == DesignVersion::VALOR ) {
+                $layout->getUpdate()->addHandle('blog_new_design');
             }
         }
     }

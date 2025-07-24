@@ -52,12 +52,31 @@ class TemplatePool
      */
     public function getTemplate(string $templateType, string $name):string
     {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         if (isset($this->templates[$templateType]) &&
             (is_array($this->templates[$templateType]) || $this->templates[$templateType] instanceof Countable)
         ) {
             foreach ($this->templates[$templateType] as $item) {
                 if (isset($item['value']) && $item['value'] == $name) {
+                    $dv = $objectManager->get(\Magefan\Blog\Model\Config::class)->getDesignVersion();
+                    if (isset($item['template' . $dv])) {
+                        return $item['template' . $dv];
+                    }
                     return $item['template'];
+                }
+            }
+        }
+        return '';
+    }
+
+    public function getTemplateClass(string $templateType, string $name):string
+    {
+        if (isset($this->templates[$templateType]) &&
+            (is_array($this->templates[$templateType]) || $this->templates[$templateType] instanceof Countable)
+        ) {
+            foreach ($this->templates[$templateType] as $item) {
+                if (isset($item['value']) && $item['value'] == $name && isset($item['class'])) {
+                    return $item['class'];
                 }
             }
         }

@@ -140,7 +140,7 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
      *
      * @return string
      */
-    public function getTemplate()
+    /*public function getTemplate()
     {
         $templateName = (string)$this->_scopeConfig->getValue(
             'mfblog/post_view/design/template',
@@ -150,7 +150,7 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
             $this->_template = $template;
         }
         return parent::getTemplate();
-    }
+    }*/
 
     /**
      * Retrieve 1 if display reading time is enabled

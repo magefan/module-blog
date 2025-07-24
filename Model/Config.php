@@ -20,6 +20,7 @@ class Config
      * Extension enabled config path
      */
     const XML_PATH_EXTENSION_ENABLED = 'mfblog/general/enabled';
+    const XML_PATH_BLOG_DESIGN_VERSION = 'mfblog/general/design_version';
     const GUEST_COMMENT = 'mfblog/post_view/comments/guest_comments';
     const NUMBER_OF_COMMENTS = 'mfblog/post_view/comments/number_of_comments';
     const NUMBER_OF_REPLIES = 'mfblog/post_view/comments/number_of_replies';
@@ -309,6 +310,18 @@ class Config
     {
         return (bool)$this->getConfig(
             self::XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI,
+            $storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return string
+     */
+    public function getDesignVersion($storeId = null)
+    {
+        return (string)$this->getConfig(
+            self::XML_PATH_BLOG_DESIGN_VERSION,
             $storeId
         );
     }

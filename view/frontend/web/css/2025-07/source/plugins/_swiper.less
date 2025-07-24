@@ -1,0 +1,72 @@
+.swiper {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    display: block;
+    .swiper-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        transition-property: transform;
+        transition-timing-function: initial;
+        box-sizing: content-box
+    }
+    .swiper-android .swiper-slide,
+    .swiper-ios .swiper-slide,
+    .swiper-wrapper {
+        transform: translate3d(0px, 0, 0)
+    }
+    &.swiper-horizontal {
+        touch-action: pan-y
+    }
+    .swiper-slide {
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition-property: transform;
+        display: block
+    }
+
+    /* Button */
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 12px;
+        margin: 0;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: #000;
+        .swiper-navigation-disabled & {
+            display: none !important;
+        }
+        &.swiper-button-disabled {
+            opacity: .35;
+            cursor: auto;
+            pointer-events: none;
+        }
+        &.swiper-button-hidden {
+            opacity: 0;
+            cursor: auto;
+            pointer-events: none
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform-origin: center;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?=
+$block->getLayout()
+    ->createBlock(get_class($block))
+    ->setData('template_type', 'article-list')
+    ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
+?>

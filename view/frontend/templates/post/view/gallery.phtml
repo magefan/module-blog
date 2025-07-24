@@ -12,6 +12,7 @@
  *
  * @var $block \Magefan\Blog\Block\Post\View\Gallery
  * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var $mfBreezeThemeDetection \Magefan\Community\Api\BreezeThemeDetectionInterface
  */
 ?>
 <?php
@@ -30,15 +31,52 @@
             </a>
         <?php } ?>
     </div>
-    <?php $script = "
-    require(['jquery', 'domReady!'], function($){
-        /* Deferer fancybox css loading */
-        $('head').append(
-            $(\"<link rel='stylesheet' href='" . $block->escapeUrl($viewFileUrl) . "' type='text/css' media='screen' />\")
-        );
-        /* Deferer fancybox js loading */
-        require(['Magefan_Blog/js/jquery.fancybox.min'], function(){});
-    });
-    "; ?>
+    <?php if ($mfBreezeThemeDetection->execute()) {
+        $script = "
+            var _deepestScroll = 0;
+    
+            function initFancyBox(firstCheck) {
+                if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
+                    return;
+                }
+    
+                _deepestScroll = document.documentElement.scrollTop;
+    
+                let fancyGallery = document.querySelector('.post-gallery');
+                let offset = 150;
+                let isFancyGalleryVisible = ((fancyGallery.getBoundingClientRect().top - offset) < window.innerHeight);
+    
+                if (isFancyGalleryVisible) {
+                    document.removeEventListener('scroll', initFancyBox);
+    
+                    const link = document.createElement('link')
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css';
+                    document.head.append(link);
+    
+                    const script = document.createElement('script')
+                    script.src = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js';
+                    document.head.append(script);
+                }
+            }
+    
+            initFancyBox(true);
+            document.addEventListener('scroll', initFancyBox);
+        ";
+    } else {
+        $script = "
+            require(['jquery', 'domReady!'], function($){
+                /* Deferer fancybox css loading */
+                $('head').append(
+                    $(\"<link rel='stylesheet' href='" . $block->escapeUrl($viewFileUrl) . "' type='text/css' media='screen' />\")
+                );
+                /* Deferer fancybox js loading */
+                require(['jquery', 'Magefan_Blog/js/jquery.fancybox.min'], function(){});
+            });
+        ";
+    } ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>
+
+
