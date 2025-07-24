@@ -68,7 +68,7 @@ class AuthorRepository implements AuthorRepositoryInterface
         AuthorResourceModel $authorResourceModel,
         AuthorCollectionInterfaceFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->authorFactory = $authorFactory;
         $this->authorResourceModel = $authorResourceModel;
@@ -128,6 +128,11 @@ class AuthorRepository implements AuthorRepositoryInterface
         $cacheKey = implode('_', func_get_args());
         if (!isset($this->instances[$cacheKey])) {
             $author = $this->authorFactory->create();
+
+            if ($storeId) {
+                $author->setStoreId($storeId);
+            }
+
             $this->authorResourceModel->load($author, $authorId);
             if (!$author->getId()) {
                 throw new NoSuchEntityException(__('Requested item doesn\'t exist'));

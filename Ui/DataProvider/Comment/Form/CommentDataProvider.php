@@ -61,7 +61,7 @@ class CommentDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         \Magento\Framework\UrlInterface $url,
         array $meta = [],
         array $data = [],
-        \Magento\Framework\Escaper $escaper = null
+        ?\Magento\Framework\Escaper $escaper = null
     ) {
         $this->collection = $commentCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;

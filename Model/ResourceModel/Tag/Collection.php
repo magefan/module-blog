@@ -16,6 +16,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * @inheritDoc
      */
+    protected $_eventPrefix = 'mfblog_tag_collection';
+
+    /**
+     * @inheritDoc
+     */
+    protected $_eventObject = 'blog_tag_collection';
+
+    /**
+     * @inheritDoc
+     */
     protected $_idFieldName = 'tag_id';
 
     /**
@@ -200,5 +210,13 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             );
         }
         parent::_renderFiltersBefore();
+    }
+
+    /**
+     * @return int
+     */
+    public function getStoreId():int
+    {
+        return (int)$this->_storeId;
     }
 }

@@ -96,20 +96,21 @@
                 </item>
             </argument>
         </field>
+        <field name="content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"/>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="source" xsi:type="string">tag</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">content</item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
-    <field name="content">
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string"/>
-                <item name="formElement" xsi:type="string">wysiwyg</item>
-                <item name="source" xsi:type="string">tag</item>
-                <item name="wysiwyg" xsi:type="boolean">true</item>
-                <item name="dataScope" xsi:type="string">content</item>
-                <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
-                <item name="sortOrder" xsi:type="number">30</item>
-            </item>
-        </argument>
-    </field>
     <fieldset name="display_settings">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">

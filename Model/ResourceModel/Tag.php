@@ -48,19 +48,21 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
-        $object->setTitle(
-            trim(($object->getTitle()))
-        );
-
-        $tag = $object->getCollection()
-            ->addFieldToFilter('title', $object->getTitle())
-            ->addFieldToFilter('tag_id', ['neq' => $object->getId()])
-            ->setPageSize(1)
-            ->getFirstItem();
-        if ($tag->getId()) {
-            throw new \Magento\Framework\Exception\LocalizedException(
-                __('The tag is already exist.')
+        if ($object->getTitle()) {
+            $object->setTitle(
+                trim(($object->getTitle()))
             );
+
+            $tag = $object->getCollection()
+                ->addFieldToFilter('title', $object->getTitle())
+                ->addFieldToFilter('tag_id', ['neq' => $object->getId()])
+                ->setPageSize(1)
+                ->getFirstItem();
+            if ($tag->getId()) {
+                throw new \Magento\Framework\Exception\LocalizedException(
+                    __('The tag is already exist.')
+                );
+            }
         }
 
         $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
@@ -180,7 +182,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns(['cp.tag_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
 
-     
+
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['tag_id']) && isset($row['identifier'])
@@ -337,5 +339,13 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         );
 
         return $adapter->fetchAll($select);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return 'tag';
     }
 }

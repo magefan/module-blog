@@ -114,13 +114,22 @@ abstract class AbstractManagement implements ManagementInterface
     public function update($id, $data)
     {
         try {
+            $data = json_decode($data, true);
             $item = $this->_itemFactory->create();
+
+            if (!empty($data['store_id'])) {
+                $item->setStoreId((int)$data['store_id']);
+                $item->setData('data_to_update', $data);
+            } else {
+                $item->setStoreId(0);
+            }
+
             $item->load($id);
 
             if (!$item->getId()) {
                 return $this->getError('Item not found');
             }
-            $data = json_decode($data, true);
+
             foreach ($this->_imagesMap as $key) {
                 if (empty($data[$key . '_name']) || empty($data[$key . '_content'])) {
                     unset($data[$key . '_name']);
@@ -162,12 +171,14 @@ abstract class AbstractManagement implements ManagementInterface
      * Get item by id
      *
      * @param  int $id
+     * @param  int|null $storeId
      * @return bool
      */
-    public function get($id)
+    public function get($id, $storeId = 0)
     {
         try {
             $item = $this->_itemFactory->create();
+            $item->setStoreId((int)$storeId);
             $item->load($id);
 
             if (!$item->getId()) {
@@ -190,6 +201,7 @@ abstract class AbstractManagement implements ManagementInterface
     {
         try {
             $item = $this->_itemFactory->create();
+            $item->setStoreId((int)$storeId);
             $item->getResource()->load($item, $id);
 
             if (!$item->isVisibleOnStore($storeId)) {
@@ -212,7 +224,8 @@ abstract class AbstractManagement implements ManagementInterface
      * @param $massage
      * @return false|string
      */
-    public function getError($massage) {
+    public function getError($massage)
+    {
         $data = ['error' => 'true'];
         
         $data['message'] = $massage ?? '';

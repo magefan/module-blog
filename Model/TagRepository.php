@@ -62,7 +62,7 @@ class TagRepository implements TagRepositoryInterface
         TagResourceModel $tagResourceModel,
         CollectionFactory $collectionFactory,
         SearchResultsFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor = null
+        ?CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->tagFactory = $tagFactory;
         $this->tagResourceModel = $tagResourceModel;
@@ -120,6 +120,11 @@ class TagRepository implements TagRepositoryInterface
     public function getById($tagId, $editMode = false, $storeId = null, $forceReload = false)
     {
         $tag = $this->tagFactory->create();
+
+        if ($storeId) {
+            $tag->setStoreId($storeId);
+        }
+
         $this->tagResourceModel->load($tag, $tagId);
         if (!$tag->getId()) {
             throw new NoSuchEntityException(__('Requested item doesn\'t exist'));

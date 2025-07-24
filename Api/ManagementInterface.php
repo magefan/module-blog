@@ -43,9 +43,10 @@ interface ManagementInterface
      *
      * @api
      * @param int $id
+     * @param int|null $storeId
      * @return bool
      */
-    public function get($id);
+    public function get($id, $storeId = null);
 
     /**
      * Get item by id and store id, only if item published

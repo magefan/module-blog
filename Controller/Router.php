@@ -123,8 +123,8 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magefan\Blog\Model\TagFactory $tagFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResponseInterface $response,
-        UrlResolverInterface $urlResolver = null,
-        Config $config = null
+        ?UrlResolverInterface $urlResolver = null,
+        ?Config $config = null
     ) {
 
         $this->actionFactory = $actionFactory;

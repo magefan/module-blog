@@ -94,8 +94,8 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magefan\Blog\Api\AuthorInterfaceFactory $userFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);

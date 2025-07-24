@@ -171,6 +171,7 @@
                     <item name="source" xsi:type="string">post</item>
                     <item name="wysiwyg" xsi:type="boolean">true</item>
                     <item name="dataScope" xsi:type="string">content</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
                     <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
                     <item name="sortOrder" xsi:type="number">50</item>
                 </item>
@@ -203,6 +204,8 @@
                     <item name="formElement" xsi:type="string">wysiwyg</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
                     <item name="dataScope" xsi:type="string">short_content</item>
                     <item name="sortOrder" xsi:type="number">60</item>
                 </item>
@@ -464,6 +467,7 @@
                         <item name="dataType" xsi:type="string">text</item>
                         <item name="label" xsi:type="string" translate="true">URL Key</item>
                         <item name="formElement" xsi:type="string">input</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
                         <item name="source" xsi:type="string">post</item>
                         <item name="dataScope" xsi:type="string">identifier</item>
                         <item name="sortOrder" xsi:type="number">10</item>
@@ -564,6 +568,7 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">OG Title</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">og_title</item>
                     <item name="sortOrder" xsi:type="number">10</item>

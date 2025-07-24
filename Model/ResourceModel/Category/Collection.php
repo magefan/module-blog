@@ -16,6 +16,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * @inheritDoc
      */
+    protected $_eventPrefix = 'mfblog_category_collection';
+
+    /**
+     * @inheritDoc
+     */
+    protected $_eventObject = 'blog_category_collection';
+
+    /**
+     * @inheritDoc
+     */
     protected $_idFieldName = 'category_id';
 
     /**
@@ -49,7 +59,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_storeManager = $storeManager;
@@ -264,5 +274,13 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $this->_toTree($i->getId(), $childs, $tree);
             }
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getStoreId():int
+    {
+        return (int)$this->_storeId;
     }
 }

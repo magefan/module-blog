@@ -61,7 +61,7 @@ class UpdateInfo extends \Magento\Backend\Block\Template
         \Magento\Framework\HTTP\Client\Curl $curl,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
         array $data = [],
-        GetModuleVersionInterface $getModuleVersion = null
+        ?GetModuleVersionInterface $getModuleVersion = null
     ) {
         $this->cacheManager = $context->getCache();
         $this->jsonHelper = $jsonHelper;
