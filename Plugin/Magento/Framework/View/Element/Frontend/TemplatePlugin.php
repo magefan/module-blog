@@ -37,20 +37,28 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
     private $config;
 
     /**
+     * @var \Magefan\Community\Api\HyvaThemeDetectionInterface
+     */
+    private $hyvaThemeDetection;
+
+    /**
      * @param Template\Context $context
      * @param File $fileDriver
      * @param Config $config
+     * @param \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         File $fileDriver,
         Config $config,
+        \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection,
         array $data = []
     )
     {
         $this->fileDriver = $fileDriver;
         $this->config = $config;
+        $this->hyvaThemeDetection = $hyvaThemeDetection;
         parent::__construct($context, $data);
     }
 
@@ -83,6 +91,24 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
 
             $template = self::deprecatedPaths[$newTemplate] ?? $newTemplate;
             $filePath = $this->getTemplateFile($template);
+
+            if ($this->hyvaThemeDetection->execute()) {
+                $modifiedPath = $result;
+                if ($this->config->getDesignVersion() == DesignVersion::VALOR){
+                    $modifiedPath = preg_replace('/\d{4}-(0[1-9]|1[0-2])/', $this->config->getDesignVersion(), $result);
+                }
+                if (strpos($modifiedPath, $this->config->getDesignVersion()) == false) {
+                    $modifiedPath = str_replace('::', '::' . $this->config->getDesignVersion() . '/', $modifiedPath);
+                }
+
+                $hyvaTemplatePath = str_replace('Magefan_Blog', 'Hyva_MagefanBlog', $modifiedPath);
+
+                $filePath = $this->getTemplateFile($hyvaTemplatePath);
+
+                if ($filePath && $this->fileDriver->isExists($filePath)) {
+                    return $hyvaTemplatePath;
+                }
+            }
 
             if ($filePath && $this->fileDriver->isExists($filePath)) {
                 $result = $template;
