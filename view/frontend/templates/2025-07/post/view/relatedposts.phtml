@@ -18,7 +18,7 @@
 <?php if ($block->displayPosts()) { ?>
     <?php $postCollection = $block->getPostCollection(); ?>
     <?php if (count($postCollection)) { ?>
-    <div class="block related related-posts">
+    <div class="block _related related-posts">
         <?php if (!$block->getHideTitle()) { ?>
         <div class="block-title title">
             <strong id="block-relatedposts-heading" role="heading" aria-level="2">
@@ -26,16 +26,14 @@
             </strong>
         </div>
         <?php } ?>
-        <ol class="block-content">
-            <?php foreach ($postCollection as $post) { ?>
-                <li class="item">
-                    <a class="post-item-link" title="<?= $block->escapeHtml($post->getTitle()) ?>"
-                       href="<?= $block->escapeUrl($post->getPostUrl()) ?>">
-                        <?= $block->escapeHtml($post->getTitle()) ?>
-                    </a>
-                </li>
-            <?php } ?>
-        </ol>
+        <div class="block-content">
+            <?=
+            $block->getLayout()
+                ->createBlock(get_class($block))
+                ->setData('template_type', 'article-default-list')
+                ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
+            ?>
+        </div>
     </div>
     <?php } ?>
 <?php } ?>

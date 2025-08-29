@@ -73,7 +73,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @return string
      */
     public function getBlockKey() {
-        return 'related-post';
+        return 'block-related-posts';
     }
     /**
      * Get relevant path to template

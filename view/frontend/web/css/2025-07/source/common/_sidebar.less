@@ -6,12 +6,10 @@
     > .block {
         padding: 20px 20px 24px;
         border: 1px solid var(--border-color-light);
-        &.widget {
-            margin: 0 0 20px;
-            border-radius: 12px;
-            &:last-child {
-                margin: 0;
-            }
+        border-radius: 12px;
+        margin: 0 0 20px;
+        &:last-child {
+            margin: 0;
         }
         .block-title {
             font-size: var(--block-title-font-size);
@@ -26,6 +24,7 @@
                 display: block;
                 font-size: var(--block-title-font-size);
                 line-height: var(--block-title-line-height);
+                font-weight: var(--block-title-font-weight);
             }
             strong {
                 display: inline-block;
@@ -36,13 +35,12 @@
         }
     }
 
-    // Grid
+    // Grid (All)
     .blog-articles.sidebar-article-grid {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
         grid-gap: 20px;
         .article-post {
-            //.article-post-vertical;
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -62,10 +60,38 @@
         }
     }
 
-    // List
+    // Grid No Image (All)
+    .blog-articles.sidebar-article-grid.article-post__no-image {
+        grid-template-columns: 100%;
+        grid-gap: var(--article--gap);
+        .blog-article {
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        .article-post__info {
+            padding: 0;
+        }
+    }
+    .blog-articles.sidebar-article-grid.article-post__no-content {
+        .article-post {
+            .article-post__image-container {
+                flex: 1 1;
+            }
+            .article-post__info {
+                .article-post__header {
+                    .article-post__title {}
+                }
+            }
+        }
+    }
+
+    // List (All)
     .blog-articles.sidebar-article-list {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
         row-gap: 20px;
         .article-post {
             .article-post-horizontal;
@@ -90,35 +116,43 @@
         }
     }
 
-    @media screen and (min-width: 768px) {
-        // Grid
-        .blog-articles.sidebar-article-grid {
-            grid-template-columns: 1fr;
+    // List No Image (All)
+    .blog-articles.sidebar-article-list.article-post__no-image {
+        .blog-article {
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            &:last-child {
+                border-bottom: none;
+            }
         }
-        // List
-        .blog-articles.sidebar-article-list {
-            grid-template-columns: 1fr;
-        }
-    }
-    @media screen and (min-width: 1101px) {}
-    @media screen and (max-width: 1100px) {
-        // List
-        .blog-articles.sidebar-article-list {
-            .article-post {
-                flex-direction: column;
-                .article-post__image-container {
-                    align-self: auto;
-                }
-                .article-post__info {
-                    padding: 15px 0 0;
-                }
+        .article-post {
+            .article-post__info {
+                padding: 0;
+            }
+            .article-post__data-wrap {
+                color: var(--post-title-color);
+                opacity: .6;
             }
         }
     }
+
+    @media screen and (min-width: 768px) {
+        // Grid
+        .blog-articles.sidebar-article-grid {
+            grid-template-columns: 100%;
+        }
+
+        // List
+        .blog-articles.sidebar-article-list {
+            grid-template-columns: 100%;
+        }
+    }
+    @media screen and (min-width: 1101px) {}
+    @media screen and (max-width: 1100px) {}
     @media screen and (max-width: 767px) {}
 
-    // Block Search
-    .widget.blog-search {
+    // Block Search (Magento)
+    .block.blog-search {
         padding: 0;
         margin-bottom: 20px;
         border: none;
@@ -192,8 +226,8 @@
         }
     }
 
-    // Block Category
-    .widget.block-categories {
+    // Block Category (All)
+    .block.block-categories {
         ul {
             list-style: none;
             margin: 0;
@@ -222,12 +256,11 @@
                     font-size: 16px;
                     line-height: 20px;
                     font-weight: 500;
-                    color: var(--post-title-color);
-                    opacity: .6;
+                    color: var(--link-sidebar-color);
                     text-decoration: none;
                     .transition;
                     &:hover {
-                        color: var(--secondary-color);
+                        color: var(--link-sidebar-color-hover);
                         opacity: 1;
                         text-decoration: none;
                         .transition;
@@ -237,12 +270,12 @@
         }
     }
 
-    // Archive
-    .widget.block-archive {
+    // Archive (All)
+    .block.block-archive {
         .block-content {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
             .item {
                 &:after {
                     content: none;
@@ -253,13 +286,11 @@
                     font-size: 16px;
                     line-height: 20px;
                     font-weight: 500;
-                    color: var(--post-title-color);
-                    opacity: .6;
+                    color: var(--link-sidebar-color);
                     text-decoration: none;
                     .transition;
                     &:hover {
                         color: var(--secondary-color);
-                        opacity: 1;
                         text-decoration: none;
                         .transition;
                     }
@@ -294,7 +325,7 @@
                         font-size: 16px;
                         line-height: 20px;
                         font-weight: 500;
-                        color: var(--post-title-color);
+                        color: var(--link-sidebar-color);
                         opacity: .6;
                         text-decoration: none;
                         .transition;
@@ -309,8 +340,8 @@
         }
     }
 
-    // RSS
-    .widget.block-rss {
+    // RSS (All)
+    .block.block-rss {
         .block-title {
             display: flex;
             align-items: center;
@@ -336,51 +367,8 @@
         }
     }
 
-    // Tag Cloud
-    .widget.block-tags {
-        .smallest {
-            font-size: 0.75em;
-        }
-        .small {
-            font-size: 1em;
-        }
-        .medium {
-            font-size: 1.25em;
-        }
-        .large {
-            font-size: 1.5em;
-        }
-        .largest {
-            font-size: 1.75em;
-        }
-        .tagcloud-hld {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            span {
-                display: inline-flex;
-                font-size: 16px;
-                line-height: 20px;
-            }
-        }
-        a {
-            padding: 6px 10px;
-            //color: var(--color-dark);
-            color: #727272;
-            border-radius: 4px;
-            border: 1px solid var(--border-color-light);
-            text-decoration: none;
-            .transition;
-            &:hover {
-                color: var(--secondary-color);
-                text-decoration: underline;
-                .transition;
-            }
-        }
-    }
-
-    // Tag Cloud
-    .widget.block-tagclaud {
+    // Tag Cloud (Magento)
+    .block.block-tagclaud {
         .tagclaud-hld {
             display: flex;
             flex-wrap: wrap;
@@ -407,7 +395,7 @@
         }
     }
 
-    // Related Products
+    // Related Products (Magento)
     .block-post-related-products {
         .product-items {
             display: grid;
@@ -424,178 +412,8 @@
         }
     }
 
-    // Related Products
-    .block_related-products {
-        .products {
-            display: grid;
-            grid-gap: 20px;
-            &.products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-                .product {
-                    flex-direction: column;
-                }
-            }
-            &.products-list {
-                grid-template-columns: 1fr;
-                .product-image {
-                    flex: 0 0 40%;
-                    min-width: 40%;
-                }
-            }
-            .product {
-                display: flex;
-                border: 1px solid #ebebeb;
-                position: relative;
-                &:hover {
-                    box-shadow: 2px 3px 10px 2px rgba(0, 0, 0, .1);
-                }
-                .product-image {
-                    padding: 10px;
-                    a {
-                        display: block;
-                        img {
-                            width: 100%;
-                            height: auto;
-                        }
-                    }
-                }
-                .product-info {
-                    flex-grow: 1;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 10px;
-                    height: 100%;
-                    .product-item-name a {
-                        display: block;
-                        font-weight: 600;
-                        line-height: 20px;
-                        color: var(--primary-color);
-                        text-decoration: none;
-                        &:after {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            bottom: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            z-index: 1;
-                        }
-                    }
-                    .product-item-price {
-                        .price-box {
-                            display: flex;
-                            align-items: center;
-                            .old-price {
-                                margin-right: 10px;
-                                .price {
-                                    font-size: 13px;
-                                    letter-spacing: 1px;
-                                    line-height: 1.5;
-                                    text-decoration: line-through;
-                                    opacity: .7;
-                                }
-                            }
-                            .special-price {
-                                .price {
-                                    font-size: 16px;
-                                    letter-spacing: 1px;
-                                    line-height: 1.5;
-                                }
-                            }
-                            .price-label {
-                                border: 0;
-                                clip: rect(0, 0, 0, 0);
-                                height: 1px;
-                                margin: -1px;
-                                overflow: hidden;
-                                padding: 0;
-                                position: absolute;
-                                width: 1px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .widget.block-recent-posts,
-    .widget.block-featured-posts,
-    .widget.block-popular-posts {
-        &.block-posts-list {
-            &.modern-template {
-                .post-item {
-                    display: flex;
-                    gap: 15px;
-                    //margin-bottom: 20px;
-                    padding-bottom: 8px;
-                    margin-bottom: 24px;
-                    border-bottom: 1px solid var(--border-color-light);
-                    &:last-child {
-                        border: none;
-                        margin: 0;
-                    }
-                    .image-container {
-                        flex: 0 0 33.333333%;
-                        width: 33.333333%;
-                        align-self: flex-start;
-                        display: block;
-                        order: 0;
-                        .image-wrap {
-                            display: block;
-                            position: relative;
-                            overflow: hidden;
-                            &._4x3 {
-                                padding-bottom: 70%;
-                            }
-                            .bg-img {
-                                display: block;
-                                position: absolute;
-                                width: 100%;
-                                height: 100%;
-                                max-width: 100%;
-                                background-size: cover;
-                                background-position: center;
-                            }
-                        }
-                        .animation-type-zoom {
-                            .transition;
-                        }
-                    }
-                }
-                .post-title a {
-                    font-size: 16px;
-                    line-height: 20px;
-                    font-weight: 600;
-                    color: var(--post-title-color);
-                    &:hover {
-                        color: var(--post-title-color-hover);
-                    }
-                }
-                .block-date {
-                    font-size: 14px;
-                    line-height: 20px;
-                }
-            }
-        }
-
-        .block-info {
-            .post-title {
-                .sidebar-post-title;
-            }
-            .block-date {
-                .sidebar-post-date;
-            }
-            .read-more {
-                display: none;
-            }
-        }
-    }
-
-    // Author List
-    .widget.block-authors {
+    // Author List (All)
+    .block.block-authors {
         padding: 12px 20px;
         .block-title {
             display: flex;
@@ -620,15 +438,17 @@
         }
     }
 
-    // Custom
-    .widget.blog-custom {
+    // Custom (All)
+    .block.blog-custom {
         border: none;
         padding: 0;
         overflow: hidden;
-        line-height: 0;
+        img {
+            line-height: 0;
+        }
     }
 
-    // Contents
+    // Contents (Magento)
     .block-contents {
         .block-content {
             ol {
@@ -681,20 +501,19 @@
     }
 }
 
+// Animations
 .headShake {
     -webkit-animation-timing-function: ease-in-out;
     animation-timing-function: ease-in-out;
     -webkit-animation-name: headShake;
     animation-name: headShake;
 }
-
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
-
 @keyframes headShake {
     0% {
         -webkit-transform: translateX(0);

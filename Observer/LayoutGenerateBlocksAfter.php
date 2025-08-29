@@ -12,6 +12,8 @@ use Magefan\Blog\Model\Config\Source\DesignVersion;
 use Magento\Framework\Event\ObserverInterface;
 use Magefan\Blog\Model\Config as BlogConfig;
 use Magefan\Community\Api\HyvaThemeDetectionInterface;
+use Magento\Framework\View\Asset\Repository;
+use Magento\Framework\Filesystem\Driver\File;
 
 class LayoutGenerateBlocksAfter implements ObserverInterface
 {
@@ -31,18 +33,34 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
     private $hyvaThemeDetection;
 
     /**
+     * @var Repository
+     */
+    private $assetRepo;
+
+    /**
+     * @var File
+     */
+    private $fileDriver;
+
+    /**
      * @param \Magento\Framework\View\Page\Config $pageConfig
      * @param BlogConfig $blogConfig
      * @param HyvaThemeDetectionInterface $hyvaThemeDetection
+     * @param Repository $assetRepo
+     * @param File $fileDriver
      */
     public function __construct(
         \Magento\Framework\View\Page\Config $pageConfig,
         BlogConfig $blogConfig,
-		HyvaThemeDetectionInterface $hyvaThemeDetection
+		HyvaThemeDetectionInterface $hyvaThemeDetection,
+        Repository $assetRepo,
+        File $fileDriver
     ) {
         $this->pageConfig = $pageConfig;
         $this->blogConfig = $blogConfig;
 		$this->hyvaThemeDetection = $hyvaThemeDetection;
+        $this->assetRepo = $assetRepo;
+        $this->fileDriver = $fileDriver;
     }
 
     /**
@@ -129,9 +147,19 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
             }
 
             if ('blog_author_view' == $fan) {
-                $this->pageConfig->addPageAsset('Magefan_Blog::css/2025-07/style-blog-author.css');
+                try {
+                    $template = 'Magefan_BlogExtra::css/2025-07/style-blog-author.css';
+                    $asset = $this->assetRepo->createAsset($template);
+                    $filePath = $asset->getSourceFile();
+                    if ($this->fileDriver->isExists($filePath)) {
+                        $this->pageConfig->addPageAsset($template);
+                        $this->pageConfig->getAssetCollection()->remove('Magefan_Blog::css/2025-07/style-blog-post-list.css');
+                    }
+                } catch (\Exception $e) {
+                    // do nothing
+                }
             }
-
+            
             if ('blog_post_view' == $fan) {
                 $this->pageConfig->addPageAsset('Magefan_Blog::css/2025-07/style-blog-post.css');
                 $this->pageConfig->getAssetCollection()->remove('Magefan_Blog::css/comments.css');

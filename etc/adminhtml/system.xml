@@ -189,7 +189,13 @@
                         <label>Display Related Products</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-
+                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\RelatedProductTemplate</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
                     <field id="number_of_products" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Number of Products</label>
                         <depends>

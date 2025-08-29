@@ -12,19 +12,20 @@
     --article-list-row-gap: 30px;
     --article-list-column-gap: 30px;
     row-gap: var(--article--gap);
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
 }
 .article-grid {
     --article-grid-gap: 30px;
     --article-grid-row-gap: 30px;
     --article-grid-column-gap: 30px;
     grid-gap: var(--article--gap);
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
 }
 
 @media screen and (min-width: 768px) {
     .blog-articles.article-list {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
+        grid-gap: var(--article--gap);
     }
     .blog-articles.article-grid {
         grid-template-columns: repeat(auto-fill, minmax(calc(~'(100% / 2) - var(--article--gap) * (2 / 2)'), 1fr));
@@ -38,6 +39,4 @@
     }
 }
 
-@media screen and (max-width: 767px) {
-
-}
+@media screen and (max-width: 767px) {}

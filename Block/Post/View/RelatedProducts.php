@@ -36,21 +36,29 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     protected $_moduleManager;
 
     /**
+     * @var \Magefan\Blog\Model\TemplatePool
+     */
+    protected $templatePool;
+
+    /**
      * Related products block construct
      * @param \Magento\Catalog\Block\Product\Context $context
      * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility
      * @param \Magento\Framework\Module\Manager $moduleManager
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $data
+     * @param \Magefan\Blog\Model\TemplatePool $templatePool
      */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\Framework\Module\Manager $moduleManager,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        \Magefan\Blog\Model\TemplatePool $templatePool,
         array $data = []
     ) {
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_moduleManager = $moduleManager;
+        $this->templatePool = $templatePool;
         parent::__construct($context, $data);
     }
 
@@ -104,6 +112,14 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
             \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_ENABLED,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    public function isNewDesign()
+    {
+        return ($this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_BLOG_DESIGN_VERSION,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        ) == \Magefan\Blog\Model\Config\Source\DesignVersion::VALOR);
     }
 
     /**
@@ -223,5 +239,25 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
         $html = str_replace('product-item" style="display: none;"', 'product-item"', $html);
 
         return $html;
+    }
+
+    /**
+     * Get relevant path to template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
+            return parent::getTemplate();
+        }
+        $templateName = (string)$this->_scopeConfig->getValue(
+            'mfblog/post_view/related_products/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template = $this->templatePool->getTemplate('blog_post_view_related_product', $templateName)) {
+            $this->_template = $template;
+        }
+        return parent::getTemplate();
     }
 }

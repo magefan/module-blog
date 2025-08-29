@@ -59,6 +59,7 @@
                 </related_posts>
                 <related_products>
                     <enabled>1</enabled>
+                    <template/>
                     <number_of_products>5</number_of_products>
                     <autorelated_enabled>0</autorelated_enabled>
                     <autorelated_black_words/>

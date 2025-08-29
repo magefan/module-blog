@@ -9,12 +9,13 @@
         $style = $matches[0] ?? '';
     }
     $displayImage = $this->getData('display_image') ?? true;
+   
 ?>
 <?php
     $_postCollection = $block->getPostCollection();
 ?>
 <?php if ($_postCollection->count() && $templateType): ?>
-    <div class="blog-articles <?=trim($templateType)?>">
+    <div class="blog-articles <?=trim(!$displayImage ? $templateType . ' article-post__no-image' : $templateType)?>">
         <?php foreach ($_postCollection as $_post):
             $entity = $_post
             ?>
@@ -22,7 +23,7 @@
             <div class="article-post">
 
                 <?php /* Post Image Container */ ?>
-                <?php if (($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
+                <?php if (!in_array($templateType,['article-default-list']) && ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
                 <div class="article-post__image-container animation-type--zoom">
                     <?php
                         $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
@@ -57,7 +58,8 @@
                         'article-templates-5-2', 'article-templates-5-3', 'article-templates-5-4',
 						'article-items',
                         'article-slider',
-                        'sidebar-article-grid', 'sidebar-article-list'
+                        'sidebar-article-grid', 'sidebar-article-list',
+                        'article-default-list'
                     ])): ?>
                     <div class="article-post__category">
                         <?php foreach ($preparedCategories as $prepareCategory): ?>
@@ -158,7 +160,10 @@
 					'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
 					'article-templates-5-1',
                     'article-items',
-                    'sidebar-article-grid', 'sidebar-article-list'])):
+					'article-slider',
+                    'sidebar-article-grid', 'sidebar-article-list',
+                    'article-default-list'
+                ])):
                     ?>
                 <div class="article-post__info">
                     <div class="article-post__header">
@@ -168,7 +173,9 @@
 
                         <?php /* Not Visible */ ?>
                         <?php if (!in_array($templateType, [
-							'article-items'
+							'article-items',
+                            'article-slider',
+                            'article-default-list'
                         ])): ?>
                             <div class="article-post__data-wrap">
                                 <?php if (!in_array($templateType, [
@@ -203,7 +210,8 @@
 
                             <?php /* Not Visible */ ?>
                             <?php if (!in_array($templateType, [
-                                'sidebar-article-grid', 'sidebar-article-list'
+                                'sidebar-article-grid', 'sidebar-article-list',
+                                'article-default-list'
                             ])): ?>
 
                             <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
@@ -226,7 +234,8 @@
 						 'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
                          'article-items',
                          'article-slider',
-                         'sidebar-article-grid', 'sidebar-article-list'
+                         'sidebar-article-grid', 'sidebar-article-list',
+                         'article-default-list'
                     ])): ?>
                         <div class="article-post__content">
                             <?= $entity->getShortFilteredContentWithoutImages() ?>
@@ -241,7 +250,8 @@
                             'article-templates-5-2', 'article-templates-5-3',
                             'article-items',
                             'article-slider',
-                            'sidebar-article-grid', 'sidebar-article-list'
+                            'sidebar-article-grid', 'sidebar-article-list',
+                            'article-default-list'
                         ])):
                         ?>
                         <div class="article-post__footer">
@@ -280,7 +290,7 @@
     <?php if ($style) { ?>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                var f = '<?= $block->getViewFileUrl('Magefan_BlogExtra::css/style-' . $style . '.css') ?>';
+                var f = '<?= $block->getViewFileUrl('Magefan_BlogExtra::css/2025-07/style-' . $style . '.css') ?>';
 
                 if (!document.querySelector('link[href="' + f + '"]')) {
                     var link = document.createElement('link');

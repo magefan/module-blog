@@ -101,9 +101,16 @@
                         <item name="template2025-07" xsi:type="string">Magefan_Blog::2025-07/post/view/relatedposts.phtml</item>
                     </item>
                 </item>
-                <item name="blog_post_sidebar_posts" xsi:type="array">
+                <item name="blog_post_view_related_product" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
+                        <item name="value" xsi:type="string"></item>
+                        <item name="template" xsi:type="string"></item>
+                    </item>
+                </item>
+                <item name="blog_post_sidebar_posts" xsi:type="array">
+                    <item name="default" xsi:type="array">
+                        <item name="label" xsi:type="string">Use System Settings (List)</item>
                         <item name="value" xsi:type="string"></item>
                         <item name="template" xsi:type="string"></item>
                         <item name="class" xsi:type="string">sidebar-article-list</item>
@@ -120,6 +127,11 @@
     <virtualType name="Magefan\Blog\Model\Config\Source\RelatedPostTemplate" type="Magefan\Blog\Model\Config\Source\Template">
         <arguments>
             <argument name="templateType" xsi:type="string">blog_post_view_related_post</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magefan\Blog\Model\Config\Source\RelatedProductTemplate" type="Magefan\Blog\Model\Config\Source\Template">
+        <arguments>
+            <argument name="templateType" xsi:type="string">blog_post_view_related_product</argument>
         </arguments>
     </virtualType>
     <virtualType name="Magefan\Blog\Model\Config\Source\SidebarPostsTemplate" type="Magefan\Blog\Model\Config\Source\Template">

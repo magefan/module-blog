@@ -1,21 +1,23 @@
-// For All Templates Post Bottom
-.article-items {
-    .grid-template-two-columns;
-    gap: 12px;
-    .article-post {
-        .article-post-vertical;
-        .small-title;
-    }
-    @media (min-width: 990px) {
-        .grid-template-tree-columns;
+// For All Templates without content and date
 
+// For All Templates Post Bottom (Default List Shopify)
+.blog-articles.article-default-list {
+    gap: 16px;
+    padding-left: 40px;
+    .blog-article {
+        display: list-item;
+        list-style: disc;
     }
-    @media (min-width: 1199px) {
-        .grid-template-for-columns;
+    .article-post {
+        .small-title;
+        a {
+            opacity: .8;
+            text-decoration: underline;
+        }
     }
 }
 
-// Related Post Default
+// Related Post Default - Product Page, Post Bottom. (List Magento)
 .block.related.related-posts {
     .block-content {
         list-style: disc;
@@ -39,29 +41,24 @@
     }
 }
 
-// Related Post
-.block.block-related-posts {
-    .article-items {
-        .grid-template-two-columns;
-        column-gap: 12px;
-        .article-post {
-            .article-post-vertical;
-            .xsmall-title;
-        }
-        @media (min-width: 990px) {
-            .grid-template-tree-columns;
-
-        }
-        @media (min-width: 1199px) {
-            .grid-template-for-columns;
-        }
+// For All Templates - Product Page, Post Bottom (Grid)
+.blog-articles.article-items {
+    .grid-template-two-columns;
+    gap: 12px;
+    .article-post {
+        .article-post-vertical;
+        .small-title;
+    }
+    @media (min-width: 990px) {
+        .grid-template-tree-columns;
+    }
+    @media (min-width: 1199px) {
+        .grid-template-for-columns;
     }
 }
 
-
-// Related Post Carousel
-.block.related.swiper-blog-post {
-
+// Related Posts Carousel - Product Page, Post Bottom.
+.block.swiper-blog-post {
     // Block Title
     .block-title-wrapper {
         display: flex;
@@ -75,9 +72,51 @@
             flex-grow: 1;
             justify-content: flex-end;
             height: 55px;
+            &.top-nav {
+                position: static;
+            }
+            .swiper-button-next,
+            .swiper-button-prev {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                padding: 12px;
+                margin: 0;
+                background: none;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                color: #000;
+                opacity: 0.8;
+                .swiper-navigation-disabled & {
+                    display: none !important;
+                }
+                &.swiper-button-disabled {
+                    opacity: .35;
+                    cursor: auto;
+                    pointer-events: none;
+                }
+                &.swiper-button-hidden {
+                    opacity: 0;
+                    cursor: auto;
+                    pointer-events: none
+                }
+                svg {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    transform-origin: center;
+                }
+                &:hover {
+                    opacity: 1;
+                }
+            }
         }
     }
 
+    // Block Content
     .block-content {
         .image-container {
             position: relative;
@@ -95,9 +134,8 @@
                 }
             }
         }
-
         .post-info {
-            padding: 16px 0 0;
+            padding: 16px 0;
             .post-title {
                 line-height: 20px;
                 padding: 0;
@@ -116,27 +154,5 @@
                 }
             }
         }
-
-
-        /* Post Title */
-        //.post-info .post-title {
-        //    font-size: 16px;
-        //    line-height: 24px;
-        //    font-weight: 400;
-        //    margin: 0;
-        //    a {
-        //        font-size: 16px;
-        //        line-height: 24px;
-        //        font-weight: 400;
-        //        margin: 0;
-        //
-        //    }
-        //}
-
     }
-
 }
-
-
-
-
