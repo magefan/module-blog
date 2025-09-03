@@ -574,6 +574,12 @@
                             -webkit-box-orient: vertical;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            color: var(--post-title-color);
+                            text-decoration: none;
+                            &:hover {
+                                color: var(--post-title-color-hover);
+                                text-decoration: none;
+                            }
                         }
                     }
                     .price-box {
@@ -663,22 +669,24 @@
                 .hidden;
             }
             .special-price {
-                color: #b91c1c;
+                order: -2;
+                margin-right: 10px;
                 .price {
                     font-size: 16px;
                     letter-spacing: 1px;
                     line-height: 1.5;
-                    padding-right: 5px;
+                    color: #b91c1c;
                 }
             }
             .old-price {
-                margin-right: 10px;
+                order: -1;
                 .price {
                     font-size: 13px;
                     letter-spacing: 1px;
                     line-height: 1.5;
                     text-decoration: line-through;
                     opacity: 0.7;
+                    color: #6b7280;
                 }
             }
         }
