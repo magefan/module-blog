@@ -21,7 +21,8 @@ class SocialNetworks implements \Magento\Framework\Option\ArrayInterface
             ['value' => 'Facebook', 'label' => 'Facebook'],
             ['value' => 'Twitter', 'label' => 'X (Twitter)'],
             ['value' => 'Pinterest', 'label' => 'Pinterest'],
-            ['value' => 'LinkedIn', 'label' => 'LinkedIn']
+            ['value' => 'LinkedIn', 'label' => 'LinkedIn'],
+            ['value' => 'BlueSky', 'label' => 'BlueSky']
         ];
     }
 
