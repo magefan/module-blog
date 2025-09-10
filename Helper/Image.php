@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -88,7 +91,7 @@ class Image extends AbstractHelper
      * @param $baseFile
      * @return $this
      */
-    public function init($baseFile)
+    public function init($baseFile): static
     {
         $this->_newFile = '';
         $this->_baseFile = $baseFile;
@@ -96,11 +99,12 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param $width
-     * @param null $height
+     * @param string $width
+     * @param $height
+     * @param $keepFrame
      * @return $this
      */
-    public function resize($width, $height = null, $keepFrame = null)
+    public function resize(string $width, $height = null, $keepFrame = null): static
     {
         if ($this->_baseFile) {
             $pathinfo = pathinfo(($this->_baseFile));
@@ -155,7 +159,7 @@ class Image extends AbstractHelper
      * @param $height
      * @return $this
      */
-    protected function resizeBaseFile($width, $height, $keepFrame)
+    protected function resizeBaseFile($width, $height, $keepFrame): static
     {
         if (!$this->fileExists($this->_baseFile)) {
             $this->_baseFile = null;
@@ -197,7 +201,7 @@ class Image extends AbstractHelper
      * @return string
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function __toString()
+    public function __toString(): string
     {
         $url = "";
         if ($this->_baseFile) {

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\ResourceModel\Post;
 
 /**
@@ -81,7 +83,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\Event\ManagerInterface                    $eventManager,
         \Magento\Framework\Stdlib\DateTime\DateTime                  $date,
         \Magento\Store\Model\StoreManagerInterface                   $storeManager,
-                                                                     $connection = null,
+                                                                     ?\Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb        $resource = null,
         ?\Magefan\Blog\Api\CategoryRepositoryInterface               $categoryRepository = null
     )
@@ -170,7 +172,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param boolean $withAdmin
      * @return $this
      */
-    public function addStoreFilter($store, $withAdmin = true)
+    public function addStoreFilter($store, $withAdmin = true): static
     {
         if ($store === null) {
             return $this;
@@ -231,7 +233,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param array|int|string $category
      * @return $this
      */
-    public function addPostsFilter($postIds)
+    public function addPostsFilter($postIds): void
     {
         if (!is_array($postIds)) {
             $postIds = explode(',', (string)$postIds);
@@ -351,7 +353,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param int $month
      * @return $this
      */
-    public function addArchiveFilter($year, $month)
+    public function addArchiveFilter($year, $month): static
     {
         $this->getSelect()
             ->where('YEAR(main_table.publish_time) = ?', $year);
@@ -367,7 +369,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param string $term
      * @return $this
      */
-    public function addSearchFilter($term)
+    public function addSearchFilter($term): static
     {
         if (!$term) {
             $term = '__EMPTY_SEARCH_VALUE__';
@@ -452,7 +454,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param array|int|string|\Magefan\Blog\Model\Tag $tag
      * @return $this
      */
-    public function addTagFilter($tag)
+    public function addTagFilter($tag): static
     {
         if (!$this->getFlag('tag_filter_added')) {
             if ($tag instanceof \Magefan\Blog\Model\Tag) {
@@ -530,7 +532,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param array|int|\Magefan\Blog\Model\Author $author
      * @return $this
      */
-    public function addAuthorFilter($author)
+    public function addAuthorFilter($author): static
     {
         if (!$this->getFlag('author_filter_added')) {
             if ($author instanceof \Magefan\Blog\Model\Author) {
@@ -575,7 +577,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param $product
      * @return $this
      */
-    public function addRelatedProductFilter($product)
+    public function addRelatedProductFilter($product): static
     {
         if (!$this->getFlag('author_filter_added')) {
             if ($product instanceof \Magento\Catalog\Api\Data\ProductInterface) {

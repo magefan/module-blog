@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 /**
@@ -39,7 +41,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return string
      */
-    public function getCollectionOrderField()
+    public function getCollectionOrderField(): string
     {
         return 'views_count';
     }
@@ -48,7 +50,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve true if display the post image is enabled in the config
      * @return bool
      */
-    public function getDisplayImage()
+    public function getDisplayImage(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/display_image',

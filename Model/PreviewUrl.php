@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 /**
@@ -36,7 +38,7 @@ class PreviewUrl extends Url
      * @param  string $controllerName
      * @return string
      */
-    public function getUrl($object, $controllerName)
+    public function getUrl($object, $controllerName): string
     {
         $storeIds = $object->getStoreIds();
         if (count($storeIds)) {

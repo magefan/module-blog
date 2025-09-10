@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column;
 
 /**
@@ -18,7 +20,7 @@ class Statuses extends \Magento\Backend\Block\Widget\Grid\Column
      *
      * @return array
      */
-    public function getFrameCallback()
+    public function getFrameCallback(): array
     {
         return [$this, 'decorateStatus'];
     }
@@ -32,7 +34,7 @@ class Statuses extends \Magento\Backend\Block\Widget\Grid\Column
      * @param bool $isExport
      * @return string
      */
-    public function decorateStatus($value, $row, $column, $isExport)
+    public function decorateStatus(string $value, $row, $column, $isExport): string
     {
         if ($row->getIsActive() || $row->getStatus()) {
             if ($row->getStatus() == 2) {

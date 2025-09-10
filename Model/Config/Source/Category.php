@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
@@ -66,7 +68,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {
@@ -80,7 +82,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
      * @param  int $n
      * @return string
      */
-    protected function _getSpaces($n)
+    protected function _getSpaces($n): string
     {
         $s = '';
         for ($i = 0; $i < $n; $i++) {

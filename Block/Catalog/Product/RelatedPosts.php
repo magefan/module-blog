@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Catalog\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
@@ -50,7 +52,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve true if Display Related Posts enabled
      * @return boolean
      */
-    public function displayPosts()
+    public function displayPosts(): bool
     {
         return (bool) $this->_scopeConfig->getValue(
             'mfblog/product_page/related_posts_enabled',

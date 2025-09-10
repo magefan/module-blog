@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\ResourceModel;
 
 class PageIdentifierGenerator
@@ -37,7 +39,7 @@ class PageIdentifierGenerator
     /**
      * @param $identifier
      */
-    public function formatIdentifier($identifier)
+    public function formatIdentifier($identifier): string
     {
         $identifier = (string)$identifier;
         $from = [
@@ -70,7 +72,7 @@ class PageIdentifierGenerator
         return $identifier;
     }
 
-    public function generate(\Magento\Framework\DataObject $object)
+    public function generate(\Magento\Framework\DataObject $object): void
     {
         if ($object->getData('identifier')) {
             return;

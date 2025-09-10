@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 /**
@@ -45,7 +47,7 @@ class Search extends \Magento\Framework\View\Element\Template
      * Retrieve query
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return urldecode($this->getRequest()->getParam('q', ''));
     }

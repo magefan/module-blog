@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Plugin\Magento\Framework\App\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;

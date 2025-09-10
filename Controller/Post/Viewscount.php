@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Post;
 
 /**
@@ -18,7 +20,7 @@ class Viewscount extends View
      * @return $this|\Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
-    public function execute()
+    public function execute(): void
     {
         $post = parent::_initPost();
         if ($post && $post->getId()) {

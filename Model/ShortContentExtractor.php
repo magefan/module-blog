@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\ShortContentExtractorInterface;
@@ -162,7 +164,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         $textLength = 0;
 
-        $processNode = function ($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode) {
+        $processNode = function ($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode): void {
 
             if ($pageBreakInserted) {
                 return;

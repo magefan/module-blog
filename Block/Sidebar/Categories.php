@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 use Magento\Store\Model\ScopeInterface;
@@ -91,7 +93,7 @@ class Categories extends Template implements IdentityInterface
      * Retrieve categories maximum depth
      * @return int
      */
-    public function maxDepth()
+    public function maxDepth(): int
     {
         $maxDepth = $this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/max_depth',

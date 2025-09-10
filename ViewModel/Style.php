@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\ViewModel;
 
 use Magento\Framework\View\Asset\Source;
@@ -55,7 +57,7 @@ class Style implements \Magento\Framework\View\Element\Block\ArgumentInterface
     /**
      * @return null|string
      */
-    public function getStyle($file)
+    public function getStyle($file): string
     {
         if (strpos($file, 'bootstrap-4.4.1-custom-min.css') !== false && !$this->config->getIncludeBootstrapCustomMini()) {
             return '';

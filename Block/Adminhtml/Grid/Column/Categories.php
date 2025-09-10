@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column;
 
 /**
@@ -16,7 +18,7 @@ class Categories extends \Magento\Backend\Block\Widget\Grid\Column
     /**
      * @return void
      */
-    public function _construct()
+    public function _construct(): void
     {
         parent::_construct();
         $this->_rendererTypes['category'] = \Magefan\Blog\Block\Adminhtml\Grid\Column\Render\Category::class;

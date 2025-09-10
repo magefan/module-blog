@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -139,7 +142,7 @@ class PostRepository implements PostRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Post $post)
+    public function delete(Post $post): bool
     {
         try {
             $this->postResourceModel->delete($post);
@@ -160,7 +163,7 @@ class PostRepository implements PostRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($postId)
+    public function deleteById($postId): bool
     {
         return $this->delete($this->getById($postId));
     }

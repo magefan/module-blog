@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
-
 namespace Magefan\Blog\Cron;
 
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory as PostCollectionFactory;
@@ -57,7 +59,7 @@ class ReSaveExistingPosts
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         if (!$this->config->isEnabled()) {
             return;

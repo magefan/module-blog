@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
-
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 class PermalinkSettingsMessage extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
@@ -13,7 +15,7 @@ class PermalinkSettingsMessage extends \Magefan\Community\Block\Adminhtml\System
      * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return string
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element): string
     {
 
         $html = '<div id="advencedNotification" style="display:none;padding:10px;background-color:#fffbbb;border:1px solid #ddd;margin-bottom:7px;">

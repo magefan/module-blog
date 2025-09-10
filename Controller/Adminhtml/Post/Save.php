@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Adminhtml\Post;
 
 use Magefan\Blog\Model\Post;
@@ -69,7 +71,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         if (!empty($data['media_gallery']['images'])) {
             $images = $data['media_gallery']['images'];
-            usort($images, function ($imageA, $imageB) {
+            usort($images, function ($imageA, $imageB): int {
                 if (!isset($imageA['position'])) {
                     $imageA['position'] = 0;
                 }

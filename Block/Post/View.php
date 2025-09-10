@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -156,7 +159,7 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
      * Retrieve 1 if display reading time is enabled
      * @return int
      */
-    public function readingTimeEnabled()
+    public function readingTimeEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_view/reading_time/enabled',

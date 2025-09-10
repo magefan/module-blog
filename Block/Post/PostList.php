@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Post;
 
 use Magento\Store\Model\ScopeInterface;
@@ -90,7 +92,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return string
      */
-    protected function getPostTemplateType()
+    protected function getPostTemplateType(): string
     {
         return (string)$this->_scopeConfig->getValue(
             'mfblog/post_list/template',

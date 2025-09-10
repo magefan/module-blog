@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 /**
@@ -17,7 +19,7 @@ trait Widget
      * Retrieve block sort order
      * @return int
      */
-    public function getSortOrder()
+    public function getSortOrder(): int
     {
         if (!$this->hasData('sort_order')) {
             $this->setData('sort_order', $this->_scopeConfig->getValue(

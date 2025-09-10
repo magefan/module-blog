@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -133,7 +136,7 @@ class CommentRepository implements CommentRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Comment $comment)
+    public function delete(Comment $comment): bool
     {
         try {
             $this->commentResourceModel->delete($comment);
@@ -154,7 +157,7 @@ class CommentRepository implements CommentRepositoryInterface
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($commentId)
+    public function deleteById($commentId): bool
     {
         return $this->delete($this->getById($commentId));
     }

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Rss;
 
 use Magento\Store\Model\ScopeInterface;
@@ -61,7 +63,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param  \Magefan\Blog\Model\Post $post
      * @return string
      */
-    public function getPostContent($post)
+    public function getPostContent($post): string|array|null
     {
         $content = $post->getFilteredContent();
         /* Remove iframes */

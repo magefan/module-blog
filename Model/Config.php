@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -175,7 +177,7 @@ class Config
      *
      * @return bool
      */
-    public function isEnabled($storeId = null)
+    public function isEnabled($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_PATH_EXTENSION_ENABLED,
@@ -188,7 +190,7 @@ class Config
      *
      * @return bool
      */
-    public function isRelatedPostsEnabled($storeId = null)
+    public function isRelatedPostsEnabled($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_RELATED_POSTS_ENABLED,
@@ -201,7 +203,7 @@ class Config
      *
      * @return bool
      */
-    public function isRelatedProductsEnabled($storeId = null)
+    public function isRelatedProductsEnabled($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_RELATED_PRODUCTS_ENABLED,
@@ -228,7 +230,7 @@ class Config
      * @param $pageType
      * @return bool
      */
-    public function getDisplayCanonicalTag($pageType)
+    public function getDisplayCanonicalTag($pageType): bool
     {
 
         if ($this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR)) {
@@ -244,7 +246,7 @@ class Config
      * @param null $storeId
      * @return bool
      */
-    public function isBlogCssIncludeOnAll($storeId = null)
+    public function isBlogCssIncludeOnAll($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_INCLUDE_BLOG_CSS_ALL_PAGES,
@@ -256,7 +258,7 @@ class Config
      * @param null $storeId
      * @return bool
      */
-    public function isBlogCssIncludeOnHome($storeId = null)
+    public function isBlogCssIncludeOnHome($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_INCLUDE_BLOG_CSS_HOME_PAGE,
@@ -268,7 +270,7 @@ class Config
      * @param null $storeId
      * @return bool
      */
-    public function isBlogCssIncludeOnProduct($storeId = null)
+    public function isBlogCssIncludeOnProduct($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES,
@@ -305,7 +307,7 @@ class Config
      * @param $storeId
      * @return bool
      */
-    public function getIncludeBootstrapCustomMini($storeId = null)
+    public function getIncludeBootstrapCustomMini($storeId = null): bool
     {
         return (bool)$this->getConfig(
             self::XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI,

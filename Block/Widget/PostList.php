@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Widget;
 
 /**
@@ -57,12 +59,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         return $this->_postCollection;
     }
 
-    public function getPostedOn($post, $format = 'Y-m-d H:i:s')
+    public function getPostedOn($post, $format = 'Y-m-d H:i:s'): string
     {
         return date($format, strtotime((string)$post->getData('publish_time')));
     }
     
-    public function getOriginalPostImage($post)
+    public function getOriginalPostImage($post): string
     {
         $imgageFile = $post->getPostImage();
         return $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).$imgageFile;
@@ -192,7 +194,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         return $this->_show;
     }
     
-    public function isShow($item)
+    public function isShow($item): bool
     {
         return in_array($item, $this->getElementShow());
     }

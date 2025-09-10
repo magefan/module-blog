@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
@@ -53,7 +56,7 @@ class Richsnippets extends Opengraph
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getOptionsByType($type)
+    public function getOptionsByType($type): array
     {
         $post = $this->getPost();
 
