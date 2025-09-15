@@ -1,20 +1,39 @@
 <?php
-    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    $width = (int)$block->getBackgroundImageWidth() ?: 1920;
-    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
-    $templateType = str_replace('block', 'article-templates', (string)$block->getTemplateType());
-    $style = null;
-    if ($templateType) {
-        preg_match('/templates-\d+/', $templateType, $matches);
-        $style = $matches[0] ?? '';
-    }
-    $displayImage = $this->getData('display_image') ?? true;
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
 ?>
 <?php
-    $_postCollection = $block->getPostCollection();
+$_postCollection = $block->getPostCollection();
 ?>
-<?php if ($_postCollection->count() && $templateType): ?>
-    <div class="blog-articles <?=trim($templateType)?>">
+<?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
+<?php if ($_postCollection->count() /* && $templateType*/ ) { ?>
+
+    <?php
+        $width = (int)$block->getBackgroundImageWidth() ?: 1920;
+        $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+        $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType());
+
+        $style = null;
+        if ($templateType) {
+            preg_match('/templates-\d+/', $templateType, $matches);
+            $style = $matches[0] ?? '';
+        } else {
+            $templateType = 'article-grid';
+        }
+        $displayImage = $this->getData('display_image') ?? true;
+    ?>
+
+    <?php if ($title = $block->getTitle()) { ?>
+    <div class="widget block mf-blog-posts">
+        <div class="block-title title">
+            <strong><?= $block->escapeHtml($title) ?></strong>
+        </div>
+        <div class="block-content">
+    <?php } ?>
+
+    <div class="blog-articles <?= $block->escapeHtml($templateType) ?>">
         <?php foreach ($_postCollection as $_post):
             $entity = $_post
             ?>
@@ -293,4 +312,9 @@
         </script>
 
     <?php } ?>
-<?php endif ?>
+
+    <?php if ( $block->getTitle()) { ?>
+            </div>
+        </div>
+    <?php } ?>
+<?php } ?>

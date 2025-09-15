@@ -8,29 +8,13 @@
 
 namespace Magefan\Blog\Block\Widget;
 
-use Magefan\Blog\Model\Config\Source\DesignVersion;
+use Magefan\Blog\Block\Post\PostList\AbstractList;
 
 /**
  * Blog featured posts widget
  */
-
-class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\Widget\Block\BlockInterface
+class Featured extends AbstractList implements \Magento\Widget\Block\BlockInterface
 {
-
-    /**
-     * Set blog template
-     *
-     * @return this
-     */
-    public function _toHtml()
-    {
-        $this->setTemplate(
-            $this->getCustomTemplate()
-        );
-
-        return \Magento\Framework\View\Element\Template::_toHtml();
-    }
-
     /**
      * Retrieve block title
      *
@@ -42,26 +26,42 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     }
 
     /**
+     * Prepare posts collection
+     *
+     * @return void
+     */
+    protected function _preparePostCollection()
+    {
+        parent::_preparePostCollection();
+        $this->_postCollection->addPostsFilter(
+            $this->getPostIdsConfigValue()
+        );
+
+        $ids = [];
+        foreach (explode(',', $this->getPostIdsConfigValue()) as $id) {
+            $id = (int)trim($id);
+            if ($id) {
+                $ids[] = $id;
+            }
+        }
+
+        if ($ids) {
+            $ids = implode(',', $ids);
+            $this->_postCollection->getSelect()->order(
+                new \Zend_Db_Expr('FIELD(`main_table`.`post_id`,' . $ids .')')
+            );
+        }
+    }
+
+    /**
      * Retrieve post ids string
      *
      * @return string
      */
     protected function getPostIdsConfigValue()
     {
-        $postsIds = (string) $this->getData('posts_ids');
-        $registeredPostsIds = $this->_coreRegistry->registry('posts_ids');
-
-        if ($postsIds !== '' && $postsIds !== $registeredPostsIds) {
-            if ($registeredPostsIds !== null) {
-                $this->_coreRegistry->unregister('posts_ids');
-            }
-            $this->_coreRegistry->register('posts_ids', $postsIds);
-        }
-
-        return $this->_coreRegistry->registry('posts_ids');
+        return (string)$this->getData('posts_ids');
     }
-
-
 
     /**
      * Retrieve post short content
@@ -77,42 +77,21 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     }
 
     /**
-     * Get relevant path to template
-     * Skip parent one as it use template for sidebar block
-     *
      * @return string
      */
     public function getTemplate()
     {
-        return \Magefan\Blog\Block\Post\PostList\AbstractList::getTemplate();
-    }
-
-	/**
-	 * @return mixed
-	 */
-    public function getElementClass(){
-        return 'featured';
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomTemplate() {
-        $designVersion = $this->config->getDesignVersion();
-        if ($designVersion === DesignVersion::VALOR  && $this->getTemplate() && strpos($this->getTemplate(), 'article.phtml') !== false) {
-			return $this->getTemplate();
-		}
-        if ($this->getData('mf_template')) {
-            if ($designVersion == DesignVersion::VALOR ) {
-                return 'Magefan_Blog::widget/blog-widget.phtml';
-            }
-
-            if ($template = $this->templatePool->getTemplate('blog_post_list', $this->getData('mf_template'))) {
-                return $template;
-            }
-        } elseif ($this->getData('custom_template')) {
-            return $this->getData('custom_template');
+        $defaultTemplate = 'Magefan_Blog::widget/recent.phtml';
+        $templateType = $this->getData('template_type');
+        if (!$templateType || 'custom_template' === $templateType) {
+            $this->_template = $this->getData('custom_template') ?: $defaultTemplate;
+        } elseif ($template = $this->templatePool->getTemplate('blog_post_list', $templateType)) {
+            $this->_template = $template;
+        } else {
+            $this->_template = $defaultTemplate;
         }
-        return 'Magefan_Blog::widget/recent.phtml';
+
+        return parent::getTemplate();
     }
+
 }

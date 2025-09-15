@@ -21,12 +21,11 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_widgetKey = 'recent_posts';
 
     /**
-     * @return $this
+     * @return int
      */
-    public function _construct()
+    public function getPageSize(): int
     {
-        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
-        return parent::_construct();
+        return (int)$this->getConfigValue('posts_per_page');
     }
 
     /**
@@ -46,12 +45,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getDisplayImage()
     {
-        return (bool)$this->_getConfigValue('display_image');
-    }
-
-    public function getClass() {
-        $templateName = (string)$this->_getConfigValue('template');
-        return $this->templatePool->getTemplateClass('blog_post_sidebar_posts', $templateName);
+        return (bool)$this->getConfigValue('display_image');
     }
 
     /**
@@ -61,28 +55,10 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $this->setPageSize((int)$this->_getConfigValue('posts_per_page'));
-        $templateName = (string)$this->_getConfigValue('template');
-
-        if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
-            return parent::getTemplate();
-        }
-
+        $templateName = (string)$this->getConfigValue('template');
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }
         return parent::getTemplate();
-    }
-
-    /**
-     * @param $param
-     * @return mixed
-     */
-    protected function _getConfigValue($param)
-    {
-        return $this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey . '/' . $param,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
     }
 }

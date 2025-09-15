@@ -15,7 +15,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 <?php if ($block->displayPosts()) { ?>
 	<?php $postCollection = $block->getPostCollection(); ?>
 	<?php if (count($postCollection)) { ?>
-        <div class="block block-<?= $block->escapeHtml($block->getBlockKey())?>">
+        <div class="block block-related-posts block-<?= $block->escapeHtml($block->getNameInLayout())?>">
 			<?php if (!$block->getHideTitle()) { ?>
                 <div class="block-title title">
                     <strong id="block-related-posts-heading"><?= $block->escapeHtml(__($block->getBlockTitle() ?: '777')) ?></strong>

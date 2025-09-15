@@ -14,10 +14,7 @@ namespace Magefan\Blog\Model\Config\Source;
 class DesignVersion implements \Magento\Framework\Option\ArrayInterface
 {
     const INITIAL = '2015-11';
-//    const MODERN = '2024-12';
     const MODERN = '2021-06';
-
-//    const VALOR = '2025-04';
     const VALOR = '2025-07';
 
 	/**

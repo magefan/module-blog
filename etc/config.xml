@@ -13,7 +13,7 @@
             <general>
                 <enabled>0</enabled>
                 <mfmodule>Blog</mfmodule>
-                <design_version>2015-11</design_version>
+                <design_version>2021-06</design_version>
             </general>
             <publish_post_on_fb>
                 <enabled>0</enabled>

@@ -70,13 +70,59 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
     {
+
         if ($this->config->isEnabled() && $result && strpos($result, 'Magefan_Blog') !== false) {
-            if (strpos($result, $this->config->getDesignVersion() . '/') !== false) {
+            $designVersion = $this->config->getDesignVersion();
+            if (strpos($result, $designVersion . '/') !== false) {
                 return $result;
             }
 
-            $newTemplate = str_replace('::', '::' . $this->config->getDesignVersion() . '/', $result);
+            $newTemplate = str_replace('::', '::' . $designVersion . '/', $result);
             $newTemplate = str_replace('-modern', '', $newTemplate);
+
+            //Magefan_Blog::2025-07/widget/recent.phtml
+            //Magefan_Blog::2025-07/widget/recent.phtml
+
+
+            if ($designVersion == DesignVersion::VALOR) {
+                $valorMapping = [
+                    'Magefan_Blog::' . $designVersion . '/widget/recent.phtml' => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-1-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-5.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-6.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-1-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-6.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-1-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-5.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-5.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-6.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
+                ];
+
+                foreach ($valorMapping as $old => $new) {
+                    if ($newTemplate === $old) {
+                        $newTemplate = $new;
+                        break;
+                    }
+                }
+            }
+
+            /*
             if ($this->config->getDesignVersion() == DesignVersion::VALOR
                 && strpos($newTemplate, 'widget') !== false
                 && strpos($newTemplate, 'recent-post-slider') == false
@@ -88,6 +134,8 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
                     $newTemplate
                 );
             }
+            */
+
 
             $template = self::deprecatedPaths[$newTemplate] ?? $newTemplate;
             $filePath = $this->getTemplateFile($template);
@@ -123,9 +171,12 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
             if ($filePath && $this->fileDriver->isExists($filePath)) {
                 $result = str_replace(['Extra','Plus'], '', $newTemplate);
             }
+            /*
             if (strpos((string) $result, 'article.phtml') !== false) {
                 return $result;
             }
+            */
+
         }
 
         return $result;
