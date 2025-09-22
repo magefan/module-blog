@@ -117,16 +117,6 @@ class Config
     const XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI = 'mfblog/developer/css_settings/include_bootstrap_custom_mini';
 
     /**
-     * Related posts on product page enabled
-     */
-    const XML_PRODUCT_PAGE_RELATED_POSTS_ENABLED = 'mfblog/product_page/related_posts_enabled';
-
-    /**
-     * Include post rich snippet on product page
-     */
-    const XML_PRODUCT_PAGE_INCLUDE_POST_RICH_SNIPPET = 'mfblog/product_page/include_post_rich_snippet';
-
-    /**
      * @var ScopeConfigInterface
      */
     protected $scopeConfig;
@@ -321,29 +311,5 @@ class Config
             self::XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI,
             $storeId
         );
-    }
-
-    /**
-     * @param null $storeId
-     * @return bool
-     */
-    public function isProductPageRelatedPostsEnabled($storeId = null): bool
-    {
-        return $this->isEnabled($storeId) && (bool)$this->getConfig(
-                self::XML_PRODUCT_PAGE_RELATED_POSTS_ENABLED,
-                $storeId
-            );
-    }
-
-    /**
-     * @param null $storeId
-     * @return bool
-     */
-    public function isProductPageRichSnippetEnabled($storeId = null): bool
-    {
-        return $this->isEnabled($storeId) && (bool)$this->getConfig(
-                self::XML_PRODUCT_PAGE_INCLUDE_POST_RICH_SNIPPET,
-                $storeId
-            );
     }
 }
