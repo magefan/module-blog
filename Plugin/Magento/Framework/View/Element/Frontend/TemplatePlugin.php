@@ -21,8 +21,8 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
         'Magefan_Blog::2021-06/post/view/nextprev.phtml' => 'Magefan_Blog::post/view/nextprev-modern.phtml',
         'Magefan_Blog::2015-11/post/view.phtml' => 'Magefan_Blog::post/view.phtml',
         'Magefan_Blog::2015-11/post/view/nextprev.phtml' => 'Magefan_Blog::post/view/nextprev.phtml',
-        'Magefan_BlogAuthor::2021-06/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml',
-        'Magefan_BlogAuthor::2015-11/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author.phtml',
+        //'Magefan_BlogAuthor::2021-06/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml',
+        //'Magefan_BlogAuthor::2015-11/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author.phtml',
         'Magefan_BlogExtra::2021-06/post/view/categoryposts.phtml' => 'Magefan_BlogExtra::post/view/categoryposts-modern.phtml',
         'Magefan_BlogExtra::2015-11/post/view/categoryposts.phtml' => 'Magefan_BlogExtra::post/view/categoryposts.phtml',
         'Magefan_BlogExtra::2021-06/post/view/relatedposts.phtml' => 'Magefan_BlogExtra::post/view/relatedposts-modern.phtml',
@@ -70,7 +70,6 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
     {
-
         if ($this->config->isEnabled() && $result && strpos($result, 'Magefan_Blog') !== false) {
             $designVersion = $this->config->getDesignVersion();
             if (strpos($result, $designVersion . '/') !== false) {

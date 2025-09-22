@@ -20,12 +20,9 @@ trait Widget
     public function getSortOrder()
     {
         if (!$this->hasData('sort_order')) {
-            $this->setData('sort_order', $this->_scopeConfig->getValue(
-                'mfblog/sidebar/' . $this->getWidgetKey() . '/sort_order',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            ));
+            $this->setData('sort_order', $this->getConfigValue('sort_order'));
         }
-        return (int) $this->getData('sort_order');
+        return (int)$this->getData('sort_order');
     }
 
     /**

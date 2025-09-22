@@ -61,6 +61,7 @@ class Template implements \Magento\Framework\Option\ArrayInterface
                     ['label' => __('Grid - 2 columns'), 'value' => []],
                     ['label' => __('Grid - 3 columns'), 'value' => []],
                     ['label' => __('Grid and List'), 'value' => []],
+                    ['label' => __('Slider'), 'value' => []],
                     ['label' => __('Other Grids'), 'value' => []],
                 ];
 
@@ -70,7 +71,8 @@ class Template implements \Magento\Framework\Option\ArrayInterface
                     'grid2' => 2,
                     'grid3' => 3,
                     'grid_and_list' => 4,
-                    'other' => 5
+                    'slider' => 5,
+                    'other' => 6
                 ];
                 $ungroupedOptions = [];
                 foreach ($this->templatePool->getAll($this->templateType) as $value => $info) {

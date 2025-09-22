@@ -8,12 +8,11 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
+        <!-- remove base CSS from initial and basic design -->
         <remove src="Magefan_Blog::css/blog-m.css" />
         <remove src="Magefan_Blog::css/blog-new.css" />
-<!--        <css src="Magefan_BlogExtra::css/blog-styles-2025-04.css" />-->
-<!--        <css src="Magefan_BlogExtra::css/style-blog-author.css" />-->
-<!--        <css src="Magefan_BlogExtra::css/style-blog-post.css" />-->
-<!--        <css src="Magefan_BlogExtra::css/style-blog-post-list.css" />-->
-<!--        <css src="Magefan_BlogExtra::css/style-product-page.css" />-->
+        <remove src="Magefan_Blog::css/comments.css" />
+        <remove src="Magefan_Blog::css/blog-custom.css" />
     </head>
+
 </page>

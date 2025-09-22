@@ -39,7 +39,6 @@
                 <display_mode>0></display_mode>
                 <posts_sort_by>0</posts_sort_by>
                 <template/>
-                <templates_new>article-grid</templates_new>
                 <posts_per_page/>
                 <post_ids/>
                 <meta_title/>
@@ -47,9 +46,6 @@
                 <meta_description/>
             </index_page>
             <post_view>
-                <design>
-                    <template>modern</template>
-                </design>
                 <related_posts>
                     <enabled>1</enabled>
                     <template/>
@@ -106,7 +102,6 @@
             </post_view>
             <post_list>
                 <template>list-modern</template>
-                <templates_new>article-grid</templates_new>
                 <posts_per_page>10</posts_per_page>
                 <shortcotent_length>1000</shortcotent_length>
                 <html_allowed>1</html_allowed>
@@ -126,14 +121,12 @@
             </tag>
             <search>
                 <template/>
-                <templates_new>article-grid</templates_new>
                 <robots>NOINDEX,FOLLOW</robots>
             </search>
             <author>
                 <enabled>1</enabled>
                 <page_enabled>1</page_enabled>
                 <template/>
-                <templates_new>article-grid</templates_new>
                 <robots>NOINDEX,FOLLOW</robots>
             </author>
 
@@ -155,7 +148,6 @@
                 <recent_posts>
                     <enabled>1</enabled>
                     <template/>
-                    <template_new>default</template_new>
                     <display_image>1</display_image>
                     <posts_per_page>5</posts_per_page>
                     <sort_order>30</sort_order>
@@ -163,7 +155,6 @@
                 <featured_posts>
                     <enabled>0</enabled>
                     <template/>
-                    <template_new>default</template_new>
                     <display_image>1</display_image>
                     <posts_ids/>
                     <sort_order>35</sort_order>
@@ -171,7 +162,6 @@
                 <popular_posts>
                     <enabled>0</enabled>
                     <template/>
-                    <template_new>default</template_new>
                     <display_image>1</display_image>
                     <posts_per_page>5</posts_per_page>
                     <sort_order>36</sort_order>

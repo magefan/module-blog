@@ -17,31 +17,31 @@ class DesignVersion implements \Magento\Framework\Option\ArrayInterface
     const MODERN = '2021-06';
     const VALOR = '2025-07';
 
-	/**
-	 * Options getter
-	 *
-	 * @return array
-	 */
-	public function toOptionArray()
-	{
-		return [
+    /**
+     * Options getter
+     *
+     * @return array
+     */
+    public function toOptionArray()
+    {
+        return [
             ['value' => self::INITIAL, 'label' => '2015-11 (Initial)'],
-			['value' => self::MODERN, 'label' => '2021-06 (Modern)'],
-			['value' => self::VALOR, 'label' => '2025-07 (Valor)']
-		];
-	}
+            ['value' => self::MODERN, 'label' => '2021-06 (Modern)'],
+            ['value' => self::VALOR, 'label' => '2025-07 (Valor)']
+        ];
+    }
 
-	/**
-	 * Get options in "key-value" format
-	 *
-	 * @return array
-	 */
-	public function toArray()
-	{
-		$array = [];
-		foreach ($this->toOptionArray() as $item) {
-			$array[$item['value']] = $item['label'];
-		}
-		return $array;
-	}
+    /**
+     * Get options in "key-value" format
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = [];
+        foreach ($this->toOptionArray() as $item) {
+            $array[$item['value']] = $item['label'];
+        }
+        return $array;
+    }
 }

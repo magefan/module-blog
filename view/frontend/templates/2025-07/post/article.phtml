@@ -5,11 +5,17 @@
  */
 ?>
 <?php
+/**
+ * @var $block \Magefan\Blog\Block\Post\PostList\AbstractList
+ */
+?>
+<?php
 $_postCollection = $block->getPostCollection();
 ?>
-<?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
 <?php if ($_postCollection->count() /* && $templateType*/ ) { ?>
-
+    <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
+        <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
+    <?php } ?>
     <?php
         $width = (int)$block->getBackgroundImageWidth() ?: 1920;
         $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
