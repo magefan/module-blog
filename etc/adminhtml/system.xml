@@ -819,6 +819,7 @@
                     <source_model>Magefan\Blog\Model\Config\Source\RelatedPostTemplate</source_model>
                     <depends>
                         <field id="enabled">1</field>
+                        <field id="related_posts_enabled">1</field>
                     </depends>
                 </field>
 
@@ -826,6 +827,16 @@
                     <label>Number of Posts</label>
                     <depends>
                         <field id="enabled">1</field>
+                        <field id="related_posts_enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="include_post_rich_snippet" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Include Post Rich Snippet / Structured Data (Blog Plus)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="related_posts_enabled">1</field>
                     </depends>
                 </field>
             </group>
@@ -924,7 +935,7 @@
                 </field>
                 <field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Permalink Type</label>
-                     <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
+                    <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
                 </field>
 
                 <field id="post_route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
