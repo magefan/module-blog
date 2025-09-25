@@ -9,6 +9,7 @@ namespace Magefan\Blog\Ui\DataProvider\Category\Form;
 
 use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\App\RequestInterface;
 
 /**
  * Class DataProvider
@@ -31,25 +32,33 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     protected $loadedData;
 
     /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
+     * @param $name
+     * @param $primaryFieldName
+     * @param $requestFieldName
      * @param CollectionFactory $categoryCollectionFactory
      * @param DataPersistorInterface $dataPersistor
+     * @param RequestInterface $request
      * @param array $meta
      * @param array $data
      */
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
+        string $name,
+        string $primaryFieldName,
+        string $requestFieldName,
         CollectionFactory $categoryCollectionFactory,
         DataPersistorInterface $dataPersistor,
+        RequestInterface $request,
         array $meta = [],
         array $data = []
     ) {
         $this->collection = $categoryCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;
+        $this->request = $request;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->meta = $this->prepareMeta($this->meta);
     }
@@ -62,7 +71,20 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      */
     public function prepareMeta(array $meta)
     {
-        return $meta;
+        $parent =(int)$this->request->getParam('parent');
+
+        $meta['general']['children']['parent'] = [
+            'arguments' => [
+                'data' => [
+                    'config' => [
+                        'default' => $parent
+                    ],
+                ],
+            ]
+        ];
+
+
+       return $meta;
     }
 
     /**

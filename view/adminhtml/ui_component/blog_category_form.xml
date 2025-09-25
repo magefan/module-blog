@@ -54,6 +54,18 @@
                 <item name="sortOrder" xsi:type="number">10</item>
             </item>
         </argument>
+
+        <field name="store" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+            </settings>
+        </field>
+
         <field name="category_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -65,6 +77,38 @@
                 </item>
             </argument>
         </field>
+
+        <field name="parent" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="path" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="level" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+        </field>
+
+
+
         <field name="is_active">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -95,39 +139,6 @@
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
-                </item>
-            </argument>
-        </field>
-        <field name="path">
-            <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CategoryPath</item>
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Parent Category</item>
-                    <item name="componentType" xsi:type="string">field</item>
-                    <item name="formElement" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
-                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
-                    <item name="dataScope" xsi:type="string">path</item>
-                    <item name="filterOptions" xsi:type="boolean">true</item>
-                    <item name="chipsEnabled" xsi:type="boolean">true</item>
-                    <item name="showCheckbox" xsi:type="boolean">true</item><!--default is true -->
-                    <item name="disableLabel" xsi:type="boolean">true</item>
-                    <item name="multiple" xsi:type="boolean">false</item><!--default is true -->
-                    <item name="levelsVisibility" xsi:type="number">1</item>
-                    <item name="sortOrder" xsi:type="number">30</item>
-                    <item name="required" xsi:type="boolean">false</item>
-                </item>
-            </argument>
-        </field>
-        <field name="position">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Position</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">category</item>
-                    <item name="sortOrder" xsi:type="number">40</item>
-                    <item name="dataScope" xsi:type="string">position</item>
                 </item>
             </argument>
         </field>

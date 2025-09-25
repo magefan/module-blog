@@ -102,6 +102,7 @@
     </table>
     <table name="magefan_blog_category" resource="default" engine="innodb" comment="Magefan Blog Category Table">
         <column xsi:type="int" name="category_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Category ID"/>
+<!--        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false" default="0" comment="Parent Category ID"/>-->
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Category Title"/>
         <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Category Meta Title"/>
         <column xsi:type="text" name="meta_keywords" nullable="true" comment="Category Meta Keywords"/>
@@ -112,6 +113,7 @@
         <column xsi:type="mediumtext" name="content" nullable="true" comment="Category Content"/>
         <column xsi:type="varchar" name="path" nullable="true" length="255" comment="Category Path"/>
         <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="false" identity="false" comment="Category Position"/>
+        <column xsi:type="smallint" name="level" padding="6" unsigned="false" nullable="false" identity="false" comment="Level"/>
         <column xsi:type="smallint" name="posts_sort_by" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Post Sort By"/>
         <column xsi:type="smallint" name="include_in_menu" padding="6" unsigned="false" nullable="true" identity="false" comment="Category In Menu"/>
         <column xsi:type="varchar" name="include_in_sidebar_tree" nullable="true" length="255" default="1" comment="Category In Sidebar Tree"/>

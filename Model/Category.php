@@ -11,6 +11,7 @@ namespace Magefan\Blog\Model;
 use Magefan\Blog\Model\Url;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magefan\Blog\Api\ShortContentExtractorInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
  * Category model
@@ -45,6 +46,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
+
+
+    const TREE_ROOT_ID = 0;
 
     /**
      * Prefix of model events names
@@ -225,6 +229,16 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * @return mixed|string
+     */
+    public function getFullPath()
+    {
+        return $this->getPath()
+            ? $this->getPath() . '/' . $this->getId()
+            : $this->getId();
+    }
+
+    /**
      * Retrieve parent category ids
      * @return array
      */
@@ -339,6 +353,16 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     public function getLevel()
     {
         return count($this->getParentIds());
+    }
+
+    /**
+     * @return array
+     */
+    public function getPathIds()
+    {
+        $pathIds = $this->getParentIds();
+        $pathIds[] = $this->getId();
+        return $pathIds;
     }
 
     /**
@@ -591,5 +615,59 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         }
 
         return $this->getData('category_image');
+    }
+
+    /**
+     * Move category
+     *
+     * @param  int $parentId new parent category id
+     * @param  null|int $afterCategoryId category id after which we have put current category
+     * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException|\Exception
+     */
+    public function move($parentId, $afterCategoryId)
+    {
+        try {
+            $parent = $this->loadFromRepository($parentId);
+        } catch (NoSuchEntityException $e) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Sorry, but we can\'t find the new parent category you selected.'), $e
+            );
+        }
+
+        if (!$this->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Sorry, but we can\'t find the new category you selected.')
+            );
+        } elseif ($parent->getId() == $this->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('We can\'t move the category because the parent category name matches the child category name.')
+            );
+        }
+
+        $eventParams = [
+            $this->_eventObject => $this,
+            'parent' => $parent,
+            'category_id' => $this->getId(),
+            'prev_parent_id' => $this->getParentId(),
+            'parent_id' => $parentId
+        ];
+
+        $this->_getResource()->beginTransaction();
+        try {
+            $this->_eventManager->dispatch($this->_eventPrefix . '_move_before', $eventParams);
+            $this->getResource()->changeParent($this, $parent, $afterCategoryId);
+            $this->_eventManager->dispatch($this->_eventPrefix . '_move_after', $eventParams);
+            $this->_getResource()->commit();
+
+        } catch (\Exception $e) {
+            $this->_getResource()->rollBack();
+            throw $e;
+        }
+        $this->_eventManager->dispatch('blog_category_move', $eventParams);
+        $this->_eventManager->dispatch('clean_cache_by_tags', ['object' => $this]);
+        $this->_cacheManager->clean([self::CACHE_TAG]);
+
+        return $this;
     }
 }
