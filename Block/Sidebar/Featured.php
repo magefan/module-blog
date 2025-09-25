@@ -63,13 +63,35 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * @return string
+     */
+    public function getWidgetKey() {
+        return (string)$this->_widgetKey;
+    }
+    
+    /**
      * Retrieve true if display the post image is enabled in the config
      * @return bool
      */
     public function getDisplayImage()
     {
+        $designVersion = (string)$this->_scopeConfig->getValue(
+            'mfblog/design/version',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        if ($designVersion == '2025-04') {
+            return false;
+        }
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getClass() {
+        return (string)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/template_new',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -81,13 +103,35 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
+        $designVersion = (string)$this->_scopeConfig->getValue(
+            'mfblog/design/version',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
         $templateName = (string)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+
+        if ($designVersion == '2025-04') {
+            $template = $this->_scopeConfig->getValue(
+                'mfblog/sidebar/'.$this->_widgetKey.'/template_new',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+            if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
+                return parent::getTemplate();
+            }
+            if ($template == 'default') {
+                $templateName = 'modern';
+            } else {
+                return 'Magefan_BlogExtra::sidebar/recent_2025_04.phtml';
+            }
+        }
+
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }
+
         return parent::getTemplate();
     }
 }

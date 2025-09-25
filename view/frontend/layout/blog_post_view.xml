@@ -40,7 +40,7 @@
                     </block>
                     -->
                     <container name="blog.post.comments" label="Comments Container" htmlTag="div" htmlClass="block comments" >
-                        <block class="Magefan\Blog\Block\Post\View\Comments\Magefan" name="blog.post.comments.magefan" template="post/view/comments/magefan.phtml">
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Magefan" name="blog.post.comments.magefan" template="Magefan_Blog::post/view/comments/magefan.phtml">
                             <block class="Magento\Framework\View\Element\Template" name="display_privacy_policy_checkbox" template="Magefan_Blog::post/view/comments/privacy_policy_checkbox.phtml"/>
                             <arguments>
                                 <argument name="jsLayout" xsi:type="array">
@@ -54,9 +54,9 @@
                             <container name="blog.post.comments.magefan.additional" label="Comments Recaptcha" />
                             <container name="blog.post.comments.magefan.reply.additional" label="Comments Reply Recaptcha" />
                         </block>
-                        <block class="Magefan\Blog\Block\Post\View\Comments\Facebook" name="blog.post.comments.facebook" template="post/view/comments/facebook.phtml" />
-                        <block class="Magefan\Blog\Block\Post\View\Comments\Disqus" name="blog.post.comments.disqus" template="post/view/comments/disqus.phtml" />
-                        <block class="Magefan\Blog\Block\Post\View\Comments\Google" name="blog.post.comments.google" template="post/view/comments/google.phtml" />
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Facebook" name="blog.post.comments.facebook" template="Magefan_Blog::post/view/comments/facebook.phtml" />
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Disqus" name="blog.post.comments.disqus" template="Magefan_Blog::post/view/comments/disqus.phtml" />
+                        <block class="Magefan\Blog\Block\Post\View\Comments\Google" name="blog.post.comments.google" template="Magefan_Blog::post/view/comments/google.phtml" />
                     </container>
                     <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
                 </container>

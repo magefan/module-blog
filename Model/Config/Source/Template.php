@@ -52,6 +52,13 @@ class Template implements \Magento\Framework\Option\ArrayInterface
         if (!$this->templateType) {
             return[];
         }
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $config = $objectManager->get(\Magefan\Blog\Model\Config::class);
+
+        if ($this->templateType == 'blog_post_list' && ($config->getConfig('mfblog/design/version') == '2025-04')) {
+            $this->templateType = 'blog_post_list_2025_04';
+        }
+        
         if (!isset($this->options[$this->templateType])) {
             $this->options[$this->templateType] = [];
             foreach ($this->templatePool->getAll($this->templateType) as $value => $info) {
