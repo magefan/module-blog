@@ -16,12 +16,21 @@
 <?php
     $comment = $block->getComment();
     $numberOfCommentsToDisplay = $block->getNumberOfReplies();
+
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+    $imageWidth = (int)$block->getFeaturedImageWidth() ?: 772;
 ?>
 <div class="c-comment c-comment-parent-<?= (int)$comment->getParentId() ?>"
     <?php if ($comment->getIsHidden()) { echo 'style="display:none"'; } ?>>
     <?php if ($authorImage = $comment->getAuthorImage()) { ?>
+        <?php
+            $authorImage = $imageHelper->init($authorImage)->resize($imageWidth, null, false);
+            $widthAndHeight = $imageHelper->getWidthAndHeigth();
+        ?>
     <div class="c-img">
-        <img src="<?= $block->escapeUrl($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
+        <img src="<?= $block->escapeUrl($authorImage) ?>" <?php if ($widthAndHeight)
+            echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
+             alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
     <div class="c-post c-post-<?= (int)$comment->getId() ?>" id="c-post-<?= (int)$comment->getId() ?>">
