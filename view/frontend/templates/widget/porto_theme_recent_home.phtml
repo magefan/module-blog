@@ -17,6 +17,9 @@
 
 <?php
     $_postCollection = $block->getPostCollection();
+
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+    $imageWidth = (int)$block->getFeaturedImageWidth() ?: '';
 ?>
 <?php if ($_postCollection->count()) { ?>
 <h2 style="margin:0 0 18px 0;font-size:18px;font-weight:600;text-align:center" class="theme-color a-center"><?= $block->escapeHtml($block->getTitle()) ?></h2>
@@ -31,15 +34,20 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="post-image">
-                    <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                    <?php $featuredImage = $_post->getFeaturedListImg() ?: $_post->getFeaturedImg(); ?>
                     <?php if ($featuredImage) { ?>
                         <?php
+                            $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);
+                            $widthAndHeight = $imageHelper->getWidthAndHeigth();
+
                             $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
                             if (!$featuredImgAlt) {
                                 $featuredImgAlt = $_postName;
                             }
                         ?>
-                           <img src="<?= $block->escapeHtml($featuredImage) ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                           <img src="<?= $block->escapeHtml($featuredImage) ?>" <?php if ($widthAndHeight)
+                               echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
+                                alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     <?php } ?>
                     </div>
                 </div>

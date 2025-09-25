@@ -16,7 +16,11 @@
 <?php
 $_post = $block->getPost();
 $_postUrl = $_post->getPostUrl();
+$_postImage = $_post->getFeaturedImg();
 $_postName = $block->escapeHtml($_post->getTitle(), null);
+
+$imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$imageWidth = (int)$block->getFeaturedImageWidth() ?: 722;
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
@@ -28,7 +32,7 @@ $_postName = $block->escapeHtml($_post->getTitle(), null);
                 <div class="post-sharing post-sharing-top old-post-view">
                     <div class="share-elements">
                         <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                            <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
+                            <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>', '<?= $_postImage ?>')">
                                 <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                                     <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                                 </div>
@@ -44,15 +48,18 @@ $_postName = $block->escapeHtml($_post->getTitle(), null);
 
         <div class="post-content">
             <div class="post-description clearfix">
-                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                <?php if ($featuredImage = $_post->getFeaturedImg()) { ?>
                     <?php
+                    $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);
+                    $widthAndHeight = $imageHelper->getWidthAndHeigth();
                     $featuredImgAlt = $_post->getData('featured_img_alt');
                     if (!$featuredImgAlt) {
                         $featuredImgAlt = $_postName;
                     }
                     ?>
                     <div class="post-ftimg-hld">
-                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>" <?php if ($widthAndHeight)
+                            echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </div>
                 <?php } ?>

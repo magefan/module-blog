@@ -14,9 +14,13 @@
  */
 ?>
 <?php
-    $_post = $block->getPost();
-    $_postUrl = $_post->getPostUrl();
-    $_postName = $block->escapeHtml($_post->getTitle(), null);
+$_post = $block->getPost();
+$_postUrl = $_post->getPostUrl();
+$_postImage = $_post->getFeaturedImg();
+$_postName = $block->escapeHtml($_post->getTitle(), null);
+
+$imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$imageWidth = (int)$block->getFeaturedImageWidth() ?: 722;
 ?>
 <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
 <div class="_post-view post-view-modern">
@@ -27,13 +31,13 @@
             <!-- post category-->
             <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
                 <div class="post-category mb-4">
-                        <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
-                               title="<?= $block->escapeHtml($ct->getTitle()) ?>">
-                                <?= $block->escapeHtml($ct->getTitle()) ?>
-                            </a>
-                        <?php } ?>
-                    </div>
+                    <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                        <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                           title="<?= $block->escapeHtml($ct->getTitle()) ?>">
+                            <?= $block->escapeHtml($ct->getTitle()) ?>
+                        </a>
+                    <?php } ?>
+                </div>
             <?php }  ?>
 
             <!-- block data -->
@@ -51,8 +55,8 @@
                             <?php } ?>
 
                             <?php
-                                $coAuthors = $_post->getRelatedCoauthors();
-                                $coAuthorsCount = count($coAuthors);
+                            $coAuthors = $_post->getRelatedCoauthors();
+                            $coAuthorsCount = count($coAuthors);
                             ?>
                             <?php if ($coAuthorsCount) { ?>
                                 <?= $block->escapeHtml(__('and')) ?>
@@ -106,15 +110,18 @@
         <div class="post-content">
             <div class="_post-description clearfix">
                 <!-- Post Image -->
-                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                <?php if ($featuredImage = $_post->getFeaturedImg()) { ?>
                     <?php
-                        $featuredImgAlt = $_post->getData('featured_img_alt');
-                        if (!$featuredImgAlt) {
-                            $featuredImgAlt = $_postName;
-                        }
+                    $featuredImage = $imageHelper->init($featuredImage)->resize($imageWidth, null, false);
+                    $widthAndHeight = $imageHelper->getWidthAndHeigth();
+                    $featuredImgAlt = $_post->getData('featured_img_alt');
+                    if (!$featuredImgAlt) {
+                        $featuredImgAlt = $_postName;
+                    }
                     ?>
                     <div class="post-featured-image">
-                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>" <?php if ($widthAndHeight)
+                            echo ' width="' . $widthAndHeight['width'] . '" height="' . $widthAndHeight['height'] . '" ' ?>
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </div>
                 <?php } ?>
@@ -146,20 +153,20 @@
         <div class="post-bottom">
 
             <?php if ($block->displayAddThisToolbox()) : ?>
-            <!-- Post Sharing -->
-            <div class="post-sharing post-sharing-bottom">
-                <div class="share-elements">
-                    <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                        <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
-                            <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
-                                <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                <!-- Post Sharing -->
+                <div class="post-sharing post-sharing-bottom">
+                    <div class="share-elements">
+                        <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
+                            <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>', '<?= $_postImage ?>')">
+                                <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                    <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                </div>
+                                <div class="label"><?= $block->escapeHtml(__('Share on %1',  $network == 'Twitter' ? "X" : $network)) ?></div>
                             </div>
-                            <div class="label"><?= $block->escapeHtml(__('Share on %1',  $network == 'Twitter' ? "X" : $network)) ?></div>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
-            <!-- END Post Sharing -->
+                <!-- END Post Sharing -->
             <?php endif; ?>
 
             <?= $block->getChildHtml('blog.post.bottom') ?>
