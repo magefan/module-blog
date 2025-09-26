@@ -1,20 +1,44 @@
 <?php
-    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    $width = (int)$block->getBackgroundImageWidth() ?: 1920;
-    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
-    $templateType = str_replace('block', 'article-templates', (string)$block->getTemplateType());
-    $style = null;
-    if ($templateType) {
-        preg_match('/templates-\d+/', $templateType, $matches);
-        $style = $matches[0] ?? '';
-    }
-    $displayImage = $this->getData('display_image') ?? true;
-   
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
 ?>
 <?php
-    $_postCollection = $block->getPostCollection();
+/**
+ * @var $block \Magefan\Blog\Block\Post\PostList\AbstractList
+ */
 ?>
-<?php if ($_postCollection->count() && $templateType): ?>
+<?php
+$_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count() /* && $templateType*/ ) { ?>
+    <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
+        <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
+    <?php } ?>
+    <?php
+        $width = (int)$block->getBackgroundImageWidth() ?: 1920;
+        $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+        $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType());
+
+        $style = null;
+        if ($templateType) {
+            preg_match('/templates-\d+/', $templateType, $matches);
+            $style = $matches[0] ?? '';
+        } else {
+            $templateType = 'article-grid';
+        }
+        $displayImage = $this->getData('display_image') ?? true;
+    ?>
+
+    <?php if ($title = $block->getTitle()) { ?>
+    <div class="widget block mf-blog-posts">
+        <div class="block-title title">
+            <strong><?= $block->escapeHtml($title) ?></strong>
+        </div>
+        <div class="block-content">
+    <?php } ?>
+
     <div class="blog-articles <?=trim(!$displayImage ? $templateType . ' article-post__no-image' : $templateType)?>">
         <?php foreach ($_postCollection as $_post):
             $entity = $_post
@@ -50,13 +74,13 @@
                         'article-grid',
                         'article-templates-1-1', 'article-templates-1-2', 'article-templates-1-3',
                         'article-templates-2-1', 'article-templates-2-2', 'article-templates-2-3',
-						'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
+                        'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
                         'article-templates-3-1', 'article-templates-3-2', 'article-templates-3-3',
-						'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
+                        'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
                         'article-templates-4-1', 'article-templates-4-2', 'article-templates-4-3',
                         'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
                         'article-templates-5-2', 'article-templates-5-3', 'article-templates-5-4',
-						'article-items',
+                        'article-items',
                         'article-slider',
                         'sidebar-article-grid', 'sidebar-article-list',
                         'article-default-list'
@@ -74,7 +98,7 @@
                     <?php /* Post Info in Image Container */ ?>
                     <?php /* Visible */ ?>
                     <?php if (in_array($templateType, [
-						'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
+                        'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
                         'article-templates-4-1', 'article-templates-4-2', 'article-templates-4-3',
                         'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
                         'article-templates-5-2', 'article-templates-5-3', 'article-templates-5-4'
@@ -118,10 +142,10 @@
                                 <span class="article-post__data"><span class="divider">&nbsp;|&nbsp;</span><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                             <?php } ?>
 
-							<?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+                            <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
                                 <?php /* <i class="mf-blog-icon mfbi-reading-time"></i>*/ ?>
                                 <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
-							<?php } ?>
+                            <?php } ?>
 
                             <?php if ($block->viewsCountEnabled()) { ?>
                                 <?php if ($viewsCount = $_post->getViewsCount()) { ?>
@@ -155,12 +179,12 @@
                     'article-grid', 'article-list',
                     'article-templates-1-1', 'article-templates-1-2', 'article-templates-1-3',
                     'article-templates-2-1', 'article-templates-2-2', 'article-templates-2-3',
-					'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
+                    'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
                     'article-templates-3-1', 'article-templates-3-2', 'article-templates-3-3',
-					'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
-					'article-templates-5-1',
+                    'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
+                    'article-templates-5-1',
                     'article-items',
-					'article-slider',
+                    'article-slider',
                     'sidebar-article-grid', 'sidebar-article-list',
                     'article-default-list'
                 ])):
@@ -173,7 +197,7 @@
 
                         <?php /* Not Visible */ ?>
                         <?php if (!in_array($templateType, [
-							'article-items',
+                            'article-items',
                             'article-slider',
                             'article-default-list'
                         ])): ?>
@@ -224,14 +248,14 @@
                             <?php endif ?>
                         <?php endif ?>
                         </div>
-					<?php endif ?>
+                    <?php endif ?>
                     </div>
 
                     <?php /* Not Visible */ ?>
                     <?php /* Short Content */ ?>
                     <?php if (!in_array($templateType, [
                          'article-templates-1-2', 'article-templates-1-3',
-						 'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
+                         'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
                          'article-items',
                          'article-slider',
                          'sidebar-article-grid', 'sidebar-article-list',
@@ -243,7 +267,7 @@
                     <?php endif ?>
 
                     <?php /* Visible */ ?>
-					<?php /* Post Category in Post Info */ ?>
+                    <?php /* Post Category in Post Info */ ?>
                     <?php if ($preparedCategories = $entity->getParentCategories()): ?>
                         <?php if (!in_array($templateType, [
                             'article-templates-4-1', 'article-templates-4-2', 'article-templates-4-3',
@@ -264,16 +288,16 @@
                             </div>
 
                         </div>
-							<?php /* END Post Category in Post Info */ ?>
-						<?php endif ?>
-					<?php endif ?>
+                            <?php /* END Post Category in Post Info */ ?>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
                 <?php endif ?>
                 <?php /* END Post Info */ ?>
 
                 <?php /* Visible */ ?>
                 <?php if (in_array($templateType, [
-					'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
+                    'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
                 ])): ?>
                 <div class="article-post__content">
                     <?= $entity->getShortFilteredContentWithoutImages() ?>
@@ -303,4 +327,9 @@
         </script>
 
     <?php } ?>
-<?php endif ?>
+
+    <?php if ( $block->getTitle()) { ?>
+            </div>
+        </div>
+    <?php } ?>
+<?php } ?>

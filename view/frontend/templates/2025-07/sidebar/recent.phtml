@@ -33,7 +33,7 @@
 		<?= $block->getLayout()
             ->createBlock(get_class($block))
             ->setData([
-                'template_type' => $block->getClass(),
+                'template_type' => 'sidebar-article-grid',
                 'display_image' => $block->getDisplayImage()
             ])
             ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()

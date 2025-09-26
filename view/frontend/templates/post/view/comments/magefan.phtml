@@ -198,7 +198,7 @@ if ($commentsCount) {
 
                 const script = document.createElement('script');
                 script.type = 'text/javascript';
-                script.src = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-coments-breeze.js')) . "';
+                script.src = '" . $block->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-comments-breeze.js')) . "';
                 document.head.append(script);
             }
         }

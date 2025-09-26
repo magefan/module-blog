@@ -3,53 +3,30 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
-
 declare(strict_types=1);
 
 namespace Magefan\Blog\Setup\Patch\Data;
-use \Magento\Config\Controller\Adminhtml\System\Config\Save;
+
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\App\Config\Storage\WriterInterface;
-use Magento\Store\Model\ScopeInterface;
-use Magento\Store\Model\StoreManagerInterface;
-use Magefan\Blog\Model\Config as BlogConfig;
+use Magento\Framework\Setup\SchemaSetupInterface;
+use Magefan\Blog\Model\Config\Source\DesignVersion;
 
 class SetDesignVersion implements DataPatchInterface
 {
-
-    private $postViewDsign = 'mfblog/post_view/design/template';
-
-    private $dsignVersion = 'mfblog/general/design_version';
-
     /**
-     * @var WriterInterface
+     * @var SchemaSetupInterface
      */
-    private WriterInterface $configWriter;
+    private $schemaSetup;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
-     * @var BlogConfig
-     */
-    private $blogConfig;
-
-    /**
-     * @param WriterInterface $configWriter
-     * @param StoreManagerInterface $storeManager
-     * @param BlogConfig $blogConfig
+     * Constructor
+     *
+     * @param SchemaSetupInterface $schemaSetup
      */
     public function __construct(
-        WriterInterface $configWriter,
-        StoreManagerInterface $storeManager,
-        BlogConfig $blogConfig
-    )
-    {
-        $this->configWriter = $configWriter;
-        $this->storeManager = $storeManager;
-        $this->blogConfig = $blogConfig;
+        SchemaSetupInterface $schemaSetup
+    ) {
+        $this->schemaSetup = $schemaSetup;
     }
 
     /**
@@ -57,54 +34,41 @@ class SetDesignVersion implements DataPatchInterface
      */
     public function apply()
     {
-        $defaultStoreValue = $this->blogConfig->getConfig(
-            $this->postViewDsign
-        );
+        $this->schemaSetup->startSetup();
+        $connection = $this->schemaSetup->getConnection();
 
-        if ($defaultStoreValue === 'modern') {
-            $this->configWriter->save(
-                $this->dsignVersion,
-                \Magefan\Blog\Model\Config\Source\DesignVersion::MODERN,
-                \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            );
-        }
+        $table = $this->schemaSetup->getTable('core_config_data');
 
-        foreach ($this->storeManager->getStores() as $store) {
-            $storeId = $store->getId();
-            $value = $this->blogConfig->getConfig(
-                $this->postViewDsign,
-                $storeId
-            );
+        $select = $connection->select()
+            ->from($table)
+            ->where('path = ?', 'mfblog/post_view/design/template');
 
-            if ($defaultStoreValue === $value) {
-                continue;
-            }
-
-            if ($value === 'modern') {
-                $this->configWriter->save(
-                    $this->dsignVersion,
-                    \Magefan\Blog\Model\Config\Source\DesignVersion::MODERN,
-                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-                    $storeId
-                );
+        foreach ($connection->fetchAll($select) as $data) {
+            if (!$data['value']) {
+                /* If used not Modern template for the blog post, then set initial design version */
+                unset($data['config_id']);
+                $data['path'] = 'mfblog/general/design_version';
+                $data['value'] = DesignVersion::INITIAL;
+                $connection->insert($table, $data);
             }
         }
+
+        $this->schemaSetup->endSetup();
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public static function getDependencies()
-    {
-        return [];
-    }
-
-    /**
-     * {@inheritdoc}
+     * @return array
      */
     public function getAliases()
     {
         return [];
     }
 
+    /**
+     * @return array
+     */
+    public static function getDependencies()
+    {
+        return [];
+    }
 }

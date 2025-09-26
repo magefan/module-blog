@@ -136,7 +136,7 @@ body.blog-page {
 
 /* Post Text */
 .blog-post-view .post-description {margin-bottom: 30px;}
-/*.blog-post-view .post-description p {font-size: 1.4rem;line-height: 1.7;}*/
+.blog-post-view .post-description p {font-size: 1.4rem;line-height: 1.7;}
 
 /* Post Bottom *****************************************/
 .post-view .post-bottom {margin-top:30px;}

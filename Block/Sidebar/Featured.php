@@ -63,24 +63,12 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * @return string
-     */
-    public function getWidgetKey() {
-        return (string)$this->_widgetKey;
-    }
-    
-    /**
      * Retrieve true if display the post image is enabled in the config
      * @return bool
      */
     public function getDisplayImage()
     {
-        return (bool)$this->_getConfigValue('display_image');
-    }
-
-    public function getClass() {
-        $templateName = (string)$this->_getConfigValue('template');
-        return $this->templatePool->getTemplateClass('blog_post_sidebar_posts', $templateName);
+        return (bool)$this->getConfigValue('display_image');
     }
 
     /**
@@ -90,27 +78,10 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_getConfigValue('template');
-
-        if (strpos((string) parent::getTemplate(), 'article.phtml') !== false) {
-            return parent::getTemplate();
-        }
-
+        $templateName = (string)$this->getConfigValue('template');
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }
         return parent::getTemplate();
-    }
-
-    /**
-     * @param $param
-     * @return mixed
-     */
-    protected function _getConfigValue($param)
-    {
-        return $this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey . '/' . $param,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
     }
 }

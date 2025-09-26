@@ -26,12 +26,23 @@ class TemplatePool
     private $templates;
 
     /**
-     * TemplatePool constructor.
-     * @param array $templates
+     * @var Config
      */
-    public function __construct(array $templates)
+    private $config;
+
+    /**
+     * @param array $templates
+     * @param Config|null $config
+     */
+    public function __construct(
+        array $templates,
+        ?Config $config = null
+    )
     {
         $this->templates = $templates;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->config = $config ?: $objectManager->get(\Magefan\Blog\Model\Config::class);
     }
 
     /**
@@ -52,31 +63,16 @@ class TemplatePool
      */
     public function getTemplate(string $templateType, string $name):string
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         if (isset($this->templates[$templateType]) &&
             (is_array($this->templates[$templateType]) || $this->templates[$templateType] instanceof Countable)
         ) {
             foreach ($this->templates[$templateType] as $item) {
                 if (isset($item['value']) && $item['value'] == $name) {
-                    $dv = $objectManager->get(\Magefan\Blog\Model\Config::class)->getDesignVersion();
-                    if (isset($item['template' . $dv])) {
+                    $dv = $this->config->getDesignVersion();
+                    if (!empty($item['template' . $dv])) {
                         return $item['template' . $dv];
                     }
                     return $item['template'];
-                }
-            }
-        }
-        return '';
-    }
-
-    public function getTemplateClass(string $templateType, string $name):string
-    {
-        if (isset($this->templates[$templateType]) &&
-            (is_array($this->templates[$templateType]) || $this->templates[$templateType] instanceof Countable)
-        ) {
-            foreach ($this->templates[$templateType] as $item) {
-                if (isset($item['value']) && $item['value'] == $name && isset($item['class'])) {
-                    return $item['class'];
                 }
             }
         }
