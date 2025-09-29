@@ -51,18 +51,23 @@
 }
 .grid-template-two-columns() {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(calc(~'(100% / 2) - var(--article--gap) * (2 / 2)'), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(calc(~"(100% / 2) - (var(--article--gap) * (2 / 2))"), 1fr));
     //grid-gap: var(--article--gap);
 }
 .grid-template-tree-columns() {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(calc(~'(100% / 3) - var(--article--gap) * (2 / 3)'), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(calc(~"(100% / 3) - (var(--article--gap) * (2 / 3))"), 1fr));
     //grid-gap: var(--article--gap);
 }
 .grid-template-for-columns() {
     display: grid;
     //grid-gap: var(--article--gap);
-    grid-template-columns: repeat(auto-fill, minmax(calc(~'(100% / 4) - var(--article--gap) * (2 / 4)'), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(calc(~"(100% / 4) - (var(--article--gap) * (2 / 4))"), 1fr));
+}
+.grid-template-five-columns() {
+    display: grid;
+    //grid-gap: var(--article--gap);
+    grid-template-columns: repeat(auto-fill, minmax(calc(~"(100% / 5) - (var(--article--gap) * (2 / 5))"), 1fr));
 }
 
 // Post Info Absolute
@@ -78,6 +83,7 @@
     .article-post {
         &__category {
             position: static;
+            .image-container-post-category;
         }
         &__title {
             display: inline-block;
@@ -221,6 +227,7 @@
         .transition;
         .two-line-in-block;
         &:hover {
+            color: var(--post-title-color-hover);
             .transition;
         }
     }
@@ -263,7 +270,7 @@
 .great-title() {
     &__title {
         font-size: 22px;
-        line-height: 28px;
+        line-height: 25px;
         font-weight: 600;
         margin: 0 0 8px;
         text-decoration: none;
@@ -272,7 +279,7 @@
     }
     &__data-wrap {
         font-family: sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 24px;
         font-weight: 500;
     }
