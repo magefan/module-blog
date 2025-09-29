@@ -21,6 +21,7 @@ if (!isset($escaper)) {
         <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
     <?php } ?>
     <?php
+
         $width = (int)$block->getBackgroundImageWidth() ?: 1920;
         $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
         $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType());
@@ -33,7 +34,6 @@ if (!isset($escaper)) {
             $templateType = 'article-grid';
         }
         $displayImage = $this->getData('display_image') ?? true;
-
 
         $displayCategoryInImageContainer = !in_array($templateType, [
             'article-grid',
@@ -73,16 +73,16 @@ if (!isset($escaper)) {
         ]);
 
         $displayShortContent = !in_array($templateType, [
-            /* after info */
             'article-templates-1-2', 'article-templates-1-3',
             'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
             'article-items',
             'article-slider',
             'sidebar-article-grid', 'sidebar-article-list',
-            'article-default-list',
+            'article-default-list'
+        ]);
 
-            /* after image */
-            'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
+        $displayShortContentAfterImage = in_array($templateType, [
+            'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6'
         ]);
 
         $displayCategoryInInfo = !in_array($templateType, [
@@ -111,7 +111,7 @@ if (!isset($escaper)) {
             <div class="article-post">
 
                 <?php /* Post Image Container */ ?>
-                <?php if ( ('article-default-list' ===$templateType) && ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
+                <?php if ( ('article-default-list' !== $templateType) && ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
                 <div class="article-post__image-container animation-type--zoom">
                     <?php
                         $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
@@ -134,7 +134,7 @@ if (!isset($escaper)) {
                     <?php /* Post Category in Image Container */ ?>
                     <?php if ($displayCategoryInImageContainer) { ?>
                         <?php if ($categories = $entity->getParentCategories()) { ?>
-                        <div class="article-post__category">
+                        <div class="article-post__category article-post__category-pos1">
                             <?php foreach ($categories as $category) { ?>
                                 <a class="article-post__category-name" href="<?= $escaper->escapeUrl($category->getCategoryUrl()) ?>"
                                    title="<?= $escaper->escapeHtml($category->getTitle()) ?>"><?= $escaper->escapeHtml($category->getTitle()) ?></a>
@@ -195,16 +195,16 @@ if (!isset($escaper)) {
                             <?php } ?>
 
                         </div>
-                        <?php if (0 !== strpos($templateType, 'article-templates-4-')): ?>
-                            <?php if (!empty($categories)): ?>
-                                <div class="article-post__category">
+                        <?php /*if (0 !== strpos($templateType, 'article-templates-4-')): */ ?>
+                            <?php if ($categories = $entity->getParentCategories()): ?>
+                                <div class="article-post__category article-post__category-pos2">
                                     <?php foreach ($categories as $category): ?>
                                         <a class="article-post__category-name" href="<?= $category->getCategoryUrl() ?>"
                                            title="<?= $category->getTitle() ?>"><?=$category->getTitle()?></a>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif ?>
-                        <?php endif ?>
+                        <?php /* endif */ ?>
                     </div>
                     <?php endif ?>
                     <?php /* END Post Info in Image Container */ ?>
@@ -290,7 +290,7 @@ if (!isset($escaper)) {
                     <?php if ($displayCategoryInInfo): ?>
                         <?php if ($categories = $entity->getParentCategories()): ?>
                             <div class="article-post__footer">
-                                <div class="article-post__category">
+                                <div class="article-post__category article-post__category-pos3">
                                     <?php foreach ($categories as $category): ?>
                                     <a class="article-post__category-name" href="<?= $category->getCategoryUrl() ?>"
                                        title="<?= $category->getTitle() ?>"><?=$category->getTitle()?></a>
@@ -305,7 +305,7 @@ if (!isset($escaper)) {
                 <?php /* END Post Info */ ?>
 
                 <?php /* Visible */ ?>
-                <?php if ($displayShortContent): ?>
+                <?php if ($displayShortContentAfterImage): ?>
                     <div class="article-post__content">
                         <?= $entity->getShortFilteredContentWithoutImages() ?>
                     </div>
