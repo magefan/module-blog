@@ -114,14 +114,6 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
         );
     }
 
-    public function isNewDesign()
-    {
-        return ($this->_scopeConfig->getValue(
-            \Magefan\Blog\Model\Config::XML_PATH_BLOG_DESIGN_VERSION,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        ) == \Magefan\Blog\Model\Config\Source\DesignVersion::VALOR);
-    }
-
     /**
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
