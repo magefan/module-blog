@@ -39,7 +39,7 @@ $_postCollection = $block->getPostCollection();
         <div class="block-content">
     <?php } ?>
 
-    <div class="blog-articles <?=trim(!$displayImage ? $templateType . ' article-post__no-image' : $templateType)?>">
+    <div class="blog-articles <?= $block->escapeHtml($templateType) ?> <?php if (!$displayImage) echo ' article-post__no-image' ?>">
         <?php foreach ($_postCollection as $_post):
             $entity = $_post
             ?>

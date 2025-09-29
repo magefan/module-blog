@@ -27,9 +27,7 @@
         </div>
         <?php } ?>
         <div class="block-content">
-            <?=
-            $block->getLayout()
-                ->createBlock(get_class($block))
+            <?= $block
                 ->setData('template_type', 'article-default-list')
                 ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
             ?>

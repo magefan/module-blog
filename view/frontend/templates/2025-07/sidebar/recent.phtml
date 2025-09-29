@@ -29,16 +29,9 @@
         <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
     </div>
     <div class="block-content">
-
-		<?= $block->getLayout()
-            ->createBlock(get_class($block))
-            ->setData([
-                'template_type' => 'sidebar-article-grid',
-                'display_image' => $block->getDisplayImage()
-            ])
+		<?= $block->setData('template_type', 'sidebar-article-grid')
             ->setTemplate('Magefan_Blog::post/article.phtml')->toHtml()
 		?>
-
     </div>
 </div>
 <?php } ?>
