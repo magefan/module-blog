@@ -69,6 +69,8 @@ class TemplatePool
             foreach ($this->templates[$templateType] as $item) {
                 if (isset($item['value']) && $item['value'] == $name) {
                     $dv = $this->config->getDesignVersion();
+
+                    var_dump($dv);
                     if (!empty($item['template' . $dv])) {
                         return $item['template' . $dv];
                     }

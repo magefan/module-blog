@@ -18,7 +18,7 @@ if (!isset($escaper)) {
 ?>
 <?php if ($_postCollection->count() /* && $templateType*/ ) { ?>
     <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
-        <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/2025-07/style-widget.css') ?>
+        <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
     <?php } ?>
     <?php
 
@@ -320,7 +320,7 @@ if (!isset($escaper)) {
     <?php if ($style) { ?>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                var f = '<?= $block->getViewFileUrl('Magefan_BlogExtra::css/2025-07/style-' . $style . '.css') ?>';
+                var f = '<?= $block->getViewFileUrl('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>';
 
                 if (!document.querySelector('link[href="' + f + '"]')) {
                     var link = document.createElement('link');

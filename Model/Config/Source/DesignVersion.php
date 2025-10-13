@@ -13,9 +13,9 @@ namespace Magefan\Blog\Model\Config\Source;
  */
 class DesignVersion implements \Magento\Framework\Option\ArrayInterface
 {
-    const INITIAL = '2015-11';
-    const MODERN = '2021-06';
-    const VALOR = '2025-07';
+    const INITIAL = 'design_initial';
+    const MODERN = 'design_modern';
+    const VALOR = 'design_valor';
 
     /**
      * Options getter
@@ -25,9 +25,9 @@ class DesignVersion implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            ['value' => self::INITIAL, 'label' => '2015-11 (Initial)'],
-            ['value' => self::MODERN, 'label' => '2021-06 (Modern)'],
-            ['value' => self::VALOR, 'label' => '2025-07 (Valor)']
+            ['value' => self::INITIAL, 'label' => 'Initial (2015)'],
+            ['value' => self::MODERN, 'label' => 'Modern (2021)'],
+            ['value' => self::VALOR, 'label' => 'Valor (2015)']
         ];
     }
 
