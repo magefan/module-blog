@@ -95,7 +95,7 @@ if (!isset($escaper)) {
         ]);
     ?>
 
-    <?php if (false && $title = $block->getTitle()) { ?>
+    <?php if ($title = $block->getTitle()) { ?>
     <div class="widget block mf-blog-posts">
         <div class="block-title title">
             <strong><?= $escaper->escapeHtml($title) ?></strong>
@@ -334,7 +334,7 @@ if (!isset($escaper)) {
 
     <?php } ?>
 
-    <?php if ( false && $block->getTitle()) { ?>
+    <?php if ( $block->getTitle()) { ?>
             </div>
         </div>
     <?php } ?>

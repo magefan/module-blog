@@ -16,19 +16,13 @@ use Magento\Framework\View\Element\Template;
 class TemplatePlugin extends \Magento\Framework\View\Element\Template
 {
 
-    const deprecatedPaths = [
+    const DEPRECATED_TEMPLATES = [
         'Magefan_Blog::design_modern/post/view.phtml' => 'Magefan_Blog::post/view-modern.phtml',
         'Magefan_Blog::design_modern/post/view/nextprev.phtml' => 'Magefan_Blog::post/view/nextprev-modern.phtml',
-        'Magefan_Blog::design_initial/post/view.phtml' => 'Magefan_Blog::post/view.phtml',
-        'Magefan_Blog::design_initial/post/view/nextprev.phtml' => 'Magefan_Blog::post/view/nextprev.phtml',
-        //'Magefan_BlogAuthor::design_modern/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml',
-        //'Magefan_BlogAuthor::design_initial/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author.phtml',
+        // !!!! 'Magefan_BlogAuthor::design_modern/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml',
         'Magefan_BlogExtra::design_modern/post/view/categoryposts.phtml' => 'Magefan_BlogExtra::post/view/categoryposts-modern.phtml',
-        'Magefan_BlogExtra::design_initial/post/view/categoryposts.phtml' => 'Magefan_BlogExtra::post/view/categoryposts.phtml',
         'Magefan_BlogExtra::design_modern/post/view/relatedposts.phtml' => 'Magefan_BlogExtra::post/view/relatedposts-modern.phtml',
-        'Magefan_Blog::design_initial/post/view/relatedposts.phtml' => 'Magefan_Blog::post/view/relatedposts.phtml',
         'Magefan_BlogExtra::design_modern/sidebar/recent.phtml' => 'Magefan_BlogExtra::sidebar/recent-modern.phtml',
-        'Magefan_Blog::design_initial/sidebar/recent.phtml' => 'Magefan_Blog::sidebar/recent.phtml',
     ];
 
     /**
@@ -70,17 +64,18 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
     {
-        if ($this->config->isEnabled() && $result && strpos($result, 'Magefan_Blog') !== false) {
+        if ($result && $this->config->isEnabled() &&
+            (false !== strpos($result, 'Magefan_Blog') || false !== strpos($result, 'Hyva_MagefanBlog'))
+        ) {
             $designVersion = $this->config->getDesignVersion();
-            if (strpos($result, $designVersion . '/') !== false) {
+            if (false !== strpos($result, $designVersion . '/') ) {
+                /* Template is already in design folder */
                 return $result;
             }
 
             $newTemplate = str_replace('::', '::' . $designVersion . '/', $result);
             $newTemplate = str_replace('-modern', '', $newTemplate);
 
-            //Magefan_Blog::design_valor/widget/recent.phtml
-            //Magefan_Blog::design_valor/widget/recent.phtml
 
 
             if ($designVersion == DesignVersion::VALOR) {
@@ -124,6 +119,7 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
             /*
             if ($this->config->getDesignVersion() == DesignVersion::VALOR
                 && strpos($newTemplate, 'widget') !== false
+                && strpos($newTemplate, 'widget') !== false
                 && strpos($newTemplate, 'recent-post-slider') == false
                 && strpos($newTemplate, 'authors-list') == false
             ) {
@@ -136,7 +132,7 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
             */
 
 
-            $template = self::deprecatedPaths[$newTemplate] ?? $newTemplate;
+            $template = self::DEPRECATED_TEMPLATES[$newTemplate] ?? $newTemplate;
             $filePath = $this->getTemplateFile($template);
 
             if ($this->hyvaThemeDetection->execute()) {

@@ -81,6 +81,10 @@ class Featured extends AbstractList implements \Magento\Widget\Block\BlockInterf
      */
     public function getTemplate()
     {
+        if ($this->_template) {
+            return parent::getTemplate();
+        }
+
         $defaultTemplate = 'Magefan_Blog::widget/recent.phtml';
         $templateType = $this->getData('template_type');
         if (!$templateType || 'custom_template' === $templateType) {
@@ -93,5 +97,4 @@ class Featured extends AbstractList implements \Magento\Widget\Block\BlockInterf
 
         return parent::getTemplate();
     }
-
 }
