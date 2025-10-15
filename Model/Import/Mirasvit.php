@@ -22,6 +22,19 @@ class Mirasvit extends AbstractImport
     public function execute()
     {
         $connection = $this->getDbConnection();
+        $tableName = $connection->getTableName('mst_blog_post_entity');
+
+        if ($connection->isTableExists($tableName)) {
+            $this->executeOld();
+        } else {
+            $this->executeNew();
+        }
+
+    }
+
+    private function executeOld()
+    {
+        $connection = $this->getDbConnection();
         $_pref = $this->getPrefix();
 
         $select = $connection->select()
@@ -279,6 +292,240 @@ class Mirasvit extends AbstractImport
                 $storeIds[] = $data2['store_id'];
             }
             $data['store_ids'] = $storeIds;
+
+            $post = $this->_postFactory->create();
+            try {
+                /* Post saving */
+                $post->setData($data)->save();
+                $this->_importedPostsCount++;
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->_skippedPosts[] = $data['title'];
+                $this->_logger->debug('Blog Post Import [' . $data['title'] . ']: '. $e->getMessage());
+            }
+            unset($post);
+        }
+        /* end */
+    }
+
+
+    public function executeNew()
+    {
+        $connection = $this->getDbConnection();
+        $_pref = $this->getPrefix();
+
+        $select = $connection->select()
+            ->from($_pref . 'mst_blog_post')->limit(1);
+
+        try {
+            $connection->fetchAll($select);
+        } catch (\Exception $e) {
+            throw new \Exception(__('Mirasvit BlogMX Extension not detected.'), 1);
+        }
+
+        $categories = [];
+        $oldCategories = [];
+
+        /* Import categories */
+
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mst_blog_category'], [
+                // magefan_blog => mirasvit
+                'old_id' => 'category_id',
+                'position' => 'position',
+                'parent_id' => 'parent_id',
+                'title' => 'name',
+                'meta_title' => 'meta_title',
+//                'meta_keywords' => 'meta_keywords',
+                'meta_description' => 'meta_description',
+                'identifier' => 'url_key',
+                'content' => 'content',
+                'is_active' => 'status',
+            ]);
+
+        $result = $connection->fetchAll($select);
+
+        foreach ($result as $data) {
+            /* Prepare category data */
+
+            /* Get Stores */
+            $data['store_ids'] = [0];
+            $data['path'] = 0;
+
+            $category = $this->_categoryFactory->create();
+            try {
+                /* Initial saving */
+                $category->setData($data)->save();
+                $this->_importedCategoriesCount++;
+                $categories[$category->getId()] = $category;
+                $oldCategories[$category->getOldId()] = $category;
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                unset($category);
+                $this->_skippedCategories[] = $data['title'];
+                $this->_logger->debug('Blog Category Import [' . $data['title'] . ']: '. $e->getMessage());
+            }
+        }
+
+        /* Reindexing parent categories */
+        foreach ($categories as $ct) {
+            if ($oldParentId = $ct->getData('parent_id')) {
+                if (isset($oldCategories[$oldParentId])) {
+                    $ct->setPath(
+                        $parentId = $oldCategories[$oldParentId]->getId()
+                    );
+                }
+            }
+        }
+
+        for ($i = 0; $i < 4; $i++) {
+            $changed = false;
+            foreach ($categories as $ct) {
+                if ($ct->getPath()) {
+                    $parentId = explode('/', $ct->getPath())[0];
+                    $pt = $categories[$parentId];
+                    if ($pt->getPath()) {
+                        $ct->setPath($pt->getPath() . '/'. $ct->getPath());
+                        $changed = true;
+                    }
+                }
+            }
+
+            if (!$changed) {
+                break;
+            }
+        }
+        /* end*/
+
+        foreach ($categories as $ct) {
+            /* Final saving */
+            $ct->save();
+        }
+
+        /* Import tags */
+        $tags = [];
+        $oldTags = [];
+        $existingTags = [];
+
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mst_blog_tag'], [
+                'old_id' => 'tag_id',
+                'title' => 'name',
+                'identifier' => 'url_key'
+            ]);
+
+        $result = $connection->fetchAll($select);
+
+        foreach ($result as $data) {
+            /* Prepare tag data */
+            /*
+            foreach (['title'] as $key) {
+                $data[$key] = mb_convert_encoding($data[$key], 'HTML-ENTITIES', 'UTF-8');
+            }
+            */
+
+            if (!$data['title']) {
+                continue;
+            }
+
+            $data['title'] = trim($data['title']);
+
+            try {
+                /* Initial saving */
+                if (!isset($existingTags[$data['title']])) {
+                    $tag = $this->_tagFactory->create();
+                    $tag->setData($data)->save();
+                    $this->_importedTagsCount++;
+                    $tags[$tag->getId()] = $tag;
+                    $oldTags[$tag->getOldId()] = $tag;
+                    $existingTags[$tag->getTitle()] = $tag;
+                } else {
+                    $tag = $existingTags[$data['title']];
+                    $oldTags[$data['old_id']] = $tag;
+                }
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->_skippedTags[] = $data['title'];
+                $this->_logger->debug('Blog Tag Import [' . $data['title'] . ']: '. $e->getMessage());
+            }
+        }
+
+        /* Import posts */
+
+        $select = $connection->select()
+            ->from(['t' => $_pref . 'mst_blog_post'], [
+                'old_id' => 'post_id',
+                'author_id' => 'author_id',
+                'creation_time' => 'created_at',
+                'publish_time' => 'created_at',
+                'update_time' => 'updated_at',
+                'meta_description' => 'meta_description',
+                'meta_keywords' => 'meta_keywords',
+                'meta_title' => 'meta_title',
+                'featured_img' => 'featured_image',
+                'featured_img_alt' => 'featured_alt',
+                'short_content' => 'short_content',
+                'content' => 'content',
+                'is_active' => 'status',
+                'identifier' => 'url_key',
+                'title' => 'name',
+                'product_ids',
+                'tag_ids',
+                'category_ids',
+                'author_id',
+                'store_ids' => 'store_ids'
+            ]);
+
+        $result = $connection->fetchAll($select);
+
+
+        foreach ($result as $data) {
+
+            if ($data['is_active'] == 2) {
+                $data['is_active'] = 1;
+            } else {
+                $data['is_active'] = 0;
+            }
+
+            if ($data['featured_img']) {
+                $data['featured_img'] = 'magefan_blog/' . $data['featured_img'];
+            }
+
+            /* Find post categories*/
+            $postCategories = [];
+
+            $c_result = explode(",", $data['category_ids']);;
+
+            foreach ($c_result as $oldId) {
+                if (isset($oldCategories[$oldId])) {
+                    $id = $oldCategories[$oldId]->getId();
+                    $postCategories[$id] = $id;
+                }
+            }
+            $data['categories'] = $postCategories;
+
+            /* Find post tags*/
+            $postTags = [];
+
+            $t_result = explode(",", $data['tag_ids']);
+
+            foreach ($t_result as $oldId) {
+                if (isset($oldTags[$oldId])) {
+                    $id = $oldTags[$oldId]->getId();
+                    $postTags[$id] = $id;
+                }
+            }
+            $data['tags'] = $postTags;
+
+            /* Find post products*/
+            $data['links'] = [];
+            $postProducts = [];
+
+            $p_result = explode(",", $data['product_ids']);
+            foreach ($p_result as $id) {
+                $postProducts[$id] = $id;
+            }
+
+            if (count($postProducts)) {
+                $data['links']['product'] = $postProducts;
+            }
 
             $post = $this->_postFactory->create();
             try {
