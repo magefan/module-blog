@@ -520,7 +520,9 @@ class Mirasvit extends AbstractImport
 
             $p_result = explode(",", $data['product_ids']);
             foreach ($p_result as $id) {
-                $postProducts[$id] = $id;
+                if(!empty($id)){
+                    $postProducts[$id] = $id;
+                }
             }
 
             if (count($postProducts)) {
