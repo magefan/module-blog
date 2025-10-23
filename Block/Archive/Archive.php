@@ -33,15 +33,24 @@ trait Archive
      * @param string $content
      * @return string
      */
-    private function filterContent(string $content):string
+    private function filterContent(string $content): string
     {
         if (!$content) {
             return '';
         }
         $vars = ['year', 'month'];
+        $values = [];
+        $monthBeforeYear = false;
         foreach ($vars as $var) {
             $schemaVar = '{{' . $var . '}}';
-            if (strpos($content, $schemaVar) !== false) {
+            $pos = strpos($content, $schemaVar);
+
+            if ($pos !== false) {
+                $positions[$var] = $pos;
+
+                if (isset($positions['month'], $positions['year'])) {
+                    $monthBeforeYear = $positions['month'] < $positions['year'];
+                }
                 $value = '';
                 switch ($var) {
                     case 'year':
@@ -49,13 +58,21 @@ trait Archive
                         break;
                     case 'month':
                         if ($this->getMonth()) {
-                            $value = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
+                            $value = __(date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01')));
                         }
                         break;
                 }
-                $content = str_replace($schemaVar, $value, $content);
+
+                $content = str_replace($schemaVar, '%s', $content);
+                $values[] = $value;
             }
         }
+
+        if ($monthBeforeYear) {
+            $values = array_reverse($values);
+        }
+        $content = sprintf(__($content), ...$values);
+
         return $content;
     }
 }
