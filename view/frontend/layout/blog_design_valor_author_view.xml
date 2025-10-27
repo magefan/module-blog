@@ -8,6 +8,6 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="blog_2025_07_default"/>
-    <update handle="blog_2025_07_post_list"/>
+    <update handle="blog_design_valor_default"/>
+    <update handle="blog_design_valor_post_list"/>
 </page>
