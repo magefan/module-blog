@@ -20,42 +20,42 @@
     <?php if ($_post->isPublishDateEnabled()) { ?>
         <div class="item post-posed-date">
             <i class="mf-blog-icon mfbi-calendar"></i>
-            <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
-            <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+            <span class="label"><?= $escaper->escapeHtml(__('Posted:')) ?></span>
+            <span class="value"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
         </div>
     <?php } ?>
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
         <div class="item post-categories">
             <i class="mf-blog-icon mfbi-folder"></i>
-            <span class="label"><?= $block->escapeHtml(__('Categories:')) ?></span>
+            <span class="label"><?= $escaper->escapeHtml(__('Categories:')) ?></span>
             <?php $n = 0; ?>
             <?php foreach ($_post->getParentCategories() as $ct) { ?>
                 <?php $n++; ?>
-                <a title="<?= $block->escapeHtml($ct->getTitle()) ?>"
-                   href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
-                ><?= $block->escapeHtml($ct->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_categoriesCount) ? ',' : '' ?>
+                <a title="<?= $escaper->escapeHtml($ct->getTitle()) ?>"
+                   href="<?= $escaper->escapeUrl($ct->getCategoryUrl()) ?>"
+                ><?= $escaper->escapeHtml($ct->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_categoriesCount) ? ',' : '' ?>
             <?php } ?>
         </div>
     <?php } ?>
     <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
         <div class="item post-comments">
             <i class="mf-blog-icon mfbi-comments"></i>
-            <span class="label"><?= $block->escapeHtml(__('Comments:')) ?></span>
-            <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
-               href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
-            ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
+            <span class="label"><?= $escaper->escapeHtml(__('Comments:')) ?></span>
+            <a title="<?= $escaper->escapeHtml($_post->getTitle()) ?>"
+               href="<?= $escaper->escapeUrl($_post->getPostUrl()) ?>#post-comments"
+            ><?= $escaper->escapeHtml($_post->getCommentsCount()) ?></a>
         </div>
     <?php } ?>
     <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
     <div class="item post-tags">
         <div class="mf-blog-icon mfbi-tags"></div>
-        <span class="label"><?= $block->escapeHtml(__('Tags:')) ?></span>
+        <span class="label"><?= $escaper->escapeHtml(__('Tags:')) ?></span>
         <?php $n = 0; ?>
         <?php foreach ($_post->getRelatedTags() as $tag) { ?>
             <?php $n++; ?>
-            <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
-               href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
-            ><?= $block->escapeHtml($tag->getTitle()) ?></a><?= ($n != $_tagsCount) ? ',' : '' ?>
+            <a title="<?= $escaper->escapeHtml($tag->getTitle()) ?>"
+               href="<?= $escaper->escapeUrl($tag->getTagUrl()) ?>"
+            ><?= $escaper->escapeHtml($tag->getTitle()) ?></a><?= ($n != $_tagsCount) ? ',' : '' ?>
         <?php } ?>
     </div>
     <?php } ?>
@@ -63,14 +63,14 @@
         <?php if ($_author = $_post->getAuthor()) { ?>
         <div class="item post-author">
                 <i class="mf-blog-icon mfbi-user"></i>
-                <span class="label"><?= $block->escapeHtml(__('Author:')) ?></span>
+                <span class="label"><?= $escaper->escapeHtml(__('Author:')) ?></span>
                 <span class="value">
                 <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
-                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
-                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>">
+                <a title="<?= $escaper->escapeHtml($_author->getTitle()) ?>"
+                   href="<?= $escaper->escapeUrl($_author->getAuthorUrl()) ?>">
                 <?php } ?>
 
-                <?= $block->escapeHtml($_author->getTitle()) ?>
+                <?= $escaper->escapeHtml($_author->getTitle()) ?>
 
                 <?php if ($authorPageEnabled) { ?>
                 </a>
@@ -81,15 +81,15 @@
                     $coAuthorsCount = count($coAuthors);
                 ?>
                 <?php if ($coAuthorsCount) { ?>
-                    <?= $block->escapeHtml(__('and')) ?>
+                    <?= $escaper->escapeHtml(__('and')) ?>
                     <?php $z = 0 ?>
-                    <?php foreach($coAuthors as $coAuthor) { ?>
+                    <?php foreach ($coAuthors as $coAuthor) { ?>
                         <?php $z++; ?>
                         <?php if ($block->authorPageEnabled()) { ?>
-                            <a title="<?= $block->escapeHtml($coAuthor->getTitle()) ?>"
-                               href="<?= $block->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $block->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                            <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
+                               href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
                         <?php } else { ?>
-                            <?= $block->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                            <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
                         <?php } ?>
                     <?php } ?>
                 <?php } ?>
@@ -104,9 +104,9 @@
         <?php if ($viewsCount = $_post->getViewsCount()) { ?>
             <div class="item post-views">
                 <i class="mf-blog-icon mfbi-views"></i>
-                <span class="label"><?= $block->escapeHtml(__('Views:')) ?></span>
+                <span class="label"><?= $escaper->escapeHtml(__('Views:')) ?></span>
                 <span class="value">
-                    <?= $block->escapeHtml($viewsCount)?>
+                    <?= $escaper->escapeHtml($viewsCount)?>
                 </span>
             </div>
         <?php } ?>
@@ -116,7 +116,7 @@
     <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
         <div class="item post-reading-time">
             <i class="mf-blog-icon mfbi-reading-time"></i>
-            <span class="value"><?= $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+            <span class="value"><?= $escaper->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
         </div>
     <?php } ?>
 

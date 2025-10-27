@@ -24,14 +24,14 @@
 ?>
 
 <?php if ($_postCollection->count()) { ?>
-<div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?>" >
+<div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?>" >
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
     </div>
     <div class="block-content">
-		<?= $block->setData('template_type', 'sidebar-article-grid')
+        <?= $block->setData('template_type', 'sidebar-article-grid')
             ->setTemplate('Magefan_Blog::design_valor/post/article.phtml')->toHtml()
-		?>
+        ?>
     </div>
 </div>
 <?php } ?>

@@ -38,28 +38,28 @@ if ($exist = $block->getItems()->getSize()) {
 
     <?php if ($type == 'related' || $type == 'upsell'): ?>
         <?php if ($type == 'related'): ?>
-            <div class="mfblog-related-products-block block <?= $block->escapeHtml($class); ?>"
+            <div class="mfblog-related-products-block block <?= $escaper->escapeHtml($class); ?>"
                  data-mage-init='{"relatedProducts":{"relatedCheckbox":".related.checkbox"}}'
-                 data-limit="<?= $block->escapeHtml($limit); ?>"
-                 data-shuffle="<?= $block->escapeHtml($shuffle); ?>">
+                 data-limit="<?= $escaper->escapeHtml($limit); ?>"
+                 data-shuffle="<?= $escaper->escapeHtml($shuffle); ?>">
         <?php else: ?>
-            <div class="block <?= $block->escapeHtml($class); ?>"
+            <div class="block <?= $escaper->escapeHtml($class); ?>"
                  data-mage-init='{"upsellProducts":{}}'
-                 data-limit="<?= $block->escapeHtml($limit); ?>"
-                 data-shuffle="<?= $block->escapeHtml($shuffle); ?>">
+                 data-limit="<?= $escaper->escapeHtml($limit); ?>"
+                 data-shuffle="<?= $escaper->escapeHtml($shuffle); ?>">
         <?php endif; ?>
     <?php else: ?>
-        <div class="block <?= $block->escapeHtml($class); ?>">
+        <div class="block <?= $escaper->escapeHtml($class); ?>">
     <?php endif; ?>
     <div class="block-title title">
-        <strong id="block-<?= $block->escapeHtml($class)?>-heading"
+        <strong id="block-<?= $escaper->escapeHtml($class)?>-heading"
                 role="heading"
-                aria-level="2"><?= $block->escapeHtml($title); ?>
+                aria-level="2"><?= $escaper->escapeHtml($title); ?>
         </strong>
     </div>
-    <div class="block-content content" aria-labelledby="block-<?= $block->escapeHtml($class)?>-heading">
+    <div class="block-content content" aria-labelledby="block-<?= $escaper->escapeHtml($class)?>-heading">
 
-        <div class="products wrapper grid products-grid products-<?= $block->escapeHtml($type); ?>">
+        <div class="products wrapper grid products-grid products-<?= $escaper->escapeHtml($type); ?>">
             <ol class="products list items product-items">
                 <?php $iterator = 1; ?>
                 <?php foreach ($items as $_item): ?>
@@ -78,18 +78,18 @@ if ($exist = $block->getItems()->getSize()) {
                             '<li class="item product product-item">' :
                             '</li><li class="item product product-item">' ?>
                 <?php endif; ?>
-                <div class="product-item-info <?= $block->escapeHtml($available); ?>">
-                    <?= '<!-- ' . $block->escapeHtml($image) . '-->' ?>
-                    <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
+                <div class="product-item-info <?= $escaper->escapeHtml($available); ?>">
+                    <?= '<!-- ' . $escaper->escapeHtml($image) . '-->' ?>
+                    <a href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"
                        class="product photo product-item-photo">
                         <?= $block->getImage($_item, $image)->toHtml(); ?>
                     </a>
                     <div class="product details product-item-details">
                         <strong class="product name product-item-name">
                             <a class="product-item-link"
-                               title="<?= $block->escapeHtml($_item->getName()) ?>"
-                               href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>">
-                            <?= $block->escapeHtml($_item->getName()) ?></a>
+                               title="<?= $escaper->escapeHtml($_item->getName()) ?>"
+                               href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>">
+                            <?= $escaper->escapeHtml($_item->getName()) ?></a>
                         </strong>
 
                         <?= /*@noEscape*/ $block->getProductPrice($_item); ?>
@@ -105,29 +105,29 @@ if ($exist = $block->getItems()->getSize()) {
                                             <?php if ($_item->isSaleable()): ?>
                                                 <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
                                                     <button class="action tocart primary"
-                                                            data-mage-init='{"redirectUrl": {"url": "<?= $block->escapeUrl($block->getAddToCartUrl($_item)) ?>"}}'
+                                                            data-mage-init='{"redirectUrl": {"url": "<?= $escaper->escapeUrl($block->getAddToCartUrl($_item)) ?>"}}'
                                                             type="button"
-                                                            title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
-                                                        <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                            title="<?= $escaper->escapeHtml(__('Add to Cart')) ?>">
+                                                        <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
                                                     </button>
                                                 <?php else: ?>
                                                     <?php $postDataHelper = $this->helper(Magento\Framework\Data\Helper\PostHelper::class);
                                                             $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()]);
                                                     ?>
                                                     <button class="action tocart primary"
-                                                            data-post='<?= $block->escapeHtml($postData); ?>'
-                                                            type="button" title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
-                                                        <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                            data-post='<?= $escaper->escapeHtml($postData); ?>'
+                                                            type="button" title="<?= $escaper->escapeHtml(__('Add to Cart')) ?>">
+                                                        <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
                                                     </button>
                                                 <?php endif; ?>
                                             <?php else: ?>
                                                 <?php if ($_item->getIsSalable()): ?>
                                                     <div class="stock available">
-                                                        <span><?= $block->escapeHtml(__('In stock')) ?></span>
+                                                        <span><?= $escaper->escapeHtml(__('In stock')) ?></span>
                                                     </div>
                                                 <?php else: ?>
                                                     <div class="stock unavailable">
-                                                        <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+                                                        <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span>
                                                     </div>
                                                 <?php endif; ?>
                                             <?php endif; ?>
@@ -138,11 +138,11 @@ if ($exist = $block->getItems()->getSize()) {
                                         <div class="secondary-addto-links actions-secondary" data-role="add-to-links">
                                             <?php if ($this->helper(Magento\Wishlist\Helper\Data::class)->isAllow() && $showWishlist): ?>
                                                 <a href="#"
-                                                   data-post='<?= $block->escapeHtml($block->getAddToWishlistParams($_item)); ?>'
+                                                   data-post='<?= $escaper->escapeHtml($block->getAddToWishlistParams($_item)); ?>'
                                                    class="action towishlist"
                                                    data-action="add-to-wishlist"
-                                                   title="<?= $block->escapeHtml(__('Add to Wish List')) ?>">
-                                                    <span><?= $block->escapeHtml(__('Add to Wish List')) ?></span>
+                                                   title="<?= $escaper->escapeHtml(__('Add to Wish List')) ?>">
+                                                    <span><?= $escaper->escapeHtml(__('Add to Wish List')) ?></span>
                                                 </a>
                                             <?php endif; ?>
                                             <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
@@ -150,10 +150,10 @@ if ($exist = $block->getItems()->getSize()) {
                                                 $compareHelper = $this->helper(Magento\Catalog\Helper\Product\Compare::class);
                                                 ?>
                                                 <a href="#" class="action tocompare"
-                                                   data-post='<?= $block->escapeHtml($compareHelper->getPostDataParams($_item));?>'
+                                                   data-post='<?= $escaper->escapeHtml($compareHelper->getPostDataParams($_item));?>'
                                                    data-role="add-to-links"
-                                                   title="<?= $block->escapeHtml(__('Add to Compare')); ?>">
-                                                    <span><?= $block->escapeHtml(__('Add to Compare')) ?></span>
+                                                   title="<?= $escaper->escapeHtml(__('Add to Compare')); ?>">
+                                                    <span><?= $escaper->escapeHtml(__('Add to Compare')) ?></span>
                                                 </a>
                                             <?php endif; ?>
                                         </div>

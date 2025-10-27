@@ -203,5 +203,4 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     {
         return $this->_coreRegistry->registry('current_blog_post');
     }
-
 }

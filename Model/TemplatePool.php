@@ -37,8 +37,7 @@ class TemplatePool
     public function __construct(
         array $templates,
         ?Config $config = null
-    )
-    {
+    ) {
         $this->templates = $templates;
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();

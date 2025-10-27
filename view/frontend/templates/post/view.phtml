@@ -16,21 +16,21 @@
 <?php
 $_post = $block->getPost();
 $_postUrl = $_post->getPostUrl();
-$_postName = $block->escapeHtml($_post->getTitle(), null);
+$_postName = $escaper->escapeHtml($_post->getTitle(), null);
 ?>
 <div class="post-view">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
 
-        <?php if ($block->displayAddThisToolbox()) : ?>
+        <?php if ($block->displayAddThisToolbox()): ?>
             <div class="post-header">
 
                 <!-- Post Sharing -->
                 <div class="post-sharing post-sharing-top old-post-view">
                     <div class="share-elements">
                         <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                            <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
-                                <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
-                                    <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                            <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
+                                <div class="icon" title="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                    <img src="<?= $block->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                                 </div>
                             </div>
                         <?php } ?>
@@ -52,8 +52,8 @@ $_postName = $block->escapeHtml($_post->getTitle(), null);
                     }
                     ?>
                     <div class="post-ftimg-hld">
-                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
-                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                        <img src="<?= $escaper->escapeUrl($featuredImage) ?>"
+                             alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
                     </div>
                 <?php } ?>
                 <div class="post-text-hld">

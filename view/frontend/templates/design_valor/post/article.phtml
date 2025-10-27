@@ -16,7 +16,7 @@ if (!isset($escaper)) {
     $escaper = $block;
 }
 ?>
-<?php if ($_postCollection->count() /* && $templateType*/ ) { ?>
+<?php if ($_postCollection->count() /* && $templateType*/) { ?>
     <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
         <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
     <?php } ?>
@@ -27,13 +27,13 @@ if (!isset($escaper)) {
         $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType());
 
         $style = null;
-        if ($templateType) {
-            preg_match('/templates-\d+/', $templateType, $matches);
-            $style = $matches[0] ?? '';
-        } else {
-            $templateType = 'article-grid';
-        }
-        $displayImage = $this->getData('display_image') ?? true;
+    if ($templateType) {
+        preg_match('/templates-\d+/', $templateType, $matches);
+        $style = $matches[0] ?? '';
+    } else {
+        $templateType = 'article-grid';
+    }
+        $displayImage = $block->getData('display_image') ?? true;
 
         $displayCategoryInImageContainer = !in_array($templateType, [
             'article-grid',
@@ -103,7 +103,7 @@ if (!isset($escaper)) {
         <div class="block-content">
     <?php } ?>
 
-    <div class="blog-articles <?= $escaper->escapeHtml($templateType) ?> <?php if (!$displayImage) echo ' article-post__no-image' ?>">
+    <div class="blog-articles <?= $escaper->escapeHtml($templateType) ?> <?php if (!$displayImage) { echo ' article-post__no-image'; } ?>">
         <?php foreach ($_postCollection as $_post):
             $entity = $_post
             ?>
@@ -111,14 +111,14 @@ if (!isset($escaper)) {
             <div class="article-post">
 
                 <?php /* Post Image Container */ ?>
-                <?php if ( ('article-default-list' !== $templateType) && ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
+                <?php if (('article-default-list' !== $templateType) && ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
                 <div class="article-post__image-container animation-type--zoom">
                     <?php
                         $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
                         $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                        if (!$featuredImgAlt) {
-                            $featuredImgAlt = $_post->getTitle();
-                        }
+                    if (!$featuredImgAlt) {
+                        $featuredImgAlt = $_post->getTitle();
+                    }
                     ?>
 
                     <?php /* if ($preparedImg) { ?>
@@ -170,9 +170,9 @@ if (!isset($escaper)) {
                                                 <?php $z++; ?>
                                                 <?php if ($block->authorPageEnabled()) { ?>
                                                     <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
-                                                       href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                                       href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
                                                 <?php } else { ?>
-                                                    <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                                    <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
                                                 <?php } ?>
                                             <?php } ?>
                                         <?php } ?>
@@ -243,13 +243,13 @@ if (!isset($escaper)) {
                                     <?php if (count($coAuthors)) { ?>
                                         <?= $escaper->escapeHtml(__('and')) ?>
                                         <?php $z = 0 ?>
-                                        <?php foreach($coAuthors as $coAuthor) { ?>
+                                        <?php foreach ($coAuthors as $coAuthor) { ?>
                                             <?php $z++; ?>
                                             <?php if ($block->authorPageEnabled()) { ?>
                                                 <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
-                                                   href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != count($coAuthors)) echo ', ' ?>
+                                                   href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != count($coAuthors)) { echo ', '; } ?>
                                             <?php } else { ?>
-                                                <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != count($coAuthors)) echo ', ' ?>
+                                                <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != count($coAuthors)) { echo ', '; } ?>
                                             <?php } ?>
                                         <?php } ?>
                                     <?php } ?>
@@ -334,7 +334,7 @@ if (!isset($escaper)) {
 
     <?php } ?>
 
-    <?php if ( $block->getTitle()) { ?>
+    <?php if ($block->getTitle()) { ?>
             </div>
         </div>
     <?php } ?>

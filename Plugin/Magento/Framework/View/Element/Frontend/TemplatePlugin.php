@@ -48,8 +48,7 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
         Config $config,
         \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection,
         array $data = []
-    )
-    {
+    ) {
         $this->fileDriver = $fileDriver;
         $this->config = $config;
         $this->hyvaThemeDetection = $hyvaThemeDetection;
@@ -68,7 +67,7 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
             (false !== strpos($result, 'Magefan_Blog') || false !== strpos($result, 'Hyva_MagefanBlog'))
         ) {
             $designVersion = $this->config->getDesignVersion();
-            if (false !== strpos($result, $designVersion . '/') ) {
+            if (false !== strpos($result, $designVersion . '/')) {
                 /* Template is already in design folder */
                 return $result;
             }
@@ -137,7 +136,7 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
 
             if ($this->hyvaThemeDetection->execute()) {
                 $modifiedPath = $result;
-                if ($this->config->getDesignVersion() == DesignVersion::VALOR){
+                if ($this->config->getDesignVersion() == DesignVersion::VALOR) {
                     $modifiedPath = preg_replace('/\d{4}-(0[1-9]|1[0-2])/', $this->config->getDesignVersion(), $result);
                 }
                 if (strpos($modifiedPath, $this->config->getDesignVersion()) == false) {

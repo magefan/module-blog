@@ -24,12 +24,12 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 ?>
 <?php if ($_postCollection->count()) { ?>
 <div class="post-list-wrapper blog-widget-recent">
-    <h3 class="title"><?= $block->escapeHtml($block->getTitle()) ?></h3>
+    <h3 class="title"><?= $escaper->escapeHtml($block->getTitle()) ?></h3>
     <ul class="post-list clearfix">
         <?php foreach ($_postCollection as $_post) { ?>
             <?php
-                $_postUrl = $block->escapeUrl($_post->getPostUrl());
-                $_postName = $block->escapeHtml($_post->getTitle());
+                $_postUrl = $escaper->escapeUrl($_post->getPostUrl());
+                $_postName = $escaper->escapeHtml($_post->getTitle());
             ?>
             <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
                 <div class="post-header">
@@ -46,18 +46,18 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                     <div class="post-info clear">
                         <?php if ($_post->isPublishDateEnabled()) { ?>
                             <div class="item post-posed-date">
-                                <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
-                                <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                <span class="label"><?= $escaper->escapeHtml(__('Posted:')) ?></span>
+                                <span class="value"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
                             </div>
                         <?php } ?>
                         <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
                         <div class="item post-categories">
-                            <span class="label"><?= $block->escapeHtml(__('Categories:')) ?></span>
+                            <span class="label"><?= $escaper->escapeHtml(__('Categories:')) ?></span>
                             <?php $n = 0;
                             foreach ($_post->getParentCategories() as $ct) { $n++; ?>
-                                <a title="<?= $block->escapeHtml($ct->getTitle()) ?>"
-                                   href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>">
-                                    <?= $block->escapeHtml($ct->getTitle()) ?>
+                                <a title="<?= $escaper->escapeHtml($ct->getTitle()) ?>"
+                                   href="<?= $escaper->escapeUrl($ct->getCategoryUrl()) ?>">
+                                    <?= $escaper->escapeHtml($ct->getTitle()) ?>
                                 </a>
                                 <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
                             <?php } ?>
@@ -79,8 +79,8 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                             ?>
                             <div class="post-ftimg-hld">
                                 <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
-                                    <img src="<?= $block->escapeHtml($featuredImage) ?>"
-                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                    <img src="<?= $escaper->escapeHtml($featuredImage) ?>"
+                                         alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
                                 </a>
                             </div>
                         <?php } ?>
@@ -91,7 +91,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                            href="<?= /*@noEscape*/ $_postUrl ?>"
                            title="<?= /*@noEscape*/ $_postName ?>"
                            >
-                           <?= $block->escapeHtml(__('Read more &#187;')) ?>
+                           <?= $escaper->escapeHtml(__('Read more &#187;')) ?>
                         </a>
                     </div>
                 </div>

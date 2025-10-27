@@ -226,5 +226,4 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
 
         return parent::getTemplate();
     }
-
 }
