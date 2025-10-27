@@ -69,8 +69,8 @@ class TemplatePool
                 if (isset($item['value']) && $item['value'] == $name) {
                     $dv = $this->config->getDesignVersion();
 
-                    if (!empty($item['template' . $dv])) {
-                        return $item['template' . $dv];
+                    if (!empty($item['template_' . $dv])) {
+                        return $item['template_' . $dv];
                     }
                     return $item['template'];
                 }

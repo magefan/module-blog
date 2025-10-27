@@ -240,7 +240,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
+        $templateName = $this->getData('template_type') ?: (string)$this->_scopeConfig->getValue(
             'mfblog/post_view/related_products/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );

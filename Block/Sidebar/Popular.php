@@ -56,7 +56,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->getConfigValue('template');
+        $templateName = $this->getData('template_type') ?: (string)$this->getConfigValue('template');
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }

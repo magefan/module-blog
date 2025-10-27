@@ -219,9 +219,9 @@ if (!isset($escaper)) {
                 <?php if ($displayInfoAfterImageContainer): ?>
                 <div class="article-post__info">
                     <div class="article-post__header">
-                        <h2 class="article-post__title">
+                        <div class="article-post__title">
                             <a href="<?= $entity->getPostUrl() ?>"><?=$entity->getTitle()?></a>
-                        </h2>
+                        </div>
 
                         <?php /* Not Visible */ ?>
                         <?php if (!in_array($templateType, [
