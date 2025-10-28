@@ -20,7 +20,34 @@ class TemplatePlugin
         // !!!! 'Magefan_BlogAuthor::design_modern/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml',
         'Magefan_BlogExtra::design_modern/post/view/categoryposts.phtml' => 'Magefan_BlogExtra::post/view/categoryposts-modern.phtml',
         'Magefan_BlogExtra::design_modern/post/view/relatedposts.phtml' => 'Magefan_BlogExtra::post/view/relatedposts-modern.phtml',
-        'Magefan_BlogExtra::design_modern/sidebar/recent.phtml' => 'Magefan_BlogExtra::sidebar/recent-modern.phtml'
+        'Magefan_BlogExtra::design_modern/sidebar/recent.phtml' => 'Magefan_BlogExtra::sidebar/recent-modern.phtml',
+
+        // whole list at - \Magefan\BlogExtra\Setup\Patch\Data\TemplateNamesChangeIn2025::BLOG_POST_LIST_TEMPLATE_MIGRATION
+        'Magefan_BlogExtra::design_modern/post/list/block-5-4.phtml' => 'Magefan_BlogExtra::post/list/block-0-1-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-5-3.phtml' => 'Magefan_BlogExtra::post/list/block-0-2-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-5-2.phtml' => 'Magefan_BlogExtra::post/list/block-0-4-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-5-3.phtml' => 'Magefan_BlogExtra::post/list/block-0-5-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-5-3.phtml' => 'Magefan_BlogExtra::post/list/block-0-6-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-1-1.phtml' => 'Magefan_BlogExtra::post/list/block-1-1-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-1-2.phtml' => 'Magefan_BlogExtra::post/list/block-1-2-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-1-3.phtml' => 'Magefan_BlogExtra::post/list/block-1-3-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-2-4.phtml' => 'Magefan_BlogExtra::post/list/block-2-1-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-2-5.phtml' => 'Magefan_BlogExtra::post/list/block-2-2-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-2-6.phtml' => 'Magefan_BlogExtra::post/list/block-2-3.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-2-1.phtml' => 'Magefan_BlogExtra::post/list/block-2-1-shortcontent.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-2-2.phtml' => 'Magefan_BlogExtra::post/list/block-2-2-shortcontent.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-2-3.phtml' => 'Magefan_BlogExtra::post/list/block-2-3-shortcontent.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-1.phtml' => 'Magefan_BlogExtra::post/list/block-3-1-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-2.phtml' => 'Magefan_BlogExtra::post/list/block-3-2.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-3.phtml' => 'Magefan_BlogExtra::post/list/block-3-3.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-4.phtml' => 'Magefan_BlogExtra::post/list/block-3-4.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-5.phtml' => 'Magefan_BlogExtra::post/list/block-3-5.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-6.phtml' => 'Magefan_BlogExtra::post/list/block-3-6.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-5-1.phtml' => 'Magefan_BlogExtra::post/list/block-4-1.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-5-1.phtml' => 'Magefan_BlogExtra::post/list/block-4-2-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-4.phtml' => 'Magefan_BlogExtra::post/list/block-5-1-full.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-5.phtml' => 'Magefan_BlogExtra::post/list/block-5-2.phtml',
+        'Magefan_BlogExtra::design_modern/post/list/block-3-4.phtml' => 'Magefan_BlogExtra::post/list/block-5-3.phtml'
     ];
 
     /**
