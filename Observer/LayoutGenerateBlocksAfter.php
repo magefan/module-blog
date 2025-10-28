@@ -25,7 +25,7 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
 
     /**
      * @param \Magento\Framework\View\Page\Config $pageConfig
-     * @param BlogConfig $scopeConfig
+     * @param BlogConfig $blogConfig
      */
     public function __construct(
         \Magento\Framework\View\Page\Config $pageConfig,

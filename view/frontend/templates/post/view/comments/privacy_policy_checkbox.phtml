@@ -14,16 +14,16 @@
            value="1"
            data-validate="{required:true}"
            class="checkbox required-entry"
-           id="<?= $block->escapeHtml($id) ?>"
+           id="<?= $escaper->escapeHtml($id) ?>"
            name="privacy">
     <?php
     $privacyPolicy =
         "<a href=" .
-            $block->escapeHtml($block->getUrl('privacy-policy-cookie-restriction-mode')) .
+            $escaper->escapeHtml($block->getUrl('privacy-policy-cookie-restriction-mode')) .
             " target='_blank' style='text-decoration: underline;'>". __('privacy policy') .
         "</a>";
     ?>
-    <label for="<?= $block->escapeHtml($id) ?>"
+    <label for="<?= $escaper->escapeHtml($id) ?>"
            class="required">
         <?= /*@noEscape*/ __('Yes, I have read the %1 and agree to the processing of my personal data.', $privacyPolicy) ?>
     </label>

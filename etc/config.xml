@@ -13,6 +13,7 @@
             <general>
                 <enabled>0</enabled>
                 <mfmodule>Blog</mfmodule>
+                <design_version>design_modern</design_version>
             </general>
             <publish_post_on_fb>
                 <enabled>0</enabled>
@@ -45,9 +46,6 @@
                 <meta_description/>
             </index_page>
             <post_view>
-                <design>
-                    <template>modern</template>
-                </design>
                 <related_posts>
                     <enabled>1</enabled>
                     <template/>
@@ -57,6 +55,7 @@
                 </related_posts>
                 <related_products>
                     <enabled>1</enabled>
+                    <template/>
                     <number_of_products>5</number_of_products>
                     <autorelated_enabled>0</autorelated_enabled>
                     <autorelated_black_words/>
@@ -83,7 +82,6 @@
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
-                    <template>modern</template>
                 </nextprev>
                 <views_count>
                     <enabled>0</enabled>

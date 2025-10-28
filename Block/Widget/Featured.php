@@ -8,27 +8,13 @@
 
 namespace Magefan\Blog\Block\Widget;
 
+use Magefan\Blog\Block\Post\PostList\AbstractList;
+
 /**
  * Blog featured posts widget
  */
-
-class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\Widget\Block\BlockInterface
+class Featured extends AbstractList implements \Magento\Widget\Block\BlockInterface
 {
-
-    /**
-     * Set blog template
-     *
-     * @return this
-     */
-    public function _toHtml()
-    {
-        $this->setTemplate(
-            $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
-        );
-
-        return \Magento\Framework\View\Element\Template::_toHtml();
-    }
-
     /**
      * Retrieve block title
      *
@@ -37,6 +23,34 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     public function getTitle()
     {
         return $this->getData('title') ?: '';
+    }
+
+    /**
+     * Prepare posts collection
+     *
+     * @return void
+     */
+    protected function _preparePostCollection()
+    {
+        parent::_preparePostCollection();
+        $this->_postCollection->addPostsFilter(
+            $this->getPostIdsConfigValue()
+        );
+
+        $ids = [];
+        foreach (explode(',', $this->getPostIdsConfigValue()) as $id) {
+            $id = (int)trim($id);
+            if ($id) {
+                $ids[] = $id;
+            }
+        }
+
+        if ($ids) {
+            $ids = implode(',', $ids);
+            $this->_postCollection->getSelect()->order(
+                new \Zend_Db_Expr('FIELD(`main_table`.`post_id`,' . $ids .')')
+            );
+        }
     }
 
     /**
@@ -63,13 +77,24 @@ class Featured extends \Magefan\Blog\Block\Sidebar\Featured implements \Magento\
     }
 
     /**
-     * Get relevant path to template
-     * Skip parent one as it use template for sidebar block
-     *
      * @return string
      */
     public function getTemplate()
     {
-        return \Magefan\Blog\Block\Post\PostList\AbstractList::getTemplate();
+        if ($this->_template) {
+            return parent::getTemplate();
+        }
+
+        $defaultTemplate = 'Magefan_Blog::widget/recent.phtml';
+        $templateType = $this->getData('template_type');
+        if (!$templateType || 'custom_template' === $templateType) {
+            $this->_template = $this->getData('custom_template') ?: $defaultTemplate;
+        } elseif ($template = $this->templatePool->getTemplate('blog_post_list', $templateType)) {
+            $this->_template = $template;
+        } else {
+            $this->_template = $defaultTemplate;
+        }
+
+        return parent::getTemplate();
     }
 }

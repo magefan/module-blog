@@ -84,7 +84,7 @@
                         source: function (request, response) {
                             var searchTag = extractLast(request.term);
                             $.ajax({
-                                url: '" . $block->escapeUrl($block->getAutocompleteUrl()) . "',
+                                url: '" . $escaper->escapeUrl($block->getAutocompleteUrl()) . "',
                                 type: 'post',
                                 dataType: 'json',
                                 data: {

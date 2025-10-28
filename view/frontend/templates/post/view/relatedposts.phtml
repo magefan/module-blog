@@ -22,16 +22,16 @@
         <?php if (!$block->getHideTitle()) { ?>
         <div class="block-title title">
             <strong id="block-relatedposts-heading" role="heading" aria-level="2">
-                <?= $block->escapeHtml(__('Related Posts')) ?>
+                <?= $escaper->escapeHtml(__('Related Posts')) ?>
             </strong>
         </div>
         <?php } ?>
         <ol class="block-content">
             <?php foreach ($postCollection as $post) { ?>
                 <li class="item">
-                    <a class="post-item-link" title="<?= $block->escapeHtml($post->getTitle()) ?>"
-                       href="<?= $block->escapeUrl($post->getPostUrl()) ?>">
-                        <?= $block->escapeHtml($post->getTitle()) ?>
+                    <a class="post-item-link" title="<?= $escaper->escapeHtml($post->getTitle()) ?>"
+                       href="<?= $escaper->escapeUrl($post->getPostUrl()) ?>">
+                        <?= $escaper->escapeHtml($post->getTitle()) ?>
                     </a>
                 </li>
             <?php } ?>

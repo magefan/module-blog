@@ -1,0 +1,42 @@
+
+// Post Grid
+// _____________________________________________________________________________________________________________________
+
+.blog-articles {
+    display: grid;
+    align-content: start;
+    --article--gap: 24px;
+}
+.article-list {
+    --article-list-gap: 30px;
+    --article-list-row-gap: 30px;
+    --article-list-column-gap: 30px;
+    row-gap: var(--article--gap);
+    grid-template-columns: 100%;
+}
+.article-grid {
+    --article-grid-gap: 30px;
+    --article-grid-row-gap: 30px;
+    --article-grid-column-gap: 30px;
+    grid-gap: var(--article--gap);
+    grid-template-columns: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .blog-articles.article-list {
+        grid-template-columns: 100%;
+        grid-gap: var(--article--gap);
+    }
+    .blog-articles.article-grid {
+        grid-template-columns: repeat(auto-fill, minmax(calc(~'(100% / 2) - var(--article--gap) * (2 / 2)'), 1fr));
+        grid-gap: var(--article--gap);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .blog-articles.article-grid {
+        grid-template-columns: repeat(auto-fill, minmax(calc(~'(100% / 3) - var(--article--gap) * (2 / 3)'), 1fr));
+    }
+}
+
+@media screen and (max-width: 767px) {}
