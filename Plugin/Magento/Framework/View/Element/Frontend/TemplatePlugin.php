@@ -63,116 +63,54 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
     {
-        if ($result && $this->config->isEnabled() &&
-            (false !== strpos($result, 'Magefan_Blog') || false !== strpos($result, 'Hyva_MagefanBlog'))
+        $template = $result;
+
+        if (!$template || !$this->config->isEnabled() ||
+            (false === strpos($template, 'Magefan_Blog') && false === strpos($template, 'Hyva_MagefanBlog'))
         ) {
-            $designVersion = $this->config->getDesignVersion();
-            if (false !== strpos($result, $designVersion . '/')) {
-                /* Template is already in design folder */
-                return $result;
-            }
-
-            $newTemplate = str_replace('::', '::' . $designVersion . '/', $result);
-            $newTemplate = str_replace('-modern', '', $newTemplate);
-
-
-
-            if ($designVersion == DesignVersion::VALOR) {
-                $valorMapping = [
-                    'Magefan_Blog::' . $designVersion . '/widget/recent.phtml' => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-1-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-5.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-6.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-1-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-6.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-1-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-1.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-5-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-2.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-3.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-5.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-2-4.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-3-5.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                    'Magefan_BlogExtra::' . $designVersion . '/post/list/block-4-6.phtml'  => 'Magefan_Blog::' . $designVersion . '/post/article.phtml',
-                ];
-
-                foreach ($valorMapping as $old => $new) {
-                    if ($newTemplate === $old) {
-                        $newTemplate = $new;
-                        break;
-                    }
-                }
-            }
-
-            /*
-            if ($this->config->getDesignVersion() == DesignVersion::VALOR
-                && strpos($newTemplate, 'widget') !== false
-                && strpos($newTemplate, 'widget') !== false
-                && strpos($newTemplate, 'recent-post-slider') == false
-                && strpos($newTemplate, 'authors-list') == false
-            ) {
-                $newTemplate = preg_replace(
-                    '#(widget/)[^/]+(\.phtml)$#',
-                    '${1}blog-widget${2}',
-                    $newTemplate
-                );
-            }
-            */
-
-
-            $template = self::DEPRECATED_TEMPLATES[$newTemplate] ?? $newTemplate;
-            $filePath = $this->getTemplateFile($template);
-
-            if ($this->hyvaThemeDetection->execute()) {
-                $modifiedPath = $result;
-                if ($this->config->getDesignVersion() == DesignVersion::VALOR) {
-                    $modifiedPath = preg_replace('/\d{4}-(0[1-9]|1[0-2])/', $this->config->getDesignVersion(), $result);
-                }
-                if (strpos($modifiedPath, $this->config->getDesignVersion()) == false) {
-                    $modifiedPath = str_replace('::', '::' . $this->config->getDesignVersion() . '/', $modifiedPath);
-                }
-
-                $hyvaTemplatePath = str_replace('Magefan_Blog', 'Hyva_MagefanBlog', $modifiedPath);
-
-                $filePath = $this->getTemplateFile($hyvaTemplatePath);
-
-                if ($filePath && $this->fileDriver->isExists($filePath)) {
-                    return $hyvaTemplatePath;
-                }
-            }
-
-            if ($filePath && $this->fileDriver->isExists($filePath)) {
-                $result = $template;
-            } else {
-                $filePath = $this->getTemplateFile($newTemplate);
-                if ($filePath && $this->fileDriver->isExists($filePath)) {
-                    $result = $newTemplate;
-                }
-            }
-
-            $filePath = $this->getTemplateFile(str_replace(['Extra','Plus'], '', $newTemplate));
-            if ($filePath && $this->fileDriver->isExists($filePath)) {
-                $result = str_replace(['Extra','Plus'], '', $newTemplate);
-            }
-            /*
-            if (strpos((string) $result, 'article.phtml') !== false) {
-                return $result;
-            }
-            */
-
+           return $template;
         }
 
-        return $result;
+       $designVersion = $this->config->getDesignVersion();
+
+       if (false !== strpos($template, $designVersion . '/')) {
+           /* Template is already in design folder */
+           return $template;
+       }
+
+        // from Magefan_BlogExtra::post/list/block-5-3.phtml to Magefan_BlogExtra::design_valor/post/list/block-5-3.phtml
+        $newTemplate = str_replace('-modern', '', $template);
+        $newTemplate = str_replace('::', '::' . $designVersion . '/', $newTemplate);
+
+       if ($this->hyvaThemeDetection->execute()) {
+           $modifiedPath = $template;
+           if ($designVersion == DesignVersion::VALOR) {
+               $modifiedPath = preg_replace('/\d{4}-(0[1-9]|1[0-2])/', $designVersion, $template);
+           }
+           if (strpos($modifiedPath, $designVersion) == false) {
+               $modifiedPath = str_replace('::', '::' . $designVersion . '/', $modifiedPath);
+           }
+
+           $hyvaTemplatePath = str_replace('Magefan_Blog', 'Hyva_MagefanBlog', $modifiedPath);
+
+           if ($this->getTemplateFile($hyvaTemplatePath)) {
+               return $hyvaTemplatePath;
+           }
+       }
+
+
+       $oldTemplate = self::DEPRECATED_TEMPLATES[$newTemplate] ?? '';
+
+       if ($oldTemplate && $this->getTemplateFile($oldTemplate)) {
+           return $oldTemplate;
+       }
+
+        $newTemplate = str_replace(['Extra','Plus'], '', $newTemplate);
+
+        if ($this->getTemplateFile($newTemplate)) {
+            return $newTemplate;
+        }
+
+        return $template;
     }
 }
