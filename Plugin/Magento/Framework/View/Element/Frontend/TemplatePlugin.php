@@ -10,19 +10,17 @@ namespace Magefan\Blog\Plugin\Magento\Framework\View\Element\Frontend;
 
 use Magefan\Blog\Model\Config;
 use Magefan\Blog\Model\Config\Source\DesignVersion;
-use Magento\Framework\Filesystem\Driver\File;
-use Magento\Framework\View\Element\Template;
 
-class TemplatePlugin extends \Magento\Framework\View\Element\Template
+class TemplatePlugin
 {
-
-    const DEPRECATED_TEMPLATES = [
+    const OLD_PATH_TO_MODERN_TEMPLATES = [
         'Magefan_Blog::design_modern/post/view.phtml' => 'Magefan_Blog::post/view-modern.phtml',
+        'Magefan_Blog::design_modern/post/list.phtml' => 'Magefan_Blog::post/list-modern.phtml',
         'Magefan_Blog::design_modern/post/view/nextprev.phtml' => 'Magefan_Blog::post/view/nextprev-modern.phtml',
         // !!!! 'Magefan_BlogAuthor::design_modern/post/view/latest-posts-by-author.phtml' => 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml',
         'Magefan_BlogExtra::design_modern/post/view/categoryposts.phtml' => 'Magefan_BlogExtra::post/view/categoryposts-modern.phtml',
         'Magefan_BlogExtra::design_modern/post/view/relatedposts.phtml' => 'Magefan_BlogExtra::post/view/relatedposts-modern.phtml',
-        'Magefan_BlogExtra::design_modern/sidebar/recent.phtml' => 'Magefan_BlogExtra::sidebar/recent-modern.phtml',
+        'Magefan_BlogExtra::design_modern/sidebar/recent.phtml' => 'Magefan_BlogExtra::sidebar/recent-modern.phtml'
     ];
 
     /**
@@ -36,30 +34,21 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
     private $hyvaThemeDetection;
 
     /**
-     * @param Template\Context $context
-     * @param File $fileDriver
      * @param Config $config
      * @param \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection
-     * @param array $data
      */
     public function __construct(
-        Template\Context $context,
-        File $fileDriver,
         Config $config,
-        \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection,
-        array $data = []
+        \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection
     ) {
-        $this->fileDriver = $fileDriver;
         $this->config = $config;
         $this->hyvaThemeDetection = $hyvaThemeDetection;
-        parent::__construct($context, $data);
     }
 
     /**
-     * @param Template $subject
+     * @param \Magento\Framework\View\Element\Template $subject
      * @param $result
-     * @return array|mixed|string|string[]|null
-     * @throws \Magento\Framework\Exception\FileSystemException
+     * @return array|mixed|string|string[]
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
     {
@@ -71,18 +60,18 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
            return $template;
         }
 
-       $designVersion = $this->config->getDesignVersion();
+        $designVersion = $this->config->getDesignVersion();
 
-       if (false !== strpos($template, $designVersion . '/')) {
-           /* Template is already in design folder */
-           return $template;
-       }
+        if (false !== strpos($template, $designVersion . '/')) {
+            /* Template is already in design folder */
+            return $template;
+        }
 
         // from Magefan_BlogExtra::post/list/block-5-3.phtml to Magefan_BlogExtra::design_valor/post/list/block-5-3.phtml
-        $newTemplate = str_replace('-modern', '', $template);
-        $newTemplate = str_replace('::', '::' . $designVersion . '/', $newTemplate);
+        $baseTemplate = str_replace('-modern', '', $template);
+        $newTemplate = str_replace('::', '::' . $designVersion . '/', $baseTemplate);
 
-       if ($this->hyvaThemeDetection->execute()) {
+        /*if ($this->hyvaThemeDetection->execute()) {
            $modifiedPath = $template;
            if ($designVersion == DesignVersion::VALOR) {
                $modifiedPath = preg_replace('/\d{4}-(0[1-9]|1[0-2])/', $designVersion, $template);
@@ -93,21 +82,21 @@ class TemplatePlugin extends \Magento\Framework\View\Element\Template
 
            $hyvaTemplatePath = str_replace('Magefan_Blog', 'Hyva_MagefanBlog', $modifiedPath);
 
-           if ($this->getTemplateFile($hyvaTemplatePath)) {
+           if ($subject->getTemplateFile($hyvaTemplatePath)) {
                return $hyvaTemplatePath;
            }
-       }
+       }*/
 
 
-       $oldTemplate = self::DEPRECATED_TEMPLATES[$newTemplate] ?? '';
+        $oldTemplate = self::OLD_PATH_TO_MODERN_TEMPLATES[$newTemplate] ?? '';
 
-       if ($oldTemplate && $this->getTemplateFile($oldTemplate)) {
-           return $oldTemplate;
-       }
+        if ($oldTemplate && $subject->getTemplateFile($oldTemplate)) {
+            return $oldTemplate;
+        }
 
         $newTemplate = str_replace(['Extra','Plus'], '', $newTemplate);
 
-        if ($this->getTemplateFile($newTemplate)) {
+        if ($subject->getTemplateFile($newTemplate)) {
             return $newTemplate;
         }
 
