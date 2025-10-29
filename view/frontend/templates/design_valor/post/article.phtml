@@ -34,7 +34,7 @@ if (!isset($escaper)) {
         $templateType = 'article-grid';
     }
 
-        $displayImage = $block->getData('display_image') ?? true;
+        $displayImage = $block->getDisplayImage() ?? true;
 
         $displayCategoryInImageContainer = !in_array($templateType, [
             'article-grid',
