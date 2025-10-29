@@ -81,8 +81,10 @@ class TemplatePlugin
     {
         $template = $result;
 
-        if (!$template || !$this->config->isEnabled() ||
-            (false === strpos($template, 'Magefan_Blog') && false === strpos($template, 'Hyva_MagefanBlog'))
+        if (
+            !$template
+            || (false === strpos($template, 'Magefan_Blog') && false === strpos($template, 'Hyva_MagefanBlog'))
+            || !$this->config->isEnabled()
         ) {
            return $template;
         }
@@ -90,6 +92,10 @@ class TemplatePlugin
         $designVersion = $this->config->getDesignVersion();
 
         if (false !== strpos($template, $designVersion . '/')) {
+            if ($oldTemplate = $this->getOldSelfOverriddenTemplate($subject, $template)) {
+                return $oldTemplate;
+            }
+
             /* Template is already in design folder */
             return $template;
         }
@@ -114,10 +120,7 @@ class TemplatePlugin
            }
        }*/
 
-
-        $oldTemplate = self::OLD_PATH_TO_MODERN_TEMPLATES[$newTemplate] ?? '';
-
-        if ($oldTemplate && $subject->getTemplateFile($oldTemplate)) {
+        if ($oldTemplate = $this->getOldSelfOverriddenTemplate($subject, $newTemplate)) {
             return $oldTemplate;
         }
 
@@ -128,5 +131,20 @@ class TemplatePlugin
         }
 
         return $template;
+    }
+
+    /**
+     * @param string $template
+     * @return string
+     */
+    private function getOldSelfOverriddenTemplate(\Magento\Framework\View\Element\Template $subject, string $template): string
+    {
+        $oldTemplate = self::OLD_PATH_TO_MODERN_TEMPLATES[$template] ?? '';
+
+        if ($oldTemplate && $subject->getTemplateFile($oldTemplate)) {
+            return $oldTemplate;
+        }
+
+        return '';
     }
 }
