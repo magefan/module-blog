@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -27,7 +28,7 @@ class DesignVersion implements \Magento\Framework\Option\ArrayInterface
         return [
             ['value' => self::INITIAL, 'label' => 'Initial (2015)'],
             ['value' => self::MODERN, 'label' => 'Modern (2021)'],
-            ['value' => self::VALOR, 'label' => 'Valor (2015)']
+            ['value' => self::VALOR, 'label' => 'Valor (2025)']
         ];
     }
 

@@ -69,8 +69,10 @@ class LayoutLoadBeforeObserver implements ObserverInterface
                 $layout->getUpdate()->addHandle('blog_non_cacheable');
             }
 
-            if ($this->config->getDesignVersion() == DesignVersion::VALOR) {
-                $dvPrefix = str_replace('-', '_', DesignVersion::VALOR) . '_';
+            $designVersion = $this->config->getDesignVersion();
+
+            if (!in_array($designVersion, [DesignVersion::INITIAL, DesignVersion::MODERN])) {
+                $dvPrefix = str_replace('-', '_', $designVersion) . '_';
             } else {
                 $dvPrefix = '';
             }
@@ -82,7 +84,7 @@ class LayoutLoadBeforeObserver implements ObserverInterface
                 $layout->getUpdate()->addHandle('blog_' . $dvPrefix . 'css');
             }
 
-            if ($this->config->getDesignVersion() == DesignVersion::VALOR) {
+            if (!in_array($designVersion, [DesignVersion::INITIAL, DesignVersion::MODERN])) {
                 if ('blog' === $this->request->getModuleName()) {
                     $layout->getUpdate()->addHandle(str_replace('blog_', 'blog_' . $dvPrefix, $this->request->getFullActionName()));
                 } elseif ('catalog_product_view' === $this->request->getFullActionName()) {
