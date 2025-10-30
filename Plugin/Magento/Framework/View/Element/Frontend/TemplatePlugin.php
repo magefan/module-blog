@@ -13,7 +13,7 @@ use Magefan\Blog\Model\Config\Source\DesignVersion;
 
 class TemplatePlugin
 {
-    const OLD_PATH_TO_MODERN_TEMPLATES = [
+    const NEW_TO_OLD_TEMPLATES_MAP = [
         'Magefan_Blog::design_modern/post/view.phtml' => 'Magefan_Blog::post/view-modern.phtml',
         'Magefan_Blog::design_modern/post/list.phtml' => 'Magefan_Blog::post/list-modern.phtml',
         'Magefan_Blog::design_modern/post/view/nextprev.phtml' => 'Magefan_Blog::post/view/nextprev-modern.phtml',
@@ -81,36 +81,26 @@ class TemplatePlugin
     {
         $template = $result;
 
-        if (
-            !$template
-            || (false === strpos($template, 'Magefan_Blog') && false === strpos($template, 'Hyva_MagefanBlog'))
-            || !$this->config->isEnabled()
-        ) {
+        if (!$template || !$this->isBlogTemplate($template) || !$this->config->isEnabled()) {
             return $template;
         }
 
         $designVersion = $this->config->getDesignVersion();
 
-        /* Template is already in design folder */
+        // If template is already using the design folder (e.g., ::design_modern/...)
         if (false !== strpos($template, $designVersion . '/')) {
-            /* Check if there is custom overrides for that template in current theme */
-            if ($oldTemplate = $this->getOldSelfOverriddenTemplate($subject, $template)) {
-                return $oldTemplate;
-            }
-
-            return $template;
+            // Check if there is custom overrides for that template in current theme
+            $overriddenTemplate = $this->getOldOverriddenTemplate($subject, $template);
+            return $overriddenTemplate ?: $template;
         }
 
-        /* for cases when template set in cms block/page via widget
-           and there is no custom overrides for that template in current theme */
-        if (false !== ($newTemplate = array_search($template, self::OLD_PATH_TO_MODERN_TEMPLATES)) && !$subject->getTemplateFile($template)) {
+        // for cases when template set in cms block/page via widget
+        // and there is no custom overrides for that template in current theme
+        if (false !== ($newTemplate = array_search($template, self::NEW_TO_OLD_TEMPLATES_MAP)) && !$subject->getTemplateFile($template)) {
             return $newTemplate;
         }
 
-        //$baseTemplate = str_replace('-modern', '', $template);
-
-        /* from Magefan_Blog::post/view.phtml to Magefan_Blog::design_valor/post/view.phtml */
-        $newTemplate = str_replace('::', '::' . $designVersion . '/', $template);
+        $newDesignTemplate = $this->getDesignVersionTemplate($template, $designVersion);
 
         /*if ($this->hyvaThemeDetection->execute()) {
            $modifiedPath = $template;
@@ -128,16 +118,19 @@ class TemplatePlugin
            }
        }*/
 
-        if ($oldTemplate = $this->getOldSelfOverriddenTemplate($subject, $newTemplate)) {
+        if ($oldTemplate = $this->getOldOverriddenTemplate($subject, $newDesignTemplate)) {
             return $oldTemplate;
         }
 
-        $newTemplateBasic = str_replace(['Extra','Plus'], '', $newTemplate);
 
-        if ($subject->getTemplateFile($newTemplate)) {
-            return $newTemplate;
-        } elseif ($subject->getTemplateFile($newTemplateBasic)) {
-            return $newTemplateBasic;
+        if ($subject->getTemplateFile($newDesignTemplate)) {
+            return $newDesignTemplate;
+        }
+
+        $newDesignTemplateBasic = str_replace(['Extra','Plus'], '', $newDesignTemplate);
+
+        if ($subject->getTemplateFile($newDesignTemplateBasic)) {
+            return $newDesignTemplateBasic;
         }
 
         return $template;
@@ -145,16 +138,41 @@ class TemplatePlugin
 
     /**
      * @param string $template
+     * @return bool
+     */
+    private function isBlogTemplate(string $template): bool
+    {
+        return false !== strpos($template, 'Magefan_Blog') || false !== strpos($template, 'Hyva_MagefanBlog');
+    }
+
+    /**
+     * Return path to old template - may be found only if it is overridden in theme
+     * @param string $template
      * @return string
      */
-    private function getOldSelfOverriddenTemplate(\Magento\Framework\View\Element\Template $subject, string $template): string
+    private function getOldOverriddenTemplate(\Magento\Framework\View\Element\Template $subject, string $template): string
     {
-        $oldTemplate = self::OLD_PATH_TO_MODERN_TEMPLATES[$template] ?? '';
+        $oldTemplate = self::NEW_TO_OLD_TEMPLATES_MAP[$template] ?? '';
 
         if ($oldTemplate && $subject->getTemplateFile($oldTemplate)) {
             return $oldTemplate;
         }
 
         return '';
+    }
+
+    /**
+     * @param string $template
+     * @param string $designVersion
+     * @return string
+     */
+    private function getDesignVersionTemplate(string $template, string $designVersion): string
+    {
+        //$baseTemplate = str_replace('-modern', '', $template);
+
+        /* from Magefan_Blog::post/view.phtml to Magefan_Blog::design_valor/post/view.phtml */
+        $newDesignTemplate = str_replace('::', '::' . $designVersion . '/', $template);
+
+        return $newDesignTemplate;
     }
 }
