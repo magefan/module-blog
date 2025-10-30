@@ -42,15 +42,6 @@
                     <container name="blog.post.comments" label="Comments Container" htmlTag="div" htmlClass="block comments" >
                         <block class="Magefan\Blog\Block\Post\View\Comments\Magefan" name="blog.post.comments.magefan" template="Magefan_Blog::post/view/comments/magefan.phtml">
                             <block class="Magento\Framework\View\Element\Template" name="display_privacy_policy_checkbox" template="Magefan_Blog::post/view/comments/privacy_policy_checkbox.phtml"/>
-                            <arguments>
-                                <argument name="jsLayout" xsi:type="array">
-                                    <item name="components" xsi:type="array">
-                                        <item name="magefan-comments.js" xsi:type="array">
-                                            <item name="component" xsi:type="string">Magefan_Blog/js/magefan-comments</item>
-                                        </item>
-                                    </item>
-                                </argument>
-                            </arguments>
                             <container name="blog.post.comments.magefan.additional" label="Comments Recaptcha" />
                             <container name="blog.post.comments.magefan.reply.additional" label="Comments Reply Recaptcha" />
                         </block>
