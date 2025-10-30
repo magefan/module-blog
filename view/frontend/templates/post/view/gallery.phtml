@@ -24,7 +24,8 @@ if (!isset($escaper)) {
 <?php
     $post = $block->getPost();
     $galleryImages = $post->getGalleryImages();
-    $viewFileUrl = $block->getViewFileUrl("Magefan_Blog::css/jquery.fancybox.min.css");
+    $fancyboxCSSFileUrl = $block->getViewFileUrl("Magefan_Blog::css/fancybox.min.css");
+    $fancyboxJSFileUrl = $block->getViewFileUrl("Magefan_Blog/js/fancybox.min.js");
 ?>
 <?php if (count($galleryImages)) { ?>
     <div class="post-gallery clearfix">
@@ -37,7 +38,7 @@ if (!isset($escaper)) {
             </a>
         <?php } ?>
     </div>
-    <?php if ($mfBreezeThemeDetection->execute()) {
+    <?php
         $script = "
             var _deepestScroll = 0;
     
@@ -58,11 +59,11 @@ if (!isset($escaper)) {
                     const link = document.createElement('link')
                     link.rel = 'stylesheet';
                     link.type = 'text/css';
-                    link.href = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css';
+                    link.href = '" . $fancyboxCSSFileUrl . "';
                     document.head.append(link);
     
                     const script = document.createElement('script')
-                    script.src = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js';
+                    script.src = '" . $fancyboxJSFileUrl . "';
                     document.head.append(script);
                 }
             }
@@ -70,18 +71,7 @@ if (!isset($escaper)) {
             initFancyBox(true);
             document.addEventListener('scroll', initFancyBox);
         ";
-    } else {
-        $script = "
-            require(['jquery', 'domReady!'], function($){
-                /* Deferer fancybox css loading */
-                $('head').append(
-                    $(\"<link rel='stylesheet' href='" . $escaper->escapeUrl($viewFileUrl) . "' type='text/css' media='screen' />\")
-                );
-                /* Deferer fancybox js loading */
-                require(['Magefan_Blog/js/jquery.fancybox.min'], function(){});
-            });
-        ";
-    } ?>
+    ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>
 
