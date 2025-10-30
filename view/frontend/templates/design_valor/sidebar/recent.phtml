@@ -20,16 +20,7 @@ if (!isset($escaper)) {
 }
 ?>
 
-<?php
-    $_postCollection = $block->getPostCollection();
-?>
-<?php
-    $width = (int)$block->getBlockImageWidth() ?: 300;
-    $height = (int)$block->getBlockImageheight() ?: 200;
-    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
-?>
-
-<?php if ($_postCollection->count()) { ?>
+<?php if ($block->getPostCollection()->count()) { ?>
 <div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?>" >
     <div class="block-title">
         <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
