@@ -10,9 +10,16 @@
 /**
  * Blog post view template
  *
- * @var $block \Magefan\Blog\Block\Post\View
+ * @var \Magefan\Blog\Block\Post\View $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
+
 <?php
 $_post = $block->getPost();
 $_postUrl = $_post->getPostUrl();

@@ -9,8 +9,14 @@
 /**
  * Blog rss feed template
  *
- * @var $block \Magefan\Blog\Block\Rss\Feed
+ * @var \Magefan\Blog\Block\Rss\Feed $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 
 $_postCollection = $block->getPostCollection();
 echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";

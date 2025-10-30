@@ -10,8 +10,14 @@
 /**
  * Blog post links template
  *
- * @var $block \Magefan\Blog\Block\Post\PostLinks
+ * @var \Magefan\Blog\Block\Post\PostLinks $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
     $postCollection = $block->getPostCollection();

@@ -10,9 +10,15 @@
 /**
  * Blog sidebar recent posts template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\Recent
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Sidebar\Recent $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php

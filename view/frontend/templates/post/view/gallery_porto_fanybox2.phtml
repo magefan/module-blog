@@ -12,9 +12,15 @@
  * Use this template for porto theme. Copy this file to your porto theme as
  * app/design/frontend/Smartwave/theme-name/Magefan_Blog/templates/post/view/gallery.phtml
  *
- * @var $block \Magefan\Blog\Block\Post\View\Gallery
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Post\View\Gallery $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php

@@ -10,8 +10,14 @@
 /**
  * Blog subcategory links template
  *
- * @var $block \Magefan\Blog\Block\Category\SubCategoryLinks
+ * @var \Magefan\Blog\Block\Category\SubCategoryLinks $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php

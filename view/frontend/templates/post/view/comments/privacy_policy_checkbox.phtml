@@ -6,6 +6,19 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 ?>
+
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+
 <?php
      $id = 'blog_comment_privacy_' . $block->getCommentType();
 ?>

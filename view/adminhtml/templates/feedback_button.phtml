@@ -10,8 +10,14 @@
 /**
  * Blog feedback button
  *
- * @var $block \Magento\Backend\Block\Template
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
 $reviewProductUrl = 'https://magefan.com/magento2-blog-extension/reviews';

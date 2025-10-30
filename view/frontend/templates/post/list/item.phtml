@@ -10,8 +10,14 @@
 /**
  * Blog post list item template
  *
- * @var $block \Magefan\Blog\Block\Post\PostList\Item
+ * @var \Magefan\Blog\Block\Post\PostList\Item $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
 $_post = $block->getPost();

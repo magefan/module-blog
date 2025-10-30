@@ -10,8 +10,14 @@
 /**
  * Blog post list lazyload template
  *
- * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar\Pager
+ * @var \Magefan\Blog\Block\Post\PostList\Toolbar\Pager $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php if ($block->useLazyload()) { ?>
     <?php

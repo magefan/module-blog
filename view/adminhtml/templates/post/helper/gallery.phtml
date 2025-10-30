@@ -7,9 +7,15 @@
  */
 
 /**
- * @var $block \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 
 $elementName = $block->getElement()->getName() . '[images]';
 $formName = $block->getFormName();

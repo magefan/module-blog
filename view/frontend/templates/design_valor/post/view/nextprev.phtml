@@ -10,8 +10,14 @@
 /**
  * Blog post next and prev post links
  *
- * @var $block \Magefan\Blog\Block\Post\View\NextPrev
+ * @var \Magefan\Blog\Block\Post\View\NextPrev $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php if ($block->displayLinks()) { ?>

@@ -10,8 +10,14 @@
 /**
  * Blog recent posts widget
  *
- * @var $block \Magefan\Blog\Block\Widget\Recent
+ * @var \Magefan\Blog\Block\Widget\Recent $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php

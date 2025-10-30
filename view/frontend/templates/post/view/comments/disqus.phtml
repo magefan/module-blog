@@ -10,9 +10,15 @@
 /**
  * Blog post comments template
  *
- * @var $block \Magefan\Blog\Block\Post\View\Comments
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Post\View\Comments $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <div id="disqus_thread"></div>
 <?php $script = "

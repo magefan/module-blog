@@ -10,9 +10,15 @@
 /**
  * Blog related posts template
  *
- * @var $block \Magefan\Blog\Block\Post\View\RelatedPosts
- * @var $block \Magefan\Blog\Block\Catalog\Product\RelatedPosts
+ * @var \Magefan\Blog\Block\Post\View\RelatedPosts $block
+ * @var \Magefan\Blog\Block\Catalog\Product\RelatedPosts $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php if ($block->displayPosts()) { ?>

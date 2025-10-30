@@ -10,8 +10,14 @@
 /**
  * Blog tag claud sidebar template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
+ * @var \Magefan\Blog\Block\Sidebar\TagClaud $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php $tags = $block->getTags(); ?>
 

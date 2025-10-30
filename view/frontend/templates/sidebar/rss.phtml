@@ -10,8 +10,14 @@
 /**
  * Blog sidebar archive template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\Rss
+ * @var \Magefan\Blog\Block\Sidebar\Rss $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <div class="widget block block-rss" data-bind="scope: 'blog-rss'">
     <div class="block-title">

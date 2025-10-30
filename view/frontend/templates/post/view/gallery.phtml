@@ -10,10 +10,16 @@
 /**
  * Blog post media gallery images template
  *
- * @var $block \Magefan\Blog\Block\Post\View\Gallery
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
- * @var $mfBreezeThemeDetection \Magefan\Community\Api\BreezeThemeDetectionInterface
+ * @var \Magefan\Blog\Block\Post\View\Gallery $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magefan\Community\Api\BreezeThemeDetectionInterface $mfBreezeThemeDetection
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
     $post = $block->getPost();

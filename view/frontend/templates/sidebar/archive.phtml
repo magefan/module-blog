@@ -10,8 +10,14 @@
 /**
  * Blog sidebar archive template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\Archive
+ * @var \Magefan\Blog\Block\Sidebar\Archive $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php

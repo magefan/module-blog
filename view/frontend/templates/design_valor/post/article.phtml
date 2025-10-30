@@ -9,14 +9,17 @@
  * @var \Magefan\Blog\Block\Post\PostList\AbstractList $block
  * @var \Magento\Framework\Escaper $escaper
  */
-?>
-<?php
-$_postCollection = $block->getPostCollection();
+
 if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
     $escaper = $block;
 }
 ?>
-<?php if ($_postCollection->count() /* && $templateType*/) { ?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+
+    if ($_postCollection->count() /* && $templateType*/) { ?>
     <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
         <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
     <?php } ?>
