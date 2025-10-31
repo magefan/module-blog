@@ -49,7 +49,7 @@ trait Archive
                         break;
                     case 'month':
                         if ($this->getMonth()) {
-                            $value = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
+                            $value = __(date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01')));
                         }
                         break;
                 }
