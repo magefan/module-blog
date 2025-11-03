@@ -50,18 +50,28 @@ $_postName = $escaper->escapeHtml($_post->getTitle(), null);
 
         <div class="post-content">
             <div class="post-description clearfix">
-                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
-                    <?php
-                    $featuredImgAlt = $_post->getData('featured_img_alt');
-                    if (!$featuredImgAlt) {
-                        $featuredImgAlt = $_postName;
-                    }
-                    ?>
+                <?php
+                $featuredImage = $_post->getFeaturedImage();
+                $postVideo = $_post->getData('post_video');
+
+                if ($featuredImage || $postVideo) { ?>
                     <div class="post-ftimg-hld">
-                        <img src="<?= $escaper->escapeUrl($featuredImage) ?>"
-                             alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
+                        <?php if ($postVideo) {
+                            echo $block->getLayout()->createBlock(\Magefan\YouTubeWidget\Block\Widget\YouTube::class)
+                                ->setData('video_url', $postVideo)
+                                ->setData('image_quality', 'maxresdefault')
+                                ->setData('image_size', 'cover')
+                                ->toHtml();
+                        } else {
+                            $featuredImgAlt = $_post->getData('featured_img_alt') ?: $_postName;
+                            ?>
+
+                            <img src="<?= $escaper->escapeUrl($featuredImage) ?>"
+                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
+                        <?php } ?>
                     </div>
                 <?php } ?>
+
                 <div class="post-text-hld">
                     <?= /*@noEscape*/ $block->getContent() ?>
                     <div class="clear clearfix"></div>
