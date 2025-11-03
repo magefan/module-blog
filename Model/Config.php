@@ -211,6 +211,15 @@ class Config
     }
 
     /**
+     * @param $storeId
+     * @return int
+     */
+    public function getRelatedProductsCount($storeId = null)
+    {
+        return (int)$this->getConfig(self::XML_RELATED_PRODUCTS_NUMBER, $storeId);
+    }
+
+    /**
      * Retrieve store config value
      * @param string $path
      * @param null $storeId
