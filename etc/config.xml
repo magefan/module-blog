@@ -15,14 +15,6 @@
                 <mfmodule>Blog</mfmodule>
                 <design_version>design_modern</design_version>
             </general>
-            <publish_post_on_fb>
-                <enabled>0</enabled>
-                <app_id/>
-                <app_secret/>
-                <page_id/>
-                <post_format>{{var post.title}} -{{post.short_content}}</post_format>
-                <autopublish_categories>0</autopublish_categories>
-            </publish_post_on_fb>
             <design>
                 <format_date>F d, Y</format_date>
                 <publication_date>1</publication_date>
