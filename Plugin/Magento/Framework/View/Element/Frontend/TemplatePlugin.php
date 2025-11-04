@@ -102,22 +102,6 @@ class TemplatePlugin
 
         $newDesignTemplate = $this->getDesignVersionTemplate($template, $designVersion);
 
-        /*if ($this->hyvaThemeDetection->execute()) {
-           $modifiedPath = $template;
-           if ($designVersion == DesignVersion::VALOR) {
-               $modifiedPath = preg_replace('/\d{4}-(0[1-9]|1[0-2])/', $designVersion, $template);
-           }
-           if (strpos($modifiedPath, $designVersion) == false) {
-               $modifiedPath = str_replace('::', '::' . $designVersion . '/', $modifiedPath);
-           }
-
-           $hyvaTemplatePath = str_replace('Magefan_Blog', 'Hyva_MagefanBlog', $modifiedPath);
-
-           if ($subject->getTemplateFile($hyvaTemplatePath)) {
-               return $hyvaTemplatePath;
-           }
-       }*/
-
         if ($oldTemplate = $this->getOldOverriddenTemplate($subject, $newDesignTemplate)) {
             return $oldTemplate;
         }
