@@ -126,11 +126,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                             }
                             ?>
 
-                            <?php /* if ($preparedImg) { ?>
-                     <?php  <div class="animation-type-zoom bg-img mfblogunveil" data-original="<?= $escaper->escapeHtml($featuredImage) ?>"></div>
-                    } */ ?>
-
-                            <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>"
+                            <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>"
                                class="article-post__image-wrapper mf-media mf-media--3x2 mf-media--transparent">
                                 <img loading="lazy" class="motion-reduce" src="<?=  $escaper->escapeHtml($featuredImage) ?>"
                                      alt="<?= $featuredImgAlt ?>">
@@ -142,7 +138,9 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                     <div class="article-post__category article-post__category-pos1">
                                         <?php foreach ($categories as $category) { ?>
                                             <a class="article-post__category-name" href="<?= $escaper->escapeUrl($category->getCategoryUrl()) ?>"
-                                               title="<?= $escaper->escapeHtml($category->getTitle()) ?>"><?= $escaper->escapeHtml($category->getTitle()) ?></a>
+                                               title="<?= $escaper->escapeHtml($category->getTitle()) ?>">
+                                                <?= $escaper->escapeHtml($category->getTitle()) ?>
+                                            </a>
                                         <?php } ?>
                                     </div>
                                 <?php } ?>
@@ -155,7 +153,9 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                 <div class="article-post__info">
 
                                     <div class="article-post__title">
-                                        <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>"><?= $escaper->escapeHtml($entity->getTitle()) ?></a>
+                                        <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>">
+                                            <?= $escaper->escapeHtml($entity->getTitle()) ?>
+                                        </a>
                                     </div>
 
                                     <div class="article-post__data-wrap">
@@ -167,7 +167,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                             $coAuthorsCount = count($coAuthors);
                                             ?>
                                             <span class="article-post__author">
-                                    <a href="<?= $escaper->escapeUrl($authorUrl) ?>">
+                                    <a href="<?= $escaper->escapeUrl($authorUrl) ?>" title="<?= $escaper->escapeHtml($fullName) ?>">
                                         <span><?= $escaper->escapeHtml($fullName) ?></span>
                                     </a>
                                         <?php if ($coAuthorsCount) { ?>
@@ -226,7 +226,9 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                         <div class="article-post__info">
                             <div class="article-post__header">
                                 <div class="article-post__title">
-                                    <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>"><?= $escaper->escapeHtml($entity->getTitle()) ?></a>
+                                    <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>">
+                                        <?= $escaper->escapeHtml($entity->getTitle()) ?>
+                                    </a>
                                 </div>
 
                                 <?php /* Not Visible */ ?>
@@ -246,15 +248,18 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                             $coAuthors = $_post->getRelatedCoauthors();
                                             ?>
                                             <?php if ('' !== $fullName): ?>
-                                                <span class="article-post__author"><a href="<?= $authorUrl ?>"><span><?=$fullName?></span></a>
+                                                <span class="article-post__author">
+                                                    <a href="<?= $authorUrl ?>" title="<?= $escaper->escapeHtml($fullName) ?>">
+                                                        <span><?=$fullName?></span>
+                                                    </a>
                                     <?php if (count($coAuthors)) { ?>
                                         <?= $escaper->escapeHtml(__('and')) ?>
                                         <?php $z = 0 ?>
                                         <?php foreach ($coAuthors as $coAuthor) { ?>
                                             <?php $z++; ?>
                                             <?php if ($block->authorPageEnabled()) { ?>
-                                                <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
-                                                   href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?>
+                                                <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>" href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>">
+                                                    <?= $escaper->escapeHtml($coAuthor->getTitle()) ?>
                                                 </a>
                                                 <?php if ($z != count($coAuthors)) { echo ', '; } ?>
                                             <?php } else { ?>
@@ -327,21 +332,9 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     </div>
 
     <?= $block->getToolbarHtml() ?>
+
     <?php if ($style) { ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var f = '<?= $block->getViewFileUrl('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>';
-
-                if (!document.querySelector('link[href="' + f + '"]')) {
-                    var link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.type = 'text/css';
-                    link.href = f;
-                    document.head.appendChild(link);
-                }
-            });
-        </script>
-
+        <?= $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>
     <?php } ?>
 
     <?php if ($block->getTitle()) { ?>
