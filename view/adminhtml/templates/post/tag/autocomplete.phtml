@@ -10,9 +10,15 @@
 /**
  * Post tag autocomplete template
  *
- * @var $block \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php $script = "
     require(['jquery', 'domReady!'], function ($) {
@@ -84,7 +90,7 @@
                         source: function (request, response) {
                             var searchTag = extractLast(request.term);
                             $.ajax({
-                                url: '" . $block->escapeUrl($block->getAutocompleteUrl()) . "',
+                                url: '" . $escaper->escapeUrl($block->getAutocompleteUrl()) . "',
                                 type: 'post',
                                 dataType: 'json',
                                 data: {

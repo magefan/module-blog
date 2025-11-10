@@ -203,21 +203,4 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     {
         return $this->_coreRegistry->registry('current_blog_post');
     }
-
-    /**
-     * Get relevant path to template
-     *
-     * @return string
-     */
-    public function getTemplate()
-    {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/post_view/nextprev/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        if ($template = $this->templatePool->getTemplate('blog_post_view_next_prev', $templateName)) {
-            $this->_template = $template;
-        }
-        return parent::getTemplate();
-    }
 }

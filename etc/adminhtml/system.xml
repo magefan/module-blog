@@ -34,6 +34,10 @@
                     <label>Product Key</label>
                     <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\ProductKeyField</frontend_model>
                 </field>
+                <field id="design_version" translate="label comment" type="select" sortOrder="1010" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Design Version</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\DesignVersion</source_model>
+                </field>
             </group>
 
             <group id="design" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -121,15 +125,6 @@
 
             <group id="post_view" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Post Page (Post View)</label>
-
-                <group id="design" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Design</label>
-                    <field id="template" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\PostViewTemplate</source_model>
-                    </field>
-                </group>
-
                 <group id="category_posts" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Posts From The Same Category (Blog Extra)</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -164,7 +159,6 @@
                             <field id="enabled">1</field>
                         </depends>
                     </field>
-
                     <field id="number_of_posts" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Number of Posts</label>
                         <depends>
@@ -195,7 +189,13 @@
                         <label>Display Related Products</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-
+                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\RelatedProductTemplate</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
                     <field id="number_of_products" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Number of Products</label>
                         <depends>
@@ -365,13 +365,6 @@
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Display Prev. &amp; Next Post Links</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\NextPrevPostTemplate</source_model>
-                        <depends>
-                            <field id="enabled">1</field>
-                        </depends>
                     </field>
                 </group>
 
@@ -821,7 +814,6 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-
                 <field id="number_of_related_posts" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Number of Posts</label>
                     <depends>
@@ -924,7 +916,7 @@
                 </field>
                 <field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Permalink Type</label>
-                     <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
+                    <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
                 </field>
 
                 <field id="post_route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">

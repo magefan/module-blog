@@ -10,8 +10,14 @@
 /**
  * Blog post list template
  *
- * @var $block \Magefan\Blog\Block\Post\PostList
+ * @var \Magefan\Blog\Block\Post\PostList $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
 $_postCollection = $block->getPostCollection();
@@ -19,7 +25,7 @@ $_postCollection = $block->getPostCollection();
 <?php if (!$_postCollection->count()): ?>
     <div class="message info empty">
         <div>
-            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+            <?= $escaper->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
         </div>
     </div>
 <?php else: ?>

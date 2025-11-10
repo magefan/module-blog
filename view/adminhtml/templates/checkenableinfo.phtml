@@ -10,8 +10,14 @@
 /**
  * Blog available for to get notification
  *
- * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\CheckEnableInfo
+ * @var \Magefan\Blog\Block\Adminhtml\System\Config\Form\CheckEnableInfo $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php if (!$block->isEnabled()) { ?>
     <div class="messages">
@@ -51,7 +57,7 @@
     <div class="messages">
         <div class="message message-notice">
             <div data-ui-id="messages-message-notice">
-                <?= $block->escapeHtml(__(
+                <?= $escaper->escapeHtml(__(
                     'Possible conflict. If you have problems with the module Magefan Blog, try to disable the following modules: %1. To disable module please run following command in the Magento root directory: bin/magento module:disable Vendor_ModuleName',
                     implode(', ', $anotherBlogs)
                 ));

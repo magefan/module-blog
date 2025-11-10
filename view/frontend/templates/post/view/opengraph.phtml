@@ -10,14 +10,20 @@
 /**
  * Blog post og:tags
  *
- * @var $block \Magefan\Blog\Block\Post\View\Opengraph
+ * @var \Magefan\Blog\Block\Post\View\Opengraph $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
-<meta property="og:type" content="<?= $block->escapeHtml($block->getType()); ?>" />
-<meta property="og:title" content="<?= $block->escapeHtml($block->getTitle()); ?>" />
-<meta property="og:description" content="<?= $block->escapeHtml($block->getDescription()); ?>" />
-<meta property="og:url" content="<?= $block->escapeHtml($block->getPageUrl()); ?>" />
+<meta property="og:type" content="<?= $escaper->escapeHtml($block->getType()); ?>" />
+<meta property="og:title" content="<?= $escaper->escapeHtml($block->getTitle()); ?>" />
+<meta property="og:description" content="<?= $escaper->escapeHtml($block->getDescription()); ?>" />
+<meta property="og:url" content="<?= $escaper->escapeHtml($block->getPageUrl()); ?>" />
 <?php if ($image = $block->getImage()) { ?>
-<meta property="og:image" content="<?= $block->escapeHtml($image); ?>" />
+<meta property="og:image" content="<?= $escaper->escapeHtml($image); ?>" />
 <?php } ?>

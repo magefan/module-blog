@@ -10,8 +10,14 @@
 /**
  * Blog post links template
  *
- * @var $block \Magefan\Blog\Block\Post\PostLinks
+ * @var \Magefan\Blog\Block\Post\PostLinks $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
     $postCollection = $block->getPostCollection();
@@ -19,7 +25,7 @@
 <?php if (!$postCollection->count()) { ?>
     <div class="message info empty">
         <div>
-            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+            <?= $escaper->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
         </div>
     </div>
 <?php } else { ?>
@@ -30,9 +36,9 @@
             <?php foreach ($postCollection as $post): ?>
                 <li>
                     <?php $postTitle = $post->getTitle() ?>
-                    <a href="<?= $block->escapeUrl($post->getPostUrl()) ?>"
-                       title="<?= $block->escapeHtml($postTitle) ?>">
-                        <?= $block->escapeHtml($postTitle) ?>
+                    <a href="<?= $escaper->escapeUrl($post->getPostUrl()) ?>"
+                       title="<?= $escaper->escapeHtml($postTitle) ?>">
+                        <?= $escaper->escapeHtml($postTitle) ?>
                     </a>
                 </li>
             <?php endforeach; ?>

@@ -8,9 +8,6 @@
 
 namespace Magefan\Blog\Block\Post\View;
 
-use Magento\Catalog\Model\ResourceModel\Product\Collection;
-use Magento\Framework\View\Element\AbstractBlock;
-
 /**
  * Blog post related posts block
  */
@@ -64,13 +61,21 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * @return string
+     */
+    public function getBlockTitle()
+    {
+        return $this->getData('block_title') ?: __('Related Posts');
+    }
+
+    /**
      * Get relevant path to template
      *
      * @return string
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
+        $templateName = $this->getData('template_type') ?: (string)$this->_scopeConfig->getValue(
             'mfblog/post_view/related_posts/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );

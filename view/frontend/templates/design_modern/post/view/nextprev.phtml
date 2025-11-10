@@ -10,8 +10,14 @@
 /**
  * Blog post next and prev post links
  *
- * @var $block \Magefan\Blog\Block\Post\View\NextPrev
+ * @var \Magefan\Blog\Block\Post\View\NextPrev $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php if ($block->displayLinks()) { ?>
@@ -25,10 +31,10 @@
                 <?php if ($prevPost) { ?>
                     <?php $title = $prevPost->getTitle() ?>
                     <a class="nextprev-link prev-link float-left"
-                       href="<?= $block->escapeUrl($prevPost->getPostUrl()) ?>"
-                       title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
-                        <span class="text-left"><?= $block->escapeHtml(__('Previous')) ?></span>
-                        <?= $block->escapeHtml($title) ?>
+                       href="<?= $escaper->escapeUrl($prevPost->getPostUrl()) ?>"
+                       title="<?= $escaper->escapeHtml(__('Read %1', $title)) ?>">
+                        <span class="text-left"><?= $escaper->escapeHtml(__('Previous')) ?></span>
+                        <?= $escaper->escapeHtml($title) ?>
                     </a>
                 <?php } ?>
             </div>
@@ -37,10 +43,10 @@
                 <?php if ($nextPost) { ?>
                     <?php $title = $nextPost->getTitle() ?>
                     <a class="nextprev-link next-link float-right"
-                       href="<?= $block->escapeUrl($nextPost->getPostUrl()) ?>"
-                       title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
-                        <span class="text-right"><?= $block->escapeHtml(__('Next')) ?></span>
-                        <?= $block->escapeHtml($title) ?>
+                       href="<?= $escaper->escapeUrl($nextPost->getPostUrl()) ?>"
+                       title="<?= $escaper->escapeHtml(__('Read %1', $title)) ?>">
+                        <span class="text-right"><?= $escaper->escapeHtml(__('Next')) ?></span>
+                        <?= $escaper->escapeHtml($title) ?>
                     </a>
                 <?php } ?>
             </div>

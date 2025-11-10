@@ -10,8 +10,14 @@
 /**
  * Blog feedback button
  *
- * @var $block \Magento\Backend\Block\Template
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
 $reviewProductUrl = 'https://magefan.com/magento2-blog-extension/reviews';
@@ -20,17 +26,17 @@ $contactUrl = 'https://magefan.com/contact';
 <?php if (\Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
 <div id="blog-feedback-block">
     <div class="blog-leave-feedback blog-leave-review">
-        <img  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
+        <img  src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/feedback-ico.png')) ?>" />
         <a target="_blank"
-           href="<?= $block->escapeUrl($reviewProductUrl); ?>">
-            <?= $block->escapeHtml(__('Leave a review about the blog extension')) ?>
+           href="<?= $escaper->escapeUrl($reviewProductUrl); ?>">
+            <?= $escaper->escapeHtml(__('Leave a review about the blog extension')) ?>
         </a>
     </div>
     <div class="blog-leave-feedback blog-leave-suggest">
-        <img  src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/add-feature-ico.png')) ?>" />
+        <img  src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/add-feature-ico.png')) ?>" />
         <a target="_blank"
-           href="<?= $block->escapeUrl($contactUrl); ?>">
-            <?= $block->escapeHtml(__('Need a new blog feature?')) ?>
+           href="<?= $escaper->escapeUrl($contactUrl); ?>">
+            <?= $escaper->escapeHtml(__('Need a new blog feature?')) ?>
         </a>
     </div>
 </div>

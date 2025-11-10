@@ -109,7 +109,15 @@ class Post extends \Magefan\Blog\App\Action\Action
                 ]));
                 return;
             }
-            
+
+            if (!filter_var(trim($request->getParam('author_email')), FILTER_VALIDATE_EMAIL)) {
+                $this->getResponse()->setBody(json_encode([
+                    'success' => false,
+                    'message' => __('Please enter valid email'),
+                ]));
+                return;
+            }
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );
