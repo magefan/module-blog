@@ -32,6 +32,9 @@
             case 'linkedin':
                 u =reverse('" . strrev('https://www.linkedin.com/sharing/share-offsite/?url=') . "') + url;
                 break;
+            case 'bluesky':
+                u =reverse('" . strrev('https://bsky.app/intent/compose?text=') . "') + url;
+                break;
         }
         if (u) {
             window.open (u, null, 'width=600,height=400');
