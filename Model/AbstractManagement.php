@@ -123,8 +123,9 @@ abstract class AbstractManagement implements ManagementInterface
             } else {
                 $storeId = 0;
 
-                if ($storeId = $this->getStoreIdFromRestRequest()) {
+                if ($storeIdFromRequest = $this->getStoreIdFromRestRequest()) {
                     $item->setData('data_to_update', $data);
+                    $storeId = $storeIdFromRequest;
                 }
 
                 $item->setStoreId($storeId);
