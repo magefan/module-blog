@@ -40,7 +40,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     /**
      * {@inheritdoc}
      */
-    public function apply()
+    public function apply(): void
     {
         $connection = $this->commentResource->getConnection();
         $postSelect = $connection->select()->from(

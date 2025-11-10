@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\Import;
 
 use Magento\Framework\Config\ConfigOptionsListConstants;
@@ -16,7 +18,7 @@ use Magento\Framework\Config\ConfigOptionsListConstants;
 class Mageplaza extends AbstractImport
 {
 
-    public function execute()
+    public function execute(): void
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Controller\Adminhtml\Import;
 
 /**
@@ -17,7 +19,7 @@ class Index extends \Magento\Backend\App\Action
      * Start available import execute
      * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function execute()
+    public function execute(): void
     {
         $this->_view->loadLayout();
         $this->_setActiveMenu('Magefan_Blog::import');

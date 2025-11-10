@@ -1,29 +1,31 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Archive;
 
 trait Archive
 {
     /**
      * Get archive month
-     * @return int
+     * @return string
      */
-    public function getMonth()
+    public function getMonth(): string
     {
-        return (int)$this->_coreRegistry->registry('current_blog_archive_month');
+        return (string)$this->_coreRegistry->registry('current_blog_archive_month');
     }
 
     /**
      * Get archive year
      * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return (int)$this->_coreRegistry->registry('current_blog_archive_year');
     }

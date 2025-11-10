@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Search;
 
 use Magento\Store\Model\ScopeInterface;
@@ -19,7 +21,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      * Retrieve query
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return urldecode((string)$this->getRequest()->getParam('q'));
     }
@@ -46,7 +48,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    public function getCollectionOrderField()
+    public function getCollectionOrderField(): string
     {
         return 'search_rate';
     }
@@ -98,7 +100,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    public function getPostTemplateType()
+    public function getPostTemplateType(): string
     {
         $template = (string)$this->_scopeConfig->getValue(
             'mfblog/search/template',

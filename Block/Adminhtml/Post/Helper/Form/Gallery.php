@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 /**
  * Blog post gallery
  */
@@ -68,7 +70,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
         \Magento\Framework\View\Element\Context $context,
         Registry $registry,
         \Magento\Framework\Data\Form $form,
-        $data = []
+        array $data = []
     ) {
         $this->registry = $registry;
         $this->form = $form;
@@ -88,7 +90,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
      *
      * @return array|null
      */
-    public function getImages()
+    public function getImages(): array
     {
         $result = [];
         $gallery = $this->registry->registry('current_model')->getGalleryImages();

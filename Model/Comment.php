@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 use Magento\Framework\Model\AbstractModel;
@@ -134,7 +136,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Comments' : 'Comment';
     }
@@ -143,7 +145,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * Retrieve true if post is active
      * @return boolean [description]
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getStatus() == \Magefan\Blog\Model\Config\Source\CommentStatus::APPROVED);
     }
@@ -152,7 +154,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * Retrieve if is visible on store
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->isActive()
             && (null === $storeId || array_intersect([0, $storeId], [$this->getStoreId()]));
@@ -269,7 +271,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * Retrieve true if comment is reply to other comment
      * @return boolean
      */
-    public function isReply()
+    public function isReply(): bool
     {
         return (bool)$this->getParentId();
     }
@@ -278,7 +280,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * Validate comment
      * @return void
      */
-    public function validate()
+    public function validate(): void
     {
         if (mb_strlen($this->getText()) < 3) {
             throw new \Exception(__('Comment text is too short.'), 1);
@@ -290,7 +292,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * @param  string $format
      * @return string
      */
-    public function getPublishDate($format = 'Y-m-d H:i:s')
+    public function getPublishDate($format = 'Y-m-d H:i:s'): string|array
     {
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
@@ -301,7 +303,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     /**
      * @return array|ResourceModel\Comment\Collection
      */
-    public function getRepliesCollection()
+    public function getRepliesCollection(): \Magefan\Blog\Model\ResourceModel\Comment\Collection|array
     {
         $repliesCollection = [];
         if (!$this->isReply()) {

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 use Magefan\Community\Api\GetModuleVersionInterface;
@@ -121,7 +123,7 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     /**
      * @return bool
      */
-    public function needToUpdate()
+    public function needToUpdate(): bool
     {
         return (version_compare($this->getCurrentVersion(), $this->getLatestVersion()) < 0);
     }

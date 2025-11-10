@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Post\View\Comments\Magefan;
 
 use Magento\Store\Model\ScopeInterface;
@@ -103,7 +105,7 @@ class Comment extends Template implements IdentityInterface
     /**
      * @return mixed
      */
-    public function getPublishDate()
+    public function getPublishDate(): string|array
     {
         $dateFormat = $this->_scopeConfig->getValue(
             'mfblog/post_view/comments/format_date',

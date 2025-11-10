@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Post\View;
 
 use Magento\Store\Model\ScopeInterface;
@@ -75,7 +77,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
      *
      * @return boolean
      */
-    public function displayLinks()
+    public function displayLinks(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/post_view/nextprev/enabled',

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\ResourceModel\Tag;
 
 /**
@@ -88,7 +90,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param boolean $withAdmin
      * @return $this
      */
-    public function addStoreFilter($store, $withAdmin = true)
+    public function addStoreFilter($store, $withAdmin = true): static
     {
         if ($store === null) {
             return $this;

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\Comment;
 
 /**
@@ -69,7 +71,7 @@ class Notification
      * Check if any pending blog comment exists
      * @return void
      */
-    public function checkComments()
+    public function checkComments(): void
     {
         if (!$this->backendSession->isLoggedIn()) {
             return; // Isn't logged in

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Smartwave\Megamenu;
 
 use Magento\Store\Model\ScopeInterface;
@@ -103,7 +105,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         $column_width = 12,
         $menu_type = 'fullwidth',
         $columns = null
-    ) {
+    ): string {
         $html = '';
 
         if (!$max_level ||

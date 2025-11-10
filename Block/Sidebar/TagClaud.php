@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -123,7 +125,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
      * Retrieve tag class
      * @return array
      */
-    public function getTagClass($tag)
+    public function getTagClass($tag): string
     {
         $maxCount = $this->getMaxCount();
         $percent = floor(($tag->getCount() / $maxCount) * 100);

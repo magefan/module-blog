@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Post\View;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
@@ -66,7 +68,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      * Premare block data
      * @return $this
      */
-    protected function _prepareCollection()
+    protected function _prepareCollection(): static
     {
         $post = $this->getPost();
 
@@ -106,7 +108,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      * Retrieve true if Display Related Products enabled
      * @return boolean
      */
-    public function displayProducts()
+    public function displayProducts(): bool
     {
         return (bool) $this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_ENABLED,
@@ -191,7 +193,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     /**
      * @return int
      */
-    public function hasItems()
+    public function hasItems(): int
     {
         return count($this->getItems());
     }

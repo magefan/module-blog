@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
@@ -298,7 +300,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      *
      * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return (string)$this->getData('identifier');
     }
@@ -317,7 +319,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Posts' : 'Post';
     }
@@ -327,7 +329,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve true if post is active
      * @return boolean [description]
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getIsActive() == self::STATUS_ENABLED);
     }
@@ -336,7 +338,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve available post statuses
      * @return array
      */
-    public function getAvailableStatuses()
+    public function getAvailableStatuses(): array
     {
         return [self::STATUS_DISABLED => __('Disabled'), self::STATUS_ENABLED => __('Enabled')];
     }
@@ -349,7 +351,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId)
+    public function checkIdentifier($identifier, $storeId): string|false
     {
         return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
@@ -428,7 +430,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param array $images
      * @return $this
      */
-    public function setGalleryImages(array $images)
+    public function setGalleryImages(array $images): static
     {
         $this->setData(
             'media_gallery',
@@ -551,7 +553,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  mixed $endCharacters
      * @return string
      */
-    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null)
+    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null): ?string
     {
         return preg_replace('<img([\w\W]+?)/>', '', $this->getShortFilteredContent($len, $endCharacters));
     }
@@ -560,7 +562,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve meta title
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -608,7 +610,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve og title
      * @return string
      */
-    public function getOgTitle()
+    public function getOgTitle(): string
     {
         $title = $this->getData('og_title');
         if (!$title) {
@@ -622,7 +624,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve og description
      * @return string
      */
-    public function getOgDescription()
+    public function getOgDescription(): string
     {
         $desc = $this->getData('og_description');
         if (!$desc) {
@@ -641,7 +643,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve og type
      * @return string
      */
-    public function getOgType()
+    public function getOgType(): string
     {
         $type = $this->getData('og_type');
         if (!$type) {
@@ -701,7 +703,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param $b
      * @return int
      */
-    public function sortByPositionDesc($a, $b)
+    public function sortByPositionDesc($a, $b): int
     {
         return strcmp($b->getPosition(), $a->getPosition());
     }
@@ -730,7 +732,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve post parent categories count
      * @return int
      */
-    public function getCategoriesCount()
+    public function getCategoriesCount(): int
     {
         return count($this->getParentCategories());
     }
@@ -756,7 +758,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve post tags
      * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
      */
-    public function getRelatedCoauthors()
+    public function getRelatedCoauthors(): array
     {
         return [];
     }
@@ -765,7 +767,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve post tags count
      * @return int
      */
-    public function getTagsCount()
+    public function getTagsCount(): int
     {
         return count($this->getRelatedTags());
     }
@@ -887,7 +889,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve if is visible on store
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->getIsActive()
             && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
@@ -898,7 +900,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve if is preview secret is valid
      * @return bool
      */
-    public function isValidSecret($secret)
+    public function isValidSecret($secret): bool
     {
         return ($secret && $this->getSecret() === $secret);
     }
@@ -908,7 +910,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getPublishDate($format = '')
+    public function getPublishDate($format = ''): string|array
     {
         if (!$format) {
             $format = $this->scopeConfig->getValue(
@@ -934,7 +936,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve true if post publish date display is enabled
      * @return bool
      */
-    public function isPublishDateEnabled()
+    public function isPublishDateEnabled(): bool
     {
         return (bool)$this->scopeConfig->getValue(
             'mfblog/design/publication_date',
@@ -947,7 +949,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getUpdateDate($format = 'Y-m-d H:i:s')
+    public function getUpdateDate($format = 'Y-m-d H:i:s'): string|array
     {
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
@@ -975,7 +977,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @return self
      * @deprecated replaced with getDynamicData
      */
-    public function initDinamicData()
+    public function initDinamicData(): static
     {
         $keys = [
             'og_image',
@@ -1164,7 +1166,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve reading time
      * @return int
      */
-    public function getReadingTime()
+    public function getReadingTime(): int
     {
         if (!$this->getData('reading_time')) {
             $wpm = 250;

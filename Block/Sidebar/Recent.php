@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 /**
@@ -43,7 +45,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve true if display the post image is enabled in the config
      * @return bool
      */
-    public function getDisplayImage()
+    public function getDisplayImage(): bool
     {
         return (bool)$this->getConfigValue('display_image');
     }

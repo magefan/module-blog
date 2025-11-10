@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Widget;
 
 use Magefan\Blog\Block\Post\PostList\AbstractList;
@@ -58,7 +60,7 @@ class Featured extends AbstractList implements \Magento\Widget\Block\BlockInterf
      *
      * @return string
      */
-    protected function getPostIdsConfigValue()
+    protected function getPostIdsConfigValue(): string
     {
         return (string)$this->getData('posts_ids');
     }

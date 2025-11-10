@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Sidebar;
 
 /**
@@ -68,7 +70,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param  int $time
      * @return string
      */
-    public function getYear($time)
+    public function getYear($time): string
     {
         return date('Y', $time);
     }
@@ -109,7 +111,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return array
      */
-    public function getIdentities()
+    public function getIdentities(): array
     {
         return [];
     }
@@ -118,7 +120,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param $time
      * @return string
      */
-    public function getTranslatedDate($time)
+    public function getTranslatedDate($time): string|array
     {
         if ($this->getGroupBy() == 'year') {
             $time = is_numeric($time) ? $time : strtotime((string)$time);

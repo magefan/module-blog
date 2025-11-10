@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Model\Import;
 
 /**
@@ -15,7 +17,7 @@ class Wordpress extends AbstractImport
 {
     protected $_requiredFields = ['dbname', 'uname', 'dbhost'];
 
-    public function execute()
+    public function execute(): void
     {
         $adapter = $this->getDbAdapter();
         $_pref = $this->getPrefix();
@@ -387,7 +389,7 @@ class Wordpress extends AbstractImport
         $adapter->getDriver()->getConnection()->disconnect();
     }
 
-    protected function wordpressOutoutWrap($pee, $br = true)
+    protected function wordpressOutoutWrap($pee, $br = true): string|array|null
     {
         $pre_tags = [];
 

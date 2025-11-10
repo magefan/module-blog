@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Helper;
 
 use Magento\Framework\App\Action\Action;
@@ -25,7 +27,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param  string $dateOrTime
      * @return string
      */
-    public static function getTranslatedDate($format, $dateOrTime)
+    public static function getTranslatedDate($format, $dateOrTime): string|array
     {
         $time = is_numeric($dateOrTime) ? $dateOrTime : strtotime((string)$dateOrTime);
         $month = ['F' => '%1', 'M' => '%2'];
@@ -37,7 +39,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $date = date($format, $time);
 
         foreach ($month as $to => $from) {
-            $date = str_replace($from, __(date($to, $time)), $date);
+            $date = str_replace($from, (string)__(date($to, $time)), $date);
         }
 
         return $date;
@@ -61,7 +63,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
-    public function isOriginMfLazyLoadEnable()
+    public function isOriginMfLazyLoadEnable(): bool
     {
         return $this->getConfig(self::XML_PATH_MFLAZYLOAD_ENABLED) && ($this->getConfig(self::XML_PATH_MFLAZYLOAD_METHOD) == 0) && $this->_moduleManager->isEnabled('Magefan_LazyLoad');
     }
