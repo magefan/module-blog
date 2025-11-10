@@ -202,13 +202,13 @@ if ($commentsCount) {
 
         if (isCommentElementVisible) {
             document.removeEventListener('scroll', initCommentsJs);
-            
+            /* css now in less
              const link = document.createElement('link')
                     link.rel = 'stylesheet';
                     link.type = 'text/css';
                     link.href = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::css/comments.css')) . "';
                     document.head.append(link);
-
+            */
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-comments.js')) . "';

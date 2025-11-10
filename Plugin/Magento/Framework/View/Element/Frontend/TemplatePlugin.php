@@ -152,8 +152,6 @@ class TemplatePlugin
      */
     private function getDesignVersionTemplate(string $template, string $designVersion): string
     {
-        //$baseTemplate = str_replace('-modern', '', $template);
-
         /* from Magefan_Blog::post/view.phtml to Magefan_Blog::design_valor/post/view.phtml */
         $newDesignTemplate = str_replace('::', '::' . $designVersion . '/', $template);
 
