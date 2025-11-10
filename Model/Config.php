@@ -191,10 +191,10 @@ class Config
      */
     public function isRelatedPostsEnabled($storeId = null)
     {
-        return (bool)$this->getConfig(
-            self::XML_RELATED_POSTS_ENABLED,
-            $storeId
-        );
+        return $this->isEnabled($storeId) && (bool)$this->getConfig(
+                self::XML_RELATED_POSTS_ENABLED,
+                $storeId
+            );
     }
 
     /**
@@ -204,10 +204,10 @@ class Config
      */
     public function isRelatedProductsEnabled($storeId = null)
     {
-        return (bool)$this->getConfig(
-            self::XML_RELATED_PRODUCTS_ENABLED,
-            $storeId
-        );
+        return $this->isEnabled($storeId) && (bool)$this->getConfig(
+                self::XML_RELATED_PRODUCTS_ENABLED,
+                $storeId
+            );
     }
 
     /**

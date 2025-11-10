@@ -204,6 +204,8 @@
                 <related_posts_enabled>1</related_posts_enabled>
                 <related_posts_template/>
                 <number_of_related_posts>5</number_of_related_posts>
+                <number_of_related_posts>5</number_of_related_posts>
+                <include_post_rich_snippet>0</include_post_rich_snippet>
             </product_page>
             <advanced_permalink>
                 <page_pagination_type>page</page_pagination_type>
