@@ -1,0 +1,61 @@
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .mfblog-contents {
+        display: none;
+        border: 1px solid #a2a9b1;
+        padding: 15px;
+        max-width: 500px;
+        margin-bottom: 16px;
+        background-color: #f8f9fa;
+
+        .mfblog-contents-header {
+            font-weight: 700;
+        }
+
+        .mfblog-contents-toggle {
+            cursor: pointer
+        }
+
+        .mfblog-contents-toggle:hover {
+            text-decoration: underline
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0;
+        }
+
+        li a {
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: underline;
+            color: #ee5204;
+        }
+
+        ol {
+            counter-reset: item
+        }
+
+        li {
+            display: block
+        }
+
+        li:before {
+            content: counters(item, '.') ' '; counter-increment: item
+        }
+    }
+}

@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog related posts template
+ *
+ * @var \Magefan\Blog\Block\Post\View\RelatedPosts $block
+ * @var \Magefan\Blog\Block\Catalog\Product\RelatedPosts $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+
+<?php if ($block->displayPosts()) { ?>
+    <?php $postCollection = $block->getPostCollection(); ?>
+    <?php if (count($postCollection)) { ?>
+    <div class="block _related related-posts">
+        <?php if (!$block->getHideTitle()) { ?>
+        <div class="block-title title">
+            <strong id="block-relatedposts-heading" role="heading" aria-level="2">
+                <?= $escaper->escapeHtml(__('Related Posts')) ?>
+            </strong>
+        </div>
+        <?php } ?>
+        <div class="block-content">
+            <?= $block
+                ->setData('template_type', 'article-default-list')
+                ->setTemplate('Magefan_Blog::design_valor/post/article.phtml')->toHtml()
+            ?>
+        </div>
+    </div>
+    <?php } ?>
+<?php } ?>
+

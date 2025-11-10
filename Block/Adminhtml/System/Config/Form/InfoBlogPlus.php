@@ -33,7 +33,8 @@ class InfoBlogPlus extends InfoPlan
             'mfblog_post_view_related_posts_autorelated_black_words',
             'mfblog_design',
             'mfblog_advanced_permalink',
-            'mfblog_sitemap'
+            'mfblog_sitemap',
+            'mfblog_product_page_include_post_rich_snippet'
         ]);
         return $sections;
     }

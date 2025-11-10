@@ -118,7 +118,7 @@ class Richsnippets extends Opengraph
                 ];
 
                 $sameAs = [];
-                foreach (['facebook_page_url', 'twitter_page_url', 'instagram_page_url', 'googleplus_page_url', 'linkedin_page_url'] as $key) {
+                foreach (['facebook_page_url', 'twitter_page_url', 'instagram_page_url', 'bluesky_page_url','googleplus_page_url', 'linkedin_page_url'] as $key) {
                     if ($value = trim($author->getData($key) ?: '')) {
                         $sameAs[] = $value;
                     }

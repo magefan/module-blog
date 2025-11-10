@@ -226,6 +226,14 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getStoreId()
+    {
+        return $this->storeId ?: $this->storeManager->getStore()->getId();
+    }
+
+    /**
      * Retrieve post id by identifier
      * @param  string $identifier
      * @return int
@@ -296,7 +304,7 @@ class UrlResolver implements UrlResolverInterface
      */
     protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
-        $storeId = $this->storeId ?: $this->storeManager->getStore()->getId();
+        $storeId = $this->getStoreId();
         $key =  $storeId . '-' . $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
         if (!isset($this->ids[$key])) {
             $sufix = $this->url->getUrlSufix($controllerName);

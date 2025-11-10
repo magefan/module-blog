@@ -139,23 +139,6 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
     }
 
     /**
-     * Get relevant path to template
-     *
-     * @return string
-     */
-    public function getTemplate()
-    {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/post_view/design/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        if ($template = $this->templatePool->getTemplate('blog_post_view', $templateName)) {
-            $this->_template = $template;
-        }
-        return parent::getTemplate();
-    }
-
-    /**
      * Retrieve 1 if display reading time is enabled
      * @return int
      */

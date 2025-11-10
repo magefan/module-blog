@@ -105,14 +105,22 @@ class Post extends \Magefan\Blog\App\Action\Action
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )) {
             /* Guest can post review */
-            if (!trim($request->getParam('author_nickname')) || !trim($request->getParam('author_email'))) {
+            if (!trim($request->getParam('author_nickname') ?: '') || !trim($request->getParam('author_email')) ?: '') {
                 $this->getResponse()->setBody(json_encode([
                     'success' => false,
                     'message' => __('Please enter your name and email'),
                 ]));
                 return;
             }
-            
+
+            if (!filter_var(trim($request->getParam('author_email')), FILTER_VALIDATE_EMAIL)) {
+                $this->getResponse()->setBody(json_encode([
+                    'success' => false,
+                    'message' => __('Please enter valid email'),
+                ]));
+                return;
+            }
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );

@@ -8,26 +8,26 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-right" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <css src="Magefan_Blog::css/comments.css" />
-    </head>
     <update handle="blog_css"/>
     <body>
         <attribute name="class" value="blog-page" />
         <referenceContainer name="sidebar.additional">
+            <!--    breeze add this block to sidebar    -->
+            <referenceBlock name="catalog.product.viewed" remove="true"/>
+
             <block class="Magefan\Blog\Block\Sidebar" name="blog.sidebar" template="sidebar.phtml">
-                <block class="Magefan\Blog\Block\Sidebar\Search" name="blog.sidebar.search" template="sidebar/search.phtml" />
-                <block class="Magefan\Blog\Block\Sidebar\Categories" name="blog.sidebar.category" template="sidebar/categories.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Search" name="blog.sidebar.search" template="Magefan_Blog::sidebar/search.phtml" />
+                <block class="Magefan\Blog\Block\Sidebar\Categories" name="blog.sidebar.category" template="Magefan_Blog::sidebar/categories.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml" >
+                <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="Magefan_Blog::sidebar/recent.phtml" >
                     <action method="setBlockTitle">
                         <argument name="time" xsi:type="string">Recent Posts</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="sidebar/recent.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Featured" name="blog.sidebar.featured" template="Magefan_Blog::sidebar/recent.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
@@ -35,7 +35,7 @@
                         <argument name="time" xsi:type="string">Featured Posts</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="sidebar/recent.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Popular" name="blog.sidebar.popular" template="Magefan_Blog::sidebar/recent.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
@@ -43,19 +43,19 @@
                         <argument name="time" xsi:type="string">Popular Posts</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="sidebar/archive.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Archive" name="blog.sidebar.archive" template="Magefan_Blog::sidebar/archive.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\TagClaud" name="blog.sidebar.tagclaud" template="sidebar/tag_claud.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\TagClaud" name="blog.sidebar.tagclaud" template="Magefan_Blog::sidebar/tag_claud.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>
                 </block>
-                <block class="Magefan\Blog\Block\Sidebar\Custom" name="blog.sidebar.custom" template="sidebar/custom.phtml" />
-                <block class="Magefan\Blog\Block\Sidebar\CustomTwo" name="blog.sidebar.custom2" template="sidebar/custom.phtml" />
-                <block class="Magefan\Blog\Block\Sidebar\Rss" name="blog.sidebar.rss" template="sidebar/rss.phtml">
+                <block class="Magefan\Blog\Block\Sidebar\Custom" name="blog.sidebar.custom" template="Magefan_Blog::sidebar/custom.phtml" />
+                <block class="Magefan\Blog\Block\Sidebar\CustomTwo" name="blog.sidebar.custom2" template="Magefan_Blog::sidebar/custom.phtml" />
+                <block class="Magefan\Blog\Block\Sidebar\Rss" name="blog.sidebar.rss" template="Magefan_Blog::sidebar/rss.phtml">
                     <action method="setCacheLifetime">
                         <argument name="time" xsi:type="string">86400</argument>
                     </action>

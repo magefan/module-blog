@@ -12,7 +12,7 @@
     <update handle="blog_post_list"/>
     <body>
         <referenceContainer name="content">
-            <block class="Magefan\Blog\Block\Author\PostList" name="blog.posts.list" template="post/list.phtml" />
+            <block class="Magefan\Blog\Block\Author\PostList" name="blog.posts.list" template="Magefan_Blog::post/list.phtml" />
         </referenceContainer>
     </body>
 </page>

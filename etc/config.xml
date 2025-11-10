@@ -13,15 +13,8 @@
             <general>
                 <enabled>0</enabled>
                 <mfmodule>Blog</mfmodule>
+                <design_version>design_modern</design_version>
             </general>
-            <publish_post_on_fb>
-                <enabled>0</enabled>
-                <app_id/>
-                <app_secret/>
-                <page_id/>
-                <post_format>{{var post.title}} -{{post.short_content}}</post_format>
-                <autopublish_categories>0</autopublish_categories>
-            </publish_post_on_fb>
             <design>
                 <format_date>F d, Y</format_date>
                 <publication_date>1</publication_date>
@@ -45,9 +38,6 @@
                 <meta_description/>
             </index_page>
             <post_view>
-                <design>
-                    <template>modern</template>
-                </design>
                 <related_posts>
                     <enabled>1</enabled>
                     <template/>
@@ -57,6 +47,7 @@
                 </related_posts>
                 <related_products>
                     <enabled>1</enabled>
+                    <template/>
                     <number_of_products>5</number_of_products>
                     <autorelated_enabled>0</autorelated_enabled>
                     <autorelated_black_words/>
@@ -83,7 +74,6 @@
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
-                    <template>modern</template>
                 </nextprev>
                 <views_count>
                     <enabled>0</enabled>
@@ -214,6 +204,8 @@
                 <related_posts_enabled>1</related_posts_enabled>
                 <related_posts_template/>
                 <number_of_related_posts>5</number_of_related_posts>
+                <number_of_related_posts>5</number_of_related_posts>
+                <include_post_rich_snippet>0</include_post_rich_snippet>
             </product_page>
             <advanced_permalink>
                 <page_pagination_type>page</page_pagination_type>

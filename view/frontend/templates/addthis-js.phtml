@@ -9,7 +9,7 @@
 <?php
 /**
  * @var $block \Magefan\Blog\Block\Social\AddThi
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  */
 ?>
 <?php $script = "
@@ -31,6 +31,9 @@
                 break;
             case 'linkedin':
                 u =reverse('" . strrev('https://www.linkedin.com/sharing/share-offsite/?url=') . "') + url;
+                break;
+            case 'bluesky':
+                u =reverse('" . strrev('https://bsky.app/intent/compose?text=') . "') + url;
                 break;
         }
         if (u) {

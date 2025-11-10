@@ -1,0 +1,73 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var \Magefan\Blog\Block\Post\View\Comments\Magefan\Comment $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<?php
+    $comment = $block->getComment();
+    $numberOfCommentsToDisplay = $block->getNumberOfReplies();
+?>
+<div class="c-comment c-comment-parent-<?= (int)$comment->getParentId() ?>"
+    <?php if ($comment->getIsHidden()) { echo 'style="display:none"'; } ?>>
+    <?php if ($authorImage = $comment->getAuthorImage()) { ?>
+    <div class="c-img">
+        <img src="<?= $escaper->escapeUrl($authorImage) ?>" alt="<?= $escaper->escapeHtml($comment->getAuthorName()) ?>">
+    </div>
+    <?php } ?>
+    <div class="c-post c-post-<?= (int)$comment->getId() ?>" id="c-post-<?= (int)$comment->getId() ?>">
+        <div class="p-info">
+            <div class="p-name"><?= $escaper->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+            <div class="publish-date"><?= $escaper->escapeHtml($block->getPublishDate()) ?></div>
+        </div>
+
+        <div class="p-text"><?= /*@noEscape*/ nl2br($escaper->escapeHtml($comment->getText())) ?></div>
+        <div class="p-actions">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.99259 1.40928e-05C6.60361 -0.00204275 5.23815 0.358785 4.03119 1.04683C2.82423 1.73487 1.81756 2.7263 1.11071 3.9231C0.403864 5.1199 0.0213084 6.48064 0.000864707 7.87079C-0.019579 9.26093 0.322798 10.6323 0.994147 11.8495L0.0306984 15.064C-0.00180451 15.1726 -0.0084979 15.2873 0.0111526 15.3989C0.0308031 15.5106 0.0762534 15.6161 0.143876 15.707C0.211498 15.7979 0.29942 15.8718 0.400625 15.9226C0.501829 15.9735 0.613514 16 0.726765 16C0.797617 15.9999 0.868088 15.9896 0.93602 15.9695L4.14752 15.0051C5.21577 15.5949 6.40473 15.932 7.62329 15.9907C8.84185 16.0494 10.0577 15.8282 11.1776 15.3438C12.2975 14.8595 13.2918 14.125 14.0842 13.1966C14.8767 12.2681 15.4463 11.1704 15.7494 9.98761C16.0525 8.80477 16.0811 7.56817 15.8329 6.37258C15.5847 5.17698 15.0664 4.05412 14.3176 3.09004C13.5689 2.12595 12.6096 1.34623 11.5132 0.810616C10.4169 0.275005 9.21256 -0.00227781 7.99259 1.40928e-05ZM7.99259 14.5455C6.80128 14.5439 5.63321 14.2154 4.61544 13.5956C4.50155 13.5271 4.3712 13.4909 4.23834 13.4909C4.16769 13.4906 4.0974 13.5009 4.02981 13.5215L1.81083 14.1884L2.47638 11.9665C2.50527 11.8698 2.51373 11.7682 2.50122 11.668C2.48871 11.5678 2.45551 11.4714 2.40372 11.3847C1.6577 10.1474 1.3422 8.69748 1.50651 7.26164C1.67081 5.8258 2.30567 4.48488 3.31189 3.4484C4.31811 2.41192 5.639 1.73826 7.06817 1.53269C8.49735 1.32712 9.95431 1.60121 11.2114 2.31214C12.4685 3.02307 13.4549 4.13079 14.0165 5.46222C14.5781 6.79365 14.6832 8.27379 14.3155 9.67136C13.9478 11.0689 13.1279 12.3052 11.9839 13.187C10.84 14.0689 9.43645 14.5465 7.99259 14.5455Z" fill="#98A2B3"/>
+            </svg>
+            <a href="#" class="reply-action"
+               data-comment="<?= $comment->isReply() ?
+                   (int)$comment->getParentId() :
+                   (int)$comment->getId() ?>"
+               title="<?= $escaper->escapeHtml(__('Reply')) ?>"><?= $escaper->escapeHtml(__('Reply')) ?></a>
+        </div>
+        <?php
+            $replies = $block->getRepliesCollection();
+            $commentsCount = count($replies);
+        if ($commentsCount) {
+            ?>
+            <div class="p-replies">
+            <?php $i = 0 ?>
+            <?php foreach ($replies as $reply) { ?>
+                    <?php
+                        $i++;
+                        $reply->setIsHidden($i > $numberOfCommentsToDisplay);
+                    ?>
+                    <?= /*@noEscape*/ $block->setComment($reply)->toHtml() ?>
+                <?php } ?>
+
+                <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
+                <div class="c-more more-comments-action" data-comment="<?= (int)$comment->getId() ?>">
+                    <a href="#" ><?= $escaper->escapeHtml(__('Show more replies in this thread')) ?><i></i></a>
+                </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>

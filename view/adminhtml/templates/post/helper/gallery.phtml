@@ -7,9 +7,15 @@
  */
 
 /**
- * @var $block \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Adminhtml\Post\Helper\Form\Gallery\Content $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 
 $elementName = $block->getElement()->getName() . '[images]';
 $formName = $block->getFormName();
@@ -17,8 +23,8 @@ $formName = $block->getFormName();
 <div id="<?= $block->getHtmlId() ?>"
      class="gallery"
      data-mage-init='{"Magefan_Blog/js/post-gallery":{"template":"#<?= $block->getHtmlId() ?>-template"}}'
-     data-parent-component="<?= $block->escapeHtml($block->getData('config/parentComponent')) ?>"
-     data-images="<?= $block->escapeHtml($block->getImagesJson()) ?>"
+     data-parent-component="<?= $escaper->escapeHtml($block->getData('config/parentComponent')) ?>"
+     data-images="<?= $escaper->escapeHtml($block->getImagesJson()) ?>"
      data-types="{}"
     >
     <?php if (!$block->getElement()->getReadonly()) {?>
@@ -26,7 +32,7 @@ $formName = $block->getFormName();
             <?= $block->getUploaderHtml(); ?>
             <div class="product-image-wrapper">
                 <p class="image-placeholder-text">
-                    <?=  $block->escapeHtml(__('Browse to find or drag image here')); ?>
+                    <?=  $escaper->escapeHtml(__('Browse to find or drag image here')); ?>
                 </p>
             </div>
         </div>
@@ -36,33 +42,33 @@ $formName = $block->getFormName();
         <div class="image item<% if (data.disabled == 1) { %> hidden-for-front<% } %>"
              data-role="image">
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][position]"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][position]"
                    value="<%- data.position %>"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    class="position"/>
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][file]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][file]"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    value="<%- data.file %>"/>
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][value_id]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][value_id]"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    value="<%- data.value_id %>"/>
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][label]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][label]"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    value="<%- data.label %>"/>
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][disabled]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][disabled]"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    value="<%- data.disabled %>"/>
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][media_type]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][media_type]"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    value="image"/>
             <input type="hidden"
-                   name="<?= $block->escapeHtml($elementName) ?>[<%- data.file_id %>][removed]"
-                   data-form-part="<?= $block->escapeHtml($formName) ?>"
+                   name="<?= $escaper->escapeHtml($elementName) ?>[<%- data.file_id %>][removed]"
+                   data-form-part="<?= $escaper->escapeHtml($formName) ?>"
                    value=""
                    class="is-removed"/>
 
@@ -76,15 +82,15 @@ $formName = $block->getFormName();
                     <button type="button"
                             class="action-remove"
                             data-role="delete-button"
-                            title="<?= $block->escapeHtml(__('Delete image')) ?>">
+                            title="<?= $escaper->escapeHtml(__('Delete image')) ?>">
                     <span>
-                        <?= $block->escapeHtml(__('Delete image')) ?>
+                        <?= $escaper->escapeHtml(__('Delete image')) ?>
                     </span>
                     </button>
                     <div class="draggable-handle"></div>
                 </div>
                 <div class="image-fade">
-                    <span><?= $block->escapeHtml(__('Hidden')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Hidden')) ?></span>
                 </div>
             </div>
 

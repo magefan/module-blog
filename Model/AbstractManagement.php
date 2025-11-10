@@ -123,7 +123,14 @@ abstract class AbstractManagement implements ManagementInterface
                 $item->setStoreId((int)$data['store_id']);
                 $item->setData('data_to_update', $data);
             } else {
-                $item->setStoreId(0);
+                $storeId = 0;
+
+                if ($storeIdFromRequest = $this->getStoreIdFromRestRequest()) {
+                    $item->setData('data_to_update', $data);
+                    $storeId = $storeIdFromRequest;
+                }
+
+                $item->setStoreId($storeId);
             }
 
             $item->load($id);
@@ -229,9 +236,36 @@ abstract class AbstractManagement implements ManagementInterface
     public function getError($massage)
     {
         $data = ['error' => 'true'];
-        
+
         $data['message'] = $massage ?? '';
 
         return json_encode($data);
+    }
+
+    /**
+     * if request url contain store code - get store id
+     * @return int
+     */
+    private function getStoreIdFromRestRequest(): int
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $appState = $objectManager->get(\Magento\Framework\App\State::class);
+        $request = $objectManager->get(\Magento\Framework\App\RequestInterface::class);
+        $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+
+        $storeId = 0;
+
+        if (\Magento\Framework\App\Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
+            $storeCode = $storeManager->getStore()->getCode();
+
+            // /rest/ua/V1/blog/post/2 or /ua/rest/V1/blog/post/2
+            $path = explode('/', trim($request->getRequestUri(), '/'));
+
+            if ('rest' === $path[0] && $path[1] === $storeCode || 'rest' === $path[1] && $path[0] === $storeCode) {
+                $storeId = (int)$storeManager->getStore()->getId();
+            }
+        }
+
+        return $storeId;
     }
 }

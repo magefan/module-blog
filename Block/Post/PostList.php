@@ -75,7 +75,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])) {
+        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml']) && !$this->getData('template_type')) {
             /* If template was not customized in layout */
             return parent::getTemplate();
         }
@@ -94,7 +94,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     protected function getPostTemplateType(): string
     {
-        return (string)$this->_scopeConfig->getValue(
+        return $this->getData('template_type') ?: (string)$this->_scopeConfig->getValue(
             'mfblog/post_list/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );

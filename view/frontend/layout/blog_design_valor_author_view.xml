@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="blog_design_valor_default"/>
+    <update handle="blog_design_valor_post_list"/>
+    <head>
+        <css src="Magefan_Blog::css/design_valor/style-blog-author.css" />
+        <remove src="Magefan_Blog::css/design_valor/style-blog-post-list.css" />
+    </head>
+</page>

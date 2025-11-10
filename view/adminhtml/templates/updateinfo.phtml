@@ -10,8 +10,14 @@
 /**
  * Blog available for to get notification
  *
- * @var $block \Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo
+ * @var \Magefan\Blog\Block\Adminhtml\System\Config\Form\UpdateInfo $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php if ($block->needToUpdate() && \Magefan\Community\Model\UrlChecker::showUrl($block->getUrl())) { ?>
@@ -30,7 +36,7 @@
                      Please <a href="%4"   target="_blank">contact</a> 
                      the Magefan team if you have any questions or need help with an update.',
                     $url1,
-                    $block->escapeHtml($block->getLatestVersion()),
+                    $escaper->escapeHtml($block->getLatestVersion()),
                     $url2,
                     $url3
                 );

@@ -23,4 +23,7 @@
     <type name="Magento\Framework\App\Config\ScopeConfigInterface">
         <plugin name="magefan_blog_plugin_framework_app_config_scopeconfiginterface" type="\Magefan\Blog\Plugin\Magento\Framework\App\Config\ScopeConfigInterfacePlugin" sortOrder="10"/>
     </type>
+    <type name="Magento\Framework\View\Element\Template">
+        <plugin name="magefan_blog_plugin_framework_view_element_template" type="Magefan\Blog\Plugin\Magento\Framework\View\Element\Frontend\TemplatePlugin" sortOrder="10" />
+    </type>
 </config>
