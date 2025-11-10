@@ -87,7 +87,7 @@ class Template implements \Magento\Framework\Option\ArrayInterface
                         $ungroupedOptions[] = ['value' => $info['value'], 'label' => $info['label']];
                     }
                 }
-                $this->options[$this->templateType] = array_filter($this->options[$this->templateType], function ($group) {
+                $this->options[$this->templateType] = array_filter($this->options[$this->templateType], function ($group): bool {
                     return !empty($group['value']);
                 });
                 $this->options[$this->templateType] = array_merge(

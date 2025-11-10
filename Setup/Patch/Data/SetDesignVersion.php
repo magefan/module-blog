@@ -32,7 +32,7 @@ class SetDesignVersion implements DataPatchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply()
+    public function apply(): void
     {
         $this->schemaSetup->startSetup();
         $connection = $this->schemaSetup->getConnection();

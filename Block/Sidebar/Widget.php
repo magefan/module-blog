@@ -44,7 +44,7 @@ trait Widget
      * @param $param
      * @return mixed
      */
-    protected function getConfigValue($param)
+    protected function getConfigValue(string $param)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/sidebar/' . $this->getWidgetKey() . '/' . $param,

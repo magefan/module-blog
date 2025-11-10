@@ -215,7 +215,7 @@ class Config
      * @param $storeId
      * @return int
      */
-    public function getRelatedProductsCount($storeId = null)
+    public function getRelatedProductsCount($storeId = null): int
     {
         return (int)$this->getConfig(self::XML_RELATED_PRODUCTS_NUMBER, $storeId);
     }
@@ -328,7 +328,7 @@ class Config
      * @param $storeId
      * @return string
      */
-    public function getDesignVersion($storeId = null)
+    public function getDesignVersion($storeId = null): string
     {
         return (string)$this->getConfig(
             self::XML_PATH_BLOG_DESIGN_VERSION,
