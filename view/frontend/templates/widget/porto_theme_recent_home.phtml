@@ -55,7 +55,7 @@ if (!isset($escaper)) {
                         <span class="month"><?= $escaper->escapeHtml($_post->getPublishDate('M')) ?></span>
                     </div>
                     <div class="postTitle">
-                        <h2><a href="<?= $_postUrl ?>" ><?= $_postName ?></a></h2>
+                        <h2><a href="<?= /*@noEscape*/ $_postUrl ?>" ><?= /*@noEscape*/ $_postName?></a></h2>
                     </div>
                     <?php
                         $content = $block->getShorContent($_post);
@@ -63,7 +63,7 @@ if (!isset($escaper)) {
                         $content = preg_replace("#<iframe[^>]+>.*?</iframe>#is", "", $content);
                     ?>
                     <div class="postContent"><?= /*@noEscape*/ $content ?></div>
-                    <a class="readmore" href="<?= $_postUrl ?>"><?= $escaper->escapeHtml(__('Read more &#187;')) ?></a>
+                    <a class="readmore" href="<?= /*@noEscape*/ $_postUrl ?>"><?= $escaper->escapeHtml(__('Read more &#187;')) ?></a>
                 </div>
             </div>
         </div>

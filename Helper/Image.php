@@ -141,7 +141,7 @@ class Image extends AbstractHelper
 
         if ($this->fileExists($file)) {
             $file = $this->_mediaDirectory->getAbsolutePath($file);
-            $imageSize = @getimagesize($file);
+            $imageSize = getimagesize($file);
             if ($imageSize) {
                 return [
                     'width' => (int)$imageSize[0],

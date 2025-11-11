@@ -46,7 +46,7 @@ class PostLinks extends \Magefan\Blog\Block\Category\PostList
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return void
      */
-    protected function _addBreadcrumbs($title = null, $key = null): null
+    protected function _addBreadcrumbs($title = null, $key = null)
     {
         return null;
     }

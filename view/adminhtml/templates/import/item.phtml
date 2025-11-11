@@ -33,7 +33,7 @@ if (!isset($escaper)) {
                 }
                 $action = 'window.location=\'' .  $escaper->escapeUrl($url) . '\'';
             } ?>
-         onclick="<?= $action ?>">
+         onclick="<?= $escaper->escapeHtml($action) ?>">
         <img class="img"
              src="<?= $escaper->escapeUrl($block->getViewFileUrl($block->getImage())) ?>" />
         <br/>

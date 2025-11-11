@@ -82,7 +82,7 @@ if (!isset($escaper)) {
 
             <?php /* post reading time */ ?>
             <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
-                <span class="post-reading-time"><?= '<span>&nbsp;|&nbsp;</span>' . $escaper->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+                <span class="post-reading-time"> <span>&nbsp;|&nbsp;</span> <?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?></span>
             <?php } ?>
 
             <?php /* post views */ ?>
@@ -164,9 +164,9 @@ if (!isset($escaper)) {
         <div class="block post-sharing post-sharing-bottom">
             <div class="share-elements">
                 <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                    <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
+                    <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>')">
                         <div class="icon" title="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
-                            <img src="<?= $block->getViewFileUrl('Magefan_Blog::images/design_valor/social/' . strtolower($network) . '.svg') ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/design_valor/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                         </div>
                         <div class="label"><?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?></div>
                     </div>
