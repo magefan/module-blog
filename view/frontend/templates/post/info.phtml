@@ -122,7 +122,7 @@ if (!isset($escaper)) {
     <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
         <div class="item post-reading-time">
             <i class="mf-blog-icon mfbi-reading-time"></i>
-            <span class="value"><?= $escaper->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+            <span class="value"><?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?></span>
         </div>
     <?php } ?>
 

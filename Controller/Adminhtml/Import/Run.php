@@ -43,7 +43,7 @@ class Run extends \Magento\Backend\App\Action
             $import->prepareData($data)->execute();
 
             $stats = $import->getImportStatistic();
-var_dump($stats->getData('skipped_count'));
+
             if ($stats->getData('imported_count')) {
                 if (!$stats->getData('skipped_count')) {
                     $this->messageManager->addSuccess((string)__(

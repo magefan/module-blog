@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Magefan\Blog\Plugin\Magento\Framework\App\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\RequestInterface\Proxy as RequestInterface;
-use Magefan\Blog\Model\Config\Proxy as Config;
+use Magento\Framework\App\RequestInterface;
+use Magefan\Blog\Model\Config;
 
 class ScopeConfigInterfacePlugin
 {

@@ -76,9 +76,9 @@ class Author extends AbstractModel implements AuthorInterface
      * Retrieve if is visible on store
      * @return bool
      */
-    public function isVisibleOnStore(int $storeId): bool
+    public function isVisibleOnStore(int|string $storeId): bool
     {
-        return $this->getIsActive();
+        return (bool)$this->getIsActive();
     }
 
     /**

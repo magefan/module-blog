@@ -40,9 +40,9 @@ $_postName = $escaper->escapeHtml($_post->getTitle());
             <div class="post-sharing post-sharing-top old-post-list-item">
                 <div class="share-elements">
                     <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                        <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
+                        <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>')">
                             <div class="icon" title="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
-                                <img src="<?= $block->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                             </div>
                         </div>
                     <?php } ?>

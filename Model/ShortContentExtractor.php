@@ -53,7 +53,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     {
         $content = (string)$content;
 
-        $key = md5($content) . $len . $endCharacters;
+        $key = hash('sha256', $content) . $len . $endCharacters;
         if (!isset($this->executedContent[$key])) {
 
             $content = $this->filterProvider->getPageFilter()->filter(

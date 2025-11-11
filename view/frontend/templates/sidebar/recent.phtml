@@ -49,7 +49,7 @@ if (!isset($escaper)) {
                             $featuredImgAlt =  $_postName;
                         }
                         ?>
-                        <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                        <a class="post-item-link" title="<?= /*@noEscape*/ $_postName ?>" href="<?= /*@noEscape*/ $_postUrl ?>">
                             <?php
                             if ($featuredImage) {
                                 $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
@@ -57,14 +57,14 @@ if (!isset($escaper)) {
                                 $featuredImageUrl = $block->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
                             }
                             ?>
-                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
+                            <img data-width-amp="<?= $escaper->escapeHtml($width) ?>" data-height-amp="<?= $escaper->escapeHtml($height) ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
                                  alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
                         </a>
                     </div>
                 <?php } ?>
 
-                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                    <?= $_postName ?>
+                <a class="post-item-link" title="<?= /*@noEscape*/ $_postName ?>" href="<?= /*@noEscape*/ $_postUrl ?>">
+                    <?= /*@noEscape*/ $_postName ?>
                 </a>
 
                 <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>

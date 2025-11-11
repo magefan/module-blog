@@ -21,7 +21,8 @@ $_postCollection = $block->getPostCollection();
 
 if ($_postCollection->count() /* && $templateType*/) { ?>
     <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
-        <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
+        <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
+
     <?php } ?>
     <?php
 
@@ -129,7 +130,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                             <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>"
                                class="article-post__image-wrapper mf-media mf-media--3x2 mf-media--transparent">
                                 <img loading="lazy" class="motion-reduce" src="<?=  $escaper->escapeHtml($featuredImage) ?>"
-                                     alt="<?= $featuredImgAlt ?>">
+                                     alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>">
                             </a>
 
                             <?php /* Post Category in Image Container */ ?>
@@ -192,7 +193,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
 
                                         <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
                                             <?php /* <i class="mf-blog-icon mfbi-reading-time"></i>*/ ?>
-                                            <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+                                            <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getReadingTime(). ' ' . __('min read'))  ?></span>
                                         <?php } ?>
 
                                         <?php if ($block->viewsCountEnabled()) { ?>
@@ -206,7 +207,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                     <?php if ($categories = $entity->getParentCategories()): ?>
                                         <div class="article-post__category article-post__category-pos2">
                                             <?php foreach ($categories as $category): ?>
-                                                <a class="article-post__category-name" href="<?= $category->getCategoryUrl() ?>"
+                                                <a class="article-post__category-name" href="<?= $escaper->escapeHtml($category->getCategoryUrl()) ?>"
                                                    title="<?= $escaper->escapeHtml($category->getTitle()) ?>"><?= $escaper->escapeHtml($category->getTitle()) ?></a>
                                             <?php endforeach; ?>
                                         </div>
@@ -249,8 +250,8 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                             ?>
                                             <?php if ('' !== $fullName): ?>
                                                 <span class="article-post__author">
-                                                    <a href="<?= $authorUrl ?>" title="<?= $escaper->escapeHtml($fullName) ?>">
-                                                        <span><?=$fullName?></span>
+                                                    <a href="<?= $escaper->escapeUrl($authorUrl) ?>" title="<?= $escaper->escapeHtml($fullName) ?>">
+                                                        <span><?= $escaper->escapeHtml($fullName)?></span>
                                                     </a>
                                     <?php if (count($coAuthors)) { ?>
                                         <?= $escaper->escapeHtml(__('and')) ?>
@@ -281,7 +282,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
 
                                             <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
                                                 <?php /* <i class="mf-blog-icon mfbi-reading-time"></i>*/ ?>
-                                                <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+                                                <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?></span>
                                             <?php } ?>
 
                                             <?php if ($postCommentsCount = count($entity->getComments())): ?>
@@ -334,7 +335,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     <?= $block->getToolbarHtml() ?>
 
     <?php if ($style) { ?>
-        <?= $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>
+        <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>
     <?php } ?>
 
     <?php if ($block->getTitle()) { ?>
