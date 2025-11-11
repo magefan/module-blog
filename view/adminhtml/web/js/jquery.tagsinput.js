@@ -50,7 +50,7 @@
         maxWidth = $(this).data('maxwidth') || options.maxInputWidth || ($(this).closest('.tagsinput').width() - options.inputPadding),
         val = '',
         input = $(this),
-        testSubject = $('<tester/>').css({
+        testSubject = $('<tester></tester>').css({
             position: 'absolute',
             top: -9999,
             left: -9999,
