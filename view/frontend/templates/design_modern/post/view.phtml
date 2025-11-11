@@ -25,7 +25,7 @@ $_post = $block->getPost();
 $_postUrl = $_post->getPostUrl();
 $_postName = $escaper->escapeHtml($_post->getTitle(), null);
 ?>
-<?= $escaper->escapeHtml($block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css'), ['style']) ?>
+<?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
 <div class="_post-view post-view-modern">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
 

@@ -21,7 +21,7 @@ $_postCollection = $block->getPostCollection();
 
 if ($_postCollection->count() /* && $templateType*/) { ?>
     <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
-        <?= $escaper->escapeHtml($block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css'), ['style']) ?>
+        <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
 
     <?php } ?>
     <?php
@@ -335,7 +335,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     <?= $block->getToolbarHtml() ?>
 
     <?php if ($style) { ?>
-        <?= $escaper->escapeHtml($block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css'), ['style']) ?>
+        <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>
     <?php } ?>
 
     <?php if ($block->getTitle()) { ?>
