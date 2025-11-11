@@ -40,6 +40,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     }
 
     $displayImage = $block->getDisplayImage() ?? true;
+    $displayBlockTitle = $block->getTitle() && (false !== stripos(get_class($block), '\widget\\'));
 
     $displayCategoryInImageContainer = !in_array($templateType, [
         'article-grid',
@@ -101,10 +102,10 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     ]);
     ?>
 
-    <?php if ($title = $block->getTitle()) { ?>
+    <?php if ($displayBlockTitle) { ?>
         <div class="widget block mf-blog-posts">
         <div class="block-title title">
-            <strong><?= $escaper->escapeHtml($title) ?></strong>
+            <strong><?= $escaper->escapeHtml($block->getTitle()) ?></strong>
         </div>
         <div class="block-content">
     <?php } ?>
@@ -338,7 +339,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
         <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>
     <?php } ?>
 
-    <?php if ($block->getTitle()) { ?>
+    <?php if ($displayBlockTitle) { ?>
         </div>
         </div>
     <?php } ?>
