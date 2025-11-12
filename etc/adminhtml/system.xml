@@ -97,13 +97,22 @@
                 <field id="posts_sort_by" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Sort By</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostsSortBy</source_model>
+                    <depends>
+                        <field id="display_mode" separator=",">0,1</field>
+                    </depends>
                 </field>
                 <field id="template" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
+                    <depends>
+                        <field id="display_mode" separator=",">0,1</field>
+                    </depends>
                 </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Per Page</label>
+                    <depends>
+                        <field id="display_mode" separator=",">0,1</field>
+                    </depends>
                 </field>
                 <field id="post_ids" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Post IDs</label>
