@@ -10,6 +10,8 @@ namespace Magefan\Blog\Plugin\Magento\Framework\View\Element\Frontend;
 
 use Magefan\Blog\Model\Config;
 use Magefan\Blog\Model\Config\Source\DesignVersion;
+use Magefan\Blog\Model\TemplatePool;
+use Magefan\Community\Api\HyvaThemeDetectionInterface;
 
 class TemplatePlugin
 {
@@ -56,9 +58,14 @@ class TemplatePlugin
     private $config;
 
     /**
-     * @var \Magefan\Community\Api\HyvaThemeDetectionInterface
+     * @var HyvaThemeDetectionInterface
      */
     private $hyvaThemeDetection;
+
+    /**
+     * @var TemplatePool
+     */
+    private $templatePool;
 
     /**
      * @param Config $config
@@ -66,10 +73,12 @@ class TemplatePlugin
      */
     public function __construct(
         Config $config,
-        \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection
+        HyvaThemeDetectionInterface $hyvaThemeDetection,
+        TemplatePool $templatePool
     ) {
         $this->config = $config;
         $this->hyvaThemeDetection = $hyvaThemeDetection;
+        $this->templatePool = $templatePool;
     }
 
     /**
@@ -96,8 +105,23 @@ class TemplatePlugin
 
         // for cases when template set in cms block/page via widget
         // and there is no custom overrides for that template in current theme
-        if (isset(self::OLD_TO_NEW_TEMPLATES_MAP[$template]) && !$subject->getTemplateFile($template)) {
-            return self::OLD_TO_NEW_TEMPLATES_MAP[$template];
+        if (isset(self::OLD_TO_NEW_TEMPLATES_MAP[$template])) {
+            $newDesignTemplate = self::OLD_TO_NEW_TEMPLATES_MAP[$template];
+            if (!in_array($designVersion, [DesignVersion::INITIAL, DesignVersion::MODERN])) {
+                /* e.g. valor desing */
+                $tpis = $this->templatePool->getAll('blog_post_list');
+                foreach ($tpis as $item) {
+                    if ($item['template'] == $newDesignTemplate && !empty($item['template_' . $designVersion])) {
+                        $newDesignTemplate = $item['template_' . $designVersion];
+                        $subject->setData('template_type', $item['value']);
+                        return $newDesignTemplate;
+                    }
+                }
+            }
+
+            if (!$subject->getTemplateFile($template)) {
+                return $newDesignTemplate;
+            }
         }
 
         $newDesignTemplate = $this->getDesignVersionTemplate($template, $designVersion);
