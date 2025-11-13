@@ -21,10 +21,10 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     /**
      * Path to tag cloud 3D animation configuration
      */
-    const ANIMATED_ENABLED = 'mfblog/sidebar/tag_claud/animated';
-    const TEXT_HIGHLIGHT_COLOR = 'mfblog/sidebar/tag_claud/text_highlight_color';
-    const CLOUD_HEIGHT = 'mfblog/sidebar/tag_claud/cloud_height';
-    const TAG_COUNT = 'mfblog/sidebar/tag_claud/tag_count';
+    const ANIMATED_ENABLED = 'animated';
+    const TEXT_HIGHLIGHT_COLOR = 'text_highlight_color';
+    const CLOUD_HEIGHT = 'cloud_height';
+    const TAG_COUNT = 'tag_count';
 
     /**
      * @var string
@@ -142,15 +142,6 @@ class TagClaud extends \Magento\Framework\View\Element\Template
             return 'large';
         }
         return 'largest';
-    }
-
-    /**
-     * @param $path
-     * @return mixed
-     */
-    public function getConfigValue($path)
-    {
-        return $this->_scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     /**

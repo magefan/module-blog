@@ -49,14 +49,13 @@ if (!isset($escaper)) {
             }
             ?>
                 <li>
-                    <span>
                         <a title="<?= $escaper->escapeHtml($item->getTitle()) ?>" href="<?= $escaper->escapeUrl($item->getCategoryUrl()) ?>">
                         <?= $escaper->escapeHtml($item->getTitle()) ?>
-                        </a>
-                    <?php if ($block->showPostsCount()) { ?>
+                        <?php if ($block->showPostsCount()) { ?>
                             <span>(<?= $escaper->escapeHtml($item->getPostsCount()) ?>)</span>
                         <?php } ?>
-                    </span>
+                        </a>
+                    
                 <?php
                 $level = $newLevel;
                 $first = false;
