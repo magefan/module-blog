@@ -21,7 +21,7 @@ class TemplatePlugin
         'Magefan_Blog::post/view/nextprev-modern.phtml' => 'Magefan_Blog::design_modern/post/view/nextprev.phtml',
         'Magefan_BlogExtra::post/view/categoryposts-modern.phtml' => 'Magefan_BlogExtra::design_modern/post/view/categoryposts.phtml',
         'Magefan_BlogExtra::post/view/relatedposts-modern.phtml' => 'Magefan_BlogExtra::design_modern/post/view/relatedposts.phtml',
-        'Magefan_BlogExtra::sidebar/recent-modern.phtml' => 'Magefan_BlogExtra::design_modern/sidebar/recent.phtml',
+        'Magefan_BlogExtra::sidebar/recent-modern.phtml' => 'Magefan_BlogExtra::sidebar/recent-grid.phtml',
         // !!!! 'Magefan_BlogAuthor::post/view/latest-posts-by-author-modern.phtml' => 'Magefan_BlogAuthor::design_modern/post/view/latest-posts-by-author.phtml',
 
         // whole list at - \Magefan\BlogExtra\Setup\Patch\Data\TemplateNamesChangeIn2025::BLOG_POST_LIST_TEMPLATE_MIGRATION

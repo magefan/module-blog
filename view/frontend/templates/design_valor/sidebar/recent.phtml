@@ -26,7 +26,7 @@ if (!isset($escaper)) {
         <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
     </div>
     <div class="block-content">
-        <?= $block->setData('template_type', 'sidebar-article-grid')
+        <?= $block->setData('template_type', 'sidebar-article-list')
             ->setTemplate('Magefan_Blog::design_valor/post/article.phtml')->toHtml()
         ?>
     </div>
