@@ -44,7 +44,7 @@ if (!isset($escaper)) {
             function initFancyBox(firstCheck) {
                 if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
                     return;
-                }
+                };
     
                 _deepestScroll = document.documentElement.scrollTop;
     
@@ -55,17 +55,17 @@ if (!isset($escaper)) {
                 if (isFancyGalleryVisible) {
                     document.removeEventListener('scroll', initFancyBox);
     
-                    const link = document.createElement('link')
+                    const link = document.createElement('link');
                     link.rel = 'stylesheet';
                     link.type = 'text/css';
                     link.href = '" . $fancyboxCSSFileUrl . "';
                     document.head.append(link);
     
-                    const script = document.createElement('script')
+                    const script = document.createElement('script');
                     script.src = '" . $fancyboxJSFileUrl . "';
                     document.head.append(script);
                 }
-            }
+            };
     
             initFancyBox(true);
             document.addEventListener('scroll', initFancyBox);
