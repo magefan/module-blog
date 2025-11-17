@@ -41,11 +41,11 @@ if (!isset($escaper)) {
     <?php $script = "
         (function () {
             function initMfPostLazyLoad() {
-                const script = document.createElement('script')
+                var script = document.createElement('script');
                 script.src = '" . $escaper->escapeUrl($block->getViewFileUrl($block->getLazyloadJs() . '.js')) . "';
                 script.addEventListener('load', () => window.mfPostLazyLoad(" . /*@noEscape*/ $config . "));
                 document.head.append(script);
-            }
+            };
 
             document.body.addEventListener('touchstart', initMfPostLazyLoad, {once: true});
             document.body.addEventListener('mouseover', initMfPostLazyLoad, {once: true});

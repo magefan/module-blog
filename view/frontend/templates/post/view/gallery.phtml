@@ -23,28 +23,34 @@ if (!isset($escaper)) {
 <?php
     $post = $block->getPost();
     $galleryImages = $post->getGalleryImages();
+
     $fancyboxCSSFileUrl = $block->getViewFileUrl("Magefan_Blog::css/fancybox.min.css");
     $fancyboxJSFileUrl = $block->getViewFileUrl("Magefan_Blog/js/fancybox.min.js");
+
+    $fancyboxCSSFileUrl = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css';
+    $fancyboxJSFileUrl = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js';
 ?>
 <?php if (count($galleryImages)) { ?>
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
-            <a class="gallery-image-hld"
+            <div class="gallery-image-hld"
                data-fancybox="gallery"
-               href="<?= $escaper->escapeUrl($image) ?>"
-               rel="nofollow">
+               data-src="<?= $escaper->escapeUrl($image) ?>"
+               rel="fancybox"
+            >
                 <img class="gallery-image" src="<?= $escaper->escapeUrl($image->resize(200, 133)) ?>" alt="" />
-            </a>
+            </div>
         <?php } ?>
     </div>
     <?php
         $script = "
             var _deepestScroll = 0;
+            var mfBlogInitFancyBoxLoaded = 0;
     
-            function initFancyBox(firstCheck) {
+            function mfBlogInitFancyBox(firstCheck) {
                 if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
                     return;
-                }
+                };
     
                 _deepestScroll = document.documentElement.scrollTop;
     
@@ -52,23 +58,25 @@ if (!isset($escaper)) {
                 let offset = 150;
                 let isFancyGalleryVisible = ((fancyGallery.getBoundingClientRect().top - offset) < window.innerHeight);
     
-                if (isFancyGalleryVisible) {
-                    document.removeEventListener('scroll', initFancyBox);
+                if (isFancyGalleryVisible /* && !mfBlogInitFancyBoxLoaded */ ) {
+                    document.removeEventListener('scroll', mfBlogInitFancyBox);
+                    mfBlogInitFancyBoxLoaded = 1;
     
-                    const link = document.createElement('link')
+                    const link = document.createElement('link');
                     link.rel = 'stylesheet';
                     link.type = 'text/css';
-                    link.href = '" . $fancyboxCSSFileUrl . "';
+                    link.href = '" . $escaper->escapeUrl($fancyboxCSSFileUrl) . "';
                     document.head.append(link);
-    
-                    const script = document.createElement('script')
-                    script.src = '" . $fancyboxJSFileUrl . "';
+                    
+                    const script = document.createElement('script');
+                    script.src = '" . $escaper->escapeUrl($fancyboxJSFileUrl) . "';
                     document.head.append(script);
+
                 }
-            }
+            };
     
-            initFancyBox(true);
-            document.addEventListener('scroll', initFancyBox);
+            mfBlogInitFancyBox(true);
+            document.addEventListener('scroll', mfBlogInitFancyBox);
         ";
     ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
