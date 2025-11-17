@@ -198,7 +198,6 @@ class Image extends AbstractHelper
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function __toString(): string
     {
