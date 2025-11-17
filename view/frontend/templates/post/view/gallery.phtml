@@ -41,7 +41,7 @@ if (!isset($escaper)) {
         $script = "
             var _deepestScroll = 0;
     
-            function initFancyBox(firstCheck) {
+            function mfBlogInitFancyBox(firstCheck) {
                 if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
                     return;
                 };
@@ -53,7 +53,7 @@ if (!isset($escaper)) {
                 let isFancyGalleryVisible = ((fancyGallery.getBoundingClientRect().top - offset) < window.innerHeight);
     
                 if (isFancyGalleryVisible) {
-                    document.removeEventListener('scroll', initFancyBox);
+                    document.removeEventListener('scroll', mfBlogInitFancyBox);
     
                     const link = document.createElement('link');
                     link.rel = 'stylesheet';
@@ -67,8 +67,8 @@ if (!isset($escaper)) {
                 }
             };
     
-            initFancyBox(true);
-            document.addEventListener('scroll', initFancyBox);
+            mfBlogInitFancyBox(true);
+            document.addEventListener('scroll', mfBlogInitFancyBox);
         ";
     ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
