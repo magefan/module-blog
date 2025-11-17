@@ -185,10 +185,10 @@ if ($commentsCount) {
 <?php $script = "
     var _deepestScroll = 0;
 
-    function initCommentsJs(firstCheck) {
+    function mfBlogInitCommentsJs(firstCheck) {
         if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
             return;
-        }
+        };
 
         _deepestScroll = document.documentElement.scrollTop;
 
@@ -198,22 +198,22 @@ if ($commentsCount) {
         let isCommentElementVisible = ((commentElement.getBoundingClientRect().top - offset) < window.innerHeight);
 
         if (isCommentElementVisible) {
-            document.removeEventListener('scroll', initCommentsJs);
+            document.removeEventListener('scroll', mfBlogInitCommentsJs);
             
-             const link = document.createElement('link')
-                    link.rel = 'stylesheet';
-                    link.type = 'text/css';
-                    link.href = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::css/comments.css')) . "';
-                    document.head.append(link);
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::css/comments.css')) . "';
+            document.head.append(link);
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-comments.js')) . "';
             document.head.append(script);
         }
-    }
+    };
 
-    initCommentsJs(true);
-    document.addEventListener('scroll', initCommentsJs);";
+    mfBlogInitCommentsJs(true);
+    document.addEventListener('scroll', mfBlogInitCommentsJs);";
 ?>
 <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
