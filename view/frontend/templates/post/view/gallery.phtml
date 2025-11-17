@@ -26,17 +26,15 @@ if (!isset($escaper)) {
 
     $fancyboxCSSFileUrl = $block->getViewFileUrl("Magefan_Blog::css/fancybox.min.css");
     $fancyboxJSFileUrl = $block->getViewFileUrl("Magefan_Blog/js/fancybox.min.js");
-
-    $fancyboxCSSFileUrl = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css';
-    $fancyboxJSFileUrl = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js';
 ?>
 <?php if (count($galleryImages)) { ?>
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
             <div class="gallery-image-hld"
-               data-fancybox="gallery"
-               data-src="<?= $escaper->escapeUrl($image) ?>"
-               rel="fancybox"
+                style="cursor: pointer;"
+                data-fancybox="gallery"
+                data-src="<?= $escaper->escapeUrl($image) ?>"
+                rel="fancybox"
             >
                 <img class="gallery-image" src="<?= $escaper->escapeUrl($image->resize(200, 133)) ?>" alt="" />
             </div>
@@ -58,7 +56,7 @@ if (!isset($escaper)) {
                 let offset = 150;
                 let isFancyGalleryVisible = ((fancyGallery.getBoundingClientRect().top - offset) < window.innerHeight);
     
-                if (isFancyGalleryVisible /* && !mfBlogInitFancyBoxLoaded */ ) {
+                if (isFancyGalleryVisible && !mfBlogInitFancyBoxLoaded) {
                     document.removeEventListener('scroll', mfBlogInitFancyBox);
                     mfBlogInitFancyBoxLoaded = 1;
     
@@ -68,9 +66,13 @@ if (!isset($escaper)) {
                     link.href = '" . $escaper->escapeUrl($fancyboxCSSFileUrl) . "';
                     document.head.append(link);
                     
-                    const script = document.createElement('script');
-                    script.src = '" . $escaper->escapeUrl($fancyboxJSFileUrl) . "';
-                    document.head.append(script);
+                    if (window.require) {
+                        require(['Magefan_Blog/js/fancybox.min'], function(){});
+                    } else {
+                        const script = document.createElement('script');
+                        script.src = '" . $escaper->escapeUrl($fancyboxJSFileUrl) . "';
+                        document.head.append(script);
+                    }
 
                 }
             };

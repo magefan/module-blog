@@ -184,6 +184,7 @@ if ($commentsCount) {
 
 <?php $script = "
     var _deepestScroll = 0;
+    var mfBlogInitCommentsJsLoaded = 0;
 
     function mfBlogInitCommentsJs(firstCheck) {
         if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
@@ -197,8 +198,9 @@ if ($commentsCount) {
 
         let isCommentElementVisible = ((commentElement.getBoundingClientRect().top - offset) < window.innerHeight);
 
-        if (isCommentElementVisible) {
+        if (isCommentElementVisible && !mfBlogInitCommentsJsLoaded) {
             document.removeEventListener('scroll', mfBlogInitCommentsJs);
+            mfBlogInitCommentsJsLoaded = 1;
             
             const link = document.createElement('link');
             link.rel = 'stylesheet';
