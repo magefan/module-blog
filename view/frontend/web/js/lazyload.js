@@ -102,7 +102,7 @@
             that.loading = false;
             document.querySelector('.mfblog-show-onload').style.display = 'none';
             if (that.opt.current_page < that.opt.last_page) {
-                document.querySelector('.mfblog-hide-onload').style.display = 'block';
+                document.querySelector('.mfblog-hide-onload').style.display = 'inline-block';
             }
         }
 
