@@ -13,6 +13,8 @@
  * @var \Magefan\Blog\Block\Post\View\Gallery $block
  * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  * @var \Magento\Framework\Escaper $escaper
+ * @var \Magefan\Community\Api\BreezeThemeDetectionInterface $mfBreezeThemeDetection;
+ * @var \Magefan\Community\Api\HyvaThemeDetectionInterface $mfHyvaThemeDetection;
  */
 
 if (!isset($escaper)) {
@@ -65,15 +67,13 @@ if (!isset($escaper)) {
                     link.type = 'text/css';
                     link.href = '" . $escaper->escapeUrl($fancyboxCSSFileUrl) . "';
                     document.head.append(link);
-                    
-                    if (window.require) {
-                        require(['Magefan_Blog/js/fancybox.min'], function(){});
-                    } else {
-                        const script = document.createElement('script');
-                        script.src = '" . $escaper->escapeUrl($fancyboxJSFileUrl) . "';
-                        document.head.append(script);
-                    }
 
+                    " . (($mfHyvaThemeDetection->execute() || $mfBreezeThemeDetection->execute())
+                        ? "
+                            const script = document.createElement('script');
+                            script.src = '" . $escaper->escapeUrl($fancyboxJSFileUrl) . "';
+                            document.head.append(script);"
+                        : "require(['Magefan_Blog/js/fancybox.min'], function(){});" ). "
                 }
             };
     
