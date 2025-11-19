@@ -18,13 +18,13 @@ Magefan Blog is the only solution you’ll need!
 <a href="https://magefan.com/magento2-blog-extension"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/download-magefan-extensions.png"></a>
 
 ## Navigation
-  * [Pricing](https://github.com/magefan/module-blog?tab=readme-ov-file#editions--pricing)
-  * [Features](https://github.com/magefan/module-blog?tab=readme-ov-file#features)
-  * [Demo](https://github.com/magefan/module-blog?tab=readme-ov-file#demo)
-  * [FAQs](https://magefan.com/magento2-blog-extension#pattr-faq)
+  * [Pricing](https://github.com/magefan/module-blog#editions--pricing)
+  * [Features](https://github.com/magefan/module-blog#features)
+  * [Demo](https://github.com/magefan/module-blog#demo)
+  * [FAQs](https://github.com/magefan/module-blog#magento-2-blog-extension-faqs)
   * [User Guide](https://magefan.com/blog/magento-2-blog-extension-documentation)
   * [Change Log](https://magefan.com/magento2-blog-extension/change-log)
-  * [Related extensions](https://github.com/magefan/module-blog?tab=readme-ov-file#magento-2-extensions-by-magefan)
+  * [Related extensions](https://github.com/magefan/module-blog#magento-2-extensions-by-magefan)
 
 ## 🇺🇦 Stand with Ukraine! [How can you help?](https://magefan.com/blog/join-our-donations)
 
@@ -56,10 +56,6 @@ No more third-party platforms, separate dashboard and inconsistent content manag
 Publish often and manage your content effortlessly with a blogging solution built to scale.
 
 
-<p align="center">
-  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/blog/magento-2-blog-posts-categories-tags.webp">
-</p>
-
 ### AI That Writes for You
 
 Don’t have enough time to stick to the content plan? Get a built in writing assistance within your blog. 
@@ -69,10 +65,14 @@ Just chose a topic, provide contexts and keywords you target. AI Blog Writer wil
 
 Stay consistent with your content creation with sacrificing quality. 
 
+<p align="center">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/magento-blog-ai-writer.webp">
+</p>
+
 
 ### A Blog That Matches Your Brand
 
-Your blog shouldn’ feel out of place in your own website. Enough of the chunky templates and mismatching design. 
+Your blog shouldn’t feel out of place in your own website. Enough of the chunky templates and mismatching design. 
 
 Choose from 22+ professionally designs templates, adjust layouts for every blog page and change everything don’t to fonts and spacing with a custom CSS (for an entire blog or specific blog posts).
 
@@ -87,7 +87,7 @@ Metadata, meta robots, canonical tags, XML sitemap, breadcrumbs, structured data
 Focus on your content. This Magento 2 Blog will make sure it follows the best Google practices.
 
 <p align="center">
-  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/magento-2-blog-related-products.webp">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/magento-blog-seo.webp">
 </p>
 
 ### Total Freedom Over Your URLs
@@ -107,7 +107,7 @@ Choose between Magefan, Facebook or Disqus comments. Edit, delete, approve, repl
 Keep a dialogue with real people by securing your comment from spam with a built in reCAPTCHA.
 
 <p align="center">
-  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/seo-friendly-blog-url.webp">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/magento-2-blog-comments.webp">
 </p>
 
 ### Clarity and Control for Your Team
@@ -125,12 +125,12 @@ Your content needs a “face” for people to trust it. Earn that trust with aut
 
 Add users as authors or create entire author profiles with bios, images and social links. Enable author blocks at the end of each post, co-authors or author pages with posts. 
 
-Real people build trust. Trust builds conversions. 
-
+Real people build trust. Trust builds conversions.
 
 <p align="center">
-  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/magento-blog-sidebar.webp">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/blog-authors-magento.webp">
 </p>
+
 
 ### Turn Content Into Sales
 
@@ -151,6 +151,11 @@ Add widgets to homepages, category pages, product pages, or any CMS block to hig
 
 Great content deserves visibility.
 
+
+<p align="center">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/add-blog-to-homepage-magento.webp">
+</p>
+
 ### Keep Readers Moving Through Your Blog
 
 Engagement time boosts conversions and signals to Google that your content is valuable. This Magento 2 Blog Extension is built to help you achieve that. 
@@ -168,6 +173,12 @@ Boost engagement with multiple sidebar widgets that come with the Magento 2 Blog
 From search bar and categories, to custom sale banners, related posts, archive, tags and related products. 
 Groups and structure your sidebar the way you like it.
 
+
+<p align="center">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/blog-sidebar-widgets-magento.webp">
+</p>
+
+
 ### Migrate in Minutes — Not Days
 
 Already have a blog on WordPress, Drupal, Hubspot or any other Magento 2 Extensions? No need to start over. 
@@ -184,6 +195,10 @@ Translate your blog blog pages easily with a Magento-native store switcher and a
 
 Target more keywords, drive more traffic and reach more customers worldwide with a blog that speaks multiple languages. 
 
+<p align="center">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/magento-multi-language-blog.webp">
+</p>
+
 ### Optimised for Speed and Modern Themes
 
 Faster blog rank and convert better. Magefan Blog does too. 
@@ -199,6 +214,10 @@ Make sure your blog looks attractive not only on your website, but an social med
 Set OG tags for your blog post to make them stand out on social media and drive traffic to your store. 
 
 Enable social sharing to multiple platforms to let your readers do the marketing for you.
+
+<p align="center">
+  <img width="860" height="428" src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/products/blog/blog-og-tags-magento.webp">
+</p>
 
 ## Magento 2 Blog Extension FAQs
 
