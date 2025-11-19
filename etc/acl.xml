@@ -29,7 +29,6 @@
                             <resource id="Magefan_Blog::comment_save" title="Save" sortOrder="10" />
                             <resource id="Magefan_Blog::comment_delete" title="Delete" sortOrder="20" />
                         </resource>
-                        <resource id="Magefan_Blog::import" title="Import" sortOrder="40" />
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">
