@@ -160,6 +160,8 @@ class TemplatePlugin
      */
     private function getOldOverriddenTemplate(\Magento\Framework\View\Element\Template $subject, string $template): string
     {
+        $designVersion = $this->config->getDesignVersion();
+        $template = str_replace($designVersion. '/', '', $template );
         $oldTemplate = array_search($template, self::OLD_TO_NEW_TEMPLATES_MAP);
 
         if ($oldTemplate && $subject->getTemplateFile($oldTemplate)) {
