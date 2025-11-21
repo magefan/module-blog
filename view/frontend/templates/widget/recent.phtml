@@ -78,15 +78,19 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                         <?php if ($featuredImage) { ?>
                             <?php
                                 $featuredImage = $imageHelper->init($featuredImage)->resize($width, null, false);
+                                $imageWidthAndHeigth = $imageHelper->getWidthAndHeigth();
+                                $addWH = !empty($imageWidthAndHeigth);
                                 $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                            if (!$featuredImgAlt) {
-                                $featuredImgAlt = $_postName;
-                            }
+                                if (!$featuredImgAlt) {
+                                    $featuredImgAlt = $_postName;
+                                }
                             ?>
                             <div class="post-ftimg-hld">
                                 <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                     <img src="<?= $escaper->escapeHtml($featuredImage) ?>"
-                                         alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
+                                         alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                         <?= $addWH ? 'width="' . $imageWidthAndHeigth['width'] . '" height="' . $imageWidthAndHeigth['height'] . '"' : '' ?>
+                                    />
                                 </a>
                             </div>
                         <?php } ?>

@@ -122,6 +122,8 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                         <div class="article-post__image-container animation-type--zoom">
                             <?php
                             $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
+                            $imageWidthAndHeigth = $imageHelper->getWidthAndHeigth();
+                            $addWH = !empty($imageWidthAndHeigth);
                             $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
                             if (!$featuredImgAlt) {
                                 $featuredImgAlt = $_post->getTitle();
@@ -131,7 +133,9 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                             <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>"
                                class="article-post__image-wrapper mf-media mf-media--3x2 mf-media--transparent">
                                 <img loading="lazy" class="motion-reduce" src="<?=  $escaper->escapeHtml($featuredImage) ?>"
-                                     alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>">
+                                     alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                     <?= $addWH ? 'width="' . $imageWidthAndHeigth['width'] . '" height="' . $imageWidthAndHeigth['height'] . '"' : '' ?>
+                                >
                             </a>
 
                             <?php /* Post Category in Image Container */ ?>

@@ -114,7 +114,7 @@ $_postName = $escaper->escapeHtml($_post->getTitle(), null);
             <div class="_post-description clearfix">
                 <!-- Post Image -->
                 <?php
-                $featuredImage = $_post->getFeaturedImage();
+                $featuredImage = $_post->getFeaturedImg();
                 $postVideo = $_post->getData('post_video');
 
                 if ($featuredImage || $postVideo) { ?>
@@ -127,10 +127,17 @@ $_postName = $escaper->escapeHtml($_post->getTitle(), null);
                                 ->toHtml();
                         } else {
                             $featuredImgAlt = $_post->getData('featured_img_alt') ?: $_postName;
+                            $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+                            $width = (int)$block->getBackgroundImageWidth() ?: 722;
+                            $featuredImage = $imageHelper->init($featuredImage)->resize($width, null, false);
+                            $imageWidthAndHeigth = $imageHelper->getWidthAndHeigth();
+                            $addWH = !empty($imageWidthAndHeigth);
                             ?>
 
                             <img src="<?= $escaper->escapeUrl($featuredImage) ?>"
-                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
+                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                 <?= $addWH ? 'width="' . $imageWidthAndHeigth['width'] . '" height="' . $imageWidthAndHeigth['height'] . '"' : '' ?>
+                            />
                         <?php } ?>
                     </div>
                 <?php } ?>
