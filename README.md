@@ -41,7 +41,11 @@ Magefan Blog is the only solution you’ll need!
           <img
             src="https://cm.magefan.com/wysiwyg/products/blog-extension-pricing-plans.png"
             alt="Magento 2 Blog Editions & Pricing" />
-        </a>      
+        </a>    
+
+ ## Special Offers
+  
+<a href="https://magefan.com/magento2-blog-extension/pricing"><img src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/banners/magefan-blog-extra-banner.webp" alt="Magento 2 Blog Extra" /></a> <a href="https://magefan.com/magento2-blog-extension/pricing"><img src="https://cm.magefan.com/mf_webp/png/media/wysiwyg/banners/magefan-blog-upgrade-banner.webp" alt="Magento 2 Blog Extra" /></a>  
         
 ## Features
 
