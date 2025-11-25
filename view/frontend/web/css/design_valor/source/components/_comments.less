@@ -9,8 +9,19 @@
     --comment-replyform-color: var(--text-color);
     --comment-reply-color: #98A2B3;
 
-    --btn-bg-primary-color: #FF9900;
-    --btn-bg-secondary-color: #222222;
+    --btn-bg-primary-color: #ff9900;
+    --btn-bg-primary-color-h: #e2e2e2;
+    --btn-primary-color: #ffffff;
+    --btn-primary-color-h: #ffffff;
+    --btn-primary-br-color: var(--btn-bg-primary-color);
+    --btn-primary-br-color-h: var(--btn-bg-primary-color);
+    --btn-bg-secondary-color: #ffffff;
+    --btn-bg-secondary-color-h: #ffffff;
+    --btn-secondary-color: var(--comment-replyform-color);
+    --btn-secondary-color-h: var(--comment-replyform-color);
+    --btn-secondary-br-color: var(--border-color, #d5d6da);
+    --btn-secondary-br-color-h: var(--primary-color, rgba(0, 0, 0, 0.8));
+    --btn-border-radius: 6px;
 }
 
 .post-view .post-bottom .block.comments {margin-top: 56px;}
@@ -37,7 +48,7 @@
 .c-replyform input.input-text {display: block;width: 100%;height: 52px;padding: 12px 14px;color: var(--comment-replyform-color);background: #fff !important;border: 1px solid var(--border-color);border-radius: 8px;}
 .c-replyform input::placeholder {font-size: 16px;line-height: 24px;font-weight: 400;}
 .c-replyform.no-active textarea {border-bottom: 1px solid var(--border-color);height: 70px;width: 100%;}
-.c-replyform textarea {padding: 12px 14px;height: 132px;border: 1px solid var(--border-color);margin-bottom: 24px;border-radius: 4px;}
+.c-replyform textarea {padding: 12px 14px;height: 132px;border: 1px solid var(--border-color);margin-bottom: 24px;border-radius: 8px;}
 .c-replyform textarea::placeholder {font-size: 16px;line-height: 24px;font-weight: 400;}
 .c-replyform textarea:focus,
 .c-replyform input:focus,
@@ -52,12 +63,12 @@
 
 /* Button */
 .c-replyform .actions {text-align: right;margin-top: 24px;margin-bottom: 24px;}
-.c-replyform .actions button {font-size: 18px;line-height: 28px;font-weight: 600;padding: 12px 24px;margin-left: 8px;transition: all 0.2s ease-out;}
+.c-replyform .actions button {font-size: 18px;line-height: 28px;font-weight: 600;padding: 12px 24px;border-radius: var(--btn-border-radius);margin-left: 8px;transition: all 0.2s ease-out;}
 .c-replyform .actions button:hover {transition: all 0.2s ease-out;}
-.c-replyform .actions button.submit {border: 1px solid #FF9900;border-radius: 6px;color: #fff;background: #FF9900;}
-.c-replyform .actions button.submit:hover {border: 1px solid #e2e2e2;background-color: #e2e2e2;}
-.c-replyform .actions button.cancel {border: 1px solid var(--border-color);border-radius: 6px;color: var(--comment-replyform-color);background: #fff;}
-.c-replyform .actions button.cancel:hover {border: 1px solid var(--primary-color);background: #fff; }
+.c-replyform .actions button.submit {color: var(--btn-primary-color);background-color: var(--btn-bg-primary-color);border: 1px solid var(--btn-primary-br-color);}
+.c-replyform .actions button.submit:hover {color: var(--btn-primary-color-h);background-color: var(--btn-bg-primary-color-h);border: 1px solid var(--btn-primary-br-color-h);}
+.c-replyform .actions button.cancel {color: var(--btn-secondary-color);background-color: var(--btn-bg-secondary-color);border: 1px solid var(--btn-secondary-br-color);}
+.c-replyform .actions button.cancel:hover {color: var(--btn-secondary-color-h);background-color: var(--btn-bg-secondary-color-h);border: 1px solid var(--btn-secondary-br-color);}
 
 
 /* Message */
@@ -102,11 +113,12 @@
 
 
 /* Button */
+.c-replyform .actions {text-align: right;}
 .c-replyform .btn {display: inline-block;color: #fff;border: none;border-radius: 0;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;margin: 20px 0 20px;cursor: pointer;}
-.c-replyform .btn.btn-primary {background-color: var(--btn-bg-primary-color);}
-.c-replyform .btn.btn-primary:hover {background-color: #222222;color: #ffffff;}
-.c-replyform .btn.btn-secondary {background-color: var(--btn-bg-secondary-color);border-color: #ced0d4;color: #4b4f56;}
-.c-replyform .btn.btn-secondary:hover {background-color: #222222;color: #ffffff;}
+.c-replyform .actions button.submit {color: var(--btn-primary-color);background-color: var(--btn-bg-primary-color);border: 1px solid var(--btn-primary-br-color);}
+.c-replyform .actions button.submit:hover {color: var(--btn-primary-color-h);background-color: var(--btn-bg-primary-color-h);border: 1px solid var(--btn-primary-br-color-h);}
+.c-replyform .actions button.cancel {color: var(--btn-secondary-color);background-color: var(--btn-bg-secondary-color);border: 1px solid var(--btn-secondary-br-color);}
+.c-replyform .actions button.cancel:hover {color: var(--btn-secondary-color-h);background-color: var(--btn-bg-secondary-color-h);border: 1px solid var(--btn-secondary-br-color);}
 
 
 .c-replyform form .c-btn-hld .input-box {width: 100%;text-align: left;padding: 6px 0;display: inline-block;margin: 0;}
