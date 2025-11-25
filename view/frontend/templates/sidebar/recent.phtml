@@ -45,7 +45,7 @@ if (!isset($escaper)) {
                     <div class="post-image">
                         <?php
                         $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                        $imageWidthAndHeigth = [];
+                        $imageWidthAndHeight = [];
                         $addWH = false;
                         if (!$featuredImgAlt) {
                             $featuredImgAlt =  $_postName;
@@ -55,15 +55,15 @@ if (!isset($escaper)) {
                             <?php
                             if ($featuredImage) {
                                 $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
-                                $imageWidthAndHeigth = $imageHelper->getWidthAndHeigth();
-                                $addWH = !empty($imageWidthAndHeigth);
+                                $imageWidthAndHeight = $imageHelper->getWidthAndHeight();
+                                $addWH = !empty($imageWidthAndHeight);
                             } else {
                                 $featuredImageUrl = $block->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
                             }
                             ?>
                             <img data-width-amp="<?= $escaper->escapeHtml($width) ?>" data-height-amp="<?= $escaper->escapeHtml($height) ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
                                  alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
-                                 <?= $addWH ? 'width="' . $imageWidthAndHeigth['width'] . '" height="' . $imageWidthAndHeigth['height'] . '"' : '' ?>
+                                 <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
                             />
                         </a>
                     </div>
