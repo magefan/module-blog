@@ -239,7 +239,7 @@
                 line-height: 20px;
                 margin-bottom: 16px;
                 &:last-child {
-                    margin-bottom: 0;
+                    //margin-bottom: 0;
                 }
                 ul {
                     margin-top: 16px;
@@ -264,6 +264,56 @@
                         opacity: 1;
                         text-decoration: none;
                         .transition;
+                    }
+                }
+            }
+
+            // with arrow
+            li {
+                a {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 8px;
+                }
+                a .toggle {
+                    background: none;
+                    border: none;
+                    font-size: 14px;
+                    width: 5px;
+                    min-width: 12px;
+                    display: inline-block;
+                    color: var(--secondary-color);
+                    font-weight: bold;
+                    margin-top: 1px;
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        width: 5px;
+                        height: 5px;
+                        border: none;
+                    }
+                }
+                &.parent {
+                    > a .toggle {
+                        cursor: pointer;
+                        &:before {
+                            content: '';
+                            border-top: 5px solid transparent;
+                            border-bottom: 5px solid transparent;
+                            border-left: 10px solid var(--secondary-color);
+                        }
+                    }
+                }
+                > ul {
+                    display: none;
+                }
+                &.open {
+                    > a .toggle {
+                        &:before {transform: rotate(90deg);
+                        }
+                    }
+                    > ul {
+                        display: block;
                     }
                 }
             }

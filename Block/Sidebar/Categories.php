@@ -103,6 +103,19 @@ class Categories extends Template implements IdentityInterface
     }
 
     /**
+     * Collapsible for categories is enabled
+     *
+     * @return bool
+     */
+    public function isCollapsibleEnabled(): bool
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/collapsible_enabled',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * Retrieve block identities
      *
      * @return array
