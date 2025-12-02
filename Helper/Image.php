@@ -212,7 +212,7 @@ class Image extends AbstractHelper
         $url = "";
         if ($this->_baseFile) {
             $url = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) .
-                ($this->_newFile ?: $this->_baseFile);
+                $this->_newFile;
         }
         return $url;
     }
