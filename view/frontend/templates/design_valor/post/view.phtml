@@ -165,10 +165,10 @@ if (!isset($escaper)) {
             <div class="share-elements">
                 <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
                     <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>')">
-                        <div class="icon" title="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                        <div class="icon" title="<?= $escaper->escapeHtml($network == 'Copy' ? $network :(__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?>">
                             <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/design_valor/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                         </div>
-                        <div class="label"><?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?></div>
+                        <div class="label"><?= $escaper->escapeHtml($network == 'Copy' ? $network :(__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?></div>
                     </div>
                 <?php } ?>
             </div>
