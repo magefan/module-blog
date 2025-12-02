@@ -89,7 +89,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param boolean $withAdmin
      * @return $this
      */
-    public function addStoreFilter($store, $withAdmin = true): static
+    public function addStoreFilter($store, $withAdmin = true)
     {
         if ($store === null) {
             return $this;

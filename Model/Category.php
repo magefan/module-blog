@@ -220,7 +220,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId): string|false
+    public function checkIdentifier($identifier, $storeId)
     {
         return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
@@ -451,7 +451,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @return self
      * @deprecated replaced with getDynamicData
      */
-    public function initDinamicData(): static
+    public function initDinamicData()
     {
         $keys = [
             'meta_description',

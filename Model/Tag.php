@@ -134,7 +134,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId): string|false
+    public function checkIdentifier($identifier, $storeId)
     {
         return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }

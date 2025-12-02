@@ -388,7 +388,7 @@ class Wordpress extends AbstractImport
         $adapter->getDriver()->getConnection()->disconnect();
     }
 
-    protected function wordpressOutoutWrap($pee, $br = true): string|array|null
+    protected function wordpressOutoutWrap($pee, $br = true)
     {
         $pre_tags = [];
 

@@ -26,7 +26,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param  string $dateOrTime
      * @return string
      */
-    public static function getTranslatedDate($format, $dateOrTime): string|array
+    public static function getTranslatedDate($format, $dateOrTime)
     {
         $time = is_numeric($dateOrTime) ? $dateOrTime : strtotime((string)$dateOrTime);
         $month = ['F' => '%1', 'M' => '%2'];

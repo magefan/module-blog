@@ -350,7 +350,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier, $storeId): string|false
+    public function checkIdentifier($identifier, $storeId)
     {
         return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
@@ -429,7 +429,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param array $images
      * @return $this
      */
-    public function setGalleryImages(array $images): static
+    public function setGalleryImages(array $images)
     {
         $this->setData(
             'media_gallery',
@@ -909,7 +909,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getPublishDate($format = ''): string|array
+    public function getPublishDate($format = '')
     {
         if (!$format) {
             $format = $this->scopeConfig->getValue(
@@ -948,7 +948,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getUpdateDate($format = 'Y-m-d H:i:s'): string|array
+    public function getUpdateDate($format = 'Y-m-d H:i:s')
     {
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
@@ -976,7 +976,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @return self
      * @deprecated replaced with getDynamicData
      */
-    public function initDinamicData(): static
+    public function initDinamicData()
     {
         $keys = [
             'og_image',

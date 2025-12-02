@@ -378,7 +378,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
      */
-    protected function isNumericPageIdentifier(\Magento\Framework\Model\AbstractModel $object): int|false
+    protected function isNumericPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
         return preg_match('/^[0-9]+$/', (string)$object->getData('identifier'));
     }
@@ -389,7 +389,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return bool
      */
-    protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object): int|false
+    protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
         return preg_match('/^([^?#<>@!&*()$%^\\+=,{}"\']+)?$/', (string)$object->getData('identifier'));
     }
@@ -402,7 +402,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param int|array $storeId
      * @return false|string
      */
-    public function checkIdentifier($identifier, $storeIds): string|false
+    public function checkIdentifier($identifier, $storeIds)
     {
         if (!is_array($storeIds)) {
             $storeIds = [$storeIds];

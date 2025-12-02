@@ -61,7 +61,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\Data\Collection $collection
      * @return $this
      */
-    public function setCollection($collection): static
+    public function setCollection($collection)
     {
         $this->_collection = $collection;
 
