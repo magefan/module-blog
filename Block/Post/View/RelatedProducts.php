@@ -67,7 +67,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      * Premare block data
      * @return $this
      */
-    protected function _prepareCollection(): static
+    protected function _prepareCollection()
     {
         $post = $this->getPost();
 

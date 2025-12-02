@@ -170,7 +170,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param boolean $withAdmin
      * @return $this
      */
-    public function addStoreFilter($store, $withAdmin = true): static
+    public function addStoreFilter($store, $withAdmin = true)
     {
         if ($store === null) {
             return $this;
@@ -351,7 +351,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param int $month
      * @return $this
      */
-    public function addArchiveFilter($year, $month): static
+    public function addArchiveFilter($year, $month)
     {
         $this->getSelect()
             ->where('YEAR(main_table.publish_time) = ?', $year);
@@ -367,7 +367,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param string $term
      * @return $this
      */
-    public function addSearchFilter($term): static
+    public function addSearchFilter($term)
     {
         if (!$term) {
             $term = '__EMPTY_SEARCH_VALUE__';
@@ -452,7 +452,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param array|int|string|\Magefan\Blog\Model\Tag $tag
      * @return $this
      */
-    public function addTagFilter($tag): static
+    public function addTagFilter($tag)
     {
         if (!$this->getFlag('tag_filter_added')) {
             if ($tag instanceof \Magefan\Blog\Model\Tag) {
@@ -530,7 +530,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param array|int|\Magefan\Blog\Model\Author $author
      * @return $this
      */
-    public function addAuthorFilter($author): static
+    public function addAuthorFilter($author)
     {
         if (!$this->getFlag('author_filter_added')) {
             if ($author instanceof \Magefan\Blog\Model\Author) {
@@ -575,7 +575,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param $product
      * @return $this
      */
-    public function addRelatedProductFilter($product): static
+    public function addRelatedProductFilter($product)
     {
         if (!$this->getFlag('author_filter_added')) {
             if ($product instanceof \Magento\Catalog\Api\Data\ProductInterface) {

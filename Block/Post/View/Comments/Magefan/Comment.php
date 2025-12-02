@@ -104,7 +104,7 @@ class Comment extends Template implements IdentityInterface
     /**
      * @return mixed
      */
-    public function getPublishDate(): string|array
+    public function getPublishDate()
     {
         $dateFormat = $this->_scopeConfig->getValue(
             'mfblog/post_view/comments/format_date',

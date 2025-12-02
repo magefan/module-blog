@@ -402,7 +402,7 @@ class Url
      * @param $storeId
      * @return $this
      */
-    public function setStoreId($storeId): static
+    public function setStoreId($storeId)
     {
         $this->storeId = $storeId;
         return $this;
