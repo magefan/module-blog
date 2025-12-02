@@ -302,7 +302,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     /**
      * @return array|ResourceModel\Comment\Collection
      */
-    public function getRepliesCollection(): \Magefan\Blog\Model\ResourceModel\Comment\Collection|array
+    public function getRepliesCollection()
     {
         $repliesCollection = [];
         if (!$this->isReply()) {
