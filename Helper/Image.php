@@ -132,6 +132,14 @@ class Image extends AbstractHelper
     /**
      * @return array
      */
+    public function getWidthAndHeigth(): array
+    {
+        return $this->getWidthAndHeight();
+    }
+
+    /**
+     * @return array
+     */
     public function getWidthAndHeight(): array
     {
         $file = $this->_newFile ?: $this->_baseFile;
@@ -204,7 +212,7 @@ class Image extends AbstractHelper
         $url = "";
         if ($this->_baseFile) {
             $url = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) .
-                $this->_newFile;
+                ($this->_newFile ?: $this->_baseFile);
         }
         return $url;
     }
