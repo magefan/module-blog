@@ -28,7 +28,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
 
     $width = (int)$block->getBackgroundImageWidth() ?: 1920;
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
-    $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType());
+    $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType() ?: $block->getPostTemplateType());
 
     $style = null;
 
@@ -118,13 +118,19 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                 <div class="article-post">
 
                     <?php /* Post Image Container */ ?>
-                    <?php if (('article-default-list' !== $templateType) && ($preparedImg = ($entity->getFeaturedListImg() ?: $entity->getFeaturedImg())) && $displayImage): ?>
+                    <?php if (('article-default-list' !== $templateType) && $displayImage): ?>
                         <div class="article-post__image-container animation-type--zoom">
                             <?php
-                            $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
-                            $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                            if (!$featuredImgAlt) {
-                                $featuredImgAlt = $_post->getTitle();
+                            $preparedImg = $entity->getFeaturedListImg() ?: $entity->getFeaturedImg();
+                            if ($preparedImg) {
+                                $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
+                                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                if (!$featuredImgAlt) {
+                                    $featuredImgAlt = $_post->getTitle();
+                                }
+                            } else {
+                                $featuredImage = $block->getViewFileUrl('Magefan_BlogExtra::images/samples/' . rand(1, 8) . '.jpeg');
+                                $featuredImgAlt  = '';
                             }
                             ?>
 
