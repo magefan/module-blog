@@ -52,9 +52,13 @@ $collapsible = $block->isCollapsibleEnabled()
                 $nextItem = $items[$index + 1] ?? null;
                 $hasChildren = $nextItem && $nextItem->getLevel() > $newLevel;
                 ?>
+
+
                 <li class="item <?= $collapsible ? ($hasChildren ? 'parent' : '') : 'open'?>">
                     <a title="<?= $escaper->escapeHtml($item->getTitle()) ?>" href="<?= $escaper->escapeUrl($item->getCategoryUrl()) ?>">
-                        <span class="toggle"></span>
+                        <?php if ($collapsible) { ?>
+                            <span class="toggle"></span>
+                        <?php } ?>
 
                         <span class="block-category-name">
                                 <?= $escaper->escapeHtml($item->getTitle()) ?>
