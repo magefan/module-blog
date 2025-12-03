@@ -35,6 +35,9 @@
             case 'bluesky':
                 u =reverse('" . strrev('https://bsky.app/intent/compose?text=') . "') + url;
                 break;
+            case 'copy':
+                navigator.clipboard.writeText(url);
+                break;
         }
         if (u) {
             window.open (u, null, 'width=600,height=400');
