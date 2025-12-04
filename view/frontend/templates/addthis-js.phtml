@@ -37,6 +37,23 @@
                 break;
             case 'copy':
                 navigator.clipboard.writeText(url);
+                var messageDiv = document.createElement('div');
+                messageDiv.innerText = 'Successfully copied to clipboard!';
+                Object.assign(messageDiv.style, {
+                    position: 'fixed',
+                    top: '20px',
+                    right: '20px',
+                    backgroundColor: '#dff0d8',
+                    color: '#3c763d',
+                    padding: '10px 20px',
+                    zIndex: '5000',
+                    borderRadius: '4px',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                    transition: 'opacity 0.5s ease',
+                    opacity: '1'
+                });
+                document.body.appendChild(messageDiv);
+                setTimeout(function(){ messageDiv.remove() }, 3000);
                 break;
         }
         if (u) {
