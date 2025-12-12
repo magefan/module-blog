@@ -38,7 +38,7 @@ class TemplatePlugin
     {
         if ('aminfotab.conflicts' === $subject->getNameInLayout() && $this->moduleManager->isEnabled('Amasty_Base')) {
             foreach ($conflictsMessages = $subject->getConflictsMessages() as $key => $conflictsMessage) {
-                if (strpos($conflictsMessage, 'Magefan') !== false) {
+                if (strpos((string)$conflictsMessage, 'Magefan') !== false) {
                     return '';
                 }
             }
