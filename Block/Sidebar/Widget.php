@@ -69,7 +69,16 @@ trait Widget
      */
     public function getCacheKeyInfo()
     {
-        $result = parent::getCacheKeyInfo();
+        $result = [
+            'BLOCK_TPL',
+            $this->_storeManager->getStore()->getCode(),
+            //$this->getTemplateFile(), don't use template, valor overide templates
+            'base_url' => $this->getBaseUrl(),
+            //'template' => $this->getTemplate() , don't use template, valor overide templates
+            $this->getNameInLayout() //add name in layout
+        ];
+
+        /* Add Customer Group */
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $result['customer_group_id'] = $objectManager->get(\Magento\Customer\Model\Session::class)->getCustomerGroupId();
         return $result;
