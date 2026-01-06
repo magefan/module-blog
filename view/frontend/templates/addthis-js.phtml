@@ -37,12 +37,10 @@
                 break;
             case 'copy':
                 navigator.clipboard.writeText(url);
-                var messageDiv = document.createElement('div');
-                messageDiv.innerText = 'Successfully copied to clipboard!';
-                Object.assign(messageDiv.style, {
-                    position: 'fixed',
-                    top: '20px',
-                    right: '20px',
+                const tooltip = document.createElement('div');
+                tooltip.innerText = 'Successfully copied to clipboard!';
+                Object.assign(tooltip.style, {
+                    position: 'absolute',
                     backgroundColor: '#dff0d8',
                     color: '#3c763d',
                     padding: '10px 20px',
@@ -52,8 +50,13 @@
                     transition: 'opacity 0.5s ease',
                     opacity: '1'
                 });
-                document.body.appendChild(messageDiv);
-                setTimeout(function(){ messageDiv.remove() }, 3000);
+                document.body.appendChild(tooltip);
+                const rect = document.querySelector('.icon-wrapper.icon-copy').getBoundingClientRect();
+                const scrollY = window.scrollY || window.pageYOffset;
+                const scrollX = window.scrollX || window.pageXOffset;
+                tooltip.style.top = rect.top + scrollY - tooltip.offsetHeight - 8 + 'px';
+                tooltip.style.left = rect.left + scrollX + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+                setTimeout(function(){ tooltip.remove() }, 1000);
                 break;
         }
         if (u) {
