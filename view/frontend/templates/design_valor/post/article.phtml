@@ -279,7 +279,9 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                                             <?php endif ?>
                                         <?php endif ?>
 
-                                        <span class="article-post__data"><span class="divider">&nbsp;|&nbsp;</span> <?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                                        <?php if ($_post->isPublishDateEnabled()) { ?>
+                                            <span class="article-post__data"><span class="divider">&nbsp;|&nbsp;</span> <?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                                        <?php } ?>
 
                                         <?php /* Not Visible */ ?>
                                         <?php if (!in_array($templateType, [
