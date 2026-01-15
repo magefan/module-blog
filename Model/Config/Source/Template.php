@@ -56,13 +56,13 @@ class Template implements \Magento\Framework\Option\ArrayInterface
         if (!isset($this->options[$this->templateType])) {
             if ($this->templateType === 'blog_post_list') {
                 $this->options[$this->templateType] = [
-                    ['label' => __('List'), 'value' => []],
-                    ['label' => __('Grid - 1 column'), 'value' => []],
-                    ['label' => __('Grid - 2 columns'), 'value' => []],
-                    ['label' => __('Grid - 3 columns'), 'value' => []],
-                    ['label' => __('Grid and List'), 'value' => []],
-                    ['label' => __('Slider'), 'value' => []],
-                    ['label' => __('Other Grids'), 'value' => []],
+                    ['label' => __('List (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid - 1 column (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid - 2 columns (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid - 3 columns (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid and List (Blog Extra)'), 'value' => []],
+                    ['label' => __('Slider (Blog Extra)'), 'value' => []],
+                    ['label' => __('Other Grids (Blog Extra)'), 'value' => []],
                 ];
 
                 $groupMap = [
