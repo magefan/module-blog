@@ -713,7 +713,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getParentCategory()
     {
-        $k = 'post_parent_category';
+        $k = 'parent_category';
         if (null === $this->getData($k)) {
             $this->setData($k, false);
             foreach ($this->getParentCategories() as $category) {
