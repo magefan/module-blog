@@ -36,8 +36,8 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
      */
     protected function _prepareLayout()
     {
-        if ($this->_authorization->isAllowed("Magefan_Blog::import")) {
-            $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+        if ($this->_authorization->isAllowed("Magefan_BlogImport::import")) {
+            $onClick = "setLocation('" . $this->getUrl('blogimport/import') . "')";
             $this->getToolbar()->addChild(
                 'options_button',
                 \Magento\Backend\Block\Widget\Button::class,
