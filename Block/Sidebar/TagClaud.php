@@ -183,4 +183,13 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
         return json_encode($data);
     }
+
+    /**
+     * Get cloud height
+     * @return mixed
+     */
+    public function getCloudHeight()
+    {
+        return $this->getConfigValue(self::CLOUD_HEIGHT);
+    }
 }
