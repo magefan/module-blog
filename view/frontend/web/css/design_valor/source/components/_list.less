@@ -40,8 +40,29 @@
         }
     }
 
+    .post-links-wrapper,
+    .subcategory-links-wrapper {
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 40px;
+            list-style: disc;
+            margin-top: 16px;
+            li {
+                display: list-item;
+                list-style: disc;
+                a {
+                    color: var(--post-title-color);
+                    text-decoration: underline;
+                    .transition;
+                    &:hover {
+                        color: var(--post-title-color-hover);
+                        .transition;
+                    }
+                }
+            }
+        }
+    }
+
 }
-
-
-
-
