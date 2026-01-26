@@ -65,7 +65,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
     {
         $post = $this->getPost();
 
-        $this->_itemCollection = $post->getRelatedProducts()
+        $this->_itemCollection = $post->getRelatedProducts(false)
             ->addAttributeToSelect('required_options');
 
         if ($this->_moduleManager->isEnabled('Magento_Checkout')) {

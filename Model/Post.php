@@ -834,11 +834,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post related products
+     * @param boolean @useCache
      * @return \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
-    public function getRelatedProducts()
+    public function getRelatedProducts($useCache = true)
     {
-        if (!$this->hasData('related_products')) {
+        if (!$this->hasData('related_products') || !$useCache) {
             $collection = $this->_productCollectionFactory->create();
 
             if ($this->getStoreId()) {
@@ -853,7 +854,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 'rl.post_id = ?',
                 $this->getId()
             );
-
             $this->setData('related_products', $collection);
         }
 
