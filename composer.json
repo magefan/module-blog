@@ -3,9 +3,10 @@
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
         "magefan/module-community" : ">=2.3.3",
+        "magefan/module-blog-comments-recaptcha" : ">=2.1.7",
+        "magefan/module-blog-import": "2.15.0",
         "magefan/module-blog-graph-ql" : ">=2.1.11",
-        "magefan/module-wysiwyg-advanced" : ">=2.0.18",
-        "magefan/module-blog-comments-recaptcha" : ">=2.1.7"
+        "magefan/module-wysiwyg-advanced" : ">=2.0.18"
     },
     "type": "magento2-module",
     "version": "2.15.0",
