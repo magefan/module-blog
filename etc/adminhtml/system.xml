@@ -629,7 +629,7 @@
                         <label>Sort Order</label>
                     </field>
                     <field id="collapsible_enabled" translate="label comment" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Collapsible subcategories</label>
+                        <label>Collapsible Subcategories</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                 </group>

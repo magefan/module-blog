@@ -65,7 +65,7 @@ class Categories extends Template implements IdentityInterface
                     unset($array[$key]);
                 }
             }
-
+            $array = array_values($array);
             $this->setData($k, $array);
         }
 
@@ -98,7 +98,7 @@ class Categories extends Template implements IdentityInterface
             'mfblog/sidebar/'.$this->_widgetKey.'/max_depth',
             ScopeInterface::SCOPE_STORE
         );
-        
+
         return (int)$maxDepth;
     }
 

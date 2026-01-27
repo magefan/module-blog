@@ -19,12 +19,12 @@ if (!isset($escaper)) {
     /* Compatability fix for old Magento versions */
     $escaper = $block;
 }
-$collapsible = $block->isCollapsibleEnabled()
 ?>
 
 <?php $items = $block->getGroupedChilds(); ?>
 
 <?php if (count($items)) { ?>
+    <?php $collapsible = $block->isCollapsibleEnabled(); ?>
     <div class="widget block block-categories" data-bind="scope: 'categories'">
         <div class="block-title">
             <strong><?= $escaper->escapeHtml(__('Categories')) ?></strong>
@@ -61,8 +61,8 @@ $collapsible = $block->isCollapsibleEnabled()
                         <?php } ?>
 
                         <span class="block-category-name">
-                                <?= $escaper->escapeHtml($item->getTitle()) ?>
-                            </span>
+                            <?= $escaper->escapeHtml($item->getTitle()) ?>
+                        </span>
 
                         <?php if ($block->showPostsCount()) { ?>
                             <span class="block-category-count">(<?= $escaper->escapeHtml($item->getPostsCount()) ?>)</span>
@@ -75,23 +75,22 @@ $collapsible = $block->isCollapsibleEnabled()
             } ?>
         </ul>
     </div>
-<?php } ?>
+    <?php if ($collapsible) { ?>
+        <?php $script = "
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.widget.block-categories .accordion li').forEach(li => {
+                    const childUl = li.querySelector(':scope > ul');
+                    const toggleBtn = li.querySelector(':scope > a > .toggle');
 
-<?php if ($collapsible) { ?>
-    <?php $script = "
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.accordion li').forEach(li => {
-                const childUl = li.querySelector(':scope > ul');
-                const toggleBtn = li.querySelector(':scope > a > .toggle');
-        
-                if (childUl && toggleBtn) {
-                    toggleBtn.addEventListener('click', e => {
-                        e.preventDefault();
-                        li.classList.toggle('open');
-                    });
-                }
+                    if (childUl && toggleBtn) {
+                        toggleBtn.addEventListener('click', e => {
+                            e.preventDefault();
+                            li.classList.toggle('open');
+                        });
+                    }
+                });
             });
-        });
-    "; ?>
-    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+        "; ?>
+        <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+    <?php } ?>
 <?php } ?>

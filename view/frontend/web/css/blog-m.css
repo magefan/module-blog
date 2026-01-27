@@ -90,7 +90,7 @@
 .widget.block-categories ul li a:hover {color: #ee5204;opacity: 1;text-decoration: none;-webkit-transition: all 0.2s ease-out;-ms-transition: all 0.2s ease-out;transition: all 0.2s ease-out;}
 .widget.block-categories ul li a {display: flex;align-items: flex-start;gap: 8px;}
 .widget.block-categories ul li a .toggle {background: none;border: none;font-size: 14px;width: 5px;min-width: 12px;display: inline-block;color: #ee5204;font-weight: bold;margin-top: 1px;}
-.widget.block-categories ul li a .toggle:before {content: '';display: inline-block;width: 5px;height: 5px;border: none;}
+.widget.block-categories ul li a .toggle:before {content: '';display: inline-block;border: none;}
 .widget.block-categories ul li.parent > a .toggle {cursor: pointer;}
 .widget.block-categories ul li.parent > a .toggle:before {content: '';border-top: 5px solid transparent;border-bottom: 5px solid transparent;border-left: 10px solid #ee5204;}
 .widget.block-categories ul li > ul {display: none;}
