@@ -134,6 +134,14 @@ class Image extends AbstractHelper
      */
     public function getWidthAndHeigth(): array
     {
+        return $this->getWidthAndHeight();
+    }
+
+    /**
+     * @return array
+     */
+    public function getWidthAndHeight(): array
+    {
         $file = $this->_newFile ?: $this->_baseFile;
         if (!$file) {
             return [];

@@ -44,8 +44,14 @@ if (!isset($escaper)) {
                         if (!$featuredImgAlt) {
                             $featuredImgAlt = $_postName;
                         }
+                        $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+                        $imageWidthAndHeight = $imageHelper->init($_post->getFeaturedImg())->getWidthAndHeight();
+                        $addWH = !empty($imageWidthAndHeight);
                         ?>
-                           <img src="<?= $escaper->escapeHtml($featuredImage) ?>" alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
+                           <img src="<?= $escaper->escapeHtml($featuredImage) ?>"
+                                alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
+                           />
                     <?php } ?>
                     </div>
                 </div>
