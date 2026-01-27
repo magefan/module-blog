@@ -13,7 +13,7 @@
  */
 ?>
 <?php $script = "
-    function mfShareWindowOpen(url, type) {
+    function mfShareWindowOpen(url, type, element) {
         function reverse(s){
             return s.split('').reverse().join('');
         }
@@ -65,9 +65,8 @@
                 
                 document.body.appendChild(tooltip);
                 
-                var icon = document.querySelector('.icon-wrapper.icon-copy');
-                if (icon) {
-                    var rect = icon.getBoundingClientRect();
+                if (element) {
+                    var rect = element.getBoundingClientRect();
                     var scrollY = window.pageYOffset || document.documentElement.scrollTop;
                     var scrollX = window.pageXOffset || document.documentElement.scrollLeft;
                 
