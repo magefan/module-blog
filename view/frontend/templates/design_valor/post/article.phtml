@@ -133,6 +133,8 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
                             } else {
                                 $featuredImage = $block->getViewFileUrl('Magefan_Blog::images/samples/' . rand(1, 8) . '.jpeg');
                                 $featuredImgAlt  = '';
+                                $imageWidthAndHeight = ['width' => 1880, 'height' => 1253];
+                                $addWH = true;
                             }
                             ?>
 
