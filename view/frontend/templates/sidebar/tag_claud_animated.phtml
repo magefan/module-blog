@@ -29,7 +29,7 @@ if (!isset($escaper)) {
     </div>
 
     <div id="blogSidebarCloudCanvasContainer">
-        <canvas style="width:100%" height="<?= $escaper->escapeHtml($block->getConfigValue($block::CLOUD_HEIGHT)) ?>" id="blogSidebarCloudCanvas">
+        <canvas style="width:100%" height="<?= $escaper->escapeHtml($block->getCloudHeight()) ?>" id="blogSidebarCloudCanvas">
             <div class="tagclaud-hld">
                 <?php foreach ($tags as $tag) { ?>
                     <?php $title = $tag->getTitle() ?>

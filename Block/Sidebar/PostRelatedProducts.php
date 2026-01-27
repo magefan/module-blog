@@ -61,11 +61,11 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      * Premare block data
      * @return $this
      */
-    protected function _prepareCollection(): static
+    protected function _prepareCollection()
     {
         $post = $this->getPost();
 
-        $this->_itemCollection = $post->getRelatedProducts()
+        $this->_itemCollection = $post->getRelatedProducts(false)
             ->addAttributeToSelect('required_options');
 
         if ($this->_moduleManager->isEnabled('Magento_Checkout')) {

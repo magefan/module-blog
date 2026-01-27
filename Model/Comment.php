@@ -291,7 +291,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * @param  string $format
      * @return string
      */
-    public function getPublishDate($format = 'Y-m-d H:i:s'): string|array
+    public function getPublishDate($format = 'Y-m-d H:i:s')
     {
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
@@ -302,7 +302,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     /**
      * @return array|ResourceModel\Comment\Collection
      */
-    public function getRepliesCollection(): \Magefan\Blog\Model\ResourceModel\Comment\Collection|array
+    public function getRepliesCollection()
     {
         $repliesCollection = [];
         if (!$this->isReply()) {

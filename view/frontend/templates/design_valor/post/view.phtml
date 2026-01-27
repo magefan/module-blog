@@ -43,8 +43,10 @@ if (!isset($escaper)) {
         <div class="post-data-wrap">
 
             <?php /* post author */ ?>
+            <?php $hasPreviusItem = false; ?>
             <?php if ($block->authorEnabled()) { ?>
                 <?php if ($_author = $_post->getAuthor()) { ?>
+                    <?php $hasPreviusItem = true; ?>
                     <span class="post-author-name">
                         <?php if ($block->authorPageEnabled()) { ?>
                             <a title="<?= $escaper->escapeHtml($_author->getTitle()) ?>"
@@ -77,12 +79,24 @@ if (!isset($escaper)) {
 
             <?php /* post date */ ?>
             <?php if ($_post->isPublishDateEnabled()) { ?>
-                <span class="post-date"><span>&nbsp;|&nbsp;</span> <?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                <span class="post-date">
+                    <?php if ($hasPreviusItem) { ?>
+                        <span>&nbsp;|&nbsp;</span>
+                    <?php } ?>
+                    <?php $hasPreviusItem = true; ?>
+                    <?= $escaper->escapeHtml($_post->getPublishDate()) ?>
+                </span>
             <?php } ?>
 
             <?php /* post reading time */ ?>
             <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
-                <span class="post-reading-time"> <span>&nbsp;|&nbsp;</span> <?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?></span>
+                <span class="post-reading-time">
+                    <?php if ($hasPreviusItem) { ?>
+                        <span>&nbsp;|&nbsp;</span>
+                    <?php } ?>
+                    <?php $hasPreviusItem = true; ?>
+                    <?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?>
+                </span>
             <?php } ?>
 
             <?php /* post views */ ?>
@@ -169,11 +183,11 @@ if (!isset($escaper)) {
         <div class="block post-sharing post-sharing-bottom">
             <div class="share-elements">
                 <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
-                    <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>')">
-                        <div class="icon" title="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                    <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>', this)">
+                        <div class="icon" title="<?= $escaper->escapeHtml($network == 'Copy' ? __($network) : (__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?>">
                             <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/design_valor/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
                         </div>
-                        <div class="label"><?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?></div>
+                        <div class="label"><?= $escaper->escapeHtml($network == 'Copy' ? __($network) : (__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?></div>
                     </div>
                 <?php } ?>
             </div>
@@ -182,6 +196,6 @@ if (!isset($escaper)) {
         <?php endif; ?>
 
         <?= $block->getChildHtml('blog.post.bottom') ?>
-        
+
     </div>
 </div>

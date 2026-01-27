@@ -90,7 +90,7 @@ class Image extends AbstractHelper
      * @param $baseFile
      * @return $this
      */
-    public function init($baseFile): static
+    public function init($baseFile)
     {
         $this->_newFile = '';
         $this->_baseFile = $baseFile;
@@ -103,7 +103,7 @@ class Image extends AbstractHelper
      * @param $keepFrame
      * @return $this
      */
-    public function resize(string $width, $height = null, $keepFrame = null): static
+    public function resize(string $width, $height = null, $keepFrame = null)
     {
         if ($this->_baseFile) {
             $pathinfo = pathinfo(($this->_baseFile));
@@ -166,7 +166,7 @@ class Image extends AbstractHelper
      * @param $height
      * @return $this
      */
-    protected function resizeBaseFile($width, $height, $keepFrame): static
+    protected function resizeBaseFile($width, $height, $keepFrame)
     {
         if (!$this->fileExists($this->_baseFile)) {
             $this->_baseFile = null;

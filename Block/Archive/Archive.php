@@ -54,7 +54,7 @@ trait Archive
                         }
                         break;
                 }
-                $content = str_replace($schemaVar, $value, $content);
+                $content = str_replace($schemaVar, (string)$value, $content);
             }
         }
         return $content;

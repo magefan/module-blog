@@ -61,7 +61,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\Data\Collection $collection
      * @return $this
      */
-    public function setCollection($collection): static
+    public function setCollection($collection)
     {
         $this->_collection = $collection;
 
@@ -115,7 +115,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     /**
      * @return bool|\Magento\Framework\DataObject|\Magento\Framework\View\Element\AbstractBlock|\Magento\Theme\Block\Html\Pager
      */
-    public function getPagerBlock(): \Magento\Framework\DataObject|false
+    public function getPagerBlock()
     {
         $pagerBlock = $this->getChildBlock('post_list_toolbar_pager');
         if ($pagerBlock instanceof \Magento\Framework\DataObject) {
