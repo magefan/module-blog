@@ -45,8 +45,6 @@ if (!isset($escaper)) {
                     <div class="post-image">
                         <?php
                         $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
-                        $imageWidthAndHeight = [];
-                        $addWH = false;
                         if (!$featuredImgAlt) {
                             $featuredImgAlt =  $_postName;
                         }
@@ -59,6 +57,8 @@ if (!isset($escaper)) {
                                 $addWH = !empty($imageWidthAndHeight);
                             } else {
                                 $featuredImageUrl = $block->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                                $imageWidthAndHeight = ['width' => 1500, 'height' => 1500];
+                                $addWH = true;
                             }
                             ?>
                             <img data-width-amp="<?= $escaper->escapeHtml($width) ?>" data-height-amp="<?= $escaper->escapeHtml($height) ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
