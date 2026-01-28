@@ -38,6 +38,8 @@ class ColorPicker extends Field
     }
 
     /**
+     * Return element html
+     *
      * @param AbstractElement $element
      * @return string
      */

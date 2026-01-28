@@ -18,6 +18,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 {
     /**
      * Retrieve query
+     *
      * @return string
      */
     public function getQuery(): string
@@ -87,6 +88,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve title
+     *
      * @return string
      */
     protected function _getTitle()

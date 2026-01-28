@@ -27,7 +27,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
 
     /**
      * @param Comment $commentResource
-     * @param ModuleContextInterface $context
+     * @param ModuleResource $moduleResource
      */
     public function __construct(
         Comment        $commentResource,

@@ -23,7 +23,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_defaultToolbarBlock = \Magefan\Blog\Block\Post\PostList\Toolbar::class;
 
     /**
-     * @var
+     * @var \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     protected $toolbarBlock;
 
@@ -59,6 +59,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve post html
+     *
      * @param  \Magefan\Blog\Model\Post $post
      * @return string
      */
@@ -74,7 +75,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml']) && !$this->getData('template_type')) {
+        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])
+            && !$this->getData('template_type')
+        ) {
             /* If template was not customized in layout */
             return parent::getTemplate();
         }
@@ -101,6 +104,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()
@@ -124,6 +128,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve Toolbar Html
+     *
      * @return string
      */
     public function getToolbarHtml()

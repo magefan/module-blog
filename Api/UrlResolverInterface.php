@@ -13,6 +13,8 @@ namespace Magefan\Blog\Api;
 interface UrlResolverInterface
 {
     /**
+     * Resolve path to url
+     *
      * @param string $path
      * @return array
      */

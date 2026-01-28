@@ -15,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Category;
 class CreateButton extends \Magefan\Community\Block\Adminhtml\Edit\CreateButton
 {
     /**
+     * Retrieves button data if the user is authorized to create
+     *
      * @return array|string
      */
     public function getButtonData()

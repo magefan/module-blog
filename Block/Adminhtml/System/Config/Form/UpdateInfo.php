@@ -16,8 +16,8 @@ use Magefan\Community\Api\GetModuleVersionInterface;
  */
 class UpdateInfo extends \Magento\Backend\Block\Template
 {
-    const MODULE_NAME = 'Blog';
-    const LATESTS_VERSION_CACHE_KEY = 'magefan_latests_product_versions';
+    public const MODULE_NAME = 'Blog';
+    public const LATESTS_VERSION_CACHE_KEY = 'magefan_latests_product_versions';
 
     /**
      * @var \Magento\Framework\HTTP\Client\Curl

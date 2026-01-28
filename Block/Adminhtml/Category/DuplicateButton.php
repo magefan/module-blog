@@ -15,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Category;
 class DuplicateButton extends \Magefan\Community\Block\Adminhtml\Edit\DuplicateButton
 {
     /**
+     * Retrieves button data if the user is authorized to save
+     *
      * @return array|string
      */
     public function getButtonData()

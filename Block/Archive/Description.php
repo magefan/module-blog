@@ -39,6 +39,8 @@ class Description extends Template
     }
 
     /**
+     * Get archive description
+     *
      * @return string
      */
     public function getDescription(): string

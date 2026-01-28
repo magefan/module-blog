@@ -13,6 +13,7 @@ trait Archive
 {
     /**
      * Get archive month
+     *
      * @return string
      */
     public function getMonth(): string
@@ -22,6 +23,7 @@ trait Archive
 
     /**
      * Get archive year
+     *
      * @return int
      */
     public function getYear(): int
@@ -31,6 +33,8 @@ trait Archive
 
 
     /**
+     * Filter content
+     *
      * @param string $content
      * @return string
      */

@@ -23,6 +23,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve rss feed url
+     *
      * @return string
      */
     public function getLink()
@@ -32,6 +33,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve rss feed title
+     *
      * @return string
      */
     public function getTitle()
@@ -41,6 +43,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve rss feed description
+     *
      * @return string
      */
     public function getDescription()
@@ -50,6 +53,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve rss feed collection size
+     *
      * @return string
      */
     public function getPageSize()
@@ -59,6 +63,7 @@ class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve post filtered content
+     *
      * @param  \Magefan\Blog\Model\Post $post
      * @return string
      */

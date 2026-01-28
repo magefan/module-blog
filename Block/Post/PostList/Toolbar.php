@@ -40,7 +40,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     /**
      * Page GET parameter name
      */
-    const PAGE_PARM_NAME = 'page';
+    public const PAGE_PARM_NAME = 'page';
 
     /**
      * Products collection
@@ -113,6 +113,8 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Return current order
+     *
      * @return bool|\Magento\Framework\DataObject|\Magento\Framework\View\Element\AbstractBlock|\Magento\Theme\Block\Html\Pager
      */
     public function getPagerBlock()
@@ -148,7 +150,6 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             $pagerBlock = false;
         }
 
-
         return $pagerBlock;
     }
 
@@ -168,6 +169,8 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get page GET parameter name
+     *
      * @return string
      */
     public function getPageParamName(): string

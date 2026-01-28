@@ -54,7 +54,7 @@ interface ManagementInterface
      *
      * @api
      * @param int $id
-     * @param  int $storeId
+     * @param int $storeId
      * @return bool
      */
     public function view($id, $storeId);

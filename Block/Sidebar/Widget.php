@@ -16,6 +16,7 @@ trait Widget
 {
     /**
      * Retrieve block sort order
+     *
      * @return int
      */
     public function getSortOrder(): int
@@ -41,7 +42,9 @@ trait Widget
     }
 
     /**
-     * @param $param
+     * Retrieve config value
+     *
+     * @param string $param
      * @return mixed
      */
     protected function getConfigValue(string $param)

@@ -12,10 +12,10 @@ use Magefan\Blog\Model\Config;
 use Magefan\Blog\Model\Config\Source\DesignVersion;
 use Magefan\Blog\Model\TemplatePool;
 use Magefan\Community\Api\HyvaThemeDetectionInterface;
-
+// phpcs:ignoreFile Generic.Files.LineLength
 class TemplatePlugin
 {
-    const OLD_TO_NEW_TEMPLATES_MAP = [
+    private const OLD_TO_NEW_TEMPLATES_MAP = [
         'Magefan_Blog::post/view-modern.phtml' => 'Magefan_Blog::design_modern/post/view.phtml',
         'Magefan_Blog::post/list-modern.phtml' => 'Magefan_Blog::design_modern/post/list.phtml',
         'Magefan_Blog::post/view/nextprev-modern.phtml' => 'Magefan_Blog::design_modern/post/view/nextprev.phtml',
@@ -69,7 +69,8 @@ class TemplatePlugin
 
     /**
      * @param Config $config
-     * @param \Magefan\Community\Api\HyvaThemeDetectionInterface $hyvaThemeDetection
+     * @param HyvaThemeDetectionInterface $hyvaThemeDetection
+     * @param TemplatePool $templatePool
      */
     public function __construct(
         Config $config,
@@ -82,8 +83,10 @@ class TemplatePlugin
     }
 
     /**
+     * Modify the template path after it is retrieved, based on design version and configuration.
+     *
      * @param \Magento\Framework\View\Element\Template $subject
-     * @param $result
+     * @param string $result
      * @return array|mixed|string|string[]
      */
     public function afterGetTemplate(\Magento\Framework\View\Element\Template $subject, $result)
@@ -130,7 +133,6 @@ class TemplatePlugin
             return $oldTemplate;
         }
 
-
         if ($subject->getTemplateFile($newDesignTemplate)) {
             return $newDesignTemplate;
         }
@@ -145,6 +147,8 @@ class TemplatePlugin
     }
 
     /**
+     * Check if template is from blog module
+     *
      * @param string $template
      * @return bool
      */
@@ -155,6 +159,8 @@ class TemplatePlugin
 
     /**
      * Return path to old template - may be found only if it is overridden in theme
+     *
+     * @param \Magento\Framework\View\Element\Template $subject
      * @param string $template
      * @return string
      */
@@ -172,6 +178,8 @@ class TemplatePlugin
     }
 
     /**
+     * Return new template path based on design version
+     *
      * @param string $template
      * @param string $designVersion
      * @return string

@@ -20,6 +20,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Prepare posts collection
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
     protected function _preparePostCollection()
@@ -82,7 +83,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
-     * @param $param
+     * Get config value
+     *
+     * @param string $param
      * @return mixed
      */
     protected function _getConfigValue(string $param)

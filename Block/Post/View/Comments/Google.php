@@ -16,5 +16,8 @@ use Magefan\Blog\Model\Config\Source\CommetType;
  */
 class Google extends \Magefan\Blog\Block\Post\View\Comments
 {
+    /**
+     * @var string
+     */
     protected $commetType = CommetType::GOOGLE;
 }

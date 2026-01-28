@@ -51,12 +51,14 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Block template file
+     *
      * @var string
      */
     protected $_template = 'Magefan_Blog::post/view/comments.phtml';
 
     /**
      * Retrieve comments type
+     *
      * @return bool
      */
     public function getCommentsType()
@@ -68,6 +70,8 @@ class Comments extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Display privacy policy checkbox
+     *
      * @return bool
      */
     public function displayPrivacyPolicyCheckbox()
@@ -80,6 +84,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve number of comments to display
+     *
      * @return int
      */
     public function getNumberOfComments(): int
@@ -92,6 +97,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve facebook app id
+     *
      * @return string
      */
     public function getFacebookAppId()
@@ -104,6 +110,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve disqus forum shortname
+     *
      * @return string
      */
     public function getDisqusShortname()
@@ -116,6 +123,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve locale code
+     *
      * @return string
      */
     public function getLocaleCode()

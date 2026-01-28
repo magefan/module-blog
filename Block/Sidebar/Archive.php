@@ -40,9 +40,13 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
             'DESC'
         );
     }
-
     /**
      * Retrieve available months
+     * @return array
+     */
+    /**
+     * Retrieve available months
+     *
      * @return array
      */
     public function getMonths()
@@ -69,6 +73,12 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param  int $time
      * @return string
      */
+    /**
+     * Retrieve year by time
+     *
+     * @param $time
+     * @return string
+     */
     public function getYear($time): string
     {
         return date('Y', $time);
@@ -79,6 +89,12 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * @param  int $time
      * @return string
      */
+    /**
+     * Retrieve month by time
+     *
+     * @param $time
+     * @return \Magento\Framework\Phrase
+     */
     public function getMonth($time)
     {
         return __(date('F', $time));
@@ -86,6 +102,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve archive url by time
+     *
      * @param  int $time
      * @return string
      */
@@ -106,8 +123,8 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve empty identities
-     * Fix for varnish error Error 503 Service Unavailable, when have many blog posts
      *
+     * Fix for varnish error Error 503 Service Unavailable, when have many blog posts
      * @return array
      */
     public function getIdentities(): array
@@ -118,6 +135,12 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     /**
      * @param $time
      * @return string
+     */
+    /**
+     * Retrieve translated date
+     *
+     * @param $time
+     * @return false|string
      */
     public function getTranslatedDate($time)
     {
@@ -136,6 +159,11 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * @return mixed
+     */
+    /**
+     * Retrieve configuration value for archive group_by setting
+     *
+     * @return string|null
      */
     protected function getGroupBy()
     {

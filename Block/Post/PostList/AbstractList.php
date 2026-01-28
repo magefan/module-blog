@@ -60,9 +60,9 @@ abstract class AbstractList extends Template implements IdentityInterface
      */
     protected $templatePool;
 
-    const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'main_table.publish_time';
-    const POSTS_SORT_FIELD_BY_POSITION = 'position';
-    const POSTS_SORT_FIELD_BY_TITLE = 'main_table.title';
+    public const POSTS_SORT_FIELD_BY_PUBLISH_TIME = 'main_table.publish_time';
+    public const POSTS_SORT_FIELD_BY_POSITION = 'position';
+    public const POSTS_SORT_FIELD_BY_TITLE = 'main_table.title';
 
     /**
      * AbstractList constructor.
@@ -72,8 +72,8 @@ abstract class AbstractList extends Template implements IdentityInterface
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
-     * @param null $config
-     * @param null $templatePool
+     * @param \Magefan\Blog\Model\Config|null $config
+     * @param \Magefan\Blog\Model\TemplatePool|null $templatePool
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -200,6 +200,7 @@ abstract class AbstractList extends Template implements IdentityInterface
 
     /**
      * Retrieve 1 if display author information is enabled
+     *
      * @return int
      */
     public function authorEnabled()
@@ -212,6 +213,7 @@ abstract class AbstractList extends Template implements IdentityInterface
 
     /**
      * Retrieve 1 if author page is enabled
+     *
      * @return int
      */
     public function authorPageEnabled()
@@ -224,6 +226,7 @@ abstract class AbstractList extends Template implements IdentityInterface
 
     /**
      * Retrieve true if magefan comments are enabled
+     *
      * @return bool
      */
     public function magefanCommentsEnabled()
@@ -235,6 +238,8 @@ abstract class AbstractList extends Template implements IdentityInterface
     }
 
     /**
+     * Views count enabled
+     *
      * @return bool
      */
     public function viewsCountEnabled()
@@ -246,6 +251,8 @@ abstract class AbstractList extends Template implements IdentityInterface
     }
 
     /**
+     * Get style view model
+     *
      * @return \Magefan\Blog\ViewModel\Style
      */
     public function getStyleViewModel()
@@ -261,6 +268,8 @@ abstract class AbstractList extends Template implements IdentityInterface
     }
 
     /**
+     * Get page param name
+     *
      * @return string
      */
     public function getPageParamName()
@@ -270,6 +279,7 @@ abstract class AbstractList extends Template implements IdentityInterface
 
     /**
      * Retrieve 1 if display reading time is enabled
+     *
      * @return int
      */
     public function readingTimeEnabled()

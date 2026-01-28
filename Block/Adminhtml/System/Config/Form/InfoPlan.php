@@ -13,11 +13,15 @@ use Magefan\Community\Api\SecureHtmlRendererInterface;
 abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
 {
     /**
+     * Retrieve the minimum required plan.
+     *
      * @return string
      */
     abstract protected function getMinPlan(): string;
 
     /**
+     * Returns a JSON-encoded string representing section IDs.
+     *
      * @return string
      */
     abstract protected function getSectionsJson(): string;
@@ -30,6 +34,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
 
     /**
      * Return info block html
+     *
      * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return string
      */

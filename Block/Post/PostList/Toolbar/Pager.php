@@ -22,7 +22,7 @@ class Pager extends \Magento\Theme\Block\Html\Pager
     /**
      * Retrieve url of all pages
      *
-     * @return string
+     * @return array
      */
     public function getPagesUrls(): array
     {
@@ -52,8 +52,8 @@ class Pager extends \Magento\Theme\Block\Html\Pager
 
     /**
      * Retrieve lazyload json config string
-     * @param array $config
      *
+     * @param array $config
      * @return string
      */
     public function getLazyloadConfig(array $config = [])

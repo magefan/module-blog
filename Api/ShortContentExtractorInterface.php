@@ -13,7 +13,8 @@ interface ShortContentExtractorInterface
 {
     /**
      * Retrieve short filtered content
-     * @param string$content
+     *
+     * @param string $content
      * @param mixed $len
      * @param mixed $endCharacters
      * @return string

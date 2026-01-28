@@ -97,6 +97,17 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         return $html;
     }
 
+    /**
+     * Generates the HTML for submenu items based on the provided hierarchy and parameters.
+     *
+     * @param array $children
+     * @param int $level
+     * @param int $max_level
+     * @param int $column_width
+     * @param string $menu_type
+     * @param int|null $columns
+     * @return string
+     */
     public function getSubmenuItemsHtml(
         $children,
         $level = 1,

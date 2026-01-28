@@ -12,9 +12,11 @@ namespace Magefan\Blog\Plugin\Magento\AdminGws\Model;
 class ModelsPlugin
 {
     /**
-     * @param $subject
+     * Intercepts the CMS page save process to adjust store-related data for blog models.
+     *
+     * @param mixed $subject
      * @param callable $proceed
-     * @param $model
+     * @param mixed $model
      * @return callable
      */
     public function aroundCmsPageSaveBefore($subject, callable $proceed, $model)

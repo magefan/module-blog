@@ -59,6 +59,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Premare block data
+     *
      * @return $this
      */
     protected function _prepareCollection()
@@ -97,6 +98,8 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
+     * Return products collection instance
+     *
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     public function getItems()
@@ -145,6 +148,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Synonim to getItems. Added to support different templates
+     *
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     public function getAllItems()
@@ -154,6 +158,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Synonim to getItems. Added to support different templates
+     *
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     public function getItemCollection()
@@ -162,6 +167,8 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
+     * Render block HTML
+     *
      * @return string
      */
     public function toHtml()

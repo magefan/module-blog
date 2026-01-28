@@ -12,6 +12,8 @@ namespace Magefan\Blog\Api;
 interface AuthorInterface
 {
     /**
+     * Determines if the item is visible on the specified store.
+     *
      * @param int $storeId
      * @return bool
      */

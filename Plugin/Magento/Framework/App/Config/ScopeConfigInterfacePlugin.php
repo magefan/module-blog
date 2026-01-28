@@ -47,17 +47,30 @@ class ScopeConfigInterfacePlugin
     }
 
     /**
-     * @param $subject
-     * @param $result
-     * @param $path
-     * @param $scopeType
-     * @param $scopeCode
-     * @return mixed|string
+     * Modify the value returned by the getValue method based on specific conditions.
+     *
+     * @param mixed $subject
+     * @param mixed $result
+     * @param string $path
+     * @param string $scopeType
+     * @param string|null $scopeCode
+     * @return mixed
      */
-    public function afterGetValue($subject, $result, $path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
-    {
-        if ($path == 'mageworx_seo/base/canonical/canonical_ignore_pages' && $this->request->getModuleName() == 'blog' && $this->config->isEnabled()) {
-            $blogPages = explode(",", $this->config->getConfig(Config::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
+    public function afterGetValue(
+        $subject,
+        $result,
+        $path,
+        $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+        $scopeCode = null
+    ) {
+        if ($path == 'mageworx_seo/base/canonical/canonical_ignore_pages'
+            && $this->request->getModuleName() == 'blog'
+            && $this->config->isEnabled()
+        ) {
+            $blogPages = explode(
+                ",",
+                $this->config->getConfig(Config::XML_PATH_DISPLAY_CANONICAL_TAG_FOR)
+            );
 
             if (in_array('all', $blogPages)) {
                 if (!empty($result)) {

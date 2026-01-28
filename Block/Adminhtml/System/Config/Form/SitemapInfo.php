@@ -11,6 +11,7 @@ class SitemapInfo extends \Magefan\Community\Block\Adminhtml\System\Config\Form\
 {
     /**
      * Return info block html
+     *
      * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return string
      */

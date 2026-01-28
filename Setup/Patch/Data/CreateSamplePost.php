@@ -63,7 +63,8 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
             'meta_description' => 'Magento 2 blog default post.',
             'identifier' => 'magento-2-blog-post-sample',
             'content_heading' => 'Magento 2 Blog Post Sample',
-            'content' => '<p>Welcome to Magento 2 Blog extension by Magefan. This is your first post. Edit or delete it, then start blogging!</p>',
+            'content' => '<p>Welcome to Magento 2 Blog extension by Magefan. '
+                . 'This is your first post. Edit or delete it, then start blogging!</p>',
             'store_ids' => [0]
         ];
 
