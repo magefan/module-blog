@@ -241,8 +241,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * Add posts filter to collection
      *
-     * @param array|int|string $category
-     * @return $this
+     * @param array|int $postIds
+     * @return void
      */
     public function addPostsFilter($postIds): void
     {
@@ -272,6 +272,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @param array|int|\Magefan\Blog\Model\Category $category
      * @return $this
      */
+    // phpcs:ignore Generic.Metrics.NestingLevel
     public function addCategoryFilter($category)
     {
         if (!$this->getFlag('category_filter_added')) {
@@ -348,7 +349,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         if ($category->getId()) {
                             return $this->addCategoryFilter($category);
                         }
-                    } catch (\NoSuchEntityException $e) {
+                    } catch (\NoSuchEntityException $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
                     }
                 }
             }
@@ -454,20 +455,28 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * @param $term
+     * Generate a search rate expression for the given term and columns.
+     *
+     * @param string $term
      * @param array $columns
      * @return string
      */
     public function getSearchRateExpression($term, array $columns): string
     {
-        return '(0 + FORMAT(MATCH (' . implode(',', $columns) . ') AGAINST (' . $this->getConnection()->quote($term) . '), 4)) ';
+        return '(0 + FORMAT(MATCH ('
+            . implode(',', $columns) .
+            ') AGAINST ('
+            . $this->getConnection()->quote($term) .
+            '), 4)) ';
     }
 
     /**
      * Add tag filter to collection
+     *
      * @param array|int|string|\Magefan\Blog\Model\Tag $tag
      * @return $this
      */
+    // phpcs:ignore Generic.Metrics.NestingLevel
     public function addTagFilter($tag)
     {
         if (!$this->getFlag('tag_filter_added')) {
@@ -543,6 +552,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add author filter to collection
+     *
      * @param array|int|\Magefan\Blog\Model\Author $author
      * @return $this
      */
@@ -588,7 +598,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add related product filter to collection
-     * @param $product
+     *
+     * @param mixed $product
      * @return $this
      */
     public function addRelatedProductFilter($product)
@@ -610,6 +621,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add is_active filter to collection
+     *
      * @return $this
      */
     public function addActiveFilter()
@@ -752,7 +764,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      *
      * @param string $field
      * @param string $direction
-     * @return  $this
+     * @return $this
      */
     public function setOrder($field, $direction = self::SORT_ORDER_DESC)
     {
@@ -765,6 +777,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Retrieve the store ID
+     *
      * @return int
      */
     public function getStoreId():int

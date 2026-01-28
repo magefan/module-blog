@@ -15,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Post;
 class DeleteButton extends \Magefan\Community\Block\Adminhtml\Edit\DeleteButton
 {
     /**
+     * Retrieves button data if the user is authorized to delete
+     *
      * @return array|string
      */
     public function getButtonData()

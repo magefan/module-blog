@@ -15,17 +15,17 @@ namespace Magefan\Blog\Model\ResourceModel\Tag;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventPrefix = 'mfblog_tag_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventObject = 'blog_tag_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_idFieldName = 'tag_id';
 
@@ -36,6 +36,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Constructor
+     *
      * Configures collection
      *
      * @return void
@@ -75,6 +76,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add search filter to collection
+     *
      * @param string $term
      * @return $this
      */
@@ -85,7 +87,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add store filter to collection
-     * @param array|int|\Magento\Store\Model\Store  $store
+     *
+     * @param array|int|\Magento\Store\Model\Store $store
      * @param boolean $withAdmin
      * @return $this
      */
@@ -137,6 +140,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add active filter to collection
+     *
      * @return self
      */
     public function addActiveFilter()
@@ -144,6 +148,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         return $this
             ->addFieldToFilter('main_table.is_active', \Magefan\Blog\Model\Tag::STATUS_ENABLED);
     }
+
     /**
      * Perform operations after collection load
      *
@@ -214,6 +219,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Retrieve the store ID
+     *
      * @return int
      */
     public function getStoreId():int

@@ -124,6 +124,7 @@ class Categories extends Template implements IdentityInterface
     {
         $identities = [];
         foreach ($this->getGroupedChilds() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

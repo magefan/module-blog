@@ -35,12 +35,15 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
     }
 
     /**
+     * Return chooser JS
+     *
      * @param  string $chooserId
      * @return string
      */
     public function onClickJs(string $chooserId) : string
     {
         $buttonHtml = "<button id='addBtn' class='action-primary' ><span>Use Selected Posts</span></button>";
+        // phpcs:disable Generic.Files.LineLength
         $js = '
                 var waitForElm = function(selector) {
                     return new Promise(resolve => {
@@ -110,10 +113,14 @@ class Chooser extends \Magento\Widget\Block\Adminhtml\Widget\Chooser
                   }
                  );
         ';
+
+        // phpcs:enable Generic.Files.LineLength
         return $js;
     }
 
     /**
+     * Return chooser config
+     *
      * @return \Magento\Framework\DataObject|mixed|null
      */
     public function getConfig()

@@ -42,6 +42,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Initialize resource model
+     *
      * Get tablename from config
      *
      * @return void
@@ -179,10 +180,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Check if category identifier exist for specific store
-     * return category id if category exists
+     *
+     * Return category id if category exists
      *
      * @param string $identifier
-     * @param int $storeId
+     * @param array $storeIds
      * @return int
      */
     protected function _getLoadByIdentifierSelect($identifier, $storeIds)
@@ -227,11 +229,10 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Check if category identifier exist for specific store
-     * return page id if page exists
+     * Check if category identifier exist for specific store return page id if page exists
      *
      * @param string $identifier
-     * @param int|array $storeId
+     * @param int|array $storeIds
      * @return false|string
      */
     public function checkIdentifier($identifier, $storeIds)
@@ -241,7 +242,10 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Magento\Framework\DB\Select::COLUMNS)->columns(['cp.category_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
+        $select->reset(\Magento\Framework\DB\Select::COLUMNS)
+            ->columns(['cp.category_id', 'cp.identifier'])
+            ->order('cps.store_id DESC')
+            ->limit(1);
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['category_id']) && isset($row['identifier'])
@@ -255,7 +259,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get store ids to which specified item is assigned
      *
-     * @param $categoryId
+     * @param int $categoryId
      * @param bool $useCache
      * @return array|mixed
      */
@@ -287,6 +291,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Retrieve the entity type
+     *
      * @return string
      */
     public function getEntityType(): string

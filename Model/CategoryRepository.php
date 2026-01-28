@@ -81,6 +81,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * Retrieve the category factory instance
+     *
      * @return CategoryFactory
      */
     public function getFactory()
@@ -89,6 +91,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * Save category entity.
+     *
      * @param Category $category
      * @return bool|mixed
      * @throws CouldNotSaveException
@@ -117,12 +121,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
-     * @param $categoryId
+     * Retrieve category by ID.
+     *
+     * @param int|string $categoryId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
-     * @return mixed
-     * @throws NoSuchEntityException
+     * @return \Magento\Catalog\Model\Category
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($categoryId, $editMode = false, $storeId = null, $forceReload = false)
     {
@@ -144,6 +150,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * Delete the specified category.
+     *
      * @param Category $category
      * @return bool
      * @throws CouldNotDeleteException
@@ -164,7 +172,9 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
-     * @param $categoryId
+     * Deletes a category by its ID.
+     *
+     * @param int|string $categoryId
      * @return bool
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
@@ -176,7 +186,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {

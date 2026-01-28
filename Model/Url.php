@@ -17,20 +17,20 @@ class Url
     /**
      * Permalink Types
      */
-    const PERMALINK_TYPE_DEFAULT = 'default';
-    const PERMALINK_TYPE_SHORT = 'short';
+    public const PERMALINK_TYPE_DEFAULT = 'default';
+    public const PERMALINK_TYPE_SHORT = 'short';
 
     /**
      * Objects Types
      */
-    const CONTROLLER_INDEX = 'blog_index';
-    const CONTROLLER_POST = 'post';
-    const CONTROLLER_CATEGORY = 'category';
-    const CONTROLLER_ARCHIVE = 'archive';
-    const CONTROLLER_AUTHOR = 'author';
-    const CONTROLLER_SEARCH = 'search';
-    const CONTROLLER_RSS = 'rss';
-    const CONTROLLER_TAG = 'tag';
+    public const CONTROLLER_INDEX = 'blog_index';
+    public const CONTROLLER_POST = 'post';
+    public const CONTROLLER_CATEGORY = 'category';
+    public const CONTROLLER_ARCHIVE = 'archive';
+    public const CONTROLLER_AUTHOR = 'author';
+    public const CONTROLLER_SEARCH = 'search';
+    public const CONTROLLER_RSS = 'rss';
+    public const CONTROLLER_TAG = 'tag';
 
     /**
      * @var \Magento\Framework\Registry
@@ -55,7 +55,6 @@ class Url
     protected $_scopeConfig;
 
     /**
-     * Store id
      * @var int | null
      */
     protected $storeId;
@@ -85,6 +84,7 @@ class Url
 
     /**
      * Retrieve permalink type
+     *
      * @return string
      */
     public function getPermalinkType()
@@ -94,6 +94,7 @@ class Url
 
     /**
      * Retrieve route name by controller
+     *
      * @param  string  $controllerName
      * @param  boolean $skip
      * @return string || null
@@ -113,6 +114,7 @@ class Url
 
     /**
      * Retrieve controller name by route
+     *
      * @param  string  $route
      * @param  boolean $skip
      * @return string || null
@@ -137,6 +139,7 @@ class Url
 
     /**
      * Retrieve blog base url
+     *
      * @return string
      */
     public function getBaseUrl()
@@ -157,6 +160,7 @@ class Url
 
     /**
      * Retrieve blog page url
+     *
      * @param  string $identifier
      * @param  string $controllerName
      * @return string
@@ -172,6 +176,7 @@ class Url
 
     /**
      * Retrieve canonical url
+     *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return string
      */
@@ -223,12 +228,12 @@ class Url
 
         $url = $this->getUrl($object, $object->getControllerName());
 
-
         return $url;
     }
 
     /**
      * Retrieve blog base path
+     *
      * @return string
      */
     public function getBasePath()
@@ -238,6 +243,7 @@ class Url
 
     /**
      * Retrieve blog url path
+     *
      * @param  string $identifier
      * @param  string $controllerName
      * @return string
@@ -276,7 +282,8 @@ class Url
 
     /**
      * Retrieve itentifier what include parent categories itentifier
-     * @param  \Magento\Framework\Model\AbstractModel || string $identifier
+     *
+     * @param \Magento\Framework\Model\AbstractModel|string $identifier
      * @return string
      */
     protected function getExpandedItentifier($identifier)
@@ -301,6 +308,7 @@ class Url
 
     /**
      * Add url sufix
+     *
      * @param string $url
      * @param string $controllerName
      * @return string
@@ -335,7 +343,8 @@ class Url
 
     /**
      * Remove slash from the end of URL
-     * @param $url
+     *
+     * @param string $url
      * @return string
      */
     protected function trimSlash($url)
@@ -350,6 +359,7 @@ class Url
 
     /**
      * Retrieve trimmed url without sufix
+     *
      * @param  string $identifier
      * @param  string $sufix
      * @return string
@@ -372,6 +382,8 @@ class Url
 
     /**
      * Retrieve post url sufix
+     *
+     * @param string $controllerName
      * @return string
      */
     public function getUrlSufix(string $controllerName): string
@@ -381,6 +393,7 @@ class Url
 
     /**
      * Retrieve media url
+     *
      * @param string $file
      * @return string
      */
@@ -391,7 +404,9 @@ class Url
     }
 
     /**
-     * @return int|null
+     * Retrieve store ID
+     *
+     * @return int|string
      */
     public function getStoreId()
     {
@@ -399,7 +414,9 @@ class Url
     }
 
     /**
-     * @param $storeId
+     * Set the store ID
+     *
+     * @param mixed $storeId
      * @return $this
      */
     public function setStoreId($storeId)
@@ -410,13 +427,14 @@ class Url
 
     /**
      * Start blog URL store emulation
-     * @param $store
-     * @throws \Exception
+     *
+     * @param mixed $store
+     * @throws \LocalizedException
      */
     public function startStoreEmulation($store): void
     {
         if (null !== $this->originalStore) {
-            throw new \Exception('Cannot start Blog URL store emulation, emulation already started.');
+            throw new \LocalizedException('Cannot start Blog URL store emulation, emulation already started.');
         }
 
         $this->originalStore = $this->_url->getScope();
@@ -441,6 +459,7 @@ class Url
 
     /**
      * Retrieve blog permalink config value
+     *
      * @param  string $key
      * @return string || null || int
      */

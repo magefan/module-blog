@@ -15,22 +15,16 @@ use Magefan\Blog\Api\SitemapConfigInterface;
 class Category implements ItemProviderInterface
 {
     /**
-     * Sitemap config
-     *
      * @var SitemapConfigInterface
      */
     private $sitemapConfig;
 
     /**
-     * Blog category collection factory
-     *
      * @var CollectionFactory
      */
     private $collectionFactory;
 
     /**
-     * Sitemap item factory
-     *
      * @var SitemapItemInterfaceFactory
      */
     private $itemFactory;
@@ -51,7 +45,7 @@ class Category implements ItemProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getItems($storeId)
     {
@@ -69,7 +63,10 @@ class Category implements ItemProviderInterface
                 'url' => $item->getUrl(),
                 'updatedAt' => $item->getUpdatedAt(),
                 'priority' => $this->sitemapConfig->getPriority(SitemapConfigInterface::CATEGORIES_PAGE, $storeId),
-                'changeFrequency' => $this->sitemapConfig->getFrequency(SitemapConfigInterface::CATEGORIES_PAGE, $storeId),
+                'changeFrequency' => $this->sitemapConfig->getFrequency(
+                    SitemapConfigInterface::CATEGORIES_PAGE,
+                    $storeId
+                ),
             ]);
         }, $collection);
 

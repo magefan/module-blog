@@ -89,7 +89,7 @@ class ProductDataProvider extends DataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getCollection()
     {

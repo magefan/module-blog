@@ -78,7 +78,9 @@ class TagManagement extends AbstractManagement
     }
 
     /**
-     * @param $item
+     * Retrieve dynamic data for a given item by processing specific keys.
+     *
+     * @param object $item
      * @return array
      */
     protected function getDynamicData($item)

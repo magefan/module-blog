@@ -15,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Tag;
 class SaveAndContinueButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveAndContinueButton
 {
     /**
+     * Retrieves button data for the authorized context.
+     *
      * @return array|string
      */
     public function getButtonData()

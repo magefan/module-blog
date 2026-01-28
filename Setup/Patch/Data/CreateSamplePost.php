@@ -47,13 +47,13 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(): void
     {
         try {
             $this->state->setAreaCode('adminhtml');
-        } catch (\Exception $e) {
+        } catch (\Exception $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
             /* Do nothing, it's OK */
         }
 
@@ -71,7 +71,7 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getDependencies()
     {
@@ -79,7 +79,7 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAliases()
     {
@@ -87,7 +87,7 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getVersion()
     {

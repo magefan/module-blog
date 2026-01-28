@@ -39,23 +39,23 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     /**
      * Posts's Statuses
      */
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 0;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 0;
 
     /**
      * blog cache post
      */
-    const CACHE_TAG = 'mfb_p';
+    public const CACHE_TAG = 'mfb_p';
 
     /**
      * Gallery images separator constant
      */
-    const GALLERY_IMAGES_SEPARATOR = ';';
+    public const GALLERY_IMAGES_SEPARATOR = ';';
 
     /**
      * Base media folder path
      */
-    const BASE_MEDIA_PATH = 'magefan_blog';
+    public const BASE_MEDIA_PATH = 'magefan_blog';
 
     /**
      * Prefix of model events names
@@ -186,6 +186,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param array $data
      * @param \Magefan\Blog\Api\AuthorRepositoryInterface|null $authorRepository
      * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
+     * @param TimezoneInterface|null $timezone
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -306,6 +308,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -315,6 +318,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve model title
+     *
      * @param  boolean $plural
      * @return string
      */
@@ -325,7 +329,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Deprecated
+     *
      * Retrieve true if post is active
+     *
      * @return boolean [description]
      */
     public function isActive(): bool
@@ -335,6 +341,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve available post statuses
+     *
      * @return array
      */
     public function getAvailableStatuses(): array
@@ -344,7 +351,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Check if post identifier exist for specific store
-     * return post id if post exists
+     *
+     * Return post id if post exists
      *
      * @param string $identifier
      * @param int $storeId
@@ -357,6 +365,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post url path
+     *
      * @return string
      */
     public function getUrl()
@@ -366,6 +375,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post url
+     *
      * @return string
      */
     public function getPostUrl()
@@ -380,6 +390,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post canonical url
+     *
      * @return string
      */
     public function getCanonicalUrl()
@@ -389,6 +400,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve featured image url
+     *
      * @return string
      */
     public function getFeaturedImage()
@@ -407,6 +419,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve featured link image url
+     *
      * @return mixed
      */
     public function getFeaturedListImage()
@@ -448,6 +461,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve media gallery images url
+     *
      * @return string
      */
     public function getGalleryImages()
@@ -477,6 +491,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve first image url
+     *
      * @return string
      */
     public function getFirstImage()
@@ -516,6 +531,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve short filtered content
+     *
      * @param  mixed $len
      * @param  mixed $endCharacters
      * @return string
@@ -548,6 +564,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve short filtered content,escaping imgs
+     *
      * @param  mixed $len
      * @param  mixed $endCharacters
      * @return string
@@ -559,6 +576,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
     public function getMetaTitle(): string
@@ -573,6 +591,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
     public function getMetaDescription()
@@ -875,7 +894,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
                         $author = $_author;
                     }
-                } catch (NoSuchEntityException $e) {
+                } catch (NoSuchEntityException $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
 
                 }
             }
@@ -1005,10 +1024,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
+     *
      * @param null|array $fields
      * @return array
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {

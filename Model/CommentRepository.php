@@ -76,6 +76,8 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * Retrieves the comment factory instance.
+     *
      * @return CommentFactory
      */
     public function getFactory()
@@ -84,6 +86,8 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * Save a comment entity.
+     *
      * @param Comment $comment
      * @return bool|Comment|mixed
      * @throws CouldNotSaveException
@@ -112,9 +116,11 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
-     * @param $commentId
+     * Retrieve a comment by its ID.
+     *
+     * @param int|string $commentId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
      * @return Comment|mixed
      * @throws NoSuchEntityException
@@ -130,6 +136,8 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * Delete a comment.
+     *
      * @param Comment $comment
      * @return bool|mixed
      * @throws CouldNotDeleteException
@@ -150,7 +158,9 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
-     * @param int $commentId
+     * Deletes a comment by its ID.
+     *
+     * @param int|string $commentId
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
@@ -162,7 +172,7 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {

@@ -30,7 +30,7 @@ class SetDesignVersion implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(): void
     {

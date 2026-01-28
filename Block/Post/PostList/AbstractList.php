@@ -178,6 +178,7 @@ abstract class AbstractList extends Template implements IdentityInterface
         $identities = [];
         $identities[] = \Magefan\Blog\Model\Post::CACHE_TAG . '_' . 0;
         foreach ($this->getPostCollection() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

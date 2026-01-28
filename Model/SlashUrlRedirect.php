@@ -51,6 +51,8 @@ class SlashUrlRedirect
     }
 
     /**
+     * Executes observer to handle URL modifications and redirections
+     *
      * @param \Magento\Framework\Event\Observer $observer
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */

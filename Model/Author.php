@@ -74,6 +74,8 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int $storeId
      * @return bool
      */
     public function isVisibleOnStore($storeId): bool
@@ -83,6 +85,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author name (used in identifier generation)
+     *
      * @return string | null
      */
     public function getTitle(): string
@@ -92,6 +95,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
     public function getMetaTitle(): string
@@ -106,6 +110,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
     public function getMetaDescription(): string
@@ -133,6 +138,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author identifier
+     *
      * @return string | null
      */
     public function getIdentifier(): ?string
@@ -146,7 +152,8 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Check if author identifier exist
-     * return author id if author exists
+     *
+     * Return author id if author exists
      *
      * @param string $identifier
      * @return int
@@ -165,6 +172,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author url route path
+     *
      * @return string
      */
     public function getUrl()
@@ -174,6 +182,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author url
+     *
      * @return string
      */
     public function getAuthorUrl()
@@ -193,9 +202,11 @@ class Author extends AbstractModel implements AuthorInterface
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
+     *
      * @return array
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData()
     {
@@ -226,6 +237,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -235,6 +247,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve true if author is active
+     *
      * @return boolean
      */
     public function isActive()
@@ -243,6 +256,8 @@ class Author extends AbstractModel implements AuthorInterface
     }
 
     /**
+     * Retrieve the short content extractor instance
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()

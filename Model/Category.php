@@ -9,9 +9,15 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
+use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magefan\Blog\Model\Url;
+use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magefan\Blog\Api\ShortContentExtractorInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
 
 /**
  * Category model
@@ -39,13 +45,13 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * blog cache category
      */
-    const CACHE_TAG = 'mfb_c';
+    public const CACHE_TAG = 'mfb_c';
 
     /**
      * Category's Statuses
      */
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 0;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 0;
 
     /**
      * Prefix of model events names
@@ -91,12 +97,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * Initialize dependencies.
      *
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magefan\Blog\Model\Url $url
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param Context $context
+     * @param Registry $registry
+     * @param Url $url
+     * @param CollectionFactory $postCollectionFactory
+     * @param AbstractResource|null $resource
+     * @param AbstractDb|null $resourceCollection
      * @param array $data
+     * @throws LocalizedException
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -145,7 +153,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param integer $modelId
      * @param null|string $field
      * @return $this
+     * @throws LocalizedException
      * @deprecated
+     * @see load()
      */
     public function load($modelId, $field = null)
     {
@@ -159,8 +169,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Load category by id
-     * @param  int $categoryId
+     *
+     * @param int $categoryId
      * @return self
+     * @throws LocalizedException
      */
     private function loadFromRepository($categoryId)
     {
@@ -176,6 +188,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -185,6 +198,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve model title
+     *
      * @param  boolean $plural
      * @return string
      */
@@ -195,7 +209,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Deprecated
+     *
      * Retrieve true if category is active
+     *
      * @return boolean [description]
      */
     public function isActive(): bool
@@ -205,6 +221,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve available category statuses
+     *
      * @return array
      */
     public function getAvailableStatuses(): array
@@ -214,11 +231,13 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Check if category identifier exist for specific store
-     * return category id if category exists
+     *
+     * Return category id if category exists
      *
      * @param string $identifier
      * @param int $storeId
      * @return int
+     * @throws LocalizedException
      */
     public function checkIdentifier($identifier, $storeId)
     {
@@ -227,6 +246,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve parent category ids
+     *
      * @return array
      */
     public function getParentIds()
@@ -244,6 +264,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve parent category id
+     *
      * @return array
      */
     public function getParentId()
@@ -258,7 +279,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve parent category
-     * @return self || false
+     *
+     * @return self|false
      */
     public function getParentCategory()
     {
@@ -280,6 +302,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Check if current category is parent category
+     *
      * @param  self  $category
      * @return boolean
      */
@@ -294,7 +317,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve children category ids
-     * @param  bool  $grandchildren
+     *
+     * @param bool $grandchildren
      * @return array
      */
     public function getChildrenIds($grandchildren = true)
@@ -325,7 +349,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Check if current category is child category
-     * @param  self  $category
+     *
+     * @param mixed $category
      * @return boolean
      */
     public function isChild($category): bool
@@ -335,6 +360,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve category depth level
+     *
      * @return int
      */
     public function getLevel(): int
@@ -344,6 +370,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve catgegory url route path
+     *
      * @return string
      */
     public function getUrl()
@@ -353,6 +380,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve category url
+     *
      * @return string
      */
     public function getCategoryUrl()
@@ -367,6 +395,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve catgegory canonical url
+     *
      * @return string
      */
     public function getCanonicalUrl()
@@ -376,6 +405,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
     public function getMetaTitle(): string
@@ -390,6 +420,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
     public function getMetaDescription(): string
@@ -417,6 +448,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int|null $storeId
      * @return bool
      */
     public function isVisibleOnStore($storeId): bool
@@ -447,9 +480,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Prepare all additional data
-     * @param  string $format
-     * @return self
+     *
+     * @return $this
      * @deprecated replaced with getDynamicData
+     * @see getDynamicData()
      */
     public function initDinamicData()
     {
@@ -472,10 +506,12 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
+     *
      * @param null|array $fields
      * @return array
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData()
      */
     public function getDynamicData($fields = null)
     {
@@ -550,6 +586,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Duplicate category and return new object
+     *
      * @return self
      */
     public function duplicate()
@@ -565,6 +602,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * Retrieves the short content extractor instance, initializing it if not already set.
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()
@@ -578,7 +617,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
-     * @return array|mixed|null
+     * Retrieves the image URL of the category if available, or false otherwise.
+     *
+     * @return string|false
      */
     public function getCategoryImage()
     {

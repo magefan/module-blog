@@ -38,7 +38,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(): void
     {
@@ -54,7 +54,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getDependencies()
     {
@@ -62,7 +62,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAliases()
     {
@@ -70,7 +70,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getVersion()
     {

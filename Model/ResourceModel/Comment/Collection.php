@@ -26,6 +26,7 @@ class Collection extends AbstractCollection
 
     /**
      * Constructor
+     *
      * Configures collection
      *
      * @return void
@@ -38,6 +39,7 @@ class Collection extends AbstractCollection
 
     /**
      * Add is_active filter to collection
+     *
      * @return $this
      */
     public function addActiveFilter()
@@ -78,7 +80,7 @@ class Collection extends AbstractCollection
     /**
      * Add store filter to collection
      *
-     * @param array|int|\Magento\Store\Model\Store  $store
+     * @param array|int|\Magento\Store\Model\Store $store
      * @param boolean $withAdmin
      * @return $this
      */

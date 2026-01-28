@@ -136,6 +136,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 
         $identities = [];
         foreach ($this->getItems() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

@@ -166,8 +166,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Check if tag identifier exist for specific store
-     * return tag id if tag exists
+     * Check if tag identifier exist for specific store return tag id if tag exists
      *
      * @param string $identifier
      * @param array|int $storeIds
@@ -293,6 +292,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             foreach ($insert as $id) {
                 $id = (int)$id;
+                // phpcs:ignore Magento2.Performance.ForeachArrayMerge
                 $data[] = array_merge(
                     ['tag_id' => (int)$object->getId(), $field => $id],
                     (isset($rowData[$id]) && is_array($rowData[$id])) ? $rowData[$id] : []
@@ -343,6 +343,8 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Retrieve the type of the entity
+     *
      * @return string
      */
     public function getEntityType(): string

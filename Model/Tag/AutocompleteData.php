@@ -23,7 +23,8 @@ class AutocompleteData
 
     /**
      * Post constructor.
-     * @param BlogFactory $blogFactory
+     *
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         CollectionFactory $collectionFactory
@@ -32,7 +33,9 @@ class AutocompleteData
     }
 
     /**
-     * @param $search
+     * Get items by search term
+     *
+     * @param string $search
      * @return array
      */
     public function getItems(string $search): array

@@ -92,7 +92,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
                         ->get($this->modelRepository['instance'])
                         ->getbyId($id);
                 }
-            } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+            } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
 
             }
         }

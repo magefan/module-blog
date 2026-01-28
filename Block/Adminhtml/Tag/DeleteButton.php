@@ -9,12 +9,16 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Tag;
 
+use Magento\Tests\NamingConvention\true\mixed;
+
 /**
  * Class Delete Button Block
  */
 class DeleteButton extends \Magefan\Community\Block\Adminhtml\Edit\DeleteButton
 {
     /**
+     * Retrieves button data if the user is authorized to delete tags.
+     *
      * @return array|string
      */
     public function getButtonData()

@@ -191,6 +191,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     {
         $identities = [];
         foreach ($this->getCommentsCollection() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 
