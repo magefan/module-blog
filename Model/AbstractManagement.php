@@ -21,8 +21,14 @@ abstract class AbstractManagement implements ManagementInterface
      */
     protected $_itemFactory;
 
+    /**
+     * @var string
+     */
     protected $_imagePath = 'magefan_blog/';
 
+    /**
+     * @var string[]
+     */
     protected $_imagesMap = [
         'featured_img',
         'featured_list_img',
@@ -39,17 +45,18 @@ abstract class AbstractManagement implements ManagementInterface
      */
     public function saveFile($fileName, $fileContent)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $objectManager = $this->getObjectManager();
 
         $file = $objectManager->get(\Magento\Framework\Filesystem\Driver\File::class);
         $directoryList = $objectManager->get(\Magento\Framework\Filesystem\DirectoryList::class);
 
-        $targetDirectory = $directoryList->getPath(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA) . '/' . $this->_imagePath;
+        $targetDirectory = $directoryList->getPath(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
+            . '/' . $this->_imagePath;
         $file->createDirectory($targetDirectory);
 
         $finalFileName = $this->getUniqueFileName($targetDirectory, $fileName, $file);
         $finalFilePath = $targetDirectory . $finalFileName;
-
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction
         $file->filePutContents($finalFilePath, base64_decode($fileContent));
 
         return $this->_imagePath . $finalFileName;
@@ -58,15 +65,17 @@ abstract class AbstractManagement implements ManagementInterface
     /**
      * Generates a unique file name if the file already exists.
      *
-     * @param $directory
-     * @param $fileName
-     * @param $fileDriver
+     * @param string $directory
+     * @param string $fileName
+     * @param \Magento\Framework\Filesystem\Driver\File $fileDriver
      * @return string
      */
     protected function getUniqueFileName(string $directory, $fileName, $fileDriver)
     {
+        // phpcs:disable Magento2.Functions.DiscouragedFunction
         $name = pathinfo($fileName, PATHINFO_FILENAME);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        // phpcs:enable
         $counter = 1;
 
         $newFileName = $fileName;
@@ -223,13 +232,17 @@ abstract class AbstractManagement implements ManagementInterface
     }
 
     /**
-     * @param $item
+     * Get dynamic data for item
+     *
+     * @param mixed $item
      * @return mixed
      */
     abstract protected function getDynamicData($item);
 
     /**
-     * @param $massage
+     * Error response
+     *
+     * @param string $massage
      * @return false|string
      */
     public function getError($massage)
@@ -242,7 +255,8 @@ abstract class AbstractManagement implements ManagementInterface
     }
 
     /**
-     * if request url contain store code - get store id
+     * If request url contain store code - get store id
+     *
      * @return int
      */
     private function getStoreIdFromRestRequest(): int

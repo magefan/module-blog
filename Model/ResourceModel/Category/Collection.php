@@ -15,17 +15,17 @@ namespace Magefan\Blog\Model\ResourceModel\Category;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
-     * @inheritDoc
-     */
+     * @var string
+     * */
     protected $_eventPrefix = 'mfblog_category_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventObject = 'blog_category_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_idFieldName = 'category_id';
 
@@ -68,6 +68,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Constructor
+     *
      * Configures collection
      *
      * @return void
@@ -107,6 +108,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add search filter to collection
+     *
      * @param string $term
      * @return $this
      */
@@ -117,7 +119,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add store filter to collection
-     * @param array|int|\Magento\Store\Model\Store  $store
+     *
+     * @param mixed $store
      * @param boolean $withAdmin
      * @return $this
      */
@@ -169,6 +172,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add enable filter to collection
+     *
      * @return $this
      */
     public function addActiveFilter()
@@ -234,6 +238,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Retrieve gruped category childs
+     *
      * @return array
      */
     public function getGroupedChilds(): array
@@ -249,6 +254,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Retrieve tree ordered categories
+     *
      * @return array
      */
     public function getTreeOrderedArray()
@@ -262,7 +268,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Auxiliary function to build tree ordered array
-     * @return array
+     *
+     * @param int $itemId
+     * @param array $childs
+     * @param array $tree
+     * @return void
      */
     protected function _toTree($itemId, $childs, &$tree)
     {
@@ -278,6 +288,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Retrieve the store ID
+     *
      * @return int
      */
     public function getStoreId():int

@@ -31,16 +31,16 @@ class CommentManagement extends AbstractManagement
         $this->_itemFactory = $commentFactory;
     }
 
-     /**
-      * Retrieve list of tag by page type, term, store, etc
-      *
-      * @param  string $type
-      * @param  string $postId
-      * @param  int $storeId
-      * @param  int $page
-      * @param  int $limit
-      * @return string
-      */
+    /**
+     * Retrieve list of tag by page type, term, store, etc
+     *
+     * @param string $type
+     * @param mixed $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
     public function getList($type, $term, $storeId, $page, $limit)
     {
         try {
@@ -77,6 +77,12 @@ class CommentManagement extends AbstractManagement
         }
     }
 
+    /**
+     * Retrieves dynamic data from the given item, including nested replies.
+     *
+     * @param object $item
+     * @return array
+     */
     public function getDynamicData($item)
     {
         $data = $item->getData();

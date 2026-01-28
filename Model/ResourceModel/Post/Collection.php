@@ -9,23 +9,33 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Model\ResourceModel\Post;
 
+use Magefan\Blog\Api\CategoryRepositoryInterface;
+use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
+use Magento\Framework\Data\Collection\EntityFactory;
+use Magento\Framework\DB\Adapter\AdapterInterface;
+use Magento\Framework\Event\ManagerInterface;
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Stdlib\DateTime\DateTime;
+use Magento\Store\Model\StoreManagerInterface;
+use Psr\Log\LoggerInterface;
+
 /**
  * Blog post collection
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_idFieldName = 'post_id';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventPrefix = 'mfblog_post_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventObject = 'blog_post_collection';
 
@@ -65,15 +75,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_previewFlag;
 
     /**
-     * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
-     * @param \Magento\Framework\Event\ManagerInterface $eventManager
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param null $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null $resource
-     * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
+     * @param EntityFactory $entityFactory
+     * @param LoggerInterface $logger
+     * @param FetchStrategyInterface $fetchStrategy
+     * @param ManagerInterface $eventManager
+     * @param DateTime $date
+     * @param StoreManagerInterface $storeManager
+     * @param AdapterInterface|null $connection
+     * @param AbstractDb|null $resource
+     * @param CategoryRepositoryInterface|null $categoryRepository
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactory             $entityFactory,
@@ -97,6 +107,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Constructor
+     *
      * Configures collection
      *
      * @return void
@@ -166,6 +177,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add store filter to collection
+     *
      * @param array|int|\Magento\Store\Model\Store $store
      * @param boolean $withAdmin
      * @return $this
@@ -210,7 +222,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $store[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
             }
 
-
             $this->addFilter('store', ['in' => $store], 'public');
 
         }
@@ -219,6 +230,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add "include in recent" filter to collection
+     *
      * @return $this
      */
     public function addRecentFilter()
@@ -228,6 +240,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add posts filter to collection
+     *
      * @param array|int|string $category
      * @return $this
      */
@@ -255,6 +268,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add category filter to collection
+     *
      * @param array|int|\Magefan\Blog\Model\Category $category
      * @return $this
      */
@@ -347,6 +361,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add archive filter to collection
+     *
      * @param int $year
      * @param int $month
      * @return $this
@@ -364,6 +379,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add search filter to collection
+     *
      * @param string $term
      * @return $this
      */

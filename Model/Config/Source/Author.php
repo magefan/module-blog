@@ -29,7 +29,6 @@ class Author implements \Magento\Framework\Option\ArrayInterface
      * Initialize dependencies.
      *
      * @param \Magefan\Blog\Api\AuthorCollectionInterfaceFactory $authorCollectionFactory
-     * @param void
      */
     public function __construct(
         \Magefan\Blog\Api\AuthorCollectionInterfaceFactory  $authorCollectionFactory

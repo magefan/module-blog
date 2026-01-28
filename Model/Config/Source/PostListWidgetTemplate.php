@@ -13,9 +13,7 @@ namespace Magefan\Blog\Model\Config\Source;
 class PostListWidgetTemplate extends Template
 {
     /**
-     * {@inheritdoc}
-     *
-     * @codeCoverageIgnore
+     * @inheritdoc
      */
     public function toOptionArray():array
     {

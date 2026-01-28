@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
+use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
+
 /**
  * Used in recent post widget
  *
@@ -28,8 +30,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
     /**
      * Initialize dependencies.
      *
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $authorCollectionFactory
-     * @param void
+     * @param CollectionFactory $categoryCollectionFactory
      */
     public function __construct(
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
@@ -78,6 +79,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
 
     /**
      * Generate spaces
+     *
      * @param  int $n
      * @return string
      */

@@ -17,17 +17,17 @@ class PostsSortBy implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const int
      */
-    const PUBLISH_DATE = 0;
+    public const PUBLISH_DATE = 0;
 
     /**
      * @const int
      */
-    const POSITION = 1;
+    public const POSITION = 1;
 
     /**
      * @const int
      */
-    const TITLE = 2;
+    public const TITLE = 2;
 
     /**
      * Options int

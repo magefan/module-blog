@@ -17,7 +17,6 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Initialize resource model
-     * Get tablename from config
      *
      * @return void
      */
@@ -171,7 +170,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * return tag id if tag exists
      *
      * @param string $identifier
-     * @param int|array $storeId
+     * @param array|int $storeIds
      * @return false|string
      */
     public function checkIdentifier($identifier, $storeIds)
@@ -181,9 +180,9 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Magento\Framework\DB\Select::COLUMNS)->columns(['cp.tag_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
-
-
+        $select->reset(\Magento\Framework\DB\Select::COLUMNS)
+            ->columns(['cp.tag_id', 'cp.identifier'])
+            ->order('cps.store_id DESC')->limit(1);
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['tag_id']) && isset($row['identifier'])
@@ -195,12 +194,10 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Check if tag identifier exist for specific store
-     * return tag id if tag exists
+     * Check if tag identifier exist for specific store return tag id if tag exists
      *
      * @param string $identifier
-     * @param int $storeId
-     * @return int
+     * @param array $storeIds
      */
     protected function _getLoadByIdentifierSelect($identifier, $storeIds)
     {
@@ -234,6 +231,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Get ids to which specified item is assigned
+     *
      * @param  int $tagId
      * @param  string $tableName
      * @param  string $field
@@ -255,12 +253,13 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Update tag connections
-     * @param  \Magento\Framework\Model\AbstractModel $object
-     * @param  Array $newRelatedIds
-     * @param  Array $oldRelatedIds
-     * @param  String $tableName
-     * @param  String  $field
-     * @param  Array  $rowData
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @param array $newRelatedIds
+     * @param array $oldRelatedIds
+     * @param string $tableName
+     * @param string $field
+     * @param array $rowData
      * @return void
      */
     protected function _updateLinks(
@@ -322,6 +321,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Get rows to which specified item is assigned
+     *
      * @param  int $tagId
      * @param  string $tableName
      * @param  string $field

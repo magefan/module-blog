@@ -18,22 +18,22 @@ class ReadingProgressBarPosition implements \Magento\Framework\Option\ArrayInter
     /**
      * @const string
      */
-    const TOP = 'top';
+    private const TOP = 'top';
 
     /**
      * @const string
      */
-    const BOTTOM = 'bottom';
+    private const BOTTOM = 'bottom';
 
     /**
      * @const string
      */
-    const LEFT = 'left';
+    private const LEFT = 'left';
 
     /**
      * @const string
      */
-    const RIGHT = 'right';
+    private const RIGHT = 'right';
 
     /**
      * Options getter

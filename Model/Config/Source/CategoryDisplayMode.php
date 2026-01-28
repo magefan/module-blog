@@ -17,22 +17,22 @@ class CategoryDisplayMode implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const int
      */
-    const POSTS = 0;
+    public const POSTS = 0;
 
     /**
      * @const int
      */
-    const POST_LINKS = 1;
+    public const POST_LINKS = 1;
 
     /**
      * @const int
      */
-    const SUBCATEGORIES_LINKS = 2;
+    public const SUBCATEGORIES_LINKS = 2;
 
     /**
      * @const int
      */
-    const POSTS_AND_SUBCATEGORIES_LINKS = 3;
+    public const POSTS_AND_SUBCATEGORIES_LINKS = 3;
 
     /**
      * Options int

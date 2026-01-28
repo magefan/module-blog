@@ -18,17 +18,17 @@ class AuthorType implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const string
      */
-    const GUEST = 0;
+    public const GUEST = 0;
 
     /**
      * @const string
      */
-    const CUSTOMER = 1;
+    public const CUSTOMER = 1;
 
     /**
      * @const string
      */
-    const ADMIN = 2;
+    public const ADMIN = 2;
 
     /**
      * Options getter

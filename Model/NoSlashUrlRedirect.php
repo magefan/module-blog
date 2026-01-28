@@ -51,8 +51,10 @@ class NoSlashUrlRedirect
     }
 
     /**
+     * Handles the event to redirect URLs without a trailing slash.
+     *
      * @param \Magento\Framework\Event\Observer $observer
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return void
      */
     public function execute(\Magento\Framework\Event\Observer $observer): void
     {

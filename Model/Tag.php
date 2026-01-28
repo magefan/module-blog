@@ -26,12 +26,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     /**
      * Tag Status
      */
-    const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED = 1;
 
     /**
      * blog cache tag
      */
-    const CACHE_TAG = 'mfb_t';
+    private const CACHE_TAG = 'mfb_t';
 
     /**
      * Prefix of model events names
@@ -99,6 +99,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve true if tag is active
+     *
      * @return boolean
      */
     public function isActive(): bool
@@ -108,6 +109,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param mixed $storeId
      * @return bool
      */
     public function isVisibleOnStore($storeId): bool
@@ -118,7 +121,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve model title
-     * @param  boolean $plural
+     *
+     * @param bool $plural
      * @return string
      */
     public function getOwnTitle($plural = false): string
@@ -128,7 +132,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Check if tag identifier exist for specific store
-     * return tag id if tag exists
+     *
+     * Return tag id if tag exists
      *
      * @param string $identifier
      * @param int $storeId
@@ -141,6 +146,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve catgegory url route path
+     *
      * @return string
      */
     public function getUrl()
@@ -150,6 +156,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve tag url
+     *
      * @return string
      */
     public function getTagUrl()
@@ -165,6 +172,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
     public function getMetaTitle(): string
@@ -179,6 +187,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
     public function getMetaDescription(): string
@@ -226,6 +235,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -234,8 +244,10 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Return all additional data
+     *
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      * @return array
      */
     public function getDynamicData()
@@ -261,6 +273,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
+     * Retrieve short content extractor instance
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()
@@ -274,7 +288,9 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
-     * @return array|mixed|null
+     * Retrieve tag image URL
+     *
+     * @return string|false
      */
     public function getTagImage()
     {

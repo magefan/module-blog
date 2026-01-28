@@ -16,7 +16,10 @@ namespace Magefan\Blog\Model\Config\Source;
 class CategoryPath extends CategoryTree
 {
     /**
-     * @return array<'label'|'value', ''|int>[]|array<'label'|'optgroup'|'value', mixed>[]
+     * Retrieve a list of options based on a given item ID.
+     *
+     * @param int $itemId
+     * @return array
      */
     protected function _getOptions($itemId = 0): array
     {
