@@ -18,6 +18,7 @@ class Info extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
 {
     /**
      * Return extension url
+     *
      * @return string
      */
     protected function getModuleUrl(): string
@@ -27,6 +28,7 @@ class Info extends \Magefan\Community\Block\Adminhtml\System\Config\Form\Info
 
     /**
      * Return extension title
+     *
      * @return string
      */
     protected function getModuleTitle(): string

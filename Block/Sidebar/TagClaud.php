@@ -125,7 +125,8 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     /**
      * Retrieve tag class
      *
-     * @return array
+     * @param mixed $tag
+     * @return string
      */
     public function getTagClass($tag): string
     {

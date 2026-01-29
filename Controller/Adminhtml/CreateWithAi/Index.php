@@ -20,7 +20,8 @@ class Index extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magefan_Blog::post_save';
+    public const ADMIN_RESOURCE = 'Magefan_Blog::post_save';
+
     /**
      * @var string
      */

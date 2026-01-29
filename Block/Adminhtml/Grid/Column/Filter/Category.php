@@ -36,6 +36,8 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Filter\Select
     }
 
     /**
+     * Retrieve an array of options for categories.
+     *
      * @return array
      */
     protected function _getOptions()

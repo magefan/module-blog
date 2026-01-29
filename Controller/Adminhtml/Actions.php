@@ -16,7 +16,8 @@ abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 {
     /**
      * Prepare images before object save
-     * @param $model
+     *
+     * @param \Magento\Framework\DataObject $model
      * @param array $fields
      */
     protected function prepareImagesBeforeSave($model, array $fields)
@@ -37,7 +38,12 @@ abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 
                         $model->setData($key, $image);
                     } else {
-                        if (isset($data[$key][0]['url']) && (false !== strpos($data[$key][0]['url'], '/media/') || false !== strpos($data[$key][0]['url'], '/.renditions/'))) {
+                        if (isset($data[$key][0]['url'])
+                            && (
+                                false !== strpos($data[$key][0]['url'], '/media/')
+                                || false !== strpos($data[$key][0]['url'], '/.renditions/')
+                            )
+                        ) {
                             $url = $data[$key][0]['url'];
 
                             /**

@@ -103,6 +103,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
                 $result['images'][] = [
                     'value_id' => $image->getFile(),
                     'file' => $image->getFile(),
+                    // phpcs:ignore Magento2.Functions.DiscouragedFunction
                     'label' => basename($image->getFile() ?: ''),
                     'position' => $position,
                     'url' => $image->getUrl(),

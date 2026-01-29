@@ -78,6 +78,8 @@ class Featured extends AbstractList implements \Magento\Widget\Block\BlockInterf
     }
 
     /**
+     * Retrieve template file path
+     *
      * @return string
      */
     public function getTemplate()

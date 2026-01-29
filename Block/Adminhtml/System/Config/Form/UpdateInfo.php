@@ -74,7 +74,9 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     }
 
     /**
-     * @return mixed
+     * Retrieve the current module version.
+     *
+     * @return string|null
      */
     public function getCurrentVersion()
     {
@@ -86,6 +88,8 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     }
 
     /**
+     * Retrieve the latest module version.
+     *
      * @return bool
      */
     public function getLatestVersion()
@@ -108,7 +112,7 @@ class UpdateInfo extends \Magento\Backend\Block\Template
             try {
                 $encodedData = $this->jsonHelper->jsonDecode($latestVersions);
                 if (!$encodedData) {
-                    throw new \Exception('Empty response');
+                    throw new \LocalizedException('Empty response');
                 }
                 $this->latestVersion = $encodedData[self::MODULE_NAME];
             } catch (\Exception $e) {
@@ -120,6 +124,8 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     }
 
     /**
+     * Check if need to update module
+     *
      * @return bool
      */
     public function needToUpdate(): bool

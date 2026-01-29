@@ -17,7 +17,7 @@ class Grid extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magento_Widget::widget_instance';
+    public const ADMIN_RESOURCE = 'Magento_Widget::widget_instance';
 
     /**
      * @var PageFactory
@@ -37,6 +37,8 @@ class Grid extends \Magento\Backend\App\Action
     }
 
     /**
+     * Execute view action
+     *
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page
      */
     public function execute()

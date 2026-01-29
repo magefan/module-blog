@@ -23,6 +23,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */

@@ -36,8 +36,7 @@ abstract class AbstractTag extends Template implements IdentityInterface
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
-
-     * @param \Magento\Framework\Registry $coreRegistry,
+     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
@@ -83,6 +82,11 @@ abstract class AbstractTag extends Template implements IdentityInterface
         return $tag->getData($key);
     }
 
+    /**
+     * Retrieve identities associated with the tag.
+     *
+     * @return array
+     */
     public function getIdentities()
     {
         return $this->getTag()->getIdentities();

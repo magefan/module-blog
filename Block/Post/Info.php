@@ -38,7 +38,6 @@ class Info extends \Magento\Framework\View\Element\Template
     /**
      * Retrieve 1 if display author information is enabled
      *
-     *
      * @return int
      */
     public function authorEnabled(): int

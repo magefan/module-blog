@@ -37,6 +37,8 @@ class Author extends \Magento\Backend\Block\Widget\Grid\Column\Filter\Select
     }
 
     /**
+     * Retrieve an array of options for authors.
+     *
      * @return array
      */
     protected function _getOptions()

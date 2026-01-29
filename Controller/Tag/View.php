@@ -18,8 +18,6 @@ use Magento\Store\Model\ScopeInterface;
 class View extends \Magefan\Blog\App\Action\Action
 {
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     private $_storeManager;
@@ -29,6 +27,10 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected $url;
 
+    /**
+     * @param Context $context
+     * @param \Magefan\Blog\Model\Url|null $url
+     */
     public function __construct(
         Context $context,
         ?\Magefan\Blog\Model\Url $url = null
@@ -89,6 +91,8 @@ class View extends \Magefan\Blog\App\Action\Action
     }
 
     /**
+     * Get store manager instance
+     *
      * @return \Magento\Store\Model\StoreManagerInterface|mixed
      */
     private function getStoreManager()

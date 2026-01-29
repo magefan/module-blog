@@ -16,8 +16,6 @@ class View extends \Magefan\Blog\App\Action\Action
 {
 
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;

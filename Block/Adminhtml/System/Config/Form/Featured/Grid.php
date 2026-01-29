@@ -48,7 +48,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @return FeaturedWidgetChooser
+     * Prepare collection
+     *
+     * @return Grid
      */
     protected function _prepareCollection() : Grid
     {
@@ -58,6 +60,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Row Init JS Callback
+     *
      * @return string
      */
     public function getRowInitCallback() : string
@@ -78,6 +82,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Get post ids from config
+     *
      * @return string
      */
     public function getPostIdsFromConfig(): string
@@ -89,6 +95,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Row Click JS Callback
+     *
      * @return string
      */
     public function getRowClickCallback(): string
@@ -210,7 +218,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param  $column
+     * Add column filter to collection
+     *
+     * @param \Magento\Framework\Data\Collection\AbstractDb $column
      * @return $this
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -234,7 +244,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @return FeaturedWidgetChooser
+     * Prepare columns
+     *
+     * @return Grid
      * @throws \Exception
      */
     protected function _prepareColumns() : Grid
@@ -272,8 +284,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         return parent::_prepareColumns();
     }
 
-
-
     /**
      * Get grid url
      *
@@ -285,6 +295,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Get selected posts
+     *
      * @return array
      */
     protected function _getSelectedPosts() : array

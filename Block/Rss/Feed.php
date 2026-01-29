@@ -16,10 +16,10 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Feed extends \Magefan\Blog\Block\Post\PostList\AbstractList
 {
-    /*
+    /**
      * Collection page size
      */
-    const PAGE_SIZE = 10;
+    public const PAGE_SIZE = 10;
 
     /**
      * Retrieve rss feed url

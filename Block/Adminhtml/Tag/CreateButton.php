@@ -15,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Tag;
 class CreateButton extends \Magefan\Community\Block\Adminhtml\Edit\SaveButton
 {
     /**
+     * Retrieves button data if the user is authorized to create tags.
+     *
      * @return array|string
      */
     public function getButtonData()

@@ -17,8 +17,6 @@ use Magefan\Blog\Controller\Adminhtml\Upload\Image\Action;
 class Gallery extends Action
 {
     /**
-     * File key
-     *
      * @var string
      */
     protected $_fileKey = 'image';

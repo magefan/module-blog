@@ -17,8 +17,6 @@ use Magefan\Blog\Controller\Adminhtml\Upload\Image\Action;
 class OgImg extends Action
 {
     /**
-     * File key
-     *
      * @var string
      */
     protected $_fileKey = 'og_img';

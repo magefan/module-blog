@@ -101,6 +101,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Prepare collection
+     *
      * @return Grid
      */
     protected function _prepareCollection() : Grid

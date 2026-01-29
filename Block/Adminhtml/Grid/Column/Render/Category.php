@@ -26,7 +26,7 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstra
 
     /**
      * @param \Magento\Backend\Block\Context $context
-     * @param \Magefan\Blog\Model\CategoryFactory $localeLists
+     * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param array $data
      */
     public function __construct(

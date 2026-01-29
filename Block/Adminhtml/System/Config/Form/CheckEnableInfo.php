@@ -47,7 +47,6 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
      * CheckEnableInfo constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magefan\Blog\Model\Config $config
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
      * @param \Magento\Framework\App\ProductMetadataInterface $metadata
      * @param array $data

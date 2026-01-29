@@ -32,6 +32,8 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Container
     }
 
     /**
+     * Prepares the layout and adds an import button to the toolbar
+     *
      * @return $this
      */
     protected function _prepareLayout()

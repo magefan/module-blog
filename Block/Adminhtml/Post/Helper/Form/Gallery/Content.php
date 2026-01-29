@@ -39,7 +39,7 @@ class Content extends \Magento\Backend\Block\Widget
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
      * @param array $data
-     * @param null $imageUploadConfigDataProvider
+     * @param \Magento\Backend\Block\DataProviders\ImageUploadConfig|null $imageUploadConfigDataProvider
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,

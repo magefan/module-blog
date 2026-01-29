@@ -16,6 +16,8 @@ class Viewscount extends View
 {
 
     /**
+     * Execute action
+     *
      * @return $this|\Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */

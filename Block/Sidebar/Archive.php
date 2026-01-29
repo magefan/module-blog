@@ -40,10 +40,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
             'DESC'
         );
     }
-    /**
-     * Retrieve available months
-     * @return array
-     */
+
     /**
      * Retrieve available months
      *
@@ -70,13 +67,8 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve year by time
-     * @param  int $time
-     * @return string
-     */
-    /**
-     * Retrieve year by time
      *
-     * @param $time
+     * @param int $time
      * @return string
      */
     public function getYear($time): string
@@ -86,13 +78,8 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve month by time
-     * @param  int $time
-     * @return string
-     */
-    /**
-     * Retrieve month by time
      *
-     * @param $time
+     * @param int $time
      * @return \Magento\Framework\Phrase
      */
     public function getMonth($time)
@@ -125,6 +112,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
      * Retrieve empty identities
      *
      * Fix for varnish error Error 503 Service Unavailable, when have many blog posts
+     *
      * @return array
      */
     public function getIdentities(): array
@@ -133,13 +121,9 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * @param $time
-     * @return string
-     */
-    /**
      * Retrieve translated date
      *
-     * @param $time
+     * @param int $time
      * @return false|string
      */
     public function getTranslatedDate($time)
@@ -157,9 +141,6 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
         return \Magefan\Blog\Helper\Data::getTranslatedDate($format, $time);
     }
 
-    /**
-     * @return mixed
-     */
     /**
      * Retrieve configuration value for archive group_by setting
      *

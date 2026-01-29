@@ -38,6 +38,7 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
 
     /**
      * Add rel prev and rel next
+     *
      * @param \Magento\Framework\Event\Observer $observer
      * @return $this|void
      */

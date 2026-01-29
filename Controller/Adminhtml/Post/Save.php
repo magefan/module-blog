@@ -23,6 +23,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
     /**
      * Before model save
+     *
      * @param  \Magefan\Blog\Model\Post $model
      * @param  \Magento\Framework\App\Request\Http $request
      * @return void
@@ -136,6 +137,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */

@@ -10,7 +10,11 @@ declare(strict_types=1);
 namespace Magefan\Blog\Block\Sidebar;
 
 use \Magento\Catalog\Block\Product\AbstractProduct;
+use Magento\Catalog\Block\Product\Context;
+use Magento\Catalog\Model\Product\Visibility;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use \Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Module\Manager;
 
 class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 {
@@ -27,8 +31,6 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
     protected $_itemCollection;
 
     /**
-     * Catalog product visibility
-     *
      * @var \Magento\Catalog\Model\Product\Visibility
      */
     protected $_catalogProductVisibility;
@@ -40,10 +42,11 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Related products block construct
-     * @param \Magento\Catalog\Block\Product\Context $context
-     * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility
-     * @param \Magento\Framework\Module\Manager $moduleManager
-     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $data
+     * @param Context $context
+     * @param Visibility $catalogProductVisibility
+     * @param Manager $moduleManager
+     * @param CollectionFactory $productCollectionFactory
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,

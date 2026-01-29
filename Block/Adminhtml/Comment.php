@@ -29,6 +29,8 @@ class Comment extends \Magento\Backend\Block\Widget\Grid\Container
     }
 
     /**
+     * Prepare layout
+     *
      * @return $this
      */
     protected function _prepareLayout()

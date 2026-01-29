@@ -83,7 +83,8 @@ trait Widget
 
         /* Add Customer Group */
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $result['customer_group_id'] = $objectManager->get(\Magento\Customer\Model\Session::class)->getCustomerGroupId();
+        $result['customer_group_id'] = $objectManager->get(\Magento\Customer\Model\Session::class)
+            ->getCustomerGroupId();
         return $result;
     }
 }

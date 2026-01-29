@@ -27,6 +27,8 @@ class Image extends AbstractRenderer
     }
 
     /**
+     * Render image grid column
+     *
      * @param DataObject $row
      * @return string
      */
