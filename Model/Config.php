@@ -88,6 +88,11 @@ class Config
     const XML_PATH_ADVANCED_PERMALINK_ENABLED = 'mfblog/advanced_permalink/enabled';
 
     /**
+     * Enabled RSS Feed
+     */
+    const XML_PATH_RSS_FEED_ENABLED = 'mfblog/sidebar/rss_feed/enabled';
+
+    /**
      * Top menu include categories config path
      */
     const XML_PATH_TOP_MENU_INCLUDE_CATEGORIES = 'mfblog/top_menu/include_categories';
@@ -332,6 +337,18 @@ class Config
     {
         return (string)$this->getConfig(
             self::XML_PATH_BLOG_DESIGN_VERSION,
+            $storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return string
+     */
+    public function isRssFeedEnabled($storeId = null): string
+    {
+        return (string)$this->getConfig(
+            self::XML_PATH_RSS_FEED_ENABLED,
             $storeId
         );
     }

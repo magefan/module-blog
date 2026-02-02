@@ -9,11 +9,24 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Rss;
 
+use Magefan\Blog\Model\Config;
+use Magento\Framework\App\Action\Context;
+
 /**
  * Blog rss feed view
  */
 class Feed extends \Magefan\Blog\App\Action\Action
 {
+    private Config $config;
+
+    public function __construct(
+        Config $config,
+        Context $context
+    ) {
+        $this->config = $config;
+        parent::__construct($context);
+    }
+
     /**
      * View blog rss feed action
      *
@@ -21,7 +34,7 @@ class Feed extends \Magefan\Blog\App\Action\Action
      */
     public function execute()
     {
-        if (!$this->moduleEnabled()) {
+        if (!$this->moduleEnabled() || !$this->config->isRssFeedEnabled()) {
             return $this->_forwardNoroute();
         }
 
