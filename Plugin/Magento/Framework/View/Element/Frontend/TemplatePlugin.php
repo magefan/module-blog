@@ -103,6 +103,16 @@ class TemplatePlugin
             return $overriddenTemplate ?: $template;
         }
 
+        // Fix bug where some blog templates are overridden in theme
+        // and already contain the suffix "-modern" in the file name
+        if ($designVersion === DesignVersion::MODERN) {
+            $modernTemplate = str_replace('.phtml', '-modern.phtml', $template);
+
+            if (isset(self::OLD_TO_NEW_TEMPLATES_MAP[$modernTemplate])) {
+                $template = $modernTemplate;
+            }
+        }
+
         // for cases when template set in cms block/page via widget
         // and there is no custom overrides for that template in current theme
         if (isset(self::OLD_TO_NEW_TEMPLATES_MAP[$template])) {
