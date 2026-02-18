@@ -663,9 +663,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                     $item->setStoreId($this->_storeId);
                 }
 
-                if ($this->category) {
-                    $item->setData('parent_category', $this->category);
-                }
             }
 
             $map = [
