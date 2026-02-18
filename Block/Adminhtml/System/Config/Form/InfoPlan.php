@@ -43,7 +43,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
 
         if ($text = $this->getText()) {
             $textHtml = '<div style="padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;">';
-            $textHtml .= $text . ' <a style="color: #ef672f; text-decoration: underline;" href="https://magefan.com/magento2-blog-extension/pricing?utm_source=blog_config&utm_medium=link&utm_campaign=regular" target="_blank">Read more</a>.';
+            $textHtml .= $text . ' <a style="color: #ef672f; text-decoration: underline;" href="https://magefan.com/magento2-blog-extension/pricing?utm_source=admin&utm_medium=config&utm_campaign=upgrade-link" target="_blank">Read more</a>.';
             $textHtml .= '</div>';
         }
 
