@@ -658,11 +658,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 }
             }
 
-            foreach ($this as $item) {
-                if ($this->_storeId) {
+            if ($this->_storeId) {
+                foreach ($this as $item) {
                     $item->setStoreId($this->_storeId);
                 }
-
             }
 
             $map = [
@@ -688,6 +687,22 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         if (isset($data[$postId])) {
                             $item->setData($property, $data[$postId]);
                         }
+                    }
+                }
+            }
+
+            if ($this->category) {
+                foreach ($this as $item) {
+                    $addParentCategory = false;
+                    /* It can be that filter is by parent category and not actualy assigned */
+                    foreach ($item->getParentCategories() as $category) {
+                        if ($category->getId() == $this->category->getId()) {
+                            $addParentCategory = true;
+                            break;
+                        }
+                    }
+                    if ($addParentCategory) {
+                        $item->setData('parent_category', $this->category);
                     }
                 }
             }
