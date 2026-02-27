@@ -28,7 +28,7 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
 
     $width = (int)$block->getBackgroundImageWidth() ?: 1920;
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
-    $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType() ?: $block->getPostTemplateType());
+    $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType() ?: (string)$block->getPostTemplateType());
 
     $style = null;
 
