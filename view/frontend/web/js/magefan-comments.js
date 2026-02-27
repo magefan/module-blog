@@ -67,6 +67,7 @@
                 }
             }).catch(function (error) {
                 console.warn(error);
+                $form.querySelector('[type=submit]').removeAttribute('disabled');
             });
 
             return false;
