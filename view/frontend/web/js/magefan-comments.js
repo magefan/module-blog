@@ -16,6 +16,7 @@
 
     var processError = function ($form, msg) {
         $form.querySelector('[type=submit]').removeAttribute('disabled');
+        resetRecaptcha();
         var $h = getMessageHtml(msg, 'error');
         $form.insertBefore($h, $form.children[0]);
         setTimeout(function () {
@@ -68,6 +69,7 @@
             }).catch(function (error) {
                 console.warn(error);
                 $form.querySelector('[type=submit]').removeAttribute('disabled');
+                resetRecaptcha();
             });
 
             return false;
@@ -110,6 +112,20 @@
             }
         };
         tick();
+    }
+
+    function resetRecaptcha() {
+        if (typeof window.grecaptcha === 'undefined') {
+            return;
+        }
+        window.grecaptcha.ready(function () {
+            try {
+                window.grecaptcha.reset();
+                window.grecaptcha.execute(); // for invisible reCAPTCHA.
+            } catch (e) {
+                console.warn('reCAPTCHA reset failed:', e);
+            }
+        });
     }
 
     $hd.querySelector('form textarea').addEventListener('click', function (event) {
