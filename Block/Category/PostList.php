@@ -211,7 +211,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getPostTemplateType(): string
     {
-        $template = (string)$this->getCategory()->getData('posts_list_template');
+        $template = $this->getCategory()
+            ? (string)$this->getCategory()->getData('posts_list_template')
+            : '';
+
         if ($template) {
             return $template;
         }
