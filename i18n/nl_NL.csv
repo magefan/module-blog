@@ -39,7 +39,7 @@ Blog,Blog
 "Use Facebook Comments","Gebruik Facebook Comments"
 "Use Disqus Comments","Gebruik Disqus Comments"
 "Use Google Comments","Gebruik Google Comments"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Uitgelichte Blogberichten"
 "Yes (With auto trigger)","Ja (Met auto trigger)"
 "Yes (Without auto trigger)","Ja (Zonder auto trigger)"
 "Parameter %1 is required","Parameter %1 is verplicht"
@@ -57,7 +57,7 @@ Categories:,Categorieën:
 Tags:,Tags:
 Author:,Auteur:
 "We can't find posts matching the selection.","We kunnen geen berichten vinden die overeen komen met deze selectie."
-"Read more","Read more"
+"Read more","Lees meer"
 "Read more &#187;","Lees meer &#187;"
 "See more","Bekijk meer"
 "Read %1","Lees %1"
@@ -72,7 +72,7 @@ Archive,Archief
 "RSS Feed","RSS Feed"
 "Search posts here...","Zoek Bericht Hier…"
 Tags,Tags
-"Read more >","Read more >"
+"Read more >","Lees meer >"
 "MageFan Extensions","MageFan Extensions"
 "Blog Information","Blog Informatie"
 "Blog Index Page","Blog Index Pagina"
@@ -178,126 +178,126 @@ Published,Gepubliceerd
 "Oct","Okt"
 "Nov","Nov"
 "Dec","Dec"
-"Reply","Reply"
-"Show more replies in this thread","Show more replies in this thread"
-"%1 Comment(s)","%1 Comment(s)"
-"Add a comment...","Add a comment..."
-"Add a reply...","Add a reply..."
-"Sign in to add a comment...","Sign in to add a comment..."
-"Sign in to add a reply...","Sign in to add a reply..."
-"Full Name","Full Name"
-"Load more comments","Load more comments"
-"Login to submit comment","Login to submit comment"
-"You cannot post comment. Blog post is not longer exist.","You cannot post comment. Blog post is not longer exist."
-"You cannot reply to this comment. Comment is not longer exist.","You cannot reply to this comment. Comment is not longer exist."
-"You cannot reply to this comment.","You cannot reply to this comment."
-"You submitted your comment for moderation.","You submitted your comment for moderation."
-"Thank you for your comment.","Thank you for your comment."
-"Import Categories","Import Categories"
-"Import Comments","Import Comments"
-"Import Posts","Import Posts"
-"Import from aheadWorks Blog Extension","Import from aheadWorks Blog Extension"
-"Import from Joomla","Import from Joomla"
-"Import from Blogger.com","Import from Blogger.com"
-"Import from Drupal","Import from Drupal"
-"Import from CSV","Import from CSV"
-"Import from XML","Import from XML"
-"Yes, I have read the %1 and agree to the processing of my personal data.","Yes, I have read the %1 and agree to the processing of my personal data."
-"privacy policy","privacy policy"
-Add New Comment,Add New Comment
-Add New Images,Add New Images
-Add New Tag,Add New Tag
-Add to Cart,Add to Cart
-Add to Compare,Add to Compare
-Add to Wish List,Add to Wish List
-Add With AI,Add With AI
+"Reply","Beantwoorden"
+"Show more replies in this thread","Toon meer antwoorden in deze thread"
+"%1 Comment(s)","%1 Reactie(s)"
+"Add a comment...","Voeg een reactie toe..."
+"Add a reply...","Voeg een antwoord toe..."
+"Sign in to add a comment...","Log in om een reactie toe te voegen..."
+"Sign in to add a reply...","Log in om een antwoord toe te voegen..."
+"Full Name","Volledige Naam"
+"Load more comments","Meer reacties laden"
+"Login to submit comment","Log in om een reactie te plaatsen"
+"You cannot post comment. Blog post is not longer exist.","Je kunt geen reactie plaatsen. Dit blogbericht bestaat niet meer."
+"You cannot reply to this comment. Comment is not longer exist.","Je kunt niet antwoorden op deze reactie. De reactie bestaat niet meer."
+"You cannot reply to this comment.","Je kunt niet antwoorden op deze reactie."
+"You submitted your comment for moderation.","Je reactie is ingediend voor moderatie."
+"Thank you for your comment.","Bedankt voor je reactie."
+"Import Categories","Categorieën Importeren"
+"Import Comments","Reacties Importeren"
+"Import Posts","Berichten Importeren"
+"Import from aheadWorks Blog Extension","Importeren vanuit aheadWorks Blog Extensie"
+"Import from Joomla","Importeren vanuit Joomla"
+"Import from Blogger.com","Importeren vanuit Blogger.com"
+"Import from Drupal","Importeren vanuit Drupal"
+"Import from CSV","Importeren vanuit CSV"
+"Import from XML","Importeren vanuit XML"
+"Yes, I have read the %1 and agree to the processing of my personal data.","Ja, ik heb %1 gelezen en ga akkoord met de verwerking van mijn persoonsgegevens."
+"privacy policy","privacybeleid"
+Add New Comment,Nieuwe Reactie Toevoegen
+Add New Images,Nieuwe Afbeeldingen Toevoegen
+Add New Tag,Nieuwe Tag Toevoegen
+Add to Cart,Toevoegen aan Winkelwagen
+Add to Compare,Toevoegen aan Vergelijking
+Add to Wish List,Toevoegen aan Verlanglijst
+Add With AI,Toevoegen met AI
 Admin,Admin
-AI Writer is not enabled. Please enable it first.,AI Writer is not enabled. Please enable it first.
-All Authors,All Authors
-All Blog Pages,All Blog Pages
-All Categories,All Categories
-and,and
-Approved,Approved
-Archive %1,Archive %1
-Blank (Use widgets to build the page content),Blank (Use widgets to build the page content)
-Blog Archive Page,Blog Archive Page
-Blog Author Page,Blog Author Page
-Blog Category Page,Blog Category Page
-Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Blog Plus <b>Advanced Permalink Settings</b> are enabled.
-Blog Post Page,Blog Post Page
-Blog Tag Page,Blog Tag Page
-Bottom (Horizontal),Bottom (Horizontal)
-Browse to find or drag image here,Browse to find or drag image here
-Cancel,Cancel
-Categories,Categories
-Category,Category
-"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API Key is missing in ""AI Writer"" configurations."
-Comments:,Comments:
-Customer,Customer
-Database connection error,Database connection error
+AI Writer is not enabled. Please enable it first.,AI Writer is niet ingeschakeld. Schakel het eerst in.
+All Authors,Alle Auteurs
+All Blog Pages,Alle Blogpagina's
+All Categories,Alle Categorieën
+and,en
+Approved,Goedgekeurd
+Archive %1,Archief %1
+Blank (Use widgets to build the page content),Leeg (Gebruik widgets om de pagina-inhoud op te bouwen)
+Blog Archive Page,Blog Archiefpagina
+Blog Author Page,Blog Auteurspagina
+Blog Category Page,Blog Categoriepagina
+Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Blog Plus <b>Geavanceerde Permalink Instellingen</b> zijn ingeschakeld.
+Blog Post Page,Blog Berichtpagina
+Blog Tag Page,Blog Tagpagina
+Bottom (Horizontal),Onder (Horizontaal)
+Browse to find or drag image here,Blader om te zoeken of sleep afbeelding hier
+Cancel,Annuleren
+Categories,Categorieën
+Category,Categorie
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API-sleutel ontbreekt in ""AI Writer"" configuraties."
+Comments:,Reacties:
+Customer,Klant
+Database connection error,Databaseverbindingsfout
 Default: mystore.com/{blog_route}/{post_route}/post-title/,Default: mystore.com/{blog_route}/{post_route}/post-title/
-Delete image,Delete image
-Disabled,Disabled
-Duplicated,Duplicated
+Delete image,Afbeelding verwijderen
+Disabled,Uitgeschakeld
+Duplicated,Gedupliceerd
 Email,Email
-Enabled,Enabled
-General Information,General Information
-Go to Home Page,Go to Home Page
-Grid - 1 column (Blog Extra),Grid - 1 column (Blog Extra)
-Grid - 2 columns (Blog Extra),Grid - 2 columns (Blog Extra)
-Grid - 3 columns (Blog Extra),Grid - 3 columns (Blog Extra)
-Grid and List (Blog Extra),Grid and List (Blog Extra)
-Guest,Guest
-Hidden,Hidden
-Home,Home
-"Images (.gif, .jpg, .png)","Images (.gif, .jpg, .png)"
-Import Tags,Import Tags
-In stock,In stock
-Leave a review about the blog extension,Leave a review about the blog extension
-Left (Vertical),Left (Vertical)
-List (Blog Extra),List (Blog Extra)
-min read,min read
-Month And Year,Month And Year
-Need a new blog feature?,Need a new blog feature?
-No,No
-Not Approved,Not Approved
-Other Grids (Blog Extra),Other Grids (Blog Extra)
-Out of stock,Out of stock
-Page,Page
+Enabled,Ingeschakeld
+General Information,Algemene Informatie
+Go to Home Page,Ga naar Startpagina
+Grid - 1 column (Blog Extra),Raster - 1 kolom (Blog Extra)
+Grid - 2 columns (Blog Extra),Raster - 2 kolommen (Blog Extra)
+Grid - 3 columns (Blog Extra),Raster - 3 kolommen (Blog Extra)
+Grid and List (Blog Extra),Raster en Lijst (Blog Extra)
+Guest,Gast
+Hidden,Verborgen
+Home,Startpagina
+"Images (.gif, .jpg, .png)","Afbeeldingen (.gif, .jpg, .png)"
+Import Tags,Tags Importeren
+In stock,Op voorraad
+Leave a review about the blog extension,Laat een beoordeling achter over de blogextensie
+Left (Vertical),Links (Verticaal)
+List (Blog Extra),Lijst (Blog Extra)
+min read,min lezen
+Month And Year,Maand en Jaar
+Need a new blog feature?,Heb je een nieuwe blogfunctie nodig?
+No,Nee
+Not Approved,Niet Goedgekeurd
+Other Grids (Blog Extra),Andere Rasters (Blog Extra)
+Out of stock,Niet op voorraad
+Page,Pagina
 /page/N,/page/N
 ?page=N,?page=N
-Pending,Pending
-Please enter valid email,Please enter valid email
-Please select post IDs,Please select post IDs
+Pending,In behandeling
+Please enter valid email,Voer een geldig e-mailadres in
+Please select post IDs,Selecteer bericht-ID's
 ?p=N,?p=N
-Position,Position
-Post Id,Post Id
-Posts (default),Posts (default)
-Posts Links,Posts Links
-Posts loader,Posts loader
-Posts & Subcategories Links,Posts & Subcategories Links
-Publish Date (default),Publish Date (default)
-Requested item doesn't exist,Requested item doesn't exist
-Right (Vertical),Right (Vertical)
-Search,Search
-Select Post IDs ...,Select Post IDs ...
-Share on %1,Share on %1
+Position,Positie
+Post Id,Bericht-ID
+Posts (default),Berichten (standaard)
+Posts Links,Berichtenlinks
+Posts loader,Berichtenlader
+Posts & Subcategories Links,Berichten & Subcategorieënlinks
+Publish Date (default),Publicatiedatum (standaard)
+Requested item doesn't exist,Het gevraagde item bestaat niet
+Right (Vertical),Rechts (Verticaal)
+Search,Zoeken
+Select Post IDs ...,Selecteer Bericht-ID's ...
+Share on %1,Delen op %1
 Short: mystore.com/{blog_route}/post-title/,Short: mystore.com/{blog_route}/post-title/
-Sign In,Sign In
+Sign In,Inloggen
 Slider (Blog Extra),Slider (Blog Extra)
-Something went wrong %1,Something went wrong %1
-Something went wrong while saving the file(s).,Something went wrong while saving the file(s).
-Subcategories Links,Subcategories Links
-Submit,Submit
+Something went wrong %1,Er is iets misgegaan %1
+Something went wrong while saving the file(s).,Er is iets misgegaan bij het opslaan van het/de bestand(en).
+Subcategories Links,Subcategorieënlinks
+Submit,Verzenden
 Tag,Tag
-This option is available in <strong>%1</strong> plan only.,This option is available in <strong>%1</strong> plan only.
-This option is available in <strong>Plus or Extra</strong> plans only.,This option is available in <strong>Plus or Extra</strong> plans only.
-Title,Title
-Top (Horizontal),Top (Horizontal)
-Unable to remove item,Unable to remove item
-Unable to save item,Unable to save item
-URL key is already in use by another blog item.,URL key is already in use by another blog item.
-URL key is already in use by another tag item.,URL key is already in use by another tag item.
-Use Magefan Blog Comments,Use Magefan Blog Comments
-Views:,Views:
-Year,Year
+This option is available in <strong>%1</strong> plan only.,Deze optie is alleen beschikbaar in het <strong>%1</strong> plan.
+This option is available in <strong>Plus or Extra</strong> plans only.,Deze optie is alleen beschikbaar in de <strong>Plus of Extra</strong> plannen.
+Title,Titel
+Top (Horizontal),Boven (Horizontaal)
+Unable to remove item,Item kan niet worden verwijderd
+Unable to save item,Item kan niet worden opgeslagen
+URL key is already in use by another blog item.,URL-sleutel is al in gebruik door een ander blogitem.
+URL key is already in use by another tag item.,URL-sleutel is al in gebruik door een ander tagitem.
+Use Magefan Blog Comments,Gebruik Magefan Blog Reacties
+Views:,Weergaven:
+Year,Jaar
