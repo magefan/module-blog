@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Controller;
 
 use Magefan\Blog\Model\Url;
-use \Magefan\Blog\Api\UrlResolverInterface;
+use Magefan\Blog\Api\UrlResolverInterface;
 use Magefan\Blog\Model\Config;
 use Magefan\Blog\Model\PostFactory;
 use Magefan\Blog\Model\CategoryFactory;
