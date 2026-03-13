@@ -342,7 +342,9 @@ class Config
     }
 
     /**
-     * @param $storeId
+     * Check if RSS feed is enabled
+     *
+     * @param int|null $storeId
      * @return string
      */
     public function isRssFeedEnabled($storeId = null): string

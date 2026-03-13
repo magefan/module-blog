@@ -17,8 +17,15 @@ use Magento\Framework\App\Action\Context;
  */
 class Feed extends \Magefan\Blog\App\Action\Action
 {
-    private Config $config;
+    /**
+     * @var Config
+     */
+    private  $config;
 
+    /**
+     * @param Config $config
+     * @param Context $context
+     */
     public function __construct(
         Config $config,
         Context $context
@@ -28,9 +35,9 @@ class Feed extends \Magefan\Blog\App\Action\Action
     }
 
     /**
-     * View blog rss feed action
+     * Executes the RSS feed generation process if the module and RSS feed are enabled.
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {
