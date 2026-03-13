@@ -14,7 +14,7 @@ use Magefan\Blog\Model\Config;
 use Magefan\Blog\Model\PostFactory;
 use Magefan\Blog\Model\CategoryFactory;
 use Magefan\Blog\Model\TagFactory;
-use Magefan\Blog\Model\AuthorFactory;
+use Magefan\Blog\Api\AuthorInterfaceFactory as AuthorFactory;
 
 /**
  * Class Blog Router
