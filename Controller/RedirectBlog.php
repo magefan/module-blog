@@ -191,9 +191,9 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
                 case Url::CONTROLLER_CATEGORY:
                 case Url::CONTROLLER_TAG:
                 case Url::CONTROLLER_AUTHOR:
+                    $redirectId = $blogPage['id'];
                     $entityType = ucfirst($blogPage['type']);
-
-                    $entity = $this->createBlogEntity($blogPage['type'])->load($blogPage['id']);
+                    $entity = $this->createBlogEntity($blogPage['type'])->setStoreId($storeId)->load($redirectId);
                     if ($entity->isVisibleOnStore($_originStoreId)) {
                         if ($entity->isVisibleOnStore($storeId)) {
                             $getEntityUrl = 'get' . $entityType . 'Url';
