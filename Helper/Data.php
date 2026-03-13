@@ -37,10 +37,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $format = str_replace($from, $to, $format);
         }
 
-        $date = date($format, $time);
+        $date = date($format, (int)$time);
 
         foreach ($month as $to => $from) {
-            $date = str_replace($from, (string)__(date($to, $time)), $date);
+            $date = str_replace($from, (string)__(date($to, (int)$time)), $date);
         }
 
         return $date;

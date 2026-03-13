@@ -207,7 +207,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         array $data = [],
         ?\Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
         ?\Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
-        ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
+        ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null,
+        ?\Magefan\Blog\Api\ShortContentExtractorInterface $shortContentExtractor = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -230,6 +231,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         );
         $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magento\Framework\Stdlib\DateTime\TimezoneInterface::class
+        );
+        $this->shortContentExtractor = $shortContentExtractor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\ShortContentExtractorInterface::class
         );
     }
 
@@ -1204,11 +1208,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getShortContentExtractor()
     {
-        if (null === $this->shortContentExtractor) {
-            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
-                ->get(ShortContentExtractorInterface::class);
-        }
-
         return $this->shortContentExtractor;
     }
 
