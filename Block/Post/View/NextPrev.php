@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View;
 
+use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -24,8 +27,6 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     protected $_prevPost;
 
     /**
-     * Next post
-     *
      * @var \Magefan\Blog\Model\Post
      */
     protected $_nextPost;
@@ -48,11 +49,11 @@ class NextPrev extends \Magento\Framework\View\Element\Template
     /**
      * Construct
      *
-     * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $_tagCollectionFactory
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @param Context $context
+     * @param CollectionFactory $postCollectionFactory
+     * @param Registry $coreRegistry
      * @param array $data
-     * @param null $templatePool
+     * @param mixed $templatePool
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -86,6 +87,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve prev post
+     *
      * @return \Magefan\Blog\Model\Post || bool
      */
     public function getPrevPost()
@@ -135,6 +137,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve next post
+     *
      * @return \Magefan\Blog\Model\Post || bool
      */
     public function getNextPost()
@@ -183,6 +186,7 @@ class NextPrev extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve post collection with frontend filters and order
+     *
      * @return bool
      */
     protected function _getFrontendCollection()

@@ -90,6 +90,7 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
 
         $baseImageAbsolutePath = $mediaPath . $baseImagePath;
         $i = 1;
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction
         while (file_exists($baseImageAbsolutePath)) {
             $i++;
             $p = mb_strrpos($originalImageName, '.');

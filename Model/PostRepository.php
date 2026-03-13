@@ -76,6 +76,8 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
+     * Retrieve the post factory instance.
+     *
      * @return PostFactory
      */
     public function getFactory()
@@ -84,6 +86,8 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
+     * Save the provided post.
+     *
      * @param Post $post
      * @return bool|mixed
      * @throws CouldNotSaveException
@@ -112,12 +116,14 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
-     * @param $postId
+     * Retrieve post by its ID.
+     *
+     * @param int|string $postId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
-     * @return mixed
-     * @throws NoSuchEntityException
+     * @return \Magefan\Blog\Model\Post
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($postId, $editMode = false, $storeId = null, $forceReload = false)
     {
@@ -136,6 +142,8 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
+     * Delete a post.
+     *
      * @param Post $post
      * @return bool|mixed
      * @throws CouldNotDeleteException
@@ -156,11 +164,10 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
-     * @param $postId
-     * @return bool|mixed
-     * @throws CouldNotDeleteException
-     * @throws NoSuchEntityException
-     * @throws StateException
+     * Deletes an entity by its ID.
+     *
+     * @param int|string $postId
+     * @return bool
      */
     public function deleteById($postId): bool
     {
@@ -168,7 +175,7 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {

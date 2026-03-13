@@ -16,6 +16,7 @@ trait Widget
 {
     /**
      * Retrieve block sort order
+     *
      * @return int
      */
     public function getSortOrder(): int
@@ -41,7 +42,9 @@ trait Widget
     }
 
     /**
-     * @param $param
+     * Retrieve config value
+     *
+     * @param string $param
      * @return mixed
      */
     protected function getConfigValue(string $param)
@@ -80,7 +83,8 @@ trait Widget
 
         /* Add Customer Group */
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $result['customer_group_id'] = $objectManager->get(\Magento\Customer\Model\Session::class)->getCustomerGroupId();
+        $result['customer_group_id'] = $objectManager->get(\Magento\Customer\Model\Session::class)
+            ->getCustomerGroupId();
         return $result;
     }
 }

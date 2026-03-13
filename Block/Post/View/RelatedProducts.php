@@ -9,7 +9,12 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View;
 
+use Magefan\Blog\Model\TemplatePool;
+use Magento\Catalog\Block\Product\Context;
+use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Framework\Module\Manager;
 use Magento\Framework\View\Element\AbstractBlock;
 use \Magento\Catalog\Block\Product\AbstractProduct;
 use \Magento\Framework\DataObject\IdentityInterface;
@@ -25,8 +30,6 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     protected $_itemCollection;
 
     /**
-     * Catalog product visibility
-     *
      * @var \Magento\Catalog\Model\Product\Visibility
      */
     protected $_catalogProductVisibility;
@@ -43,11 +46,12 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Related products block construct
-     * @param \Magento\Catalog\Block\Product\Context $context
-     * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility
-     * @param \Magento\Framework\Module\Manager $moduleManager
-     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $data
-     * @param \Magefan\Blog\Model\TemplatePool $templatePool
+     * @param Context $context
+     * @param Visibility $catalogProductVisibility
+     * @param Manager $moduleManager
+     * @param CollectionFactory $productCollectionFactory
+     * @param TemplatePool $templatePool
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
@@ -65,6 +69,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Premare block data
+     *
      * @return $this
      */
     protected function _prepareCollection()
@@ -105,6 +110,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Retrieve true if Display Related Products enabled
+     *
      * @return boolean
      */
     public function displayProducts(): bool
@@ -116,7 +122,9 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
+     * Retrieve the collection of items.
+     *
+     * @return \Magento\Framework\Data\Collection|null
      */
     public function getItems()
     {
@@ -151,6 +159,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     {
         $identities = [];
         foreach ($this->getItems() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 
@@ -173,6 +182,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Synonim to getItems. Added to support different templates
+     *
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     public function getAllItems()
@@ -182,6 +192,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Synonim to getItems. Added to support different templates
+     *
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     public function getItemCollection()
@@ -190,6 +201,8 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
+     * Check if there are items
+     *
      * @return int
      */
     public function hasItems(): int
@@ -198,6 +211,8 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
+     * Checks if the data is marked as shuffled.
+     *
      * @return bool
      */
     public function isShuffled()
@@ -209,6 +224,8 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
+     * Determines whether items can be added to the cart.
+     *
      * @return bool
      */
     public function canItemsAddToCart()
@@ -221,6 +238,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
     /**
      * Return blog html
+     *
      * @return bool
      */
     protected function _toHtml()

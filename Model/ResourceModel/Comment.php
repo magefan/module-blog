@@ -37,6 +37,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Initialize resource model
+     *
      * Get tablename from config
      *
      * @return void
@@ -103,6 +104,12 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $result;
     }
 
+    /**
+     * Update the comments count for a specific blog post
+     *
+     * @param int $postId
+     * @return void
+     */
     public function updatePostCommentsCount($postId): void
     {
         $connection = $this->getConnection();

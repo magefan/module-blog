@@ -46,9 +46,8 @@ class Post extends \Magefan\Blog\App\Action\Action
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
-     * @param\Magefan\Blog\Model\PostFactory $postFactory,
+     * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -148,20 +147,23 @@ class Post extends \Magefan\Blog\App\Action\Action
         try {
             $post = $this->initPost();
             if (!$post) {
-                throw new \Exception(__('You cannot post comment. Blog post is not longer exist.'), 1);
+                throw new \LocalizedException(__('You cannot post comment. Blog post is not longer exist.'), 1);
             }
 
             if ($request->getParam('parent_id')) {
                 $parentComment = $this->initParentComment();
                 if (!$parentComment) {
-                    throw new \Exception(__('You cannot reply to this comment. Comment is not longer exist.'), 1);
+                    throw new \LocalizedException(
+                        __('You cannot reply to this comment. Comment is not longer exist.'),
+                        1
+                    );
                 }
 
                 if (!$parentComment->getPost()
                     || $parentComment->getPost()->getId() != $post->getId()
                     || $parentComment->isReply()
                 ) {
-                    throw new \Exception(__('You cannot reply to this comment.'), 1);
+                    throw new \LocalizedException(__('You cannot reply to this comment.'), 1);
                 }
 
                 $comment->setParentId($parentComment->getId());

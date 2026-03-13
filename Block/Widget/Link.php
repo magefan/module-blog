@@ -34,7 +34,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
      * Link constructor.
      * @param \Magento\Framework\View\Element\Context $context
      * @param Url $blogUrl
-     * @param $modelRepository
+     * @param mixed $modelRepository
      * @param array $data
      */
     public function __construct(
@@ -49,6 +49,8 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
     }
 
     /**
+     * To html
+     *
      * @return string
      */
     protected function _toHtml()
@@ -73,11 +75,15 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
         if (!$href) {
             return $this->escapeHtml(__($title));
         } else {
-            return '<a href="' . $this->escapeUrl($href) . '" title="' . $this->escapeHtml(__($anchorText)) . '">' . $this->escapeHtml(__($title)) . '</a>';
+            return '<a href="' . $this->escapeUrl($href) . '" title="'
+                . $this->escapeHtml(__($anchorText)) . '">'
+                . $this->escapeHtml(__($title)) . '</a>';
         }
     }
 
     /**
+     * Get model
+     *
      * @return mixed
      */
     private function getModel()
@@ -92,6 +98,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
                         ->get($this->modelRepository['instance'])
                         ->getbyId($id);
                 }
+            // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
             } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
 
             }

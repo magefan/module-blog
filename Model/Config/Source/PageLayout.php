@@ -17,7 +17,7 @@ class PageLayout implements OptionSourceInterface
     private $pageLayoutBuilder;
 
     /**
-     * @var
+     * @var array
      */
     protected $_options;
 

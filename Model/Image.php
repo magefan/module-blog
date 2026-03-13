@@ -20,25 +20,21 @@ use Magefan\Blog\Helper\Image as ImageHelper;
  */
 class Image extends \Magento\Framework\DataObject
 {
-
     /**
      * @var \Magefan\Blog\Model\Url
      */
     protected $url;
-
     /**
      * @var \Magefan\Blog\Helper\Image
+     */
+    /**
+     * @var ImageHelper
      */
     protected $imageHelper;
 
     /**
-     * Initialize dependencies.
-     *
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param ImageHelper $imageHelper
      * @param array $data
      */
     public function __construct(
@@ -52,8 +48,9 @@ class Image extends \Magento\Framework\DataObject
     }
 
     /**
-     * Retrieve image url
-     * @return string
+     * Get the media URL of the file
+     *
+     * @return string|null
      */
     public function getUrl()
     {
@@ -63,12 +60,18 @@ class Image extends \Magento\Framework\DataObject
 
         return null;
     }
-
     /**
      * Resize image
      * @param string $width
      * @param string|null $height
      * @return string
+     */
+    /**
+     * Resize the image to the specified dimensions
+     *
+     * @param string $width
+     * @param string|null $height
+     * @return mixed
      */
     public function resize(string $width, ?string $height = null)
     {
@@ -78,6 +81,11 @@ class Image extends \Magento\Framework\DataObject
 
     /**
      * Retrieve image url
+     * @return string
+     */
+    /**
+     * Converts the object to its string representation.
+     *
      * @return string
      */
     public function __toString(): string

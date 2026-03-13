@@ -16,7 +16,7 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class UrlResolver implements UrlResolverInterface
 {
-    const PERMALINK_POST_USE_CATEGORIES = 'mfblog/permalink/post_use_categories';
+    private const PERMALINK_POST_USE_CATEGORIES = 'mfblog/permalink/post_use_categories';
 
     /**
      * @var array;
@@ -94,10 +94,12 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
+     * Resolves the given path and identifies the corresponding resource type and ID.
+     *
      * @param string $path
      * @return array
      */
-    public function resolve($path)
+    public function resolve($path)// phpcs:ignore Generic.Metrics.NestingLevel
     {
         $identifier = trim($path, '/');
         $identifier = urldecode($identifier);
@@ -164,7 +166,7 @@ class UrlResolver implements UrlResolverInterface
                         && $first
                         && ($postId = $this->_getPostId($pathInfo[$i]))
                     ) {
-                        //we have postId
+                        ;//we have postId
                     } elseif ((!$controllerName || !$first || $controllerName == Url::CONTROLLER_CATEGORY)
                         && ($cid = $this->_getCategoryId($pathInfo[$i], $first))
                     ) {
@@ -217,7 +219,10 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
-     * @param $storeId
+     * Set the store ID
+     *
+     * @param mixed $storeId
+     * @return void
      */
     public function setStoreId($storeId): void
     {
@@ -225,7 +230,9 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
-     * @return mixed
+     * Retrieve the store ID
+     *
+     * @return int
      */
     public function getStoreId()
     {
@@ -234,7 +241,9 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve post id by identifier
-     * @param  string $identifier
+     *
+     * @param string $identifier
+     * @param bool $checkSufix
      * @return int
      */
     protected function _getPostId(string $identifier, $checkSufix = true)
@@ -249,7 +258,9 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve category id by identifier
-     * @param  string $identifier
+     *
+     * @param string $identifier
+     * @param bool $checkSufix
      * @return int
      */
     protected function _getCategoryId(string $identifier, $checkSufix = true)
@@ -264,6 +275,7 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve category id by identifier
+     *
      * @param string $identifier
      * @param bool $checkSufix
      * @return int
@@ -280,6 +292,7 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve tag id by identifier
+     *
      * @param string $identifier
      * @param bool $checkSufix
      * @return int
@@ -295,7 +308,9 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
-     * @param $factory
+     * Retrieve object id by identifier
+     *
+     * @param mixed $factory
      * @param string $controllerName
      * @param string $identifier
      * @param bool $checkSufix
@@ -326,6 +341,7 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Detect arcive identifier
+     *
      * @param  string  $identifier
      * @return boolean
      */

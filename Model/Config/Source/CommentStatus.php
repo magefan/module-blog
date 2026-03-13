@@ -17,17 +17,17 @@ class CommentStatus implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const string
      */
-    const PENDING = 0;
+    public const PENDING = 0;
 
     /**
      * @const int
      */
-    const APPROVED = 1;
+    public const APPROVED = 1;
 
     /**
      * @const int
      */
-    const NOT_APPROVED = 2;
+    public const NOT_APPROVED = 2;
 
     /**
      * Options int

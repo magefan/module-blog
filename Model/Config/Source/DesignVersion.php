@@ -14,9 +14,9 @@ namespace Magefan\Blog\Model\Config\Source;
  */
 class DesignVersion implements \Magento\Framework\Option\ArrayInterface
 {
-    const INITIAL = 'design_initial';
-    const MODERN = 'design_modern';
-    const VALOR = 'design_valor';
+    public const INITIAL = 'design_initial';
+    public const MODERN = 'design_modern';
+    public const VALOR = 'design_valor';
 
     /**
      * Options getter

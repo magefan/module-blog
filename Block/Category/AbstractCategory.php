@@ -33,8 +33,7 @@ abstract class AbstractCategory extends \Magento\Framework\View\Element\Template
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
-
-     * @param \Magento\Framework\Registry $coreRegistry,
+     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data

@@ -22,6 +22,8 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_widgetKey = 'popular_posts';
 
     /**
+     * Retrieve page size
+     *
      * @return int
      */
     public function getPageSize(): int
@@ -41,6 +43,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve true if display the post image is enabled in the config
+     *
      * @return bool
      */
     public function getDisplayImage(): bool

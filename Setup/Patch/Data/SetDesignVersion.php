@@ -30,7 +30,7 @@ class SetDesignVersion implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(): void
     {
@@ -57,6 +57,8 @@ class SetDesignVersion implements DataPatchInterface
     }
 
     /**
+     * Retrieve aliases
+     *
      * @return array
      */
     public function getAliases()
@@ -65,6 +67,8 @@ class SetDesignVersion implements DataPatchInterface
     }
 
     /**
+     * Retrieve the list of class dependencies
+     *
      * @return array
      */
     public static function getDependencies()

@@ -15,9 +15,9 @@ namespace Magefan\Blog\Model\Comment;
 class Notification
 {
      /**
-     * Check every 10 min
-     */
-    const TIMEOUT = 600;
+      * Check every 10 min
+      */
+    public const TIMEOUT = 600;
 
     /**
      * @var \Magento\Framework\Message\ManagerInterface
@@ -68,6 +68,7 @@ class Notification
 
     /**
      * Check if any pending blog comment exists
+     *
      * @return void
      */
     public function checkComments(): void

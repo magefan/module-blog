@@ -79,17 +79,23 @@ class LayoutLoadBeforeObserver implements ObserverInterface
             }
 
             if ($this->config->isBlogCssIncludeOnAll()
-                || $this->config->isBlogCssIncludeOnHome() && $this->request->getFullActionName() === 'cms_index_index'
-                || $this->config->isBlogCssIncludeOnProduct() && $this->request->getFullActionName() === 'catalog_product_view'
+                || ($this->config->isBlogCssIncludeOnHome()
+                    && $this->request->getFullActionName() === 'cms_index_index')
+                || ($this->config->isBlogCssIncludeOnProduct()
+                    && $this->request->getFullActionName() === 'catalog_product_view')
             ) {
                 $layout->getUpdate()->addHandle('blog_' . $dvPrefix . 'css');
             }
 
             if (!in_array($designVersion, [DesignVersion::INITIAL, DesignVersion::MODERN])) {
                 if ('blog' === $this->request->getModuleName()) {
-                    $layout->getUpdate()->addHandle(str_replace('blog_', 'blog_' . $dvPrefix, $this->request->getFullActionName()));
+                    $layout->getUpdate()->addHandle(
+                        str_replace('blog_', 'blog_' . $dvPrefix, $this->request->getFullActionName())
+                    );
                 } elseif ('catalog_product_view' === $this->request->getFullActionName()) {
-                    $layout->getUpdate()->addHandle(str_replace('catalog_', 'catalog_' . $dvPrefix, $this->request->getFullActionName()));
+                    $layout->getUpdate()->addHandle(
+                        str_replace('catalog_', 'catalog_' . $dvPrefix, $this->request->getFullActionName())
+                    );
                 }
             }
         }

@@ -52,6 +52,7 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve post ids string
+     *
      * @return string
      */
     protected function getPostIdsConfigValue(): string
@@ -64,6 +65,7 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve true if display the post image is enabled in the config
+     *
      * @return bool
      */
     public function getDisplayImage(): bool

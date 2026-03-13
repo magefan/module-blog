@@ -30,6 +30,8 @@ class TemplatePlugin
     }
 
     /**
+     * Remove Magefan conflicts messages from AminfoTab block
+     *
      * @param \Magento\Framework\View\Element\Template $subject
      * @param callable $proceed
      * @return string

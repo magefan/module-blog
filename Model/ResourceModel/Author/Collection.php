@@ -19,13 +19,12 @@ class Collection extends AbstractCollection implements AuthorCollectionInterface
 {
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_idFieldName = 'user_id';
-    
+
     /**
-     * Constructor
-     * Configures collection
+     * Initialize model and resource model.
      *
      * @return void
      */

@@ -22,6 +22,8 @@ class Facebook extends \Magefan\Blog\Block\Post\View\Comments
     protected $commetType = CommetType::FACEBOOK;
 
     /**
+     * Constructs and returns the URL for loading the Facebook SDK JavaScript.
+     *
      * @return string
      */
     public function getFbSdkJsUrl(): string

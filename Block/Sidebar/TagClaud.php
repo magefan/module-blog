@@ -21,10 +21,10 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     /**
      * Path to tag cloud 3D animation configuration
      */
-    const ANIMATED_ENABLED = 'animated';
-    const TEXT_HIGHLIGHT_COLOR = 'text_highlight_color';
-    const CLOUD_HEIGHT = 'cloud_height';
-    const TAG_COUNT = 'tag_count';
+    public const ANIMATED_ENABLED = 'animated';
+    public const TEXT_HIGHLIGHT_COLOR = 'text_highlight_color';
+    public const CLOUD_HEIGHT = 'cloud_height';
+    public const TAG_COUNT = 'tag_count';
 
     /**
      * @var string
@@ -50,7 +50,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $_tagCollectionFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
      * @param array $data
      */
     public function __construct(
@@ -64,6 +64,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve tags
+     *
      * @return array
      */
     public function getTags()
@@ -104,6 +105,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve max tag number
+     *
      * @return array
      */
     public function getMaxCount()
@@ -122,7 +124,9 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve tag class
-     * @return array
+     *
+     * @param mixed $tag
+     * @return string
      */
     public function getTagClass($tag): string
     {
@@ -145,6 +149,8 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Prepare layout
+     *
      * @return $this|\Magento\Framework\View\Element\Template
      */
     protected function _prepareLayout()
@@ -159,6 +165,8 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get animation config
+     *
      * @return false|string
      */
     public function getAnimationConfig()
@@ -186,6 +194,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Get cloud height
+     *
      * @return mixed
      */
     public function getCloudHeight()

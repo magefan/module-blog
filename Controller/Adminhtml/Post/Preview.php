@@ -14,12 +14,17 @@ namespace Magefan\Blog\Controller\Adminhtml\Post;
  */
 class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
 {
+    /**
+     * Execute action
+     *
+     * @return void
+     */
     public function execute(): void
     {
         try {
             $post = $this->_getModel();
             if (!$post->getId()) {
-                throw new \Exception("Item is not longer exist.", 1);
+                throw new \LocalizedException("Item is not longer exist.", 1);
             }
 
             $previewUrl = $this->_objectManager->get(\Magefan\Blog\Model\PreviewUrl::class);

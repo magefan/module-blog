@@ -19,14 +19,14 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
 {
     /**
      * Magefan Blog Plus Module
-     * @deprecated
+     * deprecated
      */
-    const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
+    public const MAGEFAN_BLOG_PLUS = 'Magefan_BlogPlus';
 
     /**
      * Extension key config path
      */
-    const XML_PATH_KEY = 'mfblog/general/key';
+    public const XML_PATH_KEY = 'mfblog/general/key';
 
     /**
      * @var \Magefan\Blog\Model\Config
@@ -47,7 +47,6 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
      * CheckEnableInfo constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magefan\Blog\Model\Config $config
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
      * @param \Magento\Framework\App\ProductMetadataInterface $metadata
      * @param array $data
@@ -66,6 +65,8 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     }
 
     /**
+     * Determines if the feature is enabled for any store within the system.
+     *
      * @return bool
      */
     public function isEnabled(): bool
@@ -89,6 +90,8 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     }
 
     /**
+     * Determines if the extension key is missing.
+     *
      * @return bool
      */
     public function isKeyMissing(): bool
@@ -99,6 +102,8 @@ class CheckEnableInfo extends \Magento\Backend\Block\Template
     }
 
     /**
+     * Determines if another blog modules are enabled.
+     *
      * @return array|bool
      */
     public function isAnotherBlogModulesEnabled()

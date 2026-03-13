@@ -46,6 +46,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve true if Display Related Posts enabled
+     *
      * @return boolean
      */
     public function displayPosts(): bool
@@ -73,6 +74,8 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Retrieve the title of the block if set, otherwise falls back to default
+     *
      * @return string
      */
     public function getBlockTitle()

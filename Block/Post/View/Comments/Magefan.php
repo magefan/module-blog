@@ -91,6 +91,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     /**
      * Retrieve comment html
      *
+     * @param \Magefan\Blog\Model\Comment $comment
      * @return string
      */
     public function getCommentHtml(\Magefan\Blog\Model\Comment $comment)
@@ -131,6 +132,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
 
     /**
      * Retrieve customer session
+     *
      * @return \Magento\Customer\Model\Session
      */
     public function getCustomerSession()
@@ -140,6 +142,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
 
     /**
      * Retrieve customer url model
+     *
      * @return \Magento\Customer\Model\Url
      */
     public function getCustomerUrl()
@@ -175,6 +178,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
 
     /**
      * Retrieve form url
+     *
      * @return string
      */
     public function getFormUrl()
@@ -191,6 +195,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     {
         $identities = [];
         foreach ($this->getCommentsCollection() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

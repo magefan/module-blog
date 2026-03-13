@@ -87,7 +87,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
         return ($displayMode == CategoryDisplayMode::POSTS);
     }
 
-    /*
+    /**
      * Render block HTML
      *
      * @return string
@@ -224,6 +224,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()

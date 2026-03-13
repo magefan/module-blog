@@ -139,6 +139,7 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
 
     /**
      * Retrieve 1 if display reading time is enabled
+     *
      * @return int
      */
     public function readingTimeEnabled(): int

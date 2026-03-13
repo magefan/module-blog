@@ -21,6 +21,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 
     /**
      * After model save
+     *
      * @param  \Magefan\Blog\Model\Category $model
      * @param  \Magento\Framework\App\Request\Http $request
      * @return void
@@ -35,6 +36,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
         );
     }
 
+    /**
+     * Before model save
+     *
+     * @param  \Magefan\Blog\Model\Category $model
+     * @param  \Magento\Framework\App\Request\Http $request
+     * @return void
+     */
     protected function _beforeSave($model, $request)
     {
         /* Prepare images */
@@ -43,6 +51,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */

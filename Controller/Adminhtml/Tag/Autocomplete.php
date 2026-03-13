@@ -15,6 +15,8 @@ use Magento\Framework\Controller\ResultFactory;
 class Autocomplete extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
     /**
+     * Execute action
+     *
      * @return \Magento\Framework\Controller\Result\Json
      */
     public function execute()

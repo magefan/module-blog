@@ -17,6 +17,11 @@ use Magento\Framework\View\Element\Template;
  */
 class Description extends Template
 {
+    /**
+     * Retrieves the description configuration value.
+     *
+     * @return string
+     */
     public function getDescription(): string
     {
         return (string)$this->_scopeConfig->getValue(

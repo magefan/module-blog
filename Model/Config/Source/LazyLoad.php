@@ -14,9 +14,9 @@ namespace Magefan\Blog\Model\Config\Source;
  */
 class LazyLoad implements \Magento\Framework\Option\ArrayInterface
 {
-    const DISABLED = 0;
-    const ENABLED_WITH_AUTO_TRIGER = 1;
-    const ENABLED_WITHOUT_AUTO_TRIGER = 2;
+    public const DISABLED = 0;
+    public const ENABLED_WITH_AUTO_TRIGER = 1;
+    public const ENABLED_WITHOUT_AUTO_TRIGER = 2;
 
     /**
      * Options getter

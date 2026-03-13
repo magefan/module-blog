@@ -15,8 +15,6 @@ namespace Magefan\Blog\Controller\Author;
 class View extends \Magefan\Blog\App\Action\Action
 {
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     private $_storeManager;
@@ -76,6 +74,8 @@ class View extends \Magefan\Blog\App\Action\Action
     }
 
     /**
+     * Get store manager instance
+     *
      * @return \Magento\Store\Model\StoreManagerInterface|mixed
      */
     private function getStoreManager()

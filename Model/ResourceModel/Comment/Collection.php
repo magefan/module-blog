@@ -15,7 +15,7 @@ class Collection extends AbstractCollection
 {
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_idFieldName = 'comment_id';
 
@@ -26,6 +26,7 @@ class Collection extends AbstractCollection
 
     /**
      * Constructor
+     *
      * Configures collection
      *
      * @return void
@@ -38,6 +39,7 @@ class Collection extends AbstractCollection
 
     /**
      * Add is_active filter to collection
+     *
      * @return $this
      */
     public function addActiveFilter()
@@ -77,7 +79,8 @@ class Collection extends AbstractCollection
 
     /**
      * Add store filter to collection
-     * @param array|int|\Magento\Store\Model\Store  $store
+     *
+     * @param array|int|\Magento\Store\Model\Store $store
      * @param boolean $withAdmin
      * @return $this
      */
@@ -114,7 +117,8 @@ class Collection extends AbstractCollection
 
     /**
      * Add post filter to collection
-     * @param array|int|string|\Magefan\Blog\Model\Post  $post
+     *
+     * @param array|int|string|\Magefan\Blog\Model\Post $post
      * @return $this
      */
     public function addPostFilter($post)

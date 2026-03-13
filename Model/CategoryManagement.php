@@ -77,7 +77,9 @@ class CategoryManagement extends AbstractManagement
     }
 
     /**
-     * @param $item
+     * Retrieve dynamic data for a given item.
+     *
+     * @param object $item
      * @return array
      */
     protected function getDynamicData($item)

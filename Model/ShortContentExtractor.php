@@ -43,6 +43,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
     /**
      * Retrieve short filtered content
+     *
      * @param string $content
      * @param mixed $len
      * @param mixed $endCharacters
@@ -67,7 +68,11 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
             if (!$htmlAllowed) {
                 foreach (['style', 'script'] as $tagToRemove) {
-                    $content = preg_replace("~\<" . $tagToRemove . "(.*)\>(.*)\<\/" . $tagToRemove . "\>~", '', $content);
+                    $content = preg_replace(
+                        "~\<" . $tagToRemove . "(.*)\>(.*)\<\/" . $tagToRemove . "\>~",
+                        '',
+                        $content
+                    );
                 }
                 $content = trim(strip_tags((string)$content));
             }
@@ -102,7 +107,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
                     $content = $dom->saveHTML($body);
                     $content = preg_replace('#^<body>|</body>$#', '', $content);
                 }
-            } catch (\Exception $e) {
+            } catch (\Exception $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
                 /* Do nothing, it's OK */
             }
 
@@ -138,8 +143,10 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     }
 
     /**
+     * Set page break on len
+     *
      * @param string $content
-     * @param $len
+     * @param mixed $len
      * @return string
      */
     private function setPageBreakOnLen(string $content, $len): string
@@ -163,7 +170,14 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         $textLength = 0;
 
-        $processNode = function ($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode): void {
+        $processNode = function ($node) use (
+            &$textLength,
+            $len,
+            $dom,
+            $pageBreaker,
+            &$pageBreakInserted,
+            &$processNode
+        ): void {
 
             if ($pageBreakInserted) {
                 return;
@@ -213,6 +227,8 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     }
 
     /**
+     * Get default short content length
+     *
      * @return int
      */
     private function getDefaultShortContentLength(): int

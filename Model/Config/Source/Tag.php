@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
+use Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory;
+
 /**
  * Used in recent post widget & post edit page
  *
@@ -28,8 +30,7 @@ class Tag implements \Magento\Framework\Option\ArrayInterface
     /**
      * Initialize dependencies.
      *
-     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $authorCollectionFactory
-     * @param void
+     * @param CollectionFactory $tagCollectionFactory
      */
     public function __construct(
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory

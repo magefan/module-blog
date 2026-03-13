@@ -44,6 +44,7 @@ class Search extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve query
+     *
      * @return string
      */
     public function getQuery(): string
@@ -53,6 +54,7 @@ class Search extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve serch form action url
+     *
      * @return string
      */
     public function getFormUrl()

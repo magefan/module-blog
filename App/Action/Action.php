@@ -30,6 +30,7 @@ abstract class Action extends \Magento\Framework\App\Action\Action
     /**
      * Retrieve store config value
      *
+     * @param string $path
      * @return string | null | bool
      */
     protected function getConfigValue($path)

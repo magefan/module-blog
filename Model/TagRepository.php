@@ -76,6 +76,8 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Retrieve the tag factory instance.
+     *
      * @return TagFactory
      */
     public function getFactory()
@@ -84,6 +86,8 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Save a tag entity to the database.
+     *
      * @param Tag $tag
      * @return bool|mixed
      * @throws CouldNotSaveException
@@ -112,9 +116,11 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
-     * @param $tagId
+     * Retrieve tag by its ID.
+     *
+     * @param int $tagId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
      * @return Tag|mixed
      * @throws NoSuchEntityException
@@ -135,6 +141,8 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Deletes the specified tag.
+     *
      * @param Tag $tag
      * @return bool|mixed
      * @throws CouldNotDeleteException
@@ -155,7 +163,9 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
-     * @param int $tagId
+     * Deletes a tag by its ID.
+     *
+     * @param int|string $tagId
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
@@ -167,7 +177,7 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {

@@ -24,8 +24,10 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve formated posted date
-     * @var string
+     *
      * @deprecated Use $post->getPublishDate() instead
+     * @see \Magefan\Blog\Model\Post::getPublishDate()
+     * @param string $format
      * @return string
      */
     public function getPostedOn($format = 'Y-m-d H:i:s')
@@ -35,6 +37,7 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if display author information is enabled
+     *
      * @return int
      */
     public function authorEnabled(): int
@@ -47,6 +50,7 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if author page is enabled
+     *
      * @return int
      */
     public function authorPageEnabled(): int
@@ -59,6 +63,7 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve true if magefan comments are enabled
+     *
      * @return bool
      */
     public function magefanCommentsEnabled(): bool
@@ -70,6 +75,8 @@ class Info extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Retrieve true if views count is enabled
+     *
      * @return bool
      */
     public function viewsCountEnabled(): bool
@@ -82,6 +89,7 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if display reading time is enabled
+     *
      * @return int
      */
     public function readingTimeEnabled(): int

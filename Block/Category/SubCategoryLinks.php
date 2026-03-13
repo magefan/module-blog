@@ -45,6 +45,7 @@ class SubCategoryLinks extends \Magefan\Blog\Block\Category\AbstractCategory
 
     /**
      * Get subcategories
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     public function getSubCategories()
@@ -71,7 +72,7 @@ class SubCategoryLinks extends \Magefan\Blog\Block\Category\AbstractCategory
             || $displayMode == CategoryDisplayMode::POSTS_AND_SUBCATEGORIES_LINKS);
     }
 
-    /*
+    /**
      * Render block HTML
      *
      * @return string

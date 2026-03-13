@@ -56,6 +56,8 @@ class ReSaveExistingPosts
     }
 
     /**
+     * Executes the process to filter and update posts based on their publish time
+     *
      * @return void
      */
     public function execute(): void

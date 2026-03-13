@@ -17,10 +17,9 @@ use Magento\Store\Model\ScopeInterface;
 class Richsnippets extends Opengraph
 {
     /**
-     * @param array
+     * @var array
      */
     protected $_options;
-
 
     /**
      * Retrieve snipet params
@@ -51,7 +50,9 @@ class Richsnippets extends Opengraph
     }
 
     /**
-     * @param $type
+     * Retrieve options based on the specified type.
+     *
+     * @param string $type
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -117,7 +118,12 @@ class Richsnippets extends Opengraph
                 ];
 
                 $sameAs = [];
-                foreach (['facebook_page_url', 'twitter_page_url', 'instagram_page_url', 'bluesky_page_url','googleplus_page_url', 'linkedin_page_url'] as $key) {
+                $socialPageUrls = [
+                    'facebook_page_url', 'twitter_page_url',
+                    'instagram_page_url', 'bluesky_page_url',
+                    'googleplus_page_url', 'linkedin_page_url'
+                ];
+                foreach ($socialPageUrls as $key) {
                     if ($value = trim($author->getData($key) ?: '')) {
                         $sameAs[] = $value;
                     }
@@ -173,7 +179,6 @@ class Richsnippets extends Opengraph
             . json_encode($options)
             . '</script>';
     }
-
 
     /**
      * Retrieve page title

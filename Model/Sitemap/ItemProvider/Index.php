@@ -18,15 +18,11 @@ use Magefan\Blog\Model\Config;
 class Index implements ItemProviderInterface
 {
     /**
-     * Sitemap config
-     *
      * @var SitemapConfigInterface
      */
     private $sitemapConfig;
 
     /**
-     * Sitemap item factory
-     *
      * @var SitemapItemInterfaceFactory
      */
     private $itemFactory;
@@ -44,6 +40,8 @@ class Index implements ItemProviderInterface
     /**
      * @param SitemapConfigInterface $sitemapConfig
      * @param SitemapItemInterfaceFactory $itemFactory
+     * @param ScopeConfigInterface $scopeConfig
+     * @param Url $blogUrl
      */
     public function __construct(
         SitemapConfigInterface $sitemapConfig,
@@ -58,7 +56,7 @@ class Index implements ItemProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getItems($storeId)
     {
@@ -85,7 +83,6 @@ class Index implements ItemProviderInterface
                 $url = trim($url, '/') . '/';
             }
         }
-
 
         $items[] = $this->itemFactory->create([
             'url' => $url,

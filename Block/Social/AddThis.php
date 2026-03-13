@@ -47,6 +47,11 @@ class AddThis extends \Magento\Framework\View\Element\Template
         );
     }
 
+    /**
+     * Renders the HTML output if the required conditions are met.
+     *
+     * @return string
+     */
     public function toHtml()
     {
         if (!$this->getAddThisEnabled() || !$this->getAddThisPubId()) {

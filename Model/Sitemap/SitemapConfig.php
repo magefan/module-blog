@@ -18,8 +18,10 @@ use Magefan\Blog\Api\SitemapConfigInterface;
 class SitemapConfig extends \Magefan\Blog\Model\Config implements SitemapConfigInterface
 {
     /**
-     * @param $page
-     * @param $storeId
+     * Check if sitemap is enabled
+     *
+     * @param string $page
+     * @param int|null $storeId
      * @return bool
      */
     public function isEnabledSitemap($page, $storeId = null) : bool
@@ -28,8 +30,10 @@ class SitemapConfig extends \Magefan\Blog\Model\Config implements SitemapConfigI
     }
 
     /**
-     * @param $page
-     * @param $storeId
+     * Get sitemap frequency
+     *
+     * @param string $page
+     * @param int|null $storeId
      * @return string
      */
     public function getFrequency($page, $storeId = null): string
@@ -53,8 +57,10 @@ class SitemapConfig extends \Magefan\Blog\Model\Config implements SitemapConfigI
     }
 
     /**
-     * @param $page
-     * @param $storeId
+     * Get sitemap priority
+     *
+     * @param string $page
+     * @param int|null $storeId
      * @return float
      */
     public function getPriority($page, $storeId = null): float

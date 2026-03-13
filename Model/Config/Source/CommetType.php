@@ -17,27 +17,27 @@ class CommetType implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const int
      */
-    const DISABLED = 0;
+    public const DISABLED = 0;
 
     /**
      * @const string
      */
-    const MAGEFAN = 'magefan';
+    public const MAGEFAN = 'magefan';
 
     /**
      * @const string
      */
-    const FACEBOOK = 'facebook';
+    public const FACEBOOK = 'facebook';
 
     /**
      * @const string
      */
-    const DISQUS = 'disqus';
+    public const DISQUS = 'disqus';
 
     /**
      * @const string
      */
-    const GOOGLE = 'google';
+    public const GOOGLE = 'google';
 
     /**
      * Options getter

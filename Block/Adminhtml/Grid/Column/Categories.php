@@ -15,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Grid\Column;
 class Categories extends \Magento\Backend\Block\Widget\Grid\Column
 {
     /**
+     * Constructor
+     *
      * @return void
      */
     public function _construct(): void

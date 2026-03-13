@@ -46,7 +46,8 @@ class TemplatePool
 
     /**
      * Retrieve all templates for type
-     * @param $templateType
+     *
+     * @param string $templateType
      * @return array
      */
     public function getAll(string $templateType):array
@@ -56,6 +57,7 @@ class TemplatePool
 
     /**
      * Retrieve template
+     *
      * @param string $templateType
      * @param string $name
      * @return string

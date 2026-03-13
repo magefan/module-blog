@@ -33,6 +33,8 @@ class Tag extends \Magento\Backend\Block\Widget\Grid\Container
     }
 
     /**
+     * Prepares the layout and adds an import button to the toolbar if the user has the necessary permissions.
+     *
      * @return $this
      */
     protected function _prepareLayout()

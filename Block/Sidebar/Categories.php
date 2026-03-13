@@ -29,6 +29,7 @@ class Categories extends Template implements IdentityInterface
      * @var \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     protected $_categoryCollection;
+
     /**
      * Construct
      *
@@ -47,6 +48,7 @@ class Categories extends Template implements IdentityInterface
 
     /**
      * Get grouped categories
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     public function getGroupedChilds()
@@ -74,6 +76,7 @@ class Categories extends Template implements IdentityInterface
 
     /**
      * Retrieve true if need to show posts count
+     *
      * @return int
      */
     public function showPostsCount()
@@ -90,6 +93,7 @@ class Categories extends Template implements IdentityInterface
 
     /**
      * Retrieve categories maximum depth
+     *
      * @return int
      */
     public function maxDepth(): int
@@ -124,6 +128,7 @@ class Categories extends Template implements IdentityInterface
     {
         $identities = [];
         foreach ($this->getGroupedChilds() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

@@ -61,7 +61,7 @@ class PostDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getCollection()
     {

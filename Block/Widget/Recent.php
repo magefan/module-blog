@@ -21,7 +21,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     /**
      * @var array
      */
-    static $processedIds = [];
+    private static $processedIds = [];
 
     /**
      * @var \Magefan\Blog\Model\CategoryFactory
@@ -72,7 +72,6 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     }
 
     /**
-     *
      * Retrieve block title
      *
      * @return string
@@ -173,6 +172,8 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     }
 
     /**
+     * Retrieve collection order field
+     *
      * @return string
      */
     public function getCollectionOrderField(): string
@@ -207,6 +208,8 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     }
 
     /**
+     * Retrieve template
+     *
      * @return string
      */
     public function getTemplate()

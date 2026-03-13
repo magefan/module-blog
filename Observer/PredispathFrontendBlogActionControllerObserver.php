@@ -51,8 +51,10 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
     }
 
     /**
+     * Executes the observer logic for URL redirection based on configuration settings.
+     *
      * @param \Magento\Framework\Event\Observer $observer
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return void
      */
     public function execute(\Magento\Framework\Event\Observer $observer): void
     {

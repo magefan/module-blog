@@ -12,6 +12,8 @@ class InfoBlogExtra extends InfoPlan
 {
 
     /**
+     * Retrieves the name of the minimum plan required.
+     *
      * @return string
      */
     protected function getMinPlan(): string
@@ -20,6 +22,8 @@ class InfoBlogExtra extends InfoPlan
     }
 
     /**
+     * Encodes a predefined list of section identifiers into a JSON string.
+     *
      * @return string
      */
     protected function getSectionsJson(): string
@@ -44,6 +48,8 @@ class InfoBlogExtra extends InfoPlan
     }
 
     /**
+     * Retrieves a translatable text describing the availability of an option based on a specific plan.
+     *
      * @return string
      */
     protected function getText(): string

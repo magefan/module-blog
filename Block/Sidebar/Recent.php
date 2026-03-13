@@ -22,6 +22,8 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_widgetKey = 'recent_posts';
 
     /**
+     * Retrieve page size
+     *
      * @return int
      */
     public function getPageSize(): int
@@ -42,6 +44,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve true if display the post image is enabled in the config
+     *
      * @return bool
      */
     public function getDisplayImage(): bool

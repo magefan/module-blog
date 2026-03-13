@@ -39,6 +39,7 @@ class Sidebar extends \Magento\Framework\View\Element\Text
 
     /**
      * Sort by sort order param
+     *
      * @param  string $a
      * @param  string $b
      * @return boolean

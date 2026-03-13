@@ -18,6 +18,7 @@ class ViewsCount extends AbstractPost
 {
     /**
      * Retrieve counter controller url
+     *
      * @return string
      */
     public function getCounterUrl()

@@ -47,7 +47,6 @@ class Rss extends \Magento\Framework\View\Element\Template
         return parent::getUrl($route, $params);
     }
 
-
     /**
      * Retrieve blog url model
      *

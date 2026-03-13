@@ -61,6 +61,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()
@@ -145,6 +146,8 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve blog title
+     *
+     * @param string $param
      * @return string
      */
     protected function _getConfigValue(string $param)
@@ -227,7 +230,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve identities
-     * git add
+     *
      * @return array
      */
     public function getIdentities()

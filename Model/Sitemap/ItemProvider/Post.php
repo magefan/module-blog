@@ -15,8 +15,6 @@ use Magefan\Blog\Api\SitemapConfigInterface;
 class Post implements ItemProviderInterface
 {
     /**
-     * Sitemap config
-     *
      * @var SitemapConfigInterface
      */
     private $sitemapConfig;
@@ -51,7 +49,7 @@ class Post implements ItemProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getItems($storeId)
     {

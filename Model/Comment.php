@@ -74,7 +74,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     /**
      * blog cache comment
      */
-    const CACHE_TAG = 'mfb_co';
+    public const CACHE_TAG = 'mfb_co';
 
     /**
      * Initialize dependencies.
@@ -132,6 +132,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve model title
+     *
      * @param  boolean $plural
      * @return string
      */
@@ -142,6 +143,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve true if post is active
+     *
      * @return boolean [description]
      */
     public function isActive(): bool
@@ -151,6 +153,8 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int|null $storeId
      * @return bool
      */
     public function isVisibleOnStore($storeId): bool
@@ -161,6 +165,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve post
+     *
      * @return \Magefan\Blog\Model\Post | false
      */
     public function getPost()
@@ -180,6 +185,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve author
+     *
      * @return \\Magento\Framework\DataObject
      */
     public function getAuthor()
@@ -233,6 +239,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve parent comment
+     *
      * @return self || false
      */
     public function getParentComment()
@@ -254,6 +261,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve child comments
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
      */
     public function getChildComments()
@@ -268,6 +276,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve true if comment is reply to other comment
+     *
      * @return boolean
      */
     public function isReply(): bool
@@ -277,6 +286,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Validate comment
+     *
      * @return void
      */
     public function validate(): void
@@ -288,6 +298,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve post publish date using format
+     *
      * @param  string $format
      * @return string
      */
@@ -300,6 +311,8 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
+     * Retrieve the collection of replies for the current comment
+     *
      * @return array|ResourceModel\Comment\Collection
      */
     public function getRepliesCollection()
@@ -322,9 +335,12 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
-     * @param null $fields
+     * Prepare all additional data
+     *
+     * @param array|null $fields
      * @return array
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {

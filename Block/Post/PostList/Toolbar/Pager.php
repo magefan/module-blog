@@ -22,12 +22,15 @@ class Pager extends \Magento\Theme\Block\Html\Pager
     /**
      * Retrieve url of all pages
      *
-     * @return string
+     * @return array
      */
     public function getPagesUrls(): array
     {
         $urls = [];
-        for ($page = $this->getCurrentPage() + 1; $page <= $this->getLastPageNum(); $page++) {
+        $currentPage = $this->getCurrentPage();
+        $lastPage = $this->getLastPageNum();
+
+        for ($page = $currentPage + 1; $page <= $lastPage; $page++) {
             $urls[$page] = $this->getPageUrl($page);
         }
 
@@ -52,8 +55,8 @@ class Pager extends \Magento\Theme\Block\Html\Pager
 
     /**
      * Retrieve lazyload json config string
-     * @param array $config
      *
+     * @param array $config
      * @return string
      */
     public function getLazyloadConfig(array $config = [])
@@ -144,9 +147,9 @@ class Pager extends \Magento\Theme\Block\Html\Pager
                 $page = '/page/' . $params['page'];
             }
             $url = $this->getUrl($this->getPath(), $urlParams);
-            if ($parsed = explode('/', parse_url($url)['path'])) {
+            if ($parsed = explode('/', parse_url($url)['path'])) {// phpcs:ignore
                 $key = array_search('page', $parsed);
-                if ($key && isset($parsed[$key + 1]) && intval($parsed[$key + 1])) {
+                if ($key && isset($parsed[$key + 1]) && (int)$parsed[$key + 1]) {
                     $url = str_replace('/page/' . $parsed[$key + 1], $page, $url);
                 } else {
                     $url = $url . $page;
