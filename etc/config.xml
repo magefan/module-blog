@@ -309,6 +309,7 @@
                 <allowed_resources>
                     <media_gallery_image_folders>
                         <magefan_blog>magefan_blog</magefan_blog>
+                        <blog>blog</blog>
                     </media_gallery_image_folders>
                 </allowed_resources>
             </media_storage_configuration>
