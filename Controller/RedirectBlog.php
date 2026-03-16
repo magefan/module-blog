@@ -27,15 +27,11 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
     protected $actionFactory;
 
     /**
-     * Response
-     *
      * @var \Magento\Framework\App\ResponseInterface
      */
     protected $response;
 
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
@@ -84,7 +80,7 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\App\ResponseInterface $response
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param Url $url
+     * @param Url $blogUrl
      * @param UrlResolverInterface $urlResolver
      * @param Config $config
      * @param PostFactory $postFactory
@@ -117,7 +113,9 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
     }
 
     /**
-     * @param $storeId
+     * Check if blog is enabled for a given store.
+     *
+     * @param int $storeId
      * @return bool
      */
     public function enabled($storeId): bool
@@ -126,6 +124,8 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
     }
 
     /**
+     * Match a request to a blog redirect across stores.
+     *
      * @param \Magento\Framework\App\RequestInterface $request
      * @return \Magento\Framework\App\ActionInterface|null
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -218,7 +218,9 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
     }
 
     /**
-     * @return mixed
+     * Retrieve blog URL model instance.
+     *
+     * @return \Magefan\Blog\Model\Url
      */
     protected function getBlogUrl()
     {
@@ -226,7 +228,9 @@ class RedirectBlog implements \Magento\Framework\App\RouterInterface
     }
 
     /**
-     * @param $_identifier
+     * Resolve the blog page data for the given URL identifier.
+     *
+     * @param string $_identifier
      * @return array|void|null
      */
     protected function getBlogPage($_identifier)

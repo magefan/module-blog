@@ -85,7 +85,6 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
         $baseImagePath = $this->getFilePath($basePath, $imageName);
         $originalImageName = $imageName;
 
-
         $mediaPath = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath();
 
         $baseImageAbsolutePath = $mediaPath . $baseImagePath;

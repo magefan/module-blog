@@ -187,6 +187,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param \Magefan\Blog\Api\AuthorRepositoryInterface|null $authorRepository
      * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
      * @param TimezoneInterface|null $timezone
+     * @param \Magefan\Blog\Api\ShortContentExtractorInterface|null $shortContentExtractor
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function __construct(
@@ -232,9 +233,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magento\Framework\Stdlib\DateTime\TimezoneInterface::class
         );
-        $this->shortContentExtractor = $shortContentExtractor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
-            \Magefan\Blog\Api\ShortContentExtractorInterface::class
-        );
+        $this->shortContentExtractor =
+            $shortContentExtractor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+                \Magefan\Blog\Api\ShortContentExtractorInterface::class
+            );
     }
 
     /**

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
 
 /**
@@ -292,7 +293,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     public function validate(): void
     {
         if (mb_strlen($this->getText() ?: '') < 3) {
-            throw new \Exception((string)__('Comment text is too short.'), 1);
+            throw new \Magento\Framework\Exception\LocalizedException(__('Comment text is too short.'));
         }
     }
 
