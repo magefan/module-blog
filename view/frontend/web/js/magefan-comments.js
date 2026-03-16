@@ -155,6 +155,9 @@
             $rf.querySelector('.refresh-value').innerHTML = '';
             $rf.querySelector('[name=parent_id]').value = id;
             $rf.querySelector('form').style.display = '';
+            if ($rf.querySelector('form').querySelector('.c-btn-hld')) {
+                $rf.querySelector('form').querySelector('.c-btn-hld').classList.remove('c-btn-hld', 'hidden');
+            }
             fadeIn($rf);
 
             return false;
