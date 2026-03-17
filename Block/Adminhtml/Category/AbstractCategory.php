@@ -169,15 +169,9 @@ class AbstractCategory extends \Magento\Backend\Block\Template
 
         $root = $this->_coreRegistry->registry('root');
         if ($root === null) {
-            /*$storeId = (int)$this->getRequest()->getParam('store');
-
-            if ($storeId) {
-                $store = $this->_storeManager->getStore($storeId);
-                $rootId = $store->getRootCategoryId();
-            } else {
-                $rootId = \Magefan\Blog\Model\Category::TREE_ROOT_ID;
-            }*/
             $rootId = \Magefan\Blog\Model\Category::TREE_ROOT_ID;
+
+            $this->_categoryTree->setStoreId($this->getStore()->getId());
 
             $tree = $this->_categoryTree->load(null, $recursionLevel);
 

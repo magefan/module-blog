@@ -138,6 +138,15 @@ class Tree extends Dbp
 
             $select = clone $this->_select;
 
+            $storeId = $this->getStoreId();
+            if ($storeId) {
+                $select->join(
+                    ['store_table' => $this->_coreResource->getTableName('magefan_blog_category_store')],
+                    $this->_table . '.category_id = store_table.category_id',
+                    []
+                )->where('store_table.store_id IN (?)', [0, $storeId]);
+            }
+
             $select->order($this->_table . '.' . $this->_orderField . ' DESC');
             if ($parentPath) {
                 $pathField = $this->_conn->quoteIdentifier([$this->_table, $this->_pathField]);
