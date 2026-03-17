@@ -90,7 +90,7 @@ class Config
     /**
      * Enabled RSS Feed
      */
-    const XML_PATH_RSS_FEED_ENABLED = 'mfblog/sidebar/rss_feed/enabled';
+    public const XML_PATH_RSS_FEED_ENABLED = 'mfblog/sidebar/rss_feed/enabled';
 
     /**
      * Top menu include categories config path
