@@ -38,7 +38,14 @@ if (!isset($escaper)) {
                 data-src="<?= $escaper->escapeUrl($image) ?>"
                 rel="fancybox"
             >
-                <img class="gallery-image" src="<?= $escaper->escapeUrl($image->resize(200, 133)) ?>" alt="" />
+                <?php
+                    $featuredImage = $image->resize(200, 133, true);
+                    $imageWidthAndHeight = $featuredImage->getWidthAndHeight();
+                    $addWH = !empty($imageWidthAndHeight);
+                ?>
+                <img class="gallery-image" src="<?= $escaper->escapeUrl($featuredImage) ?>" alt=""
+                    <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
+                />
             </div>
         <?php } ?>
     </div>
