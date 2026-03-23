@@ -39,7 +39,7 @@ if (!isset($escaper)) {
                     $imageWidthAndHeight = $featuredImage->getWidthAndHeight();
                     $addWH = !empty($imageWidthAndHeight);
                 ?>
-                <img class="gallery-image" src="<?= $escaper->escapeUrl($image->resize(200)) ?>" alt="" <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>/>
+                <img class="gallery-image" src="<?= $escaper->escapeUrl($featuredImage) ?>" alt="" <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>/>
             </a>
         <?php } ?>
     </div>
