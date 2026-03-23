@@ -146,6 +146,7 @@ body.blog-page {
 .post-sharing-bottom {padding: 30px 0;margin-bottom: 30px;border-top: 1px solid var(--border-color);border-bottom: 1px solid var(--border-color);}
 .post-sharing-bottom .share-elements {text-align: center;}
 .post-sharing-bottom .share-elements .icon-wrapper {display: inline-block;cursor: pointer;margin: 0 5px 5px 0;overflow: hidden;border: 0;text-decoration: none;text-transform: none;background-color: transparent;color: inherit;transition: all .2s ease-in-out;border-radius: 0;}
+.post-sharing-bottom .share-elements .icon-wrapper:before {content: none;}
 .post-sharing-bottom .share-elements .icon-wrapper.icon-facebook {background-color: rgb(59, 89, 152);}
 .post-sharing-bottom .share-elements .icon-wrapper.icon-twitter {background-color: rgb(0, 0, 0);}
 .post-sharing-bottom .share-elements .icon-wrapper.icon-pinterest {background-color: rgb(203, 32, 39);}
