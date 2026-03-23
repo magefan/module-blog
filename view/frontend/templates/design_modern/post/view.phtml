@@ -97,7 +97,7 @@ $_postName = $escaper->escapeHtml($_post->getTitle(), null);
                         <span>&nbsp;-&nbsp;</span>
                     <?php } ?>
                         <?php $hasPreviusItem = true; ?>
-                    <span> Last updated: </span><?= $escaper->escapeHtml($_post->getUpdateDate()) ?>
+                    <span><?= $escaper->escapeHtml(__('Last updated:')) ?></span> <?= $escaper->escapeHtml($_post->getUpdateDate()) ?>
                 </span>
                 <?php } ?>
 
