@@ -30,6 +30,14 @@ if (!isset($escaper)) {
             <span class="value"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
         </div>
     <?php } ?>
+    <?php /* post modified date */ ?>
+    <?php if ( $_post->isModifiedDateEnabled()) { ?>
+        <div class="item post-modified-date">
+            <i class="mf-blog-icon mfbi-calendar"></i>
+            <span class="label"><?= $escaper->escapeHtml(__('Last updated:')) ?></span>
+            <span class="value"><?= $escaper->escapeHtml($_post->getUpdateDate()) ?></span>
+        </div>
+    <?php } ?>
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
         <div class="item post-categories">
             <i class="mf-blog-icon mfbi-folder"></i>

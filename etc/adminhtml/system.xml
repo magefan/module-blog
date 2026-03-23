@@ -79,6 +79,19 @@
                             For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
                         ]]></comment>
                 </field>
+                <field id="modified_date" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Posts Modified Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="format_date_modified" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Posts Modified Date Format</label>
+                    <depends>
+                        <field id="modified_date">1</field>
+                    </depends>
+                    <comment><![CDATA[
+                            For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
+                        ]]></comment>
+                </field>
             </group>
 
             <group id="index_page" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">

@@ -996,14 +996,40 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getUpdateDate($format = 'Y-m-d H:i:s')
+    public function getUpdateDate($format = '')
     {
+        if (!$format) {
+            $format = $this->scopeConfig->getValue(
+                'mfblog/design/format_date_modified',
+                ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$format) {
+                $format = 'Y-m-d H:i:s';
+            }
+        }
+
+        $gmtTime = $this->getData('update_time');
+        $localTime = $this->timezone->date(new \DateTime($gmtTime))->format('Y-m-d H:i:s');
+
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
-            $this->getData('update_time')
+            $localTime
         );
     }
 
+    /**
+     * Check if the modified date is enabled
+     *
+     * @return bool
+     */
+    public function isModifiedDateEnabled(): bool
+    {
+        return (bool)$this->scopeConfig->getValue(
+            'mfblog/design/modified_date',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
     /**
      * Temporary method to get images from some custom blog version. Do not use this method.
      *

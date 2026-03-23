@@ -90,6 +90,17 @@ $_postName = $escaper->escapeHtml($_post->getTitle(), null);
                         <?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
                 <?php } ?>
 
+                <?php /* post modified date */ ?>
+                <?php if ( $_post->isModifiedDateEnabled()) { ?>
+                    <span class="post-date">
+                    <?php if ($hasPreviusItem) { ?>
+                        <span>&nbsp;-&nbsp;</span>
+                    <?php } ?>
+                        <?php $hasPreviusItem = true; ?>
+                    <span> Last updated: </span><?= $escaper->escapeHtml($_post->getUpdateDate()) ?>
+                </span>
+                <?php } ?>
+
                 <!-- reading time -->
                 <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
                     <span class="reading-time">

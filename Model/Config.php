@@ -123,6 +123,9 @@ class Config
 
     public const XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI = 'mfblog/developer/css_settings/include_bootstrap_custom_mini';
 
+    public const XML_PATH_DESIGN_MODIFIED_DATE = 'mfblog/design/modified_date';
+    public const XML_PATH_DESIGN_FORMAT_DATE_MODIFIED = 'mfblog/design/format_date_modified';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -364,6 +367,28 @@ class Config
             self::XML_PATH_BLOG_DESIGN_VERSION,
             $storeId
         );
+    }
+
+    /**
+     * Check if modified date display is enabled
+     *
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isModifiedDateEnabled($storeId = null): bool
+    {
+        return (bool)$this->getConfig(self::XML_PATH_DESIGN_MODIFIED_DATE, $storeId);
+    }
+
+    /**
+     * Retrieve modified date format
+     *
+     * @param int|null $storeId
+     * @return string
+     */
+    public function getModifiedDateFormat($storeId = null): string
+    {
+        return (string)$this->getConfig(self::XML_PATH_DESIGN_FORMAT_DATE_MODIFIED, $storeId);
     }
 
     /**
