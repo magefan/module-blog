@@ -268,4 +268,28 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
         }
         return parent::getTemplate();
     }
+
+
+    /**
+     * Return additional filters to restrict the product collection.
+     *
+     * @return array
+     */
+    public function getAdditionalFilters(): array
+    {
+        // fix for Hyvä slider template
+        $ids = $this->getItems()->getAllIds();
+
+        if (empty($ids)) {
+            return [];
+        }
+
+        return [
+            [
+                'field'         => 'entity_id',
+                'value'         => $ids,
+                'conditionType' => 'in',
+            ],
+        ];
+    }
 }
