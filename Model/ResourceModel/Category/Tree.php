@@ -145,6 +145,16 @@ class Tree extends Dbp
                     $this->_table . '.category_id = store_table.category_id',
                     []
                 )->where('store_table.store_id IN (?)', [0, $storeId]);
+
+                $localizationTable = $this->_coreResource->getTableName('magefan_blog_category_localization');
+                if ($this->_conn->isTableExists($localizationTable)) {
+                    $select->joinLeft(
+                        ['loc_table' => $localizationTable],
+                        $this->_table . '.category_id = loc_table.category_id'
+                            . ' AND loc_table.store_id = ' . (int)$storeId,
+                        ['loc_title' => 'title' , 'loc_is_active' => 'is_active']
+                    );
+                }
             }
 
             $select->order($this->_table . '.' . $this->_orderField . ' DESC');
@@ -179,6 +189,14 @@ class Tree extends Dbp
                     } else {
                         $nodeInfo['path'] .= '/'. $nodeInfo['category_id'];
                     }
+                }
+
+                if (isset($nodeInfo['loc_title'])) {
+                    $nodeInfo['title'] = $nodeInfo['loc_title'];
+                }
+
+                if (isset($nodeInfo['loc_is_active'])) {
+                    $nodeInfo['is_active'] = $nodeInfo['loc_is_active'];
                 }
 
                 $nodeInfo['post_count'] = $this->getCategoryPostsCount((int)$nodeInfo['category_id']);
@@ -224,6 +242,25 @@ class Tree extends Dbp
             $select->where($condition);
         }
 
+        $storeId = $this->getStoreId();
+        if ($storeId) {
+            $select->join(
+                ['store_table' => $this->_coreResource->getTableName('magefan_blog_category_store')],
+                $this->_table . '.category_id = store_table.category_id',
+                []
+            )->where('store_table.store_id IN (?)', [0, $storeId]);
+
+            $localizationTable = $this->_coreResource->getTableName('magefan_blog_category_localization');
+            if ($this->_conn->isTableExists($localizationTable)) {
+                $select->joinLeft(
+                    ['loc_table' => $localizationTable],
+                    $this->_table . '.category_id = loc_table.category_id'
+                    . ' AND loc_table.store_id = ' . $storeId,
+                    ['loc_title' => 'title' , 'loc_is_active' => 'is_active']
+                );
+            }
+        }
+
         $arrNodes = $this->_conn->fetchAll($select);
 
         if ($arrNodes) {
@@ -236,6 +273,14 @@ class Tree extends Dbp
                     } else {
                         $nodeInfo['path'] .= '/'. $nodeInfo['category_id'];
                     }
+                }
+
+                if (isset($nodeInfo['loc_title'])) {
+                    $nodeInfo['title'] = $nodeInfo['loc_title'];
+                }
+
+                if (isset($nodeInfo['loc_is_active'])) {
+                    $nodeInfo['is_active'] = $nodeInfo['loc_is_active'];
                 }
 
                 $nodeId = $nodeInfo[$this->_idField];

@@ -45,7 +45,7 @@ abstract class AbstractManagement implements ManagementInterface
      */
     public function saveFile($fileName, $fileContent)
     {
-        $objectManager = $this->getObjectManager();
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
         $file = $objectManager->get(\Magento\Framework\Filesystem\Driver\File::class);
         $directoryList = $objectManager->get(\Magento\Framework\Filesystem\DirectoryList::class);

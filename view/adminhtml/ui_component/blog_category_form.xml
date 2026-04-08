@@ -25,8 +25,10 @@
             <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\DeleteButton</item>
             <item name="reset" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\ResetButton</item>
             <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\DuplicateButton</item>
-            <item name="save" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\SaveButton</item>
-            <item name="save_and_continue" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\SaveAndContinueButton</item>
+            <item name="save_and_continue" xsi:type="array">
+                <item name="class" xsi:type="string">primary</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+            </item>
         </item>
     </argument>
     <dataSource name="category_form_data_source">
@@ -54,17 +56,6 @@
                 <item name="sortOrder" xsi:type="number">10</item>
             </item>
         </argument>
-
-        <field name="store" formElement="hidden">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">category</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>number</dataType>
-            </settings>
-        </field>
 
         <field name="category_id">
             <argument name="data" xsi:type="array">

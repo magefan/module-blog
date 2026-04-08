@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Model\ResourceModel;
 
 use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Blog category resource model
@@ -86,22 +87,33 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return void
      */
-    protected function deleteChildren(\Magento\Framework\Model\AbstractModel $object)
+    protected function deleteChildren(\Magento\Framework\Model\AbstractModel $object): void
     {
-        $categories = $this->collectionFactory->create();
+        $connection = $this->getConnection();
         $path = $object->getFullPath();
 
-        $categories->addFieldToFilter(
-            'path',
-            [
-                ['like' => $path],
-                ['like' => $path . '/%']
-            ]
+        $childIds = $connection->fetchCol(
+            $s = $connection->select()
+                ->from($this->getMainTable(), ['category_id', 'position'])
+                ->where('path = ?', "{$path}")
         );
 
-        foreach ($categories as $category) {
-            $category->delete();
+        if (empty($childIds)) {
+            return;
         }
+
+        $connection->delete(
+            $this->getTable('magefan_blog_category_store'),
+            ['category_id IN (?)' => $childIds]
+        );
+        $connection->delete(
+            $this->getTable('magefan_blog_post_category'),
+            ['category_id IN (?)' => $childIds]
+        );
+        $connection->delete(
+            $this->getMainTable(),
+            ['category_id IN (?)' => $childIds]
+        );
     }
 
     /**
@@ -142,6 +154,21 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         if ($object->isObjectNew()) {
+            $parentId = $object->getData('parent_id');
+            $parentCategory = $this->getParentCategory($parentId);
+
+            $path = $parentCategory->getPath();
+
+            if ($parentId) {
+                if ($path) {
+                    $path .= '/' . $parentId;
+                } else {
+                    $path = $parentId;
+                }
+            }
+
+            $object->setPath($path);
+
             if (!$object->getPosition()) {
                 $object->setPosition($this->_getMaxPosition($object->getPath()) + 1);
             }
@@ -155,6 +182,27 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         return parent::_beforeSave($object);
+    }
+
+    /**
+     * Get parent category
+     *
+     * @param int $parentId
+     *
+     * @return \Magefan\Blog\Model\Category
+     * @throws LocalizedException
+     */
+    protected function getParentCategory($parentId)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        if (!$parentId) {
+            $parentId = \Magento\Catalog\Model\Category::TREE_ROOT_ID;
+            return $objectManager->create(\Magefan\Blog\Model\Category::class)
+                ->setId($parentId)
+                ->setPath('');
+        }
+
+        return $objectManager->create(\Magefan\Blog\Model\Category::class)->load($parentId);
     }
 
     /**
