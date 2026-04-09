@@ -32,6 +32,7 @@ abstract class AbstractManagement implements ManagementInterface
     protected $_imagesMap = [
         'featured_img',
         'featured_list_img',
+        'og_img',
         'category_img',
         'tag_img'
     ];
