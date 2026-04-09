@@ -33,4 +33,15 @@ class Collection extends AbstractCollection implements AuthorCollectionInterface
         parent::_construct();
         $this->_init(\Magefan\Blog\Model\Author::class, \Magefan\Blog\Model\ResourceModel\Author::class);
     }
+
+    /**
+     * Authors are admin users and not store-scoped; method exists for interface compatibility.
+     *
+     * @param int $storeId
+     * @return $this
+     */
+    public function addStoreFilter(int $storeId): self
+    {
+        return $this;
+    }
 }
