@@ -517,6 +517,13 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $positionField . ' > ?' => $category->getPosition(),
         ];
 
+        if ($category->getParentId() == 0) {
+            $where = [
+                'path IS NUll',
+                $positionField . ' > ?' => $category->getPosition(),
+            ];
+        }
+
         $connection->update($table, $bind, $where);
 
         if (!((int)$afterCategoryId)) {
@@ -540,6 +547,13 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             'path LIKE ?' => "%\\{$newParent->getId()}",
             $positionField . ' >= ?' => $position
         ];
+        if ($category->getParentId() == 0) {
+            $where = [
+                'path IS NUll',
+                $positionField . ' >= ?' => $position
+            ];
+        }
+
         $connection->update($table, $bind, $where);
 
         return $position;
