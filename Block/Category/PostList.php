@@ -40,6 +40,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getCollectionOrderField()
     {
+        if (!$this->getCategory()) {
+            return parent::getCollectionOrderField();
+        }
+
         $postsSortBy = $this->getCategory()->getData('posts_sort_by');
 
         switch ($postsSortBy) {
@@ -59,6 +63,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     public function getCollectionOrderDirection()
     {
+        if (!$this->getCategory()) {
+            return parent::getCollectionOrderDirection();
+        }
+
         $postsSortBy = $this->getCategory()->getData('posts_sort_by');
         if (PostsSortBy::TITLE == $postsSortBy) {
             return SortOrder::SORT_ASC;
@@ -83,6 +91,10 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      */
     protected function canDisplay(): bool
     {
+        if (!$this->getCategory()) {
+            return false;
+        }
+
         $displayMode = $this->getCategory()->getData('display_mode');
         return ($displayMode == CategoryDisplayMode::POSTS);
     }
@@ -230,7 +242,8 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     public function getToolbarBlock()
     {
         $toolBarBlock = parent::getToolbarBlock();
-        $limit = (int)$this->getCategory()->getData('posts_per_page');
+
+        $limit = $this->getCategory() ? (int)$this->getCategory()->getData('posts_per_page') : null;
 
         if ($limit) {
             $toolBarBlock->setData('limit', $limit);
