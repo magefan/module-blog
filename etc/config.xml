@@ -18,6 +18,8 @@
             <design>
                 <format_date>F d, Y</format_date>
                 <publication_date>1</publication_date>
+                <modified_date>0</modified_date>
+                <format_date_modified>F d, Y</format_date_modified>
                 <index_page_layout/>
                 <post_page_layout/>
                 <category_page_layout/>
