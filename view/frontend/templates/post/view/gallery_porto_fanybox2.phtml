@@ -34,7 +34,12 @@ if (!isset($escaper)) {
             <a class="gallery-image-hld fancybox-thumb"
                href="<?= $escaper->escapeUrl($image) ?>"
                rel="fancybox-thumb">
-                <img class="gallery-image" src="<?= $escaper->escapeUrl($image->resize(200)) ?>" alt="" />
+                <?php
+                    $featuredImage = $image->resize(200, null, true);
+                    $imageWidthAndHeight = $featuredImage->getWidthAndHeight();
+                    $addWH = !empty($imageWidthAndHeight);
+                ?>
+                <img class="gallery-image" src="<?= $escaper->escapeUrl($featuredImage) ?>" alt="" <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>/>
             </a>
         <?php } ?>
     </div>

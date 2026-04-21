@@ -26,7 +26,6 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     <?php } ?>
     <?php
 
-    $width = (int)$block->getBackgroundImageWidth() ?: 1920;
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
     $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType() ?: (string)$block->getPostTemplateType());
 
@@ -38,6 +37,16 @@ if ($_postCollection->count() /* && $templateType*/) { ?>
     } else {
         $templateType = 'article-grid';
     }
+
+    $defaultWidths = [
+        'article-items' => 200,
+        'article-slider' => 200,
+        'sidebar-article-grid' => 200,
+        'sidebar-article-list' => 60,
+    ];
+
+    $width = (int)$block->getBackgroundImageWidth()
+            ?: ($defaultWidths[$templateType] ?? 1920);
 
     $displayImage = $block->getDisplayImage() ?? true;
     $displayBlockTitle = $block->getTitle() && (false !== stripos(get_class($block), '\widget\\'));

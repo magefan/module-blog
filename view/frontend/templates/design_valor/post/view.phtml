@@ -196,7 +196,7 @@ if (!isset($escaper)) {
                 <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
                     <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>', this)">
                         <div class="icon" title="<?= $escaper->escapeHtml($network == 'Copy' ? __($network) : (__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?>">
-                            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/design_valor/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/design_valor/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>" width="20" height="20">
                         </div>
                         <div class="label"><?= $escaper->escapeHtml($network == 'Copy' ? __($network) : (__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?></div>
                     </div>
