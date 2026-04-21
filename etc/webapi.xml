@@ -71,6 +71,14 @@
             <resource ref="anonymous" />
         </resources>
     </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/all/:type/:term/:store_id/:page/:limit" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/post/all/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="getAll"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
 
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/category" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
@@ -131,6 +139,15 @@
         </resources>
     </route>
 
+       <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/all/:type/:term/:store_id/:page/:limit" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/category/all/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="getAll"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/tag" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
       -H "Content-Type:application/json" \
@@ -187,6 +204,14 @@
         <service class="Magefan\Blog\Api\TagManagementInterface" method="getList"/>
         <resources>
             <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/all/:type/:term/:store_id/:page/:limit" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/tag/all/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="getAll"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag"/>
         </resources>
     </route>
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/comment" \
