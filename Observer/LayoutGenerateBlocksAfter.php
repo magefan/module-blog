@@ -11,6 +11,7 @@ namespace Magefan\Blog\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magefan\Blog\Model\Config as BlogConfig;
+use Magento\Framework\App\RequestInterface;
 
 class LayoutGenerateBlocksAfter implements ObserverInterface
 {
@@ -25,15 +26,23 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
     private $blogConfig;
 
     /**
+     * @var RequestInterface
+     */
+    private $request;
+
+    /**
      * @param \Magento\Framework\View\Page\Config $pageConfig
      * @param BlogConfig $blogConfig
+     * @param RequestInterface $request
      */
     public function __construct(
         \Magento\Framework\View\Page\Config $pageConfig,
-        BlogConfig $blogConfig
+        BlogConfig $blogConfig,
+        RequestInterface $request
     ) {
         $this->pageConfig = $pageConfig;
         $this->blogConfig = $blogConfig;
+        $this->request = $request;
     }
 
     /**
@@ -53,6 +62,11 @@ class LayoutGenerateBlocksAfter implements ObserverInterface
         ];
         $fan = $observer->getEvent()->getFullActionName();
         if (!in_array($fan, $availableActions)) {
+            return;
+        }
+
+        if ($this->request->isAjax() || $this->request->getParam('isAjax')) {
+            /* Don't execute on ajax */
             return;
         }
 
