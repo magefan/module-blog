@@ -172,8 +172,12 @@ class Image extends AbstractHelper
         }
 
         if ($this->fileExists($file)) {
-            $file = $this->_mediaDirectory->getAbsolutePath($file);
-            $imageSize = getimagesize($file);// phpcs:ignore Magento2.Functions.DiscouragedFunction
+            try {
+                $content = $this->_mediaDirectory->readFile($file);
+                $imageSize = getimagesizefromstring($content);// phpcs:ignore Magento2.Functions.DiscouragedFunction
+            } catch (\Exception $e) {
+                $imageSize = false;
+            }
             if ($imageSize) {
                 return [
                     'width' => (int)$imageSize[0],
