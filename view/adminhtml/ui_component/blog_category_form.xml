@@ -181,6 +181,9 @@
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string"/>
                     <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-no-utf8mb4-characters" xsi:type="boolean">false</item>
+                    </item>
                     <item name="source" xsi:type="string">category</item>
                     <item name="wysiwyg" xsi:type="boolean">true</item>
                     <item name="dataScope" xsi:type="string">content</item>
