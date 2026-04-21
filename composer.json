@@ -2,9 +2,9 @@
     "name": "magefan/module-blog",
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
-        "magefan/module-community" : ">=2.3.4",
+        "magefan/module-community" : ">=2.3.5",
         "magefan/module-blog-comments-recaptcha" : ">=2.1.8",
-        "magefan/module-blog-import": "2.15.1",
+        "magefan/module-blog-import": "2.16.0",
         "magefan/module-blog-graph-ql" : ">=2.2.0",
         "magefan/module-wysiwyg-advanced" : ">=2.0.19"
     },
