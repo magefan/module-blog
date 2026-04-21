@@ -20,7 +20,7 @@ class Feed extends \Magefan\Blog\App\Action\Action
     /**
      * @var Config
      */
-    private  $config;
+    private $config;
 
     /**
      * @param Config $config

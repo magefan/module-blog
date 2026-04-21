@@ -45,6 +45,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
      */
     protected function _beforeSave($model, $request)
     {
+        $categoryPostData = $request->getPostValue();
+
+        $parentId = $categoryPostData['parent'] ?? null;
+        if ($parentId) {
+            $model->setParentId($parentId);
+        }
+
         /* Prepare images */
         $this->prepareImagesBeforeSave($model, ['category_img']);
     }
