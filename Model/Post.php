@@ -888,7 +888,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
             $collection->getSelect()->joinLeft(
                 ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedproduct')],
-                'e.entity_id = rl.related_id',
+                'e.entity_id = rl.related_id AND rl.post_id = ' . (int)$this->getId(),
                 ['position']
             )->where(
                 'rl.post_id = ?',
