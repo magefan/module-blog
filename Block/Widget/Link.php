@@ -62,12 +62,14 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 
         $href = $this->blogUrl->getUrl($model, $this->model->getControllerName());
 
-        $title = $this->getData('title') ? trim($this->getData('title')) : '';
+        // Note: 'anchor_text' maps to $title and 'title' maps to $anchorText — yes, swapped.
+        // Early naming mistake; kept intentionally to avoid breaking existing widget configs in DB.
+        $title = $this->getData('anchor_text') ? trim($this->getData('anchor_text')) : '';
         if (!$title) {
             $title = $model->getTitle();
         }
 
-        $anchorText = $this->getData('anchor_text') ? trim($this->getData('anchor_text')) : '';
+        $anchorText = $this->getData('title') ? trim($this->getData('title')) : '';
         if (!$anchorText) {
             $anchorText = $model->getTitle();
         }
