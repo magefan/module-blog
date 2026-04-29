@@ -61,11 +61,17 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
+        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->getStoreManager()->getStore()->getId();
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
-        if (!$author->isVisibleOnStore($storeId)) {
+        if (!$author->isVisibleOnStore($storeId) && !$author->isValidSecret($secret)) {
             return false;
+        }
+
+        if ($author->isValidSecret($secret)) {
+            $author->setData('is_active', 1);
+            $author->setIsPreviewMode(true);
         }
 
         $author->setStoreId($storeId);

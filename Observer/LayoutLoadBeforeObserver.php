@@ -66,7 +66,8 @@ class LayoutLoadBeforeObserver implements ObserverInterface
         if ($this->config->isEnabled()) {
             $entity = $this->registry->registry('current_blog_post')
                 ?: $this->registry->registry('current_blog_category')
-                    ?: $this->registry->registry('current_blog_tag');
+                    ?: $this->registry->registry('current_blog_tag')
+                        ?:$this->registry->registry('current_blog_author');
             $layout = $observer->getLayout();
             if ($entity && $entity->getIsPreviewMode()) {
                 $layout->getUpdate()->addHandle('blog_non_cacheable');

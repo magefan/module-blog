@@ -269,4 +269,16 @@ class Author extends AbstractModel implements AuthorInterface
 
         return $this->shortContentExtractor;
     }
+
+    /**
+     * Validate the provided secret
+     *
+     * @param mixed $secret
+     * @return bool
+     */
+    public function isValidSecret($secret): bool
+    {
+        return false;
+    }
+
 }
