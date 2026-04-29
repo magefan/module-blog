@@ -24,6 +24,7 @@
             <item name="back" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\BackButton</item>
             <item name="delete" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\DeleteButton</item>
             <item name="reset" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\ResetButton</item>
+            <item name="preview" xsi:type="string">Magefan\Community\Block\Adminhtml\Edit\PreviewButton</item>
             <item name="duplicate" xsi:type="string">Magefan\Blog\Block\Adminhtml\Category\DuplicateButton</item>
             <item name="save_and_continue" xsi:type="array">
                 <item name="class" xsi:type="string">primary</item>

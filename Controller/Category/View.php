@@ -80,12 +80,17 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
+        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);
 
-        if (!$category->isVisibleOnStore($storeId)) {
+        if (!$category->isVisibleOnStore($storeId) && !$category->isValidSecret($secret)) {
             return false;
+        }
+
+        if ($category->isValidSecret($secret)) {
+            $category->setIsPreviewMode(true);
         }
 
         $category->setStoreId($storeId);

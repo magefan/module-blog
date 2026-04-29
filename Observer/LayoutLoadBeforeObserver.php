@@ -64,9 +64,11 @@ class LayoutLoadBeforeObserver implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         if ($this->config->isEnabled()) {
-            $post = $this->registry->registry('current_blog_post');
+            $entity = $this->registry->registry('current_blog_post')
+                ?: $this->registry->registry('current_blog_category')
+                    ?: $this->registry->registry('current_blog_tag');
             $layout = $observer->getLayout();
-            if ($post && $post->getIsPreviewMode()) {
+            if ($entity && $entity->getIsPreviewMode()) {
                 $layout->getUpdate()->addHandle('blog_non_cacheable');
             }
 
