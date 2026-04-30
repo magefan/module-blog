@@ -14,6 +14,52 @@ namespace Magefan\Blog\Controller\Adminhtml;
  */
 abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 {
+
+    /**
+     * Generates a preview URL for the provided object and controller name.
+     *
+     * @param object $object
+     * @param string $controllerName
+     * @return string
+     */
+    protected function getPreviewUrl($object, $controllerName)
+    {
+        $storeIds = $object->getStoreIds();
+        if (count($storeIds)) {
+            $storeId = array_shift($storeIds);
+        } else {
+            $storeId = 0;
+        }
+
+        $storeManager = $this->_objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+
+        if (0 == $storeId) {
+            $storeId = $storeManager->getDefaultStoreView()->getId();
+        }
+
+        $blogUrl = $this->_objectManager->get(
+            \Magefan\Blog\Model\Url::class
+        );
+        $url = $this->_objectManager->get(
+            \Magento\Framework\Url::class
+        );
+
+        $scope = $storeManager->getStore($storeId);
+        $url = $url->setScope($scope)
+            ->getUrl(
+                '',
+                [
+                    '_direct'   => $blogUrl->getUrlPath($object->getIdentifier(), $controllerName),
+                    'key'       => null,
+                    '_nosid'    => true,
+                ]
+            );
+
+        $url .= (false === strpos($url, '?')) ? '?' : '&';
+        $url .= 'secret=' . $object->getSecret();
+        return $url;
+    }
+
     /**
      * Prepare images before object save
      *

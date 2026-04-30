@@ -70,7 +70,7 @@ class LayoutLoadBeforeObserver implements ObserverInterface
                         ?:$this->registry->registry('current_blog_author');
             $layout = $observer->getLayout();
             if ($entity && $entity->getIsPreviewMode()) {
-                $layout->getUpdate()->addHandle('blog_non_cacheable');
+                $layout->getUpdate()->addHandle('blog_preview');
             }
 
             $designVersion = $this->config->getDesignVersion();

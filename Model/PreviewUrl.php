@@ -11,6 +11,8 @@ namespace Magefan\Blog\Model;
 
 /**
  * Blog url model
+ *
+ * @deprecated
  */
 class PreviewUrl extends Url
 {
@@ -21,6 +23,8 @@ class PreviewUrl extends Url
      * @param  \Magento\Framework\Model\AbstractModel $object
      * @param  string $controllerName
      * @return string
+     * @deprecated
+     * @see \Magefan\Blog\Controller\Adminhtml\Actions::getPreviewUrl
      */
     public function getUrl($object, $controllerName): string
     {
