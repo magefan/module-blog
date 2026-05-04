@@ -10,7 +10,9 @@
     var getMessageHtml = function (msg, type) {
         var h = document.createElement('div');
         h.classList.add('message-' + type, type, 'message');
-        h.innerHTML = '<div>' + msg + '</div>';
+        var inner = document.createElement('div');
+        inner.textContent = msg;
+        h.appendChild(inner);
         return h;
     };
 

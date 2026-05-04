@@ -170,10 +170,16 @@ class Post extends \Magefan\Blog\App\Action\Action
             }
 
             $comment->save();
-        } catch (\Exception $e) {
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->getResponse()->setBody(json_encode([
                 'success' => false,
                 'message' => $e->getMessage(),
+            ]));
+            return;
+        } catch (\Exception $e) {
+            $this->getResponse()->setBody(json_encode([
+                'success' => false,
+                'message' => __('Something went wrong while submitting your comment. Please try again.'),
             ]));
             return;
         }
