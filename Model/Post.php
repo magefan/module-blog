@@ -74,11 +74,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $_eventObject = 'blog_post';
 
     /**
-     * @var \Magento\Framework\Math\Random
-     */
-    protected $random;
-
-    /**
      * @var \Magento\Cms\Model\Template\FilterProvider
      */
     protected $filterProvider;
@@ -939,17 +934,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
-     * Retrieve if is preview secret is valid
-     *
-     * @param string $secret
-     * @return bool
-     */
-    public function isValidSecret($secret): bool
-    {
-        return ($secret && $this->getSecret() === $secret);
-    }
-
-    /**
      * Retrieve post publish date using format
      *
      * @param string $format
@@ -1199,24 +1183,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         );
 
         return $object->save();
-    }
-
-    /**
-     * Retrieve secret key of post, it can be used during preview
-     *
-     * @return string
-     */
-    public function getSecret()
-    {
-        if ($this->getId() && !$this->getData('secret')) {
-            $this->setData(
-                'secret',
-                $this->random->getRandomString(32)
-            );
-            $this->save();
-        }
-
-        return $this->getData('secret');
     }
 
     /**

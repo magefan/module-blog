@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml;
 
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Request\DataPersistorInterface;
+
 /**
  * Abstract admin controller
  */
@@ -56,8 +59,29 @@ abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
             );
 
         $url .= (false === strpos($url, '?')) ? '?' : '&';
-        $url .= 'secret=' . $object->getSecret();
+        $url .= 'secret=' . $this->getSecret($object);
         return $url;
+    }
+
+    /**
+     * Retrieve secret key, it can be used during preview
+     *
+     * @return string
+     */
+    public function getSecret($object)
+    {
+        if ($object->getId() && !$object->getData('secret')) {
+            $random = $this->_objectManager->get(
+                \Magento\Framework\Math\Random ::class
+            );
+            $object->setData(
+                'secret',
+                $random->getRandomString(32)
+            );
+            $object->save();
+        }
+
+        return $object->getData('secret');
     }
 
     /**

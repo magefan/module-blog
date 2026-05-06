@@ -96,18 +96,12 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     protected $shortContentExtractor;
 
     /**
-     * @var \Magento\Framework\Math\Random
-     */
-    protected $random;
-
-    /**
      * Initialize dependencies.
      *
      * @param Context $context
      * @param Registry $registry
      * @param Url $url
      * @param CollectionFactory $postCollectionFactory
-     * @param \Magento\Framework\Math\Random $random
      * @param AbstractResource|null $resource
      * @param AbstractDb|null $resourceCollection
      * @param array $data
@@ -118,14 +112,12 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         \Magento\Framework\Registry $registry,
         Url $url,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
-        \Magento\Framework\Math\Random $random,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_url = $url;
         $this->postCollectionFactory = $postCollectionFactory;
-        $this->random = $random;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
@@ -721,34 +713,5 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         $this->_cacheManager->clean([self::CACHE_TAG]);
 
         return $this;
-    }
-
-    /**
-     * Check if provided secret matches the category secret.
-     *
-     * @param string $secret
-     * @return bool
-     */
-    public function isValidSecret($secret): bool
-    {
-        return ($secret && $this->getSecret() === $secret);
-    }
-
-    /**
-     * Retrieve secret key of post, it can be used during preview
-     *
-     * @return string
-     */
-    public function getSecret()
-    {
-        if ($this->getId() && !$this->getData('secret')) {
-            $this->setData(
-                'secret',
-                $this->random->getRandomString(32)
-            );
-            $this->save();
-        }
-
-        return $this->getData('secret');
     }
 }

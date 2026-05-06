@@ -82,11 +82,12 @@ class View extends \Magefan\Blog\App\Action\Action
         $storeId = $this->getStoreManager()->getStore()->getId();
         $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
-        if (!$tag->isVisibleOnStore($storeId) && !$tag->isValidSecret($secret)) {
+        $isValidSecret = $secret && $tag->getData('secret') === $secret;
+        if (!$tag->isVisibleOnStore($storeId) && $isValidSecret) {
             return false;
         }
 
-        if ($tag->isValidSecret($secret)) {
+        if ($isValidSecret) {
             $tag->setIsPreviewMode(true);
         }
 

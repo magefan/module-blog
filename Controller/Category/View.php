@@ -85,11 +85,12 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);
 
-        if (!$category->isVisibleOnStore($storeId) && !$category->isValidSecret($secret)) {
+        $isValidSecret = $secret && $category->getData('secret') === $secret;
+        if (!$category->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
         }
 
-        if ($category->isValidSecret($secret)) {
+        if ($isValidSecret) {
             $category->setIsPreviewMode(true);
         }
 
