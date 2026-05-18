@@ -61,7 +61,7 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                       $imageWidthAndHeight = $imageHelper->getWidthAndHeight();
                                       $addWH = !empty($imageWidthAndHeight);
                                   ?>
-                                <img src="<?= $escaper->escapeUrl($post_image); ?>" alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>/>
+                                <img src="<?= $escaper->escapeUrl($featuredImage); ?>" alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>/>
                                 <?php } ?>
                               <div class="post-date">
                                 <span class="day"><?= $escaper->escapeHtml(date("j", strtotime((string)$postDate))); ?></span>
