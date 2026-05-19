@@ -292,7 +292,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      */
     public function validate(): void
     {
-        if (mb_strlen($this->getText() ?: '') < 3) {
+        if (mb_strlen((string)$this->getText() ?: '') < 3) {
             throw new \Magento\Framework\Exception\LocalizedException(__('Comment text is too short.'));
         }
     }
