@@ -49,8 +49,8 @@
                     url: that.opt.page_url[that.opt.current_page+1],
                     success:  function(responseText) {
 
-                        var $html = document.createElement('html');
-                        $html.innerHTML = responseText;
+                        var $html = document.implementation.createHTMLDocument('');
+                        $html.documentElement.innerHTML = responseText;
 
                         var ws = that.opt.list_wrapper;
                         var $nw = $html.querySelector(ws);
