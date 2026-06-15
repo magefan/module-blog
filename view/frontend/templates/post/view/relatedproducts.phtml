@@ -98,7 +98,7 @@ if ($exist = $block->getItems()->getSize()) {
                             <?= $escaper->escapeHtml($_item->getName()) ?></a>
                         </strong>
 
-                        <?= /*@noEscape*/ $block->getProductPrice($_item); ?>
+                        <?= /*@noEscape*/ str_replace('<div', '<div translate="no"', $block->getProductPrice($_item)); ?>
 
                             <?php if ($templateType): ?>
                                 <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
