@@ -12,6 +12,7 @@
     <update handle="editor"/>
     <update handle="blog_update_info"/>
     <body>
+        <attribute name="class" value="catalog-category-edit"/>
         <referenceContainer name="left">
             <block class="Magefan\Blog\Block\Adminhtml\Category\Tree" name="category.tree" template="Magento_Catalog::catalog/category/tree.phtml"/>
         </referenceContainer>
