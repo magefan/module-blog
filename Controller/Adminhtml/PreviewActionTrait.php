@@ -21,8 +21,9 @@ trait PreviewActionTrait
             if (!$model->getId()) {
                 throw new \Exception("Item is not longer exist.", 1);
             }
+            $previewUrl = $this->_objectManager->get(\Magefan\Blog\Model\PreviewUrl::class);
 
-            $redirectUrl = $this->getPreviewUrl($model, $model->getControllerName());
+            $redirectUrl = $previewUrl->getUrl($model, $model->getControllerName());
 
             $this->getResponse()->setRedirect($redirectUrl);
         } catch (\Exception $e) {

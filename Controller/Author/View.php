@@ -61,11 +61,10 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
-        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->getStoreManager()->getStore()->getId();
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
-        $isValidSecret = $secret && $author->getData('secret') === $secret;
+        $isValidSecret = $this->isValidSecret($author);
         if (!$author->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
         }

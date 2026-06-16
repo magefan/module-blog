@@ -12,10 +12,60 @@ namespace Magefan\Blog\Model;
 /**
  * Blog url model
  *
- * @deprecated
  */
-class PreviewUrl extends Url
+class PreviewUrl
 {
+    /**
+     * @var Url
+     */
+    private $url;
+
+    /**
+     * @var \Magento\Framework\Url
+     */
+    private $frameworkUrl;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
+     * @var \Magento\Framework\Math\Random
+     */
+    private $random;
+
+    /**
+     * @param Url $url
+     * @param \Magento\Framework\Url $frameworkUrl
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Math\Random $random
+     */
+    public function __construct(
+        Url $url,
+        \Magento\Framework\Url $frameworkUrl,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Math\Random $random
+    ) {
+        $this->url = $url;
+        $this->frameworkUrl = $frameworkUrl;
+        $this->storeManager = $storeManager;
+        $this->random = $random;
+    }
+
+    /**
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return string
+     */
+    private function getSecret($object): string
+    {
+        if ($object->getId() && !$object->getData('secret')) {
+            $object->setData('secret', $this->random->getRandomString(32));
+            $object->save();
+        }
+
+        return (string) $object->getData('secret');
+    }
 
     /**
      * Retrieve blog page preview url
@@ -23,8 +73,6 @@ class PreviewUrl extends Url
      * @param  \Magento\Framework\Model\AbstractModel $object
      * @param  string $controllerName
      * @return string
-     * @deprecated
-     * @see \Magefan\Blog\Controller\Adminhtml\Actions::getPreviewUrl
      */
     public function getUrl($object, $controllerName): string
     {
@@ -36,24 +84,21 @@ class PreviewUrl extends Url
         }
 
         if (0 == $storeId) {
-            $storeId = $this->_storeManager->getDefaultStoreView()->getId();
+            $storeId = $this->storeManager->getDefaultStoreView()->getId();
         }
 
-        $this->storeId = $storeId;
-
-        $scope = $this->_storeManager->getStore($this->storeId);
-        $url = $this->_url->setScope($scope)
+        $scope = $this->storeManager->getStore($storeId);
+        $url = $this->frameworkUrl->setScope($scope)
             ->getUrl(
                 '',
                 [
-                    '_direct'   => $this->getUrlPath($object->getIdentifier(), $controllerName),
-                    'key'       => null,
-                    '_nosid'    => true,
+                    '_direct' => $this->url->getUrlPath($object->getIdentifier(), $controllerName),
+                    'key'     => null,
+                    '_nosid'  => true,
                 ]
             );
-
         $url .= (false === strpos($url, '?')) ? '?' : '&';
-        $url .= 'secret=' . $object->getSecret();
+        $url .= 'secret=' . $this->getSecret($object);
         return $url;
     }
 }

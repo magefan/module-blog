@@ -80,12 +80,11 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
-        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);
 
-        $isValidSecret = $secret && $category->getData('secret') === $secret;
+        $isValidSecret = $this->isValidSecret($category);
         if (!$category->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
         }
