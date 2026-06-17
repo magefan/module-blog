@@ -82,7 +82,7 @@ class View extends \Magefan\Blog\App\Action\Action
         $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
         $isValidSecret = $this->isValidSecret($tag);
-        if (!$tag->isVisibleOnStore($storeId) && $isValidSecret) {
+        if (!$tag->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
         }
 
