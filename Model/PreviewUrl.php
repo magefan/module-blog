@@ -18,7 +18,7 @@ class PreviewUrl
     /**
      * @var Url
      */
-    private $url;
+    private $blogUrl;
 
     /**
      * @var \Magento\Framework\Url
@@ -42,12 +42,12 @@ class PreviewUrl
      * @param \Magento\Framework\Math\Random $random
      */
     public function __construct(
-        Url $url,
+        Url $blogUrl,
         \Magento\Framework\Url $frameworkUrl,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Math\Random $random
     ) {
-        $this->url = $url;
+        $this->blogUrl = $blogUrl;
         $this->frameworkUrl = $frameworkUrl;
         $this->storeManager = $storeManager;
         $this->random = $random;
@@ -87,16 +87,11 @@ class PreviewUrl
             $storeId = $this->storeManager->getDefaultStoreView()->getId();
         }
 
-        $scope = $this->storeManager->getStore($storeId);
-        $url = $this->frameworkUrl->setScope($scope)
-            ->getUrl(
-                '',
-                [
-                    '_direct' => $this->url->getUrlPath($object->getIdentifier(), $controllerName),
-                    'key'     => null,
-                    '_nosid'  => true,
-                ]
-            );
+        $this->blogUrl->startStoreEmulation($this->storeManager->getStore($storeId));
+        $url = $this->blogUrl->getUrl($object, $controllerName);
+        $this->blogUrl->stopStoreEmulation();
+
+
         $url .= (false === strpos($url, '?')) ? '?' : '&';
         $url .= 'secret=' . $this->getSecret($object);
         return $url;
