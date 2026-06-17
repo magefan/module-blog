@@ -9,15 +9,11 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml;
 
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Request\DataPersistorInterface;
-
 /**
  * Abstract admin controller
  */
 abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 {
-
     /**
      * Prepare images before object save
      *
