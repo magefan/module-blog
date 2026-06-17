@@ -943,6 +943,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      *
      * @param string $secret
      * @return bool
+     * @deprecated
      */
     public function isValidSecret($secret): bool
     {
@@ -1205,6 +1206,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve secret key of post, it can be used during preview
      *
      * @return string
+     * @deprecated
      */
     public function getSecret()
     {

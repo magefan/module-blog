@@ -43,6 +43,18 @@ abstract class Action extends \Magento\Framework\App\Action\Action
     }
 
     /**
+     * Check whether the preview secret from request matches the object's secret.
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return bool
+     */
+    protected function isValidSecret($object): bool
+    {
+        $secret = (string)$this->getRequest()->getParam('secret');
+        return $secret && $object->getData('secret') === $secret;
+    }
+
+    /**
      * Throw control to cms_index_noroute action.
      *
      * @return void

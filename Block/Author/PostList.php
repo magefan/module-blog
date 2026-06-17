@@ -96,6 +96,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     $this->escapeHtml($author->getTitle())
                 );
             }
+            if ($author->getIsPreviewMode()) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+            }
         }
 
         return parent::_prepareLayout();

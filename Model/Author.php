@@ -269,4 +269,5 @@ class Author extends AbstractModel implements AuthorInterface
 
         return $this->shortContentExtractor;
     }
+
 }

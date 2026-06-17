@@ -64,8 +64,13 @@ class View extends \Magefan\Blog\App\Action\Action
         $storeId = $this->getStoreManager()->getStore()->getId();
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
-        if (!$author->isVisibleOnStore($storeId)) {
+        $isValidSecret = $this->isValidSecret($author);
+        if (!$author->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
+        }
+
+        if ($isValidSecret) {
+            $author->setIsPreviewMode(true);
         }
 
         $author->setStoreId($storeId);

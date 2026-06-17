@@ -79,16 +79,16 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
-        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $post = $this->_objectManager->create(\Magefan\Blog\Model\Post::class)->load($id);
 
-        if (!$post->isVisibleOnStore($storeId) && !$post->isValidSecret($secret)) {
+        $isValidSecret = $this->isValidSecret($post);
+        if (!$post->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
         }
 
-        if ($post->isValidSecret($secret)) {
+        if ($isValidSecret) {
             $post->setIsPreviewMode(true);
         }
 
