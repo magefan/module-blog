@@ -102,11 +102,11 @@
         <description translate="true">Link to a Specified Blog Post Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Text</label>
+                <label translate="true">Anchor Custom Title</label>
                 <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Title</label>
+                <label translate="true">Anchor Custom Text</label>
             </parameter>
             <parameter name="entity_id" xsi:type="text" visible="true">
                 <label translate="true">Post ID</label>
@@ -120,11 +120,11 @@
         <description translate="true">Link to a Specified Blog Category Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Text</label>
+                <label translate="true">Anchor Custom Title</label>
                 <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Title</label>
+                <label translate="true">Anchor Custom Text</label>
             </parameter>
             <parameter name="entity_id" xsi:type="text" visible="true">
                 <label translate="true">Category ID</label>
@@ -138,11 +138,11 @@
         <description translate="true">Link to a Specified Blog Tag Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Text</label>
+                <label translate="true">Anchor Custom Title</label>
                 <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Title</label>
+                <label translate="true">Anchor Custom Text</label>
             </parameter>
             <parameter name="entity_id" xsi:type="text" visible="true">
                 <label translate="true">Tag ID</label>
@@ -156,11 +156,11 @@
         <description translate="true">Link to a Specified Blog Author Page</description>
         <parameters>
             <parameter name="anchor_text" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Text</label>
+                <label translate="true">Anchor Custom Title</label>
                 <description translate="true">If empty, we'll use the object name here.</description>
             </parameter>
             <parameter name="title" xsi:type="text" visible="true">
-                <label translate="true">Anchor Custom Title</label>
+                <label translate="true">Anchor Custom Text</label>
             </parameter>
             <parameter name="entity_id" xsi:type="text" visible="true">
                 <label translate="true">Author ID</label>
