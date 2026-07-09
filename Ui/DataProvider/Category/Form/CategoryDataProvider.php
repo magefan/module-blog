@@ -73,17 +73,18 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      */
     public function prepareMeta(array $meta): array
     {
-        $parent =(int)$this->request->getParam('parent');
-
-        $meta['general']['children']['parent'] = [
-            'arguments' => [
-                'data' => [
-                    'config' => [
-                        'default' => $parent
+        if ($this->request->getParam('parent') !== null) {
+            $parent = (int)$this->request->getParam('parent');
+            $meta['data']['children']['path'] = [
+                'arguments' => [
+                    'data' => [
+                        'config' => [
+                            'default' => $parent
+                        ],
                     ],
-                ],
-            ]
-        ];
+                ]
+            ];
+        }
 
         return $meta;
     }
