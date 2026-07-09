@@ -23,6 +23,8 @@ class SocialNetworks implements \Magento\Framework\Option\ArrayInterface
             ['value' => 'Pinterest', 'label' => 'Pinterest'],
             ['value' => 'LinkedIn', 'label' => 'LinkedIn'],
             ['value' => 'BlueSky', 'label' => 'BlueSky'],
+            ['value' => 'WhatsApp', 'label' => 'WhatsApp'],
+            ['value' => 'Email', 'label' => 'Email'],
             ['value' => 'Copy', 'label' => 'Copy Link']
         ];
     }
