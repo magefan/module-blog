@@ -11,15 +11,14 @@
  * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  */
 ?>
+<?= $block->getLayout()->createBlock(\Magefan\Community\Block\JsScript::class)->setMethod('sendBeacon')->toHtml() ?>
 <?php $script = "
-    require(['jquery', 'domReady!'], function($){
+    require(['domReady!'], function(){
         setTimeout(function(){
-            $.ajax({
+            MagefanJs.sendBeacon({
                 url: atob( '" . base64_encode($block->getCounterUrl()) . "'),
-                type:'POST',
-                dataType: 'json',
-                success: function(response) { }
-            })
+                data: {}
+            });
         }, 5000);
     });
 "; ?>
