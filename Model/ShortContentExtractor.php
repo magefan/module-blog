@@ -69,7 +69,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
             if (!$htmlAllowed) {
                 foreach (['style', 'script'] as $tagToRemove) {
                     $content = preg_replace(
-                        "~\<" . $tagToRemove . "(.*)\>(.*)\<\/" . $tagToRemove . "\>~",
+                        "~\<" . $tagToRemove . "\b[^>]*>.*?" . $tagToRemove . "\>~is",
                         '',
                         $content
                     );
