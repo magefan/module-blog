@@ -42,7 +42,17 @@ class InfoBlogExtra extends InfoPlan
             'mfblog_sidebar_contents',
             'mfblog_ai_writer',
             'mfblog_draft_autosave',
-            'mfblog_post_view_latest_posts_by_author'
+            'mfblog_post_view_latest_posts_by_author',
+            'mfblog_post_list_template',
+            'mfblog_index_page_template',
+            'mfblog_post_view_related_posts_template',
+            'mfblog_post_view_related_products_template',
+            'mfblog_sidebar_recent_posts_template',
+            'mfblog_sidebar_featured_posts_template',
+            'mfblog_sidebar_popular_posts_template',
+            'mfblog_product_page_related_posts_template',
+            'mfblog_author_template',
+            'mfblog_search_template',
         ]);
         return $sections;
     }

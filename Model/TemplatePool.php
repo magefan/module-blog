@@ -74,7 +74,9 @@ class TemplatePool
                     if (!empty($item['template_' . $dv])) {
                         return $item['template_' . $dv];
                     }
-                    return $item['template'];
+                    if (!empty($item['template'])) {
+                        return $item['template'];
+                    }
                 }
             }
         }

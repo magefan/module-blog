@@ -17,6 +17,7 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
     {
         return [
             '[data-index="websites"]',
+            '[name="posts_list_template"]',
         ];
     }
 
