@@ -21,6 +21,7 @@
 
             <uiComponent name="blog_category_form"/>
             <block name="mfblog.tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />
+            <block class="Magefan\Blog\Block\Adminhtml\Category\VersionsManager" name="mfblog.versions.manager" template="Magefan_Blog::versions_manager.phtml" />
         </referenceContainer>
     </body>
 </page>

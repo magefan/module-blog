@@ -20,6 +20,7 @@
             <uiComponent name="blog_post_form"/>
             <block class="Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete" name="post.tag.autocomplete" template="Magefan_Blog::post/tag/autocomplete.phtml" />
             <block name="mfblog.tmp.fix" template="Magefan_Blog::admin_grid_issue.phtml" />
+            <block class="Magefan\Blog\Block\Adminhtml\Post\VersionsManager" name="mfblog.versions.manager" template="Magefan_Blog::versions_manager.phtml" />
         </referenceContainer>
     </body>
 </page>

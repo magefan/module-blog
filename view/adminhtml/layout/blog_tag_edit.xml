@@ -14,6 +14,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="blog_tag_form"/>
+            <block class="Magefan\Blog\Block\Adminhtml\Tag\VersionsManager" name="mfblog.versions.manager" template="Magefan_Blog::versions_manager.phtml" />
         </referenceContainer>
     </body>
 </page>
