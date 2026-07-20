@@ -29,6 +29,43 @@ $selectorMap = [
         _currentPlan: " . json_encode($currentPlan) . ",
         _selector: " . json_encode($selectorMap) . ",
 
+        _attachHandlers: function (element, plan) {
+            if (element._vmAttached) return;
+            element._vmAttached = true;
+            if (element.tagName == 'SELECT') {
+                element.addEventListener('mousedown', function () {
+                    this._previousValue = this.value;
+                });
+                element.addEventListener('change', function () {
+                    if (this._isResetting) return;
+                    versionsManager.showAlert(plan);
+                    this._isResetting = true;
+                    this.value = this._previousValue !== undefined ? this._previousValue : '';
+                    this.dispatchEvent(new Event('change', { bubbles: true }));
+                    this._isResetting = false;
+                });
+            } else {
+                element.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    versionsManager.showAlert(plan);
+                });
+                element.querySelectorAll('select').forEach(function (select) {
+                    select.addEventListener('mousedown', function () {
+                        this._previousValue = this.value;
+                    });
+                    select.addEventListener('change', function () {
+                        if (this._isResetting) return;
+                        versionsManager.showAlert(plan);
+                        this._isResetting = true;
+                        this.value = this._previousValue !== undefined ? this._previousValue : '';
+                        this.dispatchEvent(new Event('change', { bubbles: true }));
+                        this._isResetting = false;
+                    });
+                });
+            }
+        },
+
         initListener: function () {
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
@@ -36,43 +73,11 @@ $selectorMap = [
                         let planFeatures = versionsManager._selector[plan];
 
                         planFeatures.forEach(selector => {
-                            if (document.querySelector(selector)) {
-                                const element = document.querySelector(selector);
-
-                                if (element.tagName == 'SELECT') {
-                                    element.addEventListener('mousedown', function () {
-                                        this._previousValue = this.value;
-                                    });
-                                    element.addEventListener('change', function () {
-                                        if (this._isResetting) return;
-                                        versionsManager.showAlert(plan);
-                                        this._isResetting = true;
-                                        this.value = this._previousValue !== undefined ? this._previousValue : '';
-                                        this.dispatchEvent(new Event('change', { bubbles: true }));
-                                        this._isResetting = false;
-                                    });
-                                } else {
-                                    element.addEventListener('click', function (event) {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                        versionsManager.showAlert(plan);
-                                    });
-                                    element.querySelectorAll('select').forEach(function (select) {
-                                        select.addEventListener('mousedown', function () {
-                                            this._previousValue = this.value;
-                                        });
-                                        select.addEventListener('change', function () {
-                                            if (this._isResetting) return;
-                                            versionsManager.showAlert(plan);
-                                            this._isResetting = true;
-                                            this.value = this._previousValue !== undefined ? this._previousValue : '';
-                                            this.dispatchEvent(new Event('change', { bubbles: true }));
-                                            this._isResetting = false;
-                                        });
-                                    });
-                                }
-
-                                versionsManager._selector[plan] = versionsManager._selector[plan].filter(item => item !== selector);
+                            const elements = document.querySelectorAll(selector);
+                            if (elements.length) {
+                                elements.forEach(function (element) {
+                                    versionsManager._attachHandlers(element, plan);
+                                });
                             }
                         });
                     }

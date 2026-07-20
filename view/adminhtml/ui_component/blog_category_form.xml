@@ -339,6 +339,66 @@
                 </item>
             </argument>
         </field>
+        <field name="groups">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CustomerGroups</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog+)</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">groups</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="category_img" sortOrder="10" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Category Image (Blog+)</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="source" xsi:type="string">magefan_blog_category</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Category Image (Blog+)</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>false</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="blogplus/category_upload/categoryImg"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <openDialogTitle>Category Image</openDialogTitle>
+                        <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="category_img_alt">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Category Image Alt (Blog+)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">category_img_alt</item>
+                    <item name="sortOrder" xsi:type="number">15</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
     <fieldset name="search_engine_optimization">
         <argument name="data" xsi:type="array">
@@ -427,66 +487,6 @@
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">category</item>
                     <item name="dataScope" xsi:type="string">meta_robots</item>
-                </item>
-            </argument>
-        </field>
-        <field name="groups">
-            <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CustomerGroups</item>
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog+)</item>
-                    <item name="dataType" xsi:type="string">number</item>
-                    <item name="formElement" xsi:type="string">multiselect</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
-                    <item name="source" xsi:type="string">post</item>
-                    <item name="dataScope" xsi:type="string">groups</item>
-                    <item name="default" xsi:type="number">0</item>
-                </item>
-            </argument>
-        </field>
-        <field name="category_img" sortOrder="10" formElement="imageUploader">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="collapsible" xsi:type="boolean">true</item>
-                    <item name="label" xsi:type="string" translate="true">Category Image (Blog+)</item>
-                    <item name="sortOrder" xsi:type="number">10</item>
-                    <item name="source" xsi:type="string">magefan_blog_category</item>
-                </item>
-            </argument>
-            <settings>
-                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
-                <dataType>string</dataType>
-                <label translate="true">Category Image (Blog+)</label>
-                <visible>true</visible>
-                <required>false</required>
-            </settings>
-            <formElements>
-                <imageUploader>
-                    <settings>
-                        <required>false</required>
-                        <uploaderConfig>
-                            <param xsi:type="url" name="url" path="blogplus/category_upload/categoryImg"/>
-                        </uploaderConfig>
-                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
-                        <openDialogTitle>Category Image</openDialogTitle>
-                        <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
-                        <allowedExtensions>jpg jpeg png</allowedExtensions>
-                        <maxFileSize>4194304</maxFileSize>
-                    </settings>
-                </imageUploader>
-            </formElements>
-        </field>
-        <field name="category_img_alt">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Category Image Alt (Blog+)</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">post</item>
-                    <item name="dataScope" xsi:type="string">category_img_alt</item>
-                    <item name="sortOrder" xsi:type="number">15</item>
                 </item>
             </argument>
         </field>

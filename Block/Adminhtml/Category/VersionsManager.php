@@ -20,6 +20,7 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
             '[name="posts_list_template"]',
             '.admin__fieldset-section.category [data-index="button_product"]',
             '[data-index="websites"]',
+            '[data-index="related"]'
         ];
     }
 

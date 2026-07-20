@@ -17,7 +17,8 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
     {
         return [
             '[name="end_time"]',
-            '[name="post_video"]'
+            '[name="post_video"]',
+            '[data-index="container_coauthors"]',
         ];
     }
 
