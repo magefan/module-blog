@@ -51,6 +51,7 @@ class InfoBlogExtra extends InfoPlan
             'mfblog_sidebar_custom_sticky',
             'mfblog_sidebar_custom2_sticky',
             'mfblog_sidebar_rss_feed_sticky',
+            'mfblog_sidebar_contents_sticky',
             'mfblog_ai_writer',
             'mfblog_draft_autosave',
             'mfblog_post_view_latest_posts_by_author'
