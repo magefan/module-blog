@@ -18,7 +18,8 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
         return [
             '[name="end_time"]',
             '[name="post_video"]',
-            '[data-index="container_coauthors"]',
+            '[data-index="coauthors"]',
+            '.store-switcher'
         ];
     }
 
@@ -32,11 +33,11 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
             '[name="featured_list_img_alt"]',
             '[name="enable_comments"]',
             '[name="url_key_create_redirect"]',
-            '[upload-area-id="featured_list_img"]',
+            '.featured_list_img .file-uploader.image-uploader',
             '#blog_post_formrule_conditions_fieldset_',
-            '[data-index="display_on_product"]',
-            '[data-index="display_on_post"]',
-            '[data-index="auto_related"]',
+            '[name$="[display_on_product]"]',
+            '[name$="[display_on_post]"]',
+            '[name$="[auto_related]"]',
             '[data-index="related_by_rule"]',
         ];
     }

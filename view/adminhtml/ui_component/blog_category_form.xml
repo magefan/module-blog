@@ -370,6 +370,9 @@
                 <label translate="true">Category Image (Blog+)</label>
                 <visible>true</visible>
                 <required>false</required>
+                <additionalClasses>
+                    <class name="category_img">true</class>
+                </additionalClasses>
             </settings>
             <formElements>
                 <imageUploader>
@@ -491,7 +494,7 @@
             </argument>
         </field>
     </fieldset>
-    <fieldset name="bottom_content">
+    <fieldset name="bottom_content_container">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
@@ -516,7 +519,7 @@
             </argument>
         </field>
     </fieldset>
-    <fieldset name="related">
+    <fieldset name="related_container">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
@@ -524,7 +527,7 @@
                 <item name="sortOrder" xsi:type="number">45</item>
             </item>
         </argument>
-        <fieldset name="product">
+        <fieldset name="posts">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="collapsible" xsi:type="boolean">false</item>

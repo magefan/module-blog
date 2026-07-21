@@ -16,6 +16,13 @@
     <update handle="editor"/>
     <update handle="blog_update_info"/>
     <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
         <referenceContainer name="content">
             <uiComponent name="blog_post_form"/>
             <block class="Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete" name="post.tag.autocomplete" template="Magefan_Blog::post/tag/autocomplete.phtml" />

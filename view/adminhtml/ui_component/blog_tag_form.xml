@@ -266,6 +266,9 @@
                 <label translate="true">Tag Image (Blog+)</label>
                 <visible>true</visible>
                 <required>false</required>
+                <additionalClasses>
+                    <class name="tag_img">true</class>
+                </additionalClasses>
             </settings>
             <formElements>
                 <imageUploader>

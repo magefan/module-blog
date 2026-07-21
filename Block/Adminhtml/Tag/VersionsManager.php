@@ -18,6 +18,7 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
         return [
             '[data-index="websites"]',
             '[name="posts_list_template"]',
+            '.store-switcher'
         ];
     }
 
@@ -28,7 +29,7 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
     {
         return [
             '[name="url_key_create_redirect"]',
-            '[upload-area-id="tag_img"]',
+            '.tag_img .file-uploader.image-uploader',
             '[name="tag_img_alt"]',
         ];
     }

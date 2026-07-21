@@ -32,7 +32,13 @@ $selectorMap = [
         _attachHandlers: function (element, plan) {
             if (element._vmAttached) return;
             element._vmAttached = true;
-            if (element.tagName == 'SELECT') {
+            if (element.dataset.index === 'coauthors') {
+                element.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    versionsManager.showAlert(plan);
+                });
+            } else if (element.tagName == 'SELECT' || (element.id !== 'blog_post_formrule_conditions_fieldset_' && element.querySelector('select'))) {
                 element.addEventListener('mousedown', function () {
                     this._previousValue = this.value;
                 });
@@ -45,23 +51,17 @@ $selectorMap = [
                     this._isResetting = false;
                 });
             } else {
-                element.addEventListener('click', function (event) {
+                var wrapper = document.createElement('div');
+                wrapper.style.cssText = 'position:relative;';
+                element.parentNode.insertBefore(wrapper, element);
+                wrapper.appendChild(element);
+                var overlay = document.createElement('div');
+                overlay.style.cssText = 'position:absolute;inset:0;z-index:900;cursor:not-allowed;';
+                wrapper.appendChild(overlay);
+                overlay.addEventListener('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     versionsManager.showAlert(plan);
-                });
-                element.querySelectorAll('select').forEach(function (select) {
-                    select.addEventListener('mousedown', function () {
-                        this._previousValue = this.value;
-                    });
-                    select.addEventListener('change', function () {
-                        if (this._isResetting) return;
-                        versionsManager.showAlert(plan);
-                        this._isResetting = true;
-                        this.value = this._previousValue !== undefined ? this._previousValue : '';
-                        this.dispatchEvent(new Event('change', { bubbles: true }));
-                        this._isResetting = false;
-                    });
                 });
             }
         },

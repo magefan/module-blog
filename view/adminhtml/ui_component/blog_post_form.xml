@@ -456,6 +456,9 @@
                 <label translate="true">Media Gallery</label>
                 <visible>true</visible>
                 <required>false</required>
+                <additionalClasses>
+                    <class name="featured_list_img">true</class>
+                </additionalClasses>
             </settings>
             <formElements>
                 <imageUploader>

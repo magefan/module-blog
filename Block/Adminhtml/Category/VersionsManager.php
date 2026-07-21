@@ -20,7 +20,8 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
             '[name="posts_list_template"]',
             '.admin__fieldset-section.category [data-index="button_product"]',
             '[data-index="websites"]',
-            '[data-index="related"]'
+            '[data-index="posts"]',
+            '.store-switcher'
         ];
     }
 
@@ -31,7 +32,7 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
     {
         return [
             '[name="url_key_create_redirect"]',
-            '[upload-area-id="category_img"]',
+            '.category_img .file-uploader.image-uploader',
             '[name="category_img_alt"]',
             '[data-index="bottom_content"]',
             '[name="groups"]'
