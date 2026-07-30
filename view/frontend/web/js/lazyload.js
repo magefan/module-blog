@@ -14,11 +14,9 @@
         window.isMfPostLazyLoadIntited = true;
 
         var that = this;
-        var _deepestScroll = 0;
 
         /**
          * Init options
-         * @type {Object}
          */
         that.opt = Object.assign({
             expires: null,
@@ -85,7 +83,7 @@
                                         el.style.backgroundImage = "url('" + url  + "')";
                                     }
                                 }
-                                
+
                             }
                         }
                         endLoading();
@@ -111,25 +109,27 @@
 
         /* If auto trigger enabled */
         if (that.opt.auto_trigger) {
-            document.addEventListener('scroll', function () {
-
-                if (_deepestScroll + 50 > document.documentElement.scrollTop) {
-                    return;
-                }
-
-                _deepestScroll = document.documentElement.scrollTop;
-
-                if ((document.querySelector(that.opt.trigger_element).getBoundingClientRect().top - that.opt.padding) <= window.innerHeight) {
-                    startLoading();
-                }
-            });
+            var triggerEl = document.querySelector(that.opt.trigger_element);
+            if (triggerEl) {
+                var observer = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) {
+                        startLoading();
+                    }
+                }, {
+                    rootMargin: that.opt.padding + 'px 0px'
+                });
+                observer.observe(triggerEl);
+            }
         }
 
         /* On trigger element click */
         if (that.opt.trigger_element) {
-            document.querySelector(that.opt.trigger_element).addEventListener('click', function () {
-                startLoading();
-            });
+            var clickEl = document.querySelector(that.opt.trigger_element);
+            if (clickEl) {
+                clickEl.addEventListener('click', function () {
+                    startLoading();
+                });
+            }
         }
     };
 
