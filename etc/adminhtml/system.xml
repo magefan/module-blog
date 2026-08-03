@@ -1195,6 +1195,12 @@
                     </field>
                 </group>
             </group>
+            <group id="widgets_info" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Widgets</label>
+                <field id="widgetsInfo" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\WidgetsInfo</frontend_model>
+                </field>
+            </group>
         </section>
     </system>
 </config>
