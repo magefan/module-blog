@@ -57,6 +57,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
         $key = hash('sha256', $content) . $len . $endCharacters;
         if (!isset($this->executedContent[$key])) {
 
+            $content = preg_replace('/{{widget[^}]*}}/i', '', $content);
             $content = $this->filterProvider->getPageFilter()->filter(
                 (string) $content ?: ''
             );
