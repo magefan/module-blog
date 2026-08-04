@@ -45,12 +45,18 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     protected $templatePool;
 
     /**
+     * @var \Magefan\Community\Api\HyvaThemeDetectionInterface
+     */
+    protected $mfHyvaThemeDetection;
+
+    /**
      * Related products block construct
      * @param Context $context
      * @param Visibility $catalogProductVisibility
      * @param Manager $moduleManager
      * @param CollectionFactory $productCollectionFactory
      * @param TemplatePool $templatePool
+     * @param \Magefan\Community\Api\HyvaThemeDetectionInterface $mfHyvaThemeDetection
      * @param array $data
      */
     public function __construct(
@@ -59,11 +65,13 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
         \Magento\Framework\Module\Manager $moduleManager,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magefan\Blog\Model\TemplatePool $templatePool,
+        \Magefan\Community\Api\HyvaThemeDetectionInterface $mfHyvaThemeDetection,
         array $data = []
     ) {
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_moduleManager = $moduleManager;
         $this->templatePool = $templatePool;
+        $this->mfHyvaThemeDetection = $mfHyvaThemeDetection;
         parent::__construct($context, $data);
     }
 
@@ -85,12 +93,7 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
 
         $this->_itemCollection->setVisibility($this->_catalogProductVisibility->getVisibleInCatalogIds());
 
-        $this->_itemCollection->setPageSize(
-            (int) $this->_scopeConfig->getValue(
-                \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_NUMBER,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            )
-        );
+        $this->_itemCollection->setPageSize($this->getPageSize());
 
         $this->_itemCollection->getSelect()->order('rl.position', 'ASC');
 
@@ -246,10 +249,34 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
         if (!$this->displayProducts()) {
             return '';
         }
+
+        $this->prepareHyvaSliderData();
+
         $html = parent::_toHtml();
         $html = str_replace('product-item" style="display: none;"', 'product-item"', $html);
 
         return $html;
+    }
+
+    /**
+     * Pass page_size and additional_filters to Hyvä product-slider.phtml via getData().
+     *
+     * @return void
+     */
+    protected function prepareHyvaSliderData(): void
+    {
+        if (!$this->mfHyvaThemeDetection->execute()
+            || $this->getTemplate() !== 'Magento_Catalog::product/slider/product-slider.phtml'
+        ) {
+            return;
+        }
+
+        if (!$this->hasData('page_size')) {
+            $this->setData('page_size', $this->getPageSize());
+        }
+        if (!$this->hasData('additional_filters')) {
+            $this->setData('additional_filters', $this->getAdditionalFilters());
+        }
     }
 
     /**
@@ -269,6 +296,16 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
         return parent::getTemplate();
     }
 
+    /**
+     * @return int
+     */
+    public function getPageSize(): int
+    {
+        return (int) $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_RELATED_PRODUCTS_NUMBER,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 
     /**
      * Return additional filters to restrict the product collection.
@@ -277,17 +314,16 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getAdditionalFilters(): array
     {
-        // fix for Hyvä slider template
-        $ids = $this->getItems()->getAllIds();
-
-        if (empty($ids)) {
-            return [];
+        $ids = [];
+        foreach ($this->getItems() as $item) {
+            $ids[] = (int)$item->getId();
         }
 
+        // Prevent Hyvä slider from fetching all products when no related products are set
         return [
             [
                 'field'         => 'entity_id',
-                'value'         => $ids,
+                'value'         => empty($ids) ? [0] : $ids,
                 'conditionType' => 'in',
             ],
         ];
