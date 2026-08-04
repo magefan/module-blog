@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * @var \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete $block
+ * @var \Magefan\Blog\Block\Adminhtml\System\Config\Form\SortableMultiselect $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<?php $selected = $block->getSelectedValues(); ?>
+<div id="sortable-multiselect-container">
+    <ul id="<?= $escaper->escapeHtml($block->getElement()->getId()) ?>-sortable-list" class="sortable-list" style="list-style-type: none;">
+        <?php foreach ($block->getOptions() as $option): ?>
+            <li data-value="<?= $escaper->escapeHtmlAttr($option['value']) ?>" style="cursor: pointer"
+                class="<?= in_array($option['value'], $selected) ? 'selected' : '' ?>">
+                <input type="checkbox"
+                    <?= in_array($option['value'], $selected) ? 'checked' : '' ?> />
+                <?= $escaper->escapeHtml($option['label']) ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <input type="hidden"
+           id="<?= $escaper->escapeHtmlAttr($block->getElement()->getHtmlId()) ?>"
+           name="<?= $escaper->escapeHtmlAttr($block->getElement()->getName()) ?>"
+           value="<?= $escaper->escapeHtmlAttr($block->getElement()->getValue()) ?>" />
+</div>
+
+<?php $script = "
+    require(['jquery', 'jquery/ui'], function ($) {
+        var \$list = $('#" . $escaper->escapeHtml($block->getElement()->getId()) . "-sortable-list');
+        var \$hidden = $('#" . $escaper->escapeJs($block->getElement()->getHtmlId()) . "');
+
+        function syncValue() {
+            var values = [];
+            \$list.find('li').each(function () {
+                if ($(this).find('input[type=checkbox]').is(':checked')) {
+                    values.push($(this).data('value'));
+                }
+            });
+            \$hidden.val(values.join(','));
+        }
+
+        \$list.sortable({
+            update: syncValue,
+            placeholder: 'sortable-placeholder'
+        });
+
+        \$list.on('change', 'input[type=checkbox]', function () {
+            $(this).closest('li').toggleClass('selected', this.checked);
+            syncValue();
+        });
+
+        syncValue(); // initial state
+    });
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
