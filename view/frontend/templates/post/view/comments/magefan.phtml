@@ -183,25 +183,10 @@ if ($commentsCount) {
 </div>
 
 <?php $script = "
-    var _deepestScroll = 0;
-    var mfBlogInitCommentsJsLoaded = 0;
+    var mfCommentsObserver = new IntersectionObserver(function (entries, obs) {
+        if (entries[0].isIntersecting) {
+            obs.disconnect();
 
-    function mfBlogInitCommentsJs(firstCheck) {
-        if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
-            return;
-        };
-
-        _deepestScroll = document.documentElement.scrollTop;
-
-        let commentElement = document.querySelector('#post-comments');
-        let offset = 50;
-
-        let isCommentElementVisible = ((commentElement.getBoundingClientRect().top - offset) < window.innerHeight);
-
-        if (isCommentElementVisible && !mfBlogInitCommentsJsLoaded) {
-            document.removeEventListener('scroll', mfBlogInitCommentsJs);
-            mfBlogInitCommentsJsLoaded = 1;
-            
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.type = 'text/css';
@@ -213,9 +198,8 @@ if ($commentsCount) {
             script.src = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-comments.js')) . "';
             document.head.append(script);
         }
-    };
+    }, { rootMargin: '50px' });
 
-    mfBlogInitCommentsJs(true);
-    document.addEventListener('scroll', mfBlogInitCommentsJs);";
+    mfCommentsObserver.observe(document.querySelector('#post-comments'));";
 ?>
 <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

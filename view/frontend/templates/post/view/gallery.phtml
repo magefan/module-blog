@@ -51,24 +51,13 @@ if (!isset($escaper)) {
     </div>
     <?php
         $script = "
-            var _deepestScroll = 0;
             var mfBlogInitFancyBoxLoaded = 0;
-    
-            function mfBlogInitFancyBox(firstCheck) {
-                if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
-                    return;
-                };
-    
-                _deepestScroll = document.documentElement.scrollTop;
-    
-                let fancyGallery = document.querySelector('.post-gallery');
-                let offset = 150;
-                let isFancyGalleryVisible = ((fancyGallery.getBoundingClientRect().top - offset) < window.innerHeight);
-    
-                if (isFancyGalleryVisible && !mfBlogInitFancyBoxLoaded) {
-                    document.removeEventListener('scroll', mfBlogInitFancyBox);
+
+            var mfFancyObserver = new IntersectionObserver(function (entries, obs) {
+                if (entries[0].isIntersecting && !mfBlogInitFancyBoxLoaded) {
+                    obs.disconnect();
                     mfBlogInitFancyBoxLoaded = 1;
-    
+
                     const link = document.createElement('link');
                     link.rel = 'stylesheet';
                     link.type = 'text/css';
@@ -82,10 +71,9 @@ if (!isset($escaper)) {
                             document.head.append(script);"
                         : "require(['Magefan_Blog/js/fancybox.min'], function(){});" ). "
                 }
-            };
-    
-            mfBlogInitFancyBox(true);
-            document.addEventListener('scroll', mfBlogInitFancyBox);
+            }, { rootMargin: '150px' });
+
+            mfFancyObserver.observe(document.querySelector('.post-gallery'));
         ";
     ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
