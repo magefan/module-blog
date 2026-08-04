@@ -28,17 +28,22 @@ trait Widget
     }
 
     /**
-     * Retrieve block html
+     * Retrieve block html, injecting mfblog-sticky class into the wrapper div when sticky is enabled.
      *
      * @return string
      */
     protected function _toHtml()
     {
-        if ($this->getConfigValue('enabled')) {
-            return parent::_toHtml();
+        if (!$this->getConfigValue('enabled')) {
+            return '';
+        }
+        $html = parent::_toHtml();
+
+        if ($html && $this->getConfigValue('sticky')) {
+            $html = preg_replace('/(<div\b[^>]*\bclass=")/', '$1mfblog-sticky ', $html, 1);
         }
 
-        return '';
+        return $html;
     }
 
     /**
