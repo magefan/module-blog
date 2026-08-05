@@ -76,7 +76,7 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $parent = $this->request->getParam('parent');
         if (null !== $parent) {
             $parent = (int)$parent;
-            $meta['data']['children']['path'] = [
+            $meta['data']['children']['parent'] = [
                 'arguments' => [
                     'data' => [
                         'config' => [
