@@ -107,6 +107,9 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getItems()
     {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
         if (null === $this->_itemCollection) {
             $this->_prepareCollection();
         }
@@ -136,7 +139,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getIdentities()
     {
-        if (!$this->getPost()) {
+        if (!$this->getPost() || !$this->getConfigValue('enabled')) {
             return [];
         }
 
