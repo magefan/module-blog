@@ -5,7 +5,6 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
-
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 use Magento\Config\Block\System\Config\Form\Field;
@@ -34,5 +33,29 @@ class SortableMultiselect extends Field
     {
         $value = $this->getElement()->getValue();
         return $value ? explode(',', $value) : [];
+    }
+
+    public function getSortedOptions(): array
+    {
+        $options = $this->getOptions();
+        $selected = $this->getSelectedValues();
+
+        $optionsByValue = [];
+        foreach ($options as $option) {
+            $optionsByValue[$option['value']] = $option;
+        }
+
+        $sorted = [];
+        foreach ($selected as $value) {
+            if (isset($optionsByValue[$value])) {
+                $sorted[] = $optionsByValue[$value];
+                unset($optionsByValue[$value]);
+            }
+        }
+        foreach ($optionsByValue as $option) {
+            $sorted[] = $option;
+        }
+
+        return $sorted;
     }
 }

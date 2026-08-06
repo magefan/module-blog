@@ -19,13 +19,16 @@ if (!isset($escaper)) {
 }
 ?>
 <?php $selected = $block->getSelectedValues(); ?>
+<?php $isDisabled = (bool)$block->getElement()->getDisabled(); ?>
+
 <div id="sortable-multiselect-container">
-    <ul id="<?= $escaper->escapeHtml($block->getElement()->getId()) ?>-sortable-list" class="sortable-list" style="list-style-type: none;">
-        <?php foreach ($block->getOptions() as $option): ?>
+    <ul id="<?= $escaper->escapeHtml($block->getElement()->getId()) ?>-sortable-list" class="sortable-list<?= $isDisabled ? ' disabled' : '' ?>" style="list-style-type: none;">   
+        <?php foreach ($block->getSortedOptions() as $option): ?>
             <li data-value="<?= $escaper->escapeHtmlAttr($option['value']) ?>" style="cursor: pointer"
                 class="<?= in_array($option['value'], $selected) ? 'selected' : '' ?>">
                 <input type="checkbox"
-                    <?= in_array($option['value'], $selected) ? 'checked' : '' ?> />
+                    <?= in_array($option['value'], $selected) ? 'checked' : '' ?>
+                    <?= $isDisabled ? 'disabled="disabled"' : '' ?> />
                 <?= $escaper->escapeHtml($option['label']) ?>
             </li>
         <?php endforeach; ?>
@@ -36,16 +39,24 @@ if (!isset($escaper)) {
            value="<?= $escaper->escapeHtmlAttr($block->getElement()->getValue()) ?>" />
 </div>
 
+<style>
+    #sortable-multiselect-container .sortable-list.disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+</style>
+
 <?php $script = "
-    require(['jquery', 'jquery/ui'], function ($) {
-        var \$list = $('#" . $escaper->escapeHtml($block->getElement()->getId()) . "-sortable-list');
-        var \$hidden = $('#" . $escaper->escapeJs($block->getElement()->getHtmlId()) . "');
+    require(['jquery', 'jquery/ui'], function (\$) {
+        var \$list = \$('#" . $escaper->escapeHtml($block->getElement()->getId()) . "-sortable-list');
+        var \$hidden = \$('#" . $escaper->escapeJs($block->getElement()->getHtmlId()) . "');
+        var \$inheritCheckbox = \$('#" . $escaper->escapeHtml($block->getElement()->getHtmlId()) . "_inherit');
 
         function syncValue() {
             var values = [];
             \$list.find('li').each(function () {
-                if ($(this).find('input[type=checkbox]').is(':checked')) {
-                    values.push($(this).data('value'));
+                if (\$(this).find('input[type=checkbox]').is(':checked')) {
+                    values.push(\$(this).data('value'));
                 }
             });
             \$hidden.val(values.join(','));
@@ -57,8 +68,12 @@ if (!isset($escaper)) {
         });
 
         \$list.on('change', 'input[type=checkbox]', function () {
-            $(this).closest('li').toggleClass('selected', this.checked);
+            \$(this).closest('li').toggleClass('selected', this.checked);
             syncValue();
+        });
+
+        \$inheritCheckbox.on('change', function () {
+            \$list.toggleClass('disabled', \$(this).is(':checked'));
         });
 
         syncValue(); // initial state
