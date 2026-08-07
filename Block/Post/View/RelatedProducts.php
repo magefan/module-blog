@@ -163,9 +163,6 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
       */
     public function getIdentities()
     {
-        if (!$this->displayProducts()) {
-            return [];
-        }
         $identities = [];
         foreach ($this->getItems() as $item) {
             // phpcs:ignore Magento2.Performance.ForeachArrayMerge

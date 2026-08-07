@@ -139,7 +139,7 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getIdentities()
     {
-        if (!$this->getPost() || !$this->getConfigValue('enabled')) {
+        if (!$this->getPost()) {
             return [];
         }
 
