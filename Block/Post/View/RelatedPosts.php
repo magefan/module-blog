@@ -63,6 +63,30 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        if (!$this->displayPosts()) {
+            return '';
+        }
+
+        return parent::_toHtml();
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentities()
+    {
+        if (!$this->displayPosts()) {
+            return [];
+        }
+
+        return parent::getIdentities();
+    }
+
+    /**
      * Retrieve the block title or default to 'Related Posts'
      *
      * @return string
