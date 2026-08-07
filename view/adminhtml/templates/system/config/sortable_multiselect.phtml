@@ -8,8 +8,8 @@
 ?>
 <?php
 /**
- * @var \Magefan\Blog\Block\Adminhtml\Post\Tag\Autocomplete $block
- * @var \Magefan\Blog\Block\Adminhtml\System\Config\Form\SortableMultiselect $mfSecureRenderer
+ * @var \Magefan\Blog\Block\Adminhtml\System\Config\Form\SortableMultiselect $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  * @var \Magento\Framework\Escaper $escaper
  */
 
@@ -18,11 +18,14 @@ if (!isset($escaper)) {
     $escaper = $block;
 }
 ?>
-<?php $selected = $block->getSelectedValues(); ?>
-<?php $isDisabled = (bool)$block->getElement()->getDisabled(); ?>
+<?php
+$htmlId = $block->getElement()->getHtmlId();
+$selected = $block->getSelectedValues();
+$isDisabled = (bool)$block->getElement()->getDisabled();
+?>
 
-<div id="sortable-multiselect-container">
-    <ul id="<?= $escaper->escapeHtml($block->getElement()->getId()) ?>-sortable-list" class="sortable-list<?= $isDisabled ? ' disabled' : '' ?>" style="list-style-type: none;">   
+<div id="<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-multiselect-container">
+    <ul id="<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-list" class="sortable-list<?= $isDisabled ? ' disabled' : '' ?>" style="list-style-type: none;">
         <?php foreach ($block->getSortedOptions() as $option): ?>
             <li data-value="<?= $escaper->escapeHtmlAttr($option['value']) ?>" style="cursor: pointer"
                 class="<?= in_array($option['value'], $selected) ? 'selected' : '' ?>">
@@ -34,23 +37,31 @@ if (!isset($escaper)) {
         <?php endforeach; ?>
     </ul>
     <input type="hidden"
-           id="<?= $escaper->escapeHtmlAttr($block->getElement()->getHtmlId()) ?>"
+           id="<?= $escaper->escapeHtmlAttr($htmlId) ?>"
            name="<?= $escaper->escapeHtmlAttr($block->getElement()->getName()) ?>"
            value="<?= $escaper->escapeHtmlAttr($block->getElement()->getValue()) ?>" />
 </div>
 
 <style>
-    #sortable-multiselect-container .sortable-list.disabled {
+    #<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-multiselect-container .sortable-list.disabled {
         opacity: .5;
         pointer-events: none;
+    }
+    #<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-multiselect-container .sortable-list li {
+        padding: 2px 0;
+    }
+    #<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-multiselect-container .sortable-placeholder {
+        height: 1.8em;
+        border: 1px dashed #adadad;
+        background: #f5f5f5;
     }
 </style>
 
 <?php $script = "
     require(['jquery', 'jquery/ui'], function (\$) {
-        var \$list = \$('#" . $escaper->escapeHtml($block->getElement()->getId()) . "-sortable-list');
-        var \$hidden = \$('#" . $escaper->escapeJs($block->getElement()->getHtmlId()) . "');
-        var \$inheritCheckbox = \$('#" . $escaper->escapeHtml($block->getElement()->getHtmlId()) . "_inherit');
+        var \$list = \$('#" . $escaper->escapeJs($htmlId) . "-sortable-list');
+        var \$hidden = \$('#" . $escaper->escapeJs($htmlId) . "');
+        var \$inheritCheckbox = \$('#" . $escaper->escapeJs($htmlId) . "_inherit');
 
         function syncValue() {
             var values = [];
