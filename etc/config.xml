@@ -300,6 +300,8 @@
             </developer>
             <ai_writer>
                 <enabled_ai_writer>1</enabled_ai_writer>
+                <chat_gpt_model>gpt-4o-mini</chat_gpt_model>
+                <chat_gpt_image_model>gpt-image-1</chat_gpt_image_model>
                 <default_prompt_template>Write an article about {{post_topic}}, use these seo keywords: {{keywords}}</default_prompt_template>
                 <generate_post_image>1</generate_post_image>
                 <default_image_prompt_template>A vibrant and modern illustration representing the {{post_topic}}</default_image_prompt_template>
