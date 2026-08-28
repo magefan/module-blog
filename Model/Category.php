@@ -161,8 +161,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     public function load($modelId, $field = null)
     {
         $object = parent::load($modelId, $field);
-        if (!isset(self::$loadedCategoriesRepository[$object->getId()])) {
-            self::$loadedCategoriesRepository[$object->getId()] = $object;
+        $objectId = $object->getId();
+        if ($objectId !== null && !isset(self::$loadedCategoriesRepository[$objectId])) {
+            self::$loadedCategoriesRepository[$objectId] = $object;
         }
 
         return $object;

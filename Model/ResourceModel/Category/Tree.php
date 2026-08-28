@@ -232,7 +232,7 @@ class Tree extends Dbp
     {
         $pathIds = $category->getPathIds();
         $rootNodeId = $rootNode->getId();
-        $rootNodePath = $rootNode->getData($this->_pathField);
+        $rootNodePath = (string)$rootNode->getData($this->_pathField);
 
         $select = clone $this->_select;
         $select->order($this->_table . '.' . $this->_orderField . ' DESC');
