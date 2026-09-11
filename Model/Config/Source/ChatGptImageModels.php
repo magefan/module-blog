@@ -14,17 +14,9 @@ class ChatGptImageModels implements \Magento\Framework\Option\ArrayInterface
      * @var string[]
      */
     private $models = [
-        'gpt-image-1',
-        'gpt-image-2'
-    ];
-
-    /**
-     * Models which will soon stop being supported
-     *
-     * @var string[]
-     */
-    private $deprecatedModels = [
-        'gpt-image-1'
+        'gpt-image-2',
+        'gpt-image-2.5-sunburst',
+        'gpt-image-2.5-flare'
     ];
 
     /**
@@ -37,11 +29,7 @@ class ChatGptImageModels implements \Magento\Framework\Option\ArrayInterface
         $result = [];
 
         foreach ($this->models as $modelCode) {
-            $label = $modelCode;
-            if (in_array($modelCode, $this->deprecatedModels, true)) {
-                $label .= ' (' . __('Deprecated') . ')';
-            }
-            $result[] = ['value' => $modelCode, 'label' => $label];
+            $result[] = ['value' => $modelCode, 'label' => $modelCode];
         }
 
         return $result;

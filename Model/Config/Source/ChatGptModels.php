@@ -26,25 +26,9 @@ class ChatGptModels implements \Magento\Framework\Option\ArrayInterface
 
         'gpt-4.1',
         'gpt-4.1-mini',
-        'gpt-4.1-nano',
 
-        'gpt-4',
         'gpt-4o',
         'gpt-4o-mini',
-
-        'gpt-3.5-turbo'
-    ];
-
-    /**
-     * Models which will soon stop being supported
-     *
-     * @var string[]
-     */
-    private $deprecatedModels = [
-        'gpt-4.1-nano',
-        'gpt-4',
-        'gpt-4-turbo',
-        'gpt-3.5-turbo'
     ];
 
     /**
@@ -57,11 +41,7 @@ class ChatGptModels implements \Magento\Framework\Option\ArrayInterface
         $result = [];
 
         foreach ($this->models as $modelCode) {
-            $label = $modelCode;
-            if (in_array($modelCode, $this->deprecatedModels, true)) {
-                $label .= ' (' . __('Deprecated') . ')';
-            }
-            $result[] = ['value' => $modelCode, 'label' => $label];
+            $result[] = ['value' => $modelCode, 'label' => $modelCode];
         }
 
         return $result;
