@@ -19,11 +19,10 @@ class ImageSizeOptions implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            ['value' => '256x256', 'label' => __('256x256')],
-            ['value' => '512x512', 'label' => __('512x512')],
-            ['value' => '1024x1024', 'label' => __('1024x1024')]
-            //['value' => '1024x1792', 'label' => __('1024x1792')],
-            //['value' => '1792x1024', 'label' => __('1792x1024')]
+            ['value' => 'auto', 'label' => __('Auto')],
+            ['value' => '1024x1024', 'label' => __('1024x1024')],
+            ['value' => '1024x1536', 'label' => __('1024x1536')],
+            ['value' => '1536x1024', 'label' => __('1536x1024')],
         ];
     }
 
