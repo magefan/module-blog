@@ -35,19 +35,39 @@ class SlashUrlRedirect
     protected $actionFlag;
 
     /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $request;
+
+    /**
+     * @var \Magento\Framework\App\Response\HttpInterface
+     */
+    protected $response;
+
+    /**
      * NoSlashUrlRedirect constructor.
      * @param UrlInterface $urlInterface
      * @param ActionFlag $actionFlag
      * @param ScopeConfigInterface $scopeConfig
+     * @param \Magento\Framework\App\RequestInterface|null $request
+     * @param \Magento\Framework\App\ResponseInterface|null $response
      */
     public function __construct(
         UrlInterface $urlInterface,
         ActionFlag $actionFlag,
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        ?\Magento\Framework\App\RequestInterface $request = null,
+        ?\Magento\Framework\App\ResponseInterface $response = null
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->actionFlag = $actionFlag;
         $this->urlInterface = $urlInterface;
+        $this->request = $request ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Framework\App\RequestInterface::class
+        );
+        $this->response = $response ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Framework\App\ResponseInterface::class
+        );
     }
 
     /**
@@ -100,14 +120,13 @@ class SlashUrlRedirect
             $urlSlash = implode('?', $result);
 
             if ($urlSlash != $currentUrl) {
-                $controller = $observer->getEvent()->getData('controller_action');
-                if ($controller->getRequest()->isXmlHttpRequest()
-                    || $controller->getRequest()->isPost()
+                if ($this->request->isXmlHttpRequest()
+                    || $this->request->isPost()
                 ) {
                     return;
                 }
                 $this->actionFlag->set('', \Magento\Framework\App\ActionInterface::FLAG_NO_DISPATCH, true);
-                $controller->getResponse()->setRedirect($urlSlash, 301)->sendResponse();
+                $this->response->setRedirect($urlSlash, 301)->sendResponse();
             }
         }
     }
