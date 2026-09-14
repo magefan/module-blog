@@ -512,7 +512,6 @@
                 <field id="enabled_ai_writer" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>If enabled it will use the gpt-4o-mini model to generate content.</comment>
                 </field>
                 <field id="chat_gpt_api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Chat-GPT API Key</label>
@@ -524,6 +523,21 @@
                             <a href="https://www.google.com/search?q=how+to+find+Chat-GPT+API+Key" title="Where to find Tag ID?" target="_blank" rel="nofollow noopener">Where to find Chat-GPT API Key</a>? Or ask <a title="ChatGPT" href="https://chatgpt.com/" target="_blank" rel="nofollow noopener">ChatGPT</a> itself.</a></p>
                         ]]>
                     </comment>
+                </field>
+                <field id="chat_gpt_model" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Chat-GPT Model</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\ChatGptModels</source_model>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+                <field id="chat_gpt_image_model" translate="label" type="select" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Chat-GPT Image Model</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\ChatGptImageModels</source_model>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                        <field id="generate_post_image">1</field>
+                    </depends>
                 </field>
                 <field id="default_prompt_template" translate="label comment"  type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default Prompt Template</label>
