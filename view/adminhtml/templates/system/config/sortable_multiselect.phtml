@@ -1,0 +1,118 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * @var \Magefan\Blog\Block\Adminhtml\System\Config\Form\SortableMultiselect $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<?php
+$htmlId = $block->getElement()->getHtmlId();
+$selected = $block->getSelectedValues();
+$isDisabled = (bool)$block->getElement()->getDisabled();
+?>
+
+<div id="<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-multiselect-container">
+    <table class="admin__control-table<?= $isDisabled ? ' disabled' : '' ?>">
+        <tbody id="<?= $escaper->escapeHtmlAttr($htmlId) ?>-sortable-list">
+        <?php foreach ($block->getSortedOptions() as $option): ?>
+            <tr data-value="<?= $escaper->escapeHtmlAttr($option['value']) ?>"
+                class="<?= in_array($option['value'], $selected) ? 'selected' : '' ?>">
+                <td class="col-draggable" style="width:24px;">
+                    <div class="draggable-handle" title="<?= $escaper->escapeHtmlAttr(__('Drag to reorder')) ?>"></div>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox"
+                            <?= in_array($option['value'], $selected) ? 'checked' : '' ?>
+                            <?= $isDisabled ? 'disabled="disabled"' : '' ?> />
+                        <?= $escaper->escapeHtml($option['label']) ?>
+                    </label>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <input type="hidden"
+           id="<?= $escaper->escapeHtmlAttr($htmlId) ?>"
+           name="<?= $escaper->escapeHtmlAttr($block->getElement()->getName()) ?>"
+           value="<?= $escaper->escapeHtmlAttr($block->getElement()->getValue()) ?>" />
+</div>
+
+<?php $script = "
+    require(['jquery', 'jquery/ui'], function (\$) {
+        var \$list = \$('#" . $escaper->escapeJs($htmlId) . "-sortable-list');
+        var \$hidden = \$('#" . $escaper->escapeJs($htmlId) . "');
+        var \$inheritCheckbox = \$('#" . $escaper->escapeJs($htmlId) . "_inherit');
+
+        function syncValue() {
+            var values = [];
+            \$list.find('tr').each(function () {
+                if (\$(this).find('input[type=checkbox]').is(':checked')) {
+                    values.push(\$(this).data('value'));
+                }
+            });
+            \$hidden.val(values.join(','));
+        }
+
+        \$list.sortable({
+            update: syncValue,
+            handle: '.draggable-handle',
+            items: '> tr',
+            axis: 'y',
+            tolerance: 'pointer',
+            forcePlaceholderSize: true,
+            placeholder: 'ui-sortable-placeholder',
+            cursor: 'move',
+            helper: function (e, tr) {
+                var \$originals = tr.children();
+                var \$helper = tr.clone();
+                \$helper.children().each(function (index) {
+                    \$(this).width(\$originals.eq(index).outerWidth());
+                });
+                return \$helper;
+            },
+            start: function (e, ui) {
+                ui.placeholder.height(ui.item.outerHeight());
+                ui.placeholder.html('<td colspan=\"2\">&nbsp;</td>');
+            }
+        });
+
+        \$list.on('change', 'input[type=checkbox]', function () {
+            \$(this).closest('tr').toggleClass('selected', this.checked);
+            syncValue();
+        });
+
+        \$list.on('click', 'tr', function (e) {
+            if (\$(e.target).closest('.col-draggable, input, label').length) {
+                return;
+            }
+            var \$checkbox = \$(this).find('input[type=checkbox]');
+            if (\$checkbox.is(':disabled')) {
+                return;
+            }
+            \$checkbox.prop('checked', !\$checkbox.prop('checked')).trigger('change');
+        });
+
+        \$list.find('tr').css('cursor', 'pointer');
+
+        \$inheritCheckbox.on('change', function () {
+            \$list.closest('table').toggleClass('disabled', \$(this).is(':checked'));
+        });
+
+        syncValue();
+    });
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
