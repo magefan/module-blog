@@ -1115,7 +1115,7 @@
                     <label>Social Networks</label>
                     <source_model>Magefan\Blog\Model\Config\Source\SocialNetworks</source_model>
                     <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\SortableMultiselect</frontend_model>
-                    <comment><![CDATA[Use drag-and-drop to change an item's position.]]></comment>
+                    <comment><![CDATA[Reorder items by dragging them with the handle on the left.]]></comment>
                 </field>
             </group>
             <group id="top_menu" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
