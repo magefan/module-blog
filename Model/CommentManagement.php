@@ -138,7 +138,8 @@ class CommentManagement extends AbstractManagement
         unset(
             $data['author_email'],
             $data['customer_id'],
-            $data['admin_id']
+            $data['admin_id'],
+            $data['auto_save_data']
         );
         return $data;
     }
