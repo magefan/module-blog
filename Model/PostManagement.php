@@ -168,6 +168,12 @@ class PostManagement extends AbstractManagement
             $data[$key] = $item->$method();
         }
 
+        unset(
+            $data['draft_content'],
+            $data['published_content'],
+            $data['auto_save_data']
+        );
+
         return $data;
     }
 }

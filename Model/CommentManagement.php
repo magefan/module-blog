@@ -126,13 +126,20 @@ class CommentManagement extends AbstractManagement
                 $replier = $reply->getDynamicData(
                     isset($fields['replies']) ? $fields['replies'] : null
                 );
-                unset($replier['author_email']);
+                unset(
+                    $replier['author_email'],
+                    $replier['customer_id'],
+                    $replier['admin_id']
+                );
                 $replies[] = $replier;
             }
             $data['replies'] = $replies;
         }
-        unset($data['author_email']);
-
+        unset(
+            $data['author_email'],
+            $data['customer_id'],
+            $data['admin_id']
+        );
         return $data;
     }
 }
