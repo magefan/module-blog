@@ -132,8 +132,10 @@ class CommentManagement extends AbstractManagement
     }
 
     /**
-     * @param $data
-     * @return mixed
+     * Remove sensitive fields from response data.
+     *
+     * @param array $data
+     * @return array
      */
     protected function unsetSensitiveData($data)
     {
