@@ -231,7 +231,8 @@ abstract class AbstractManagement implements ManagementInterface
             unset(
                 $data['draft_content'],
                 $data['published_content'],
-                $data['auto_save_data']
+                $data['auto_save_data'],
+                $data['secret']
             );
 
             return json_encode($data);
