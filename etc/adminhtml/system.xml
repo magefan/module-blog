@@ -196,7 +196,7 @@
                         </depends>
                     </field>
                     <field id="autorelated_black_words" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Black Words For Auto Related (Blog Plus)</label>
+                        <label>Black Words For Auto Related</label>
                         <comment>Blog extension uses words from title and description to automatically define related posts. Enter words separated by comma you want to ignore. </comment>
                         <depends>
                             <field id="enabled">1</field>
@@ -233,7 +233,7 @@
                         </depends>
                     </field>
                     <field id="autorelated_black_words" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Black Words For Auto Related (Blog Plus)</label>
+                        <label>Black Words For Auto Related</label>
                         <comment>Blog extension uses words from title and description to automatically define related products. Enter words separated by comma you want to ignore. </comment>
                         <depends>
                             <field id="enabled">1</field>
