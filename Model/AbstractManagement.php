@@ -228,13 +228,6 @@ abstract class AbstractManagement implements ManagementInterface
             }
 
             $data = $this->getDynamicData($item);
-            unset(
-                $data['draft_content'],
-                $data['published_content'],
-                $data['auto_save_data'],
-                $data['secret']
-            );
-
             return json_encode($data);
         } catch (\Exception $e) {
             return $this->getError($e->getMessage());
@@ -248,6 +241,22 @@ abstract class AbstractManagement implements ManagementInterface
      * @return mixed
      */
     abstract protected function getDynamicData($item);
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    protected function unsetSensitiveData($data)
+    {
+        unset(
+            $data['draft_content'],
+            $data['published_content'],
+            $data['auto_save_data'],
+            $data['secret']
+        );
+
+        return $data;
+    }
 
     /**
      * Error response

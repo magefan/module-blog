@@ -168,6 +168,8 @@ class PostManagement extends AbstractManagement
             $data[$key] = $item->$method();
         }
 
+        $data = $this->unsetSensitiveData($data);
+
         return $data;
     }
 }

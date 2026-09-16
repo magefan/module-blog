@@ -119,27 +119,31 @@ class CommentManagement extends AbstractManagement
     public function getDynamicData($item)
     {
         $data = $item->getData();
-        $fields = ['replies' => 1];
-        if (is_array($fields) && array_key_exists('replies', $fields)) {
-            $replies = [];
-            foreach ($item->getRepliesCollection() as $reply) {
-                $replier = $reply->getDynamicData(
-                    isset($fields['replies']) ? $fields['replies'] : null
-                );
-                unset(
-                    $replier['author_email'],
-                    $replier['customer_id'],
-                    $replier['admin_id']
-                );
-                $replies[] = $replier;
-            }
-            $data['replies'] = $replies;
+
+        $replies = [];
+        foreach ($item->getRepliesCollection() as $reply) {
+            $replier = $this->getDynamicData($reply);
+            $replies[] = $replier;
         }
+        $data['replies'] = $replies;
+        $data = $this->unsetSensitiveData($data);
+
+        return $data;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    protected function unsetSensitiveData($data)
+    {
+        $data = parent::unsetSensitiveData($data);
         unset(
             $data['author_email'],
             $data['customer_id'],
             $data['admin_id']
         );
+
         return $data;
     }
 }

@@ -246,30 +246,15 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     /**
      * Return all additional data
      *
+     * @return array
+     * @throws \Exception
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
-     * @return array
      */
     public function getDynamicData()
     {
-        $data = $this->getData();
-
-        $keys = [
-            'meta_description',
-            'meta_title',
-            'tag_url',
-        ];
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $data[$key] = $this->$method();
-        }
-
-        return $data;
+        throw new \Exception('\Magefan\Blog\Model\Tag::getDynamicData is retired. '
+            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Tag::getDynamicData instead.');
     }
 
     /**

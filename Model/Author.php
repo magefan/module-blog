@@ -205,34 +205,14 @@ class Author extends AbstractModel implements AuthorInterface
      * Prepare all additional data
      *
      * @return array
+     * @throws \Exception
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData()
     {
-        $data = $this->getData();
-
-        $keys = [
-            'meta_description',
-            'meta_title',
-            'author_url',
-            'name',
-            'title',
-            'identifier',
-        ];
-
-        $data['author_id'] = $this->getId();
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $data[$key] = $this->$method();
-        }
-
-        return $data;
+        throw new \Exception('\Magefan\Blog\Model\Author::getDynamicData is retired. '
+            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Author::getDynamicData instead.');
     }
 
     /**
