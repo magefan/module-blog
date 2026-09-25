@@ -11,4 +11,55 @@
     <type name="Magento\Framework\View\Element\Template">
         <plugin name="mf_conflict_plugin" type="Magefan\Blog\Plugin\Magento\Framework\View\Element\TemplatePlugin" sortOrder="10" />
     </type>
+    <virtualType name="Magefan\Blog\Ui\Component\Source\Listing\Column\Store"
+                 type="Magento\Store\Ui\Component\Listing\Column\Store">
+        <arguments>
+            <argument name="storeKey" xsi:type="string">store_ids</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Category\Listing\CategoryDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Category\Collection</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">title</item>
+                <item name="1" xsi:type="string">identifier</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Post\Listing\PostDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Post\Collection</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">title</item>
+                <item name="1" xsi:type="string">content</item>
+                <item name="2" xsi:type="string">identifier</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Tag\Listing\TagDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Tag\Collection</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">title</item>
+                <item name="1" xsi:type="string">identifier</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Comment\Listing\CommentDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Comment\Collection\Grid</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">author_nickname</item>
+                <item name="1" xsi:type="string">text</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

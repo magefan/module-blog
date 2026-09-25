@@ -18,4 +18,5 @@ class MassStatus extends \Magefan\Blog\Controller\Adminhtml\Post
      * @var string
      */
     protected $_allowedKey = 'Magefan_Blog::post_save';
+
 }

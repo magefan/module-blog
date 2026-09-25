@@ -8,13 +8,11 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="formkey"/>
     <update handle="blog_update_info"/>
-    <update handle="blog_post_grid_block"/>
     <body>
         <referenceContainer name="content">
-            <block class="Magefan\Blog\Block\Adminhtml\Post" name="blog.post.container"/>
-            <block class="Magefan\Blog\Block\Adminhtml\AiButton" name="blog.post.ai.button" />
+            <uiComponent name="blog_post_listing"/>
+            <block class="Magefan\Blog\Block\Adminhtml\AiButton" name="blog.post.ai.button"/>
         </referenceContainer>
     </body>
 </page>
