@@ -227,7 +227,8 @@ abstract class AbstractManagement implements ManagementInterface
                 return $this->getError('Item is not visible on this store.');
             }
 
-            return json_encode($this->getDynamicData($item));
+            $data = $this->getDynamicData($item);
+            return json_encode($data);
         } catch (\Exception $e) {
             return $this->getError($e->getMessage());
         }
@@ -240,6 +241,24 @@ abstract class AbstractManagement implements ManagementInterface
      * @return mixed
      */
     abstract protected function getDynamicData($item);
+
+    /**
+     * Remove sensitive fields from response data.
+     *
+     * @param array $data
+     * @return array
+     */
+    protected function unsetSensitiveData($data)
+    {
+        unset(
+            $data['draft_content'],
+            $data['published_content'],
+            $data['auto_save_data'],
+            $data['secret']
+        );
+
+        return $data;
+    }
 
     /**
      * Error response

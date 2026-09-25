@@ -340,23 +340,13 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      *
      * @param array|null $fields
      * @return array
+     * @throws \Exception
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {
-        $data = $this->getData();
-
-        if (is_array($fields) && array_key_exists('replies', $fields)) {
-            $replies = [];
-            foreach ($this->getRepliesCollection() as $reply) {
-                $replies[] = $reply->getDynamicData(
-                    isset($fields['replies']) ? $fields['replies'] : null
-                );
-            }
-            $data['replies'] = $replies;
-        }
-
-        return $data;
+        throw new \Exception('\Magefan\Blog\Model\Comment::getDynamicData is retired. '
+            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Comment::getDynamicData instead.');
     }
 }
