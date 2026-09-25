@@ -131,6 +131,9 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getItems()
     {
+        if (!$this->displayProducts()) {
+            return [];
+        }
         if (null === $this->_itemCollection) {
             $this->_prepareCollection();
         }

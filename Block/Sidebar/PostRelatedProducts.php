@@ -107,6 +107,9 @@ class PostRelatedProducts extends AbstractProduct implements IdentityInterface
      */
     public function getItems()
     {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
         if (null === $this->_itemCollection) {
             $this->_prepareCollection();
         }

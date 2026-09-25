@@ -126,6 +126,9 @@ class Categories extends Template implements IdentityInterface
      */
     public function getIdentities()
     {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
         $identities = [];
         foreach ($this->getGroupedChilds() as $item) {
             // phpcs:ignore Magento2.Performance.ForeachArrayMerge

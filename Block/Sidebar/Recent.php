@@ -43,6 +43,18 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * @return array
+     */
+    public function getIdentities()
+    {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
+
+        return parent::getIdentities();
+    }
+
+    /**
      * Retrieve true if display the post image is enabled in the config
      *
      * @return bool
