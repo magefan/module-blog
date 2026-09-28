@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Ui\Component\Source\Listing;
 
+use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -22,6 +23,11 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class Actions extends Column
 {
     /**
+     * @var Escaper
+     */
+    private $escaper;
+
+    /**
      * @var UrlInterface
      */
     private $urlBuilder;
@@ -30,6 +36,7 @@ class Actions extends Column
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param UrlInterface $urlBuilder
+     * @param Escaper $escaper
      * @param array $components
      * @param array $data
      */
@@ -37,10 +44,12 @@ class Actions extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         UrlInterface $urlBuilder,
+        Escaper $escaper,
         array $components = [],
         array $data = []
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
+        $this->escaper = $escaper;
         $this->urlBuilder = $urlBuilder;
     }
 
@@ -73,7 +82,7 @@ class Actions extends Column
                 'href'    => $this->urlBuilder->getUrl($deleteUrl, ['id' => $id]),
                 'label'   => __('Delete'),
                 'confirm' => [
-                    'title'   => __('Delete "%1"', $item[$nameField] ?? ''),
+                    'title'   => __('Delete "%1"', $this->escaper->escapeHtml($item[$nameField] ?? '')),
                     'message' => __($deleteMessage),
                 ],
                 'post' => true,

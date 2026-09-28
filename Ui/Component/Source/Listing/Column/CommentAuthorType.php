@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Ui\Component\Source\Listing\Column;
 
 use Magefan\Blog\Model\Config\Source\AuthorType;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
@@ -21,6 +22,11 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class CommentAuthorType extends Column
 {
     /**
+     * @var Escaper
+     */
+    private $escaper;
+
+    /**
      * @var array
      */
     private $types = [];
@@ -29,6 +35,7 @@ class CommentAuthorType extends Column
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param AuthorType $authorType
+     * @param Escaper $escaper
      * @param array $components
      * @param array $data
      */
@@ -36,10 +43,12 @@ class CommentAuthorType extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         AuthorType $authorType,
+        Escaper $escaper,
         array $components = [],
         array $data = []
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
+        $this->escaper = $escaper;
         $this->types = $authorType->toArray();
     }
 
@@ -55,7 +64,7 @@ class CommentAuthorType extends Column
         $fieldName = $this->getData('name');
         foreach ($dataSource['data']['items'] as &$item) {
             $value = $item[$fieldName] ?? null;
-            $item[$fieldName] = $this->types[$value] ?? $value;
+            $item[$fieldName] = $this->escaper->escapeHtml($this->types[$value] ?? $value);
         }
 
         return $dataSource;

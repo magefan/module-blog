@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Ui\Component\Source\Listing\Column;
 
 use Magefan\Blog\Api\AuthorRepositoryInterface;
+use Magento\Framework\Escaper;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -20,6 +21,11 @@ use Magento\Ui\Component\Listing\Columns\Column;
  */
 class Author extends Column
 {
+    /**
+     * @var Escaper
+     */
+    private $escaper;
+
     /**
      * @var AuthorRepositoryInterface
      */
@@ -34,6 +40,7 @@ class Author extends Column
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param AuthorRepositoryInterface $authorRepository
+     * @param Escaper $escaper
      * @param array $components
      * @param array $data
      */
@@ -41,10 +48,12 @@ class Author extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         AuthorRepositoryInterface $authorRepository,
+        Escaper $escaper,
         array $components = [],
         array $data = []
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
+        $this->escaper = $escaper;
         $this->authorRepository = $authorRepository;
     }
 
@@ -60,7 +69,7 @@ class Author extends Column
         $fieldName = $this->getData('name');
         foreach ($dataSource['data']['items'] as &$item) {
             $authorId = $item['author_id'] ?? null;
-            $item[$fieldName] = $authorId ? $this->getAuthorName((int)$authorId) : '';
+            $item[$fieldName] = $authorId ? $this->escaper->escapeHtml($this->getAuthorName((int)$authorId)) : '';
         }
 
         return $dataSource;

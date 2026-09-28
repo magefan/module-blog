@@ -172,6 +172,17 @@ class Collection extends AbstractCollection
     }
 
     /**
+     * Render deferred filters (store, category, tag) before fetching ids
+     *
+     * @return array
+     */
+    public function getAllIds()
+    {
+        $this->_renderFilters();
+        return parent::getAllIds();
+    }
+
+    /**
      * Join store relation table if there is store filter
      *
      * @return void

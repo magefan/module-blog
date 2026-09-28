@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Ui\Component\Source\Listing\Column;
 
 use Magefan\Blog\Api\CategoryRepositoryInterface;
+use Magento\Framework\Escaper;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -20,6 +21,11 @@ use Magento\Ui\Component\Listing\Columns\Column;
  */
 class Category extends Column
 {
+    /**
+     * @var Escaper
+     */
+    private $escaper;
+
     /**
      * @var CategoryRepositoryInterface
      */
@@ -34,6 +40,7 @@ class Category extends Column
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param CategoryRepositoryInterface $categoryRepository
+     * @param Escaper $escaper
      * @param array $components
      * @param array $data
      */
@@ -41,10 +48,12 @@ class Category extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         CategoryRepositoryInterface $categoryRepository,
+        Escaper $escaper,
         array $components = [],
         array $data = []
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
+        $this->escaper = $escaper;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -66,7 +75,7 @@ class Category extends Column
             }
             $names = [];
             foreach ($categoryIds as $id) {
-                $names[] = $this->getCategoryTitle((int)$id);
+                $names[] = $this->escaper->escapeHtml($this->getCategoryTitle((int)$id));
             }
             $item[$fieldName] = implode(', ', array_filter($names));
         }

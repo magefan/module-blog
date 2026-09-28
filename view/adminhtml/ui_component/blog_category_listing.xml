@@ -13,11 +13,6 @@
     </argument>
     <settings>
         <buttons>
-            <button name="import">
-                <url path="blogimport/import/index"/>
-                <class>button</class>
-                <label translate="true">Import Categories</label>
-            </button>
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>

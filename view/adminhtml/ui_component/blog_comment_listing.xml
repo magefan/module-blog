@@ -14,14 +14,6 @@
         </item>
     </argument>
     <settings>
-        <buttons>
-            <button name="import">
-                <url path="blogimport/import/index"/>
-                <class>button</class>
-                <label translate="true">Import Comments</label>
-                <aclResource>Magefan_BlogImport::import</aclResource>
-            </button>
-        </buttons>
         <spinner>blog_comment_listing_columns</spinner>
         <deps>
             <dep>blog_comment_listing.blog_comment_listing_data_source</dep>

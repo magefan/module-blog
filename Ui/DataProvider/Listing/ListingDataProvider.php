@@ -58,7 +58,7 @@ class ListingDataProvider extends AbstractDataProvider
         if ($filter->getField() === 'fulltext') {
             $fields = $this->fulltextFields;
             if ($fields) {
-                $value = '%' . $filter->getValue() . '%';
+                $value = '%' . str_replace(['%', '_'], ['\%', '\_'], (string)$filter->getValue()) . '%';
                 $this->collection->addFieldToFilter(
                     $fields,
                     array_fill(0, count($fields), ['like' => $value])

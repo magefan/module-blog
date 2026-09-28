@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Ui\Component\Source\Listing\Column;
 
 use Magefan\Blog\Model\Post;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
@@ -20,6 +21,11 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class Status extends Column
 {
     /**
+     * @var Escaper
+     */
+    private $escaper;
+
+    /**
      * @var array
      */
     private $statuses = [];
@@ -28,6 +34,7 @@ class Status extends Column
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param Post $post
+     * @param Escaper $escaper
      * @param array $components
      * @param array $data
      */
@@ -35,10 +42,12 @@ class Status extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         Post $post,
+        Escaper $escaper,
         array $components = [],
         array $data = []
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
+        $this->escaper = $escaper;
         $this->statuses = $post->getAvailableStatuses();
     }
 
@@ -54,7 +63,7 @@ class Status extends Column
         $fieldName = $this->getData('name');
         foreach ($dataSource['data']['items'] as &$item) {
             $value = $item[$fieldName] ?? null;
-            $label = $this->statuses[$value] ?? $value;
+            $label = $this->escaper->escapeHtml($this->statuses[$value] ?? $value);
             if ($value) {
                 $severity = $value == 2 ? 'minor' : 'notice';
             } else {

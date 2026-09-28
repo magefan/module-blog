@@ -15,11 +15,6 @@
     </argument>
     <settings>
         <buttons>
-            <button name="import">
-                <url path="blogimport/import/index"/>
-                <class>button</class>
-                <label translate="true">Import Posts</label>
-            </button>
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>
@@ -73,6 +68,26 @@
                     <options class="Magento\Cms\Ui\Component\Listing\Column\Cms\Options"/>
                     <label translate="true">Store View</label>
                     <dataScope>store_id</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+            <filterSelect name="category" provider="${ $.parentName }"
+                          component="Magento_Ui/js/form/element/ui-select"
+                          template="ui/grid/filters/elements/ui-select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="multiple" xsi:type="boolean">true</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <options class="Magefan\Blog\Model\Config\Source\CategoryTree"/>
+                    <label translate="true">Category</label>
+                    <dataScope>category</dataScope>
                     <imports>
                         <link name="visible">componentType = column, index = ${ $.index }:visible</link>
                     </imports>
