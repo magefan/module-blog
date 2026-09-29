@@ -753,7 +753,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $joinOptions->setData([
                     'key' => $key,
                     'fields' => [],
-                    'fields' => [],
                 ]);
                 $this->_eventManager->dispatch(
                     'mfblog_post_collection_render_filter_join',
