@@ -280,6 +280,40 @@
                 </item>
             </argument>
         </field>
+        <field name="post_video">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Post Video [YouTube] (Blog Extra)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">post_video</item>
+                    <item name="sortOrder" xsi:type="number">18</item>
+                    <item name="notice"  xsi:type="string" translate="true">If filled the post video will be shown instead of the post featured image.</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-url" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="end_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">End Date (Blog Extra)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">end_time</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                    <item name="notice"  xsi:type="string" translate="true">You can set an end date of the publication. The post will not be available for reading after this date.</item>
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
         <field name="publish_time">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
