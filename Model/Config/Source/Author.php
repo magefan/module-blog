@@ -16,7 +16,7 @@ namespace Magefan\Blog\Model\Config\Source;
 class Author implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @var \Magento\User\Model\ResourceModel\User\CollectionFactory
+     * @var \Magefan\Blog\Api\AuthorCollectionInterfaceFactory
      */
     protected $authorCollectionFactory;
 
