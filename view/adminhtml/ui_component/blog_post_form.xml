@@ -566,7 +566,7 @@
                 <argument name="data" xsi:type="array">
                     <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\Authors</item>
                     <item name="config" xsi:type="array">
-                        <item name="label" xsi:type="string" translate="true">Co-Authors</item>
+                        <item name="label" xsi:type="string" translate="true">Co-Authors (Blog Extra)</item>
                         <item name="formElement" xsi:type="string">select</item>
                         <item name="component" xsi:type="string">Magefan_Blog/js/components/new-category</item>
                         <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
