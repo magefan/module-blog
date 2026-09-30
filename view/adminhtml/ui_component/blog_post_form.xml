@@ -613,10 +613,6 @@
                         <item name="levelsVisibility" xsi:type="number">1</item>
                         <item name="sortOrder" xsi:type="number">35</item>
                         <item name="required" xsi:type="boolean">false</item>
-                        <item name="listens" xsi:type="array">
-                            <item name="index=create_category:responseData" xsi:type="string">setParsed</item>
-                            <item name="newOption" xsi:type="string">toggleOptionSelected</item>
-                        </item>
                     </item>
                 </argument>
             </field>
