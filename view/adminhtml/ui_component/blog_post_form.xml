@@ -280,40 +280,6 @@
                 </item>
             </argument>
         </field>
-        <field name="post_video">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Post Video [YouTube] (Blog Extra)</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">post</item>
-                    <item name="dataScope" xsi:type="string">post_video</item>
-                    <item name="sortOrder" xsi:type="number">18</item>
-                    <item name="notice"  xsi:type="string" translate="true">If filled the post video will be shown instead of the post featured image.</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="validate-url" xsi:type="boolean">true</rule>
-                </validation>
-            </settings>
-        </field>
-        <field name="end_time">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">End Date (Blog Extra)</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">date</item>
-                    <item name="source" xsi:type="string">post</item>
-                    <item name="dataScope" xsi:type="string">end_time</item>
-                    <item name="sortOrder" xsi:type="number">25</item>
-                    <item name="notice"  xsi:type="string" translate="true">You can set an end date of the publication. The post will not be available for reading after this date.</item>
-                    <item name="options" xsi:type="array">
-                        <item name="showsTime" xsi:type="boolean">true</item>
-                    </item>
-                </item>
-            </argument>
-        </field>
         <field name="publish_time">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -478,7 +444,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="collapsible" xsi:type="boolean">true</item>
-                    <item name="label" xsi:type="string" translate="true">Featured List Image (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Featured List Image (Blog Plus)</item>
                     <item name="sortOrder" xsi:type="number">16</item>
                     <item name="template" xsi:type="string">ui/form/field</item>
                     <item name="source" xsi:type="string">magefan_blog_post</item>
@@ -502,7 +468,7 @@
                             <param xsi:type="url" name="url" path="blogplus/post_upload/featuredListImg"/>
                         </uploaderConfig>
                         <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
-                        <openDialogTitle>Featured List Image (Blog+)</openDialogTitle>
+                        <openDialogTitle>Featured List Image (Blog Plus)</openDialogTitle>
                         <initialMediaGalleryOpenSubpath>magefan_blog</initialMediaGalleryOpenSubpath>
                         <allowedExtensions>jpg jpeg png</allowedExtensions>
                         <maxFileSize>4194304</maxFileSize>
@@ -514,7 +480,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Featured List Image Alt (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Featured List Image Alt (Blog Plus)</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">featured_list_img_alt</item>
@@ -560,7 +526,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CustomerGroups</item>
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog Plus)</item>
                     <item name="dataType" xsi:type="string">number</item>
                     <item name="formElement" xsi:type="string">multiselect</item>
                     <item name="validation" xsi:type="array">
@@ -577,7 +543,7 @@
                 <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Enable Comments (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Comments (Blog Plus)</item>
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="dataScope" xsi:type="string">enable_comments</item>
                     <item name="fit" xsi:type="boolean">true</item>
@@ -674,7 +640,7 @@
                 <formElements>
                     <checkbox>
                         <settings>
-                            <description translate="true">Create Permanent Redirect for old URL</description>
+                            <description translate="true">Create Permanent Redirect for old URL (Blog Plus)</description>
                             <valueMap>
                                 <map name="false" xsi:type="number">0</map>
                                 <map name="true" xsi:type="number">1</map>
@@ -1067,7 +1033,7 @@
                             <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
                             <item name="config" xsi:type="array">
                                 <item name="dataType" xsi:type="string">text</item>
-                                <item name="label" xsi:type="string" translate="true">Auto Related</item>
+                                <item name="label" xsi:type="string" translate="true">Auto Related (Blog Plus)</item>
                                 <item name="formElement" xsi:type="string">select</item>
                                 <item name="dataScope" xsi:type="string">auto_related</item>
                                 <item name="fit" xsi:type="boolean">true</item>
@@ -1272,7 +1238,7 @@
                             <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\NoYes</item>
                             <item name="config" xsi:type="array">
                                 <item name="dataType" xsi:type="string">text</item>
-                                <item name="label" xsi:type="string" translate="true">Display Post On Product Page</item>
+                                <item name="label" xsi:type="string" translate="true">Display Post On Product Page (Blog Plus)</item>
                                 <item name="formElement" xsi:type="string">select</item>
                                 <item name="dataScope" xsi:type="string">display_on_product</item>
                                 <item name="fit" xsi:type="boolean">true</item>
@@ -1286,7 +1252,7 @@
                             <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\NoYes</item>
                             <item name="config" xsi:type="array">
                                 <item name="dataType" xsi:type="string">text</item>
-                                <item name="label" xsi:type="string" translate="true">Display Product On Post Page</item>
+                                <item name="label" xsi:type="string" translate="true">Display Product On Post Page (Blog Plus)</item>
                                 <item name="formElement" xsi:type="string">select</item>
                                 <item name="dataScope" xsi:type="string">display_on_post</item>
                                 <item name="fit" xsi:type="boolean">true</item>
@@ -1300,7 +1266,7 @@
                             <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
                             <item name="config" xsi:type="array">
                                 <item name="dataType" xsi:type="string">text</item>
-                                <item name="label" xsi:type="string" translate="true">Auto Related</item>
+                                <item name="label" xsi:type="string" translate="true">Auto Related (Blog Plus)</item>
                                 <item name="formElement" xsi:type="string">select</item>
                                 <item name="dataScope" xsi:type="string">auto_related</item>
                                 <item name="fit" xsi:type="boolean">true</item>
@@ -1316,7 +1282,7 @@
     <fieldset name="rp_conditions_serialized" sortOrder="60">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Related Product Rules (Blog+)</item>
+                <item name="label" xsi:type="string" translate="true">Related Product Rules (Blog Plus)</item>
                 <item name="collapsible" xsi:type="boolean">true</item>
                 <item name="sortOrder" xsi:type="number">59</item>
             </item>

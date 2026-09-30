@@ -17,7 +17,7 @@ abstract class AbstractPromo extends Action
     /**
      * Authorization level of a basic admin session
      */
-    const ADMIN_RESOURCE = 'Magefan_Blog::elements';
+    public const ADMIN_RESOURCE = 'Magefan_Blog::elements';
 
     /**
      * @var PageFactory

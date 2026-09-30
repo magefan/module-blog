@@ -343,7 +343,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CustomerGroups</item>
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Visible For Customer Groups (Blog Plus)</item>
                     <item name="dataType" xsi:type="string">number</item>
                     <item name="formElement" xsi:type="string">multiselect</item>
                     <item name="validation" xsi:type="array">
@@ -359,7 +359,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="collapsible" xsi:type="boolean">true</item>
-                    <item name="label" xsi:type="string" translate="true">Category Image (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Category Image (Blog Plus)</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="source" xsi:type="string">magefan_blog_category</item>
                 </item>
@@ -367,7 +367,7 @@
             <settings>
                 <elementTmpl>ui/form/element/uploader/image</elementTmpl>
                 <dataType>string</dataType>
-                <label translate="true">Category Image (Blog+)</label>
+                <label translate="true">Category Image (Blog Plus)</label>
                 <visible>true</visible>
                 <required>false</required>
                 <additionalClasses>
@@ -394,7 +394,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Category Image Alt (Blog+)</item>
+                    <item name="label" xsi:type="string" translate="true">Category Image Alt (Blog Plus)</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">post</item>
                     <item name="dataScope" xsi:type="string">category_img_alt</item>
@@ -438,7 +438,7 @@
                 <formElements>
                     <checkbox>
                         <settings>
-                            <description translate="true">Create Permanent Redirect for old URL</description>
+                            <description translate="true">Create Permanent Redirect for old URL (Blog Plus)</description>
                             <valueMap>
                                 <map name="false" xsi:type="number">0</map>
                                 <map name="true" xsi:type="number">1</map>
@@ -498,14 +498,14 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="label" xsi:type="string" translate="true">Bottom Content (Blog+)</item>
+                <item name="label" xsi:type="string" translate="true">Bottom Content (Blog Plus)</item>
                 <item name="sortOrder" xsi:type="number">30</item>
             </item>
         </argument>
         <field name="bottom_content">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string"/>
+                    <item name="label" xsi:type="string" translate="true">Bottom Content (Blog Plus)</item>
                     <item name="formElement" xsi:type="string">wysiwyg</item>
                     <item name="validation" xsi:type="array">
                         <item name="validate-no-utf8mb4-characters" xsi:type="boolean">false</item>
@@ -551,11 +551,11 @@
                             <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
                             <item name="actions" xsi:type="array">
                                 <item name="0" xsi:type="array">
-                                    <item name="targetName" xsi:type="string">blog_category_form.blog_category_form.related.product.modal</item>
+                                    <item name="targetName" xsi:type="string">blog_category_form.blog_category_form.related_container.posts.modal</item>
                                     <item name="actionName" xsi:type="string">toggleModal</item>
                                 </item>
                                 <item name="1" xsi:type="array">
-                                    <item name="targetName" xsi:type="string">blog_category_form.blog_category_form.related.product.modal.blog_related_category_listing</item>
+                                    <item name="targetName" xsi:type="string">blog_category_form.blog_category_form.related_container.posts.modal.blog_related_category_listing</item>
                                     <item name="actionName" xsi:type="string">render</item>
                                 </item>
                             </item>
@@ -718,10 +718,6 @@
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
                 <item name="label" xsi:type="string" translate="true">Category in Websites</item>
-                <item name="visible" xsi:type="boolean">false</item>
-                <item name="imports" xsi:type="array">
-                    <item name="visible" xsi:type="string">${$.provider}:data.is_default_store</item>
-                </item>
                 <item name="sortOrder" xsi:type="number">40</item>
             </item>
         </argument>

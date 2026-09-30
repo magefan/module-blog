@@ -10,6 +10,11 @@
  * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  */
 
+if (!isset($escaper)) {
+    /* Compatibility fix for old Magento versions */
+    $escaper = $block;
+}
+
 if ($block->isBlogExtraInstalled()) {
     return;
 }
@@ -95,10 +100,10 @@ $selectorMap = [
                     extensionPlan = 'Plus or Extra';
                 }
                 alert({
-                    title: '" . $escaper->escapeHtml(__('You cannot use this option.')) . "',
-                    content: '" . $escaper->escapeHtml(__('This feature is available in')) . " <strong>' + extensionPlan + '</strong> " . $escaper->escapeHtml(__('plan only.')) . "',
+                    title: '" . $escaper->escapeJs((string)__('You cannot use this option.')) . "',
+                    content: '" . $escaper->escapeJs((string)__('This feature is available in')) . " <strong>' + extensionPlan + '</strong> " . $escaper->escapeJs((string)__('plan only.')) . "',
                     buttons: [{
-                        text: '" . $escaper->escapeHtml(__('Upgrade Plan Now')) . "',
+                        text: '" . $escaper->escapeJs((string)__('Upgrade Plan Now')) . "',
                         class: 'action primary accept',
                         click: function () {
                             window.open('https://magefan.com/magento2-blog-extension/pricing?utm_source=admin&utm_medium=config&utm_campaign=upgrade-link');

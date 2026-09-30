@@ -16,7 +16,6 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
     public function getExtraSelectors(): array
     {
         return [
-            '[data-index="websites"]',
             '[name="posts_list_template"]',
             '.store-switcher'
         ];

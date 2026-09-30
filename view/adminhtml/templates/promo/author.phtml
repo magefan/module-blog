@@ -6,6 +6,12 @@
 
 /** @var \Magento\Framework\Escaper $escaper */
 ?>
+<?php
+if (!isset($escaper)) {
+    /* Compatibility fix for old Magento versions */
+    $escaper = $block;
+}
+?>
 <div class="mf-promo-page">
     <div class="mf-promo-badge mf-promo-badge--extra"><?= $escaper->escapeHtml(__('Extra Plan Feature')) ?></div>
     <h2 class="mf-promo-title"><?= $escaper->escapeHtml(__('Authors')) ?></h2>

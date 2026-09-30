@@ -6,6 +6,8 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model\Config\Source;
 
 /**
@@ -38,6 +40,7 @@ class Authors implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         if ($this->options === null) {
+            $this->options = [];
             $collection = $this->authorCollectionFactory->create();
 
             foreach ($collection as $item) {
