@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div class="mf-promo-page">
+    <div class="mf-promo-badge mf-promo-badge--extra"><?= $escaper->escapeHtml(__('Extra Plan Feature')) ?></div>
+    <h2 class="mf-promo-title"><?= $escaper->escapeHtml(__('Authors')) ?></h2>
+    <p class="mf-promo-description">
+        <?= $escaper->escapeHtml(__('Manage blog authors in one place and give every writer a dedicated author page on your storefront.')) ?>
+    </p>
+
+    <ul class="mf-promo-features">
+        <li><?= $escaper->escapeHtml(__('Create and manage blog authors from the admin panel')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Dedicated author pages with the list of author posts')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Assign an author and co-authors to each post')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Display author information on the post page')) ?></li>
+    </ul>
+    <br>
+    <a class="action-primary mf-promo-btn"
+       href="https://magefan.com/magento2-blog-extension/pricing?utm_source=admin&utm_medium=menu&utm_campaign=upgrade-link"
+       target="_blank">
+        <?= $escaper->escapeHtml(__('Upgrade to Extra')) ?>
+    </a>
+</div>
