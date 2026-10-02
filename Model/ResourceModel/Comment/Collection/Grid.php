@@ -62,6 +62,8 @@ class Grid extends Collection
                 'main_table.post_id = post.post_id',
                 ['title' => 'title']
             );
+        $this->addFilterToMap('creation_time', 'main_table.creation_time');
+        $this->addFilterToMap('update_time', 'main_table.update_time');
 
         return $this;
     }

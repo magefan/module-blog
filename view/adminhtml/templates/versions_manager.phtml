@@ -56,6 +56,10 @@ $selectorMap = [
                     this._isResetting = false;
                 });
             } else {
+                if (element.type === 'checkbox' && element.parentNode) {
+                    /* Wrap checkbox together with its label, checkbox styles rely on input + label */
+                    element = element.parentNode;
+                }
                 var wrapper = document.createElement('div');
                 wrapper.style.cssText = 'position:relative;';
                 element.parentNode.insertBefore(wrapper, element);

@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php
+if (!isset($escaper)) {
+    /* Compatibility fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<div class="mf-promo-page">
+    <div class="mf-promo-badge mf-promo-badge--extra"><?= $escaper->escapeHtml(__('Extra Plan Feature')) ?></div>
+    <h2 class="mf-promo-title"><?= $escaper->escapeHtml(__('New Post With AI')) ?></h2>
+    <p class="mf-promo-description">
+        <?= $escaper->escapeHtml(__('Generate complete blog posts with ChatGPT in a few clicks and save hours on content writing.')) ?>
+    </p>
+
+    <ul class="mf-promo-features">
+        <li><?= $escaper->escapeHtml(__('Generate a post from a topic, keywords and tone of voice')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Use your own prompt templates')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Choose the ChatGPT model that fits your needs')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Review and edit the generated post before publishing')) ?></li>
+    </ul>
+    <br>
+    <a class="action-primary mf-promo-btn"
+       href="https://magefan.com/magento2-blog-extension/pricing?utm_source=admin&utm_medium=menu&utm_campaign=upgrade-link"
+       target="_blank">
+        <?= $escaper->escapeHtml(__('Upgrade to Extra')) ?>
+    </a>
+</div>
