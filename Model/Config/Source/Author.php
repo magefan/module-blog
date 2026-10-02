@@ -16,7 +16,7 @@ namespace Magefan\Blog\Model\Config\Source;
 class Author implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @var \Magento\User\Model\ResourceModel\User\CollectionFactory
+     * @var \Magefan\Blog\Api\AuthorCollectionInterfaceFactory
      */
     protected $authorCollectionFactory;
 
@@ -26,14 +26,22 @@ class Author implements \Magento\Framework\Option\ArrayInterface
     protected $options;
 
     /**
+     * @var bool
+     */
+    private $withEmptyOption;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magefan\Blog\Api\AuthorCollectionInterfaceFactory $authorCollectionFactory
+     * @param bool $withEmptyOption
      */
     public function __construct(
-        \Magefan\Blog\Api\AuthorCollectionInterfaceFactory  $authorCollectionFactory
+        \Magefan\Blog\Api\AuthorCollectionInterfaceFactory  $authorCollectionFactory,
+        $withEmptyOption = true
     ) {
         $this->authorCollectionFactory = $authorCollectionFactory;
+        $this->withEmptyOption = (bool)$withEmptyOption;
     }
 
     /**
@@ -44,7 +52,7 @@ class Author implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         if ($this->options === null) {
-            $this->options = [['label' => __('Please select'), 'value' => 0]];
+            $this->options = $this->withEmptyOption ? [['label' => __('Please select'), 'value' => 0]] : [];
             $collection = $this->authorCollectionFactory->create();
 
             foreach ($collection as $item) {

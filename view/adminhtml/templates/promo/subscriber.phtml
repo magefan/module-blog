@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php
+if (!isset($escaper)) {
+    /* Compatibility fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<div class="mf-promo-page">
+    <div class="mf-promo-badge mf-promo-badge--extra"><?= $escaper->escapeHtml(__('Extra Plan Feature')) ?></div>
+    <h2 class="mf-promo-title"><?= $escaper->escapeHtml(__('Comment Subscribers')) ?></h2>
+    <p class="mf-promo-description">
+        <?= $escaper->escapeHtml(__('Let readers subscribe to post comments and keep the discussion going with automatic email notifications.')) ?>
+    </p>
+
+    <ul class="mf-promo-features">
+        <li><?= $escaper->escapeHtml(__('Readers can subscribe to new comments on a post')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Automatic email notifications about new replies')) ?></li>
+        <li><?= $escaper->escapeHtml(__('Manage all comment subscribers from the admin panel')) ?></li>
+    </ul>
+    <br>
+    <a class="action-primary mf-promo-btn"
+       href="https://magefan.com/magento2-blog-extension/pricing?utm_source=admin&utm_medium=menu&utm_campaign=upgrade-link"
+       target="_blank">
+        <?= $escaper->escapeHtml(__('Upgrade to Extra')) ?>
+    </a>
+</div>

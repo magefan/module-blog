@@ -62,4 +62,10 @@
             </argument>
         </arguments>
     </virtualType>
+
+    <virtualType name="Magefan\Blog\Model\Config\Source\Authors" type="Magefan\Blog\Model\Config\Source\Author">
+        <arguments>
+            <argument name="withEmptyOption" xsi:type="boolean">false</argument>
+        </arguments>
+    </virtualType>
 </config>

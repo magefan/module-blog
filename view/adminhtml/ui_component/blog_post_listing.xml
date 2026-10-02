@@ -59,6 +59,18 @@
                             <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
                             <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
                         </select>
+                        <dateRange>
+                            <param name="rangeType" xsi:type="string">datetime</param>
+                            <param name="templates" xsi:type="array">
+                                <item name="datetime" xsi:type="array">
+                                    <item name="timezoneFormat" xsi:type="string">YYYY-MM-DD HH:mm:ss</item>
+                                    <item name="options" xsi:type="array">
+                                        <item name="dateFormat" xsi:type="string">MMM d, y,</item>
+                                        <item name="timeFormat" xsi:type="string">h:mm:ss a</item>
+                                    </item>
+                                </item>
+                            </param>
+                        </dateRange>
                     </filters>
                 </templates>
             </settings>
@@ -251,6 +263,9 @@
                 component="Magento_Ui/js/grid/columns/date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                     <item name="sortOrder" xsi:type="number">80</item>
                 </item>
             </argument>
@@ -266,6 +281,9 @@
                 component="Magento_Ui/js/grid/columns/date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
                     <item name="sortOrder" xsi:type="number">90</item>
                 </item>
             </argument>
