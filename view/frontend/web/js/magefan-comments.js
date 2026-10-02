@@ -130,7 +130,7 @@
         });
     }
 
-    $hd.querySelector('form textarea').addEventListener('click', function (event) {
+    $hd.querySelector('form textarea').addEventListener('focus', function (event) {
         if (event.target.closest('form').querySelector('.c-btn-hld')) {
             event.target.closest('form').querySelector('.c-btn-hld').classList.remove('c-btn-hld', 'hidden');
         }
