@@ -43,18 +43,13 @@ class ModelsPlugin
             || $model instanceof \Magefan\Blog\Api\AuthorInterface
         );
         if ($isBlogModel) {
-            /* Restricted role: stores are already filtered by AdminGws */
-            $allowedStoreIds = array_keys($this->storeManager->getStores());
-            $storeIds = (array)$model->getStoreIds();
 
-            /* No allowed store view selected (e.g. field is hidden or "All Store Views") - use all allowed ones */
-            if ($allowedStoreIds && !array_intersect($storeIds, $allowedStoreIds)) {
-                $model->setStoreIds($allowedStoreIds);
-            }
+            $originStoreId  = $model->getStoreId();
+            $model->setStoreId($model->getStoreIds());
+            $result = $proceed($model);
+            $model->setStoreId($originStoreId);
+            return $result;
 
-            if ($model->getStoreIds()) {
-                $model->setStoreId($model->getStoreIds());
-            }
         }
 
         return $proceed($model);
