@@ -39,6 +39,8 @@ class ModelsPlugin
     {
         $isBlogModel = ($model instanceof \Magefan\Blog\Model\Post
             || $model instanceof \Magefan\Blog\Model\Category
+            || $model instanceof \Magefan\Blog\Model\Tag
+            || $model instanceof \Magefan\Blog\Api\AuthorInterface
         );
         if ($isBlogModel) {
             /* Restricted role: stores are already filtered by AdminGws */

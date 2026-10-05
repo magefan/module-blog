@@ -11,13 +11,16 @@
     <group name="collection_load_before" processor="Magento\AdminGws\Model\Collections">
         <callback class="Magefan\Blog\Model\ResourceModel\Post\Collection" method="addStoreFilter" />
         <callback class="Magefan\Blog\Model\ResourceModel\Category\Collection" method="addStoreFilter" />
+        <callback class="Magefan\Blog\Model\ResourceModel\Tag\Collection" method="addStoreFilter" />
     </group>
     <group name="model_save_before" processor="Magento\AdminGws\Model\Models">
         <callback class="Magefan\Blog\Model\Post" method="cmsPageSaveBefore" />
         <callback class="Magefan\Blog\Model\Category" method="cmsPageSaveBefore" />
+        <callback class="Magefan\Blog\Model\Tag" method="cmsPageSaveBefore" />
     </group>
     <group name="model_delete_before" processor="Magento\AdminGws\Model\Models">
         <callback class="Magefan\Blog\Model\Post" method="cmsPageDeleteBefore" />
         <callback class="Magefan\Blog\Model\Category" method="cmsPageDeleteBefore" />
+        <callback class="Magefan\Blog\Model\Tag" method="cmsPageDeleteBefore" />
     </group>
 </config>
