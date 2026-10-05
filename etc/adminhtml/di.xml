@@ -68,4 +68,21 @@
             <argument name="withEmptyOption" xsi:type="boolean">false</argument>
         </arguments>
     </virtualType>
+
+    <type name="Magefan\Community\Controller\Adminhtml\Promo\Index">
+        <arguments>
+            <argument name="pages" xsi:type="array">
+                <item name="blog_promo_author" xsi:type="array">
+                    <item name="resource" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="menu" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="title" xsi:type="string" translate="true">Authors</item>
+                </item>
+                <item name="blog_promo_subscriber" xsi:type="array">
+                    <item name="resource" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="menu" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="title" xsi:type="string" translate="true">Comment Subscribers</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
