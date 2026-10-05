@@ -8,11 +8,9 @@ declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Promo;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
+use Magefan\Community\Controller\Adminhtml\AbstractPromo as CommunityAbstractPromo;
 
-abstract class AbstractPromo extends Action
+abstract class AbstractPromo extends CommunityAbstractPromo
 {
     /**
      * Authorization level of a basic admin session
@@ -20,37 +18,10 @@ abstract class AbstractPromo extends Action
     public const ADMIN_RESOURCE = 'Magefan_Blog::elements';
 
     /**
-     * @var PageFactory
+     * @inheritdoc
      */
-    private $resultPageFactory;
-
-    /**
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
-     */
-    public function __construct(Context $context, PageFactory $resultPageFactory)
+    protected function getActiveMenu(): string
     {
-        parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
-    }
-
-    /**
-     * Get promo page title
-     *
-     * @return string
-     */
-    abstract protected function getPageTitle(): string;
-
-    /**
-     * Render promo page
-     *
-     * @return \Magento\Framework\View\Result\Page
-     */
-    public function execute()
-    {
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Magefan_Blog::elements');
-        $resultPage->getConfig()->getTitle()->prepend(__($this->getPageTitle()));
-        return $resultPage;
+        return 'Magefan_Blog::elements';
     }
 }
