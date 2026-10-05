@@ -18,19 +18,41 @@ use Magento\Framework\Filesystem\Driver\File;
 class ObsoleteFiles extends \Magento\Backend\Block\AbstractBlock
 {
     /**
-     * Files removed from modules after their form options were moved to Blog
+     * Files removed since previous version (2.16.2)
      */
     private const REMOVED_FILES = [
+        'Magefan_Blog' => [
+            'Block/Adminhtml/Category.php',
+            'Block/Adminhtml/Comment.php',
+            'Block/Adminhtml/Post.php',
+            'Block/Adminhtml/Tag.php',
+            'view/adminhtml/layout/blog_category_grid.xml',
+            'view/adminhtml/layout/blog_category_grid_block.xml',
+            'view/adminhtml/layout/blog_comment_grid.xml',
+            'view/adminhtml/layout/blog_comment_grid_block.xml',
+            'view/adminhtml/layout/blog_post_grid.xml',
+            'view/adminhtml/layout/blog_post_grid_block.xml',
+            'view/adminhtml/layout/blog_tag_grid.xml',
+            'view/adminhtml/layout/blog_tag_grid_block.xml',
+        ],
         'Magefan_BlogPlus' => [
             'Block/Adminhtml/Post/RelatedProductsRule.php',
             'Model/Config/Source/CustomerGroups.php',
+            'view/adminhtml/layout/blog_category_grid_block.xml',
+            'view/adminhtml/layout/blog_tag_grid_block.xml',
             'view/adminhtml/ui_component/blog_category_form.xml',
             'view/adminhtml/ui_component/blog_tag_form.xml',
             'view/adminhtml/web/js/components/url-key-handle-changes.js',
         ],
         'Magefan_BlogAuthor' => [
             'Model/Config/Source/Authors.php',
+            'view/adminhtml/layout/blogauthor_author_grid.xml',
+            'view/adminhtml/layout/blogauthor_author_grid_block.xml',
             'view/adminhtml/ui_component/blog_post_form.xml',
+        ],
+        'Magefan_BlogImport' => [
+            'view/adminhtml/layout/blog_post_export_grid_block.xml',
+            'view/adminhtml/layout/blog_post_grid_block.xml',
         ],
     ];
 
@@ -81,17 +103,21 @@ class ObsoleteFiles extends \Magento\Backend\Block\AbstractBlock
             return '';
         }
 
-        $html = '<div class="messages"><div class="message message-warning warning"><div><strong>'
-            . $this->_escaper->escapeHtml(__('Please delete these files left from previous versions:'))
-            . '</strong> '
-            . '</div><ul style="padding-left: 30px;">';
+        $commands = [];
         foreach ($files as $file) {
-            $html .= '<li><code>' . $this->_escaper->escapeHtml($file) . '</code></li>';
+            $commands[] = 'rm ' . $file;
         }
+        $commands[] = 'php bin/magento cache:flush';
 
-        return $html . '</ul><div>'
-            . $this->_escaper->escapeHtml(__('Then flush Magento cache.'))
-            . '</div></div></div>';
+        $text = implode(' ', [
+            __('Some obsolete files are left over from previous versions after an extension upgrade.'),
+            __('These files are no longer used in the latest version of the Blog extension.'),
+            __('Please remove them. Run the commands:'),
+        ]);
+
+        return '<div class="messages"><div class="message message-warning warning"><div>'
+            . $this->_escaper->escapeHtml($text)
+            . '</div><pre>' . $this->_escaper->escapeHtml(implode("\n", $commands)) . '</pre></div></div>';
     }
 
     /**
@@ -105,7 +131,7 @@ class ObsoleteFiles extends \Magento\Backend\Block\AbstractBlock
         foreach (self::REMOVED_FILES as $moduleName => $files) {
             foreach ($files as $file) {
                 $path = $this->getPath($moduleName, $file);
-                if (true||$path && $this->file->isExists($path)) {
+                if ($path && $this->file->isExists($path)) {
                     $result[] = $this->getRelativePath($path);
                 }
             }
