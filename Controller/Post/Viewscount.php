@@ -21,6 +21,8 @@ class Viewscount extends View implements HttpPostActionInterface, CsrfAwareActio
 {
 
     /**
+     * Create CSRF validation exception
+     *
      * @param RequestInterface $request
      * @return InvalidRequestException|null
      */
@@ -30,6 +32,8 @@ class Viewscount extends View implements HttpPostActionInterface, CsrfAwareActio
     }
 
     /**
+     * Perform custom request validation
+     *
      * @param RequestInterface $request
      * @return bool|null
      */

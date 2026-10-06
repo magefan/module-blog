@@ -205,14 +205,16 @@ class Author extends AbstractModel implements AuthorInterface
      * Prepare all additional data
      *
      * @return array
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData()
     {
-        throw new \Exception('\Magefan\Blog\Model\Author::getDynamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Author::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Author::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Author::getDynamicData instead.'
+        ));
     }
 
     /**

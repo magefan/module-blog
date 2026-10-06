@@ -34,6 +34,8 @@ abstract class VersionsManager extends Template
     }
 
     /**
+     * Check if Blog Extra is installed
+     *
      * @return bool
      */
     public function isBlogExtraInstalled(): bool
@@ -42,6 +44,8 @@ abstract class VersionsManager extends Template
     }
 
     /**
+     * Check if Blog Plus is installed
+     *
      * @return bool
      */
     public function isBlogPlusInstalled(): bool
@@ -50,6 +54,8 @@ abstract class VersionsManager extends Template
     }
 
     /**
+     * Get current Blog plan name
+     *
      * @return string
      */
     public function getCurrentPlan(): string
@@ -64,13 +70,16 @@ abstract class VersionsManager extends Template
     }
 
     /**
+     * Get selectors of Blog Extra features
+     *
      * @return array
      */
     abstract public function getExtraSelectors(): array;
 
     /**
+     * Get selectors of Blog Plus features
+     *
      * @return array
      */
     abstract public function getPlusSelectors(): array;
-
 }

@@ -36,7 +36,7 @@ class PreviewUrl
     private $random;
 
     /**
-     * @param Url $url
+     * @param Url $blogUrl
      * @param \Magento\Framework\Url $frameworkUrl
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Math\Random $random
@@ -54,6 +54,8 @@ class PreviewUrl
     }
 
     /**
+     * Get preview secret of the object
+     *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return string
      */
@@ -90,7 +92,6 @@ class PreviewUrl
         $this->blogUrl->startStoreEmulation($this->storeManager->getStore($storeId));
         $url = $this->blogUrl->getUrl($object, $controllerName);
         $this->blogUrl->stopStoreEmulation();
-
 
         $url .= (false === strpos($url, '?')) ? '?' : '&';
         $url .= 'secret=' . $this->getSecret($object);

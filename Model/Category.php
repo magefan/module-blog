@@ -508,14 +508,16 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * Prepare all additional data
      *
      * @return $this
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated replaced with getDynamicData
      * @see getDynamicData()
      */
     public function initDinamicData()
     {
-        throw new \Exception('\Magefan\Blog\Model\Category::initDinamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Category::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Category::initDinamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Category::getDynamicData instead.'
+        ));
     }
 
     /**
@@ -523,14 +525,16 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      *
      * @param null|array $fields
      * @return array
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData()
      */
     public function getDynamicData($fields = null)
     {
-        throw new \Exception('\Magefan\Blog\Model\Category::getDynamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Category::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Category::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Category::getDynamicData instead.'
+        ));
     }
 
     /**

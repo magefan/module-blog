@@ -247,14 +247,16 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * Return all additional data
      *
      * @return array
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData()
     {
-        throw new \Exception('\Magefan\Blog\Model\Tag::getDynamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Tag::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Tag::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Tag::getDynamicData instead.'
+        ));
     }
 
     /**

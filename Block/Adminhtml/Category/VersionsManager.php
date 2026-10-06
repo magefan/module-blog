@@ -11,6 +11,8 @@ namespace Magefan\Blog\Block\Adminhtml\Category;
 class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
 {
     /**
+     * Get selectors of Blog Extra features
+     *
      * @return array
      */
     public function getExtraSelectors(): array
@@ -23,6 +25,8 @@ class VersionsManager extends \Magefan\Blog\Block\Adminhtml\VersionsManager
     }
 
     /**
+     * Get selectors of Blog Plus features
+     *
      * @return array
      */
     public function getPlusSelectors(): array

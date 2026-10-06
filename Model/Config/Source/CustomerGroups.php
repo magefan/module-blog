@@ -46,6 +46,8 @@ class CustomerGroups implements OptionSourceInterface
     }
 
     /**
+     * Get options as value-label pairs
+     *
      * @return array
      */
     public function toOptionArray(): array

@@ -76,6 +76,8 @@ class Author extends Column
     }
 
     /**
+     * Get author name by id
+     *
      * @param int $id
      * @return string
      */

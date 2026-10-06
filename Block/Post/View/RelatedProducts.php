@@ -300,6 +300,8 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
     }
 
     /**
+     * Get related products page size
+     *
      * @return int
      */
     public function getPageSize(): int

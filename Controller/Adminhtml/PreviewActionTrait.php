@@ -14,12 +14,17 @@ namespace Magefan\Blog\Controller\Adminhtml;
  */
 trait PreviewActionTrait
 {
+    /**
+     * Redirect to entity preview url
+     *
+     * @return void
+     */
     public function execute(): void
     {
         try {
             $model = $this->_getModel();
             if (!$model->getId()) {
-                throw new \Exception("Item is not longer exist.", 1);
+                throw new \Magento\Framework\Exception\LocalizedException(__('Item is not longer exist.'));
             }
             $previewUrl = $this->_objectManager->get(\Magefan\Blog\Model\PreviewUrl::class);
 

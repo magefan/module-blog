@@ -43,6 +43,8 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Get block cache identities
+     *
      * @return array
      */
     public function getIdentities()
