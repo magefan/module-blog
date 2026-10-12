@@ -16,6 +16,8 @@ class NoYes implements ArrayInterface
     public const DISABLED = 1;
 
     /**
+     * Get options as value-label pairs
+     *
      * @return array
      */
     public function toOptionArray(): array
@@ -27,6 +29,8 @@ class NoYes implements ArrayInterface
     }
 
     /**
+     * Get options in key-value format
+     *
      * @return array
      */
     public function toArray(): array

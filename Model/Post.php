@@ -943,7 +943,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      *
      * @param string $secret
      * @return bool
-     * @deprecated
+     * @deprecated Preview secret is managed by the preview url model
+     * @see \Magefan\Blog\Model\PreviewUrl::getUrl()
      */
     public function isValidSecret($secret): bool
     {
@@ -1050,14 +1051,16 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Prepare all additional data
      *
      * @return self
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated replaced with getDynamicData
      * @see getDynamicData
      */
     public function initDinamicData()
     {
-        throw new \Exception('\Magefan\Blog\Model\Post::initDinamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Post::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Post::initDinamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Post::getDynamicData instead.'
+        ));
     }
 
     /**
@@ -1065,14 +1068,16 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      *
      * @param null|array $fields
      * @return array
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {
-        throw new \Exception('\Magefan\Blog\Model\Post::getDynamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Post::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Post::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Post::getDynamicData instead.'
+        ));
     }
 
     /**
@@ -1111,7 +1116,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Retrieve secret key of post, it can be used during preview
      *
      * @return string
-     * @deprecated
+     * @deprecated Preview secret is managed by the preview url model
+     * @see \Magefan\Blog\Model\PreviewUrl::getUrl()
      */
     public function getSecret()
     {

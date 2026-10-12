@@ -84,6 +84,8 @@ class Category extends Column
     }
 
     /**
+     * Get category title by id
+     *
      * @param int $id
      * @return string
      */

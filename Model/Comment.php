@@ -340,13 +340,15 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      *
      * @param array|null $fields
      * @return array
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated use getDynamicData method in graphQL data provider
      * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {
-        throw new \Exception('\Magefan\Blog\Model\Comment::getDynamicData is retired. '
-            . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Comment::getDynamicData instead.');
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Comment::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Comment::getDynamicData instead.'
+        ));
     }
 }

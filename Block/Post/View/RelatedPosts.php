@@ -63,6 +63,8 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Render block HTML
+     *
      * @return string
      */
     protected function _toHtml()
@@ -75,6 +77,8 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Get block cache identities
+     *
      * @return array
      */
     public function getIdentities()

@@ -15,11 +15,11 @@ namespace Magefan\Blog\Controller\Adminhtml;
 abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 {
      /**
-     * Prepare images before object save
-     *
-     * @param \Magento\Framework\DataObject $model
-     * @param array $fields
-     */
+      * Prepare images before object save
+      *
+      * @param \Magento\Framework\DataObject $model
+      * @param array $fields
+      */
     protected function prepareImagesBeforeSave($model, array $fields)
     {
         $data = $model->getData();
