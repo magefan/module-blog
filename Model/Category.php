@@ -599,7 +599,12 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     public function move($parentId, $afterCategoryId)
     {
         try {
-            $parent = $this->loadFromRepository($parentId);
+            if ((int)$parentId === self::TREE_ROOT_ID) {
+                $parent = clone $this;
+                $parent->unsetData();
+            } else {
+                $parent = $this->loadFromRepository($parentId);
+            }
         } catch (NoSuchEntityException $e) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('Sorry, but we can\'t find the new parent category you selected.'),

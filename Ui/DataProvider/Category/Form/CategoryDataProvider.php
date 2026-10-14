@@ -105,6 +105,9 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         foreach ($items as $category) {
             $category = $category->load($category->getId()); //temporary fix
             $data = $category->getData();
+            unset($data['position']);
+            unset($data['path']);
+            unset($data['level']);
             /* Prepare Featured Image */
             $map = [
                 'category_img' => 'getCategoryImage',

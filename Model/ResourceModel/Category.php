@@ -449,10 +449,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             ? sprintf('%s/%s', $newParent->getPath(), $newParent->getId())
             : $newParent->getId();
 
-        $newLevel = $newParent->getLevel() + 2;
+        $newLevel = $newParent->getId() ? $newParent->getLevel() + 2 : 1;
         $levelDisposition = $newLevel - ($category->getLevel() + 1);
 
         $childrenNodesPath = $category->getFullPath();
+        $newChildrenNodesPath = $newPath ? $newPath . '/' . $category->getId() : (string)$category->getId();
 
         /**
          * Update children nodes path
@@ -461,11 +462,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $table,
             [
                 'path' => new \Zend_Db_Expr(
-                    'REPLACE(' . $pathField . ',' . $connection->quote(
-                        $category->getPath() . '/'
-                    ) . ', ' . $connection->quote(
-                        $newPath . '/'
-                    ) . ')'
+                    'CONCAT(' . $connection->quote($newChildrenNodesPath) . ', SUBSTRING(' . $pathField . ', '
+                    . (strlen((string)$childrenNodesPath) + 1) . '))'
                 ),
                 'level' => new \Zend_Db_Expr($levelField . ' + ' . $levelDisposition)
             ],

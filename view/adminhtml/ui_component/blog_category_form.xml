@@ -91,23 +91,6 @@
                 <dataType>text</dataType>
             </settings>
         </field>
-        <field name="path" formElement="hidden">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">category</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>text</dataType>
-            </settings>
-        </field>
-        <field name="level" formElement="hidden">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">category</item>
-                </item>
-            </argument>
-        </field>
 
 
 
