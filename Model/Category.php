@@ -45,7 +45,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * blog cache category
      */
-    public const CACHE_TAG = 'mfb_c';
+    public const CACHE_TAG = 'mfblog_c';
 
     /**
      * Category's Statuses
