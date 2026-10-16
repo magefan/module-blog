@@ -406,23 +406,16 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _getMaxPosition($path)
     {
         $connection = $this->getConnection();
-        $positionField = $connection->quoteIdentifier('position');
-        $level = count(explode('/', (string)$path)) + 1;
-        $bind = ['c_level' => $level, 'c_path' => $path];
-        $select = $connection->select()->from(
-            $this->getTable($this->getMainTable()),
-            'MAX(' . $positionField . ')'
-        )->where(
-            $connection->quoteIdentifier('path') . ' LIKE :c_path'
-        )->where(
-            $connection->quoteIdentifier('level') . ' = :c_level'
-        );
+        $select = $connection->select()
+            ->from($this->getMainTable(), 'MAX(position)');
 
-        $position = $connection->fetchOne($select, $bind);
-        if (!$position) {
-            $position = 0;
+        if ($path) {
+            $select->where('path = ?', $path);
+        } else {
+            $select->where('path IS NULL');
         }
-        return $position;
+
+        return (int)$connection->fetchOne($select);
     }
 
     /**
