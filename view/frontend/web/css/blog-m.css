@@ -43,6 +43,7 @@
 .post-content .post-description img {margin: 15px 0;max-width: 100%;height: auto}
 .post-content .post-description ul,
 .post-content .post-description ol {list-style-position: outside;}
+.post-content .post-description pre {white-space: pre-wrap;overflow-wrap: anywhere;}
 
 .post-content .post-description .mfblog-contents li {display: list-item;}
 .post-content .post-description .mfblog-contents li li {margin-left: 15px;}
