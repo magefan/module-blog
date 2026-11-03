@@ -269,7 +269,7 @@
     <route url="/V1/blog/version" method="GET">
         <service class="Magefan\Blog\Api\VersionInterface" method="getVersion"/>
         <resources>
-            <resource ref="anonymous" />
+            <resource ref="Magefan_Blog::elements" />
         </resources>
     </route>
 </routes>
