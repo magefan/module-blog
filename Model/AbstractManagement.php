@@ -10,6 +10,14 @@ declare(strict_types=1);
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\ManagementInterface;
+use Magento\Framework\App\Area;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\State;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Filesystem;
+use Magento\Store\Model\StoreManagerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Abstract management model
@@ -38,40 +46,64 @@ abstract class AbstractManagement implements ManagementInterface
     ];
 
     /**
-     * Saves a file with unique name if necessary.
-     *
-     * @param string $fileName Desired file name (without path)
-     * @param string $fileContent Content of the file
-     * @return string Saved file name with short path
+     * @var LoggerInterface
      */
-    public function saveFile($fileName, $fileContent)
+    private $logger;
+
+    /**
+     * Save base64-encoded image file to media directory
+     *
+     * @param string $fileName
+     * @param string $fileContent
+     * @return string
+     * @throws LocalizedException
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
+    public function saveFile(string $fileName, string $fileContent): string
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $filesystem = $objectManager->get(Filesystem::class);
 
-        $file = $objectManager->get(\Magento\Framework\Filesystem\Driver\File::class);
-        $directoryList = $objectManager->get(\Magento\Framework\Filesystem\DirectoryList::class);
+        $fileIo = $objectManager->get(\Magento\Framework\Filesystem\Io\File::class);
 
-        $targetDirectory = $directoryList->getPath(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
-            . '/' . $this->_imagePath;
-        $file->createDirectory($targetDirectory);
+        $pathInfo  = $fileIo->getPathInfo($fileName);
+        $safeName  = (string)($pathInfo['basename'] ?? '');
+        $extension = strtolower((string)($pathInfo['extension'] ?? ''));
 
-        $finalFileName = $this->getUniqueFileName($targetDirectory, $fileName, $file);
-        $finalFilePath = $targetDirectory . $finalFileName;
-        // phpcs:ignore Magento2.Functions.DiscouragedFunction
-        $file->filePutContents($finalFilePath, base64_decode($fileContent));
+        if (!in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'], true)) {
+            throw new LocalizedException(__('File type "%1" is not allowed.', $extension));
+        }
 
-        return $this->_imagePath . $finalFileName;
+        $mediaDir = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        $mediaDir->create($this->_imagePath);
+
+        $finalFileName = $this->getUniqueFileName($mediaDir, $this->_imagePath, $safeName);
+        $relativePath  = $this->_imagePath . $finalFileName;
+
+        $decoded = base64_decode($fileContent, true); // phpcs:ignore Magento2.Functions.DiscouragedFunction
+        if ($decoded === false) {
+            throw new LocalizedException(__('Invalid file content encoding.'));
+        }
+
+        $imageInfo = getimagesizefromstring($decoded); // phpcs:ignore Magento2.Functions.DiscouragedFunction
+        if ($imageInfo === false) {
+            throw new LocalizedException(__('Uploaded file is not a valid image.'));
+        }
+
+        $mediaDir->writeFile($relativePath, $decoded);
+
+        return $relativePath;
     }
 
     /**
      * Generates a unique file name if the file already exists.
      *
-     * @param string $directory
+     * @param \Magento\Framework\Filesystem\Directory\WriteInterface $mediaDir
+     * @param string $path Relative directory path within media
      * @param string $fileName
-     * @param \Magento\Framework\Filesystem\Driver\File $fileDriver
      * @return string
      */
-    protected function getUniqueFileName(string $directory, $fileName, $fileDriver)
+    protected function getUniqueFileName($mediaDir, string $path, string $fileName): string
     {
         // phpcs:disable Magento2.Functions.DiscouragedFunction
         $name = pathinfo($fileName, PATHINFO_FILENAME);
@@ -80,7 +112,7 @@ abstract class AbstractManagement implements ManagementInterface
         $counter = 1;
 
         $newFileName = $fileName;
-        while ($fileDriver->isExists($directory . $newFileName)) {
+        while ($mediaDir->isExist($path . $newFileName)) {
             $newFileName = $name . '_' . $counter . '.' . $extension;
             $counter++;
         }
@@ -92,7 +124,7 @@ abstract class AbstractManagement implements ManagementInterface
      * Create new item using data
      *
      * @param string $data
-     * @return string || false
+     * @return string
      */
     public function create($data)
     {
@@ -110,8 +142,11 @@ abstract class AbstractManagement implements ManagementInterface
             $item = $this->_itemFactory->create();
             $item->setData($data)->save();
             return json_encode($item->getData());
-        } catch (\Exception $e) {
+        } catch (LocalizedException $e) {
             return $this->getError($e->getMessage());
+        } catch (\Throwable $e) {
+            $this->getLogger()->critical($e);
+            return $this->getError('An error occurred while creating the item.');
         }
     }
 
@@ -120,7 +155,7 @@ abstract class AbstractManagement implements ManagementInterface
      *
      * @param int $id
      * @param string $data
-     * @return string || false
+     * @return string
      */
     public function update($id, $data)
     {
@@ -159,8 +194,11 @@ abstract class AbstractManagement implements ManagementInterface
 
             $item->addData($data)->save();
             return json_encode($item->getData());
-        } catch (\Exception $e) {
+        } catch (LocalizedException $e) {
             return $this->getError($e->getMessage());
+        } catch (\Throwable $e) {
+            $this->getLogger()->critical($e);
+            return $this->getError('An error occurred while updating the item.');
         }
     }
 
@@ -168,7 +206,7 @@ abstract class AbstractManagement implements ManagementInterface
      * Delete item by id
      *
      * @param  int $id
-     * @return bool
+     * @return bool|string
      */
     public function delete($id)
     {
@@ -180,8 +218,11 @@ abstract class AbstractManagement implements ManagementInterface
                 return true;
             }
             return $this->getError('Something went wrong');
-        } catch (\Exception $e) {
+        } catch (LocalizedException $e) {
             return $this->getError($e->getMessage());
+        } catch (\Throwable $e) {
+            $this->getLogger()->critical($e);
+            return $this->getError('An error occurred while deleting the item.');
         }
     }
 
@@ -203,8 +244,11 @@ abstract class AbstractManagement implements ManagementInterface
                 return $this->getError('Item not found');
             }
             return json_encode($item->getData());
-        } catch (\Exception $e) {
+        } catch (LocalizedException $e) {
             return $this->getError($e->getMessage());
+        } catch (\Throwable $e) {
+            $this->getLogger()->critical($e);
+            return $this->getError('An error occurred while loading the item.');
         }
     }
 
@@ -213,7 +257,7 @@ abstract class AbstractManagement implements ManagementInterface
      *
      * @param  int $id
      * @param  int $storeId
-     * @return bool
+     * @return string
      */
     public function view($id, $storeId)
     {
@@ -229,8 +273,11 @@ abstract class AbstractManagement implements ManagementInterface
 
             $data = $this->getDynamicData($item);
             return json_encode($data);
-        } catch (\Exception $e) {
+        } catch (LocalizedException $e) {
             return $this->getError($e->getMessage());
+        } catch (\Throwable $e) {
+            $this->getLogger()->critical($e);
+            return $this->getError('An error occurred while loading the item.');
         }
     }
 
@@ -276,30 +323,46 @@ abstract class AbstractManagement implements ManagementInterface
     }
 
     /**
-     * If request url contain store code - get store id
+     * If request url contains store code - get store id
      *
      * @return int
      */
     private function getStoreIdFromRestRequest(): int
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $appState = $objectManager->get(\Magento\Framework\App\State::class);
-        $request = $objectManager->get(\Magento\Framework\App\RequestInterface::class);
-        $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+        $appState = $objectManager->get(State::class);
+        $request = $objectManager->get(RequestInterface::class);
+        $storeManager = $objectManager->get(StoreManagerInterface::class);
 
         $storeId = 0;
 
-        if (\Magento\Framework\App\Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
+        if (Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
             $storeCode = $storeManager->getStore()->getCode();
 
             // /rest/ua/V1/blog/post/2 or /ua/rest/V1/blog/post/2
             $path = explode('/', trim($request->getRequestUri(), '/'));
 
-            if ('rest' === $path[0] && $path[1] === $storeCode || 'rest' === $path[1] && $path[0] === $storeCode) {
+            if ('rest' === $path[0] && $path[1] === $storeCode
+                || 'rest' === $path[1] && $path[0] === $storeCode
+            ) {
                 $storeId = (int)$storeManager->getStore()->getId();
             }
         }
 
         return $storeId;
+    }
+
+    /**
+     * Get logger instance
+     *
+     * @return mixed|LoggerInterface
+     */
+    protected function getLogger()
+    {
+        if (null == $this->logger) {
+            $this->logger = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(LoggerInterface::class);
+        }
+        return $this->logger;
     }
 }
