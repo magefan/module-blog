@@ -34,9 +34,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     protected $_category;
 
     /**
-     * Construct
-     *
-     * @param \Magento\Framework\View\Element\Context $context
+     * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
