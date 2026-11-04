@@ -8,8 +8,24 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Magento\Backend\Block\Template" name="mfblog.promo.author"
-                   template="Magefan_Blog::promo/author.phtml"/>
+            <block class="Magefan\Community\Block\Adminhtml\Promo" name="mfblog.promo.author">
+                <arguments>
+                    <argument name="plan" xsi:type="string">extra</argument>
+                    <argument name="badge" xsi:type="string" translate="true">Extra Plan Feature</argument>
+                    <argument name="title" xsi:type="string" translate="true">Authors</argument>
+                    <argument name="description" xsi:type="string" translate="true">Manage blog authors in one place and give every writer a dedicated author page on your storefront.</argument>
+                    <argument name="features" xsi:type="array">
+                        <item name="f0" xsi:type="string" translate="true">Create and manage blog authors separate from admin users</item>
+                        <item name="f1" xsi:type="string" translate="true">Dedicated author pages with the list of author posts</item>
+                        <item name="f2" xsi:type="string" translate="true">Assign an author and co-authors to each post</item>
+                        <item name="f3" xsi:type="string" translate="true">Display author information on the post page</item>
+                    </argument>
+                    <argument name="section" xsi:type="string">mfblog</argument>
+                    <argument name="module_name" xsi:type="string">Magefan_Blog</argument>
+                    <argument name="utm_campaign" xsi:type="string">blog</argument>
+                    <argument name="button_label" xsi:type="string" translate="true">Upgrade to Extra</argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>
