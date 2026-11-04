@@ -406,23 +406,16 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _getMaxPosition($path)
     {
         $connection = $this->getConnection();
-        $positionField = $connection->quoteIdentifier('position');
-        $level = count(explode('/', (string)$path)) + 1;
-        $bind = ['c_level' => $level, 'c_path' => $path];
-        $select = $connection->select()->from(
-            $this->getTable($this->getMainTable()),
-            'MAX(' . $positionField . ')'
-        )->where(
-            $connection->quoteIdentifier('path') . ' LIKE :c_path'
-        )->where(
-            $connection->quoteIdentifier('level') . ' = :c_level'
-        );
+        $select = $connection->select()
+            ->from($this->getMainTable(), 'MAX(position)');
 
-        $position = $connection->fetchOne($select, $bind);
-        if (!$position) {
-            $position = 0;
+        if ($path) {
+            $select->where('path = ?', $path);
+        } else {
+            $select->where('path IS NULL');
         }
-        return $position;
+
+        return (int)$connection->fetchOne($select);
     }
 
     /**
@@ -449,10 +442,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             ? sprintf('%s/%s', $newParent->getPath(), $newParent->getId())
             : $newParent->getId();
 
-        $newLevel = $newParent->getLevel() + 2;
+        $newLevel = $newParent->getId() ? $newParent->getLevel() + 2 : 1;
         $levelDisposition = $newLevel - ($category->getLevel() + 1);
 
         $childrenNodesPath = $category->getFullPath();
+        $newChildrenNodesPath = $newPath ? $newPath . '/' . $category->getId() : (string)$category->getId();
 
         /**
          * Update children nodes path
@@ -461,11 +455,8 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $table,
             [
                 'path' => new \Zend_Db_Expr(
-                    'REPLACE(' . $pathField . ',' . $connection->quote(
-                        $category->getPath() . '/'
-                    ) . ', ' . $connection->quote(
-                        $newPath . '/'
-                    ) . ')'
+                    'CONCAT(' . $connection->quote($newChildrenNodesPath) . ', SUBSTRING(' . $pathField . ', '
+                    . (strlen((string)$childrenNodesPath) + 1) . '))'
                 ),
                 'level' => new \Zend_Db_Expr($levelField . ' + ' . $levelDisposition)
             ],
