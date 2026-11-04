@@ -75,7 +75,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     /**
      * blog cache comment
      */
-    public const CACHE_TAG = 'mfb_co';
+    public const CACHE_TAG = 'mfblog_co';
 
     /**
      * Initialize dependencies.

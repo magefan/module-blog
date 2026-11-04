@@ -31,7 +31,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     /**
      * blog cache tag
      */
-    private const CACHE_TAG = 'mfb_t';
+    private const CACHE_TAG = 'mfblog_t';
 
     /**
      * Prefix of model events names

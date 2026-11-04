@@ -45,7 +45,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     /**
      * blog cache post
      */
-    public const CACHE_TAG = 'mfb_p';
+    public const CACHE_TAG = 'mfblog_p';
 
     /**
      * Gallery images separator constant

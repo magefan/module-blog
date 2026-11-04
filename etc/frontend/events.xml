@@ -18,6 +18,6 @@
         <observer name="magefan_blog_layout_load_before" instance="Magefan\Blog\Observer\LayoutLoadBeforeObserver" />
     </event>
     <event name="layout_generate_blocks_after">
-        <observer name="categorySeo" instance="Magefan\Blog\Observer\LayoutGenerateBlocksAfter" />
+        <observer name="magefan_blog_layout_generate_blocks_after" instance="Magefan\Blog\Observer\LayoutGenerateBlocksAfter" />
     </event>
 </config>
