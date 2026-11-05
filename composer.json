@@ -2,14 +2,14 @@
     "name": "magefan/module-blog",
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
-        "magefan/module-community" : ">=2.4.8",
+        "magefan/module-community" : ">=2.4.11",
         "magefan/module-blog-comments-recaptcha" : ">=2.1.9",
-        "magefan/module-blog-import": "2.17.0",
-        "magefan/module-blog-graph-ql" : ">=2.2.2",
+        "magefan/module-blog-import": "2.17.1",
+        "magefan/module-blog-graph-ql" : ">=2.3.0",
         "magefan/module-wysiwyg-advanced" : ">=2.0.19"
     },
     "type": "magento2-module",
-    "version": "2.17.0",
+    "version": "2.17.1",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
