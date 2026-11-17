@@ -33,7 +33,7 @@ class Wordpress extends AbstractImport
                 LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
                 WHERE tt.taxonomy = "category" AND t.slug <> "uncategorized"';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare category data */
             /*
@@ -51,7 +51,8 @@ class Wordpress extends AbstractImport
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
-                $category->setData($data)->save();
+                $category->setData($data);
+                $this->categoryResource->save($category);
                 $this->_importedCategoriesCount++;
                 $categories[$category->getId()] = $category;
                 $oldCategories[$category->getOldId()] = $category;
@@ -97,7 +98,7 @@ class Wordpress extends AbstractImport
 
         foreach ($categories as $ct) {
             /* Final saving */
-            $ct->save();
+            $this->categoryResource->save($ct);
         }
 
         /* Import tags */
@@ -113,7 +114,7 @@ class Wordpress extends AbstractImport
                 LEFT JOIN '.$_pref.'term_taxonomy tt on t.term_id = tt.term_id
                 WHERE tt.taxonomy = "post_tag" AND t.slug <> "uncategorized"';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -132,7 +133,8 @@ class Wordpress extends AbstractImport
             $tag = $this->_tagFactory->create();
             try {
                 /* Initial saving */
-                $tag->setData($data)->save();
+                $tag->setData($data);
+                $this->tagResource->save($tag);
                 $this->_importedTagsCount++;
                 $tags[$tag->getId()] = $tag;
                 $oldTags[$tag->getOldId()] = $tag;
@@ -148,7 +150,7 @@ class Wordpress extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'posts WHERE `post_type` = "post"';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
 
         foreach ($result as $data) {
             /* find post categories*/
@@ -158,7 +160,7 @@ class Wordpress extends AbstractImport
                     LEFT JOIN '.$_pref.'term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
                     WHERE tr.`object_id` = "'.$data['ID'].'" AND tt.taxonomy = "category"';
 
-            $result2 = $adapter->query($sql)->execute();
+            $result2 = $adapter->fetchAll($sql);
             foreach ($result2 as $data2) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldCategories[$oldTermId])) {
@@ -173,7 +175,7 @@ class Wordpress extends AbstractImport
                     LEFT JOIN '.$_pref.'term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
                     WHERE tr.`object_id` = "'.$data['ID'].'" AND tt.taxonomy = "post_tag"';
 
-            $result2 = $adapter->query($sql)->execute();
+            $result2 = $adapter->fetchAll($sql);
             foreach ($result2 as $data2) {
                 $oldTermId = $data2['term_id'];
                 if (isset($oldTags[$oldTermId])) {
@@ -206,7 +208,7 @@ class Wordpress extends AbstractImport
                 ORDER BY
                     p1.post_date DESC';
 
-            $result2 = $adapter->query($sql)->execute();
+            $result2 = $adapter->fetchAll($sql);
             foreach ($result2 as $data2) {
                 if ($data2['featured_img']) {
                     $data['featured_img'] = \Magefan\Blog\Model\Post::BASE_MEDIA_PATH . '/' . $data2['featured_img'];
@@ -232,7 +234,7 @@ class Wordpress extends AbstractImport
                     ORDER BY
                         p1.post_date DESC';
 
-                $result2 = $adapter->query($sql)->execute();
+                $result2 = $adapter->fetchAll($sql);
                 foreach ($result2 as $data2) {
                     if ($data2['featured_img']) {
                         $serializeInterface = \Magento\Framework\App\ObjectManager::getInstance()
@@ -256,7 +258,7 @@ class Wordpress extends AbstractImport
 
             /* Find Meta Data */
             $sql = 'SELECT * FROM `'.$_pref.'postmeta` WHERE `post_id` = ' . ((int)$data['ID']);
-            $metaResult = $adapter->query($sql)->execute();
+            $metaResult = $adapter->fetchAll($sql);
             foreach ($metaResult as $metaData) {
 
                 $metaValue = trim(isset($metaData['meta_value']) ? $metaData['meta_value'] : '');
@@ -322,7 +324,8 @@ class Wordpress extends AbstractImport
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
-                $post->setData($data)->save();
+                $post->setData($data);
+                $this->postResource->save($post);
 
                 /* find post comment s*/
                 $sql = 'SELECT
@@ -333,7 +336,7 @@ class Wordpress extends AbstractImport
                             `comment_approved`=1
                         AND
                             `comment_post_ID` = ' . $wordpressPostId;
-                $resultComments = $adapter->query($sql)->execute();
+                $resultComments = $adapter->fetchAll($sql);
                 $commentParents = [];
 
                 foreach ($resultComments as $comments) {
@@ -360,7 +363,8 @@ class Wordpress extends AbstractImport
 
                     try {
                         /* Initial saving */
-                        $comment->setData($commentData)->save();
+                        $comment->setData($commentData);
+                        $this->commentResource->save($comment);
                         $this->_importedCommentsCount++;
                         $commentParents[$comments["comment_ID"]] = $comment->getCommentId();
                     } catch (\Exception $e) {

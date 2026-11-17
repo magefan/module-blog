@@ -24,15 +24,23 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstra
     protected static $categories = [];
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Category
+     */
+    protected $categoryResource;
+
+    /**
      * @param \Magento\Backend\Block\Context $context
      * @param \Magefan\Blog\Model\CategoryFactory $localeLists
      * @param array $data
+     * @param \Magefan\Blog\Model\ResourceModel\Category $categoryResource
      */
     public function __construct(
         \Magento\Backend\Block\Context $context,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magefan\Blog\Model\ResourceModel\Category $categoryResource,
         array $data = []
     ) {
+        $this->categoryResource = $categoryResource;
         parent::__construct($context, $data);
         $this->categoryFactory = $categoryFactory;
     }
@@ -68,7 +76,8 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstra
     protected function getCategoryById($id)
     {
         if (!isset(self::$categories[$id])) {
-            self::$categories[$id] = $this->categoryFactory->create()->load($id);
+            self::$categories[$id] = $this->categoryFactory->create();
+            $this->categoryResource->load(self::$categories[$id], $id);
         }
         return self::$categories[$id];
     }

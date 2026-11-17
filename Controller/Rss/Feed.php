@@ -15,12 +15,13 @@ class Feed extends \Magefan\Blog\App\Action\Action
     /**
      * View blog rss feed action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $this->_view->loadLayout();

@@ -85,7 +85,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
                         $gallery[] = $image['value_id'];
                     } elseif (!empty($image['file'])) {
                         $imageUploader = $this->_objectManager->get(
-                            \Magefan\Blog\ImageUpload::class
+                            'Magefan\Blog\ImageUpload'
                         );
                         $image['file'] = $imageUploader->moveFileFromTmp($image['file'], true);
                         $gallery[] = $image['file'];

@@ -25,7 +25,7 @@ class Aw2 extends AbstractImport
 
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_category LIMIT 1';
         try {
-            $adapter->query($sql)->execute();
+            $adapter->fetchAll($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('AheadWorks Blog Extension not detected.'), 1);
         }
@@ -42,7 +42,7 @@ class Aw2 extends AbstractImport
                     t.sort_order as position,
                     t.meta_description as meta_description
                 FROM '.$_pref.'aw_blog_category t';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
 
         foreach ($result as $data) {
             /* Prepare category data */
@@ -55,7 +55,7 @@ class Aw2 extends AbstractImport
                           '.$_pref.'`aw_blog_category_store`
                       WHERE
                           `category_id` = '. ((int)$data['old_id']) . ";";
-            $s_result =  $adapter->query($s_sql)->execute();
+            $s_result =  $adapter->fetchAll($s_sql);
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -80,7 +80,8 @@ class Aw2 extends AbstractImport
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
-                $category->setData($data)->save();
+                $category->setData($data);
+                $this->categoryResource->save($category);
                 $this->_importedCategoriesCount++;
                 $categories[$category->getId()] = $category;
                 $oldCategories[$category->getOldId()] = $category;
@@ -101,7 +102,7 @@ class Aw2 extends AbstractImport
                     t.name as title
                 FROM '.$_pref.'aw_blog_tag t';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -120,7 +121,8 @@ class Aw2 extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
-                    $tag->setData($data)->save();
+                    $tag->setData($data);
+                    $this->tagResource->save($tag);
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
                     $oldTags[$tag->getOldId()] = $tag;
@@ -137,13 +139,13 @@ class Aw2 extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_post';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
 
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT category_id FROM '.$_pref.'aw_blog_post_category WHERE post_id = "'.$data['id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+            $c_result = $adapter->fetchAll($c_sql);
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -155,7 +157,7 @@ class Aw2 extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_post_store WHERE post_id = "'.$data['id'].'"';
-            $s_result = $adapter->query($s_sql)->execute();
+            $s_result = $adapter->fetchAll($s_sql);
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -196,7 +198,8 @@ class Aw2 extends AbstractImport
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
-                $post->setData($data)->save();
+                $post->setData($data);
+                $this->postResource->save($post);
 
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {

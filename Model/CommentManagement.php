@@ -21,13 +21,21 @@ class CommentManagement extends AbstractManagement
     protected $_itemFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $collectionFactory
      */
     public function __construct(
-        \Magefan\Blog\Model\CommentFactory $commentFactory
+        \Magefan\Blog\Model\CommentFactory $commentFactory,
+        \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $collectionFactory
     ) {
+        $this->collectionFactory = $collectionFactory;
         $this->_itemFactory = $commentFactory;
     }
 
@@ -44,7 +52,7 @@ class CommentManagement extends AbstractManagement
     public function getList($type, $term, $storeId, $page, $limit)
     {
         try {
-            $collection = $this->_itemFactory->create()->getCollection();
+            $collection = $this->collectionFactory->create();
             $collection
                 ->addActiveFilter()
                 ->addStoreFilter($storeId)

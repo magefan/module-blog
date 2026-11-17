@@ -19,13 +19,21 @@ class CategoryManagement extends AbstractManagement
     protected $_itemFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $collectionFactory
      */
     public function __construct(
-        \Magefan\Blog\Model\CategoryFactory $categoryFactory
+        \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $collectionFactory
     ) {
+        $this->collectionFactory = $collectionFactory;
         $this->_itemFactory = $categoryFactory;
     }
 
@@ -42,7 +50,7 @@ class CategoryManagement extends AbstractManagement
     public function getList($type, $term, $storeId, $page, $limit)
     {
         try {
-            $collection = $this->_itemFactory->create()->getCollection();
+            $collection = $this->collectionFactory->create();
             $collection
                 ->addActiveFilter()
                 ->addStoreFilter($storeId)

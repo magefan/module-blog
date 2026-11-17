@@ -24,7 +24,7 @@ class Aw extends AbstractImport
 
         $sql = 'SELECT * FROM '.$_pref.'aw_blog_cat LIMIT 1';
         try {
-            $adapter->query($sql)->execute();
+            $adapter->fetchAll($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('AheadWorks Blog Extension not detected.'), 1);
         }
@@ -44,14 +44,14 @@ class Aw extends AbstractImport
                     t.meta_description as meta_description
                 FROM '.$_pref.'aw_blog_cat t';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare category data */
 
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_cat_store WHERE cat_id = "'.$data['old_id'].'"';
-            $s_result =  $adapter->query($s_sql)->execute();
+            $s_result =  $adapter->fetchAll($s_sql);
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -76,7 +76,8 @@ class Aw extends AbstractImport
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
-                $category->setData($data)->save();
+                $category->setData($data);
+                $this->categoryResource->save($category);
                 $this->_importedCategoriesCount++;
                 $categories[$category->getId()] = $category;
                 $oldCategories[$category->getOldId()] = $category;
@@ -97,7 +98,7 @@ class Aw extends AbstractImport
                     t.tag as title
                 FROM '.$_pref.'aw_blog_tags t';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -116,7 +117,8 @@ class Aw extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
-                    $tag->setData($data)->save();
+                    $tag->setData($data);
+                    $this->tagResource->save($tag);
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
                     $oldTags[$tag->getOldId()] = $tag;
@@ -133,14 +135,14 @@ class Aw extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM '.$_pref.'aw_blog';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
 
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT cat_id as category_id FROM '.
                       $_pref.'aw_blog_post_cat WHERE post_id = "'.$data['post_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+            $c_result = $adapter->fetchAll($c_sql);
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -152,7 +154,7 @@ class Aw extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'aw_blog_store WHERE post_id = "'.$data['post_id'].'"';
-            $s_result = $adapter->query($s_sql)->execute();
+            $s_result = $adapter->fetchAll($s_sql);
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -190,11 +192,12 @@ class Aw extends AbstractImport
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
-                $post->setData($data)->save();
+                $post->setData($data);
+                $this->postResource->save($post);
 
                 /* find post comment s*/
                 $sql = 'SELECT * FROM '.$_pref.'aw_blog_comment WHERE `post_id` = ' . $post->getOldId();
-                $resultComments = $adapter->query($sql)->execute();
+                $resultComments = $adapter->fetchAll($sql);
                 foreach ($resultComments as $comments) {
                     $commentParentId = 0;
 
@@ -224,7 +227,8 @@ class Aw extends AbstractImport
 
                     try {
                         /* saving */
-                        $comment->setData($commentData)->save();
+                        $comment->setData($commentData);
+                        $this->commentResource->save($comment);
                         $this->_importedCommentsCount++;
                     } catch (\Exception $e) {
                         if (!isset($commentData['title'])) {

@@ -235,7 +235,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $field,
         $rowData = []
     ) {
-        return $this->_updateLinks($object, $newRelatedIds, $oldRelatedIds, $tableName, $field, $rowData);
+        $this->_updateLinks($object, $newRelatedIds, $oldRelatedIds, $tableName, $field, $rowData);
     }
 
     /**
@@ -408,7 +408,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Zend_Db_Select::COLUMNS)->columns(['cp.post_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
+        $select->reset(\Magento\Framework\DB\Select::COLUMNS)->columns(['cp.post_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['post_id']) && isset($row['identifier'])

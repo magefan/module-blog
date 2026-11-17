@@ -9,6 +9,11 @@ use Magento\Framework\DataObject;
 
 class Image extends AbstractRenderer
 {
+    /**
+     * @var Url
+     */
+    protected $_url;
+
 
     /**
      * @param Url $url

@@ -76,6 +76,21 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     const CACHE_TAG = 'mfb_co';
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post
+     */
+    protected $postResource;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment
+     */
+    protected $commentResource;
+
+    /**
+     * @var \Magento\Customer\Model\ResourceModel\Customer
+     */
+    protected $customerResource;
+
+    /**
      * Initialize dependencies.
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
@@ -86,6 +101,9 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
      * @param array                                                        $data
+     * @param \Magefan\Blog\Model\ResourceModel\Post $postResource
+     * @param \Magefan\Blog\Model\ResourceModel\Comment $commentResource
+     * @param \Magento\Customer\Model\ResourceModel\Customer $customerResource
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -94,10 +112,16 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magefan\Blog\Api\AuthorInterfaceFactory $userFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
+        \Magefan\Blog\Model\ResourceModel\Post $postResource,
+        \Magefan\Blog\Model\ResourceModel\Comment $commentResource,
+        \Magento\Customer\Model\ResourceModel\Customer $customerResource,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
+        $this->customerResource = $customerResource;
+        $this->commentResource = $commentResource;
+        $this->postResource = $postResource;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
         $this->postFactory = $postFactory;
@@ -167,7 +191,8 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         if (!$this->hasData('post')) {
             $this->setData('post', false);
             if ($postId = $this->getData('post_id')) {
-                $post = $this->postFactory->create()->load($postId);
+                $post = $this->postFactory->create();
+                $this->postResource->load($post, $postId);
                 if ($post->getId()) {
                     $this->setData('post', $post);
                 }
@@ -200,7 +225,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
                     break;
                 case \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER:
                     $customer = $this->customerFactory->create();
-                    $customer->load($this->getCustomerId());
+                    $this->customerResource->load($customer, $this->getCustomerId());
                     if ($customer->getId()) {
                         $this->author->setData([
                             'nickname' => $customer->getName(),
@@ -241,7 +266,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
             $this->setData($k, false);
             if ($pId = $this->getParentId()) {
                 $comment = clone $this;
-                $comment->load($pId);
+                $this->commentResource->load($comment, $pId);
                 if ($comment->getId()) {
                     $this->setData($k, $comment);
                 }

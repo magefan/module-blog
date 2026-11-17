@@ -168,6 +168,16 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $timezone;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post
+     */
+    protected $postResource;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory
+     */
+    protected $postCollectionFactory;
+
+    /**
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Math\Random $random
@@ -185,6 +195,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param array $data
      * @param \Magefan\Blog\Api\AuthorRepositoryInterface|null $authorRepository
      * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
+     * @param \Magefan\Blog\Model\ResourceModel\Post $postResource
+     * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -199,6 +211,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        \Magefan\Blog\Model\ResourceModel\Post $postResource,
+        \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
@@ -206,6 +220,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         ?\Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
         ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
     ) {
+        $this->postCollectionFactory = $postCollectionFactory;
+        $this->postResource = $postResource;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
         $this->filterProvider = $filterProvider;
@@ -218,7 +234,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $this->_tagCollectionFactory = $tagCollectionFactory;
         $this->_commentCollectionFactory = $commentCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
-        $this->_relatedPostsCollection = clone($this->getCollection());
+        $this->_relatedPostsCollection = $this->postCollectionFactory->create();
         $this->authorRepository = $authorRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magefan\Blog\Api\AuthorRepositoryInterface::class
         );
@@ -351,7 +367,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function checkIdentifier($identifier, $storeId)
     {
-        return $this->_getResource()->checkIdentifier($identifier, $storeId);
+        return $this->postResource->checkIdentifier($identifier, $storeId);
     }
 
     /**
@@ -819,7 +835,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 ->addFieldToFilter('post_id', ['neq' => $this->getId()])
                 ->addStoreFilter($this->getStoreId());
             $collection->getSelect()->joinLeft(
-                ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedpost')],
+                ['rl' => $this->postResource->getTable('magefan_blog_post_relatedpost')],
                 'main_table.post_id = rl.related_id',
                 ['position']
             )->where(
@@ -845,7 +861,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
 
             $collection->getSelect()->joinLeft(
-                ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedproduct')],
+                ['rl' => $this->postResource->getTable('magefan_blog_post_relatedproduct')],
                 'e.entity_id = rl.related_id',
                 ['position']
             )->where(
@@ -890,7 +906,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     public function isVisibleOnStore($storeId)
     {
         return $this->getIsActive()
-            && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
+            && $this->getData('publish_time') <= $this->postResource->getDate()->gmtDate()
             && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
     }
 
@@ -1118,7 +1134,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             ]
         );
 
-        return $object->save();
+        $this->postResource->save($object);
+        return $object;
     }
 
     /**
@@ -1132,7 +1149,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 'secret',
                 $this->random->getRandomString(32)
             );
-            $this->save();
+            $this->postResource->save($this);
         }
 
         return $this->getData('secret');

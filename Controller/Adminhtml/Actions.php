@@ -30,7 +30,7 @@ abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
                         $image = $data[$key][0]['name'];
 
                         $imageUploader = $this->_objectManager->get(
-                            \Magefan\Blog\ImageUpload::class
+                            'Magefan\Blog\ImageUpload'
                         );
                         $image = $imageUploader->moveFileFromTmp($image, true);
 

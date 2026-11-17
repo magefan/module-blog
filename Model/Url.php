@@ -244,6 +244,7 @@ class Url
     public function getUrlPath($identifier, $controllerName)
     {
         $identifier = $this->getExpandedItentifier($identifier);
+        $path = '';
         switch ($this->getPermalinkType()) {
             case self::PERMALINK_TYPE_DEFAULT:
                 $path = $this->getRoute() .

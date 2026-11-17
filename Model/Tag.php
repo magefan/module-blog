@@ -64,6 +64,11 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     protected $shortContentExtractor;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Tag
+     */
+    protected $tagResource;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -72,15 +77,18 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
+     * @param \Magefan\Blog\Model\ResourceModel\Tag $tagResource
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
+        \Magefan\Blog\Model\ResourceModel\Tag $tagResource,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
+        $this->tagResource = $tagResource;
         $this->_url = $url;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
@@ -135,7 +143,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     public function checkIdentifier($identifier, $storeId)
     {
-        return $this->_getResource()->checkIdentifier($identifier, $storeId);
+        return $this->tagResource->checkIdentifier($identifier, $storeId);
     }
 
     /**

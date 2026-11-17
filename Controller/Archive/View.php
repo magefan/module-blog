@@ -15,12 +15,13 @@ class View extends \Magefan\Blog\App\Action\Action
     /**
      * View blog archive action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $date = $this->getRequest()->getParam('date');
@@ -30,7 +31,8 @@ class View extends \Magefan\Blog\App\Action\Action
         $time = strtotime(implode('-', $date));
 
         if (!$time || (count($date) != 3 && !empty($date[1]))) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $registry = $this->_objectManager->get(\Magento\Framework\Registry::class);

@@ -43,12 +43,13 @@ class View extends \Magefan\Blog\App\Action\Action
     /**
      * View Blog post action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\Controller\ResultInterface|null
      */
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $post = $this->_initPost();

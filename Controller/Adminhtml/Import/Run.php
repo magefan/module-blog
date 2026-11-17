@@ -15,7 +15,7 @@ class Run extends \Magento\Backend\App\Action
 {
     /**
      * Run import
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {

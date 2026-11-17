@@ -51,6 +51,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
         foreach ($posts as $post) {
             $this->commentResource->updatePostCommentsCount($post['post_id']);
         }
+        return $this;
     }
 
     /**

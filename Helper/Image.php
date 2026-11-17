@@ -104,7 +104,7 @@ class Image extends AbstractHelper
     {
         if ($this->_baseFile) {
             $pathinfo = pathinfo(($this->_baseFile));
-            if (isset($pathinfo) && isset($pathinfo['extension']) && $pathinfo['extension'] == 'webp') {
+            if (isset($pathinfo['extension']) && $pathinfo['extension'] == 'webp') {
                 $this->_newFile = $this->_baseFile;
             } else {
                 $path = 'blog/cache/' . $width . 'x' . $height;
@@ -138,7 +138,14 @@ class Image extends AbstractHelper
 
         if ($this->fileExists($file)) {
             $file = $this->_mediaDirectory->getAbsolutePath($file);
-            $imageSize = @getimagesize($file);
+            set_error_handler(function () {
+                return true;
+            }, E_WARNING | E_NOTICE);
+            try {
+                $imageSize = getimagesize($file);
+            } finally {
+                restore_error_handler();
+            }
             if ($imageSize) {
                 return [
                     'width' => (int)$imageSize[0],

@@ -21,7 +21,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_widgetKey = 'popular_posts';
 
     /**
-     * @return $this
+     * @return void
      */
     public function _construct()
     {
@@ -31,7 +31,7 @@ class Popular extends \Magefan\Blog\Block\Post\PostList\AbstractList
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         );
-        return parent::_construct();
+        parent::_construct();
     }
 
     /**

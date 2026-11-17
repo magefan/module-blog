@@ -13,6 +13,11 @@ use Magento\Backend\Block\Widget\Context;
 
 class AiButton extends \Magento\Backend\Block\Widget\Grid\Container
 {
+    /**
+     * @var Config
+     */
+    protected $config;
+
     const ADMIN_RESOURCE = 'Magefan_Blog::post_save';
 
     /**

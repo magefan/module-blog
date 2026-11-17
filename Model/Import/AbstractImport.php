@@ -14,6 +14,16 @@ namespace Magefan\Blog\Model\Import;
 abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
 {
     /**
+     * @var \Magento\Framework\Filesystem\Io\File
+     */
+    protected $file;
+
+    /**
+     * @var \Magento\Framework\Filesystem
+     */
+    protected $fileSystem;
+
+    /**
      * Connect to bd
      */
     protected $_connect;
@@ -99,7 +109,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     protected $_storeManager;
 
     /**
-     * @var \Laminas\Db\Adapter\Adapter
+     * @var \Magento\Framework\DB\Adapter\AdapterInterface
      */
     protected $dbAdapter;
 
@@ -112,6 +122,31 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @var \Magento\Catalog\Model\ProductRepository|mixed
      */
     protected $productRepository;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Category
+     */
+    protected $categoryResource;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Tag
+     */
+    protected $tagResource;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post
+     */
+    protected $postResource;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment
+     */
+    protected $commentResource;
+
+    /**
+     * @var \Magento\Framework\App\ResourceConnection\ConnectionFactory
+     */
+    protected $connectionFactory;
 
     /**
      * AbstractImport constructor.
@@ -127,6 +162,11 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
      * @param array $data
      * @param null $authorFactory
      * @param null $productRepository
+     * @param \Magefan\Blog\Model\ResourceModel\Category $categoryResource
+     * @param \Magefan\Blog\Model\ResourceModel\Tag $tagResource
+     * @param \Magefan\Blog\Model\ResourceModel\Post $postResource
+     * @param \Magefan\Blog\Model\ResourceModel\Comment $commentResource
+     * @param \Magento\Framework\App\ResourceConnection\ConnectionFactory $connectionFactory
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -138,12 +178,22 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\Filesystem\Io\File $file,
+        \Magefan\Blog\Model\ResourceModel\Category $categoryResource,
+        \Magefan\Blog\Model\ResourceModel\Tag $tagResource,
+        \Magefan\Blog\Model\ResourceModel\Post $postResource,
+        \Magefan\Blog\Model\ResourceModel\Comment $commentResource,
+        \Magento\Framework\App\ResourceConnection\ConnectionFactory $connectionFactory,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
         $authorFactory = null,
         $productRepository = null
     ) {
+        $this->connectionFactory = $connectionFactory;
+        $this->commentResource = $commentResource;
+        $this->postResource = $postResource;
+        $this->tagResource = $tagResource;
+        $this->categoryResource = $categoryResource;
         $this->_postFactory = $postFactory;
         $this->_categoryFactory = $categoryFactory;
         $this->_tagFactory = $tagFactory;
@@ -239,7 +289,7 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     {
         $adapter = $this->getDbAdapter();
         if ($this->getData('prefix')) {
-            $_pref = $adapter->getPlatform()->quoteValue(
+            $_pref = $adapter->quote(
                 $this->getData('prefix')
             );
             $_pref = trim($_pref, "'");
@@ -251,27 +301,24 @@ abstract class AbstractImport extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * @return \Laminas\Db\Adapter\Adapter
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
     protected function getDbAdapter()
     {
         if (null === $this->dbAdapter) {
             $connectionConf = [
-                'driver' => 'Pdo_Mysql',
-                'database' => $this->getData('dbname'),
+                'active' => true,
+                'host' => $this->getData('dbhost') ?: 'localhost',
+                'dbname' => $this->getData('dbname'),
                 'username' => $this->getData('uname'),
                 'password' => $this->getData('pwd'),
                 'charset' => 'utf8',
             ];
 
-            if ($this->getData('dbhost')) {
-                $connectionConf['host'] = $this->getData('dbhost');
-            }
-
-            $this->dbAdapter = new \Laminas\Db\Adapter\Adapter($connectionConf);
+            $this->dbAdapter = $this->connectionFactory->create($connectionConf);
 
             try {
-                $this->dbAdapter->query('SELECT 1')->execute();
+                $this->dbAdapter->fetchAll('SELECT 1');
             } catch (\Exception $e) {
                 throw  new \Exception("Failed connect to the database.");
             }

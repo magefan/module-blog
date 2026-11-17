@@ -87,5 +87,6 @@ class TagInStore implements DataPatchInterface, PatchVersionInterface
                 }
             }
         }
+        return $this;
     }
 }
