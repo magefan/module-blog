@@ -22,7 +22,7 @@ class Form extends \Magento\Backend\App\Action
 
     /**
      * Prepare wordpress import
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {

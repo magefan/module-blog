@@ -33,6 +33,11 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     protected $_category;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Category
+     */
+    protected $categoryResource;
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
@@ -42,6 +47,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
      * @param \Magefan\Blog\Model\Url $url
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param array $data
+     * @param \Magefan\Blog\Model\ResourceModel\Category $categoryResource
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -50,8 +56,10 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         \Magefan\Blog\Model\Url $url,
         \Magefan\Blog\Model\CategoryFactory $categoryFactory,
+        \Magefan\Blog\Model\ResourceModel\Category $categoryResource,
         array $data = []
     ) {
+        $this->categoryResource = $categoryResource;
         parent::__construct($context, $coreRegistry, $filterProvider, $postCollectionFactory, $url, $data);
         $this->_categoryFactory = $categoryFactory;
     }
@@ -63,9 +71,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
      */
     public function _toHtml()
     {
-        $this->setTemplate(
-            $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
-        );
+        $this->_template = $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml';
 
         foreach ($this->getPostCollection() as $item) {
             self::$processedIds[$item->getId()] = $item->getId();
@@ -146,7 +152,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
         if ($this->_category === null) {
             if ($categoryId = $this->getData('category_id')) {
                 $category = $this->_categoryFactory->create();
-                $category->load($categoryId);
+                $this->categoryResource->load($category, $categoryId);
 
                 $storeId = $this->_storeManager->getStore()->getId();
                 if ($category->isVisibleOnStore($storeId)) {

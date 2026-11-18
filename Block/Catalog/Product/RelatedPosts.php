@@ -37,7 +37,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
         $product = $this->getProduct();
         $this->_postCollection->getSelect()->joinLeft(
-            ['rl' => $product->getResource()->getTable('magefan_blog_post_relatedproduct')],
+            ['rl' => $this->_postCollection->getTable('magefan_blog_post_relatedproduct')],
             'main_table.post_id = rl.post_id',
             ['position']
         )->where(
@@ -61,7 +61,7 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     /**
      * Retrieve posts instance
      *
-     * @return \Magefan\Blog\Model\Category
+     * @return \Magento\Catalog\Model\Product
      */
     public function getProduct()
     {

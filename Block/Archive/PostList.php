@@ -19,7 +19,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Prepare posts collection
-     * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
+     * @return void
      */
     protected function _preparePostCollection()
     {

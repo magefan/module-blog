@@ -247,7 +247,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $postIds = [0];
         }
 
-        $this->addFieldToFilter(
+        return $this->addFieldToFilter(
             'post_id',
             ['in' => $postIds]
         );
@@ -334,7 +334,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                         if ($category->getId()) {
                             return $this->addCategoryFilter($category);
                         }
-                    } catch (\NoSuchEntityException $e) {
+                    } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
                     }
                 }
             }
@@ -712,7 +712,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
                 $joinOptions = new \Magento\Framework\DataObject();
                 $joinOptions->setData([
                     'key' => $key,
-                    'fields' => [],
                     'fields' => [],
                 ]);
                 $this->_eventManager->dispatch(

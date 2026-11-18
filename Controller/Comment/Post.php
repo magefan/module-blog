@@ -41,20 +41,36 @@ class Post extends \Magefan\Blog\App\Action\Action
     protected $formKeyValidator;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment
+     */
+    protected $commentResource;
+
+    /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post
+     */
+    protected $postResource;
+
+    /**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
      * @param\Magefan\Blog\Model\PostFactory $postFactory,
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param \Magefan\Blog\Model\ResourceModel\Comment $commentResource
+     * @param \Magefan\Blog\Model\ResourceModel\Post $postResource
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Magefan\Blog\Model\CommentFactory $commentFactory,
         \Magefan\Blog\Model\PostFactory $postFactory,
-        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Magefan\Blog\Model\ResourceModel\Comment $commentResource,
+        \Magefan\Blog\Model\ResourceModel\Post $postResource
     ) {
+        $this->postResource = $postResource;
+        $this->commentResource = $commentResource;
         $this->customerSession = $customerSession;
         $this->commentFactory = $commentFactory;
         $this->postFactory = $postFactory;
@@ -66,7 +82,7 @@ class Post extends \Magefan\Blog\App\Action\Action
     /**
      * View blog homepage action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {
@@ -80,7 +96,8 @@ class Post extends \Magefan\Blog\App\Action\Action
         }
 
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $comment = $this->commentFactory->create();
@@ -98,8 +115,7 @@ class Post extends \Magefan\Blog\App\Action\Action
                 \Magefan\Blog\Model\Config\Source\AuthorType::CUSTOMER
             );
         } elseif ($this->getConfigValue(
-            \Magefan\Blog\Helper\Config::GUEST_COMMENT,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            \Magefan\Blog\Helper\Config::GUEST_COMMENT
         )) {
             /* Guest can post review */
             if (!trim($request->getParam('author_nickname')) || !trim($request->getParam('author_email'))) {
@@ -130,8 +146,7 @@ class Post extends \Magefan\Blog\App\Action\Action
         /* Set default status */
         $comment->setStatus(
             $this->getConfigValue(
-                \Magefan\Blog\Helper\Config::COMMENT_STATUS,
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                \Magefan\Blog\Helper\Config::COMMENT_STATUS
             )
         );
 
@@ -157,7 +172,7 @@ class Post extends \Magefan\Blog\App\Action\Action
                 $comment->setParentId($parentComment->getId());
             }
 
-            $comment->save();
+            $this->commentResource->save($comment);
         } catch (\Exception $e) {
             $this->getResponse()->setBody(json_encode([
                 'success' => false,
@@ -182,7 +197,8 @@ class Post extends \Magefan\Blog\App\Action\Action
     protected function initPost()
     {
         $postId = (int)$this->getRequest()->getParam('post_id');
-        $post = $this->postFactory->create()->load($postId);
+        $post = $this->postFactory->create();
+        $this->postResource->load($post, $postId);
         if (!$post->getIsActive()) {
             return false;
         }
@@ -198,7 +214,8 @@ class Post extends \Magefan\Blog\App\Action\Action
     {
         $commentId = (int)$this->getRequest()->getParam('parent_id');
 
-        $comment = $this->commentFactory->create()->load($commentId);
+        $comment = $this->commentFactory->create();
+        $this->commentResource->load($comment, $commentId);
         if (!$comment->isActive()) {
             return false;
         }

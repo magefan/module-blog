@@ -15,12 +15,13 @@ class Index extends \Magefan\Blog\App\Action\Action
     /**
      * View blog search results action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\Controller\ResultInterface|null
      */
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $resultPage = $this->_objectManager->get(\Magefan\Blog\Helper\Page::class)

@@ -21,13 +21,21 @@ class TagManagement extends AbstractManagement
     protected $_itemFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $collectionFactory
      */
     public function __construct(
-        \Magefan\Blog\Model\TagFactory $tagFactory
+        \Magefan\Blog\Model\TagFactory $tagFactory,
+        \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $collectionFactory
     ) {
+        $this->collectionFactory = $collectionFactory;
         $this->_itemFactory = $tagFactory;
     }
 
@@ -44,7 +52,7 @@ class TagManagement extends AbstractManagement
     public function getList($type, $term, $storeId, $page, $limit)
     {
         try {
-            $collection = $this->_itemFactory->create()->getCollection();
+            $collection = $this->collectionFactory->create();
             $collection
                 ->addActiveFilter()
                 ->addStoreFilter($storeId)

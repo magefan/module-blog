@@ -36,6 +36,7 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
         if ($this->isEnabled() && $this->getCommentType() == 'facebook' && $this->isHeadApiEnabled() && $this->getApiId()) {
             return '<meta property="fb:app_id" content="' . $this->escapeHtml($this->getApiId()) . '" />';
         }
+        return '';
     }
 
     /**

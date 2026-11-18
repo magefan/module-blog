@@ -29,6 +29,11 @@ class PostDataProvider extends AbstractDataProvider
     private $post;
 
     /**
+     * @var \Magefan\Blog\Api\PostRepositoryInterface
+     */
+    protected $postRepository;
+
+    /**
      * Construct
      *
      * @param string $name
@@ -38,6 +43,7 @@ class PostDataProvider extends AbstractDataProvider
      * @param RequestInterface $request
      * @param array $meta
      * @param array $data
+     * @param \Magefan\Blog\Api\PostRepositoryInterface $postRepository
      */
     public function __construct(
         $name,
@@ -45,9 +51,11 @@ class PostDataProvider extends AbstractDataProvider
         $requestFieldName,
         CollectionFactory $collectionFactory,
         RequestInterface $request,
+        \Magefan\Blog\Api\PostRepositoryInterface $postRepository,
         array $meta = [],
         array $data = []
     ) {
+        $this->postRepository = $postRepository;
         parent::__construct(
             $name,
             $primaryFieldName,
@@ -80,9 +88,18 @@ class PostDataProvider extends AbstractDataProvider
     }
 
     /**
+     * @param Collection $collection
+     * @return Collection
+     */
+    protected function addCollectionFilters(Collection $collection)
+    {
+        return $collection;
+    }
+
+    /**
      * Retrieve post
      *
-     * @return PostInterface|null
+     * @return \Magefan\Blog\Model\Post|null
      */
     protected function getPost()
     {

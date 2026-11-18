@@ -22,24 +22,27 @@ class View extends \Magefan\Blog\App\Action\Action
     /**
      * View blog author action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\Controller\ResultInterface|null
      */
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $enabled = (int) $this->getConfigValue('mfblog/author/enabled');
         $pageEnabled = (int) $this->getConfigValue('mfblog/author/page_enabled');
 
         if (!$enabled || !$pageEnabled) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $author = $this->_initAuthor();
         if (!$author) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $this->_objectManager->get(\Magento\Framework\Registry::class)->register('current_blog_author', $author);

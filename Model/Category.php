@@ -88,6 +88,11 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     protected $shortContentExtractor;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Category
+     */
+    protected $categoryResource;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -96,16 +101,19 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
+     * @param \Magefan\Blog\Model\ResourceModel\Category $categoryResource
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
+        \Magefan\Blog\Model\ResourceModel\Category $categoryResource,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
+        $this->categoryResource = $categoryResource;
         $this->_url = $url;
         $this->postCollectionFactory = $postCollectionFactory;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
@@ -166,7 +174,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         if (!isset(self::$loadedCategoriesRepository[$categoryId])) {
             $category = clone $this;
             $category->unsetData();
-            $category->load($categoryId);
+            $this->categoryResource->load($category, $categoryId);
+            if (!isset(self::$loadedCategoriesRepository[$category->getId()])) {
+                self::$loadedCategoriesRepository[$category->getId()] = $category;
+            }
             $categoryId = $category->getId();
         }
 
@@ -221,7 +232,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      */
     public function checkIdentifier($identifier, $storeId)
     {
-        return $this->_getResource()->checkIdentifier($identifier, $storeId);
+        return $this->categoryResource->checkIdentifier($identifier, $storeId);
     }
 
     /**
@@ -560,7 +571,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
             ->setData('is_active', 0);
 
-        return $object->save();
+        $this->categoryResource->save($object);
+        return $object;
     }
 
     /**

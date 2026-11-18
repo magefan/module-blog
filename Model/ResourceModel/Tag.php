@@ -15,6 +15,25 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory
+     */
+    protected $tagCollectionFactory;
+
+    /**
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
+     * @param string|null $connectionName
+     */
+    public function __construct(
+        \Magento\Framework\Model\ResourceModel\Db\Context $context,
+        \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
+        $connectionName = null
+    ) {
+        $this->tagCollectionFactory = $tagCollectionFactory;
+        parent::__construct($context, $connectionName);
+    }
+
+    /**
      * Initialize resource model
      * Get tablename from config
      *
@@ -53,7 +72,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 trim(($object->getTitle()))
             );
 
-            $tag = $object->getCollection()
+            $tag = $this->tagCollectionFactory->create()
                 ->addFieldToFilter('title', $object->getTitle())
                 ->addFieldToFilter('tag_id', ['neq' => $object->getId()])
                 ->setPageSize(1)
@@ -180,7 +199,7 @@ class Tag extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Zend_Db_Select::COLUMNS)->columns(['cp.tag_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
+        $select->reset(\Magento\Framework\DB\Select::COLUMNS)->columns(['cp.tag_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
 
 
 

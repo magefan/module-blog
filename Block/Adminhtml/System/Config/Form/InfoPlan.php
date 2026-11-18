@@ -40,6 +40,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
         }
 
         $html = '';
+        $textHtml = '';
 
         if ($text = $this->getText()) {
             $textHtml = '<div style="padding:10px;background-color:#f8f8f8;border:1px solid #ddd;margin-bottom:7px;">';

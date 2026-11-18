@@ -261,7 +261,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Auxiliary function to build tree ordered array
-     * @return array
+     * @return void
      */
     protected function _toTree($itemId, $childs, &$tree)
     {

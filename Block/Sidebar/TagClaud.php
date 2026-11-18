@@ -160,7 +160,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
         parent::_prepareLayout();
 
         if ($this->getConfigValue(self::ANIMATED_ENABLED)) {
-            $this->setTemplate('Magefan_Blog::sidebar/tag_claud_animated.phtml');
+            $this->_template = 'Magefan_Blog::sidebar/tag_claud_animated.phtml';
         }
 
         return $this;

@@ -19,13 +19,21 @@ class PostManagement extends AbstractManagement
     protected $_itemFactory;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magefan\Blog\Model\PostFactory $postFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory
      */
     public function __construct(
-        \Magefan\Blog\Model\PostFactory $postFactory
+        \Magefan\Blog\Model\PostFactory $postFactory,
+        \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory
     ) {
+        $this->collectionFactory = $collectionFactory;
         $this->_itemFactory = $postFactory;
     }
 
@@ -42,7 +50,7 @@ class PostManagement extends AbstractManagement
     public function getList($type, $term, $storeId, $page, $limit)
     {
         try {
-            $collection = $this->_itemFactory->create()->getCollection();
+            $collection = $this->collectionFactory->create();
             $collection
                 ->addActiveFilter()
                 ->addStoreFilter($storeId)

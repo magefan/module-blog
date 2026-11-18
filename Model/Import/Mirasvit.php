@@ -26,7 +26,7 @@ class Mirasvit extends AbstractImport
 
         $sql = 'SELECT * FROM ' . $_pref . 'mst_blog_post_entity LIMIT 1';
         try {
-            $adapter->query($sql)->execute();
+            $adapter->fetchAll($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('Mirasvit Blog Extension not detected.'), 1);
         }
@@ -40,7 +40,7 @@ class Mirasvit extends AbstractImport
                     t.position as position,
                     t.parent_id as parent_id
                 FROM ' . $_pref . 'mst_blog_category_entity t';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -66,7 +66,8 @@ class Mirasvit extends AbstractImport
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
-                $category->setData($data)->save();
+                $category->setData($data);
+                $this->categoryResource->save($category);
                 $this->_importedCategoriesCount++;
                 $categories[$category->getId()] = $category;
                 $oldCategories[$category->getOldId()] = $category;
@@ -109,7 +110,7 @@ class Mirasvit extends AbstractImport
 
         foreach ($categories as $ct) {
             /* Final saving */
-            $ct->save();
+            $this->categoryResource->save($ct);
         }
 
         /* Import tags */
@@ -124,7 +125,7 @@ class Mirasvit extends AbstractImport
                     1 as is_active
                 FROM ' . $_pref . 'mst_blog_tag t';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -143,7 +144,8 @@ class Mirasvit extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
-                    $tag->setData($data)->save();
+                    $tag->setData($data);
+                    $this->tagResource->save($tag);
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
                     $oldTags[$tag->getOldId()] = $tag;
@@ -167,7 +169,7 @@ class Mirasvit extends AbstractImport
                     t.updated_at as update_time  
                 FROM ' . $_pref . 'mst_blog_post_entity t WHERE type="post"';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
 
             $map = [
@@ -208,7 +210,7 @@ class Mirasvit extends AbstractImport
                           ' . $_pref . 'mst_blog_category_post 
                       WHERE 
                           post_id = "'.$data['old_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+            $c_result = $adapter->fetchAll($c_sql);
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -222,7 +224,7 @@ class Mirasvit extends AbstractImport
             $postTags = [];
             $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mst_blog_tag_post WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_result = $adapter->fetchAll($t_sql);
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -238,7 +240,7 @@ class Mirasvit extends AbstractImport
             $postProducts = [];
             $t_sql = 'SELECT product_id FROM ' . $_pref . 'mst_blog_post_product WHERE post_id = "'.$data['old_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_result = $adapter->fetchAll($t_sql);
 
             foreach ($t_result as $t_data) {
                 $id = $t_data['product_id'];
@@ -252,7 +254,7 @@ class Mirasvit extends AbstractImport
             /* Find store ids */
             $storeIds = [];
             $sql2 = 'SELECT store_id FROM  ' . $_pref . 'mst_blog_store_post WHERE post_id=' . $data['old_id'];
-            $result2 = $adapter->query($sql2)->execute();
+            $result2 = $adapter->fetchAll($sql2);
             foreach ($result2 as $data2) {
                 $storeIds[] = $data2['store_id'];
             }
@@ -261,7 +263,8 @@ class Mirasvit extends AbstractImport
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
-                $post->setData($data)->save();
+                $post->setData($data);
+                $this->postResource->save($post);
                 $this->_importedPostsCount++;
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_skippedPosts[] = $data['title'];
@@ -283,7 +286,7 @@ class Mirasvit extends AbstractImport
                     entity_type_id
                 FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code="' . $entitytTypeCode . '"';
 
-            $result = $adapter->query($sql)->execute();
+            $result = $adapter->fetchAll($sql);
             if (count($result)) {
                 foreach ($result as $data) {
                     $this->entityTypeId[$entitytTypeCode] = $data['entity_type_id'];
@@ -305,7 +308,7 @@ class Mirasvit extends AbstractImport
             $sql = 'SELECT
                     *
                 FROM ' . $_pref . 'eav_attribute WHERE entity_type_id=' . $entityTypeId;
-            $result = $adapter->query($sql)->execute();
+            $result = $adapter->fetchAll($sql);
             foreach ($result as $data) {
                 $this->entityTypeAttributes[$entitytTypeCode][$data['attribute_code']] = $data;
             }
@@ -322,7 +325,7 @@ class Mirasvit extends AbstractImport
                 FROM ' . $_pref . 'mst_'.$entitytTypeCode.'_entity_' . $attribute['backend_type'] . ' WHERE store_id = 0
                    AND attribute_id = ' . $attribute['attribute_id'] . '
                    AND entity_id=' . $entitytId;
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         if (count($result)) {
             foreach ($result as $data) {
                 return $data['value'];

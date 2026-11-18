@@ -40,13 +40,12 @@ class RelatedProducts extends AbstractProduct implements IdentityInterface
      * @param \Magento\Catalog\Block\Product\Context $context
      * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility
      * @param \Magento\Framework\Module\Manager $moduleManager
-     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $data
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\Framework\Module\Manager $moduleManager,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         array $data = []
     ) {
         $this->_catalogProductVisibility = $catalogProductVisibility;

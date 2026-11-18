@@ -21,8 +21,7 @@ abstract class Action extends \Magento\Framework\App\Action\Action
     protected function moduleEnabled()
     {
         return (bool) $this->getConfigValue(
-            \Magefan\Blog\Helper\Config::XML_PATH_EXTENSION_ENABLED,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            \Magefan\Blog\Helper\Config::XML_PATH_EXTENSION_ENABLED
         );
     }
 

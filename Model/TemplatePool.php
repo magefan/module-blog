@@ -53,7 +53,7 @@ class TemplatePool
     public function getTemplate(string $templateType, string $name):string
     {
         if (isset($this->templates[$templateType]) &&
-            (is_array($this->templates[$templateType]) || $this->templates[$templateType] instanceof Countable)
+            (is_array($this->templates[$templateType]) || $this->templates[$templateType] instanceof \Countable)
         ) {
             foreach ($this->templates[$templateType] as $item) {
                 if (isset($item['value']) && $item['value'] == $name) {

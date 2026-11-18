@@ -43,19 +43,27 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
     private $manager;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Comment
+     */
+    protected $commentResource;
+
+    /**
      * @param CommentFactory $comment
      * @param Session $session
      * @param Context $context
      * @param Manager $manager
      * @param DataPersistorInterface $dataPersistor
+     * @param \Magefan\Blog\Model\ResourceModel\Comment $commentResource
      */
     public function __construct(
         CommentFactory         $comment,
         Session                $session,
         Context                $context,
         Manager                $manager,
-        DataPersistorInterface $dataPersistor
+        DataPersistorInterface $dataPersistor,
+        \Magefan\Blog\Model\ResourceModel\Comment $commentResource
     ) {
+        $this->commentResource = $commentResource;
         $this->comment = $comment;
         $this->session = $session;
         $this->manager = $manager;
@@ -74,7 +82,8 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
         if ($parentCommentId) {
             try {
                 $user = $this->session->getUser();
-                $parentComment = $this->comment->create()->load($parentCommentId);
+                $parentComment = $this->comment->create();
+                $this->commentResource->load($parentComment, $parentCommentId);
                 $parentId = $parentComment->getParentId() ?: $parentComment->getCommentId();
 
                 if (!$parentId) {
@@ -90,7 +99,7 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
                     $reply->setData('author_nickname', $user->getUsername());
                     $reply->setData('author_email', $user->getEmail());
                     $reply->setData('text', _('Please type your comment reply here...'));
-                    $reply = $reply->save();
+                    $this->commentResource->save($reply);
 
                     $replyCommentId = $reply->getCommentId();
                     $resultRedirect->setPath('*/*/edit', ['id' => $replyCommentId]);

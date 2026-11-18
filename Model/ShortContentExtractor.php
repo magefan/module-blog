@@ -52,7 +52,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
     {
         $content = (string)$content;
 
-        $key = md5($content) . $len . $endCharacters;
+        $key = hash('sha256', $content) . $len . $endCharacters;
         if (!isset($this->executedContent[$key])) {
 
             $content = $this->filterProvider->getPageFilter()->filter(
@@ -162,7 +162,7 @@ class ShortContentExtractor implements ShortContentExtractorInterface
 
         $textLength = 0;
 
-        $processNode = function ($node) use (&$textLength, $len, $dom, $pageBreaker, &$pageBreakInserted, &$processNode) {
+        $processNode = function ($node) use (&$textLength, $len, $pageBreaker, &$pageBreakInserted, &$processNode) {
 
             if ($pageBreakInserted) {
                 return;

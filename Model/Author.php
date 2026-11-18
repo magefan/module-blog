@@ -34,27 +34,31 @@ class Author extends AbstractModel implements AuthorInterface
     protected $_url;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Author\CollectionFactory
+     */
+    protected $authorCollectionFactory;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
+     * @param \Magefan\Blog\Model\ResourceModel\Author\CollectionFactory $authorCollectionFactory
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magefan\Blog\Model\ResourceModel\Author\CollectionFactory $authorCollectionFactory,
         ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
+        $this->authorCollectionFactory = $authorCollectionFactory;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->_url = $url;
     }
@@ -68,7 +72,7 @@ class Author extends AbstractModel implements AuthorInterface
     {
         $this->_init(\Magefan\Blog\Model\ResourceModel\Author::class);
         $this->_collectionName = \Magefan\Blog\Model\ResourceModel\Author\Collection::class;
-        $this->controllerName = URL::CONTROLLER_AUTHOR;
+        $this->controllerName = Url::CONTROLLER_AUTHOR;
     }
 
     /**
@@ -152,7 +156,7 @@ class Author extends AbstractModel implements AuthorInterface
      */
     public function checkIdentifier($identifier)
     {
-        $authors = $this->getCollection();
+        $authors = $this->authorCollectionFactory->create();
         foreach ($authors as $author) {
             if ($author->getIdentifier() == $identifier) {
                 return $author->getId();
@@ -168,7 +172,7 @@ class Author extends AbstractModel implements AuthorInterface
      */
     public function getUrl()
     {
-        return $this->_url->getUrlPath($this, URL::CONTROLLER_AUTHOR);
+        return $this->_url->getUrlPath($this, Url::CONTROLLER_AUTHOR);
     }
 
     /**
@@ -177,7 +181,7 @@ class Author extends AbstractModel implements AuthorInterface
      */
     public function getAuthorUrl()
     {
-        return $this->_url->getUrl($this, URL::CONTROLLER_AUTHOR);
+        return $this->_url->getUrl($this, Url::CONTROLLER_AUTHOR);
     }
 
     /**

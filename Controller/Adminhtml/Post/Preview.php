@@ -13,8 +13,12 @@ namespace Magefan\Blog\Controller\Adminhtml\Post;
  */
 class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
 {
+    /**
+     * @return void
+     */
     public function execute()
     {
+        $post = null;
         try {
             $post = $this->_getModel();
             if (!$post->getId()) {
@@ -33,7 +37,7 @@ class Preview extends \Magefan\Blog\Controller\Adminhtml\Post
                 $e,
                 __('Something went wrong %1', $e->getMessage())
             );
-            $this->_redirect('*/*/edit', [$this->_idKey => $post->getId()]);
+            $this->_redirect('*/*/edit', [$this->_idKey => $post ? $post->getId() : null]);
         }
     }
 }

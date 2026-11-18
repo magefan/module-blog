@@ -62,6 +62,11 @@ class UrlResolver implements UrlResolverInterface
     protected $config;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post
+     */
+    protected $postResource;
+
+    /**
      * UrlResolver constructor.
      * @param Url $url
      * @param PostFactory $postFactory
@@ -70,6 +75,7 @@ class UrlResolver implements UrlResolverInterface
      * @param TagFactory $tagFactory
      * @param StoreManagerInterface $storeManager
      * @param Config|null $config
+     * @param \Magefan\Blog\Model\ResourceModel\Post $postResource
      */
     public function __construct(
         Url $url,
@@ -78,8 +84,10 @@ class UrlResolver implements UrlResolverInterface
         AuthorInterfaceFactory $authorFactory,
         TagFactory $tagFactory,
         StoreManagerInterface $storeManager,
+        \Magefan\Blog\Model\ResourceModel\Post $postResource,
         ?Config $config = null
     ) {
+        $this->postResource = $postResource;
         $this->url = $url;
         $this->postFactory = $postFactory;
         $this->categoryFactory = $categoryFactory;
@@ -185,7 +193,8 @@ class UrlResolver implements UrlResolverInterface
                                 return null;
                             }
                             $factory = Url::CONTROLLER_POST . 'Factory';
-                            $model = $this->$factory->create()->load($postId);
+                            $model = $this->$factory->create();
+                            $this->postResource->load($model, $postId);
 
                             $parentCategories = $model->getParentCategories();
                             if (!count($parentCategories) || !isset($parentCategories[$categoryId])) {

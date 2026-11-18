@@ -23,7 +23,7 @@ class Mageplaza extends AbstractImport
 
         $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_category LIMIT 1';
         try {
-            $adapter->query($sql)->execute();
+            $adapter->fetchAll($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
@@ -47,7 +47,7 @@ class Mageplaza extends AbstractImport
                     t.enabled as is_active,
                     t.store_ids as store_ids
                 FROM ' . $_pref . 'mageplaza_blog_category t';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -62,7 +62,8 @@ class Mageplaza extends AbstractImport
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
-                $category->setData($data)->save();
+                $category->setData($data);
+                $this->categoryResource->save($category);
                 $this->_importedCategoriesCount++;
                 $categories[$category->getId()] = $category;
                 $oldCategories[$category->getOldId()] = $category;
@@ -105,7 +106,7 @@ class Mageplaza extends AbstractImport
 
         foreach ($categories as $ct) {
             /* Final saving */
-            $ct->save();
+            $this->categoryResource->save($ct);
         }
 
         /* Import tags */
@@ -126,7 +127,7 @@ class Mageplaza extends AbstractImport
                     't.enabled as is_active
                 FROM ' . $_pref . 'mageplaza_blog_tag t';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare tag data */
             /*
@@ -145,7 +146,8 @@ class Mageplaza extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
-                    $tag->setData($data)->save();
+                    $tag->setData($data);
+                    $this->tagResource->save($tag);
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
                     $oldTags[$tag->getOldId()] = $tag;
@@ -162,13 +164,13 @@ class Mageplaza extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_blog_post';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT category_id FROM ' . $_pref .
                      'mageplaza_blog_post_category WHERE post_id = "'.$data['post_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+            $c_result = $adapter->fetchAll($c_sql);
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -181,7 +183,7 @@ class Mageplaza extends AbstractImport
             $postTags = [];
             $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mageplaza_blog_post_tag WHERE post_id = "'.$data['post_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_result = $adapter->fetchAll($t_sql);
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -219,12 +221,13 @@ class Mageplaza extends AbstractImport
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
-                $post->setData($data)->save();
+                $post->setData($data);
+                $this->postResource->save($post);
 
                 /* find post comment s*/
                 $sql = 'SELECT * FROM ' . $_pref .
                        'mageplaza_blog_comment WHERE `post_id` = ' . $post->getOldId();
-                $resultComments = $adapter->query($sql)->execute();
+                $resultComments = $adapter->fetchAll($sql);
 
                 foreach ($resultComments as $comments) {
                     $commentData = [
@@ -253,7 +256,8 @@ class Mageplaza extends AbstractImport
 
                     try {
                         /* saving */
-                        $comment->setData($commentData)->save();
+                        $comment->setData($commentData);
+                        $this->commentResource->save($comment);
                         $this->_importedCommentsCount++;
                     } catch (\Exception $e) {
                         if (!isset($commentData['title'])) {

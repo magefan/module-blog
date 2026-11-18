@@ -32,15 +32,23 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
     private $scopeConfig;
 
     /**
+     * @var \Magefan\Blog\Model\ResourceModel\Post
+     */
+    protected $postResource;
+
+    /**
      * @param PostFactory $postFactory
      * @param State $state
      * @param ScopeConfigInterface $scopeConfig
+     * @param \Magefan\Blog\Model\ResourceModel\Post $postResource
      */
     public function __construct(
         PostFactory $postFactory,
         State $state,
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        \Magefan\Blog\Model\ResourceModel\Post $postResource
     ) {
+        $this->postResource = $postResource;
         $this->_postFactory = $postFactory;
         $this->state = $state;
         $this->scopeConfig = $scopeConfig;
@@ -67,7 +75,9 @@ class CreateSamplePost implements DataPatchInterface, PatchVersionInterface
             'store_ids' => [0]
         ];
 
-        $this->_postFactory->create()->setData($data)->save();
+        $post = $this->_postFactory->create()->setData($data);
+        $this->postResource->save($post);
+        return $this;
     }
 
     /**

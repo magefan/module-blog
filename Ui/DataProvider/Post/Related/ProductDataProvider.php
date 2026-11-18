@@ -45,6 +45,11 @@ class ProductDataProvider extends DataProvider
     private $post;
 
     /**
+     * @var \Magefan\Blog\Api\PostRepositoryInterface
+     */
+    protected $postRepository;
+
+    /**
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
@@ -57,6 +62,7 @@ class ProductDataProvider extends DataProvider
      * @param array $meta
      * @param array $data
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param \Magefan\Blog\Api\PostRepositoryInterface $postRepository
      */
     public function __construct(
         $name,
@@ -68,9 +74,11 @@ class ProductDataProvider extends DataProvider
         ProductLinkRepositoryInterface $productLinkRepository,
         $addFieldStrategies,
         $addFilterStrategies,
+        \Magefan\Blog\Api\PostRepositoryInterface $postRepository,
         array $meta = [],
         array $data = []
     ) {
+        $this->postRepository = $postRepository;
         parent::__construct(
             $name,
             $primaryFieldName,
@@ -113,7 +121,7 @@ class ProductDataProvider extends DataProvider
     /**
      * Retrieve post
      *
-     * @return PostInterface|null
+     * @return \Magefan\Blog\Model\Post|null
      */
     protected function getPost()
     {

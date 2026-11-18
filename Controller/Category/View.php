@@ -43,12 +43,13 @@ class View extends \Magefan\Blog\App\Action\Action
     /**
      * View blog category action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\Controller\ResultInterface|null
      */
     public function execute()
     {
         if (!$this->moduleEnabled()) {
-            return $this->_forwardNoroute();
+            $this->_forwardNoroute();
+            return;
         }
 
         $category = $this->_initCategory();

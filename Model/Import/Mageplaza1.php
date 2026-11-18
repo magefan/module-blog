@@ -35,7 +35,7 @@ class Mageplaza1 extends AbstractImport
 
         $sql = 'SELECT * FROM ' . $_pref . 'mageplaza_betterblog_post LIMIT 1';
         try {
-            $adapter->query($sql)->execute();
+            $adapter->fetchAll($sql);
         } catch (\Exception $e) {
             throw new \Exception(__('Mageplaza Blog Extension not detected.'), 1);
         }
@@ -56,7 +56,7 @@ class Mageplaza1 extends AbstractImport
                     t.parent_id as parent_id,
                     t.status as is_active
                 FROM ' . $_pref . 'mageplaza_betterblog_category t';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Prepare category data */
 
@@ -71,7 +71,7 @@ class Mageplaza1 extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'mageplaza_betterblog_category_store WHERE category_id = "'.$data['old_id'].'"';
-            $s_result =  $adapter->query($s_sql)->execute();
+            $s_result =  $adapter->fetchAll($s_sql);
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -81,7 +81,8 @@ class Mageplaza1 extends AbstractImport
             $category = $this->_categoryFactory->create();
             try {
                 /* Initial saving */
-                $category->setData($data)->save();
+                $category->setData($data);
+                $this->categoryResource->save($category);
                 $this->_importedCategoriesCount++;
                 $categories[$category->getId()] = $category;
                 $oldCategories[$category->getOldId()] = $category;
@@ -124,7 +125,7 @@ class Mageplaza1 extends AbstractImport
 
         foreach ($categories as $ct) {
             /* Final saving */
-            $ct->save();
+            $this->categoryResource->save($ct);
         }
 
         /* Import tags */
@@ -143,7 +144,7 @@ class Mageplaza1 extends AbstractImport
                     t.status as is_active
                 FROM ' . $_pref . 'mageplaza_betterblog_tag t';
 
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
 
             if (!$data['title']) {
@@ -154,7 +155,7 @@ class Mageplaza1 extends AbstractImport
             /* Find store ids */
             $data['store_ids'] = [];
             $s_sql = 'SELECT store_id FROM '.$_pref.'mageplaza_betterblog_tag_store WHERE tag_id = "'.$data['old_id'].'"';
-            $s_result =  $adapter->query($s_sql)->execute();
+            $s_result =  $adapter->fetchAll($s_sql);
             foreach ($s_result as $s_data) {
                 $data['store_ids'][] = $s_data['store_id'];
             }
@@ -163,7 +164,8 @@ class Mageplaza1 extends AbstractImport
                 /* Initial saving */
                 if (!isset($existingTags[$data['title']])) {
                     $tag = $this->_tagFactory->create();
-                    $tag->setData($data)->save();
+                    $tag->setData($data);
+                    $this->tagResource->save($tag);
                     $this->_importedTagsCount++;
                     $tags[$tag->getId()] = $tag;
                     $oldTags[$tag->getOldId()] = $tag;
@@ -180,13 +182,13 @@ class Mageplaza1 extends AbstractImport
 
         /* Import posts */
         $sql = 'SELECT entity_id as post_id, created_at, updated_at  FROM ' . $_pref . 'mageplaza_betterblog_post';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             /* Find post categories*/
             $postCategories = [];
             $c_sql = 'SELECT category_id FROM ' . $_pref .
                      'mageplaza_betterblog_post_category WHERE post_id = "'.$data['post_id'].'"';
-            $c_result = $adapter->query($c_sql)->execute();
+            $c_result = $adapter->fetchAll($c_sql);
             foreach ($c_result as $c_data) {
                 $oldId = $c_data['category_id'];
                 if (isset($oldCategories[$oldId])) {
@@ -199,7 +201,7 @@ class Mageplaza1 extends AbstractImport
             $postTags = [];
             $t_sql = 'SELECT tag_id FROM ' . $_pref . 'mageplaza_betterblog_post_tag WHERE post_id = "'.$data['post_id'].'"';
 
-            $t_result = $adapter->query($t_sql)->execute();
+            $t_result = $adapter->fetchAll($t_sql);
 
             foreach ($t_result as $t_data) {
                 $oldId = $t_data['tag_id'];
@@ -237,12 +239,13 @@ class Mageplaza1 extends AbstractImport
             $post = $this->_postFactory->create();
             try {
                 /* Post saving */
-                $post->setData($data)->save();
+                $post->setData($data);
+                $this->postResource->save($post);
 
                 /* find post comment s*/
                 $sql = 'SELECT * FROM ' . $_pref .
                        'mageplaza_betterblog_post_comment WHERE `post_id` = ' . $post->getOldId();
-                $resultComments = $adapter->query($sql)->execute();
+                $resultComments = $adapter->fetchAll($sql);
 
                 foreach ($resultComments as $comments) {
                     $commentData = [
@@ -264,7 +267,8 @@ class Mageplaza1 extends AbstractImport
 
                     try {
                         /* saving */
-                        $comment->setData($commentData)->save();
+                        $comment->setData($commentData);
+                        $this->commentResource->save($comment);
                         $this->_importedCommentsCount++;
                     } catch (\Exception $e) {
                         if (!isset($commentData['title'])) {
@@ -301,7 +305,7 @@ class Mageplaza1 extends AbstractImport
 
         $sql = 'SELECT value FROM ' . $_pref . 'mageplaza_betterblog_post_' . $attribute['backend_type'] . ' WHERE entity_id = "' . ((int)$postId) . '"
             AND attribute_id = "' . ((int)$attribute['attribute_id']) . '" LIMIT 1';
-        $result = $adapter->query($sql)->execute();
+        $result = $adapter->fetchAll($sql);
         foreach ($result as $data) {
             return $data['value'];
         }
@@ -320,7 +324,7 @@ class Mageplaza1 extends AbstractImport
             $_pref = $this->getPrefix();
 
             $sql = 'SELECT entity_type_id FROM ' . $_pref . 'eav_entity_type WHERE entity_type_code = "mageplaza_betterblog_post" LIMIT 1';
-            $result = $adapter->query($sql)->execute();
+            $result = $adapter->fetchAll($sql);
             foreach ($result as $data) {
                 $this->blogEntityId = (int)$data['entity_type_id'];
                 break;
@@ -348,7 +352,7 @@ class Mageplaza1 extends AbstractImport
 
             $sql = 'SELECT * FROM ' . $_pref . 'eav_attribute WHERE entity_type_id = "' . $this->getBlogEntityId() . '" 
                  AND attribute_code = "' . $attributeCode . '" LIMIT 1';
-            $result = $adapter->query($sql)->execute();
+            $result = $adapter->fetchAll($sql);
             foreach ($result as $data) {
                 $this->blogAttributes[$attributeCode] = $data;
                 break;

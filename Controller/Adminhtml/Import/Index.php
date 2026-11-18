@@ -15,7 +15,7 @@ class Index extends \Magento\Backend\App\Action
 {
     /**
      * Start available import execute
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return void
      */
     public function execute()
     {
