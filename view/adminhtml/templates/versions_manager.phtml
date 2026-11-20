@@ -104,7 +104,7 @@ $selectorMap = [
                     extensionPlan = 'Plus or Extra';
                 }
                 alert({
-                    title: '" . $escaper->escapeJs((string)__('You cannot use this option.')) . "',
+                    title: '" . $escaper->escapeJs((string)__('Upgrade to use this option.')) . "',
                     content: '" . $escaper->escapeJs((string)__('This feature is available in')) . " <strong>' + extensionPlan + '</strong> " . $escaper->escapeJs((string)__('plan only.')) . "',
                     buttons: [{
                         text: '" . $escaper->escapeJs((string)__('Upgrade Plan Now')) . "',
