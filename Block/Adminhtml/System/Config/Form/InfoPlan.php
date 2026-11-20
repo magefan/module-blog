@@ -85,7 +85,7 @@ abstract class InfoPlan extends \Magefan\Community\Block\Adminhtml\System\Config
                                 $(this).click(function(){
                                     $(this).val($(this).data("mfOldValue")).trigger("change");     
                                     alert({
-                                        title: "You cannot use this option.",
+                                        title: "Upgrade to use this option.",
                                         content: "' . $optionAvailableInText . '",
                                         buttons: [{
                                             text: "Upgrade Plan Now",
