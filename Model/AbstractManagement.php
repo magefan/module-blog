@@ -131,6 +131,10 @@ abstract class AbstractManagement implements ManagementInterface
         try {
             $data = json_decode($data, true);
             foreach ($this->_imagesMap as $key) {
+                /* Image path can be set only via file upload (<key>_name + <key>_content), empty value clears it */
+                if (isset($data[$key])) {
+                    unset($data[$key]);
+                }
                 if (empty($data[$key . '_name']) || empty($data[$key . '_content'])) {
                     unset($data[$key . '_name']);
                     unset($data[$key . '_content']);
@@ -184,6 +188,10 @@ abstract class AbstractManagement implements ManagementInterface
             }
 
             foreach ($this->_imagesMap as $key) {
+                /* Image path can be set only via file upload (<key>_name + <key>_content), empty value clears it */
+                if (isset($data[$key])) {
+                    unset($data[$key]);
+                }
                 if (empty($data[$key . '_name']) || empty($data[$key . '_content'])) {
                     unset($data[$key . '_name']);
                     unset($data[$key . '_content']);
