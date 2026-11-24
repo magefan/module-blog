@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Category;
 
@@ -20,6 +21,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
 
     /**
      * After model save
+     *
      * @param  \Magefan\Blog\Model\Category $model
      * @param  \Magento\Framework\App\Request\Http $request
      * @return void
@@ -34,14 +36,29 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
         );
     }
 
+    /**
+     * Before model save
+     *
+     * @param  \Magefan\Blog\Model\Category $model
+     * @param  \Magento\Framework\App\Request\Http $request
+     * @return void
+     */
     protected function _beforeSave($model, $request)
     {
+        $categoryPostData = $request->getPostValue();
+
+        $parentId = $categoryPostData['parent'] ?? null;
+        if ($parentId) {
+            $model->setParentId($parentId);
+        }
+
         /* Prepare images */
         $this->prepareImagesBeforeSave($model, ['category_img']);
     }
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */

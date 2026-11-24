@@ -5,8 +5,11 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\ResourceModel;
+
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Blog post resource model
@@ -44,6 +47,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Initialize resource model
+     *
      * Get tablename from config
      *
      * @return void
@@ -55,6 +59,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Retrieve date object
+     *
      * @return \Magento\Framework\Stdlib\DateTime
      */
     public function getDate()
@@ -205,10 +210,12 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Increment post views count
+     *
      * @throws \Magento\Framework\Exception\LocalizedException
      * @param \Magento\Framework\Model\AbstractModel $object
      */
-    public function incrementViewsCount(\Magento\Framework\Model\AbstractModel $object)
+    public function incrementViewsCount(\Magento\Framework\Model\AbstractModel $object): void
     {
         $this->getConnection()->update(
             $this->getMainTable(),
@@ -219,20 +226,21 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Update post connections
-     * @param  \Magento\Framework\Model\AbstractModel $object
-     * @param  Array $newRelatedIds
-     * @param  Array $oldRelatedIds
-     * @param  String $tableName
-     * @param  String  $field
-     * @param  Array  $rowData
-     * @return void
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @param array $newRelatedIds
+     * @param array $oldRelatedIds
+     * @param string $tableName
+     * @param string $field
+     * @param array $rowData
+     * @return null
      */
     public function updateLinks(
         \Magento\Framework\Model\AbstractModel $object,
         array $newRelatedIds,
         array $oldRelatedIds,
         $tableName,
-        $field,
+        string $field,
         $rowData = []
     ) {
         return $this->_updateLinks($object, $newRelatedIds, $oldRelatedIds, $tableName, $field, $rowData);
@@ -240,12 +248,13 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Update post connections
-     * @param  \Magento\Framework\Model\AbstractModel $object
-     * @param  Array $newRelatedIds
-     * @param  Array $oldRelatedIds
-     * @param  String $tableName
-     * @param  String  $field
-     * @param  Array  $rowData
+     *
+     * @param AbstractModel $object
+     * @param array $newRelatedIds
+     * @param array $oldRelatedIds
+     * @param string $tableName
+     * @param string $field
+     * @param array $rowData
      * @return void
      */
     protected function _updateLinks(
@@ -253,7 +262,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         array $newRelatedIds,
         array $oldRelatedIds,
         $tableName,
-        $field,
+        string $field,
         $rowData = []
     ) {
         $table = $this->getTable($tableName);
@@ -279,6 +288,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             foreach ($insert as $id) {
                 $id = (int)$id;
+                // phpcs:ignore Magento2.Performance.ForeachArrayMerge
                 $data[] = array_merge(
                     ['post_id' => (int)$object->getId(), $field => $id],
                     (isset($rowData[$id]) && is_array($rowData[$id])) ? $rowData[$id] : []
@@ -345,11 +355,10 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Check if post identifier exist for specific store
-     * return post id if post exists
+     * Check if post identifier exist for specific store return post id if post exists
      *
      * @param string $identifier
-     * @param int $storeId
+     * @param int $storeIds
      * @return int
      */
     protected function _getLoadByIdentifierSelect($identifier, $storeIds)
@@ -394,11 +403,10 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Check if post identifier exist for specific store
-     * return post id if post exists
+     * Check if post identifier exist for specific store return post id if post exists
      *
      * @param string $identifier
-     * @param int|array $storeId
+     * @param int|array $storeIds
      * @return false|string
      */
     public function checkIdentifier($identifier, $storeIds)
@@ -408,7 +416,10 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Zend_Db_Select::COLUMNS)->columns(['cp.post_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
+        $select->reset(\Magento\Framework\DB\Select::COLUMNS)
+            ->columns(['cp.post_id', 'cp.identifier'])
+            ->order('cps.store_id DESC')
+            ->limit(1);
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['post_id']) && isset($row['identifier'])
@@ -476,9 +487,10 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Get ids to which specified item is assigned
-     * @param  int $postId
-     * @param  string $tableName
-     * @param  string $field
+     *
+     * @param int $postId
+     * @param string $tableName
+     * @param string $field
      * @return array
      */
     public function lookupIds($postId, $tableName, $field)
@@ -487,6 +499,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
     /**
      * Get ids to which specified item is assigned
+     *
      * @param  int $postId
      * @param  string $tableName
      * @param  string $field
@@ -508,6 +521,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Get rows to which specified item is assigned
+     *
      * @param  int $postId
      * @param  string $tableName
      * @param  string $field
@@ -529,9 +543,11 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Retrieves the type of the entity.
+     *
      * @return string
      */
-    public function getEntityType()
+    public function getEntityType(): string
     {
         return 'post';
     }

@@ -10,8 +10,14 @@
 /**
  * Blog sidebar posts list template
  *
- * @var $block \Magefan\Blog\Block\Post\PostList\AbstractList
+ * @var \Magefan\Blog\Block\Post\PostList\AbstractList $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php
@@ -23,15 +29,15 @@
     $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 ?>
 <?php if ($_postCollection->count()) { ?>
-<div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
+<div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
     </div>
     <div class="block-content">
         <?php foreach ($_postCollection as $_post) { ?>
             <?php
-                $_postUrl = $block->escapeUrl($_post->getPostUrl());
-                $_postName = $block->escapeHtml($_post->getTitle());
+                $_postUrl = $escaper->escapeUrl($_post->getPostUrl());
+                $_postName = $escaper->escapeHtml($_post->getTitle());
             ?>
             <div class="item clearfix">
                 <?php if ($block->getDisplayImage()) { ?>
@@ -43,27 +49,33 @@
                             $featuredImgAlt =  $_postName;
                         }
                         ?>
-                        <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                        <a class="post-item-link" title="<?= /*@noEscape*/ $_postName ?>" href="<?= /*@noEscape*/ $_postUrl ?>">
                             <?php
-                                if ($featuredImage) {
-                                    $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
-                                } else {
-                                    $featuredImageUrl = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
-                                }
+                            if ($featuredImage) {
+                                $featuredImageUrl = $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height);
+                                $imageWidthAndHeight = $imageHelper->getWidthAndHeight();
+                                $addWH = !empty($imageWidthAndHeight);
+                            } else {
+                                $featuredImageUrl = $block->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                                $imageWidthAndHeight = ['width' => 1500, 'height' => 1500];
+                                $addWH = true;
+                            }
                             ?>
-                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $block->escapeUrl($featuredImageUrl) ?>"
-                                 alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                            <img data-width-amp="<?= $escaper->escapeHtml($width) ?>" data-height-amp="<?= $escaper->escapeHtml($height) ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
+                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                 <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
+                            />
                         </a>
                     </div>
                 <?php } ?>
 
-                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                    <?= $_postName ?>
+                <a class="post-item-link" title="<?= /*@noEscape*/ $_postName ?>" href="<?= /*@noEscape*/ $_postUrl ?>">
+                    <?= /*@noEscape*/ $_postName ?>
                 </a>
 
                 <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>
                     <div class="post-item-date">
-                        <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                        <span class="value"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
                     </div>
                 <?php } ?>
             </div>

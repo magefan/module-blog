@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Smartwave\Megamenu;
 
@@ -96,6 +97,17 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         return $html;
     }
 
+    /**
+     * Generates the HTML for submenu items based on the provided hierarchy and parameters.
+     *
+     * @param array $children
+     * @param int $level
+     * @param int $max_level
+     * @param int $column_width
+     * @param string $menu_type
+     * @param int|null $columns
+     * @return string
+     */
     public function getSubmenuItemsHtml(
         $children,
         $level = 1,
@@ -103,7 +115,7 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         $column_width = 12,
         $menu_type = 'fullwidth',
         $columns = null
-    ) {
+    ): string {
         $html = '';
 
         if (!$max_level ||

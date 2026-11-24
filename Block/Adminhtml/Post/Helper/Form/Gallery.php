@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 /**
  * Blog post gallery
@@ -68,7 +69,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
         \Magento\Framework\View\Element\Context $context,
         Registry $registry,
         \Magento\Framework\Data\Form $form,
-        $data = []
+        array $data = []
     ) {
         $this->registry = $registry;
         $this->form = $form;
@@ -76,6 +77,8 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
+     * Get element html
+     *
      * @return string
      */
     public function getElementHtml()
@@ -88,7 +91,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
      *
      * @return array|null
      */
-    public function getImages()
+    public function getImages(): array
     {
         $result = [];
         $gallery = $this->registry->registry('current_model')->getGalleryImages();
@@ -100,6 +103,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
                 $result['images'][] = [
                     'value_id' => $image->getFile(),
                     'file' => $image->getFile(),
+                    // phpcs:ignore Magento2.Functions.DiscouragedFunction
                     'label' => basename($image->getFile() ?: ''),
                     'position' => $position,
                     'url' => $image->getUrl(),
@@ -141,6 +145,8 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
+     * Get html id
+     *
      * @return string
      */
     protected function getHtmlId()
@@ -149,6 +155,8 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -157,6 +165,8 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
+     * Get field name suffix
+     *
      * @return string
      */
     public function getFieldNameSuffix()
@@ -165,6 +175,8 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
+     * Get data scope html id
+     *
      * @return string
      */
     public function getDataScopeHtmlId()
@@ -173,6 +185,8 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
+     * To html
+     *
      * @return string
      */
     public function toHtml()

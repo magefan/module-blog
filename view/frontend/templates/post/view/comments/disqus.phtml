@@ -10,18 +10,24 @@
 /**
  * Blog post comments template
  *
- * @var $block \Magefan\Blog\Block\Post\View\Comments
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Post\View\Comments $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <div id="disqus_thread"></div>
 <?php $script = "
     var disqus_config = function () {
-        this.page.url = '" . $block->escapeUrl($block->getPost()->getPostUrl()) . "';
+        this.page.url = '" . $escaper->escapeUrl($block->getPost()->getPostUrl()) . "';
     };
     (function() {
         var d = document, s = d.createElement('script');
-        s.src = '" . $block->escapeHtml('/' . '/' .  $block->getDisqusShortname()) . ".disqus.com/embed.js';
+        s.src = '" . $escaper->escapeHtml('/' . '/' .  $block->getDisqusShortname()) . ".disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

@@ -71,6 +71,14 @@
             <resource ref="anonymous" />
         </resources>
     </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/post/all/:type/:term/:store_id/:page/:limit" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/post/all/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\PostManagementInterface" method="getAll"/>
+        <resources>
+            <resource ref="Magefan_Blog::post"/>
+        </resources>
+    </route>
 
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/category" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
@@ -131,6 +139,15 @@
         </resources>
     </route>
 
+       <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/category/all/:type/:term/:store_id/:page/:limit" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/category/all/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\CategoryManagementInterface" method="getAll"/>
+        <resources>
+            <resource ref="Magefan_Blog::category"/>
+        </resources>
+    </route>
+
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/tag" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
       -H "Content-Type:application/json" \
@@ -138,7 +155,7 @@
     <route url="/V1/blog/tag" method="POST">
         <service class="Magefan\Blog\Api\TagManagementInterface" method="create"/>
         <resources>
-            <resource ref="Magefan_Blog::tag"/>
+            <resource ref="Magefan_Blog::tag_save"/>
         </resources>
     </route>
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/tag/:id" \
@@ -189,6 +206,14 @@
             <resource ref="anonymous" />
         </resources>
     </route>
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/all/:type/:term/:store_id/:page/:limit" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/blog/tag/all/:type/:term/:store_id/:page/:limit" method="GET">
+        <service class="Magefan\Blog\Api\TagManagementInterface" method="getAll"/>
+        <resources>
+            <resource ref="Magefan_Blog::tag"/>
+        </resources>
+    </route>
     <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/blog/comment" \
       -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
       -H "Content-Type:application/json" \
@@ -196,7 +221,7 @@
     <route url="/V1/blog/comment" method="POST">
         <service class="Magefan\Blog\Api\CommentManagementInterface" method="create"/>
         <resources>
-            <resource ref="Magefan_Blog::comment"/>
+            <resource ref="Magefan_Blog::comment_save"/>
         </resources>
     </route>
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/comment/:id" \
@@ -232,7 +257,7 @@
             <resource ref="anonymous" />
         </resources>
     </route>
-    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/comment/:type/:term/:store_id/:page/:limit" -->
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/comment/:type/:term/:store_id/:page/:limit" -->
     <route url="/V1/blog/comment/:type/:term/:store_id/:page/:limit" method="GET">
         <service class="Magefan\Blog\Api\CommentManagementInterface" method="getList"/>
         <resources>
@@ -244,7 +269,7 @@
     <route url="/V1/blog/version" method="GET">
         <service class="Magefan\Blog\Api\VersionInterface" method="getVersion"/>
         <resources>
-            <resource ref="anonymous" />
+            <resource ref="Magefan_Blog::elements" />
         </resources>
     </route>
 </routes>

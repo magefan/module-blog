@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Controller\Post;
 
 /**
@@ -14,8 +16,6 @@ class View extends \Magefan\Blog\App\Action\Action
 {
 
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -79,16 +79,16 @@ class View extends \Magefan\Blog\App\Action\Action
             return false;
         }
 
-        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $post = $this->_objectManager->create(\Magefan\Blog\Model\Post::class)->load($id);
 
-        if (!$post->isVisibleOnStore($storeId) && !$post->isValidSecret($secret)) {
+        $isValidSecret = $this->isValidSecret($post);
+        if (!$post->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
         }
 
-        if ($post->isValidSecret($secret)) {
+        if ($isValidSecret) {
             $post->setIsPreviewMode(true);
         }
 

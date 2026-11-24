@@ -15,12 +15,12 @@ class ArchiveGroupBy implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const string
      */
-    const MONTH_AND_YEAR = 'month_year';
+    private const MONTH_AND_YEAR = 'month_year';
 
     /**
      * @const string
      */
-    const YEAR = 'year';
+    private const YEAR = 'year';
 
     /**
      * Options getter
@@ -40,7 +40,7 @@ class ArchiveGroupBy implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

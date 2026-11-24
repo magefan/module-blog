@@ -43,10 +43,43 @@ class TagManagement extends AbstractManagement
       */
     public function getList($type, $term, $storeId, $page, $limit)
     {
+        return $this->fetchFilteredTags($type, $term, $storeId, $page, $limit);
+    }
+
+    /**
+     * Retrieve all posts (including inactive) filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
+    public function getAll($type, $term, $storeId, $page, $limit)
+    {
+        return $this->fetchFilteredTags($type, $term, $storeId, $page, $limit, false);
+    }
+
+    /**
+     *  Build a JSON response with posts filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @param bool $active
+     * @return false|string
+     */
+    protected function fetchFilteredTags($type, $term, $storeId, $page, $limit, bool $active = true)
+    {
         try {
             $collection = $this->_itemFactory->create()->getCollection();
+            if ($active) {
+                $collection->addActiveFilter();
+            }
             $collection
-                ->addActiveFilter()
                 ->addStoreFilter($storeId)
                 ->setCurPage($page)
                 ->setPageSize($limit);
@@ -78,7 +111,9 @@ class TagManagement extends AbstractManagement
     }
 
     /**
-     * @param $item
+     * Retrieve dynamic data for a given item by processing specific keys.
+     *
+     * @param object $item
      * @return array
      */
     protected function getDynamicData($item)
@@ -95,6 +130,8 @@ class TagManagement extends AbstractManagement
             $method = 'get' . str_replace('_', '', ucwords($key, '_'));
             $data[$key] = $item->$method();
         }
+
+        $data = $this->unsetSensitiveData($data);
 
         return $data;
     }

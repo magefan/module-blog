@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 /**
  * Blog post gallery content
@@ -34,10 +35,11 @@ class Content extends \Magento\Backend\Block\Widget
 
     /**
      * Content constructor.
+     *
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
      * @param array $data
-     * @param null $imageUploadConfigDataProvider
+     * @param \Magento\Backend\Block\DataProviders\ImageUploadConfig|null $imageUploadConfigDataProvider
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -64,6 +66,8 @@ class Content extends \Magento\Backend\Block\Widget
     }
 
     /**
+     * Prepare layout
+     *
      * @return AbstractBlock
      */
     protected function _prepareLayout()
@@ -113,14 +117,18 @@ class Content extends \Magento\Backend\Block\Widget
     }
 
     /**
+     * Get js object name
+     *
      * @return string
      */
-    public function getJsObjectName()
+    public function getJsObjectName(): string
     {
         return $this->getHtmlId() . 'JsObject';
     }
 
     /**
+     * Get add images button html
+     *
      * @return string
      */
     public function getAddImagesButton()
@@ -134,6 +142,8 @@ class Content extends \Magento\Backend\Block\Widget
     }
 
     /**
+     * Get images json
+     *
      * @return string
      */
     public function getImagesJson()
@@ -160,7 +170,7 @@ class Content extends \Magento\Backend\Block\Widget
     private function sortImagesByPosition($images)
     {
         if (is_array($images)) {
-            usort($images, function ($imageA, $imageB) {
+            usort($images, function (array $imageA, array $imageB): int {
                 return ($imageA['position'] < $imageB['position']) ? -1 : 1;
             });
         }

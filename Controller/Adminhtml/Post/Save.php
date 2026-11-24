@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Post;
 
@@ -22,6 +23,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
     /**
      * Before model save
+     *
      * @param  \Magefan\Blog\Model\Post $model
      * @param  \Magento\Framework\App\Request\Http $request
      * @return void
@@ -69,14 +71,13 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
         if (!empty($data['media_gallery']['images'])) {
             $images = $data['media_gallery']['images'];
-            usort($images, function ($imageA, $imageB) {
-                if (!isset($imageA['position'])) {
-                    $imageA['position'] = 0;
+            usort($images, function ($imageA, $imageB): int {
+                $posA = isset($a['position']) ? (int)$a['position'] : 0;
+                $posB = isset($b['position']) ? (int)$b['position'] : 0;
+                if ($posA === $posB) {
+                    return 0;
                 }
-                if (!isset($imageB['position'])) {
-                    $imageB['position'] = 0;
-                }
-                return ($imageA['position'] < $imageB['position']) ? -1 : 1;
+                return ($posA < $posB) ? -1 : 1;
             });
             $gallery = [];
             foreach ($images as $image) {
@@ -135,6 +136,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Post
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */

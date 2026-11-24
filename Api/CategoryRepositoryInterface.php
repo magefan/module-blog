@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Api;
 
@@ -17,18 +18,24 @@ use Magefan\Blog\Model\CategoryFactory;
 interface CategoryRepositoryInterface
 {
     /**
+     * Retrieve Category factory instance.
+     *
      * @return CategoryFactory
      */
     public function getFactory();
 
     /**
+     * Save the provided category.
+     *
      * @param Category $category
      * @return mixed
      */
     public function save(Category $category);
 
     /**
-     * @param $categoryId
+     * Retrieve Category by ID.
+     *
+     * @param int $categoryId
      * @return mixed
      */
     public function getById($categoryId);
@@ -43,6 +50,8 @@ interface CategoryRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
+     * Delete the provided category.
+     *
      * @param Category $category
      * @return mixed
      */

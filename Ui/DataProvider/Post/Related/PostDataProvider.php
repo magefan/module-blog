@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Ui\DataProvider\Post\Related;
 
@@ -60,7 +61,7 @@ class PostDataProvider extends AbstractDataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getCollection()
     {

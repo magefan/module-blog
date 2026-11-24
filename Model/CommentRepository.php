@@ -3,6 +3,8 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\CommentRepositoryInterface;
@@ -74,6 +76,8 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * Retrieves the comment factory instance.
+     *
      * @return CommentFactory
      */
     public function getFactory()
@@ -82,6 +86,8 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * Save a comment entity.
+     *
      * @param Comment $comment
      * @return bool|Comment|mixed
      * @throws CouldNotSaveException
@@ -110,9 +116,11 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
-     * @param $commentId
+     * Retrieve a comment by its ID.
+     *
+     * @param int|string $commentId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
      * @return Comment|mixed
      * @throws NoSuchEntityException
@@ -128,12 +136,14 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * Delete a comment.
+     *
      * @param Comment $comment
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Comment $comment)
+    public function delete(Comment $comment): bool
     {
         try {
             $this->commentResourceModel->delete($comment);
@@ -148,19 +158,21 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
-     * @param int $commentId
+     * Deletes a comment by its ID.
+     *
+     * @param int|string $commentId
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($commentId)
+    public function deleteById($commentId): bool
     {
         return $this->delete($this->getById($commentId));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
@@ -173,7 +185,7 @@ class CommentRepository implements CommentRepositoryInterface
         $searchResult = $this->searchResultsFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getData());
+        $searchResult->setItems($collection->getItems());
 
         return $searchResult;
     }

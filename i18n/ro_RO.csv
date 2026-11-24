@@ -32,14 +32,14 @@ The import process completed. %1 posts and %2 categories where imported. Some po
 Nothing to import.,Nu e nimic de importat.
 Can not make import.,Nu pot realiza importul.
 Something went wrong: ,Ceva nu e in regula:
-Please enter your name and email,Please enter your name and email
+Please enter your name and email,Introduceți vă rugăm numele și adresa de e-mail
 Blog Import from WordPress,Importa Blog din WordPress
-Comment text is too short.,Comment text is too short.
+Comment text is too short.,Textul comentariului este prea scurt.
 Please select,Va rugam alegeti
 Use Facebook Comments,Foloseste Comentararii Facebook
 Use Disqus Comments,Foloseste Comentarii Disqus
 Use Google Comments,Foloseste Comentareii Google
-Featured Blog Posts,Featured Blog Posts
+Featured Blog Posts,Postări recomandate pe blog
 Yes (With auto trigger),Da (Cu declansare automata)
 Yes (Without auto trigger),Da (Fara declansare automata)
 Parameter %1 is required,E nevoie de parametrul %1
@@ -57,7 +57,7 @@ Categories:,Categorii:
 Tags:,Tag-uri:
 Author:,Autor:
 We can't find posts matching the selection.,Nu gasesc postari pe baza termenilor alesi.
-Read more,Read more
+Read more,Citește mai mult
 Read more &#187;,Citeste mai departe &#187;
 See more,Vezi tot
 Read %1,Citeste %1
@@ -72,7 +72,7 @@ Recent Posts,Postari Recente
 RSS Feed,RSS Feed
 Search posts here...,Cauta postari...
 Tags,Tag-uri
-Read more >,Read more >
+Read more >,Citește mai mult >
 MageFan Extensions,Extensii MageFan
 Blog Information,Informatii Blog
 Blog Index Page,Prima Pagina Blog
@@ -203,3 +203,143 @@ Add Selected Posts,Adauga Postarile Selectate
 "Import from XML","Import from XML"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Yes, I have read the %1 and agree to the processing of my personal data."
 "privacy policy","privacy policy"
+"New Arrivals","Noutăți"
+"Blog Posts","Postări pe blog"
+"Blog Categories","Categorii de bloguri"
+"Post Contents","Cuprinsul postării"
+"hide","ascunde"
+"show","spectacol"
+"You May Also Like","V-ar putea plăcea și"
+"People Who Bought This Also Bought:","Persoanele care au cumpărat asta au cumpărat și:"
+"and","şi"
+"Popular Posts","Postări populare"
+"Featured Posts","Postări recomandate"
+"min read","citire minimă"
+"Latest From %1","Cel mai recent de la %1"
+"Co-author","Coautor"
+"Author","Autor"
+"Reply","Răspunde"
+"Show more replies in this thread","Arată mai multe răspunsuri în acest fir"
+"%1 Comment(s)","%1 Comentariu(ii)"
+"Add a comment...","Adaugă un comentariu..."
+"Add a reply...","Adaugă un răspuns..."
+"Sign in to add a comment...","Autentifică-te pentru a adăuga un comentariu..."
+"Sign in to add a reply...","Autentifică-te pentru a adăuga un răspuns..."
+"Full Name","Nume Complet"
+"Load more comments","Încarcă mai multe comentarii"
+"Login to submit comment","Autentifică-te pentru a trimite comentariul"
+"You cannot post comment. Blog post is not longer exist.","Nu poți posta comentariul. Articolul de blog nu mai există."
+"You cannot reply to this comment. Comment is not longer exist.","Nu poți răspunde la acest comentariu. Comentariul nu mai există."
+"You cannot reply to this comment.","Nu poți răspunde la acest comentariu."
+"You submitted your comment for moderation.","Comentariul tău a fost trimis pentru moderare."
+"Thank you for your comment.","Îți mulțumim pentru comentariu."
+"Import Categories","Importă Categorii"
+"Import Comments","Importă Comentarii"
+"Import Posts","Importă Postări"
+"Import from aheadWorks Blog Extension","Importă din extensia Blog aheadWorks"
+"Import from Joomla","Importă din Joomla"
+"Import from Blogger.com","Importă din Blogger.com"
+"Import from Drupal","Importă din Drupal"
+"Import from CSV","Importă din CSV"
+"Import from XML","Importă din XML"
+"Yes, I have read the %1 and agree to the processing of my personal data.","Da, am citit %1 și sunt de acord cu prelucrarea datelor mele personale."
+"privacy policy","politica de confidențialitate"
+Add New Comment,Adaugă Comentariu Nou
+Add New Images,Adaugă Imagini Noi
+Add New Tag,Adaugă Tag Nou
+Add to Cart,Adaugă în Coș
+Add to Compare,Adaugă la Comparare
+Add to Wish List,Adaugă la Lista de Dorințe
+Add With AI,Adaugă cu AI
+Admin,Admin
+AI Writer is not enabled. Please enable it first.,AI Writer nu este activat. Vă rugăm să îl activați mai întâi.
+All Authors,Toți Autorii
+All Blog Pages,Toate Paginile de Blog
+All Categories,Toate Categoriile
+and,și
+Approved,Aprobat
+Archive %1,Arhivă %1
+Blank (Use widgets to build the page content),Gol (Folosiți widget-uri pentru a construi conținutul paginii)
+Blog Archive Page,Pagina Arhivă Blog
+Blog Author Page,Pagina Autor Blog
+Blog Category Page,Pagina Categorie Blog
+Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Blog Plus <b>Setările Avansate Permalink</b> sunt activate.
+Blog Post Page,Pagina Postare Blog
+Blog Tag Page,Pagina Tag Blog
+Bottom (Horizontal),Jos (Orizontal)
+Browse to find or drag image here,Răsfoiți pentru a găsi sau trageți imaginea aici
+Cancel,Anulează
+Categories,Categorii
+Category,Categorie
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Cheia API Chat-GPT lipsește din configurările ""AI Writer""."
+Comments:,Comentarii:
+Customer,Client
+Database connection error,Eroare de conectare la baza de date
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Default: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Șterge imaginea
+Disabled,Dezactivat
+Duplicated,Duplicat
+Email,Email
+Enabled,Activat
+General Information,Informații Generale
+Go to Home Page,Mergi la Pagina Principală
+Grid - 1 column (Blog Extra),Grilă - 1 coloană (Blog Extra)
+Grid - 2 columns (Blog Extra),Grilă - 2 coloane (Blog Extra)
+Grid - 3 columns (Blog Extra),Grilă - 3 coloane (Blog Extra)
+Grid and List (Blog Extra),Grilă și Listă (Blog Extra)
+Guest,Vizitator
+Hidden,Ascuns
+Home,Acasă
+"Images (.gif, .jpg, .png)","Imagini (.gif, .jpg, .png)"
+Import Tags,Importă Tag-uri
+In stock,În stoc
+Leave a review about the blog extension,Lasă o recenzie despre extensia de blog
+Left (Vertical),Stânga (Vertical)
+List (Blog Extra),Listă (Blog Extra)
+min read,min citire
+Month And Year,Lună și An
+Need a new blog feature?,Ai nevoie de o funcție nouă pentru blog?
+No,Nu
+Not Approved,Neaprobat
+Other Grids (Blog Extra),Alte Grile (Blog Extra)
+Out of stock,Stoc epuizat
+Page,Pagină
+/page/N,/page/N
+?page=N,?page=N
+Pending,În așteptare
+Please enter valid email,Vă rugăm introduceți o adresă de email validă
+Please select post IDs,Vă rugăm selectați ID-urile postărilor
+?p=N,?p=N
+Position,Poziție
+Post Id,ID Postare
+Posts (default),Postări (implicit)
+Posts Links,Link-uri Postări
+Posts loader,Încărcător Postări
+Posts & Subcategories Links,Link-uri Postări și Subcategorii
+Publish Date (default),Data Publicării (implicit)
+Related Products,Produse Asociate
+Requested item doesn't exist,Elementul solicitat nu există
+Right (Vertical),Dreapta (Vertical)
+Search,Caută
+Select Post IDs ...,Selectează ID-urile Postărilor ...
+Share on %1,Distribuie pe %1
+Short: mystore.com/{blog_route}/post-title/,Short: mystore.com/{blog_route}/post-title/
+Sign In,Autentifică-te
+Slider (Blog Extra),Slider (Blog Extra)
+Something went wrong %1,Ceva nu a funcționat %1
+Something went wrong while saving the file(s).,Ceva nu a funcționat la salvarea fișierului/fișierelor.
+Subcategories Links,Link-uri Subcategorii
+Submit,Trimite
+Tag,Tag
+This option is available in <strong>%1</strong> plan only.,Această opțiune este disponibilă doar în planul <strong>%1</strong>.
+This option is available in <strong>Plus or Extra</strong> plans only.,Această opțiune este disponibilă doar în planurile <strong>Plus sau Extra</strong>.
+Title,Titlu
+Top (Horizontal),Sus (Orizontal)
+Unable to remove item,Imposibil de eliminat elementul
+Unable to save item,Imposibil de salvat elementul
+URL key is already in use by another blog item.,Cheia URL este deja utilizată de un alt element de blog.
+URL key is already in use by another tag item.,Cheia URL este deja utilizată de un alt element tag.
+Use Magefan Blog Comments,Folosește Comentariile Blog Magefan
+Views:,Vizualizări:
+Year,An
+"Last updated:","Ultima actualizare:"

@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Tag;
 
@@ -22,7 +23,8 @@ class AutocompleteData
 
     /**
      * Post constructor.
-     * @param BlogFactory $blogFactory
+     *
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         CollectionFactory $collectionFactory
@@ -31,10 +33,12 @@ class AutocompleteData
     }
 
     /**
-     * @param $search
+     * Get items by search term
+     *
+     * @param string $search
      * @return array
      */
-    public function getItems($search)
+    public function getItems(string $search): array
     {
         $collection = $this->collectionFactory->create();
         $collection

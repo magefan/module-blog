@@ -5,10 +5,12 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Helper;
 
 use Magento\Framework\Data\Tree\Node;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -23,7 +25,7 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
     protected $url;
 
     /**
-     * @param \Magento\Framework\Registry $registry,
+     * @var \Magento\Framework\Registry
      */
     protected $registry;
 
@@ -60,6 +62,7 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * Retrieve blog menu nodes
+     *
      * @param  mixed $menu
      * @param  mixed $tree
      * @return \Magento\Framework\Data\Tree\Node | null
@@ -138,7 +141,9 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * Retrieve sorted array of categories
+     *
      * @return array
+     * @throws NoSuchEntityException
      */
     protected function getGroupedChilds()
     {
@@ -152,6 +157,7 @@ class Menu extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * Retrieve current blog category
+     *
      * @return \Magefan\Blog\Model\Category | null
      */
     protected function getCurrentCategory()

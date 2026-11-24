@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Filter;
 
@@ -36,6 +37,8 @@ class Author extends \Magento\Backend\Block\Widget\Grid\Column\Filter\Select
     }
 
     /**
+     * Retrieve an array of options for authors.
+     *
      * @return array
      */
     protected function _getOptions()

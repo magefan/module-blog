@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Api;
 
@@ -17,18 +18,24 @@ use Magefan\Blog\Model\TagFactory;
 interface TagRepositoryInterface
 {
     /**
+     * Retrieve Tag factory instance.
+     *
      * @return TagFactory
      */
     public function getFactory();
 
     /**
+     * Save the provided tag.
+     *
      * @param Tag $tag
      * @return mixed
      */
     public function save(Tag $tag);
 
     /**
-     * @param $tagId
+     * Retrieve Tag by ID.
+     *
+     * @param int $tagId
      * @return mixed
      */
     public function getById($tagId);
@@ -43,6 +50,8 @@ interface TagRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
+     * Delete the provided tag.
+     *
      * @param Tag $tag
      * @return mixed
      */

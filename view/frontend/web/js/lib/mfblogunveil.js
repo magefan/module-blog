@@ -12,51 +12,70 @@ define(['jquery'], function($) {
     /* Origin https://github.com/luis-almeida/unveil/blob/master/jquery.unveil.js */
     $.fn.mfblogunveil = function(threshold, callback) {
 
-        var $w = $(window),
-            th = threshold || 0,
-            attrib = 'data-original',
-            images = this,
-            loaded;
+        var attrib = 'data-original';
+        var images = this;
 
-        this.one("mfblogunveil", function() {
-            var source = this.getAttribute(attrib);
-            /*source = source || this.getAttribute("data-src");*/
-            if (source) {
-                /*this.setAttribute("src", source);*/
+        function revealImage(el) {
+            var source = el.getAttribute(attrib);
+            if (!source) return;
 
-                if (window.MagefanWebP && window.MagefanWebP.canUseWebP() && !source.includes('mf_webp')) {
-                    source = window.MagefanWebP.getWebUrl(source);
-                }
-                
-                var style = this.getAttribute('style') ? (this.getAttribute('style') + '; ') : '';
-                source = source.replace('"', '\\"');
-                style = style + 'background-image: url("' + source + '");'
-                this.setAttribute('style', style);
-
-                if (typeof callback === "function") callback.call(this);
+            if (window.MagefanWebP && window.MagefanWebP.canUseWebP() && !source.includes('mf_webp')) {
+                source = window.MagefanWebP.getWebUrl(source);
             }
-        });
 
-        function mfblogunveil() {
-            var inview = images.filter(function() {
-                var $e = $(this);
-                if ($e.is(":hidden")) return;
+            var style = el.getAttribute('style') ? (el.getAttribute('style') + '; ') : '';
+            source = source.replace('"', '\\"');
+            style = style + 'background-image: url("' + source + '");';
+            el.setAttribute('style', style);
 
-                var wt = $w.scrollTop(),
-                    wb = wt + $w.height(),
-                    et = $e.offset().top,
-                    eb = et + $e.height();
-
-                return eb >= wt - th && et <= wb + th;
-            });
-
-            loaded = inview.trigger("mfblogunveil");
-            images = images.not(loaded);
+            if (typeof callback === 'function') callback.call(el);
         }
 
-        $w.on("scroll.mfblogunveil resize.mfblogunveil lookup.mfblogunveil", mfblogunveil);
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        revealImage(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: (threshold || 0) + 'px'
+            });
 
-        mfblogunveil();
+            images.each(function () {
+                if (!$(this).is(':hidden')) {
+                    observer.observe(this);
+                }
+            });
+        } else {
+            /* Fallback for browsers without IntersectionObserver */
+            var $w = $(window);
+            var th = threshold || 0;
+
+            function mfblogunveil() {
+                var inview = images.filter(function () {
+                    var $e = $(this);
+                    if ($e.is(":hidden")) return;
+
+                    var wt = $w.scrollTop(),
+                        wb = wt + $w.height(),
+                        et = $e.offset().top,
+                        eb = et + $e.height();
+
+                    return eb >= wt - th && et <= wb + th;
+                });
+
+                inview.each(function () {
+                    revealImage(this);
+                });
+                images = images.not(inview);
+            }
+
+            $w.on("scroll.mfblogunveil resize.mfblogunveil lookup.mfblogunveil", mfblogunveil);
+
+            mfblogunveil();
+        }
 
         return this;
     };

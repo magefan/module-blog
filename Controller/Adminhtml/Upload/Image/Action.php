@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Upload\Image;
 
@@ -16,12 +17,15 @@ use Magento\Framework\Controller\ResultFactory;
 abstract class Action extends \Magento\Catalog\Controller\Adminhtml\Category\Image\Upload
 {
     /**
-     * File key
-     *
      * @var string
      */
     protected $_fileKey;
 
+    /**
+     * Handles file upload to a temporary directory and prepares JSON response with session cookie or error details.
+     *
+     * @return \Magento\Framework\Controller\Result\Json|(\Magento\Framework\Controller\Result\Json&\Magento\Framework\Controller\ResultInterface)|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         try {

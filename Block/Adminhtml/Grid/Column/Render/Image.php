@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Render;
 
 use Magefan\Blog\Model\Url;
@@ -25,6 +27,8 @@ class Image extends AbstractRenderer
     }
 
     /**
+     * Render image grid column
+     *
      * @param DataObject $row
      * @return string
      */

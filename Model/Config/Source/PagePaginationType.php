@@ -3,6 +3,7 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -28,7 +29,7 @@ class PagePaginationType implements OptionSourceInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

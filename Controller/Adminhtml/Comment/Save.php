@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Comment;
 
@@ -22,6 +23,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Comment
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */

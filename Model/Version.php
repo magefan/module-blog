@@ -34,7 +34,9 @@ class Version implements VersionInterface
     }
 
     /**
-     * @return false|string
+     * Retrieves the current version and edition of the module.
+     *
+     * @return string
      */
     public function getVersion(): string
     {

@@ -1,0 +1,202 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post comments template
+ *
+ * @var \Magefan\Blog\Block\Post\View\Comments $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magefan\Community\Api\BreezeThemeDetectionInterface $mfBreezeThemeDetection
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<?php
+    $comments = $block->getCommentsCollection();
+    $numberOfCommentsToDisplay = $block->getNumberOfComments();
+    $session = $block->getCustomerSession();
+
+    $canPost = $block->canPost();
+?>
+<div id="post-comments">
+    <div class="c-count">
+        <strong><?= $escaper->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?></strong>
+    </div>
+    <!-- reply form -->
+    <div class="c-reply cf">
+        <?php if ($image = $block->getCustomerImage()) { ?>
+        <div class="c-img">
+            <img src="<?= $escaper->escapeUrl($image) ?>" alt="<?= $escaper->escapeHtml($block->getCustomerName()) ?>">
+        </div>
+        <?php } ?>
+        <div class="c-replyform <?php if ($canPost) {  echo 'no-active'; } ?>">
+            <form class="comment-form-blog-recaptcha"
+                  action="<?= $escaper->escapeUrl($block->getFormUrl()) ?>"
+                  method="post"
+                  data-mage-init='{"validation":{}}'>
+                <?= $block->getBlockHtml('formkey') ?>
+                <input type="hidden" name="post_id" value="<?= (int)($block->getPost()->getId()) ?>" />
+
+                <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
+                    <div class="lr-hld">
+                        <div class="left-hld">
+                            <input type="text"
+                                   name="author_nickname"
+                                   value=""
+                                   placeholder="<?= $escaper->escapeHtml(__('Full Name')) ?>"
+                                   class="input-text required-entry"
+                                   data-validate="{required:true}"
+                                   autocomplete="off"
+                                   aria-required="true">
+                        </div>
+                        <div class="right-hld">
+                            <input type="email"
+                                   name="author_email"
+                                   autocomplete="email"
+                                   value=""
+                                   placeholder="<?= $escaper->escapeHtml(__('Email')) ?>"
+                                   class="input-text"
+                                   data-validate="{required:true, 'validate-email':true}"
+                                   aria-required="true">
+                        </div>
+                    </div>
+                <?php } ?>
+
+                <textarea name="text"
+                          placeholder="<?= $canPost ? $escaper->escapeHtml(__('Add a comment...')) : $escaper->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
+                          disabled="disabled"<?php } ?>
+                          data-validate="{required:true}"></textarea>
+                <div class="c-btn-hld">
+
+                    <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
+                        <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('post')->toHtml(); ?>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+
+                    <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
+
+                    <div class="actions">
+                        <?php if ($canPost) { ?>
+                            <button type="submit" class="submit"><?= $escaper->escapeHtml(__('Submit')) ?></button>
+                        <?php } else { ?>
+                            <button type="button"
+                                    onclick="window.location='<?= $escaper->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
+                                <?= $escaper->escapeHtml(__('Sign In')) ?>
+                            </button>
+                        <?php } ?>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+<?php
+    $commentsCount = count($comments);
+if ($commentsCount) {
+    ?>
+    <!-- comments list -->
+    <div class="c-comments" >
+    <?php $i = 0 ?>
+    <?php foreach ($comments as $comment) { ?>
+            <?php
+                $i++;
+                $comment->setIsHidden($i > $numberOfCommentsToDisplay);
+            ?>
+            <?= $block->getCommentHtml($comment) ?>
+        <?php } ?>
+        <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
+            <a href="#" class="c-allcomments more-comments-action" data-comment="0"><?= $escaper->escapeHtml(__('Load more comments')) ?></a>
+        <?php } ?>
+    </div>
+
+    <!-- reply comment form -->
+    <div id="c-replyform-comment" class="c-replyform c-replyform-comment" style="display:none">
+        <form class="reply-form-blog-recaptcha"
+              action="<?= $escaper->escapeUrl($block->getFormUrl()) ?>"
+              method="post"
+              data-mage-init='{"validation":{}}'>
+            <?= $block->getBlockHtml('formkey') ?>
+            <input type="hidden" name="post_id" value="<?= $escaper->escapeHtml($block->getPost()->getId()) ?>" />
+            <input type="hidden" name="parent_id" value="" />
+
+            <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
+                <div class="lr-hld">
+                    <div class="left-hld">
+                        <input type="text"
+                               name="author_nickname"
+                               value=""
+                               placeholder="<?= $escaper->escapeHtml(__('Full Name')) ?>"
+                               class="input-text required-entry refresh-value"
+                               data-validate="{required:true}"
+                               autocomplete="off"
+                               aria-required="true">
+                    </div>
+                    <div class="right-hld">
+                        <input type="email"
+                               name="author_email"
+                               autocomplete="email"
+                               value=""
+                               placeholder="<?= $escaper->escapeHtml(__('Email')) ?>"
+                               class="input-text required-entry refresh-value"
+                               data-validate="{required:true, 'validate-email':true}"
+                               aria-required="true">
+                    </div>
+                </div>
+            <?php } ?>
+
+            <textarea class="refresh-value"
+                      name="text"
+                      placeholder="<?= $canPost ? $escaper->escapeHtml(__('Add a reply...')) : $escaper->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
+                      disabled="disabled"<?php } ?>
+                      data-validate="{required:true}"></textarea>
+
+            <div class="c-btn-hld">
+                <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
+                    <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
+                <?php } ?>
+
+                <div id="recaptcha-reply-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.reply.additional'); ?></div>
+
+                <div class="actions">
+                    <button type="button" class="cancel reply-cancel-action" ><?= $escaper->escapeHtml(__('Cancel')) ?></button>
+                    <?php if ($canPost) { ?>
+                        <button type="submit" class="submit"><?= $escaper->escapeHtml(__('Submit')) ?></button>
+                    <?php } else { ?>
+                        <button type="button" class="submit"
+                                onclick="window.location='<?= $escaper->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
+                            <?= $escaper->escapeHtml(__('Sign In')) ?>
+                        </button>
+                    <?php } ?>
+                </div>
+            </div>
+        </form>
+    </div>
+<?php } ?>
+</div>
+
+
+<?php $script = "
+    var mfCommentsObserver = new IntersectionObserver(function (entries, obs) {
+        if (entries[0].isIntersecting) {
+            obs.disconnect();
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '" . $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog/js/magefan-comments.js')) . "';
+            document.head.append(script);
+        }
+    }, { rootMargin: '50px' });
+
+    mfCommentsObserver.observe(document.querySelector('#post-comments'));";
+?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

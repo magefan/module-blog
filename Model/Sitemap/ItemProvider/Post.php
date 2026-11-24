@@ -3,6 +3,7 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Sitemap\ItemProvider;
 
@@ -14,8 +15,6 @@ use Magefan\Blog\Api\SitemapConfigInterface;
 class Post implements ItemProviderInterface
 {
     /**
-     * Sitemap config
-     *
      * @var SitemapConfigInterface
      */
     private $sitemapConfig;
@@ -50,7 +49,7 @@ class Post implements ItemProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getItems($storeId)
     {

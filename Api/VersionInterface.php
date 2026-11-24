@@ -12,7 +12,7 @@ namespace Magefan\Blog\Api;
 interface VersionInterface
 {
     /**
-     * get blog version and edition
+     * Get blog version and edition
      *
      * @api
      * @return string

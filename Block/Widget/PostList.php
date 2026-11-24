@@ -5,12 +5,15 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Widget;
 
 /**
  * Blog post list block
- * @deprecated Do not use this file! It was taken from the Fastest theme to prevent errors after installing the original version
+ * @deprecated Do not use this file!
+ * It was taken from the Fastest theme to prevent errors after installing the original version
+ * @see Do not use this file!
  */
 class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \Magento\Widget\Block\BlockInterface
 {
@@ -18,16 +21,34 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
      * Block template file
      * @var string
      */
-    protected $_defaultToolbarBlock = 'Magefan\Blog\Block\Post\PostList\Toolbar';
-    
+    protected $_defaultToolbarBlock = \Magefan\Blog\Block\Post\PostList\Toolbar::class;
+
+    /**
+     * @var array
+     */
     protected $_sliderData = [];
-    
+
+    /**
+     * @var array
+     */
     protected $_show = [];
-    
+
+    /**
+     * @var mixed
+     */
     protected $_themeHelper;
-    
+
+    /**
+     * @var bool
+     */
     protected $_isFullHtml;
-    
+
+    /**
+     * Prepare posts collection
+     *
+     * @return void
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     protected function _preparePostCollection()
     {
         $orderBy = $this->getOrderBy();
@@ -38,7 +59,6 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
             ->addStoreFilter($this->_storeManager->getStore()->getId())
             ->setOrder($orderBy, $order);
         
-        
         if ($this->getCategories()) {
             $categories = explode(',', trim($this->getCategories()));
             $this->_postCollection->addCategoryFilter($categories);
@@ -48,27 +68,50 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
             $this->_postCollection->setPageSize($this->getPostCount());
         }
     }
+
+    /**
+     * Retrieve posts collection
+     *
+     * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
+     */
     public function getPostCollection()
     {
-        if (is_null($this->_postCollection)) {
+        if ($this->_postCollection === null) {
             $this->_preparePostCollection();
         }
 
         return $this->_postCollection;
     }
 
-    public function getPostedOn($post, $format = 'Y-m-d H:i:s')
+    /**
+     * Return posted on date
+     *
+     * @param \Magefan\Blog\Model\Post $post
+     * @param string $format
+     * @return string
+     */
+    public function getPostedOn($post, $format = 'Y-m-d H:i:s'): string
     {
         return date($format, strtotime((string)$post->getData('publish_time')));
     }
-    
-    public function getOriginalPostImage($post)
+
+    /**
+     * Return original post image
+     *
+     * @param \Magefan\Blog\Model\Post $post
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getOriginalPostImage($post): string
     {
         $imgageFile = $post->getPostImage();
-        return $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).$imgageFile;
+        return $this->_storeManager->getStore()
+                ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $imgageFile;
     }
+
     /**
      * Retrieve post html
+     *
      * @param  \Magefan\Blog\Model\Post $post
      * @return string
      */
@@ -79,6 +122,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()
@@ -97,6 +141,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
 
     /**
      * Retrieve Toolbar Html
+     *
      * @return string
      */
     public function getToolbarHtml()
@@ -119,6 +164,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         }
         return parent::_beforeToHtml();
     } */
+
+    /**
+     * Retrieve the template based on configuration and context
+     *
+     * @return string
+     */
     public function getTemplate()
     {
         if ($this->isFullHtml()) {
@@ -132,7 +183,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
             return 'Magefan_Blog::post/widget/ajax-blog.phtml';
         }
     }
-    
+
+    /**
+     * Determine if full HTML is used
+     *
+     * @return bool
+     */
     public function isFullHtml()
     {
         if ($this->_isFullHtml === null) {
@@ -141,7 +197,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         }
         return $this->_isFullHtml;
     }
-    
+
+    /**
+     * Get filter data
+     *
+     * @return array|mixed|null
+     */
     public function getFilterData()
     {
         $data = $this->getData();
@@ -149,15 +210,27 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         unset($data['module_name']);
         return $data;
     }
-    
+
+    /**
+     * Retrieve theme helper instance
+     *
+     * @return mixed
+     */
     public function getThemeHelper()
     {
         if ($this->_themeHelper === null) {
-            $this->_themeHelper = \Magento\Framework\App\ObjectManager::getInstance()->get('Codazon\ThemeLayoutPro\Helper\Data');
+            $this->_themeHelper = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get('Codazon\ThemeLayoutPro\Helper\Data');// phpcs:ignore
+
         }
         return $this->_themeHelper;
     }
-    
+
+    /**
+     * Retrieves and returns slider configuration data
+     *
+     * @return array
+     */
     public function getSliderData()
     {
         if (!$this->_sliderData) {
@@ -173,7 +246,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         }
         return $this->_sliderData;
     }
-    
+
+    /**
+     * Trims a string to a specified length, ensuring it does not split words, and appends an ellipsis if truncated.
+     *
+     * @param string $str
+     * @param int $strLenght
+     * @return string
+     */
     public function subString($str, $strLenght)
     {
         $str = $this->stripTags($str);
@@ -183,7 +263,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         }
         return $str;
     }
-    
+
+    /**
+     * Get show in front elements
+     *
+     * @return array|false|string[]
+     */
     public function getElementShow()
     {
         if (!$this->_show) {
@@ -191,8 +276,14 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList implements
         }
         return $this->_show;
     }
-    
-    public function isShow($item)
+
+    /**
+     * Check if element should be shown
+     *
+     * @param string $item
+     * @return bool
+     */
+    public function isShow($item): bool
     {
         return in_array($item, $this->getElementShow());
     }

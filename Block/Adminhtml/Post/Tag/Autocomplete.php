@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Post\Tag;
 
@@ -25,8 +26,8 @@ class Autocomplete extends Template
     /**
      * Autocomplete constructor.
      * @param Context $context
-     * @param array $data
      * @param Registry $registry
+     * @param array $data
      */
     public function __construct(Context $context, Registry $registry, array $data = [])
     {
@@ -35,6 +36,8 @@ class Autocomplete extends Template
     }
 
     /**
+     * Get linked tags
+     *
      * @return bool|false|string
      */
     public function getLinkedTags()
@@ -54,6 +57,8 @@ class Autocomplete extends Template
     }
 
     /**
+     * Get autocomplete url
+     *
      * @return string
      */
     public function getAutocompleteUrl()

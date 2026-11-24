@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Api;
 
@@ -17,18 +18,24 @@ use Magefan\Blog\Model\CommentFactory;
 interface CommentRepositoryInterface
 {
     /**
+     * Retrieve Comment factory instance.
+     *
      * @return CommentFactory
      */
     public function getFactory();
 
     /**
+     * Save the provided comment.
+     *
      * @param Comment $comment
      * @return mixed
      */
     public function save(Comment $comment);
 
     /**
-     * @param $commentId
+     * Retrieve Comment by ID.
+     *
+     * @param int $commentId
      * @return mixed
      */
     public function getById($commentId);
@@ -43,6 +50,8 @@ interface CommentRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
+     * Delete the provided comment.
+     *
      * @param Comment $comment
      * @return mixed
      */

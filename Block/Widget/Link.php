@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Widget;
 
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -32,7 +34,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
      * Link constructor.
      * @param \Magento\Framework\View\Element\Context $context
      * @param Url $blogUrl
-     * @param $modelRepository
+     * @param mixed $modelRepository
      * @param array $data
      */
     public function __construct(
@@ -47,6 +49,8 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
     }
 
     /**
+     * To html
+     *
      * @return string
      */
     protected function _toHtml()
@@ -58,24 +62,30 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 
         $href = $this->blogUrl->getUrl($model, $this->model->getControllerName());
 
-        $title = $this->getData('title') ? trim($this->getData('title')) : '';
+        // Note: 'anchor_text' maps to $title and 'title' maps to $anchorText — yes, swapped.
+        // Early naming mistake; kept intentionally to avoid breaking existing widget configs in DB.
+        $title = $this->getData('anchor_text') ? trim($this->getData('anchor_text')) : '';
         if (!$title) {
             $title = $model->getTitle();
         }
 
-        $anchorText = $this->getData('anchor_text') ? trim($this->getData('anchor_text')) : '';
+        $anchorText = $this->getData('title') ? trim($this->getData('title')) : '';
         if (!$anchorText) {
             $anchorText = $model->getTitle();
         }
 
         if (!$href) {
-            return $this->escapeHtml(__($title));
+            return $this->escapeHtml(__($anchorText));
         } else {
-            return '<a href="' . $this->escapeUrl($href) . '" title="' . $this->escapeHtml(__($anchorText)) . '">' . $this->escapeHtml(__($title)) . '</a>';
+            return '<a href="' . $this->escapeUrl($href) . '" title="'
+                . $this->escapeHtml(__($title)) . '">'
+                . $this->escapeHtml(__($anchorText)) . '</a>';
         }
     }
 
     /**
+     * Get model
+     *
      * @return mixed
      */
     private function getModel()
@@ -90,6 +100,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
                         ->get($this->modelRepository['instance'])
                         ->getbyId($id);
                 }
+            // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
             } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
 
             }

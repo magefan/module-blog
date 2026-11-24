@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Controller\Comment;
 
 /**
@@ -44,9 +46,8 @@ class Post extends \Magefan\Blog\App\Action\Action
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magefan\Blog\Model\CommentFactory $commentFactory
-     * @param\Magefan\Blog\Model\PostFactory $postFactory,
+     * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -102,14 +103,22 @@ class Post extends \Magefan\Blog\App\Action\Action
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )) {
             /* Guest can post review */
-            if (!trim($request->getParam('author_nickname')) || !trim($request->getParam('author_email'))) {
+            if (!trim($request->getParam('author_nickname') ?: '') || !trim($request->getParam('author_email')) ?: '') {
                 $this->getResponse()->setBody(json_encode([
                     'success' => false,
                     'message' => __('Please enter your name and email'),
                 ]));
                 return;
             }
-            
+
+            if (!filter_var(trim($request->getParam('author_email')), FILTER_VALIDATE_EMAIL)) {
+                $this->getResponse()->setBody(json_encode([
+                    'success' => false,
+                    'message' => __('Please enter valid email'),
+                ]));
+                return;
+            }
+
             $comment->setCustomerId(0)->setAuthorType(
                 \Magefan\Blog\Model\Config\Source\AuthorType::GUEST
             );
@@ -138,30 +147,39 @@ class Post extends \Magefan\Blog\App\Action\Action
         try {
             $post = $this->initPost();
             if (!$post) {
-                throw new \Exception(__('You cannot post comment. Blog post is not longer exist.'), 1);
+                throw new \LocalizedException(__('You cannot post comment. Blog post is not longer exist.'), 1);
             }
 
             if ($request->getParam('parent_id')) {
                 $parentComment = $this->initParentComment();
                 if (!$parentComment) {
-                    throw new \Exception(__('You cannot reply to this comment. Comment is not longer exist.'), 1);
+                    throw new \LocalizedException(
+                        __('You cannot reply to this comment. Comment is not longer exist.'),
+                        1
+                    );
                 }
 
                 if (!$parentComment->getPost()
                     || $parentComment->getPost()->getId() != $post->getId()
                     || $parentComment->isReply()
                 ) {
-                    throw new \Exception(__('You cannot reply to this comment.'), 1);
+                    throw new \LocalizedException(__('You cannot reply to this comment.'), 1);
                 }
 
                 $comment->setParentId($parentComment->getId());
             }
 
             $comment->save();
-        } catch (\Exception $e) {
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->getResponse()->setBody(json_encode([
                 'success' => false,
                 'message' => $e->getMessage(),
+            ]));
+            return;
+        } catch (\Exception $e) {
+            $this->getResponse()->setBody(json_encode([
+                'success' => false,
+                'message' => __('Something went wrong while submitting your comment. Please try again.'),
             ]));
             return;
         }

@@ -2,15 +2,14 @@
     "name": "magefan/module-blog",
     "description": "Implements Blog functionality on Magento 2 store",
     "require": {
-        "magefan/module-community" : ">=2.2.15",
-        "magefan/module-blog-graph-ql" : ">=2.1.10",
-        "magefan/module-wysiwyg-advanced" : ">=2.0.18"
-    },
-   "suggest": {
-        "magefan/module-amp-blog": "Install this module to activate Blog integration with the Plumrocket AMP extension."
+        "magefan/module-community" : ">=2.4.15",
+        "magefan/module-blog-comments-recaptcha" : ">=2.1.9",
+        "magefan/module-blog-import": "2.17.2",
+        "magefan/module-blog-graph-ql" : ">=2.3.1",
+        "magefan/module-wysiwyg-advanced" : ">=2.0.19"
     },
     "type": "magento2-module",
-    "version": "2.13.1",
+    "version": "2.17.2",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {

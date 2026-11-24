@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
@@ -37,6 +38,8 @@ class ColorPicker extends Field
     }
 
     /**
+     * Return element html
+     *
      * @param AbstractElement $element
      * @return string
      */

@@ -12,9 +12,15 @@
  * Use this template for porto theme. Copy this file to your porto theme as
  * app/design/frontend/Smartwave/theme-name/Magefan_Blog/templates/post/view/gallery.phtml
  *
- * @var $block \Magefan\Blog\Block\Post\View\Gallery
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Post\View\Gallery $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 
 <?php
@@ -26,9 +32,14 @@
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
             <a class="gallery-image-hld fancybox-thumb"
-               href="<?= $block->escapeUrl($image) ?>"
+               href="<?= $escaper->escapeUrl($image) ?>"
                rel="fancybox-thumb">
-                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200)) ?>" alt="" />
+                <?php
+                    $featuredImage = $image->resize(200, null, true);
+                    $imageWidthAndHeight = $featuredImage->getWidthAndHeight();
+                    $addWH = !empty($imageWidthAndHeight);
+                ?>
+                <img class="gallery-image" src="<?= $escaper->escapeUrl($featuredImage) ?>" alt="" <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>/>
             </a>
         <?php } ?>
     </div>

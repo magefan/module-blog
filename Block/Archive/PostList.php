@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Archive;
 
@@ -19,6 +20,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Prepare posts collection
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
     protected function _preparePostCollection()
@@ -81,10 +83,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
     }
 
     /**
-     * @param $param
+     * Get config value
+     *
+     * @param string $param
      * @return mixed
      */
-    protected function _getConfigValue($param)
+    protected function _getConfigValue(string $param)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/archive/'.$param,

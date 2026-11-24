@@ -32,14 +32,14 @@ Blog,Ιστολόγιο
 "Nothing to import.","Δεν υπάρχει κάτι για εισαγωγή."
 "Can not make import.","Αδύνατη εισαγωγή."
 "Something went wrong: ","Κάτι πήγε στραβά: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Παρακαλώ εισάγετε το όνομα και το email σας"
 "Blog Import from WordPress","Εισαγωγή ιστολόγιου WordPress"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Το κείμενο του σχολίου είναι πολύ μικρό."
 "Please select","Παρακαλώ επιλέξτε"
 "Use Facebook Comments","Χρήση σχολίων Facebook"
 "Use Disqus Comments","Χρήση σχολίων Disqus"
 "Use Google Comments","Χρήση σχολίων Google (beta)"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Προτεινόμενες Δημοσιεύσεις Ιστολόγιου"
 "Yes (With auto trigger)","Ναι (Με auto trigger)"
 "Yes (Without auto trigger)","Ναι (Χωρίς auto trigger)"
 "Parameter %1 is required","Παράμετρος %1 είναι αναγκαία"
@@ -57,7 +57,7 @@ Categories:,Κατηγορίες:
 Tags:,Ετικέτες:
 Author:,Συντάκτης:
 '"We can''t find posts matching the selection."',"Δεν βρέθηκαν σχετικές αναρτήσεις."
-"Read more","Read more"
+"Read more","Διαβάστε περισσότερα"
 "Read more &#187","Συνέχεια άρθρου &#187"
 "See more","Δείτε περισσότερα"
 "Read %1","Ανάγνωση %1"
@@ -72,7 +72,7 @@ Archive,Αρχείο
 "RSS Feed","RSS Feed"
 "Search posts here...","Αναζητήστε άρθρα..."
 Tags,Ετικέτες
-"Read more >","Read more >"
+"Read more >","Διαβάστε περισσότερα >"
 "MageFan Extensions","Πρόσθετα MageFan"
 "Blog Information","Πληροφορίες Ιστολόγιου"
 "Blog Index Page","Ευρετήριο Ιστολόγιου"
@@ -118,11 +118,11 @@ Social,Κοινωνικά Δίκτυα
 "AddThis Enabled","Ενεργοποίηση AddThis"
 "AddThis ID","AddThis ID"
 "AddThis Language","AddThis Γλώσσα"
-"Category Top Navigation","Category Top Navigation"
+"Category Top Navigation","Κορυφαία Πλοήγηση Κατηγορίας"
 "Display Blog Link","Προβολή συνδέσμου ιστολόγιου"
 "Blog Category","Κατηγορία Ιστολόγιου"
 "Leave blank to display posts from all categories.","Αφήστε κενό για την προβολή δημοσιεύσεων απο όλες τις κατηγορίες."
-"Custom Template","Custom Template"
+"Custom Template","Προσαρμοσμένο Πρότυπο"
 Published,Δημοσιευμένο
 "Category Information","Πληροφορίες Κατηγορίας"
 "Enable Category","Ενεργοποίηση Κατηγορία"
@@ -203,3 +203,119 @@ Published,Δημοσιευμένο
 "Import from XML","Εισαγωγή από XML"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Yes, I have read the %1 and agree to the processing of my personal data."
 "privacy policy","privacy policy"
+"New Arrivals","Νέες Αφίξεις"
+"Blog Posts","Αναρτήσεις ιστολογίου"
+"Blog Categories","Κατηγορίες ιστολογίου"
+"Post Contents","Περιεχόμενα ανάρτησης"
+"hide","κρύβω"
+"show","εμφανίζω"
+"You May Also Like","Μπορεί επίσης να σας αρέσουν"
+"People Who Bought This Also Bought:","Άτομα που το αγόρασαν αυτό, αγόρασαν επίσης:"
+"and","και"
+"Popular Posts","Δημοφιλείς αναρτήσεις"
+"Featured Posts","Προτεινόμενες αναρτήσεις"
+"min read","λεπτά ανάγνωσης"
+"Latest From %1","Τελευταία από %1"
+"Co-author","Συν-συγγραφέας"
+"Author","Συγγραφέας"
+"Yes, I have read the %1 and agree to the processing of my personal data.","Ναι, έχω διαβάσει %1 και συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων."
+"privacy policy","πολιτική απορρήτου"
+Add New Comment,Προσθήκη Νέου Σχολίου
+Add New Images,Προσθήκη Νέων Εικόνων
+Add New Tag,Προσθήκη Νέας Ετικέτας
+Add to Cart,Προσθήκη στο Καλάθι
+Add to Compare,Προσθήκη για Σύγκριση
+Add to Wish List,Προσθήκη στη Λίστα Επιθυμητών
+Add With AI,Προσθήκη με ΤΝ
+Admin,Διαχειριστής
+AI Writer is not enabled. Please enable it first.,Ο Συγγραφέας ΤΝ δεν είναι ενεργοποιημένος. Παρακαλώ ενεργοποιήστε τον πρώτα.
+All Authors,Όλοι οι Συγγραφείς
+All Blog Pages,Όλες οι Σελίδες Ιστολόγιου
+All Categories,Όλες οι Κατηγορίες
+and,και
+Approved,Εγκεκριμένο
+Archive %1,Αρχείο %1
+Blank (Use widgets to build the page content),Κενό (Χρησιμοποιήστε widgets για τη δημιουργία του περιεχομένου)
+Blog Archive Page,Σελίδα Αρχείου Ιστολόγιου
+Blog Author Page,Σελίδα Συγγραφέα Ιστολόγιου
+Blog Category Page,Σελίδα Κατηγορίας Ιστολόγιου
+Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Το Blog Plus με <b>Σύνθετες Ρυθμίσεις Permalink</b> είναι ενεργοποιημένο.
+Blog Post Page,Σελίδα Δημοσίευσης Ιστολόγιου
+Blog Tag Page,Σελίδα Ετικέτας Ιστολόγιου
+Bottom (Horizontal),Κάτω (Οριζόντιο)
+Browse to find or drag image here,Αναζητήστε ή σύρετε εικόνα εδώ
+Cancel,Ακύρωση
+Categories,Κατηγορίες
+Category,Κατηγορία
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Το κλειδί API Chat-GPT λείπει από τις ρυθμίσεις ""Συγγραφέα ΤΝ""."
+Comments:,Σχόλια:
+Customer,Πελάτης
+Database connection error,Σφάλμα σύνδεσης βάσης δεδομένων
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Default: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Διαγραφή εικόνας
+Disabled,Απενεργοποιημένο
+Duplicated,Διπλότυπο
+Email,Email
+Enabled,Ενεργοποιημένο
+General Information,Γενικές Πληροφορίες
+Go to Home Page,Πηγαίνετε στην Αρχική Σελίδα
+Grid - 1 column (Blog Extra),Grid - 1 column (Blog Extra)
+Grid - 2 columns (Blog Extra),Grid - 2 columns (Blog Extra)
+Grid - 3 columns (Blog Extra),Grid - 3 columns (Blog Extra)
+Grid and List (Blog Extra),Grid and List (Blog Extra)
+Guest,Επισκέπτης
+Hidden,Κρυφό
+Home,Αρχική
+"Images (.gif, .jpg, .png)","Εικόνες (.gif, .jpg, .png)"
+Import Tags,Εισαγωγή Ετικετών
+In stock,Σε απόθεμα
+Leave a review about the blog extension,Αφήστε μια αξιολόγηση για την επέκταση ιστολόγιου
+Left (Vertical),Αριστερά (Κατακόρυφο)
+List (Blog Extra),List (Blog Extra)
+min read,λεπτά ανάγνωσης
+Month And Year,Μήνας και Έτος
+Need a new blog feature?,Χρειάζεστε νέα λειτουργία ιστολόγιου;
+No,Όχι
+Not Approved,Μη Εγκεκριμένο
+Other Grids (Blog Extra),Other Grids (Blog Extra)
+Out of stock,Εκτός αποθέματος
+Page,Σελίδα
+/page/N,/page/N
+?page=N,?page=N
+Pending,Εκκρεμής
+Please enter valid email,Παρακαλώ εισάγετε έγκυρο email
+Please select post IDs,Παρακαλώ επιλέξτε IDs δημοσιεύσεων
+?p=N,?p=N
+Position,Θέση
+Post Id,ID Δημοσίευσης
+Posts (default),Δημοσιεύσεις (προεπιλογή)
+Posts Links,Σύνδεσμοι Δημοσιεύσεων
+Posts loader,Φόρτωση Δημοσιεύσεων
+Posts & Subcategories Links,Σύνδεσμοι Δημοσιεύσεων & Υποκατηγοριών
+Publish Date (default),Ημερομηνία Δημοσίευσης (προεπιλογή)
+Related Products,Σχετικά Προϊόντα
+Requested item doesn't exist,Το ζητούμενο στοιχείο δεν υπάρχει
+Right (Vertical),Δεξιά (Κατακόρυφο)
+Search,Αναζήτηση
+Select Post IDs ...,Επιλέξτε IDs Δημοσιεύσεων ...
+Share on %1,Κοινοποίηση σε %1
+Short: mystore.com/{blog_route}/post-title/,Short: mystore.com/{blog_route}/post-title/
+Sign In,Σύνδεση
+Slider (Blog Extra),Slider (Blog Extra)
+Something went wrong %1,Κάτι πήγε στραβά %1
+Something went wrong while saving the file(s).,Κάτι πήγε στραβά κατά την αποθήκευση αρχείου(ων).
+Subcategories Links,Σύνδεσμοι Υποκατηγοριών
+Submit,Υποβολή
+Tag,Ετικέτα
+This option is available in <strong>%1</strong> plan only.,Αυτή η επιλογή είναι διαθέσιμη μόνο στο πλάνο <strong>%1</strong>.
+This option is available in <strong>Plus or Extra</strong> plans only.,Αυτή η επιλογή είναι διαθέσιμη μόνο στα πλάνα <strong>Plus ή Extra</strong>.
+Title,Τίτλος
+Top (Horizontal),Κορυφή (Οριζόντιο)
+Unable to remove item,Αδύνατη η αφαίρεση στοιχείου
+Unable to save item,Αδύνατη η αποθήκευση στοιχείου
+URL key is already in use by another blog item.,Το κλειδί URL χρησιμοποιείται ήδη από άλλο στοιχείο ιστολόγιου.
+URL key is already in use by another tag item.,Το κλειδί URL χρησιμοποιείται ήδη από άλλο στοιχείο ετικέτας.
+Use Magefan Blog Comments,Χρήση Σχολίων Magefan Blog
+Views:,Προβολές:
+Year,Έτος
+"Last updated:","Τελευταία ενημέρωση:"

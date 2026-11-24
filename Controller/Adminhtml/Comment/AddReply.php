@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Comment;
 
@@ -63,6 +64,8 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
     }
 
     /**
+     * Execute action based on request and return result
+     *
      * @return Redirect|ResultInterface
      * @throws \Exception
      */
@@ -89,14 +92,14 @@ class AddReply extends \Magefan\Blog\Controller\Adminhtml\Comment
                     $reply->setData('author_type', '2');
                     $reply->setData('author_nickname', $user->getUsername());
                     $reply->setData('author_email', $user->getEmail());
-                    $reply->setData('text', _('Please type your comment reply here...'));
+                    $reply->setData('text', __('Please type your comment reply here...'));
                     $reply = $reply->save();
 
                     $replyCommentId = $reply->getCommentId();
                     $resultRedirect->setPath('*/*/edit', ['id' => $replyCommentId]);
                 }
             } catch (\Exception $exception) {
-                $this->messageManager->addErrorMessage(_('Something wrong: ' . $exception->getMessage()));
+                $this->messageManager->addErrorMessage(__('Something wrong: ' . $exception->getMessage()));
                 $resultRedirect->setPath('*/*/index');
                 return $resultRedirect;
             }

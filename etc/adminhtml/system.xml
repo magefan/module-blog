@@ -34,6 +34,10 @@
                     <label>Product Key</label>
                     <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\ProductKeyField</frontend_model>
                 </field>
+                <field id="design_version" translate="label comment" type="select" sortOrder="1010" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Design Version</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\DesignVersion</source_model>
+                </field>
             </group>
 
             <group id="design" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -75,6 +79,19 @@
                             For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
                         ]]></comment>
                 </field>
+                <field id="modified_date" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Posts Modified Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="format_date_modified" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Posts Modified Date Format</label>
+                    <depends>
+                        <field id="modified_date">1</field>
+                    </depends>
+                    <comment><![CDATA[
+                            For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
+                        ]]></comment>
+                </field>
             </group>
 
             <group id="index_page" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -93,13 +110,22 @@
                 <field id="posts_sort_by" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Sort By</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostsSortBy</source_model>
+                    <depends>
+                        <field id="display_mode" separator=",">0,1</field>
+                    </depends>
                 </field>
                 <field id="template" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Template</label>
                     <source_model>Magefan\Blog\Model\Config\Source\PostListTemplate</source_model>
+                    <depends>
+                        <field id="display_mode" separator=",">0,1</field>
+                    </depends>
                 </field>
                 <field id="posts_per_page" translate="label comment" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Posts Per Page</label>
+                    <depends>
+                        <field id="display_mode" separator=",">0,1</field>
+                    </depends>
                 </field>
                 <field id="post_ids" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Post IDs</label>
@@ -121,15 +147,6 @@
 
             <group id="post_view" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Post Page (Post View)</label>
-
-                <group id="design" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Design</label>
-                    <field id="template" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\PostViewTemplate</source_model>
-                    </field>
-                </group>
-
                 <group id="category_posts" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Posts From The Same Category (Blog Extra)</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -164,7 +181,6 @@
                             <field id="enabled">1</field>
                         </depends>
                     </field>
-
                     <field id="number_of_posts" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Number of Posts</label>
                         <depends>
@@ -195,7 +211,13 @@
                         <label>Display Related Products</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-
+                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Template</label>
+                        <source_model>Magefan\Blog\Model\Config\Source\RelatedProductTemplate</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
                     <field id="number_of_products" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Number of Products</label>
                         <depends>
@@ -366,13 +388,6 @@
                         <label>Display Prev. &amp; Next Post Links</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Template</label>
-                        <source_model>Magefan\Blog\Model\Config\Source\NextPrevPostTemplate</source_model>
-                        <depends>
-                            <field id="enabled">1</field>
-                        </depends>
-                    </field>
                 </group>
 
                 <group id="views_count" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -497,7 +512,6 @@
                 <field id="enabled_ai_writer" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>If enabled it will use the gpt-4o-mini model to generate content.</comment>
                 </field>
                 <field id="chat_gpt_api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Chat-GPT API Key</label>
@@ -509,6 +523,21 @@
                             <a href="https://www.google.com/search?q=how+to+find+Chat-GPT+API+Key" title="Where to find Tag ID?" target="_blank" rel="nofollow noopener">Where to find Chat-GPT API Key</a>? Or ask <a title="ChatGPT" href="https://chatgpt.com/" target="_blank" rel="nofollow noopener">ChatGPT</a> itself.</a></p>
                         ]]>
                     </comment>
+                </field>
+                <field id="chat_gpt_model" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Chat-GPT Model</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\ChatGptModels</source_model>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                    </depends>
+                </field>
+                <field id="chat_gpt_image_model" translate="label" type="select" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Chat-GPT Image Model</label>
+                    <source_model>Magefan\Blog\Model\Config\Source\ChatGptImageModels</source_model>
+                    <depends>
+                        <field id="enabled_ai_writer">1</field>
+                        <field id="generate_post_image">1</field>
+                    </depends>
                 </field>
                 <field id="default_prompt_template" translate="label comment"  type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default Prompt Template</label>
@@ -594,7 +623,11 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
@@ -603,6 +636,10 @@
                     <label>Post Contents Widget (Blog Extra)</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sticky" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -623,8 +660,16 @@
                     <field id="max_depth" type="text" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Maximal Depth</label>
                     </field>
+                    <field id="sticky" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
+                    </field>
+                    <field id="collapsible_enabled" translate="label comment" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Collapsible Subcategories</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                 </group>
                 <group id="recent_posts" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -644,7 +689,11 @@
                     <field id="posts_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Posts Number</label>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
@@ -669,7 +718,11 @@
                     <field id="posts_ids_grid" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured</frontend_model>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
@@ -690,7 +743,11 @@
                     <field id="posts_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Posts Number</label>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
@@ -710,7 +767,11 @@
                             For more information about the formatting options <a href="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters" target="_blank">click here</a>.
                         ]]></comment>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
@@ -740,10 +801,14 @@
                             <field id="animated">1</field>
                         </depends>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
-                    <field id="tag_count" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="tag_count" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Number of Tags</label>
                     </field>
                 </group>
@@ -759,7 +824,11 @@
                             <field id="enabled">1</field>
                         </depends>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
                 </group>
@@ -769,10 +838,14 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
-                    <field id="html" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="html" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>HTML</label>
                     </field>
                 </group>
@@ -782,10 +855,14 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="sticky" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Sort Order</label>
                     </field>
-                    <field id="html" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="html" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>HTML</label>
                     </field>
                 </group>
@@ -793,6 +870,10 @@
                     <label>Rss Feed</label>
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sticky" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Sticky (Blog Extra)</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="sort_order" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -819,13 +900,23 @@
                     <source_model>Magefan\Blog\Model\Config\Source\RelatedPostTemplate</source_model>
                     <depends>
                         <field id="enabled">1</field>
+                        <field id="related_posts_enabled">1</field>
                     </depends>
                 </field>
-
                 <field id="number_of_related_posts" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Number of Posts</label>
                     <depends>
                         <field id="enabled">1</field>
+                        <field id="related_posts_enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="include_post_rich_snippet" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Include Post Rich Snippet / Structured Data (Blog Plus)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="related_posts_enabled">1</field>
                     </depends>
                 </field>
             </group>
@@ -924,7 +1015,7 @@
                 </field>
                 <field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Permalink Type</label>
-                     <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
+                    <source_model>Magefan\Blog\Model\Config\Source\PermalinkType</source_model>
                 </field>
 
                 <field id="post_route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -1082,9 +1173,11 @@
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="use_social_networks" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="use_social_networks" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Social Networks</label>
                     <source_model>Magefan\Blog\Model\Config\Source\SocialNetworks</source_model>
+                    <frontend_model>Magefan\Blog\Block\Adminhtml\System\Config\Form\SortableMultiselect</frontend_model>
+                    <comment><![CDATA[Reorder items by dragging them with the handle on the left.]]></comment>
                 </field>
             </group>
             <group id="top_menu" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -1165,6 +1258,12 @@
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                 </group>
+            </group>
+            <group id="widgets_info" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Widgets</label>
+                <field id="widgetsInfo" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\WidgetsInfo</frontend_model>
+                </field>
             </group>
         </section>
     </system>

@@ -7,21 +7,18 @@
  */
 
 /**
- * @var $block \Magefan\Blog\Block\ViewsCount
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Post\View\ViewsCount $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  */
 ?>
+<?= $block->getLayout()->createBlock(\Magefan\Community\Block\JsScript::class)->setMethod('sendBeacon')->toHtml() ?>
 <?php $script = "
-    require(['jquery', 'domReady!'], function($){
-        setTimeout(function(){
-            $.ajax({
-                url: atob( '" . base64_encode($block->getCounterUrl()) . "'),
-                type:'POST',
-                dataType: 'json',
-                success: function(response) { }
-            })
-        }, 5000);
-    });
+    setTimeout(function(){
+        MagefanJs.sendBeacon({
+            url: atob( '" . base64_encode($block->getCounterUrl()) . "'),
+            data: {}
+        });
+    }, 5000);
 "; ?>
 <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 

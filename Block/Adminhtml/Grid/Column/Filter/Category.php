@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Filter;
 
@@ -35,6 +36,8 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Filter\Select
     }
 
     /**
+     * Retrieve an array of options for categories.
+     *
      * @return array
      */
     protected function _getOptions()

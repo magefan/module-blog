@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -17,22 +18,22 @@ class ReadingProgressBarPosition implements \Magento\Framework\Option\ArrayInter
     /**
      * @const string
      */
-    const TOP = 'top';
+    private const TOP = 'top';
 
     /**
      * @const string
      */
-    const BOTTOM = 'bottom';
+    private const BOTTOM = 'bottom';
 
     /**
      * @const string
      */
-    const LEFT = 'left';
+    private const LEFT = 'left';
 
     /**
      * @const string
      */
-    const RIGHT = 'right';
+    private const RIGHT = 'right';
 
     /**
      * Options getter
@@ -54,7 +55,7 @@ class ReadingProgressBarPosition implements \Magento\Framework\Option\ArrayInter
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

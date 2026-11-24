@@ -3,6 +3,8 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\TagRepositoryInterface;
@@ -74,6 +76,8 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Retrieve the tag factory instance.
+     *
      * @return TagFactory
      */
     public function getFactory()
@@ -82,6 +86,8 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Save a tag entity to the database.
+     *
      * @param Tag $tag
      * @return bool|mixed
      * @throws CouldNotSaveException
@@ -110,9 +116,11 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
-     * @param $tagId
+     * Retrieve tag by its ID.
+     *
+     * @param int $tagId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
      * @return Tag|mixed
      * @throws NoSuchEntityException
@@ -133,12 +141,14 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Deletes the specified tag.
+     *
      * @param Tag $tag
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Tag $tag)
+    public function delete(Tag $tag): bool
     {
         try {
             $this->tagResourceModel->delete($tag);
@@ -153,19 +163,21 @@ class TagRepository implements TagRepositoryInterface
     }
 
     /**
-     * @param int $tagId
+     * Deletes a tag by its ID.
+     *
+     * @param int|string $tagId
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($tagId)
+    public function deleteById($tagId): bool
     {
         return $this->delete($this->getById($tagId));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
@@ -178,7 +190,7 @@ class TagRepository implements TagRepositoryInterface
         $searchResult = $this->searchResultsFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getData());
+        $searchResult->setItems($collection->getItems());
 
         return $searchResult;
     }

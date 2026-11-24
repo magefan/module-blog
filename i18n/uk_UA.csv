@@ -60,6 +60,7 @@ Tags:,Теги:
 Author:,Аутор:
 "We can't find posts matching the selection.","Ми не можемо знайти жодних публікацій тут."
 "Read more &#187;","Дізнатись більше &#187;"
+"Read more","Дізнатись більше"
 "See more","Дивітся більше"
 "Read %1","Читати %1"
 "&larr; Previous","&larr; Попередня"
@@ -204,3 +205,116 @@ Published,Опубліковано
 "Import from XML","Import from XML"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Так, я прочитав %1 та погодився на обробку моїх особистих даних."
 "privacy policy","політику конфіденційності"
+"New Arrivals","Нові надходження"
+"Blog Posts","Дописи в блозі"
+"Blog Categories","Категорії блогу"
+"Post Contents","Зміст публікації"
+"hide","приховати"
+"show","показати"
+"You May Also Like","Вам також може сподобатися"
+"People Who Bought This Also Bought:","Люди, які купили це, також купили:"
+"and","i"
+"Popular Posts","Популярні публікації"
+"Featured Posts","Рекомендовані публікації"
+"min read","хв читання"
+"Latest From %1","Останнє від %1"
+"Co-author","Співавтор"
+"Author","Автор"
+Add New Comment,Додати новий коментар
+Add New Images,Додати нові зображення
+Add New Tag,Додати новий тег
+Add to Cart,Додати до кошика
+Add to Compare,Додати до порівняння
+Add to Wish List,Додати до списку бажань
+Add With AI,Додати за допомогою ШІ
+Admin,Адміністратор
+AI Writer is not enabled. Please enable it first.,"AI Writer не увімкнений. Будь ласка, спочатку увімкніть його."
+All Authors,Всі автори
+All Blog Pages,Всі сторінки блогу
+All Categories,Всі категорії
+and,та
+Approved,Схвалено
+Archive %1,Архів %1
+Blank (Use widgets to build the page content),Порожній (використовуйте віджети для побудови контенту сторінки)
+Blog Archive Page,Сторінка архіву блогу
+Blog Author Page,Сторінка автора блогу
+Blog Category Page,Сторінка категорії блогу
+Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Blog Plus <b>Розширені налаштування постійних посилань</b> увімкнені.
+Blog Post Page,Сторінка публікації блогу
+Blog Tag Page,Сторінка тегу блогу
+Bottom (Horizontal),Знизу (горизонтально)
+Browse to find or drag image here,Знайдіть або перетягніть зображення сюди
+Cancel,Скасувати
+Category,Категорія
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API Key відсутній у налаштуваннях ""AI Writer""."
+Comments:,Коментарі:
+Customer,Покупець
+Database connection error,Помилка підключення до бази даних
+Default: mystore.com/{blog_route}/{post_route}/post-title/,За замовчуванням: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Видалити зображення
+Disabled,Вимкнено
+Duplicated,Дублювати
+Email,Електронна пошта
+Enabled,Увімкнено
+General Information,Загальна інформація
+Go to Home Page,Перейти на головну сторінку
+Grid - 1 column (Blog Extra),Сітка — 1 колонка (Blog Extra)
+Grid - 2 columns (Blog Extra),Сітка — 2 колонки (Blog Extra)
+Grid - 3 columns (Blog Extra),Сітка — 3 колонки (Blog Extra)
+Grid and List (Blog Extra),Сітка і список (Blog Extra)
+Guest,Гість
+Hidden,Прихований
+Home,Головна
+"Images (.gif, .jpg, .png)","Зображення (.gif, .jpg, .png)"
+Import Tags,Імпортувати теги
+In stock,В наявності
+Leave a review about the blog extension,Залишити відгук про розширення блогу
+Left (Vertical),Зліва (вертикально)
+List (Blog Extra),Список (Blog Extra)
+min read,хв читання
+Month And Year,Місяць і рік
+Need a new blog feature?,Потрібна нова функція для блогу?
+No,Ні
+Not Approved,Не схвалено
+Other Grids (Blog Extra),Інші сітки (Blog Extra)
+Out of stock,Немає в наявності
+Page,Сторінка
+/page/N,/page/N
+?page=N,?page=N
+Pending,Очікує
+Please enter valid email,"Будь ласка, введіть дійсну адресу електронної пошти"
+Please select post IDs,"Будь ласка, оберіть ID публікацій"
+?p=N,?p=N
+Position,Позиція
+Post Id,ID публікації
+Posts (default),Публікації (за замовчуванням)
+Posts Links,Посилання на публікації
+Posts loader,Завантажувач публікацій
+Posts & Subcategories Links,Посилання на публікації та підкатегорії
+Publish Date (default),Дата публікації (за замовчуванням)
+Related Products,Пов'язані продукти
+Requested item doesn't exist,Запитаний елемент не існує
+Right (Vertical),Справа (вертикально)
+Search,Пошук
+Select Post IDs ...,Оберіть ID публікацій...
+Share on %1,Поділитись у %1
+Short: mystore.com/{blog_route}/post-title/,Короткий: mystore.com/{blog_route}/post-title/
+Sign In,Увійти
+Slider (Blog Extra),Слайдер (Blog Extra)
+Something went wrong %1,Щось пішло не так: %1
+Something went wrong while saving the file(s).,Щось пішло не так під час збереження файлу(ів).
+Subcategories Links,Посилання на підкатегорії
+Submit,Відправити
+Tag,Тег
+This option is available in <strong>%1</strong> plan only.,Ця опція доступна лише у плані <strong>%1</strong>.
+This option is available in <strong>Plus or Extra</strong> plans only.,Ця опція доступна лише у планах <strong>Plus або Extra</strong>.
+Title,Заголовок
+Top (Horizontal),Зверху (горизонтально)
+Unable to remove item,Неможливо видалити елемент
+Unable to save item,Неможливо зберегти елемент
+URL key is already in use by another blog item.,URL ключ вже використовується іншим елементом блогу.
+URL key is already in use by another tag item.,URL ключ вже використовується іншим тегом.
+Use Magefan Blog Comments,Використовувати коментарі Magefan Blog
+Views:,Перегляди:
+Year,Рік
+"Last updated:","Останнє оновлення:"

@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Post;
 
 use Magento\Store\Model\ScopeInterface;
@@ -136,27 +138,11 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
     }
 
     /**
-     * Get relevant path to template
-     *
-     * @return string
-     */
-    public function getTemplate()
-    {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/post_view/design/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        if ($template = $this->templatePool->getTemplate('blog_post_view', $templateName)) {
-            $this->_template = $template;
-        }
-        return parent::getTemplate();
-    }
-
-    /**
      * Retrieve 1 if display reading time is enabled
+     *
      * @return int
      */
-    public function readingTimeEnabled()
+    public function readingTimeEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_view/reading_time/enabled',

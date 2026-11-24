@@ -10,35 +10,73 @@
 /**
  * Blog post media gallery images template
  *
- * @var $block \Magefan\Blog\Block\Post\View\Gallery
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Blog\Block\Post\View\Gallery $block
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magefan\Community\Api\BreezeThemeDetectionInterface $mfBreezeThemeDetection;
+ * @var \Magefan\Community\Api\HyvaThemeDetectionInterface $mfHyvaThemeDetection;
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php
     $post = $block->getPost();
     $galleryImages = $post->getGalleryImages();
-    $viewFileUrl = $block->getViewFileUrl("Magefan_Blog::css/jquery.fancybox.min.css");
+
+    $fancyboxCSSFileUrl = $block->getViewFileUrl("Magefan_Blog::css/fancybox.min.css");
+    $fancyboxJSFileUrl = $block->getViewFileUrl("Magefan_Blog/js/fancybox.min.js");
 ?>
 <?php if (count($galleryImages)) { ?>
     <div class="post-gallery clearfix">
         <?php foreach ($galleryImages as $image) { ?>
-            <a class="gallery-image-hld"
-               data-fancybox="gallery"
-               href="<?= $block->escapeUrl($image) ?>"
-               rel="nofollow">
-                <img class="gallery-image" src="<?= $block->escapeUrl($image->resize(200, 133)) ?>" alt="" />
-            </a>
+            <div class="gallery-image-hld"
+                style="cursor: pointer;"
+                data-fancybox="gallery"
+                data-src="<?= $escaper->escapeUrl($image) ?>"
+                rel="fancybox"
+            >
+                <?php
+                    $featuredImage = $image->resize(200, 133, true);
+                    $imageWidthAndHeight = $featuredImage->getWidthAndHeight();
+                    $addWH = !empty($imageWidthAndHeight);
+                ?>
+                <img class="gallery-image" src="<?= $escaper->escapeUrl($featuredImage) ?>" alt=""
+                    <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
+                />
+            </div>
         <?php } ?>
     </div>
-    <?php $script = "
-    require(['jquery', 'domReady!'], function($){
-        /* Deferer fancybox css loading */
-        $('head').append(
-            $(\"<link rel='stylesheet' href='" . $block->escapeUrl($viewFileUrl) . "' type='text/css' media='screen' />\")
-        );
-        /* Deferer fancybox js loading */
-        require(['Magefan_Blog/js/jquery.fancybox.min'], function(){});
-    });
-    "; ?>
+    <?php
+        $script = "
+            var mfBlogInitFancyBoxLoaded = 0;
+
+            var mfFancyObserver = new IntersectionObserver(function (entries, obs) {
+                if (entries[0].isIntersecting && !mfBlogInitFancyBoxLoaded) {
+                    obs.disconnect();
+                    mfBlogInitFancyBoxLoaded = 1;
+
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = '" . $escaper->escapeUrl($fancyboxCSSFileUrl) . "';
+                    document.head.append(link);
+
+                    " . (($mfHyvaThemeDetection->execute() || $mfBreezeThemeDetection->execute())
+                        ? "
+                            const script = document.createElement('script');
+                            script.src = '" . $escaper->escapeUrl($fancyboxJSFileUrl) . "';
+                            document.head.append(script);"
+                        : "require(['Magefan_Blog/js/fancybox.min'], function(){});" ). "
+                }
+            }, { rootMargin: '150px' });
+
+            mfFancyObserver.observe(document.querySelector('.post-gallery'));
+        ";
+    ?>
     <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>
+
+

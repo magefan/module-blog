@@ -112,6 +112,7 @@
         <column xsi:type="mediumtext" name="content" nullable="true" comment="Category Content"/>
         <column xsi:type="varchar" name="path" nullable="true" length="255" comment="Category Path"/>
         <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="false" identity="false" comment="Category Position"/>
+        <column xsi:type="smallint" name="level" padding="6" unsigned="false" nullable="false" identity="false" comment="Level"/>
         <column xsi:type="smallint" name="posts_sort_by" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Post Sort By"/>
         <column xsi:type="smallint" name="include_in_menu" padding="6" unsigned="false" nullable="true" identity="false" comment="Category In Menu"/>
         <column xsi:type="varchar" name="include_in_sidebar_tree" nullable="true" length="255" default="1" comment="Category In Sidebar Tree"/>
@@ -126,6 +127,7 @@
         <column xsi:type="date" name="custom_theme_to" comment="Post Custom Theme Active To Date"/>
         <column xsi:type="int" name="posts_per_page" padding="11" unsigned="false" nullable="true" identity="false" comment="Posts Per Page"/>
         <column xsi:type="varchar" name="posts_list_template" nullable="true" length="100" comment="Posts List Template"/>
+        <column xsi:type="varchar" name="secret" nullable="true" length="32" comment="Category Secret"/>
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
           <column name="category_id"/>
@@ -252,6 +254,7 @@
         <column xsi:type="date" name="custom_theme_to" comment="Tag Custom Theme Active To Date"/>
         <column xsi:type="int" name="posts_per_page" padding="11" unsigned="false" nullable="true" identity="false" comment="Posts Per Page"/>
         <column xsi:type="varchar" name="posts_list_template" nullable="true" length="100" comment="Posts List Template"/>
+        <column xsi:type="varchar" name="secret" nullable="true" length="32" comment="Tag Secret"/>
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
           <column name="tag_id"/>

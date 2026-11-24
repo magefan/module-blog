@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View\Comments;
 
@@ -90,6 +91,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     /**
      * Retrieve comment html
      *
+     * @param \Magefan\Blog\Model\Comment $comment
      * @return string
      */
     public function getCommentHtml(\Magefan\Blog\Model\Comment $comment)
@@ -130,6 +132,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
 
     /**
      * Retrieve customer session
+     *
      * @return \Magento\Customer\Model\Session
      */
     public function getCustomerSession()
@@ -139,6 +142,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
 
     /**
      * Retrieve customer url model
+     *
      * @return \Magento\Customer\Model\Url
      */
     public function getCustomerUrl()
@@ -151,7 +155,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
      *
      * @return string
      */
-    public function canPost()
+    public function canPost(): bool
     {
         return $this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::GUEST_COMMENT,
@@ -162,11 +166,11 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     /**
      * Retrieve number of comments to display
      *
-     * @return string
+     * @return int
      */
-    public function getNumberOfComments()
+    public function getNumberOfComments(): int
     {
-        return $this->_scopeConfig->getValue(
+        return (int)$this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::NUMBER_OF_COMMENTS,
             ScopeInterface::SCOPE_STORE
         );
@@ -174,6 +178,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
 
     /**
      * Retrieve form url
+     *
      * @return string
      */
     public function getFormUrl()
@@ -190,6 +195,7 @@ class Magefan extends \Magefan\Blog\Block\Post\View\Comments implements \Magento
     {
         $identities = [];
         foreach ($this->getCommentsCollection() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

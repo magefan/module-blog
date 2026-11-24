@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Controller\Category;
 
 /**
@@ -13,8 +15,6 @@ namespace Magefan\Blog\Controller\Category;
 class View extends \Magefan\Blog\App\Action\Action
 {
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -84,8 +84,13 @@ class View extends \Magefan\Blog\App\Action\Action
 
         $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);
 
-        if (!$category->isVisibleOnStore($storeId)) {
+        $isValidSecret = $this->isValidSecret($category);
+        if (!$category->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
+        }
+
+        if ($isValidSecret) {
+            $category->setIsPreviewMode(true);
         }
 
         $category->setStoreId($storeId);

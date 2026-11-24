@@ -32,14 +32,14 @@ Blog,Blog
 "Nothing to import.","Niets om te Importeren."
 "Can not make import.","Kan niet Importeren."
 "Something went wrong: ","Er is iets mis gegaan: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Vul uw naam en e-mailadres in"
 "Blog Import from WordPress","Blog Importeren vanaf WordPress"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","De commentaartekst is te kort."
 "Please select","Selecteer"
 "Use Facebook Comments","Gebruik Facebook Comments"
 "Use Disqus Comments","Gebruik Disqus Comments"
 "Use Google Comments","Gebruik Google Comments"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Uitgelichte Blogberichten"
 "Yes (With auto trigger)","Ja (Met auto trigger)"
 "Yes (Without auto trigger)","Ja (Zonder auto trigger)"
 "Parameter %1 is required","Parameter %1 is verplicht"
@@ -57,7 +57,7 @@ Categories:,Categorieën:
 Tags:,Tags:
 Author:,Auteur:
 "We can't find posts matching the selection.","We kunnen geen berichten vinden die overeen komen met deze selectie."
-"Read more","Read more"
+"Read more","Lees meer"
 "Read more &#187;","Lees meer &#187;"
 "See more","Bekijk meer"
 "Read %1","Lees %1"
@@ -72,7 +72,7 @@ Archive,Archief
 "RSS Feed","RSS Feed"
 "Search posts here...","Zoek Bericht Hier…"
 Tags,Tags
-"Read more >","Read more >"
+"Read more >","Lees meer >"
 "MageFan Extensions","MageFan Extensions"
 "Blog Information","Blog Informatie"
 "Blog Index Page","Blog Index Pagina"
@@ -204,3 +204,142 @@ Published,Gepubliceerd
 "Import from XML","Import from XML"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Yes, I have read the %1 and agree to the processing of my personal data."
 "privacy policy","privacy policy"
+"New Arrivals","Nieuwe artikelen"
+"Blog Posts","Blogberichten"
+"Blog Categories","Blogcategorieën"
+"Post Contents","Berichtinhoud"
+"hide","verbergen"
+"show","show"
+"You May Also Like","Dit vind je misschien ook interessant"
+"People Who Bought This Also Bought:","Mensen die dit kochten, kochten ook:"
+"and","En"
+"Popular Posts","Populaire berichten"
+"Featured Posts","Featured Posts"
+"min read","min leestijd"
+"Latest From %1","Laatste van %1"
+"Co-author","Medeauteur"
+"Author","Auteur"
+"Reply","Beantwoorden"
+"Show more replies in this thread","Toon meer antwoorden in deze thread"
+"%1 Comment(s)","%1 Reactie(s)"
+"Add a comment...","Voeg een reactie toe..."
+"Add a reply...","Voeg een antwoord toe..."
+"Sign in to add a comment...","Log in om een reactie toe te voegen..."
+"Sign in to add a reply...","Log in om een antwoord toe te voegen..."
+"Full Name","Volledige Naam"
+"Load more comments","Meer reacties laden"
+"Login to submit comment","Log in om een reactie te plaatsen"
+"You cannot post comment. Blog post is not longer exist.","Je kunt geen reactie plaatsen. Dit blogbericht bestaat niet meer."
+"You cannot reply to this comment. Comment is not longer exist.","Je kunt niet antwoorden op deze reactie. De reactie bestaat niet meer."
+"You cannot reply to this comment.","Je kunt niet antwoorden op deze reactie."
+"You submitted your comment for moderation.","Je reactie is ingediend voor moderatie."
+"Thank you for your comment.","Bedankt voor je reactie."
+"Import Categories","Categorieën Importeren"
+"Import Comments","Reacties Importeren"
+"Import Posts","Berichten Importeren"
+"Import from aheadWorks Blog Extension","Importeren vanuit aheadWorks Blog Extensie"
+"Import from Joomla","Importeren vanuit Joomla"
+"Import from Blogger.com","Importeren vanuit Blogger.com"
+"Import from Drupal","Importeren vanuit Drupal"
+"Import from CSV","Importeren vanuit CSV"
+"Import from XML","Importeren vanuit XML"
+"Yes, I have read the %1 and agree to the processing of my personal data.","Ja, ik heb %1 gelezen en ga akkoord met de verwerking van mijn persoonsgegevens."
+"privacy policy","privacybeleid"
+Add New Comment,Nieuwe Reactie Toevoegen
+Add New Images,Nieuwe Afbeeldingen Toevoegen
+Add New Tag,Nieuwe Tag Toevoegen
+Add to Cart,Toevoegen aan Winkelwagen
+Add to Compare,Toevoegen aan Vergelijking
+Add to Wish List,Toevoegen aan Verlanglijst
+Add With AI,Toevoegen met AI
+Admin,Admin
+AI Writer is not enabled. Please enable it first.,AI Writer is niet ingeschakeld. Schakel het eerst in.
+All Authors,Alle Auteurs
+All Blog Pages,Alle Blogpagina's
+All Categories,Alle Categorieën
+and,en
+Approved,Goedgekeurd
+Archive %1,Archief %1
+Blank (Use widgets to build the page content),Leeg (Gebruik widgets om de pagina-inhoud op te bouwen)
+Blog Archive Page,Blog Archiefpagina
+Blog Author Page,Blog Auteurspagina
+Blog Category Page,Blog Categoriepagina
+Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Blog Plus <b>Geavanceerde Permalink Instellingen</b> zijn ingeschakeld.
+Blog Post Page,Blog Berichtpagina
+Blog Tag Page,Blog Tagpagina
+Bottom (Horizontal),Onder (Horizontaal)
+Browse to find or drag image here,Blader om te zoeken of sleep afbeelding hier
+Cancel,Annuleren
+Categories,Categorieën
+Category,Categorie
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API-sleutel ontbreekt in ""AI Writer"" configuraties."
+Comments:,Reacties:
+Customer,Klant
+Database connection error,Databaseverbindingsfout
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Default: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Afbeelding verwijderen
+Disabled,Uitgeschakeld
+Duplicated,Gedupliceerd
+Email,Email
+Enabled,Ingeschakeld
+General Information,Algemene Informatie
+Go to Home Page,Ga naar Startpagina
+Grid - 1 column (Blog Extra),Raster - 1 kolom (Blog Extra)
+Grid - 2 columns (Blog Extra),Raster - 2 kolommen (Blog Extra)
+Grid - 3 columns (Blog Extra),Raster - 3 kolommen (Blog Extra)
+Grid and List (Blog Extra),Raster en Lijst (Blog Extra)
+Guest,Gast
+Hidden,Verborgen
+Home,Startpagina
+"Images (.gif, .jpg, .png)","Afbeeldingen (.gif, .jpg, .png)"
+Import Tags,Tags Importeren
+In stock,Op voorraad
+Leave a review about the blog extension,Laat een beoordeling achter over de blogextensie
+Left (Vertical),Links (Verticaal)
+List (Blog Extra),Lijst (Blog Extra)
+min read,min lezen
+Month And Year,Maand en Jaar
+Need a new blog feature?,Heb je een nieuwe blogfunctie nodig?
+No,Nee
+Not Approved,Niet Goedgekeurd
+Other Grids (Blog Extra),Andere Rasters (Blog Extra)
+Out of stock,Niet op voorraad
+Page,Pagina
+/page/N,/page/N
+?page=N,?page=N
+Pending,In behandeling
+Please enter valid email,Voer een geldig e-mailadres in
+Please select post IDs,Selecteer bericht-ID's
+?p=N,?p=N
+Position,Positie
+Post Id,Bericht-ID
+Posts (default),Berichten (standaard)
+Posts Links,Berichtenlinks
+Posts loader,Berichtenlader
+Posts & Subcategories Links,Berichten & Subcategorieënlinks
+Publish Date (default),Publicatiedatum (standaard)
+Requested item doesn't exist,Het gevraagde item bestaat niet
+Right (Vertical),Rechts (Verticaal)
+Search,Zoeken
+Select Post IDs ...,Selecteer Bericht-ID's ...
+Share on %1,Delen op %1
+Short: mystore.com/{blog_route}/post-title/,Short: mystore.com/{blog_route}/post-title/
+Sign In,Inloggen
+Slider (Blog Extra),Slider (Blog Extra)
+Something went wrong %1,Er is iets misgegaan %1
+Something went wrong while saving the file(s).,Er is iets misgegaan bij het opslaan van het/de bestand(en).
+Subcategories Links,Subcategorieënlinks
+Submit,Verzenden
+Tag,Tag
+This option is available in <strong>%1</strong> plan only.,Deze optie is alleen beschikbaar in het <strong>%1</strong> plan.
+This option is available in <strong>Plus or Extra</strong> plans only.,Deze optie is alleen beschikbaar in de <strong>Plus of Extra</strong> plannen.
+Title,Titel
+Top (Horizontal),Boven (Horizontaal)
+Unable to remove item,Item kan niet worden verwijderd
+Unable to save item,Item kan niet worden opgeslagen
+URL key is already in use by another blog item.,URL-sleutel is al in gebruik door een ander blogitem.
+URL key is already in use by another tag item.,URL-sleutel is al in gebruik door een ander tagitem.
+Use Magefan Blog Comments,Gebruik Magefan Blog Reacties
+Views:,Weergaven:
+Year,Jaar
+"Last updated:","Laatst bijgewerkt:"

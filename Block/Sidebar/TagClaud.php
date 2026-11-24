@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
@@ -20,10 +21,10 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     /**
      * Path to tag cloud 3D animation configuration
      */
-    const ANIMATED_ENABLED = 'mfblog/sidebar/tag_claud/animated';
-    const TEXT_HIGHLIGHT_COLOR = 'mfblog/sidebar/tag_claud/text_highlight_color';
-    const CLOUD_HEIGHT = 'mfblog/sidebar/tag_claud/cloud_height';
-    const TAG_COUNT = 'mfblog/sidebar/tag_claud/tag_count';
+    public const ANIMATED_ENABLED = 'animated';
+    public const TEXT_HIGHLIGHT_COLOR = 'text_highlight_color';
+    public const CLOUD_HEIGHT = 'cloud_height';
+    public const TAG_COUNT = 'tag_count';
 
     /**
      * @var string
@@ -49,7 +50,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
      * Construct
      *
      * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $_tagCollectionFactory
+     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
      * @param array $data
      */
     public function __construct(
@@ -63,6 +64,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve tags
+     *
      * @return array
      */
     public function getTags()
@@ -103,6 +105,7 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve max tag number
+     *
      * @return array
      */
     public function getMaxCount()
@@ -121,9 +124,11 @@ class TagClaud extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve tag class
-     * @return array
+     *
+     * @param mixed $tag
+     * @return string
      */
-    public function getTagClass($tag)
+    public function getTagClass($tag): string
     {
         $maxCount = $this->getMaxCount();
         $percent = floor(($tag->getCount() / $maxCount) * 100);
@@ -144,15 +149,8 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @param $path
-     * @return mixed
-     */
-    public function getConfigValue($path)
-    {
-        return $this->_scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-    }
-
-    /**
+     * Prepare layout
+     *
      * @return $this|\Magento\Framework\View\Element\Template
      */
     protected function _prepareLayout()
@@ -167,6 +165,8 @@ class TagClaud extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get animation config
+     *
      * @return false|string
      */
     public function getAnimationConfig()
@@ -190,5 +190,15 @@ class TagClaud extends \Magento\Framework\View\Element\Template
         }
 
         return json_encode($data);
+    }
+
+    /**
+     * Get cloud height
+     *
+     * @return mixed
+     */
+    public function getCloudHeight()
+    {
+        return $this->getConfigValue(self::CLOUD_HEIGHT);
     }
 }

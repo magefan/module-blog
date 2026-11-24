@@ -3,6 +3,8 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\PostRepositoryInterface;
@@ -74,6 +76,8 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
+     * Retrieve the post factory instance.
+     *
      * @return PostFactory
      */
     public function getFactory()
@@ -82,6 +86,8 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
+     * Save the provided post.
+     *
      * @param Post $post
      * @return bool|mixed
      * @throws CouldNotSaveException
@@ -110,12 +116,14 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
-     * @param $postId
+     * Retrieve post by its ID.
+     *
+     * @param int|string $postId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
-     * @return mixed
-     * @throws NoSuchEntityException
+     * @return \Magefan\Blog\Model\Post
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($postId, $editMode = false, $storeId = null, $forceReload = false)
     {
@@ -134,12 +142,14 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
+     * Delete a post.
+     *
      * @param Post $post
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Post $post)
+    public function delete(Post $post): bool
     {
         try {
             $this->postResourceModel->delete($post);
@@ -154,19 +164,18 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
-     * @param $postId
-     * @return bool|mixed
-     * @throws CouldNotDeleteException
-     * @throws NoSuchEntityException
-     * @throws StateException
+     * Deletes an entity by its ID.
+     *
+     * @param int|string $postId
+     * @return bool
      */
-    public function deleteById($postId)
+    public function deleteById($postId): bool
     {
         return $this->delete($this->getById($postId));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
@@ -179,7 +188,7 @@ class PostRepository implements PostRepositoryInterface
         $searchResult = $this->searchResultsFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getData());
+        $searchResult->setItems($collection->getItems());
 
         return $searchResult;
     }

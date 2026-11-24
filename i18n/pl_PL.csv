@@ -31,20 +31,20 @@
 "Nothing to import.","Nie ma nic do zaimportowania."
 "Can not make import.","Nie można dokonać importu."
 "Something went wrong: ","Coś poszło nie tak: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Proszę wpisać swoje imię i adres e-mail"
 "Blog Import from WordPress","Import bloga z WordPress"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Tekst komentarza jest zbyt krótki."
 "Please select","Proszę wybrać"
 "Use Facebook Comments","Użyj komentarzy Facebooka"
 "Use Disqus Comments","Użyj komentarzy Disqus"
 "Use Google Comments","Użyj komentarzy Google"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Polecane wpisy na blogu"
 "Yes (With auto trigger)","Tak (z automatycznym wyzwalaniem)"
 "Yes (Without auto trigger)","Tak (bez automatycznego wyzwalania)"
 "Parameter %1 is required","Wymagany jest parametr %1"
 "AheadWorks Blog Extension not detected.","Nie wykryto rozszerzenia bloga AheadWorks."
 "The category URL key contains disallowed symbols.","Klucz adresu URL kategorii zawiera niedozwolone symbole."
-"The category URL key cannot be made of only numbers.","The category URL key cannot be made of only numbers."
+"The category URL key cannot be made of only numbers.","Klucz adresu URL kategorii nie może składać się tylko z liczb."
 "The post URL key contains disallowed symbols.","Klucz adresu URL posta zawiera niedozwolone symbole."
 "The post URL key cannot be made of only numbers.","Klucz adresu URL posta nie może składać się tylko z liczb."
 "The tag is already exist.","Tag już istnieje."
@@ -61,14 +61,14 @@
 "Read %1","Czytaj %1"
 "&larr; Previous","&larr; Poprzedni"
 "Next &rarr;","Następny &rarr;"
-"Next","Next"
+"Next","Następny"
 "Archive","Archiwum"
 "Archive %s","Archiwizuj %s"
 "Recent Posts","Najnowsze posty"
 "RSS Feed","kanał RSS"
 "Search posts here...","Szukaj postów tutaj..."
 "Tags","Tagi"
-"Read more >","Read more >"
+"Read more >","Czytaj więcej >"
 "MageFan Extensions","Rozszerzenia MageFan"
 "Blog Information","Informacje o blogu"
 "Blog Index Page","Strona Indeksu bloga"
@@ -243,3 +243,112 @@
 "Default Short Content Length", "Domyślna długość krótkiej zawartości"
 "Featured Image Alt", "Alt wyróżnionego zdjęcia"
 "Include in Recent Posts", "Uwzględnij w ostatnich postach"
+"New Arrivals","Nowości"
+"Blog Posts","Wpisy na blogu"
+"Blog Categories","Kategorie blogów"
+"Post Contents","Treść posta"
+"hide","ukrywać"
+"show","pokazywać"
+"You May Also Like","Może Ci się też spodobać"
+"People Who Bought This Also Bought:","Osoby, które kupiły ten produkt, kupiły również:"
+"and","i"
+"Popular Posts","Popularne posty"
+"Featured Posts","Polecane posty"
+"min read","min czytania"
+"Latest From %1","Najnowsze z %1"
+"Co-author","Współautor"
+Add New Comment,Dodaj nowy komentarz
+Add New Images,Dodaj nowe obrazy
+Add New Tag,Dodaj nowy tag
+Add to Cart,Dodaj do koszyka
+Add to Compare,Dodaj do porównania
+Add to Wish List,Dodaj do listy życzeń
+Add With AI,Dodaj z AI
+Admin,Administrator
+AI Writer is not enabled. Please enable it first.,AI Writer nie jest włączony. Najpierw go włącz.
+All Authors,Wszyscy autorzy
+All Blog Pages,Wszystkie strony bloga
+All Categories,Wszystkie kategorie
+and,i
+Approved,Zatwierdzone
+Archive %1,Archiwum %1
+Blank (Use widgets to build the page content),Pusty (Użyj widgetów do budowania treści strony)
+Blog Archive Page,Strona archiwum bloga
+Blog Author Page,Strona autora bloga
+Blog Category Page,Strona kategorii bloga
+"Blog Plus <b>Advanced Permalink Settings</b> are enabled.","Blog Plus <b>Zaawansowane ustawienia linków bezpośrednich</b> są włączone."
+Blog Post Page,Strona wpisu bloga
+Blog Tag Page,Strona tagu bloga
+Bottom (Horizontal),Dół (Poziomo)
+Browse to find or drag image here,Przeglądaj lub przeciągnij obraz tutaj
+Cancel,Anuluj
+Category,Kategoria
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Klucz API Chat-GPT brakuje w konfiguracjach ""AI Writer""."
+Comments:,Komentarze:
+Customer,Klient
+Database connection error,Błąd połączenia z bazą danych
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Domyślnie: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Usuń obraz
+Disabled,Wyłączone
+Duplicated,Zduplikowane
+Email,E-mail
+Enabled,Włączone
+General Information,Informacje ogólne
+Go to Home Page,Idź do strony głównej
+Grid - 1 column (Blog Extra),Siatka - 1 kolumna (Blog Extra)
+Grid - 2 columns (Blog Extra),Siatka - 2 kolumny (Blog Extra)
+Grid - 3 columns (Blog Extra),Siatka - 3 kolumny (Blog Extra)
+Grid and List (Blog Extra),Siatka i lista (Blog Extra)
+Guest,Gość
+Hidden,Ukryte
+Home,Strona główna
+"Images (.gif, .jpg, .png)","Obrazy (.gif, .jpg, .png)"
+Import Tags,Importuj tagi
+In stock,W magazynie
+Leave a review about the blog extension,Zostaw recenzję o rozszerzeniu bloga
+Left (Vertical),Lewa (Pionowo)
+List (Blog Extra),Lista (Blog Extra)
+min read,min czytania
+Month And Year,Miesiąc i rok
+Need a new blog feature?,Potrzebujesz nowej funkcji bloga?
+No,Nie
+Not Approved,Niezatwierdzone
+Other Grids (Blog Extra),Inne siatki (Blog Extra)
+Out of stock,Brak w magazynie
+Page,Strona
+/page/N,/page/N
+?page=N,?page=N
+Pending,Oczekujące
+Please enter valid email,Proszę wpisać prawidłowy adres e-mail
+Please select post IDs,Proszę wybrać ID wpisów
+?p=N,?p=N
+Position,Pozycja
+Post Id,ID wpisu
+Posts (default),Wpisy (domyślne)
+Posts Links,Linki do wpisów
+Posts loader,Ładowarka wpisów
+Posts & Subcategories Links,Wpisy i linki do podkategorii
+Publish Date (default),Data publikacji (domyślna)
+Requested item doesn't exist,Żądany element nie istnieje
+Right (Vertical),Prawa (Pionowo)
+Search,Szukaj
+Select Post IDs ...,Wybierz ID wpisów ...
+Share on %1,Udostępnij na %1
+Short: mystore.com/{blog_route}/post-title/,Krótki: mystore.com/{blog_route}/post-title/
+Slider (Blog Extra),Suwak (Blog Extra)
+Something went wrong %1,Coś poszło nie tak %1
+Something went wrong while saving the file(s).,Coś poszło nie tak podczas zapisywania pliku(ów).
+Subcategories Links,Linki do podkategorii
+Tag,Tag
+"This option is available in <strong>%1</strong> plan only.","Ta opcja jest dostępna tylko w planie <strong>%1</strong>."
+"This option is available in <strong>Plus or Extra</strong> plans only.","Ta opcja jest dostępna tylko w planach <strong>Plus lub Extra</strong>."
+Title,Tytuł
+Top (Horizontal),Góra (Poziomo)
+Unable to remove item,Nie można usunąć elementu
+Unable to save item,Nie można zapisać elementu
+URL key is already in use by another blog item.,Klucz URL jest już używany przez inny element bloga.
+URL key is already in use by another tag item.,Klucz URL jest już używany przez inny element tagu.
+Use Magefan Blog Comments,Używaj komentarzy Magefan Blog
+Views:,Wyświetlenia:
+Year,Rok
+"Last updated:","Ostatnia aktualizacja:"

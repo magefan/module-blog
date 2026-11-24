@@ -5,9 +5,11 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
 
 /**
@@ -73,7 +75,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     /**
      * blog cache comment
      */
-    const CACHE_TAG = 'mfb_co';
+    public const CACHE_TAG = 'mfblog_co';
 
     /**
      * Initialize dependencies.
@@ -131,28 +133,32 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve model title
+     *
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Comments' : 'Comment';
     }
 
     /**
      * Retrieve true if post is active
+     *
      * @return boolean [description]
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getStatus() == \Magefan\Blog\Model\Config\Source\CommentStatus::APPROVED);
     }
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int|null $storeId
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->isActive()
             && (null === $storeId || array_intersect([0, $storeId], [$this->getStoreId()]));
@@ -160,6 +166,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve post
+     *
      * @return \Magefan\Blog\Model\Post | false
      */
     public function getPost()
@@ -179,6 +186,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve author
+     *
      * @return \\Magento\Framework\DataObject
      */
     public function getAuthor()
@@ -232,6 +240,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve parent comment
+     *
      * @return self || false
      */
     public function getParentComment()
@@ -253,6 +262,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve child comments
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
      */
     public function getChildComments()
@@ -267,26 +277,29 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
 
     /**
      * Retrieve true if comment is reply to other comment
+     *
      * @return boolean
      */
-    public function isReply()
+    public function isReply(): bool
     {
         return (bool)$this->getParentId();
     }
 
     /**
      * Validate comment
+     *
      * @return void
      */
-    public function validate()
+    public function validate(): void
     {
-        if (mb_strlen($this->getText()) < 3) {
-            throw new \Exception(__('Comment text is too short.'), 1);
+        if (mb_strlen((string)$this->getText() ?: '') < 3) {
+            throw new \Magento\Framework\Exception\LocalizedException(__('Comment text is too short.'));
         }
     }
 
     /**
      * Retrieve post publish date using format
+     *
      * @param  string $format
      * @return string
      */
@@ -299,6 +312,8 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
+     * Retrieve the collection of replies for the current comment
+     *
      * @return array|ResourceModel\Comment\Collection
      */
     public function getRepliesCollection()
@@ -321,24 +336,19 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
-     * @param null $fields
+     * Prepare all additional data
+     *
+     * @param array|null $fields
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {
-        $data = $this->getData();
-
-        if (is_array($fields) && array_key_exists('replies', $fields)) {
-            $replies = [];
-            foreach ($this->getRepliesCollection() as $reply) {
-                $replies[] = $reply->getDynamicData(
-                    isset($fields['replies']) ? $fields['replies'] : null
-                );
-            }
-            $data['replies'] = $replies;
-        }
-
-        return $data;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Comment::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Comment::getDynamicData instead.'
+        ));
     }
 }

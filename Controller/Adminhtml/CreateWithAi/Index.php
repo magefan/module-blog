@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Magefan\Blog\Controller\Adminhtml\CreateWithAi;
 
 use Magefan\Blog\Model\Config;
+use Magefan\Community\Api\GetModuleVersionInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\View\Result\PageFactory;
@@ -20,7 +21,8 @@ class Index extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magefan_Blog::post_save';
+    public const ADMIN_RESOURCE = 'Magefan_Blog::post_save';
+
     /**
      * @var string
      */
@@ -37,17 +39,25 @@ class Index extends \Magento\Backend\App\Action
     private $config;
 
     /**
+     * @var GetModuleVersionInterface
+     */
+    private $getModuleVersion;
+
+    /**
      * @param PageFactory $resultPageFactory
      * @param Config $config
      * @param Context $context
+     * @param GetModuleVersionInterface $getModuleVersion
      */
     public function __construct(
         PageFactory $resultPageFactory,
         Config $config,
-        Context $context
+        Context $context,
+        GetModuleVersionInterface $getModuleVersion
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->config = $config;
+        $this->getModuleVersion = $getModuleVersion;
         parent::__construct($context);
     }
 
@@ -58,6 +68,14 @@ class Index extends \Magento\Backend\App\Action
      */
     public function execute()
     {
+        if (!$this->getModuleVersion->execute('Magefan_BlogExtra')) {
+            $resultPage = $this->resultPageFactory->create();
+            $resultPage->addHandle('blog_promo_aiwriter');
+            $resultPage->setActiveMenu('Magefan_Blog::post');
+            $resultPage->getConfig()->getTitle()->prepend(__('New Post With AI'));
+            return $resultPage;
+        }
+
         if (!$this->config->getConfig('mfblog/ai_writer/enabled_ai_writer')) {
             $this->messageManager->addErrorMessage(__('AI Writer is not enabled. Please enable it first.'));
             $this->_redirect('adminhtml/system_config/edit/section/mfblog');

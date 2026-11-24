@@ -10,6 +10,8 @@ namespace Magefan\Blog\Block\Adminhtml\System\Config\Form\Featured;
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
     /**
+     * Prepare form
+     *
      * @return \Magento\Backend\Block\Widget\Form\Generic
      * @throws \Magento\Framework\Exception\LocalizedException
      */

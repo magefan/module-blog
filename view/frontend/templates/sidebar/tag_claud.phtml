@@ -10,23 +10,29 @@
 /**
  * Blog tag claud sidebar template
  *
- * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
+ * @var \Magefan\Blog\Block\Sidebar\TagClaud $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php $tags = $block->getTags(); ?>
 
 <?php if (count($tags)) { ?>
 <div class="widget block block-tagclaud" data-bind="scope: 'tagclaud'">
     <div class="block-title">
-        <strong><?= $block->escapeHtml(__('Tags')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__('Tags')) ?></strong>
     </div>
 
     <div class="tagclaud-hld">
     <?php foreach ($tags as $tag) { ?>
         <?php $title = $tag->getTitle() ?>
-        <span class="<?= $block->escapeHtml($block->getTagClass($tag)) ?>">
-            <a href="<?= $block->escapeUrl($tag->getTagUrl()) ?>" title="<?= $block->escapeHtml($title) ?>">
-                <?= $block->escapeHtml($title) ?>
+        <span class="<?= $escaper->escapeHtml($block->getTagClass($tag)) ?>">
+            <a href="<?= $escaper->escapeUrl($tag->getTagUrl()) ?>" title="<?= $escaper->escapeHtml($title) ?>">
+                <?= $escaper->escapeHtml($title) ?>
             </a>
         </span>
     <?php } ?>

@@ -32,14 +32,14 @@ Blog,Blog
 "Nothing to import.","Nichts zu importieren."
 "Can not make import.","Import nicht möglich."
 "Something went wrong: ","Etwas ist schiefgelaufen: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse ein"
 "Blog Import from WordPress","Blog-Import von WordPress"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Der Kommentartext ist zu kurz."
 "Please select","Bitte auswählen"
 "Use Facebook Comments","Facebook-Kommentare verwenden"
 "Use Disqus Comments","Disqus-Kommentare verwenden"
 "Use Google Comments","Google-Kommentare verwenden"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Empfohlene Blogbeiträge"
 "Yes (With auto trigger)","Ja (mit automatischem Trigger)"
 "Yes (Without auto trigger)","Ja (ohne automatischen Trigger)"
 "Parameter %1 is required","Parameter %1 ist erforderlich"
@@ -58,7 +58,7 @@ Tags:,Tags:
 "Read more >","Read more >"
 Author:,Autor:
 "We can't find posts matching the selection.","Wir können keine Posts finden, die der Auswahl entsprechen."
-"Read more","Read more"
+"Read more","Mehr lesen"
 "Read more &#187;","Mehr lesen &#187;"
 "See more","Mehr anzeigen"
 "Read %1","%1 lesen"
@@ -204,3 +204,116 @@ Published,Veröffentlicht
 "Import from XML","Aus XML importieren"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Ja, ich habe die %1 gelesen und stimme der Verarbeitung meiner persönlichen Daten zu."
 "privacy policy","Datenschutzbestimmungen"
+"New Arrivals","Neu eingetroffen"
+"Blog Posts","Blogbeiträge"
+"Blog Categories","Blog-Kategorien"
+"Post Contents","Inhalt des Beitrags"
+"hide","verstecken"
+"show","zeigen"
+"You May Also Like","Das könnte Ihnen auch gefallen"
+"People Who Bought This Also Bought:","Kunden, die diesen Artikel gekauft haben, kauften auch:"
+"and","Und"
+"Popular Posts","Beliebte Beiträge"
+"Featured Posts","Ausgewählte Beiträge"
+"min read","Minuten Lesezeit"
+"Latest From %1","Neuestes von %1"
+"Co-author","Mitverfasser"
+"Author","Autor"
+Add New Comment,Neuen Kommentar hinzufügen
+Add New Images,Neue Bilder hinzufügen
+Add New Tag,Neuen Tag hinzufügen
+Add to Cart,In den Warenkorb
+Add to Compare,Zum Vergleich hinzufügen
+Add to Wish List,Zur Wunschliste hinzufügen
+Add With AI,Mit KI hinzufügen
+Admin,Administrator
+AI Writer is not enabled. Please enable it first.,KI-Autor ist nicht aktiviert. Bitte zuerst aktivieren.
+All Authors,Alle Autoren
+All Blog Pages,Alle Blog-Seiten
+All Categories,Alle Kategorien
+and,und
+Approved,Genehmigt
+Archive %1,Archiv %1
+Blank (Use widgets to build the page content),Leer (Widgets verwenden um den Seiteninhalt zu erstellen)
+Blog Archive Page,Blog-Archivseite
+Blog Author Page,Blog-Autorenseite
+Blog Category Page,Blog-Kategorieseite
+"Blog Plus <b>Advanced Permalink Settings</b> are enabled.","Blog Plus <b>Erweiterte Permalink-Einstellungen</b> sind aktiviert."
+Blog Post Page,Blog-Beitragsseite
+Blog Tag Page,Blog-Tag-Seite
+Bottom (Horizontal),Unten (Horizontal)
+Browse to find or drag image here,Suchen oder Bild hier ablegen
+Cancel,Abbrechen
+Categories,Kategorien
+Category,Kategorie
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API-Schlüssel fehlt in den ""KI-Autor""-Konfigurationen."
+Comments:,Kommentare:
+Customer,Kunde
+Database connection error,Datenbankverbindungsfehler
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Standard: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Bild löschen
+Disabled,Deaktiviert
+Duplicated,Dupliziert
+Email,E-Mail
+Enabled,Aktiviert
+General Information,Allgemeine Informationen
+Go to Home Page,Zur Startseite gehen
+Grid - 1 column (Blog Extra),Raster - 1 Spalte (Blog Extra)
+Grid - 2 columns (Blog Extra),Raster - 2 Spalten (Blog Extra)
+Grid - 3 columns (Blog Extra),Raster - 3 Spalten (Blog Extra)
+Grid and List (Blog Extra),Raster und Liste (Blog Extra)
+Guest,Gast
+Hidden,Ausgeblendet
+Home,Startseite
+"Images (.gif, .jpg, .png)","Bilder (.gif, .jpg, .png)"
+Import Tags,Tags importieren
+In stock,Auf Lager
+Leave a review about the blog extension,Bewertung zur Blog-Erweiterung abgeben
+Left (Vertical),Links (Vertikal)
+List (Blog Extra),Liste (Blog Extra)
+min read,Min. Lesezeit
+Month And Year,Monat und Jahr
+Need a new blog feature?,Brauchen Sie eine neue Blog-Funktion?
+No,Nein
+Not Approved,Nicht genehmigt
+Other Grids (Blog Extra),Andere Raster (Blog Extra)
+Out of stock,Nicht auf Lager
+Page,Seite
+/page/N,/page/N
+?page=N,?page=N
+Pending,Ausstehend
+Please enter valid email,Bitte gültige E-Mail-Adresse eingeben
+Please select post IDs,Bitte Post-IDs auswählen
+?p=N,?p=N
+Position,Position
+Post Id,Post-ID
+Posts (default),Posts (Standard)
+Posts Links,Post-Links
+Posts loader,Posts-Lader
+Posts & Subcategories Links,Posts & Unterkategorie-Links
+Publish Date (default),Veröffentlichungsdatum (Standard)
+Requested item doesn't exist,Das angeforderte Element existiert nicht
+Right (Vertical),Rechts (Vertikal)
+Search,Suche
+Select Post IDs ...,Post-IDs auswählen ...
+Share on %1,Auf %1 teilen
+Short: mystore.com/{blog_route}/post-title/,Kurz: mystore.com/{blog_route}/post-title/
+Sign In,Anmelden
+Slider (Blog Extra),Schieberegler (Blog Extra)
+Something went wrong %1,Etwas ist schiefgelaufen %1
+Something went wrong while saving the file(s).,Beim Speichern der Datei(en) ist etwas schiefgelaufen.
+Subcategories Links,Unterkategorie-Links
+Submit,Absenden
+Tag,Tag
+"This option is available in <strong>%1</strong> plan only.","Diese Option ist nur im <strong>%1</strong>-Plan verfügbar."
+"This option is available in <strong>Plus or Extra</strong> plans only.","Diese Option ist nur in den Plänen <strong>Plus oder Extra</strong> verfügbar."
+Title,Titel
+Top (Horizontal),Oben (Horizontal)
+Unable to remove item,Element kann nicht entfernt werden
+Unable to save item,Element kann nicht gespeichert werden
+URL key is already in use by another blog item.,URL-Schlüssel wird bereits von einem anderen Blog-Element verwendet.
+URL key is already in use by another tag item.,URL-Schlüssel wird bereits von einem anderen Tag-Element verwendet.
+Use Magefan Blog Comments,Magefan Blog-Kommentare verwenden
+Views:,Aufrufe:
+Year,Jahr
+"Last updated:","Zuletzt aktualisiert:"

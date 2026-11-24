@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
@@ -21,17 +22,13 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_widgetKey = 'recent_posts';
 
     /**
-     * @return $this
+     * Retrieve page size
+     *
+     * @return int
      */
-    public function _construct()
+    public function getPageSize(): int
     {
-        $this->setPageSize(
-            (int) $this->_scopeConfig->getValue(
-                'mfblog/sidebar/'.$this->_widgetKey.'/posts_per_page',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            )
-        );
-        return parent::_construct();
+        return (int)$this->getConfigValue('posts_per_page');
     }
 
     /**
@@ -46,15 +43,27 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Get block cache identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
+
+        return parent::getIdentities();
+    }
+
+    /**
      * Retrieve true if display the post image is enabled in the config
+     *
      * @return bool
      */
-    public function getDisplayImage()
+    public function getDisplayImage(): bool
     {
-        return (bool)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getConfigValue('display_image');
     }
 
     /**
@@ -64,10 +73,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $templateName = $this->getData('template_type') ?: (string)$this->getConfigValue('template');
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }

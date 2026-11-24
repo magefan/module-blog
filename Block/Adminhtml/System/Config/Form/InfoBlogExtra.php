@@ -12,6 +12,8 @@ class InfoBlogExtra extends InfoPlan
 {
 
     /**
+     * Retrieves the name of the minimum plan required.
+     *
      * @return string
      */
     protected function getMinPlan(): string
@@ -20,6 +22,8 @@ class InfoBlogExtra extends InfoPlan
     }
 
     /**
+     * Encodes a predefined list of section identifiers into a JSON string.
+     *
      * @return string
      */
     protected function getSectionsJson(): string
@@ -36,13 +40,38 @@ class InfoBlogExtra extends InfoPlan
             'mfblog_post_view_reading_progress_bar',
             'mfblog_blog_search',
             'mfblog_sidebar_contents',
+            'mfblog_sidebar_search_sticky',
+            'mfblog_sidebar_categories_sticky',
+            'mfblog_sidebar_recent_posts_sticky',
+            'mfblog_sidebar_featured_posts_sticky',
+            'mfblog_sidebar_popular_posts_sticky',
+            'mfblog_sidebar_archive_sticky',
+            'mfblog_sidebar_tag_claud_sticky',
+            'mfblog_sidebar_post_related_products_sticky',
+            'mfblog_sidebar_custom_sticky',
+            'mfblog_sidebar_custom2_sticky',
+            'mfblog_sidebar_rss_feed_sticky',
+            'mfblog_sidebar_contents_sticky',
             'mfblog_ai_writer',
-            'mfblog_draft_autosave'
+            'mfblog_draft_autosave',
+            'mfblog_post_view_latest_posts_by_author',
+            'mfblog_post_list_template',
+            'mfblog_index_page_template',
+            'mfblog_post_view_related_posts_template',
+            'mfblog_post_view_related_products_template',
+            'mfblog_sidebar_recent_posts_template',
+            'mfblog_sidebar_featured_posts_template',
+            'mfblog_sidebar_popular_posts_template',
+            'mfblog_product_page_related_posts_template',
+            'mfblog_author_template',
+            'mfblog_search_template',
         ]);
         return $sections;
     }
 
     /**
+     * Retrieves a translatable text describing the availability of an option based on a specific plan.
+     *
      * @return string
      */
     protected function getText(): string

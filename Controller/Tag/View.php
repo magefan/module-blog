@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Controller\Tag;
 
 use Magento\Framework\App\Action\Context;
@@ -16,8 +18,6 @@ use Magento\Store\Model\ScopeInterface;
 class View extends \Magefan\Blog\App\Action\Action
 {
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     private $_storeManager;
@@ -27,6 +27,10 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected $url;
 
+    /**
+     * @param Context $context
+     * @param \Magefan\Blog\Model\Url|null $url
+     */
     public function __construct(
         Context $context,
         ?\Magefan\Blog\Model\Url $url = null
@@ -77,8 +81,13 @@ class View extends \Magefan\Blog\App\Action\Action
         $storeId = $this->getStoreManager()->getStore()->getId();
         $tag = $this->_objectManager->create(\Magefan\Blog\Model\Tag::class)->load($id);
 
-        if (!$tag->isVisibleOnStore($storeId)) {
+        $isValidSecret = $this->isValidSecret($tag);
+        if (!$tag->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
+        }
+
+        if ($isValidSecret) {
+            $tag->setIsPreviewMode(true);
         }
 
         $tag->setStoreId($storeId);
@@ -87,6 +96,8 @@ class View extends \Magefan\Blog\App\Action\Action
     }
 
     /**
+     * Get store manager instance
+     *
      * @return \Magento\Store\Model\StoreManagerInterface|mixed
      */
     private function getStoreManager()

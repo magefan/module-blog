@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post;
 
@@ -68,8 +69,8 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\Url $url
      * @param array $data
-     * @param null $config
-     * @param null $templatePool
+     * @param \Magefan\Blog\Model\Config|null $config
+     * @param \Magefan\Blog\Model\TemplatePool|null $templatePool
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -126,6 +127,13 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         return $this->getPost()->getShortFilteredContent($len, $endCharacters);
     }
 
+    /**
+     * Retrieve post short content without images
+     *
+     * @param mixed $len
+     * @param mixed $endCharacters
+     * @return string|null
+     */
     public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null)
     {
         return $this->getPost()->getShortFilteredContentWithoutImages($len, $endCharacters);
@@ -177,6 +185,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if display author information is enabled
+     *
      * @return int
      */
     public function authorEnabled()
@@ -189,6 +198,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if author page is enabled
+     *
      * @return int
      */
     public function authorPageEnabled()
@@ -201,6 +211,7 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve true if magefan comments are enabled
+     *
      * @return bool
      */
     public function magefanCommentsEnabled()
@@ -212,6 +223,8 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Views count enabled
+     *
      * @return bool
      */
     public function viewsCountEnabled()
@@ -223,6 +236,8 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Retrieve Style View Model
+     *
      * @return \Magefan\Blog\ViewModel\Style
      */
     public function getStyleViewModel()
@@ -257,11 +272,16 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Retrieve allowed social networks
+     *
      * @return array
      */
     public function getAllowedSocialNetworks(): array
     {
-        $socialNetworks = (string)$this->_scopeConfig->getValue('mfblog/social/use_social_networks', ScopeInterface::SCOPE_STORE);
+        $socialNetworks = (string)$this->_scopeConfig->getValue(
+            'mfblog/social/use_social_networks',
+            ScopeInterface::SCOPE_STORE
+        );
         if ($socialNetworks) {
             return explode(',', $socialNetworks);
         }

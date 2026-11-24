@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block;
 
@@ -38,6 +39,7 @@ class Sidebar extends \Magento\Framework\View\Element\Text
 
     /**
      * Sort by sort order param
+     *
      * @param  string $a
      * @param  string $b
      * @return boolean

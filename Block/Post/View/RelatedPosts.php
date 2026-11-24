@@ -5,11 +5,9 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View;
-
-use Magento\Catalog\Model\ResourceModel\Product\Collection;
-use Magento\Framework\View\Element\AbstractBlock;
 
 /**
  * Blog post related posts block
@@ -37,9 +35,10 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve true if Display Related Posts enabled
+     *
      * @return boolean
      */
-    public function displayPosts()
+    public function displayPosts(): bool
     {
         return (bool) $this->_scopeConfig->getValue(
             \Magefan\Blog\Model\Config::XML_RELATED_POSTS_ENABLED,
@@ -64,13 +63,51 @@ class RelatedPosts extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        if (!$this->displayPosts()) {
+            return '';
+        }
+
+        return parent::_toHtml();
+    }
+
+    /**
+     * Get block cache identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        if (!$this->displayPosts()) {
+            return [];
+        }
+
+        return parent::getIdentities();
+    }
+
+    /**
+     * Retrieve the block title or default to 'Related Posts'
+     *
+     * @return string
+     */
+    public function getBlockTitle()
+    {
+        return $this->getData('block_title') ?: __('Related Posts');
+    }
+
+    /**
      * Get relevant path to template
      *
      * @return string
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
+        $templateName = $this->getData('template_type') ?: (string)$this->_scopeConfig->getValue(
             'mfblog/post_view/related_posts/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );

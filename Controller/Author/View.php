@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Controller\Author;
 
 /**
@@ -13,8 +15,6 @@ namespace Magefan\Blog\Controller\Author;
 class View extends \Magefan\Blog\App\Action\Action
 {
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     private $_storeManager;
@@ -64,8 +64,13 @@ class View extends \Magefan\Blog\App\Action\Action
         $storeId = $this->getStoreManager()->getStore()->getId();
         $author = $this->_objectManager->create(\Magefan\Blog\Api\AuthorInterface::class)->load($id);
 
-        if (!$author->isVisibleOnStore($storeId)) {
+        $isValidSecret = $this->isValidSecret($author);
+        if (!$author->isVisibleOnStore($storeId) && !$isValidSecret) {
             return false;
+        }
+
+        if ($isValidSecret) {
+            $author->setIsPreviewMode(true);
         }
 
         $author->setStoreId($storeId);
@@ -74,6 +79,8 @@ class View extends \Magefan\Blog\App\Action\Action
     }
 
     /**
+     * Get store manager instance
+     *
      * @return \Magento\Store\Model\StoreManagerInterface|mixed
      */
     private function getStoreManager()

@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model\Config\Source;
 
 class BlogPages implements \Magento\Framework\Option\ArrayInterface
@@ -33,7 +35,7 @@ class BlogPages implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

@@ -10,8 +10,14 @@
 /**
  * Blog post list lazyload template
  *
- * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar\Pager
+ * @var \Magefan\Blog\Block\Post\PostList\Toolbar\Pager $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
 ?>
 <?php if ($block->useLazyload()) { ?>
     <?php
@@ -19,15 +25,31 @@
             'trigger_element' => '.mbblog-lazyload-trigger'
         ]);
     ?>
-    <div class="mfblog-autoloader"
-         data-mage-init='{"<?= /*@noEscape*/ $block->getLazyloadJs() ?>" : <?= /*@noEscape*/ $config ?>}'>
+    <div class="mfblog-autoloader">
         <button class="mbblog-lazyload-trigger mfblog-hide-onload action primary"
-                title="<?= $block->escapeHtml(__('See more')) ?>"
+                title="<?= $escaper->escapeHtml(__('See more')) ?>"
                 type="button">
-            <span><?= $block->escapeHtml(__('See more')) ?></span>
+            <span><?= $escaper->escapeHtml(__('See more')) ?></span>
         </button>
-        <img class="posts-loader mfblog-show-onload"
-             src="<?= $block->escapeUrl($block->getViewFileUrl('images/loader-2.gif')) ?>"
-             alt="<?= $block->escapeHtml(__('Posts loader')) ?>" />
+        <div class="mfblog-show-onload" style="display: none;">
+            <img class="posts-loader"
+                 src="<?= $escaper->escapeUrl($block->getViewFileUrl('images/loader-2.gif')) ?>"
+                 alt="<?= $escaper->escapeHtml(__('Posts loader')) ?>" />
+        </div>
     </div>
+    <?=  /* @noEscape */ $block->getLayout()->createBlock(\Magefan\Community\Block\JsScript::class)->setMethod('ajax')->toHtml() ?>
+    <?php $script = "
+        (function () {
+            function initMfPostLazyLoad() {
+                var script = document.createElement('script');
+                script.src = '" . $escaper->escapeUrl($block->getViewFileUrl($block->getLazyloadJs() . '.js')) . "';
+                script.addEventListener('load', () => window.mfPostLazyLoad(" . /*@noEscape*/ $config . "));
+                document.head.append(script);
+            };
+
+            document.body.addEventListener('touchstart', initMfPostLazyLoad, {once: true});
+            document.body.addEventListener('mouseover', initMfPostLazyLoad, {once: true});
+        })();
+    "; ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 <?php } ?>

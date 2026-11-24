@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar posts list template
+ *
+ * @var \Magefan\Blog\Block\Post\PostList\AbstractList $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+
+<?php if ($block->getPostCollection()->count()) { ?>
+<div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?>" >
+    <div class="block-title">
+        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
+    </div>
+    <div class="block-content">
+        <?= $block->setData('template_type', 'sidebar-article-list')
+            ->setTemplate('Magefan_Blog::design_valor/post/article.phtml')->toHtml()
+        ?>
+    </div>
+</div>
+<?php } ?>

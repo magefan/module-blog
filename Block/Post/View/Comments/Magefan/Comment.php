@@ -5,9 +5,11 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View\Comments\Magefan;
 
+use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\DataObject\IdentityInterface;
@@ -28,9 +30,9 @@ class Comment extends Template implements IdentityInterface
 
     /**
      * Comment constructor.
-     * @param Template\Context $context
-     * @param TimezoneInterface $timezone
+     * @param Context $context
      * @param array $data
+     * @param TimezoneInterface|null $timezone
      */
     public function __construct(
         Template\Context $context,
@@ -101,6 +103,8 @@ class Comment extends Template implements IdentityInterface
     }
 
     /**
+     * Retrieves the publish date of the comment formatted according to store configuration.
+     *
      * @return mixed
      */
     public function getPublishDate()

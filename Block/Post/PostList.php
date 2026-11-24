@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post;
 
@@ -22,7 +23,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
     protected $_defaultToolbarBlock = \Magefan\Blog\Block\Post\PostList\Toolbar::class;
 
     /**
-     * @var
+     * @var \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     protected $toolbarBlock;
 
@@ -58,6 +59,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve post html
+     *
      * @param  \Magefan\Blog\Model\Post $post
      * @return string
      */
@@ -73,7 +75,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])) {
+        if (!in_array($this->_template, ['post/list.phtml', 'Magefan_Blog::post/list.phtml'])
+            && !$this->getData('template_type')
+        ) {
             /* If template was not customized in layout */
             return parent::getTemplate();
         }
@@ -90,9 +94,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
      *
      * @return string
      */
-    protected function getPostTemplateType()
+    protected function getPostTemplateType(): string
     {
-        return (string)$this->_scopeConfig->getValue(
+        return $this->getData('template_type') ?: (string)$this->_scopeConfig->getValue(
             'mfblog/post_list/template',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
@@ -100,6 +104,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()
@@ -123,6 +128,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve Toolbar Html
+     *
      * @return string
      */
     public function getToolbarHtml()

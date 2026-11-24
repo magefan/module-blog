@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View;
 
@@ -50,12 +51,14 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Block template file
+     *
      * @var string
      */
-    protected $_template = 'post/view/comments.phtml';
+    protected $_template = 'Magefan_Blog::post/view/comments.phtml';
 
     /**
      * Retrieve comments type
+     *
      * @return bool
      */
     public function getCommentsType()
@@ -67,6 +70,8 @@ class Comments extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Display privacy policy checkbox
+     *
      * @return bool
      */
     public function displayPrivacyPolicyCheckbox()
@@ -79,9 +84,10 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve number of comments to display
+     *
      * @return int
      */
-    public function getNumberOfComments()
+    public function getNumberOfComments(): int
     {
         return (int)$this->_scopeConfig->getValue(
             'mfblog/post_view/comments/number_of_comments',
@@ -91,6 +97,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve facebook app id
+     *
      * @return string
      */
     public function getFacebookAppId()
@@ -103,6 +110,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve disqus forum shortname
+     *
      * @return string
      */
     public function getDisqusShortname()
@@ -115,6 +123,7 @@ class Comments extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve locale code
+     *
      * @return string
      */
     public function getLocaleCode()

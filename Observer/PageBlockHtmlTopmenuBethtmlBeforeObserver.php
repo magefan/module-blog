@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Observer;
 
@@ -36,7 +37,7 @@ class PageBlockHtmlTopmenuBethtmlBeforeObserver implements ObserverInterface
      * @return void
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         /** @var \Magento\Framework\Data\Tree\Node $menu */
         $menu = $observer->getMenu();

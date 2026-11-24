@@ -1,0 +1,212 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var \Magefan\Blog\Block\Post\View $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+
+<?php
+$_post = $block->getPost();
+$_postUrl = $_post->getPostUrl();
+$_postName = $escaper->escapeHtml($_post->getTitle(), null);
+?>
+<?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
+<div class="_post-view post-view-modern">
+    <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+
+        <div class="post-header clearfix">
+
+            <!-- post category-->
+            <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                <div class="post-category mb-4">
+                    <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                        <a class="category-name" href="<?= $escaper->escapeUrl($ct->getCategoryUrl()) ?>"
+                           title="<?= $escaper->escapeHtml($ct->getTitle()) ?>">
+                            <?= $escaper->escapeHtml($ct->getTitle()) ?>
+                        </a>
+                    <?php } ?>
+                </div>
+            <?php }  ?>
+
+            <!-- block data -->
+            <div class="post-data-wrap mb-4">
+                <!-- post author -->
+                <?php $hasPreviusItem = false; ?>
+                <?php if ($block->authorEnabled()) { ?>
+                    <?php if ($_author = $_post->getAuthor()) { ?>
+                        <?php $hasPreviusItem = true; ?>
+                        <span class="post-author-name">
+                            <?php if ($block->authorPageEnabled()) { ?>
+                                <a title="<?= $escaper->escapeHtml($_author->getTitle()) ?>"
+                                   href="<?= $escaper->escapeUrl($_author->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($_author->getTitle()) ?>
+                                </a>
+                            <?php } else { ?>
+                                <?= $escaper->escapeHtml($_author->getTitle()) ?>
+                            <?php } ?>
+
+                            <?php
+                            $coAuthors = $_post->getRelatedCoauthors();
+                            $coAuthorsCount = count($coAuthors);
+                            ?>
+                            <?php if ($coAuthorsCount) { ?>
+                                <?= $escaper->escapeHtml(__('and')) ?>
+                                <?php $z = 0 ?>
+                                <?php foreach ($coAuthors as $coAuthor) { ?>
+                                    <?php $z++; ?>
+                                    <?php if ($block->authorPageEnabled()) { ?>
+                                        <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
+                                           href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
+                                    <?php } else { ?>
+                                        <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
+                        </span>
+                    <?php } ?>
+                <?php } ?>
+
+                <!-- post date -->
+                <?php if ($_post->isPublishDateEnabled()) { ?>
+                    <span class="post-date">
+                        <?php if ($hasPreviusItem) { ?>
+                            <span>&nbsp;-&nbsp;</span>
+                        <?php } ?>
+                        <?php $hasPreviusItem = true; ?>
+                        <?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                <?php } ?>
+
+                <?php /* post modified date */ ?>
+                <?php if ( $_post->isModifiedDateEnabled()) { ?>
+                    <span class="post-date">
+                    <?php if ($hasPreviusItem) { ?>
+                        <span>&nbsp;-&nbsp;</span>
+                    <?php } ?>
+                        <?php $hasPreviusItem = true; ?>
+                    <span><?= $escaper->escapeHtml(__('Last updated:')) ?></span> <?= $escaper->escapeHtml($_post->getUpdateDate()) ?>
+                </span>
+                <?php } ?>
+
+                <!-- reading time -->
+                <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+                    <span class="reading-time">
+                        <?php if ($hasPreviusItem) { ?>
+                            <span>&nbsp;-&nbsp;</span>
+                        <?php } ?>
+                        <?php $hasPreviusItem = true; ?>
+                        <?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?></span>
+                <?php } ?>
+
+                <!-- post views -->
+                <?php if ($block->viewsCountEnabled()) { ?>
+                    <?php if ($viewsCount = $_post->getViewsCount()) { ?>
+                        <span class="post-views float-right d-none d-md-block">
+                            <i class="mf-blog-icon mfbi-views"></i>
+                            <?= $escaper->escapeHtml($viewsCount)?>
+                        </span>
+                    <?php } ?>
+                <?php } ?>
+
+                <!-- post comments -->
+                <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
+                    <span class="post-comments float-right d-none d-md-block">
+                        <i class="mf-blog-icon mfbi-comments"></i>
+                        <a title="<?= $escaper->escapeHtml($_post->getTitle()) ?>"
+                           href="<?= $escaper->escapeUrl($_post->getPostUrl()) ?>#post-comments"
+                        ><?= $escaper->escapeHtml($_post->getCommentsCount()) ?></a>
+                    </span>
+                <?php } ?>
+            </div>
+        </div>
+
+        <div class="post-content">
+            <div class="_post-description clearfix">
+                <!-- Post Image -->
+                <?php
+                $featuredImage = $_post->getFeaturedImage();
+                $postVideo = $_post->getData('post_video');
+
+                if ($featuredImage || $postVideo) { ?>
+                    <div class="post-featured-image">
+                        <?php if ($postVideo) {
+                            echo $block->getLayout()->createBlock(\Magefan\YouTubeWidget\Block\Widget\YouTube::class)
+                                ->setData('video_url', $postVideo)
+                                ->setData('image_quality', 'maxresdefault')
+                                ->setData('image_size', 'cover')
+                                ->toHtml();
+                        } else {
+                            $featuredImgAlt = $_post->getData('featured_img_alt') ?: $_postName;
+                            $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+                            $imageWidthAndHeight = $imageHelper->init($_post->getFeaturedImg())->getWidthAndHeight();
+                            $addWH = !empty($imageWidthAndHeight);
+                            ?>
+
+                            <img src="<?= $escaper->escapeUrl($featuredImage) ?>"
+                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                 <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
+                            />
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+
+                <!-- Post Tags -->
+                <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                    <div class="post-tag">
+                        <div class="item post-tags">
+                            <div class="post-tag-title"><?= $escaper->escapeHtml(__('Tags')) ?></div>
+                            <?php $n = 0; ?>
+                            <?php foreach ($_post->getRelatedTags() as $tag) { ?>
+                                <?php $n++; ?>
+                                <a title="<?= $escaper->escapeHtml($tag->getTitle()) ?>"
+                                   href="<?= $escaper->escapeUrl($tag->getTagUrl()) ?>"
+                                ><?= $escaper->escapeHtml($tag->getTitle()) ?></a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
+                <!-- END Post Tags -->
+
+                <div class="post-description">
+                    <?= /*@noEscape*/ $block->getContent() ?>
+                    <div class="clear clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+
+            <?php if ($block->displayAddThisToolbox()): ?>
+                <!-- Post Sharing -->
+                <div class="post-sharing post-sharing-bottom">
+                    <div class="share-elements">
+                        <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
+                            <div class="icon-wrapper icon-<?= $escaper->escapeHtml(strtolower($network)) ?>" onclick="mfShareWindowOpen('<?= $escaper->escapeUrl($_postUrl) ?>', '<?= $escaper->escapeHtml(strtolower($network)) ?>', this)">
+                                <div class="icon" title="<?= $escaper->escapeHtml($network == 'Copy' ? __($network) : (__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?>">
+                                    <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg')) ?>" alt="<?= $escaper->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>" width="48" height="48">
+                                </div>
+                                <div class="label"><?= $escaper->escapeHtml($network == 'Copy' ? __($network) : (__('Share on %1', $network == 'Twitter' ? "X" : $network))) ?></div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <!-- END Post Sharing -->
+            <?php endif; ?>
+
+            <?= $block->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

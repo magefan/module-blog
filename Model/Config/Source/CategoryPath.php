@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -14,7 +15,13 @@ namespace Magefan\Blog\Model\Config\Source;
  */
 class CategoryPath extends CategoryTree
 {
-    protected function _getOptions($itemId = 0)
+    /**
+     * Retrieve a list of options based on a given item ID.
+     *
+     * @param int $itemId
+     * @return array
+     */
+    protected function _getOptions($itemId = 0): array
     {
         $childs =  $this->_getChilds();
         $options = [];

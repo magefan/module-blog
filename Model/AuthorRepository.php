@@ -3,6 +3,8 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\AuthorRepositoryInterface;
@@ -80,6 +82,8 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
+     * Retrieve the author factory instance.
+     *
      * @return AuthorInterfaceFactory
      */
     public function getFactory()
@@ -88,6 +92,8 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
+     * Saves the given author entity.
+     *
      * @param AuthorInterface $author
      * @return bool|Author|mixed
      * @throws CouldNotSaveException
@@ -116,9 +122,11 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
-     * @param $authorId
+     * Get author by ID.
+     *
+     * @param int $authorId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
      * @return Author|mixed
      * @throws NoSuchEntityException
@@ -143,12 +151,14 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
+     * Delete an author.
+     *
      * @param AuthorInterface $author
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(AuthorInterface $author)
+    public function delete(AuthorInterface $author): bool
     {
         try {
             $this->authorResourceModel->delete($author);
@@ -163,19 +173,21 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
+     * Delete an entity by its ID.
+     *
      * @param int $authorId
      * @return bool|mixed
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($authorId)
+    public function deleteById($authorId): bool
     {
         return $this->delete($this->getById($authorId));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
@@ -188,7 +200,7 @@ class AuthorRepository implements AuthorRepositoryInterface
         $searchResult = $this->searchResultsFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getData());
+        $searchResult->setItems($collection->getItems());
 
         return $searchResult;
     }

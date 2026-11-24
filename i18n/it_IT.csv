@@ -32,14 +32,14 @@ Blog,Blog
 "Nothing to import.","Niente da importare."
 "Can not make import.","Impossibile importare."
 "Something went wrong: ","Qualcosa e' andato storto: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Inserisci il tuo nome e la tua e-mail"
 "Blog Import from WordPress","Importa Blog da WordPress"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Il testo del commento è troppo breve."
 "Please select","Perpiacere seleziona"
 "Use Facebook Comments","Usa Facebook Comments"
 "Use Disqus Comments","Usa Disqus Comments"
 "Use Google Comments","Usa Google Comments"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Articoli in evidenza del blog"
 "Yes (With auto trigger)","Si' (con rilevamento automatico)"
 "Yes (Without auto trigger)","Si' (senza rilevamento automatico)"
 "Parameter %1 is required","Il parametro %1 e' richiesto"
@@ -57,7 +57,7 @@ Categories:,Categorie:
 Tags:,Tag:
 Author:,Autore:
 "We can't find posts matching the selection.","Non riusciamo a trovare articoli soddisfacenti la selezione."
-"Read more","Read more"
+"Read more","Leggi di più"
 "Read more &#187;","Leggi di piu' &#187;"
 "See more","Di piu'"
 "Read %1","Leggi %1"
@@ -177,29 +177,143 @@ Published,Pubblicato
 "Oct","Ott"
 "Nov","Nov"
 "Dec","Dic"
-"Reply","Reply"
-"Show more replies in this thread","Show more replies in this thread"
-"%1 Comment(s)","%1 Comment(s)"
-"Add a comment...","Add a comment..."
-"Add a reply...","Add a reply..."
-"Sign in to add a comment...","Sign in to add a comment..."
-"Sign in to add a reply...","Sign in to add a reply..."
-"Full Name","Full Name"
-"Load more comments","Load more comments"
-"Login to submit comment","Login to submit comment"
-"You cannot post comment. Blog post is not longer exist.","You cannot post comment. Blog post is not longer exist."
-"You cannot reply to this comment. Comment is not longer exist.","You cannot reply to this comment. Comment is not longer exist."
-"You cannot reply to this comment.","You cannot reply to this comment."
-"You submitted your comment for moderation.","You submitted your comment for moderation."
-"Thank you for your comment.","Thank you for your comment."
-"Import Categories","Import Categories"
-"Import Comments","Import Comments"
-"Import Posts","Import Posts"
-"Import from aheadWorks Blog Extension","Import from aheadWorks Blog Extension"
-"Import from Joomla","Import from Joomla"
-"Import from Blogger.com","Import from Blogger.com"
-"Import from Drupal","Import from Drupal"
-"Import from CSV","Import from CSV"
-"Import from XML","Import from XML"
+"Reply","Rispondi"
+"Show more replies in this thread","Mostra più risposte in questo thread"
+"%1 Comment(s)","%1 Commento/i"
+"Add a comment...","Aggiungi un commento..."
+"Add a reply...","Aggiungi una risposta..."
+"Sign in to add a comment...","Accedi per aggiungere un commento..."
+"Sign in to add a reply...","Accedi per aggiungere una risposta..."
+"Full Name","Nome completo"
+"Load more comments","Carica altri commenti"
+"Login to submit comment","Accedi per inviare un commento"
+"You cannot post comment. Blog post is not longer exist.","Non puoi pubblicare un commento. L'articolo del blog non esiste più."
+"You cannot reply to this comment. Comment is not longer exist.","Non puoi rispondere a questo commento. Il commento non esiste più."
+"You cannot reply to this comment.","Non puoi rispondere a questo commento."
+"You submitted your comment for moderation.","Il tuo commento è stato inviato per la moderazione."
+"Thank you for your comment.","Grazie per il tuo commento."
+"Import Categories","Importa Categorie"
+"Import Comments","Importa Commenti"
+"Import Posts","Importa Articoli"
+"Import from aheadWorks Blog Extension","Importa dall'estensione Blog aheadWorks"
+"Import from Joomla","Importa da Joomla"
+"Import from Blogger.com","Importa da Blogger.com"
+"Import from Drupal","Importa da Drupal"
+"Import from CSV","Importa da CSV"
+"Import from XML","Importa da XML"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Sì, ho letto %1 e acconsento al trattamento dei miei dati personali"
 "privacy policy","l'informativa sulla privacy"
+"New Arrivals","Nuovi arrivi"
+"Blog Posts","Post del blog"
+"Blog Categories","Categorie del blog"
+"Post Contents","Contenuto del post"
+"hide","nascondere"
+"show","mostrare"
+"You May Also Like","Potrebbe anche piacerti"
+"People Who Bought This Also Bought:","Le persone che hanno acquistato questo hanno acquistato anche:"
+"and","e"
+"Popular Posts","Post popolari"
+"Featured Posts","Post in evidenza"
+"min read","min di lettura"
+"Latest From %1","Ultimo da %1"
+"Co-author","Coautore"
+"Author","Autore"
+Add New Comment,Aggiungi nuovo commento
+Add New Images,Aggiungi nuove immagini
+Add New Tag,Aggiungi nuovo tag
+Add to Cart,Aggiungi al carrello
+Add to Compare,Aggiungi al confronto
+Add to Wish List,Aggiungi alla lista dei desideri
+Add With AI,Aggiungi con l'IA
+Admin,Amministratore
+AI Writer is not enabled. Please enable it first.,L'autore IA non è attivato. Si prega di abilitarlo prima.
+All Authors,Tutti gli autori
+All Blog Pages,Tutte le pagine del blog
+All Categories,Tutte le categorie
+and,e
+Approved,Approvato
+Archive %1,Archivio %1
+Blank (Use widgets to build the page content),Vuoto (Usa widget per costruire il contenuto della pagina)
+Blog Archive Page,Pagina archivio blog
+Blog Author Page,Pagina autore blog
+Blog Category Page,Pagina categoria blog
+"Blog Plus <b>Advanced Permalink Settings</b> are enabled.","Blog Plus <b>Impostazioni avanzate dei permalink</b> sono abilitate."
+Blog Post Page,Pagina articolo blog
+Blog Tag Page,Pagina tag blog
+Bottom (Horizontal),Basso (Orizzontale)
+Browse to find or drag image here,Sfoglia o trascina l'immagine qui
+Cancel,Annulla
+Categories,Categorie
+Category,Categoria
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","La chiave API Chat-GPT manca nelle configurazioni ""Autore IA""."
+Comments:,Commenti:
+Customer,Cliente
+Database connection error,Errore di connessione al database
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Predefinito: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Elimina immagine
+Disabled,Disabilitato
+Duplicated,Duplicato
+Email,Email
+Enabled,Abilitato
+General Information,Informazioni generali
+Go to Home Page,Vai alla pagina principale
+Grid - 1 column (Blog Extra),Griglia - 1 colonna (Blog Extra)
+Grid - 2 columns (Blog Extra),Griglia - 2 colonne (Blog Extra)
+Grid - 3 columns (Blog Extra),Griglia - 3 colonne (Blog Extra)
+Grid and List (Blog Extra),Griglia ed elenco (Blog Extra)
+Guest,Ospite
+Hidden,Nascosto
+Home,Home
+"Images (.gif, .jpg, .png)","Immagini (.gif, .jpg, .png)"
+Import Tags,Importa tag
+In stock,Disponibile
+Leave a review about the blog extension,Lascia una recensione sull'estensione blog
+Left (Vertical),Sinistra (Verticale)
+List (Blog Extra),Elenco (Blog Extra)
+min read,min di lettura
+Month And Year,Mese e Anno
+Need a new blog feature?,Hai bisogno di una nuova funzione del blog?
+No,No
+Not Approved,Non approvato
+Other Grids (Blog Extra),Altre griglie (Blog Extra)
+Out of stock,Esaurito
+Page,Pagina
+/page/N,/page/N
+?page=N,?page=N
+Pending,In attesa
+Please enter valid email,Inserisci un'email valida
+Please select post IDs,Seleziona gli ID degli articoli
+?p=N,?p=N
+Position,Posizione
+Post Id,ID articolo
+Posts (default),Articoli (predefinito)
+Posts Links,Link degli articoli
+Posts loader,Caricatore articoli
+Posts & Subcategories Links,Articoli e link delle sottocategorie
+Publish Date (default),Data di pubblicazione (predefinita)
+Related Products,Prodotti correlati
+Requested item doesn't exist,L'elemento richiesto non esiste
+Right (Vertical),Destra (Verticale)
+Search,Cerca
+Select Post IDs ...,Seleziona ID articoli ...
+Share on %1,Condividi su %1
+Short: mystore.com/{blog_route}/post-title/,Breve: mystore.com/{blog_route}/post-title/
+Sign In,Accedi
+Slider (Blog Extra),Cursore (Blog Extra)
+Something went wrong %1,Qualcosa è andato storto %1
+Something went wrong while saving the file(s).,Si è verificato un errore durante il salvataggio del/dei file.
+Subcategories Links,Link delle sottocategorie
+Submit,Invia
+Tag,Tag
+"This option is available in <strong>%1</strong> plan only.","Questa opzione è disponibile solo nel piano <strong>%1</strong>."
+"This option is available in <strong>Plus or Extra</strong> plans only.","Questa opzione è disponibile solo nei piani <strong>Plus o Extra</strong>."
+Title,Titolo
+Top (Horizontal),Alto (Orizzontale)
+Unable to remove item,Impossibile rimuovere l'elemento
+Unable to save item,Impossibile salvare l'elemento
+URL key is already in use by another blog item.,La chiave URL è già in uso da un altro elemento del blog.
+URL key is already in use by another tag item.,La chiave URL è già in uso da un altro elemento tag.
+Use Magefan Blog Comments,Utilizza i commenti Magefan Blog
+Views:,Visualizzazioni:
+Year,Anno
+"Last updated:","Ultimo aggiornamento:"

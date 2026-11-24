@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Category;
 
@@ -80,13 +81,13 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return bool
      */
-    protected function canDisplay()
+    protected function canDisplay(): bool
     {
         $displayMode = $this->getCategory()->getData('display_mode');
         return ($displayMode == CategoryDisplayMode::POSTS);
     }
 
-    /*
+    /**
      * Render block HTML
      *
      * @return string
@@ -144,6 +145,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $pageMainTitle->setPageTitle(
                     $this->escapeHtml($category->getTitle())
                 );
+            }
+            if ($category->getIsPreviewMode()) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
             }
         }
 
@@ -208,9 +212,12 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    public function getPostTemplateType()
+    public function getPostTemplateType(): string
     {
-        $template = (string)$this->getCategory()->getData('posts_list_template');
+        $template = $this->getCategory()
+            ? (string)$this->getCategory()->getData('posts_list_template')
+            : '';
+
         if ($template) {
             return $template;
         }
@@ -220,6 +227,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()

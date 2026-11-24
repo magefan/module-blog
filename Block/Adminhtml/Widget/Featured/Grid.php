@@ -58,7 +58,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * Prepares the HTML for the given element by configuring a chooser component and appending it.
+     *
+     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return \Magento\Framework\Data\Form\Element\AbstractElement
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -99,6 +101,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Prepare collection
+     *
      * @return Grid
      */
     protected function _prepareCollection() : Grid
@@ -109,6 +113,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Returns a JavaScript callback function as a string for initializing a grid row.
+     *
      * @return string
      */
     public function getRowInitCallback() : string
@@ -138,6 +144,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Row Click JS Callback
+     *
      * @return string
      */
     public function getRowClickCallback() : string
@@ -251,7 +259,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param  $column
+     * Add column filter to collection
+     *
+     * @param mixed $column
      * @return $this
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -275,6 +285,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Prepare columns
+     *
      * @return Grid
      * @throws \Exception
      */
@@ -324,6 +336,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
+     * Get selected posts
+     *
      * @return array
      */
     protected function _getSelectedPosts() : array

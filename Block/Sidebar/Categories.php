@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
@@ -28,6 +29,7 @@ class Categories extends Template implements IdentityInterface
      * @var \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     protected $_categoryCollection;
+
     /**
      * Construct
      *
@@ -46,6 +48,7 @@ class Categories extends Template implements IdentityInterface
 
     /**
      * Get grouped categories
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     public function getGroupedChilds()
@@ -64,7 +67,7 @@ class Categories extends Template implements IdentityInterface
                     unset($array[$key]);
                 }
             }
-
+            $array = array_values($array);
             $this->setData($k, $array);
         }
 
@@ -73,6 +76,7 @@ class Categories extends Template implements IdentityInterface
 
     /**
      * Retrieve true if need to show posts count
+     *
      * @return int
      */
     public function showPostsCount()
@@ -89,16 +93,30 @@ class Categories extends Template implements IdentityInterface
 
     /**
      * Retrieve categories maximum depth
+     *
      * @return int
      */
-    public function maxDepth()
+    public function maxDepth(): int
     {
         $maxDepth = $this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/max_depth',
             ScopeInterface::SCOPE_STORE
         );
-        
+
         return (int)$maxDepth;
+    }
+
+    /**
+     * Collapsible for categories is enabled
+     *
+     * @return bool
+     */
+    public function isCollapsibleEnabled(): bool
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'mfblog/sidebar/'.$this->_widgetKey.'/collapsible_enabled',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -108,8 +126,12 @@ class Categories extends Template implements IdentityInterface
      */
     public function getIdentities()
     {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
         $identities = [];
         foreach ($this->getGroupedChilds() as $item) {
+            // phpcs:ignore Magento2.Performance.ForeachArrayMerge
             $identities = array_merge($identities, $item->getIdentities());
         }
 

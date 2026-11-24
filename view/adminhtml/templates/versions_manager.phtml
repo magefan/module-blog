@@ -1,0 +1,127 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+
+/**
+ * @var \Magefan\Blog\Block\Adminhtml\VersionsManager $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
+ */
+
+if (!isset($escaper)) {
+    /* Compatibility fix for old Magento versions */
+    $escaper = $block;
+}
+
+if ($block->isBlogExtraInstalled()) {
+    return;
+}
+
+$currentPlan  = $block->getCurrentPlan();
+$extraSelectors = $block->getExtraSelectors();
+$plusSelectors  = $currentPlan !== 'Plus' ? $block->getPlusSelectors() : [];
+
+$selectorMap = [
+    'Extra' => $extraSelectors,
+    'Plus'  => $plusSelectors,
+];
+?>
+
+<?php $script = "
+    var versionsManager = {
+        _currentPlan: " . json_encode($currentPlan) . ",
+        _selector: " . json_encode($selectorMap) . ",
+
+        _attachHandlers: function (element, plan) {
+            if (element._vmAttached) return;
+            element._vmAttached = true;
+            if (element.dataset.index === 'coauthors') {
+                element.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    versionsManager.showAlert(plan);
+                });
+            } else if (element.tagName == 'SELECT' || (element.id !== 'blog_post_formrule_conditions_fieldset_' && element.querySelector('select'))) {
+                element.addEventListener('mousedown', function () {
+                    this._previousValue = this.value;
+                });
+                element.addEventListener('change', function () {
+                    if (this._isResetting) return;
+                    versionsManager.showAlert(plan);
+                    this._isResetting = true;
+                    this.value = this._previousValue !== undefined ? this._previousValue : '';
+                    this.dispatchEvent(new Event('change', { bubbles: true }));
+                    this._isResetting = false;
+                });
+            } else {
+                if (element.type === 'checkbox' && element.parentNode) {
+                    /* Wrap checkbox together with its label, checkbox styles rely on input + label */
+                    element = element.parentNode;
+                }
+                var wrapper = document.createElement('div');
+                wrapper.style.cssText = 'position:relative;';
+                element.parentNode.insertBefore(wrapper, element);
+                wrapper.appendChild(element);
+                var overlay = document.createElement('div');
+                overlay.style.cssText = 'position:absolute;inset:0;z-index:900;cursor:not-allowed;';
+                wrapper.appendChild(overlay);
+                overlay.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    versionsManager.showAlert(plan);
+                });
+            }
+        },
+
+        initListener: function () {
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    for (let plan in versionsManager._selector) {
+                        let planFeatures = versionsManager._selector[plan];
+
+                        planFeatures.forEach(selector => {
+                            const elements = document.querySelectorAll(selector);
+                            if (elements.length) {
+                                elements.forEach(function (element) {
+                                    versionsManager._attachHandlers(element, plan);
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+        },
+
+        showAlert: function (extensionPlan) {
+            if (versionsManager._alertOpen) return;
+            versionsManager._alertOpen = true;
+            require(['jquery', 'Magento_Ui/js/modal/alert'], function(\$, alert) {
+                if (extensionPlan === 'Plus') {
+                    extensionPlan = 'Plus or Extra';
+                }
+                alert({
+                    title: '" . $escaper->escapeJs((string)__('Upgrade to use this option.')) . "',
+                    content: '" . $escaper->escapeJs((string)__('This feature is available in')) . " <strong>' + extensionPlan + '</strong> " . $escaper->escapeJs((string)__('plan only.')) . "',
+                    buttons: [{
+                        text: '" . $escaper->escapeJs((string)__('Upgrade Plan Now')) . "',
+                        class: 'action primary accept',
+                        click: function () {
+                            window.open('https://magefan.com/magento2-blog-extension/pricing?utm_source=admin&utm_medium=config&utm_campaign=upgrade-link');
+                        }
+                    }],
+                    closed: function () {
+                        versionsManager._alertOpen = false;
+                    }
+                });
+            });
+        }
+    };
+
+    versionsManager.initListener();
+"; ?>
+
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>

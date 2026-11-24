@@ -15,29 +15,35 @@ namespace Magefan\Blog\Api;
  */
 interface SitemapConfigInterface
 {
-    const HOME_PAGE = 'index';
-    const CATEGORIES_PAGE = 'category';
-    const POSTS_PAGE = 'post';
-    const TAGS_PAGE = 'tag';
-    const AUTHOR_PAGE = 'author';
+    public const HOME_PAGE = 'index';
+    public const CATEGORIES_PAGE = 'category';
+    public const POSTS_PAGE = 'post';
+    public const TAGS_PAGE = 'tag';
+    public const AUTHOR_PAGE = 'author';
 
     /**
-     * @param $page
-     * @param $storeId
+     * Check if the sitemap is enabled
+     *
+     * @param string $page
+     * @param int|null $storeId
      * @return bool
      */
     public function isEnabledSitemap($page, $storeId = null): bool;
 
     /**
-     * @param $page
-     * @param $storeId
+     * Get sitemap change frequency
+     *
+     * @param string $page
+     * @param int|null $storeId
      * @return string
      */
     public function getFrequency($page, $storeId = null): string;
 
     /**
-     * @param $page
-     * @param $storeId
+     * Get sitemap priority
+     *
+     * @param string $page
+     * @param int|null $storeId
      * @return float
      */
     public function getPriority($page, $storeId = null): float;

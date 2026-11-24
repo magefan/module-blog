@@ -3,6 +3,8 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\CategoryRepositoryInterface;
@@ -79,6 +81,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * Retrieve the category factory instance
+     *
      * @return CategoryFactory
      */
     public function getFactory()
@@ -87,6 +91,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * Save category entity.
+     *
      * @param Category $category
      * @return bool|mixed
      * @throws CouldNotSaveException
@@ -115,12 +121,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
-     * @param $categoryId
+     * Retrieve category by ID.
+     *
+     * @param int|string $categoryId
      * @param bool $editMode
-     * @param null $storeId
+     * @param int|null $storeId
      * @param bool $forceReload
-     * @return mixed
-     * @throws NoSuchEntityException
+     * @return \Magento\Catalog\Model\Category
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($categoryId, $editMode = false, $storeId = null, $forceReload = false)
     {
@@ -142,12 +150,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * Delete the specified category.
+     *
      * @param Category $category
      * @return bool
      * @throws CouldNotDeleteException
      * @throws StateException
      */
-    public function delete(Category $category)
+    public function delete(Category $category): bool
     {
         try {
             $this->categoryResourceModel->delete($category);
@@ -162,19 +172,21 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
-     * @param $categoryId
+     * Deletes a category by its ID.
+     *
+     * @param int|string $categoryId
      * @return bool
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      * @throws StateException
      */
-    public function deleteById($categoryId)
+    public function deleteById($categoryId): bool
     {
         return $this->delete($this->getById($categoryId));
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
@@ -187,7 +199,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $searchResult = $this->searchResultsFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getData());
+        $searchResult->setItems($collection->getItems());
 
         return $searchResult;
     }

@@ -29,7 +29,7 @@ class TagInStore implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getDependencies()
     {
@@ -37,7 +37,7 @@ class TagInStore implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAliases()
     {
@@ -45,7 +45,7 @@ class TagInStore implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getVersion()
     {
@@ -53,9 +53,9 @@ class TagInStore implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function apply()
+    public function apply(): void
     {
         $connection = $this->resourceConnection->getConnection();
 

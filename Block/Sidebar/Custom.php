@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
@@ -25,8 +26,8 @@ class Custom extends \Magento\Framework\View\Element\Template
     /**
      * Construct
      *
-     * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magefan\Blog\Model\Url $url
+     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param array $data
      */
     public function __construct(

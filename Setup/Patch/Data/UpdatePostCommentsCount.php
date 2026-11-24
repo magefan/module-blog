@@ -27,7 +27,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
 
     /**
      * @param Comment $commentResource
-     * @param ModuleContextInterface $context
+     * @param ModuleResource $moduleResource
      */
     public function __construct(
         Comment        $commentResource,
@@ -38,9 +38,9 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function apply()
+    public function apply(): void
     {
         $connection = $this->commentResource->getConnection();
         $postSelect = $connection->select()->from(
@@ -54,7 +54,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getDependencies()
     {
@@ -62,7 +62,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAliases()
     {
@@ -70,7 +70,7 @@ class UpdatePostCommentsCount implements DataPatchInterface, PatchVersionInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getVersion()
     {

@@ -9,11 +9,11 @@
 <?php
 /**
  * @var $block \Magefan\Blog\Block\Social\AddThi
- * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  */
 ?>
 <?php $script = "
-    function mfShareWindowOpen(url, type) {
+    function mfShareWindowOpen(url, type, element) {
         function reverse(s){
             return s.split('').reverse().join('');
         }
@@ -31,6 +31,62 @@
                 break;
             case 'linkedin':
                 u =reverse('" . strrev('https://www.linkedin.com/sharing/share-offsite/?url=') . "') + url;
+                break;
+            case 'bluesky':
+                u =reverse('" . strrev('https://bsky.app/intent/compose?text=') . "') + url;
+                break;
+            case 'whatsapp':
+                u =reverse('" . strrev('https://wa.me/?text=') . "') + url;
+                break;
+            case 'email':
+                u =reverse('" . strrev('mailto:?body=') . "') + url;
+                break;
+            case 'copy':
+                var textarea = document.createElement('textarea');
+                textarea.value = url;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'fixed';
+
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+
+                try {
+                    document.execCommand('copy');
+                } catch (e) {}
+
+                document.body.removeChild(textarea);
+
+                var tooltip = document.createElement('div');
+                tooltip.innerText = 'Successfully copied to clipboard!';
+
+                tooltip.style.position = 'absolute';
+                tooltip.style.backgroundColor = '#dff0d8';
+                tooltip.style.color = '#3c763d';
+                tooltip.style.padding = '10px 20px';
+                tooltip.style.zIndex = '5000';
+                tooltip.style.borderRadius = '4px';
+                tooltip.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+                tooltip.style.opacity = '1';
+
+                document.body.appendChild(tooltip);
+
+                if (element) {
+                    var rect = element.getBoundingClientRect();
+                    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                    var scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+
+                    tooltip.style.top =
+                        rect.top + scrollY - tooltip.offsetHeight - 8 + 'px';
+                    tooltip.style.left =
+                        rect.left + scrollX + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+                }
+
+                setTimeout(function () {
+                    if (tooltip.parentNode) {
+                        tooltip.parentNode.removeChild(tooltip);
+                    }
+                }, 1000);
                 break;
         }
         if (u) {

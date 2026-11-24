@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Post\View\Comments;
 
 class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
@@ -29,17 +31,25 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
-     * @return string
+     * Render HTML content.
+     *
+     * @return string|null
      */
     public function _toHtml()
     {
-        if ($this->isEnabled() && $this->getCommentType() == 'facebook' && $this->isHeadApiEnabled() && $this->getApiId()) {
+        if ($this->isEnabled()
+            && $this->getCommentType() == 'facebook'
+            && $this->isHeadApiEnabled()
+            && $this->getApiId()
+        ) {
             return '<meta property="fb:app_id" content="' . $this->escapeHtml($this->getApiId()) . '" />';
         }
     }
 
     /**
-     * @return mixed
+     * Checks if the feature is enabled in the configuration.
+     *
+     * @return bool
      */
     protected function isEnabled()
     {
@@ -47,7 +57,9 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
-     * @return mixed
+     * Retrieve the comment type configuration value.
+     *
+     * @return string
      */
     protected function getCommentType()
     {
@@ -55,7 +67,9 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
-     * @return mixed
+     * Retrieves the Facebook App ID from the configuration settings.
+     *
+     * @return string|null
      */
     protected function getApiId()
     {
@@ -63,7 +77,9 @@ class HeadFbApi extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
-     * @return mixed
+     * Checks if the Head API is enabled by retrieving the configuration value.
+     *
+     * @return bool
      */
     protected function isHeadApiEnabled()
     {

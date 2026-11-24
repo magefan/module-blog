@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\App\Action;
 
@@ -29,6 +30,7 @@ abstract class Action extends \Magento\Framework\App\Action\Action
     /**
      * Retrieve store config value
      *
+     * @param string $path
      * @return string | null | bool
      */
     protected function getConfigValue($path)
@@ -38,6 +40,18 @@ abstract class Action extends \Magento\Framework\App\Action\Action
             $path,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Check whether the preview secret from request matches the object's secret.
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return bool
+     */
+    protected function isValidSecret($object): bool
+    {
+        $secret = (string)$this->getRequest()->getParam('secret');
+        return $secret && $object->getData('secret') === $secret;
     }
 
     /**

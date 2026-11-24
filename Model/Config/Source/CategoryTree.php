@@ -5,12 +5,15 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
+use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
+
 /**
- * Used in edit post form
- *
+ * Class responsible for building and retrieving a hierarchical category tree structure
+ * used as options in various contexts.
  */
 class CategoryTree implements \Magento\Framework\Option\ArrayInterface
 {
@@ -32,8 +35,7 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
     /**
      * Initialize dependencies.
      *
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $authorCollectionFactory
-     * @param void
+     * @param CollectionFactory $categoryCollectionFactory
      */
     public function __construct(
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
@@ -54,7 +56,13 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
         return $this->_options;
     }
 
-    protected function _getOptions($itemId = 0)
+    /**
+     * Retrieve hierarchical options list
+     *
+     * @param int $itemId
+     * @return array
+     */
+    protected function _getOptions($itemId = 0): array
     {
         $childs =  $this->_getChilds();
         $options = [];
@@ -78,6 +86,11 @@ class CategoryTree implements \Magento\Framework\Option\ArrayInterface
         return $options;
     }
 
+    /**
+     * Retrieve grouped child categories
+     *
+     * @return array
+     */
     protected function _getChilds()
     {
         if ($this->_childs === null) {

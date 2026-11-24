@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View\Comments;
 
@@ -15,5 +16,8 @@ use Magefan\Blog\Model\Config\Source\CommetType;
  */
 class Disqus extends \Magefan\Blog\Block\Post\View\Comments
 {
+    /**
+     * @var string
+     */
     protected $commetType = CommetType::DISQUS;
 }

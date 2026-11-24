@@ -3,6 +3,7 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Tag;
 
@@ -14,6 +15,8 @@ use Magento\Framework\Controller\ResultFactory;
 class Autocomplete extends \Magefan\Blog\Controller\Adminhtml\Tag
 {
     /**
+     * Execute action
+     *
      * @return \Magento\Framework\Controller\Result\Json
      */
     public function execute()

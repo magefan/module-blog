@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Post\View;
 
 use Magento\Store\Model\ScopeInterface;
@@ -15,10 +17,9 @@ use Magento\Store\Model\ScopeInterface;
 class Richsnippets extends Opengraph
 {
     /**
-     * @param array
+     * @var array
      */
     protected $_options;
-
 
     /**
      * Retrieve snipet params
@@ -49,11 +50,13 @@ class Richsnippets extends Opengraph
     }
 
     /**
-     * @param $type
+     * Retrieve options based on the specified type.
+     *
+     * @param string $type
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getOptionsByType($type)
+    public function getOptionsByType($type): array
     {
         $post = $this->getPost();
 
@@ -115,7 +118,12 @@ class Richsnippets extends Opengraph
                 ];
 
                 $sameAs = [];
-                foreach (['facebook_page_url', 'twitter_page_url', 'instagram_page_url', 'googleplus_page_url', 'linkedin_page_url'] as $key) {
+                $socialPageUrls = [
+                    'facebook_page_url', 'twitter_page_url',
+                    'instagram_page_url', 'bluesky_page_url',
+                    'googleplus_page_url', 'linkedin_page_url'
+                ];
+                foreach ($socialPageUrls as $key) {
                     if ($value = trim($author->getData($key) ?: '')) {
                         $sameAs[] = $value;
                     }
@@ -171,7 +179,6 @@ class Richsnippets extends Opengraph
             . json_encode($options)
             . '</script>';
     }
-
 
     /**
      * Retrieve page title

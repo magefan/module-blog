@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Archive;
 
@@ -12,24 +13,28 @@ trait Archive
 {
     /**
      * Get archive month
-     * @return int
+     *
+     * @return string
      */
-    public function getMonth()
+    public function getMonth(): string
     {
-        return (int)$this->_coreRegistry->registry('current_blog_archive_month');
+        return (string)$this->_coreRegistry->registry('current_blog_archive_month');
     }
 
     /**
      * Get archive year
+     *
      * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return (int)$this->_coreRegistry->registry('current_blog_archive_year');
     }
 
 
     /**
+     * Filter content
+     *
      * @param string $content
      * @return string
      */
@@ -49,11 +54,11 @@ trait Archive
                         break;
                     case 'month':
                         if ($this->getMonth()) {
-                            $value = date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
+                            $value = __(date('F', strtotime($this->getYear() . '-' . $this->getMonth() . '-01')));
                         }
                         break;
                 }
-                $content = str_replace($schemaVar, $value, $content);
+                $content = str_replace($schemaVar, (string)$value, $content);
             }
         }
         return $content;

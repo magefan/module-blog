@@ -418,3 +418,54 @@ Yönet Posts,Yazıları Yönet
 Add Blog Blocks via Widgets,Kutucukları Kullanarak Blog Blokları Ekle
 "Posts","Yazılar"
 "Search Posts","Ara"
+"New Arrivals","New Arrival"
+"Blog Posts","Blog Yazıları"
+"Blog Categories","Blog Kategorileri"
+"Post Contents","Gönderi İçeriği"
+"hide","saklamak"
+"show","göstermek"
+"You May Also Like","Bunlar da ilginizi çekebilir"
+"People Who Bought This Also Bought:","Bu ürünü satın alanlar ayrıca şunları da satın aldı:"
+"and","ve"
+"Popular Posts","Popüler Gönderiler"
+"Featured Posts","Öne Çıkan Yazılar"
+"min read","dakika okuma"
+"Latest From %1","Son Gönderi %1"
+"Co-author","Ortak yazar"
+"Author","Yazar"
+Add New Comment,Yeni Yorum Ekle
+Add With AI,AI ile Ekle
+AI Writer is not enabled. Please enable it first.,AI Writer etkin değil. Lütfen önce etkinleştirin.
+and,ve
+Archive %1,Arşiv %1
+Blank (Use widgets to build the page content),Boş (İçerik oluşturmak için widget'ları kullanın)
+"Blog Plus <b>Advanced Permalink Settings</b> are enabled.","Blog Plus <b>Gelişmiş Kalıcı Bağlantı Ayarları</b> etkin."
+Bottom (Horizontal),Alt (Yatay)
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API Anahtarı ""AI Writer"" konfigürasyonlarında eksik."
+General Information,Genel Bilgi
+Grid - 1 column (Blog Extra),Izgara - 1 sütun (Blog Extra)
+Grid - 2 columns (Blog Extra),Izgara - 2 sütun (Blog Extra)
+Grid - 3 columns (Blog Extra),Izgara - 3 sütun (Blog Extra)
+Grid and List (Blog Extra),Izgara ve Liste (Blog Extra)
+Left (Vertical),Sol (Dikey)
+List (Blog Extra),Liste (Blog Extra)
+min read,dakika okuma
+Month And Year,Ay ve Yıl
+Other Grids (Blog Extra),Diğer Izgaralar (Blog Extra)
+Page,Sayfa
+/page/N,/page/N
+?page=N,?page=N
+Please enter valid email,Lütfen geçerli bir e-posta giriniz
+Please select post IDs,Lütfen yazı numaralarını seçiniz
+?p=N,?p=N
+Post Id,Yazı No
+Right (Vertical),Sağ (Dikey)
+Select Post IDs ...,Yazı numaralarını seçiniz ...
+Share on %1,%1'de paylaş
+Slider (Blog Extra),Kaydırıcı (Blog Extra)
+"This option is available in <strong>%1</strong> plan only.","Bu seçenek yalnızca <strong>%1</strong> planında mevcuttur."
+"This option is available in <strong>Plus or Extra</strong> plans only.","Bu seçenek yalnızca <strong>Plus veya Extra</strong> planlarında mevcuttur."
+Top (Horizontal),Üst (Yatay)
+URL key is already in use by another tag item.,Bu adres anahtarı zaten başka bir etiket içeriğine ait.
+Year,Yıl
+"Last updated:","Son güncelleme:"

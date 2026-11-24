@@ -52,9 +52,10 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve post ids string
+     *
      * @return string
      */
-    protected function getPostIdsConfigValue()
+    protected function getPostIdsConfigValue(): string
     {
         return (string)$this->_scopeConfig->getValue(
             'mfblog/sidebar/'.$this->_widgetKey.'/posts_ids',
@@ -63,15 +64,27 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
+     * Get block cache identities
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        if (!$this->getConfigValue('enabled')) {
+            return [];
+        }
+
+        return parent::getIdentities();
+    }
+
+    /**
      * Retrieve true if display the post image is enabled in the config
+     *
      * @return bool
      */
-    public function getDisplayImage()
+    public function getDisplayImage(): bool
     {
-        return (bool)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/display_image',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getConfigValue('display_image');
     }
 
     /**
@@ -81,10 +94,7 @@ class Featured extends \Magefan\Blog\Block\Post\PostList\AbstractList
      */
     public function getTemplate()
     {
-        $templateName = (string)$this->_scopeConfig->getValue(
-            'mfblog/sidebar/'.$this->_widgetKey.'/template',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $templateName = $this->getData('template_type') ?: (string)$this->getConfigValue('template');
         if ($template = $this->templatePool->getTemplate('blog_post_sidebar_posts', $templateName)) {
             $this->_template = $template;
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magefan\Blog\Block\Social;
 
 use Magento\Store\Model\ScopeInterface;
@@ -11,7 +13,7 @@ class AddThis extends \Magento\Framework\View\Element\Template
      *
      * @return boolean
      */
-    public function getAddThisEnabled()
+    public function getAddThisEnabled(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/social/add_this_enabled',
@@ -45,6 +47,11 @@ class AddThis extends \Magento\Framework\View\Element\Template
         );
     }
 
+    /**
+     * Renders the HTML output if the required conditions are met.
+     *
+     * @return string
+     */
     public function toHtml()
     {
         if (!$this->getAddThisEnabled() || !$this->getAddThisPubId()) {

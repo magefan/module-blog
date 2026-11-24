@@ -105,7 +105,7 @@
                 </item>
             </argument>
         </field>
-        <field name="path">
+        <field name="parent">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magefan\Blog\Model\Config\Source\CategoryPath</item>
                 <item name="config" xsi:type="array">
@@ -114,7 +114,7 @@
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="component" xsi:type="string">Magefan_Blog/js/components/new-category</item>
                     <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
-                    <item name="dataScope" xsi:type="string">data.path</item>
+                    <item name="dataScope" xsi:type="string">data.parent</item>
                     <item name="filterOptions" xsi:type="boolean">true</item>
                     <item name="chipsEnabled" xsi:type="boolean">true</item>
                     <item name="showCheckbox" xsi:type="boolean">true</item><!--default is true -->

@@ -32,14 +32,14 @@ The import process completed. %1 posts and %2 categories where imported. Some po
 Nothing to import.,Nič na import.
 Can not make import.,Nie je možné vykonať import.
 Something went wrong: ,Niečo sa pokazilo:
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Prosím zadajte vaše meno a e-mail"
 Blog Import from WordPress,Import blogu z WordPress
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Text komentára je príliš krátky."
 Please select,Prosím vyber
 Use Facebook Comments,Použite komentáre na Facebooku
 Use Disqus Comments,Použite komentáre Disqus
 Use Google Comments,Použite Google Comments
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Odporúčané blogové príspevky"
 Yes (With auto trigger),Áno (s automatickým spúšťaním)
 Yes (Without auto trigger),Áno (bez automatického spúšťania)
 Parameter %1 is required,Parameter %1 je povinný
@@ -57,7 +57,7 @@ Categories:,Kategórie:
 Tags:,Tagy:
 Author:,Autor:
 We can't find posts matching the selection.,Nemôžeme nájsť príspevky zodpovedajúce výberu.
-"Read more","Read more"
+"Read more","Čítať viac"
 Read more &#187;,Čítaj viac &#187;
 See more,Pozri viac
 Read %1,Čítaj %1
@@ -72,7 +72,7 @@ Recent Posts,Posledné články
 RSS Feed,RSS zdroj
 Search posts here...,Hľadať príspevky tu...
 Tags,Tagy
-"Read more >","Read more >"
+"Read more >","Čítať viac >"
 MageFan Extensions,Rozšírenia MageFan
 Blog Information,Informácie o blogu
 Blog Index Page,Indexová stránka blogu
@@ -203,3 +203,117 @@ Import from CSV,Import z CSV
 Import from XML,Import z XML
 "Yes, I have read the %1 and agree to the processing of my personal data.","Áno, prečítal som si %1 a súhlasím so spracovaním mojich osobných údajov."
 privacy policy,zásady ochrany osobných údajov
+"New Arrivals","Nové príchody"
+"Blog Posts","Príspevky na blogu"
+"Blog Categories","Kategórie blogu"
+"Post Contents","Obsah príspevku"
+"hide","skryť"
+"show","show"
+"You May Also Like","Mohlo by sa vám tiež páčiť"
+"People Who Bought This Also Bought:","Ľudia, ktorí si toto kúpili, kúpili aj:"
+"and","a"
+"Popular Posts","Populárne príspevky"
+"Featured Posts","Odporúčané príspevky"
+"min read","minúta čítania"
+"Latest From %1","Najnovšie z %1"
+"Co-author","Spoluautor"
+"Author","Autor"
+Add New Comment,Pridať nový komentár
+Add New Images,Pridať nové obrázky
+Add New Tag,Pridať nový tag
+Add to Cart,Pridať do košíka
+Add to Compare,Pridať na porovnanie
+Add to Wish List,Pridať na zoznam prianí
+Add With AI,Pridať s AI
+Admin,Administrátor
+AI Writer is not enabled. Please enable it first.,AI Writer nie je povolený. Najprv ho prosím povoľte.
+All Authors,Všetci autori
+All Blog Pages,Všetky stránky blogu
+All Categories,Všetky kategórie
+and,a
+Approved,Schválené
+Archive %1,Archív %1
+Blank (Use widgets to build the page content),Prázdne (Použite widgety na vytvorenie obsahu stránky)
+Blog Archive Page,Stránka archívu blogu
+Blog Author Page,Stránka autora blogu
+Blog Category Page,Stránka kategórie blogu
+"Blog Plus <b>Advanced Permalink Settings</b> are enabled.","Blog Plus <b>Pokročilé nastavenia trvalých odkazov</b> sú povolené."
+Blog Post Page,Stránka príspevku blogu
+Blog Tag Page,Stránka tagu blogu
+Bottom (Horizontal),Dole (Horizontálne)
+Browse to find or drag image here,Prehľadávať alebo pretiahnite obrázok sem
+Cancel,Zrušiť
+Categories,Kategórie
+Category,Kategória
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Kľúč API Chat-GPT chýba v konfigurácii ""AI Writer""."
+Comments:,Komentáre:
+Customer,Zákazník
+Database connection error,Chyba pripojenia k databáze
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Predvolené: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Odstrániť obrázok
+Disabled,Zakázané
+Duplicated,Duplikované
+Email,E-mail
+Enabled,Povolené
+General Information,Všeobecné informácie
+Go to Home Page,Prejsť na domovskú stránku
+Grid - 1 column (Blog Extra),Mriežka - 1 stĺpec (Blog Extra)
+Grid - 2 columns (Blog Extra),Mriežka - 2 stĺpce (Blog Extra)
+Grid - 3 columns (Blog Extra),Mriežka - 3 stĺpce (Blog Extra)
+Grid and List (Blog Extra),Mriežka a zoznam (Blog Extra)
+Guest,Hosť
+Hidden,Skryté
+Home,Domov
+"Images (.gif, .jpg, .png)","Obrázky (.gif, .jpg, .png)"
+Import Tags,Importovať tagy
+In stock,Na sklade
+Leave a review about the blog extension,Zanechajte recenziu na doplnok blogu
+Left (Vertical),Vľavo (Vertikálne)
+List (Blog Extra),Zoznam (Blog Extra)
+min read,min čítania
+Month And Year,Mesiac a rok
+Need a new blog feature?,Potrebujete novú funkciu blogu?
+No,Nie
+Not Approved,Neschválené
+Other Grids (Blog Extra),Ostatné mriežky (Blog Extra)
+Out of stock,Nie na sklade
+Page,Stránka
+/page/N,/page/N
+?page=N,?page=N
+Pending,Čaká
+Please enter valid email,Prosím zadajte platný e-mail
+Please select post IDs,Prosím vyberte ID príspevkov
+?p=N,?p=N
+Position,Pozícia
+Post Id,ID príspevku
+Posts (default),Príspevky (predvolené)
+Posts Links,Odkazy na príspevky
+Posts loader,Načítač príspevkov
+Posts & Subcategories Links,Príspevky a odkazy na podkategórie
+Publish Date (default),Dátum zverejnenia (predvolené)
+Related Products,Súvisiace produkty
+Requested item doesn't exist,Požadovaná položka neexistuje
+Right (Vertical),Vpravo (Vertikálne)
+Search,Hľadať
+Select Post IDs ...,Vyberte ID príspevkov ...
+Share on %1,Zdieľať na %1
+Short: mystore.com/{blog_route}/post-title/,Krátke: mystore.com/{blog_route}/post-title/
+Sign In,Prihlásiť sa
+Slider (Blog Extra),Posuvník (Blog Extra)
+Something went wrong %1,Niečo sa pokazilo %1
+Something went wrong while saving the file(s).,Pri ukladaní súboru(ov) sa niečo pokazilo.
+Subcategories Links,Odkazy na podkategórie
+Submit,Odoslať
+Tag,Tag
+"This option is available in <strong>%1</strong> plan only.","Táto možnosť je dostupná iba v pláne <strong>%1</strong>."
+"This option is available in <strong>Plus or Extra</strong> plans only.","Táto možnosť je dostupná iba v plánoch <strong>Plus alebo Extra</strong>."
+Title,Názov
+Top (Horizontal),Hore (Horizontálne)
+Unable to remove item,Nie je možné odstrániť položku
+Unable to save item,Nie je možné uložiť položku
+URL key is already in use by another blog item.,URL kľúč je už používaný iným prvkom blogu.
+URL key is already in use by another tag item.,URL kľúč je už používaný iným prvkom tagu.
+Use Magefan Blog Comments,Používať komentáre Magefan Blog
+Views:,Zobrazenia:
+Year,Rok
+"Last updated:","Naposledy aktualizované:"

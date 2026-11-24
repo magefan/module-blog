@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
@@ -38,23 +39,23 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     /**
      * Posts's Statuses
      */
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 0;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 0;
 
     /**
      * blog cache post
      */
-    const CACHE_TAG = 'mfb_p';
+    public const CACHE_TAG = 'mfblog_p';
 
     /**
      * Gallery images separator constant
      */
-    const GALLERY_IMAGES_SEPARATOR = ';';
+    public const GALLERY_IMAGES_SEPARATOR = ';';
 
     /**
      * Base media folder path
      */
-    const BASE_MEDIA_PATH = 'magefan_blog';
+    public const BASE_MEDIA_PATH = 'magefan_blog';
 
     /**
      * Prefix of model events names
@@ -185,6 +186,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param array $data
      * @param \Magefan\Blog\Api\AuthorRepositoryInterface|null $authorRepository
      * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
+     * @param TimezoneInterface|null $timezone
+     * @param \Magefan\Blog\Api\ShortContentExtractorInterface|null $shortContentExtractor
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -204,7 +208,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         array $data = [],
         ?\Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
         ?\Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
-        ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
+        ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null,
+        ?\Magefan\Blog\Api\ShortContentExtractorInterface $shortContentExtractor = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -228,6 +233,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
             \Magento\Framework\Stdlib\DateTime\TimezoneInterface::class
         );
+        $this->shortContentExtractor =
+            $shortContentExtractor ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+                \Magefan\Blog\Api\ShortContentExtractorInterface::class
+            );
     }
 
     /**
@@ -298,13 +307,14 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      *
      * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return (string)$this->getData('identifier');
     }
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -314,36 +324,41 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve model title
+     *
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Posts' : 'Post';
     }
 
     /**
      * Deprecated
+     *
      * Retrieve true if post is active
+     *
      * @return boolean [description]
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**
      * Retrieve available post statuses
+     *
      * @return array
      */
-    public function getAvailableStatuses()
+    public function getAvailableStatuses(): array
     {
         return [self::STATUS_DISABLED => __('Disabled'), self::STATUS_ENABLED => __('Enabled')];
     }
 
     /**
      * Check if post identifier exist for specific store
-     * return post id if post exists
+     *
+     * Return post id if post exists
      *
      * @param string $identifier
      * @param int $storeId
@@ -356,6 +371,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post url path
+     *
      * @return string
      */
     public function getUrl()
@@ -365,6 +381,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post url
+     *
      * @return string
      */
     public function getPostUrl()
@@ -379,6 +396,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post canonical url
+     *
      * @return string
      */
     public function getCanonicalUrl()
@@ -388,6 +406,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve featured image url
+     *
      * @return string
      */
     public function getFeaturedImage()
@@ -406,6 +425,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve featured link image url
+     *
      * @return mixed
      */
     public function getFeaturedListImage()
@@ -447,6 +467,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve media gallery images url
+     *
      * @return string
      */
     public function getGalleryImages()
@@ -476,6 +497,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve first image url
+     *
      * @return string
      */
     public function getFirstImage()
@@ -515,6 +537,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve short filtered content
+     *
      * @param  mixed $len
      * @param  mixed $endCharacters
      * @return string
@@ -547,20 +570,22 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve short filtered content,escaping imgs
+     *
      * @param  mixed $len
      * @param  mixed $endCharacters
      * @return string
      */
-    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null)
+    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null): ?string
     {
         return preg_replace('<img([\w\W]+?)/>', '', $this->getShortFilteredContent($len, $endCharacters));
     }
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -572,6 +597,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
     public function getMetaDescription()
@@ -606,9 +632,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve og title
+     *
      * @return string
      */
-    public function getOgTitle()
+    public function getOgTitle(): string
     {
         $title = $this->getData('og_title');
         if (!$title) {
@@ -620,9 +647,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve og description
+     *
      * @return string
      */
-    public function getOgDescription()
+    public function getOgDescription(): string
     {
         $desc = $this->getData('og_description');
         if (!$desc) {
@@ -633,15 +661,16 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 $desc = mb_substr($desc, 0, 300);
             }
         }
-
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction
         return trim(html_entity_decode($desc));
     }
 
     /**
      * Retrieve og type
+     *
      * @return string
      */
-    public function getOgType()
+    public function getOgType(): string
     {
         $type = $this->getData('og_type');
         if (!$type) {
@@ -653,6 +682,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve og image url
+     *
      * @return string
      */
     public function getOgImage()
@@ -671,6 +701,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post parent categories
+     *
      * @return array
      */
     public function getParentCategories()
@@ -684,7 +715,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         if ($category->getId() && $category->isVisibleOnStore($this->getStoreId())) {
                             $this->_parentCategories[$categoryId] = $category;
                         }
-                    } catch (NoSuchEntityException $e) {
+                    } catch (NoSuchEntityException $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
 
                     }
                 }
@@ -697,17 +728,19 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Sort by position param
-     * @param $a
-     * @param $b
+     *
+     * @param object $a
+     * @param object $b
      * @return int
      */
-    public function sortByPositionDesc($a, $b)
+    public function sortByPositionDesc($a, $b): int
     {
         return strcmp($b->getPosition(), $a->getPosition());
     }
 
     /**
      * Retrieve parent category
+     *
      * @return \Magefan\Blog\Model\Category || false
      */
     public function getParentCategory()
@@ -728,15 +761,17 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post parent categories count
+     *
      * @return int
      */
-    public function getCategoriesCount()
+    public function getCategoriesCount(): int
     {
         return count($this->getParentCategories());
     }
 
     /**
      * Retrieve post tags
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
      */
     public function getRelatedTags()
@@ -754,24 +789,27 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post tags
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
      */
-    public function getRelatedCoauthors()
+    public function getRelatedCoauthors(): array
     {
         return [];
     }
 
     /**
      * Retrieve post tags count
+     *
      * @return int
      */
-    public function getTagsCount()
+    public function getTagsCount(): int
     {
         return count($this->getRelatedTags());
     }
 
     /**
      * Retrieve post comments
+     *
      * @param  boolean $active
      * @return \Magefan\Blog\Model\ResourceModel\Comment\Collection
      */
@@ -787,6 +825,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve active comments count
+     *
      * @return int
      */
     public function getCommentsCount()
@@ -810,6 +849,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post related posts
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Post\Collection
      */
     public function getRelatedPosts()
@@ -833,11 +873,13 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post related products
+     *
+     * @param boolean $useCache
      * @return \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
-    public function getRelatedProducts()
+    public function getRelatedProducts($useCache = true)
     {
-        if (!$this->hasData('related_products')) {
+        if (!$this->hasData('related_products') || !$useCache) {
             $collection = $this->_productCollectionFactory->create();
 
             if ($this->getStoreId()) {
@@ -846,13 +888,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
             $collection->getSelect()->joinLeft(
                 ['rl' => $this->getResource()->getTable('magefan_blog_post_relatedproduct')],
-                'e.entity_id = rl.related_id',
+                'e.entity_id = rl.related_id AND rl.post_id = ' . (int)$this->getId(),
                 ['position']
             )->where(
                 'rl.post_id = ?',
                 $this->getId()
             );
-
             $this->setData('related_products', $collection);
         }
 
@@ -861,6 +902,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post author
+     *
      * @return \Magefan\Blog\Api\AuthorInterface | false
      */
     public function getAuthor()
@@ -874,7 +916,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                     if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
                         $author = $_author;
                     }
-                } catch (NoSuchEntityException $e) {
+                } catch (NoSuchEntityException $e) {// phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
 
                 }
             }
@@ -885,9 +927,11 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int|null $storeId
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->getIsActive()
             && $this->getData('publish_time') <= $this->getResource()->getDate()->gmtDate()
@@ -896,16 +940,21 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve if is preview secret is valid
+     *
+     * @param string $secret
      * @return bool
+     * @deprecated Preview secret is managed by the preview url model
+     * @see \Magefan\Blog\Model\PreviewUrl::getUrl()
      */
-    public function isValidSecret($secret)
+    public function isValidSecret($secret): bool
     {
         return ($secret && $this->getSecret() === $secret);
     }
 
     /**
      * Retrieve post publish date using format
-     * @param  string $format
+     *
+     * @param string $format
      * @return string
      */
     public function getPublishDate($format = '')
@@ -932,9 +981,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve true if post publish date display is enabled
+     *
      * @return bool
      */
-    public function isPublishDateEnabled()
+    public function isPublishDateEnabled(): bool
     {
         return (bool)$this->scopeConfig->getValue(
             'mfblog/design/publication_date',
@@ -944,19 +994,47 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post publish date using format
+     *
      * @param  string $format
      * @return string
      */
-    public function getUpdateDate($format = 'Y-m-d H:i:s')
+    public function getUpdateDate($format = '')
     {
+        if (!$format) {
+            $format = $this->scopeConfig->getValue(
+                'mfblog/design/format_date_modified',
+                ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$format) {
+                $format = 'Y-m-d H:i:s';
+            }
+        }
+
+        $gmtTime = $this->getData('update_time');
+        $localTime = $this->timezone->date(new \DateTime($gmtTime))->format('Y-m-d H:i:s');
+
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
-            $this->getData('update_time')
+            $localTime
         );
     }
 
     /**
+     * Check if the modified date is enabled
+     *
+     * @return bool
+     */
+    public function isModifiedDateEnabled(): bool
+    {
+        return (bool)$this->scopeConfig->getValue(
+            'mfblog/design/modified_date',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+    /**
      * Temporary method to get images from some custom blog version. Do not use this method.
+     *
      * @param  string $format
      * @return string
      */
@@ -971,127 +1049,40 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Prepare all additional data
-     * @param  string $format
+     *
      * @return self
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated replaced with getDynamicData
+     * @see getDynamicData
      */
     public function initDinamicData()
     {
-        $keys = [
-            'og_image',
-            'og_type',
-            'og_description',
-            'og_title',
-            'meta_description',
-            'meta_title',
-            'short_filtered_content',
-            'filtered_content',
-            'first_image',
-            'featured_image',
-            'post_url',
-        ];
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $this->$method();
-        }
-
-        return $this;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Post::initDinamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Post::getDynamicData instead.'
+        ));
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
+     *
      * @param null|array $fields
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData($fields = null)
     {
-        $data = $this->getData();
-
-        $keys = [
-            'og_image',
-            'og_type',
-            'og_description',
-            'og_title',
-            'meta_description',
-            'meta_title',
-            'short_filtered_content',
-            'filtered_content',
-            'first_image',
-            'featured_image',
-            'post_url',
-        ];
-
-        foreach ($keys as $key) {
-            if (null === $fields || array_key_exists($key, $fields)) {
-                $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
-                $data[$key] = $this->$method();
-            }
-        }
-
-        if (null === $fields || array_key_exists('tags', $fields)) {
-            $tags = [];
-            foreach ($this->getRelatedTags() as $tag) {
-                $tags[] = $tag->getDynamicData(
-                // isset($fields['tags']) ? $fields['tags'] : null
-                );
-            }
-            $data['tags'] = $tags;
-        }
-
-        /* Do not use check for null === $fields here
-         * this checks is used for REST, and related data was not provided via reset */
-        if (is_array($fields) && array_key_exists('related_posts', $fields)) {
-            $relatedPosts = [];
-            foreach ($this->getRelatedPosts() as $relatedPost) {
-                $relatedPosts[] = $relatedPost->getDynamicData(
-                    isset($fields['related_posts']) ? $fields['related_posts'] : null
-                );
-            }
-            $data['related_posts'] = $relatedPosts;
-        }
-
-        /* Do not use check for null === $fields here */
-        if (is_array($fields) && array_key_exists('related_products', $fields)) {
-            $relatedProducts = [];
-            foreach ($this->getRelatedProducts() as $relatedProduct) {
-                $relatedProducts[] = $relatedProduct->getSku();
-            }
-            $data['related_products'] = $relatedProducts;
-        }
-
-        if (null === $fields || array_key_exists('categories', $fields)) {
-            $categories = [];
-            foreach ($this->getParentCategories() as $category) {
-                $categories[] = $category->getDynamicData(
-                    isset($fields['categories']) ? $fields['categories'] : null
-                );
-            }
-            $data['categories'] = $categories;
-        }
-
-        if (null === $fields || array_key_exists('author', $fields)) {
-            if ($author = $this->getAuthor()) {
-                $data['author'] = $author->getDynamicData(
-                //isset($fields['author']) ? $fields['author'] : null
-                );
-            }
-        }
-
-        return $data;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Post::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Post::getDynamicData instead.'
+        ));
     }
 
     /**
      * Duplicate post and return new object
+     *
      * @return self
      */
     public function duplicate()
@@ -1123,7 +1114,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve secret key of post, it can be used during preview
+     *
      * @return string
+     * @deprecated Preview secret is managed by the preview url model
+     * @see \Magefan\Blog\Model\PreviewUrl::getUrl()
      */
     public function getSecret()
     {
@@ -1140,6 +1134,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve updated at time
+     *
      * @return mixed
      */
     public function getUpdatedAt()
@@ -1148,23 +1143,21 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve the short content extractor instance
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()
     {
-        if (null === $this->shortContentExtractor) {
-            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
-                ->get(ShortContentExtractorInterface::class);
-        }
-
         return $this->shortContentExtractor;
     }
 
     /**
      * Retrieve reading time
+     *
      * @return int
      */
-    public function getReadingTime()
+    public function getReadingTime(): int
     {
         if (!$this->getData('reading_time')) {
             $wpm = 250;

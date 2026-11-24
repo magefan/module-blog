@@ -16,11 +16,25 @@
                     <item name="disable" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="string">60</item>
                 </item>
+                <item name="redirectblog" xsi:type="array">
+                    <item name="class" xsi:type="string">Magefan\Blog\Controller\RedirectBlog</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">61</item>
+                </item>
             </argument>
         </arguments>
     </type>
 
     <type name="Magento\Framework\App\Config\ScopeConfigInterface">
         <plugin name="magefan_blog_plugin_framework_app_config_scopeconfiginterface" type="\Magefan\Blog\Plugin\Magento\Framework\App\Config\ScopeConfigInterfacePlugin" sortOrder="10"/>
+    </type>
+    <type name="Magefan\Blog\Plugin\Magento\Framework\App\Config\ScopeConfigInterfacePlugin">
+        <arguments>
+            <argument name="request" xsi:type="object">Magento\Framework\App\RequestInterface\Proxy</argument>
+            <argument name="config" xsi:type="object">Magefan\Blog\Model\Config\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\Template">
+        <plugin name="magefan_blog_plugin_framework_view_element_template" type="Magefan\Blog\Plugin\Magento\Framework\View\Element\Frontend\TemplatePlugin" sortOrder="10" />
     </type>
 </config>

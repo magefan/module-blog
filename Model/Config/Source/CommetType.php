@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -16,27 +17,27 @@ class CommetType implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const int
      */
-    const DISABLED = 0;
+    public const DISABLED = 0;
 
     /**
      * @const string
      */
-    const MAGEFAN = 'magefan';
+    public const MAGEFAN = 'magefan';
 
     /**
      * @const string
      */
-    const FACEBOOK = 'facebook';
+    public const FACEBOOK = 'facebook';
 
     /**
      * @const string
      */
-    const DISQUS = 'disqus';
+    public const DISQUS = 'disqus';
 
     /**
      * @const string
      */
-    const GOOGLE = 'google';
+    public const GOOGLE = 'google';
 
     /**
      * Options getter
@@ -59,7 +60,7 @@ class CommetType implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

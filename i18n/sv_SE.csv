@@ -32,14 +32,14 @@ Blog,Blogg
 "Nothing to import.","Inget att importera."
 "Can not make import.","Kan inte genomföra importen."
 "Something went wrong: ","Något gick fel: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Ange ditt namn och din e-postadress"
 "Blog Import from WordPress","Bloggimport från WordPress"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Kommentarstexten är för kort."
 "Please select","Vänligen välj"
 "Use Facebook Comments","Använd Facebook-kommentarer"
 "Use Disqus Comments","Använd Disqus-kommentarer"
 "Use Google Comments","Använd Googles kommentarer"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Utvalda blogginlägg"
 "Yes (With auto trigger)","Ja (Med automatisk utlösare)"
 "Yes (Without auto trigger)","Ja (Utan automatisk utlösare)"
 "Parameter %1 is required","Parameter %1 krävs"
@@ -57,7 +57,7 @@ Categories:,Kategorier:
 Tags:,Taggar:
 Author:,Författare:
 "We can't find posts matching the selection.","Vi kan inte hitta inlägg som matchar valet."
-"Read more","Read more"
+"Read more","Läs mer"
 "Read more &#187;","Läs mer &#187;"
 "See more","Se mer"
 "Read %1","Läs %1"
@@ -72,7 +72,7 @@ Archive,Arkiv
 "RSS Feed","RSS Flöde"
 "Search posts here...","Sök inlägg här..."
 Tags,Taggar
-"Read more >","Read more >"
+"Read more >","Läs mer >"
 "MageFan Extensions","MageFan Tillägg"
 "Blog Information","Blogg Information"
 "Blog Index Page","Blogg Indexsida"
@@ -191,7 +191,7 @@ Published,Publicerad
 "You cannot reply to this comment. Comment is not longer exist.","Du kan inte svara på den här kommentaren. Kommentaren finns inte längre."
 "You cannot reply to this comment.","Du kan inte svara på den här kommentaren."
 "You submitted your comment for moderation.","Du skickade in din kommentar för moderering."
-"Thank you for your comment.","Thank you for your comment."
+"Thank you for your comment.","Tack för din kommentar."
 "Import Categories","Importera Kategorier"
 "Import Comments","Importera Kommentarer"
 "Import Posts","Importera Inlägg"
@@ -240,3 +240,105 @@ Published,Publicerad
 "Blog Author Page","Blogg Författaresida"
 "Blog Archive Page","Blogg Arkivsida"
 "Blog Tag Page","Blogg Taggsida"
+"New Arrivals","Nya varor"
+"Blog Posts","Blogginlägg"
+"Blog Categories","Bloggkategorier"
+"Post Contents","Inläggets innehåll"
+"hide","dölja"
+"show","visa"
+"You May Also Like","Du kanske också gillar"
+"People Who Bought This Also Bought:","Personer som köpte detta köpte också:"
+"and","och"
+"Popular Posts","Populära inlägg"
+"Featured Posts","Utvalda inlägg"
+"min read","min läsning"
+"Latest From %1","Senaste från %1"
+"Co-author","Medförfattare"
+"Author","Författare"
+Add New Comment,Lägg till ny kommentar
+Add New Images,Lägg till nya bilder
+Add to Cart,Lägg i varukorg
+Add to Compare,Lägg till jämförelse
+Add to Wish List,Lägg till önskelista
+Add With AI,Lägg till med AI
+Admin,Administratör
+AI Writer is not enabled. Please enable it first.,AI-skrivaren är inte aktiverad. Vänligen aktivera den först.
+All Authors,Alla författare
+All Categories,Alla kategorier
+and,och
+Approved,Godkänd
+Archive %1,Arkiv %1
+Blank (Use widgets to build the page content),Tom (Använd widgets för att bygga sidinnehållet)
+"Blog Plus <b>Advanced Permalink Settings</b> are enabled.","Blog Plus <b>Avancerade Permalänkinställningar</b> är aktiverade."
+Bottom (Horizontal),Botten (Horisontellt)
+Browse to find or drag image here,Bläddra för att hitta eller dra bild här
+Cancel,Avbryt
+Categories,Kategorier
+Category,Kategori
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API-nyckel saknas i ""AI-skrivar""-konfigurationer."
+Comments:,Kommentarer:
+Customer,Kund
+Database connection error,Databasanslutningsfel
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Standard: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Ta bort bild
+Disabled,Inaktiverad
+Duplicated,Duplicerad
+Email,E-post
+Enabled,Aktiverad
+General Information,Allmän information
+Go to Home Page,Gå till startsida
+Grid - 1 column (Blog Extra),Rutnät - 1 kolumn (Blog Extra)
+Grid - 2 columns (Blog Extra),Rutnät - 2 kolumner (Blog Extra)
+Grid - 3 columns (Blog Extra),Rutnät - 3 kolumner (Blog Extra)
+Grid and List (Blog Extra),Rutnät och lista (Blog Extra)
+Guest,Gäst
+Hidden,Dold
+Home,Hem
+"Images (.gif, .jpg, .png)","Bilder (.gif, .jpg, .png)"
+In stock,I lager
+Left (Vertical),Vänster (Vertikalt)
+List (Blog Extra),Lista (Blog Extra)
+min read,min läsning
+Month And Year,Månad och år
+Need a new blog feature?,Behöver du en ny bloggfunktion?
+No,Nej
+Not Approved,Inte godkänd
+Other Grids (Blog Extra),Andra rutnät (Blog Extra)
+Out of stock,Slut i lager
+Page,Sida
+/page/N,/page/N
+?page=N,?page=N
+Pending,Väntande
+Please enter valid email,Ange en giltig e-postadress
+Please select post IDs,Välj inläggs-ID:n
+?p=N,?p=N
+Position,Position
+Post Id,Inläggs-ID
+Posts (default),Inlägg (standard)
+Posts Links,Inläggslänkar
+Posts loader,Inläggsladdare
+Posts & Subcategories Links,Inlägg och underkategorilänkar
+Related Products,Relaterade produkter
+Requested item doesn't exist,Begärt objekt finns inte
+Right (Vertical),Höger (Vertikalt)
+Search,Sök
+Select Post IDs ...,Välj inläggs-ID:n ...
+Share on %1,Dela på %1
+Short: mystore.com/{blog_route}/post-title/,Kort: mystore.com/{blog_route}/post-title/
+Sign In,Logga in
+Slider (Blog Extra),Skjutreglage (Blog Extra)
+Something went wrong %1,Något gick fel %1
+Something went wrong while saving the file(s).,Något gick fel vid sparandet av filen/filerna.
+Subcategories Links,Underkategorilänkar
+Submit,Skicka
+"This option is available in <strong>%1</strong> plan only.","Denna alternativ är tillgänglig endast i <strong>%1</strong>-planen."
+"This option is available in <strong>Plus or Extra</strong> plans only.","Denna alternativ är tillgänglig endast i <strong>Plus eller Extra</strong>-planerna."
+Title,Titel
+Top (Horizontal),Topp (Horisontellt)
+Unable to remove item,Det går inte att ta bort objektet
+Unable to save item,Det går inte att spara objektet
+URL key is already in use by another blog item.,URL-nyckeln används redan av ett annat bloggobjekt.
+URL key is already in use by another tag item.,URL-nyckeln används redan av ett annat taggobjekt.
+Views:,Visningar:
+Year,År
+"Last updated:","Senast uppdaterad:"

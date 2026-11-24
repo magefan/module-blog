@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Ui\DataProvider\Post\Form;
 
 use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
@@ -60,7 +62,7 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @param array $meta
      * @return array
      */
-    public function prepareMeta(array $meta)
+    public function prepareMeta(array $meta): array
     {
         return $meta;
     }
@@ -125,7 +127,12 @@ class PostDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                 $itemData['id'] = $item->getId();
                 /* Fix for big request data array */
                 foreach ($itemData as $key => $value) {
-                    if (!in_array($key, ['entity_id', 'position', 'display_on_product', 'display_on_post', 'auto_related', 'related_by_rule', 'name', 'store_id', 'id'])) {
+                    if (!in_array($key, [
+                        'entity_id', 'position',
+                        'display_on_product', 'display_on_post',
+                        'auto_related', 'related_by_rule',
+                        'name', 'store_id', 'id'
+                        ])) {
                         unset($itemData[$key]);
                     }
                 }

@@ -5,8 +5,12 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\ResourceModel;
+
+use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Blog category resource model
@@ -24,23 +28,32 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected static $allStoreIds;
 
     /**
+     * @var CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
+     * @param CollectionFactory $collectionFactory
      * @param string|null $resourcePrefix
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         \Magento\Framework\Stdlib\DateTime $dateTime,
+        CollectionFactory $collectionFactory,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
         $this->dateTime = $dateTime;
+        $this->collectionFactory = $collectionFactory;
     }
 
     /**
      * Initialize resource model
+     *
      * Get tablename from config
      *
      * @return void
@@ -63,7 +76,44 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->getConnection()->delete($this->getTable('magefan_blog_category_store'), $condition);
         $this->getConnection()->delete($this->getTable('magefan_blog_post_category'), $condition);
 
+        $this->deleteChildren($object);
+
         return parent::_beforeDelete($object);
+    }
+
+    /**
+     * Delete children categories.
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return void
+     */
+    protected function deleteChildren(\Magento\Framework\Model\AbstractModel $object): void
+    {
+        $connection = $this->getConnection();
+        $path = $object->getFullPath();
+
+        $childIds = $connection->fetchCol(
+            $s = $connection->select()
+                ->from($this->getMainTable(), ['category_id', 'position'])
+                ->where('path = ?', "{$path}")
+        );
+
+        if (empty($childIds)) {
+            return;
+        }
+
+        $connection->delete(
+            $this->getTable('magefan_blog_category_store'),
+            ['category_id IN (?)' => $childIds]
+        );
+        $connection->delete(
+            $this->getTable('magefan_blog_post_category'),
+            ['category_id IN (?)' => $childIds]
+        );
+        $connection->delete(
+            $this->getMainTable(),
+            ['category_id IN (?)' => $childIds]
+        );
     }
 
     /**
@@ -103,7 +153,56 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             );
         }
 
+        if ($object->isObjectNew()) {
+            $parentId = $object->getData('parent_id');
+            $parentCategory = $this->getParentCategory($parentId);
+
+            $path = $parentCategory->getPath();
+
+            if ($parentId) {
+                if ($path) {
+                    $path .= '/' . $parentId;
+                } else {
+                    $path = $parentId;
+                }
+            }
+
+            $object->setPath($path);
+
+            if (!$object->getPosition()) {
+                $object->setPosition($this->_getMaxPosition($object->getPath()) + 1);
+            }
+
+            $path = explode('/', (string)$object->getPath());
+            $level = $object->getPath() ? count($path) + 1 : 1;
+
+            if (!$object->hasLevel()) {
+                $object->setLevel($level);
+            }
+        }
+
         return parent::_beforeSave($object);
+    }
+
+    /**
+     * Get parent category
+     *
+     * @param int $parentId
+     *
+     * @return \Magefan\Blog\Model\Category
+     * @throws LocalizedException
+     */
+    protected function getParentCategory($parentId)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        if (!$parentId) {
+            $parentId = \Magento\Catalog\Model\Category::TREE_ROOT_ID;
+            return $objectManager->create(\Magefan\Blog\Model\Category::class)
+                ->setId($parentId)
+                ->setPath('');
+        }
+
+        return $objectManager->create(\Magefan\Blog\Model\Category::class)->load($parentId);
     }
 
     /**
@@ -178,10 +277,11 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Check if category identifier exist for specific store
-     * return category id if category exists
+     *
+     * Return category id if category exists
      *
      * @param string $identifier
-     * @param int $storeId
+     * @param array $storeIds
      * @return int
      */
     protected function _getLoadByIdentifierSelect($identifier, $storeIds)
@@ -226,11 +326,10 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * Check if category identifier exist for specific store
-     * return page id if page exists
+     * Check if category identifier exist for specific store return page id if page exists
      *
      * @param string $identifier
-     * @param int|array $storeId
+     * @param int|array $storeIds
      * @return false|string
      */
     public function checkIdentifier($identifier, $storeIds)
@@ -240,7 +339,10 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
         $storeIds[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $select = $this->_getLoadByIdentifierSelect($identifier, $storeIds);
-        $select->reset(\Zend_Db_Select::COLUMNS)->columns(['cp.category_id', 'cp.identifier'])->order('cps.store_id DESC')->limit(1);
+        $select->reset(\Magento\Framework\DB\Select::COLUMNS)
+            ->columns(['cp.category_id', 'cp.identifier'])
+            ->order('cps.store_id DESC')
+            ->limit(1);
 
         $row = $this->getConnection()->fetchRow($select);
         if (isset($row['category_id']) && isset($row['identifier'])
@@ -254,7 +356,7 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * Get store ids to which specified item is assigned
      *
-     * @param $categoryId
+     * @param int $categoryId
      * @param bool $useCache
      * @return array|mixed
      */
@@ -286,10 +388,210 @@ class Category extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Retrieve the entity type
+     *
      * @return string
      */
-    public function getEntityType()
+    public function getEntityType(): string
     {
         return 'category';
+    }
+
+    /**
+     * Get maximum position of child categories by specific tree path
+     *
+     * @param string $path
+     * @return int
+     */
+    protected function _getMaxPosition($path)
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()
+            ->from($this->getMainTable(), 'MAX(position)');
+
+        if ($path) {
+            $select->where('path = ?', $path);
+        } else {
+            $select->where('path IS NULL');
+        }
+
+        return (int)$connection->fetchOne($select);
+    }
+
+    /**
+     * Move category to another parent node
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @param \Magefan\Blog\Model\Category $newParent
+     * @param null|int $afterCategoryId
+     * @return $this
+     */
+    public function changeParent(
+        \Magefan\Blog\Model\Category $category,
+        \Magefan\Blog\Model\Category $newParent,
+        $afterCategoryId = null
+    ) {
+        $table = $this->getMainTable();
+        $connection = $this->getConnection();
+        $levelField = $connection->quoteIdentifier('level');
+        $pathField = $connection->quoteIdentifier('path');
+
+        $position = $this->_processPositions($category, $newParent, $afterCategoryId);
+
+        $newPath = $newParent->getPath()
+            ? sprintf('%s/%s', $newParent->getPath(), $newParent->getId())
+            : $newParent->getId();
+
+        $newLevel = $newParent->getId() ? $newParent->getLevel() + 2 : 1;
+        $levelDisposition = $newLevel - ($category->getLevel() + 1);
+
+        $childrenNodesPath = $category->getFullPath();
+        $newChildrenNodesPath = $newPath ? $newPath . '/' . $category->getId() : (string)$category->getId();
+
+        /**
+         * Update children nodes path
+         */
+        $connection->update(
+            $table,
+            [
+                'path' => new \Zend_Db_Expr(
+                    'CONCAT(' . $connection->quote($newChildrenNodesPath) . ', SUBSTRING(' . $pathField . ', '
+                    . (strlen((string)$childrenNodesPath) + 1) . '))'
+                ),
+                'level' => new \Zend_Db_Expr($levelField . ' + ' . $levelDisposition)
+            ],
+            [
+                $connection->quoteInto($pathField . ' = ?', $childrenNodesPath) .
+                ' OR ' .
+                $connection->quoteInto($pathField . ' LIKE ?', $childrenNodesPath . '/%')
+            ]
+        );
+        /**
+         * Update moved category data
+         */
+        $data = [
+            'path' => $newPath,
+            'level' => $newLevel,
+            'position' => $position,
+       //     'parent_id' => $newParent->getId(),
+        ];
+        $connection->update($table, $data, ['category_id = ?' => $category->getId()]);
+
+        // Update category object to new data
+        $category->addData($data);
+        $category->unsetData('path_ids');
+
+        return $this;
+    }
+
+    /**
+     * Process positions of old parent category children and new parent category children.
+     *
+     * Get position for moved category
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @param \Magefan\Blog\Model\Category $newParent
+     * @param null|int $afterCategoryId
+     * @return int
+     */
+    protected function _processPositions($category, $newParent, $afterCategoryId)
+    {
+        $this->makePositionValuesUnique($category);
+
+        $table = $this->getMainTable();
+        $connection = $this->getConnection();
+        $positionField = $connection->quoteIdentifier('position');
+
+        $bind = ['position' => new \Zend_Db_Expr($positionField . ' - 1')];
+        $where = [
+            'path LIKE ?' => "%\\{$category->getParentId()}",
+            $positionField . ' > ?' => $category->getPosition(),
+        ];
+
+        if ($category->getParentId() == 0) {
+            $where = [
+                'path IS NUll',
+                $positionField . ' > ?' => $category->getPosition(),
+            ];
+        }
+
+        $connection->update($table, $bind, $where);
+
+        if (!((int)$afterCategoryId)) {
+            $position = $this->_getMaxPosition($category->getPath()) + 1;
+        } else {
+            /**
+             * Prepare position value
+             */
+            if ($afterCategoryId) {
+                $select = $connection->select()->from($table, 'position')->where('category_id = :category_id');
+                $position = $connection->fetchOne($select, ['category_id' => $afterCategoryId]);
+                $position = (int)$position;
+            } else {
+                $position = 0;
+            }
+        }
+
+        $bind = ['position' => new \Zend_Db_Expr($positionField . ' + 1')];
+        $where = [
+        //    'parent_id = ?' => $newParent->getId(),
+            'path LIKE ?' => "%\\{$newParent->getId()}",
+            $positionField . ' >= ?' => $position
+        ];
+        if ($category->getParentId() == 0) {
+            $where = [
+                'path IS NUll',
+                $positionField . ' >= ?' => $position
+            ];
+        }
+
+        $connection->update($table, $bind, $where);
+
+        return $position;
+    }
+
+    /**
+     * Make position values unique.
+     *
+     * @param \Magefan\Blog\Model\Category $category
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    protected function makePositionValuesUnique(\Magefan\Blog\Model\Category $category): void
+    {
+        $connection = $this->getConnection();
+
+        $select = $connection->select()
+            ->from($this->getMainTable(), ['category_id', 'position'])
+            ->where('path LIKE ?', "%\\{$category->getParentId()}");
+
+        $rows = $connection->fetchAll($select);
+
+        // Group by position
+        $positions = [];
+        foreach ($rows as $row) {
+            $pos = (int)$row['position'];
+            if (!isset($positions[$pos])) {
+                $positions[$pos] = [];
+            }
+            $positions[$pos][] = $row['category_id'];
+        }
+
+        $duplicates = array_filter($positions, function ($ids) {
+            return count($ids) > 1;
+        });
+
+        if (!empty($duplicates)) {
+            // Reassign positions sequentially (3,2,1..)
+            $i = count($rows);
+            foreach ($rows as $row) {
+                $connection->update(
+                    $this->getMainTable(),
+                    ['position' => $i],
+                    ['category_id = ?' => $row['category_id']]
+                );
+                $i--;
+            }
+        }
     }
 }

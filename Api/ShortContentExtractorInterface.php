@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Api;
 
@@ -12,7 +13,8 @@ interface ShortContentExtractorInterface
 {
     /**
      * Retrieve short filtered content
-     * @param string$content
+     *
+     * @param string $content
      * @param mixed $len
      * @param mixed $endCharacters
      * @return string

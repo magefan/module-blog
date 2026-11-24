@@ -17,7 +17,7 @@ class Chooser extends \Magento\Backend\App\Action
     /**
      * Authorization level of a basic admin session
      */
-    const ADMIN_RESOURCE = 'Magento_Widget::widget_instance';
+    public const ADMIN_RESOURCE = 'Magento_Widget::widget_instance';
 
     /**
      * @var LayoutFactory
@@ -42,6 +42,8 @@ class Chooser extends \Magento\Backend\App\Action
     }
 
     /**
+     * Execute view action
+     *
      * @return Raw
      */
     public function execute() : Raw

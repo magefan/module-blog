@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Infortis\UltraMegamenu;
 
@@ -56,7 +57,8 @@ class Topmenu extends \Magento\Framework\View\Element\Text
             $active = ($this->getRequest()->getModuleName() == 'blog');
 
             $html .= '
-            <li class="nav-item level0 level-top classic ' . ($active ? 'active' : '') . ' ' . ($hasChildren ? 'parent nav-item--only-subcategories' : '') . ' ">
+            <li class="nav-item level0 level-top classic ' . ($active ? 'active' : '')
+                . ' ' . ($hasChildren ? 'parent nav-item--only-subcategories' : '') . ' ">
                 <a class="level-top" 
                    href="' . $blogNode->getUrl() . '" 
                    title="' . $this->escapeHtml($blogNode->getName()) . '">
@@ -79,7 +81,15 @@ class Topmenu extends \Magento\Framework\View\Element\Text
         return $html;
     }
 
-    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0)
+    /**
+     * Get submenu items html
+     *
+     * @param \Magento\Framework\Data\Tree\Node\Collection $children
+     * @param int $level
+     * @param int $max_level
+     * @return string
+     */
+    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0): string
     {
         $html = '';
 

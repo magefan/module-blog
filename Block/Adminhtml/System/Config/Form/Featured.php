@@ -9,6 +9,7 @@ namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
 use Magefan\Community\Api\SecureHtmlRendererInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+// phpcs:ignoreFile Generic.Files.LineLength
 
 class Featured extends \Magento\Config\Block\System\Config\Form\Field
 {
@@ -32,6 +33,8 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
     }
 
     /**
+     * Generates and returns a JavaScript implementation for managing featured posts grid interactions.
+     *
      * @return string
      */
     public function getJs() : string
@@ -141,6 +144,8 @@ class Featured extends \Magento\Config\Block\System\Config\Form\Field
     }
 
     /**
+     * Renders the HTML and JavaScript for the custom element.
+     *
      * @param AbstractElement $element
      * @return string
      */

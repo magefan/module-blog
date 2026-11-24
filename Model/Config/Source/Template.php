@@ -43,19 +43,63 @@ class Template implements \Magento\Framework\Option\ArrayInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @codeCoverageIgnore
+     * @inheritdoc
      */
     public function toOptionArray():array
     {
         if (!$this->templateType) {
-            return[];
+            return [];
         }
+
         if (!isset($this->options[$this->templateType])) {
-            $this->options[$this->templateType] = [];
-            foreach ($this->templatePool->getAll($this->templateType) as $value => $info) {
-                $this->options[$this->templateType][] = ['value' => $info['value'], 'label' => $info['label']];
+            if ($this->templateType === 'blog_post_list') {
+                $this->options[$this->templateType] = [
+                    ['label' => __('List (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid - 1 column (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid - 2 columns (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid - 3 columns (Blog Extra)'), 'value' => []],
+                    ['label' => __('Grid and List (Blog Extra)'), 'value' => []],
+                    ['label' => __('Slider (Blog Extra)'), 'value' => []],
+                    ['label' => __('Other Grids (Blog Extra)'), 'value' => []],
+                ];
+
+                $groupMap = [
+                    'list' => 0,
+                    'grid1' => 1,
+                    'grid2' => 2,
+                    'grid3' => 3,
+                    'grid_and_list' => 4,
+                    'slider' => 5,
+                    'other' => 6
+                ];
+                $ungroupedOptions = [];
+                foreach ($this->templatePool->getAll($this->templateType) as $value => $info) {
+                    $option = [
+                        'value' => $info['value'],
+                        'label' => $info['label']
+                    ];
+                    if (isset($info['group']) && isset($groupMap[$info['group']])) {
+                        $index = $groupMap[$info['group']];
+                        $this->options[$this->templateType][$index]['value'][] = $option;
+                    } else {
+                        $ungroupedOptions[] = ['value' => $info['value'], 'label' => $info['label']];
+                    }
+                }
+                $this->options[$this->templateType] = array_filter(
+                    $this->options[$this->templateType],
+                    function ($group): bool {
+                        return !empty($group['value']);
+                    }
+                );
+                $this->options[$this->templateType] = array_merge(
+                    $ungroupedOptions,
+                    $this->options[$this->templateType]
+                );
+            } else {
+                $this->options[$this->templateType] = [];
+                foreach ($this->templatePool->getAll($this->templateType) as $value => $info) {
+                    $this->options[$this->templateType][] = ['value' => $info['value'], 'label' => $info['label']];
+                }
             }
         }
         return $this->options[$this->templateType];

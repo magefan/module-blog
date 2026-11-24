@@ -9,6 +9,80 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework/ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\View\Element\Template">
-        <plugin name="mf_conflict_plugin" type="Magefan\Blog\Plugin\Magento\Framework\View\Element\TemplatePlugin" sortOrder="10" />
+        <plugin name="magefan_blog_plugin_conflict" type="Magefan\Blog\Plugin\Magento\Framework\View\Element\TemplatePlugin" sortOrder="10" />
+    </type>
+    <virtualType name="Magefan\Blog\Ui\Component\Source\Listing\Column\Store"
+                 type="Magento\Store\Ui\Component\Listing\Column\Store">
+        <arguments>
+            <argument name="storeKey" xsi:type="string">store_ids</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Category\Listing\CategoryDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Category\Collection</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">title</item>
+                <item name="1" xsi:type="string">identifier</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Post\Listing\PostDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Post\Collection</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">title</item>
+                <item name="1" xsi:type="string">content</item>
+                <item name="2" xsi:type="string">identifier</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Tag\Listing\TagDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Tag\Collection</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">title</item>
+                <item name="1" xsi:type="string">identifier</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Ui\DataProvider\Comment\Listing\CommentDataProvider"
+                 type="Magefan\Blog\Ui\DataProvider\Listing\ListingDataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magefan\Blog\Model\ResourceModel\Comment\Collection\Grid</argument>
+            <argument name="fulltextFields" xsi:type="array">
+                <item name="0" xsi:type="string">author_nickname</item>
+                <item name="1" xsi:type="string">text</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magefan\Blog\Model\Config\Source\Authors" type="Magefan\Blog\Model\Config\Source\Author">
+        <arguments>
+            <argument name="withEmptyOption" xsi:type="boolean">false</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magefan\Community\Controller\Adminhtml\Promo\Index">
+        <arguments>
+            <argument name="pages" xsi:type="array">
+                <item name="blog_promo_author" xsi:type="array">
+                    <item name="resource" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="menu" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="title" xsi:type="string" translate="true">Authors</item>
+                </item>
+                <item name="blog_promo_subscriber" xsi:type="array">
+                    <item name="resource" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="menu" xsi:type="string">Magefan_Blog::elements</item>
+                    <item name="title" xsi:type="string" translate="true">Comment Subscribers</item>
+                </item>
+            </argument>
+        </arguments>
     </type>
 </config>

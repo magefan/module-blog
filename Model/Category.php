@@ -5,12 +5,19 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
+use Magefan\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magefan\Blog\Model\Url;
+use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magefan\Blog\Api\ShortContentExtractorInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
 
 /**
  * Category model
@@ -38,13 +45,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * blog cache category
      */
-    const CACHE_TAG = 'mfb_c';
+    public const CACHE_TAG = 'mfblog_c';
 
     /**
      * Category's Statuses
      */
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 0;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 0;
+    public const TREE_ROOT_ID = 0;
 
     /**
      * Prefix of model events names
@@ -90,12 +98,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     /**
      * Initialize dependencies.
      *
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magefan\Blog\Model\Url $url
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param Context $context
+     * @param Registry $registry
+     * @param Url $url
+     * @param CollectionFactory $postCollectionFactory
+     * @param AbstractResource|null $resource
+     * @param AbstractDb|null $resourceCollection
      * @param array $data
+     * @throws LocalizedException
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -144,13 +154,19 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
      * @param integer $modelId
      * @param null|string $field
      * @return $this
+     * @throws LocalizedException
      * @deprecated
+     * @see load()
      */
     public function load($modelId, $field = null)
     {
         $object = parent::load($modelId, $field);
-        if (!isset(self::$loadedCategoriesRepository[$object->getId()])) {
-            self::$loadedCategoriesRepository[$object->getId()] = $object;
+        $objectId = (int)$object->getId();
+        if (!$objectId && $modelId && null === $field) {
+            $objectId = (int)$modelId;
+        }
+        if ($objectId && !isset(self::$loadedCategoriesRepository[$objectId])) {
+            self::$loadedCategoriesRepository[$objectId] = $object;
         }
 
         return $object;
@@ -158,16 +174,18 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Load category by id
-     * @param  int $categoryId
+     *
+     * @param int $categoryId
      * @return self
+     * @throws LocalizedException
      */
     private function loadFromRepository($categoryId)
     {
+        $categoryId = (int)$categoryId;
         if (!isset(self::$loadedCategoriesRepository[$categoryId])) {
             $category = clone $this;
             $category->unsetData();
             $category->load($categoryId);
-            $categoryId = $category->getId();
         }
 
         return self::$loadedCategoriesRepository[$categoryId];
@@ -175,6 +193,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -184,40 +203,46 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve model title
+     *
      * @param  boolean $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Categories' : 'Category';
     }
 
     /**
      * Deprecated
+     *
      * Retrieve true if category is active
+     *
      * @return boolean [description]
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**
      * Retrieve available category statuses
+     *
      * @return array
      */
-    public function getAvailableStatuses()
+    public function getAvailableStatuses(): array
     {
         return [self::STATUS_DISABLED => __('Disabled'), self::STATUS_ENABLED => __('Enabled')];
     }
 
     /**
      * Check if category identifier exist for specific store
-     * return category id if category exists
+     *
+     * Return category id if category exists
      *
      * @param string $identifier
      * @param int $storeId
      * @return int
+     * @throws LocalizedException
      */
     public function checkIdentifier($identifier, $storeId)
     {
@@ -225,7 +250,20 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * Get full path.
+     *
+     * @return mixed|string
+     */
+    public function getFullPath()
+    {
+        return $this->getPath()
+            ? $this->getPath() . '/' . $this->getId()
+            : $this->getId();
+    }
+
+    /**
      * Retrieve parent category ids
+     *
      * @return array
      */
     public function getParentIds()
@@ -243,6 +281,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve parent category id
+     *
      * @return array
      */
     public function getParentId()
@@ -257,7 +296,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve parent category
-     * @return self || false
+     *
+     * @return self|false
      */
     public function getParentCategory()
     {
@@ -279,10 +319,11 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Check if current category is parent category
+     *
      * @param  self  $category
      * @return boolean
      */
-    public function isParent($category)
+    public function isParent($category): bool
     {
         if (is_object($category)) {
             $category = $category->getId();
@@ -293,7 +334,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve children category ids
-     * @param  bool  $grandchildren
+     *
+     * @param bool $grandchildren
      * @return array
      */
     public function getChildrenIds($grandchildren = true)
@@ -324,25 +366,40 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Check if current category is child category
-     * @param  self  $category
+     *
+     * @param mixed $category
      * @return boolean
      */
-    public function isChild($category)
+    public function isChild($category): bool
     {
         return $category->isParent($this);
     }
 
     /**
      * Retrieve category depth level
+     *
      * @return int
      */
-    public function getLevel()
+    public function getLevel(): int
     {
         return count($this->getParentIds());
     }
 
     /**
+     * Get path IDs.
+     *
+     * @return array
+     */
+    public function getPathIds()
+    {
+        $pathIds = $this->getParentIds();
+        $pathIds[] = $this->getId();
+        return $pathIds;
+    }
+
+    /**
      * Retrieve catgegory url route path
+     *
      * @return string
      */
     public function getUrl()
@@ -352,6 +409,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve category url
+     *
      * @return string
      */
     public function getCategoryUrl()
@@ -366,6 +424,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve catgegory canonical url
+     *
      * @return string
      */
     public function getCanonicalUrl()
@@ -375,9 +434,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -389,9 +449,10 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
@@ -416,9 +477,11 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int|null $storeId
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->getIsActive()
             && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
@@ -446,109 +509,40 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
 
     /**
      * Prepare all additional data
-     * @param  string $format
-     * @return self
+     *
+     * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException
      * @deprecated replaced with getDynamicData
+     * @see getDynamicData()
      */
     public function initDinamicData()
     {
-        $keys = [
-            'meta_description',
-            'meta_title',
-            'category_url',
-        ];
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $this->$method();
-        }
-
-        return $this;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Category::initDinamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Category::getDynamicData instead.'
+        ));
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
+     *
      * @param null|array $fields
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData()
      */
     public function getDynamicData($fields = null)
     {
-        $data = $this->getData();
-
-        $keys = [
-            'meta_description',
-            'meta_title',
-            'category_url',
-        ];
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $data[$key] = $this->$method();
-        }
-
-        if (is_array($fields) && array_key_exists('breadcrumbs', $fields)) {
-            $breadcrumbs = [];
-
-            $category = $this;
-            $parentCategories = [];
-            while ($parentCategory = $category->getParentCategory()) {
-                $parentCategories[] = $category = $parentCategory;
-            }
-
-            for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
-                $category = $parentCategories[$i];
-
-                $breadcrumbs[] = [
-                    'category_id' => $category->getId(),
-                    'category_name' => $category->getTitle(),
-                    'category_level' => $category->getLevel(),
-                    'category_url_key' => $category->getIdentifier(),
-                    'category_url_path' => $category->getUrl(),
-                ];
-            }
-
-            $category = $this;
-            $breadcrumbs[] = [
-                'category_id' => $category->getId(),
-                'category_name' => $category->getTitle(),
-                'category_level' => $category->getLevel(),
-                'category_url_key' => $category->getIdentifier(),
-                'category_url_path' => $category->getUrl(),
-            ];
-
-            $data['breadcrumbs'] = $breadcrumbs;
-        }
-
-        if (is_array($fields) && array_key_exists('parent_category_id', $fields)) {
-            $data['parent_category_id'] = $this->getParentCategory() ? $this->getParentCategory()->getId() : 0;
-        }
-
-        if (is_array($fields) && array_key_exists('category_level', $fields)) {
-            $data['category_level'] = $this->getLevel();
-        }
-
-        if (is_array($fields) && array_key_exists('posts_count', $fields)) {
-            $data['posts_count'] = $this->getPostsCount();
-        }
-
-        if (is_array($fields) && array_key_exists('category_url_path', $fields)) {
-            $data['category_url_path'] = $this->getUrl();
-        }
-
-        return $data;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Category::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Category::getDynamicData instead.'
+        ));
     }
 
     /**
      * Duplicate category and return new object
+     *
      * @return self
      */
     public function duplicate()
@@ -564,6 +558,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
+     * Retrieves the short content extractor instance, initializing it if not already set.
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()
@@ -577,7 +573,9 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     }
 
     /**
-     * @return array|mixed|null
+     * Retrieves the image URL of the category if available, or false otherwise.
+     *
+     * @return string|false
      */
     public function getCategoryImage()
     {
@@ -591,5 +589,65 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         }
 
         return $this->getData('category_image');
+    }
+
+    /**
+     * Move category
+     *
+     * @param  int $parentId new parent category id
+     * @param  null|int $afterCategoryId category id after which we have put current category
+     * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException|\Exception
+     */
+    public function move($parentId, $afterCategoryId)
+    {
+        try {
+            if ((int)$parentId === self::TREE_ROOT_ID) {
+                $parent = clone $this;
+                $parent->unsetData();
+            } else {
+                $parent = $this->loadFromRepository($parentId);
+            }
+        } catch (NoSuchEntityException $e) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Sorry, but we can\'t find the new parent category you selected.'),
+                $e
+            );
+        }
+
+        if (!$this->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Sorry, but we can\'t find the new category you selected.')
+            );
+        } elseif ($parent->getId() == $this->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('We can\'t move the category because the parent category name matches the child category name.')
+            );
+        }
+
+        $eventParams = [
+            $this->_eventObject => $this,
+            'parent' => $parent,
+            'category_id' => $this->getId(),
+            'prev_parent_id' => $this->getParentId(),
+            'parent_id' => $parentId
+        ];
+
+        $this->_getResource()->beginTransaction();
+        try {
+            $this->_eventManager->dispatch($this->_eventPrefix . '_move_before', $eventParams);
+            $this->getResource()->changeParent($this, $parent, $afterCategoryId);
+            $this->_eventManager->dispatch($this->_eventPrefix . '_move_after', $eventParams);
+            $this->_getResource()->commit();
+
+        } catch (\Exception $e) {
+            $this->_getResource()->rollBack();
+            throw $e;
+        }
+        $this->_eventManager->dispatch('blog_category_move', $eventParams);
+        $this->_eventManager->dispatch('clean_cache_by_tags', ['object' => $this]);
+        $this->_cacheManager->clean([self::CACHE_TAG]);
+
+        return $this;
     }
 }

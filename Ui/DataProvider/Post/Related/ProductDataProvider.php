@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Ui\DataProvider\Post\Related;
 
@@ -66,8 +67,8 @@ class ProductDataProvider extends DataProvider
         RequestInterface $request,
         ProductRepositoryInterface $productRepository,
         ProductLinkRepositoryInterface $productLinkRepository,
-        $addFieldStrategies,
-        $addFilterStrategies,
+        array $addFieldStrategies,
+        array $addFilterStrategies,
         array $meta = [],
         array $data = []
     ) {
@@ -88,7 +89,7 @@ class ProductDataProvider extends DataProvider
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getCollection()
     {
@@ -105,7 +106,7 @@ class ProductDataProvider extends DataProvider
      * @param Collection $collection
      * @return Collection
      */
-    protected function addCollectionFilters(Collection $collection)
+    protected function addCollectionFilters(Collection $collection): Collection
     {
         return $collection;
     }

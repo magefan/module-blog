@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
@@ -42,6 +43,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve available months
+     *
      * @return array
      */
     public function getMonths()
@@ -65,18 +67,20 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve year by time
-     * @param  int $time
+     *
+     * @param int $time
      * @return string
      */
-    public function getYear($time)
+    public function getYear($time): string
     {
         return date('Y', $time);
     }
 
     /**
      * Retrieve month by time
-     * @param  int $time
-     * @return string
+     *
+     * @param int $time
+     * @return \Magento\Framework\Phrase
      */
     public function getMonth($time)
     {
@@ -85,6 +89,7 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve archive url by time
+     *
      * @param  int $time
      * @return string
      */
@@ -105,18 +110,21 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
 
     /**
      * Retrieve empty identities
+     *
      * Fix for varnish error Error 503 Service Unavailable, when have many blog posts
      *
      * @return array
      */
-    public function getIdentities()
+    public function getIdentities(): array
     {
         return [];
     }
 
     /**
-     * @param $time
-     * @return string
+     * Retrieve translated date
+     *
+     * @param int $time
+     * @return false|string
      */
     public function getTranslatedDate($time)
     {
@@ -134,7 +142,9 @@ class Archive extends \Magefan\Blog\Block\Post\PostList\AbstractList
     }
 
     /**
-     * @return mixed
+     * Retrieve configuration value for archive group_by setting
+     *
+     * @return string|null
      */
     protected function getGroupBy()
     {

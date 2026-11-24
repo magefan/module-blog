@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Ui\DataProvider\Tag\Form;
 
 use Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory;
@@ -60,7 +62,7 @@ class TagDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @param array $meta
      * @return array
      */
-    public function prepareMeta(array $meta)
+    public function prepareMeta(array $meta): array
     {
         return $meta;
     }

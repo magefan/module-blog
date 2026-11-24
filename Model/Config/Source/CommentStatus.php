@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -16,17 +17,17 @@ class CommentStatus implements \Magento\Framework\Option\ArrayInterface
     /**
      * @const string
      */
-    const PENDING = 0;
+    public const PENDING = 0;
 
     /**
      * @const int
      */
-    const APPROVED = 1;
+    public const APPROVED = 1;
 
     /**
      * @const int
      */
-    const NOT_APPROVED = 2;
+    public const NOT_APPROVED = 2;
 
     /**
      * Options int
@@ -47,7 +48,7 @@ class CommentStatus implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

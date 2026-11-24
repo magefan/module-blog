@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Api;
 
@@ -53,7 +54,7 @@ interface ManagementInterface
      *
      * @api
      * @param int $id
-     * @param  int $storeId
+     * @param int $storeId
      * @return bool
      */
     public function view($id, $storeId);
@@ -69,4 +70,16 @@ interface ManagementInterface
      * @return string
      */
     public function getList($type, $term, $storeId, $page, $limit);
+
+    /**
+     * Retrieve all posts (including inactive) filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
+    public function getAll($type, $term, $storeId, $page, $limit);
 }

@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Plugin\Magento\Framework\View\Element;
 
@@ -29,6 +30,8 @@ class TemplatePlugin
     }
 
     /**
+     * Remove Magefan conflicts messages from AminfoTab block
+     *
      * @param \Magento\Framework\View\Element\Template $subject
      * @param callable $proceed
      * @return string
@@ -37,7 +40,7 @@ class TemplatePlugin
     {
         if ('aminfotab.conflicts' === $subject->getNameInLayout() && $this->moduleManager->isEnabled('Amasty_Base')) {
             foreach ($conflictsMessages = $subject->getConflictsMessages() as $key => $conflictsMessage) {
-                if (strpos($conflictsMessage, 'Magefan')) {
+                if (strpos((string)$conflictsMessage, 'Magefan') !== false) {
                     return '';
                 }
             }

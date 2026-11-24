@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
@@ -73,27 +74,31 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param int $storeId
      * @return bool
      */
-    public function isVisibleOnStore(int $storeId): bool
+    public function isVisibleOnStore($storeId): bool
     {
-        return $this->getIsActive();
+        return (bool)$this->getIsActive();
     }
 
     /**
      * Retrieve author name (used in identifier generation)
+     *
      * @return string | null
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getName();
     }
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -105,9 +110,10 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
@@ -132,9 +138,10 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author identifier
+     *
      * @return string | null
      */
-    public function getIdentifier()
+    public function getIdentifier(): ?string
     {
         return preg_replace(
             "/[^A-Za-z0-9\-]/",
@@ -145,7 +152,8 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Check if author identifier exist
-     * return author id if author exists
+     *
+     * Return author id if author exists
      *
      * @param string $identifier
      * @return int
@@ -164,6 +172,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author url route path
+     *
      * @return string
      */
     public function getUrl()
@@ -173,6 +182,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve author url
+     *
      * @return string
      */
     public function getAuthorUrl()
@@ -186,45 +196,30 @@ class Author extends AbstractModel implements AuthorInterface
      * @param string $separator
      * @return string
      */
-    public function getName($separator = ' ')
+    public function getName(string $separator = ' '): string
     {
         return $this->getFirstname() . $separator . $this->getLastname();
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Prepare all additional data
+     *
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData()
     {
-        $data = $this->getData();
-
-        $keys = [
-            'meta_description',
-            'meta_title',
-            'author_url',
-            'name',
-            'title',
-            'identifier',
-        ];
-
-        $data['author_id'] = $this->getId();
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $data[$key] = $this->$method();
-        }
-
-        return $data;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Author::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Author::getDynamicData instead.'
+        ));
     }
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -234,6 +229,7 @@ class Author extends AbstractModel implements AuthorInterface
 
     /**
      * Retrieve true if author is active
+     *
      * @return boolean
      */
     public function isActive()
@@ -242,6 +238,8 @@ class Author extends AbstractModel implements AuthorInterface
     }
 
     /**
+     * Retrieve the short content extractor instance
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()

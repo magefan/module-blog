@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\ResourceModel\Category;
 
@@ -14,17 +15,17 @@ namespace Magefan\Blog\Model\ResourceModel\Category;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
-     * @inheritDoc
-     */
+     * @var string
+     * */
     protected $_eventPrefix = 'mfblog_category_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventObject = 'blog_category_collection';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_idFieldName = 'category_id';
 
@@ -58,7 +59,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        $connection = null,
+        ?\Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
@@ -67,6 +68,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Constructor
+     *
      * Configures collection
      *
      * @return void
@@ -106,6 +108,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add search filter to collection
+     *
      * @param string $term
      * @return $this
      */
@@ -116,7 +119,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add store filter to collection
-     * @param array|int|\Magento\Store\Model\Store  $store
+     *
+     * @param mixed $store
      * @param boolean $withAdmin
      * @return $this
      */
@@ -168,6 +172,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Add enable filter to collection
+     *
      * @return $this
      */
     public function addActiveFilter()
@@ -233,9 +238,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Retrieve gruped category childs
+     *
      * @return array
      */
-    public function getGroupedChilds()
+    public function getGroupedChilds(): array
     {
         $childs = [];
         if (count($this)) {
@@ -248,6 +254,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Retrieve tree ordered categories
+     *
      * @return array
      */
     public function getTreeOrderedArray()
@@ -261,7 +268,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Auxiliary function to build tree ordered array
-     * @return array
+     *
+     * @param int $itemId
+     * @param array $childs
+     * @param array $tree
+     * @return void
      */
     protected function _toTree($itemId, $childs, &$tree)
     {
@@ -277,6 +288,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
+     * Retrieve the store ID
+     *
      * @return int
      */
     public function getStoreId():int

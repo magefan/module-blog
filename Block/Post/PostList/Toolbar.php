@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\PostList;
 
@@ -39,7 +40,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     /**
      * Page GET parameter name
      */
-    const PAGE_PARM_NAME = 'page';
+    public const PAGE_PARM_NAME = 'page';
 
     /**
      * Products collection
@@ -105,13 +106,15 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      *
      * @return int
      */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
         $page = (int) $this->_request->getParam($this->getPageParamName());
         return $page ? $page : 1;
     }
 
     /**
+     * Return current order
+     *
      * @return bool|\Magento\Framework\DataObject|\Magento\Framework\View\Element\AbstractBlock|\Magento\Theme\Block\Html\Pager
      */
     public function getPagerBlock()
@@ -147,7 +150,6 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             $pagerBlock = false;
         }
 
-
         return $pagerBlock;
     }
 
@@ -167,9 +169,11 @@ class Toolbar extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get page GET parameter name
+     *
      * @return string
      */
-    public function getPageParamName()
+    public function getPageParamName(): string
     {
         return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }

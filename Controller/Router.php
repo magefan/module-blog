@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller;
 
@@ -23,64 +24,46 @@ class Router implements \Magento\Framework\App\RouterInterface
     protected $actionFactory;
 
     /**
-     * Event manager
-     *
      * @var \Magento\Framework\Event\ManagerInterface
      */
     protected $_eventManager;
 
     /**
-     * Store manager
-     *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
-     * Page factory
-     *
      * @var \Magefan\Blog\Model\PostFactory
      */
     protected $_postFactory;
 
     /**
-     * Category factory
-     *
      * @var \Magefan\Blog\Model\CategoryFactory
      */
     protected $_categoryFactory;
 
     /**
-     * Author factory
-     *
      * @var   \Magefan\Blog\Api\AuthorInterfaceFactory
      */
     protected $_authorFactory;
 
     /**
-     * Tag factory
-     *
      * @var \Magefan\Blog\Model\TagFactory
      */
     protected $_tagFactory;
 
     /**
-     * Config primary
-     *
      * @var \Magento\Framework\App\State
      */
     protected $_appState;
 
     /**
-     * Url
-     *
      * @var \Magefan\Blog\Model\Url
      */
     protected $_url;
 
     /**
-     * Response
-     *
      * @var \Magento\Framework\App\ResponseInterface
      */
     protected $_response;
@@ -103,15 +86,15 @@ class Router implements \Magento\Framework\App\RouterInterface
     /**
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
-     * @param \Magefan\Blog\Model\Url $url
+     * @param Url $url
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory
      * @param \Magefan\Blog\Model\TagFactory $tagFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\ResponseInterface $response
-     * @param UrlResolverInterface $urlResolver
-     * @param Config $config
+     * @param UrlResolverInterface|null $urlResolver
+     * @param Config|null $config
      */
     public function __construct(
         \Magento\Framework\App\ActionFactory $actionFactory,
@@ -302,7 +285,12 @@ class Router implements \Magento\Framework\App\RouterInterface
         $pathInfo = $request->getPathInfo();
         $_identifier = trim($pathInfo, '/');
         $blogPage = $this->urlResolver->resolve($_identifier);
-        if (!$blogPage || empty($blogPage['type']) || (empty($blogPage['id']) && $blogPage['type'] != Url::CONTROLLER_SEARCH)) {
+        if (!$blogPage || empty($blogPage['type'])
+            || (
+                empty($blogPage['id'])
+                && $blogPage['type'] != Url::CONTROLLER_SEARCH
+            )
+        ) {
             return null;
         }
 
@@ -385,11 +373,14 @@ class Router implements \Magento\Framework\App\RouterInterface
 
     /**
      * Retrieve post id by identifier
-     * @param  string $identifier
+     *
+     * @param string $identifier
+     * @param bool $checkSufix
      * @return int
      * @deprecated Use URL resolver interface instead
+     * @see URL resolver
      */
-    protected function _getPostId($identifier, $checkSufix = true)
+    protected function _getPostId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_postFactory,
@@ -401,11 +392,14 @@ class Router implements \Magento\Framework\App\RouterInterface
 
     /**
      * Retrieve category id by identifier
-     * @param  string $identifier
+     *
+     * @param string $identifier
+     * @param bool $checkSufix
      * @return int
      * @deprecated Use URL resolver interface instead
+     * @see URL resolver
      */
-    protected function _getCategoryId($identifier, $checkSufix = true)
+    protected function _getCategoryId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_categoryFactory,
@@ -417,12 +411,14 @@ class Router implements \Magento\Framework\App\RouterInterface
 
     /**
      * Retrieve category id by identifier
+     *
      * @param string $identifier
      * @param bool $checkSufix
      * @return int
      * @deprecated Use URL resolver interface instead
+     * @see URL resolver
      */
-    protected function _getAuthorId($identifier, $checkSufix = true)
+    protected function _getAuthorId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_authorFactory,
@@ -434,12 +430,14 @@ class Router implements \Magento\Framework\App\RouterInterface
 
     /**
      * Retrieve tag id by identifier
+     *
      * @param string $identifier
      * @param bool $checkSufix
      * @return int
      * @deprecated Use URL resolver interface instead
+     * @see URL resolver
      */
-    protected function _getTagId($identifier, $checkSufix = true)
+    protected function _getTagId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->_tagFactory,
@@ -450,14 +448,17 @@ class Router implements \Magento\Framework\App\RouterInterface
     }
 
     /**
-     * @param $factory
+     * Get object id by identifier
+     *
+     * @param mixed $factory
      * @param string $controllerName
      * @param string $identifier
      * @param bool $checkSufix
      * @return mixed
      * @deprecated Use URL resolver interface instead
+     * @see URL resolver
      */
-    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
         $key =  $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
         if (!isset($this->ids[$key])) {
@@ -481,11 +482,13 @@ class Router implements \Magento\Framework\App\RouterInterface
 
     /**
      * Detect arcive identifier
-     * @param  string  $identifier
+     *
+     * @param string $identifier
      * @return boolean
      * @deprecated Use URL resolver interface instead
+     * @see URL resolver
      */
-    protected function _isArchiveIdentifier($identifier)
+    protected function _isArchiveIdentifier($identifier): bool
     {
         $info = explode('-', $identifier);
         return count($info) == 2

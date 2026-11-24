@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post;
 
@@ -23,8 +24,10 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve formated posted date
-     * @var string
+     *
      * @deprecated Use $post->getPublishDate() instead
+     * @see \Magefan\Blog\Model\Post::getPublishDate()
+     * @param string $format
      * @return string
      */
     public function getPostedOn($format = 'Y-m-d H:i:s')
@@ -34,9 +37,10 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if display author information is enabled
+     *
      * @return int
      */
-    public function authorEnabled()
+    public function authorEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/author/enabled',
@@ -46,9 +50,10 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if author page is enabled
+     *
      * @return int
      */
-    public function authorPageEnabled()
+    public function authorPageEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/author/page_enabled',
@@ -58,9 +63,10 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve true if magefan comments are enabled
+     *
      * @return bool
      */
-    public function magefanCommentsEnabled()
+    public function magefanCommentsEnabled(): bool
     {
         return $this->_scopeConfig->getValue(
             'mfblog/post_view/comments/type',
@@ -69,9 +75,11 @@ class Info extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Retrieve true if views count is enabled
+     *
      * @return bool
      */
-    public function viewsCountEnabled()
+    public function viewsCountEnabled(): bool
     {
         return (bool)$this->_scopeConfig->getValue(
             'mfblog/post_view/views_count/enabled',
@@ -81,9 +89,10 @@ class Info extends \Magento\Framework\View\Element\Template
 
     /**
      * Retrieve 1 if display reading time is enabled
+     *
      * @return int
      */
-    public function readingTimeEnabled()
+    public function readingTimeEnabled(): int
     {
         return (int) $this->_scopeConfig->getValue(
             'mfblog/post_view/reading_time/enabled',

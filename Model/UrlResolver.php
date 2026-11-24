@@ -3,6 +3,8 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\AuthorInterfaceFactory;
@@ -14,7 +16,7 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class UrlResolver implements UrlResolverInterface
 {
-    const PERMALINK_POST_USE_CATEGORIES = 'mfblog/permalink/post_use_categories';
+    private const PERMALINK_POST_USE_CATEGORIES = 'mfblog/permalink/post_use_categories';
 
     /**
      * @var array;
@@ -92,10 +94,12 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
+     * Resolves the given path and identifies the corresponding resource type and ID.
+     *
      * @param string $path
      * @return array
      */
-    public function resolve($path)
+    public function resolve($path)// phpcs:ignore Generic.Metrics.NestingLevel
     {
         $identifier = trim($path, '/');
         $identifier = urldecode($identifier);
@@ -162,7 +166,7 @@ class UrlResolver implements UrlResolverInterface
                         && $first
                         && ($postId = $this->_getPostId($pathInfo[$i]))
                     ) {
-                        //we have postId
+                        ;//we have postId
                     } elseif ((!$controllerName || !$first || $controllerName == Url::CONTROLLER_CATEGORY)
                         && ($cid = $this->_getCategoryId($pathInfo[$i], $first))
                     ) {
@@ -215,19 +219,34 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
-     * @param $storeId
+     * Set the store ID
+     *
+     * @param mixed $storeId
+     * @return void
      */
-    public function setStoreId($storeId)
+    public function setStoreId($storeId): void
     {
         $this->storeId = $storeId;
     }
 
     /**
-     * Retrieve post id by identifier
-     * @param  string $identifier
+     * Retrieve the store ID
+     *
      * @return int
      */
-    protected function _getPostId($identifier, $checkSufix = true)
+    public function getStoreId()
+    {
+        return $this->storeId ?: $this->storeManager->getStore()->getId();
+    }
+
+    /**
+     * Retrieve post id by identifier
+     *
+     * @param string $identifier
+     * @param bool $checkSufix
+     * @return int
+     */
+    protected function _getPostId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->postFactory,
@@ -239,10 +258,12 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve category id by identifier
-     * @param  string $identifier
+     *
+     * @param string $identifier
+     * @param bool $checkSufix
      * @return int
      */
-    protected function _getCategoryId($identifier, $checkSufix = true)
+    protected function _getCategoryId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->categoryFactory,
@@ -254,11 +275,12 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve category id by identifier
+     *
      * @param string $identifier
      * @param bool $checkSufix
      * @return int
      */
-    protected function _getAuthorId($identifier, $checkSufix = true)
+    protected function _getAuthorId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->authorFactory,
@@ -270,11 +292,12 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Retrieve tag id by identifier
+     *
      * @param string $identifier
      * @param bool $checkSufix
      * @return int
      */
-    protected function _getTagId($identifier, $checkSufix = true)
+    protected function _getTagId(string $identifier, $checkSufix = true)
     {
         return $this->getObjectId(
             $this->tagFactory,
@@ -285,15 +308,17 @@ class UrlResolver implements UrlResolverInterface
     }
 
     /**
-     * @param $factory
+     * Retrieve object id by identifier
+     *
+     * @param mixed $factory
      * @param string $controllerName
      * @param string $identifier
      * @param bool $checkSufix
      * @return mixed
      */
-    protected function getObjectId($factory, $controllerName, $identifier, $checkSufix)
+    protected function getObjectId($factory, string $controllerName, string $identifier, $checkSufix)
     {
-        $storeId = $this->storeId ?: $this->storeManager->getStore()->getId();
+        $storeId = $this->getStoreId();
         $key =  $storeId . '-' . $controllerName . '-' .$identifier . ($checkSufix ? '-checksufix' : '');
         if (!isset($this->ids[$key])) {
             $sufix = $this->url->getUrlSufix($controllerName);
@@ -316,10 +341,11 @@ class UrlResolver implements UrlResolverInterface
 
     /**
      * Detect arcive identifier
+     *
      * @param  string  $identifier
      * @return boolean
      */
-    protected function _isArchiveIdentifier($identifier)
+    protected function _isArchiveIdentifier($identifier): bool
     {
         $info = explode('-', $identifier);
         if (!empty($info[1])) {

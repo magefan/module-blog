@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -13,9 +14,9 @@ namespace Magefan\Blog\Model\Config\Source;
  */
 class LazyLoad implements \Magento\Framework\Option\ArrayInterface
 {
-    const DISABLED = 0;
-    const ENABLED_WITH_AUTO_TRIGER = 1;
-    const ENABLED_WITHOUT_AUTO_TRIGER = 2;
+    public const DISABLED = 0;
+    public const ENABLED_WITH_AUTO_TRIGER = 1;
+    public const ENABLED_WITHOUT_AUTO_TRIGER = 2;
 
     /**
      * Options getter
@@ -36,7 +37,7 @@ class LazyLoad implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

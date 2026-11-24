@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magefan\Community\Block\Adminhtml\Promo" name="mfblog.promo.subscriber">
+                <arguments>
+                    <argument name="plan" xsi:type="string">extra</argument>
+                    <argument name="badge" xsi:type="string" translate="true">Extra Plan Feature</argument>
+                    <argument name="title" xsi:type="string" translate="true">Comment Subscribers</argument>
+                    <argument name="description" xsi:type="string" translate="true">Let readers subscribe to post comments and keep the discussion going with automatic email notifications.</argument>
+                    <argument name="features" xsi:type="array">
+                        <item name="f0" xsi:type="string" translate="true">Readers can subscribe to new comments on a post</item>
+                        <item name="f1" xsi:type="string" translate="true">Automatic email notifications about new replies</item>
+                        <item name="f2" xsi:type="string" translate="true">Manage all comment subscribers from the admin panel</item>
+                    </argument>
+                    <argument name="section" xsi:type="string">mfblog</argument>
+                    <argument name="module_name" xsi:type="string">Magefan_Blog</argument>
+                    <argument name="utm_campaign" xsi:type="string">blog</argument>
+                    <argument name="button_label" xsi:type="string" translate="true">Upgrade to Extra</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

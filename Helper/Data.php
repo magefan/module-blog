@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Helper;
 
@@ -16,15 +17,17 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const XML_PATH_MFLAZYLOAD_ENABLED = 'mflazyzoad/general/enabled';
-    const XML_PATH_MFLAZYLOAD_METHOD = 'mflazyzoad/general/method';
+    private const XML_PATH_MFLAZYLOAD_ENABLED = 'mflazyzoad/general/enabled';
+    private const XML_PATH_MFLAZYLOAD_METHOD = 'mflazyzoad/general/method';
 
     /**
      * Retrieve translated & formated date
+     *
      * @param  string $format
      * @param  string $dateOrTime
      * @return string
      */
+    // phpcs:ignore Magento2.Functions.StaticFunction
     public static function getTranslatedDate($format, $dateOrTime)
     {
         $time = is_numeric($dateOrTime) ? $dateOrTime : strtotime((string)$dateOrTime);
@@ -34,10 +37,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $format = str_replace($from, $to, $format);
         }
 
-        $date = date($format, $time);
+        $date = date($format, (int)$time);
 
         foreach ($month as $to => $from) {
-            $date = str_replace($from, __(date($to, $time)), $date);
+            $date = str_replace($from, (string)__(date($to, (int)$time)), $date);
         }
 
         return $date;
@@ -45,8 +48,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * Retrieve store config value
+     *
      * @param string $path
-     * @param null $storeId
+     * @param int|string|null $storeId
      * @return mixed
      */
     public function getConfig($path, $storeId = null)
@@ -59,10 +63,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @return mixed
+     * Check if Origin MF LazyLoad is enabled
+     *
+     * @return bool
      */
-    public function isOriginMfLazyLoadEnable()
+    public function isOriginMfLazyLoadEnable(): bool
     {
-        return $this->getConfig(self::XML_PATH_MFLAZYLOAD_ENABLED) && ($this->getConfig(self::XML_PATH_MFLAZYLOAD_METHOD) == 0) && $this->_moduleManager->isEnabled('Magefan_LazyLoad');
+        return $this->getConfig(self::XML_PATH_MFLAZYLOAD_ENABLED)
+            && ($this->getConfig(self::XML_PATH_MFLAZYLOAD_METHOD) == 0)
+            && $this->_moduleManager->isEnabled('Magefan_LazyLoad');
     }
 }

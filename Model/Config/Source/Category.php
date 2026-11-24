@@ -5,8 +5,11 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
+
+use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
 
 /**
  * Used in recent post widget
@@ -27,8 +30,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
     /**
      * Initialize dependencies.
      *
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $authorCollectionFactory
-     * @param void
+     * @param CollectionFactory $categoryCollectionFactory
      */
     public function __construct(
         \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
@@ -66,7 +68,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {
@@ -77,10 +79,11 @@ class Category implements \Magento\Framework\Option\ArrayInterface
 
     /**
      * Generate spaces
+     *
      * @param  int $n
      * @return string
      */
-    protected function _getSpaces($n)
+    protected function _getSpaces($n): string
     {
         $s = '';
         for ($i = 0; $i < $n; $i++) {

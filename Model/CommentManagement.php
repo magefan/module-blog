@@ -31,22 +31,55 @@ class CommentManagement extends AbstractManagement
         $this->_itemFactory = $commentFactory;
     }
 
-     /**
-      * Retrieve list of tag by page type, term, store, etc
-      *
-      * @param  string $type
-      * @param  string $postId
-      * @param  int $storeId
-      * @param  int $page
-      * @param  int $limit
-      * @return string
-      */
+    /**
+     * Retrieve list of tag by page type, term, store, etc
+     *
+     * @param string $type
+     * @param mixed $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
     public function getList($type, $term, $storeId, $page, $limit)
+    {
+        return $this->fetchFilteredComments($type, $term, $storeId, $page, $limit);
+    }
+
+    /**
+     * Retrieve all posts (including inactive) filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
+    public function getAll($type, $term, $storeId, $page, $limit)
+    {
+        return $this->fetchFilteredComments($type, $term, $storeId, $page, $limit, false);
+    }
+
+    /**
+     *  Build a JSON response with posts filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @param bool $active
+     * @return false|string
+     */
+    public function fetchFilteredComments($type, $term, $storeId, $page, $limit, bool $active = true)
     {
         try {
             $collection = $this->_itemFactory->create()->getCollection();
+            if ($active) {
+                $collection->addActiveFilter();
+            }
             $collection
-                ->addActiveFilter()
                 ->addStoreFilter($storeId)
                 ->setCurPage($page)
                 ->setPageSize($limit);
@@ -77,22 +110,41 @@ class CommentManagement extends AbstractManagement
         }
     }
 
+    /**
+     * Retrieves dynamic data from the given item, including nested replies.
+     *
+     * @param object $item
+     * @return array
+     */
     public function getDynamicData($item)
     {
         $data = $item->getData();
-        $fields = ['replies' => 1];
-        if (is_array($fields) && array_key_exists('replies', $fields)) {
-            $replies = [];
-            foreach ($item->getRepliesCollection() as $reply) {
-                $replier = $reply->getDynamicData(
-                    isset($fields['replies']) ? $fields['replies'] : null
-                );
-                unset($replier['author_email']);
-                $replies[] = $replier;
-            }
-            $data['replies'] = $replies;
+
+        $replies = [];
+        foreach ($item->getRepliesCollection() as $reply) {
+            $replier = $this->getDynamicData($reply);
+            $replies[] = $replier;
         }
-        unset($data['author_email']);
+        $data['replies'] = $replies;
+        $data = $this->unsetSensitiveData($data);
+
+        return $data;
+    }
+
+    /**
+     * Remove sensitive fields from response data.
+     *
+     * @param array $data
+     * @return array
+     */
+    protected function unsetSensitiveData($data)
+    {
+        $data = parent::unsetSensitiveData($data);
+        unset(
+            $data['author_email'],
+            $data['customer_id'],
+            $data['admin_id']
+        );
 
         return $data;
     }

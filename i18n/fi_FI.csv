@@ -33,14 +33,14 @@
 "Nothing to import.","Ei tuotavaa"
 "Can not make import.","Tuontia ei voida suorittaa"
 "Something went wrong: ","Jokin meni pieleen: "
-"Please enter your name and email","Please enter your name and email"
+"Please enter your name and email","Syötä nimesi ja sähköpostiosoitteesi"
 "Blog Import from WordPress","Blogin tuonti WordPressista"
-"Comment text is too short.","Comment text is too short."
+"Comment text is too short.","Kommentti on liian lyhyt."
 "Please select","Valitse"
 "Use Facebook Comments","Käytä Facebook-kommentteja"
 "Use Disqus Comments","Käytä Disqus-kommentteja"
 "Use Google Comments","Käytä Google-kommentteja"
-"Featured Blog Posts","Featured Blog Posts"
+"Featured Blog Posts","Suositellut blogiartikkelit"
 "Yes (With auto trigger)","Kyllä (automaattisella käynnistyksellä)"
 "Yes (Without auto trigger)","Kyllä (ilman automaattista käynnistystä)"
 "Parameter %1 is required","Parameteri %1 vaaditaan"
@@ -59,7 +59,7 @@
 "Tags:","Tagit:"
 "Author:","Kirjoittaja:"
 "We can't find posts matching the selection.","Emme löydä hakuasi vastaavaa postausta"
-"Read more","Read more"
+"Read more","Lue lisää"
 "Read more &#187;","Lue lisää &#187;"
 "See more","Näytä more"
 "Read %1","Lue %1"
@@ -72,7 +72,7 @@
 "RSS Feed","RSS-syöte"
 "Search posts here...","Hae artikkeleita…"
 "Tags","Tagit"
-"Read more >","Read more >"
+"Read more >","Lue lisää >"
 "MageFan Extensions","MageFan-laajennus"
 "Blog Information","Tietoja blogista"
 "Blog Index Page","Blogin sisällysluettelo"
@@ -147,12 +147,12 @@
 "Leave blank to use Featured Image by default. Allow image type: jpg, jpeg, gif, png.","Jätä tyhjäksi, jotta artikkelikuva on oletuksena. Sallitut kuvatiedostot: jpg, jpeg, gif, png."
 "OG Type","OG tyyppi"
 "Leave blank to use ""article"" type by default.","Jätä tyhjäksi jotta ""artikkeli"" -tyyppi on oletuksena"
-"Post in Websites","Post in Websites"
-"Related Posts and Products","Related Posts and Products"
-"Related posts are shown to customers in addition to the item the customer is looking at.","Related posts are shown to customers in addition to the item the customer is looking at."
-"Add Related Post","Add Related Post"
-"Add Related Posts","Add Related Posts"
-"Add Selected Posts","Add Selected Posts"
+"Post in Websites","Artikkeli verkkosivuilla"
+"Related Posts and Products","Aiheeseen liittyvät artikkelit ja tuotteet"
+"Related posts are shown to customers in addition to the item the customer is looking at.","Aiheeseen liittyvät artikkelit näytetään asiakkaille lisäksi tuotteen yhteydessä."
+"Add Related Post","Lisää aiheeseen liittyvä artikkeli"
+"Add Related Posts","Lisää aiheeseen liittyviä artikkeleita"
+"Add Selected Posts","Lisää valitut artikkelit"
 "January","tammikuu"
 "February","helmikuu"
 "March","maaliskuu"
@@ -192,14 +192,126 @@
 "You cannot reply to this comment.","Tähän kommenttiin ei voi vastata"
 "You submitted your comment for moderation.","Lähetä kommenttisi tarkistettavaksi"
 "Thank you for your comment.","Kiitos kommentistasi"
-"Import Categories","Import Categories"
-"Import Comments","Import Comments"
-"Import Posts","Import Posts"
-"Import from aheadWorks Blog Extension","Import from aheadWorks Blog Extension"
-"Import from Joomla","Import from Joomla"
-"Import from Blogger.com","Import from Blogger.com"
-"Import from Drupal","Import from Drupal"
-"Import from CSV","Import from CSV"
-"Import from XML","Import from XML"
+"Import Categories","Tuo kategoriat"
+"Import Comments","Tuo kommentit"
+"Import Posts","Tuo artikkelit"
+"Import from aheadWorks Blog Extension","Tuo aheadWorks Blog -laajennuksesta"
+"Import from Joomla","Tuo Joomlasta"
+"Import from Blogger.com","Tuo Blogger.comista"
+"Import from Drupal","Tuo Drupalista"
+"Import from CSV","Tuo CSV-tiedostosta"
+"Import from XML","Tuo XML-tiedostosta"
 "Yes, I have read the %1 and agree to the processing of my personal data.","Kyllä, olen lukenut %1 ja suostun tietojeni käsittelyyn."
 "privacy policy","Tietosuojaseloste"
+"New Arrivals","Uudet tuotteet"
+"Blog Posts","Blogikirjoitukset"
+"Blog Categories","Blogikategoriat"
+"Post Contents","Viestin sisältö"
+"hide","piilottaa"
+"show","näyttää"
+"You May Also Like","Saatat pitää myös näistä"
+"People Who Bought This Also Bought:","Tämän ostaneet ihmiset ostivat myös:"
+"and","ja"
+"Popular Posts","Suositut julkaisut"
+"Featured Posts","Esittelyssä olevat julkaisut"
+"min read","min lukuaika"
+"Latest From %1","Uusin käyttäjältä %1"
+"Co-author","Yhteiskirjoittaja"
+Add New Comment,Lisää uusi kommentti
+Add New Images,Lisää uusia kuvia
+Add New Tag,Lisää uusi tagi
+Add to Cart,Lisää ostoskoriin
+Add to Compare,Lisää vertailuun
+Add to Wish List,Lisää toivelistalle
+Add With AI,Lisää tekoälyllä
+Admin,Admin
+AI Writer is not enabled. Please enable it first.,AI Writer ei ole käytössä. Ota se ensin käyttöön.
+All Authors,Kaikki kirjoittajat
+All Blog Pages,Kaikki blogisivut
+All Categories,Kaikki kategoriat
+and,ja
+Approved,Hyväksytty
+Archive %1,Arkisto %1
+Blank (Use widgets to build the page content),Tyhjä (käytä widgetejä sivun sisällön rakentamiseen)
+Blog Archive Page,Blogin arkistosivu
+Blog Author Page,Blogin kirjoittajasivu
+Blog Category Page,Blogin kategoriasivu
+Blog Plus <b>Advanced Permalink Settings</b> are enabled.,Blog Plus <b>Edistyneet kestolinkin asetukset</b> ovat käytössä.
+Blog Post Page,Blogin artikkelisivu
+Blog Tag Page,Blogin tagisivu
+Bottom (Horizontal),Alhaalla (vaakasuora)
+Browse to find or drag image here,Selaa löytääksesi tai vedä kuva tähän
+Cancel,Peruuta
+Category,Kategoria
+"Chat-GPT API Key is missing in ""AI Writer"" configurations.","Chat-GPT API-avain puuttuu ""AI Writer"" -asetuksista."
+Comments:,Kommentit:
+Customer,Asiakas
+Database connection error,Tietokantayhteysvirhe
+Default: mystore.com/{blog_route}/{post_route}/post-title/,Default: mystore.com/{blog_route}/{post_route}/post-title/
+Delete image,Poista kuva
+Disabled,Pois käytöstä
+Duplicated,Monistettu
+Email,Email
+Enabled,Käytössä
+General Information,Yleiset tiedot
+Go to Home Page,Siirry etusivulle
+Grid - 1 column (Blog Extra),Ruudukko - 1 sarake (Blog Extra)
+Grid - 2 columns (Blog Extra),Ruudukko - 2 saraketta (Blog Extra)
+Grid - 3 columns (Blog Extra),Ruudukko - 3 saraketta (Blog Extra)
+Grid and List (Blog Extra),Ruudukko ja lista (Blog Extra)
+Guest,Vieras
+Hidden,Piilotettu
+Home,Etusivu
+"Images (.gif, .jpg, .png)","Kuvat (.gif, .jpg, .png)"
+Import Tags,Tuo tagit
+In stock,Varastossa
+Leave a review about the blog extension,Jätä arvio bloglaajennuksesta
+Left (Vertical),Vasemmalla (pystysuora)
+List (Blog Extra),Lista (Blog Extra)
+min read,min lukuaika
+Month And Year,Kuukausi ja vuosi
+Need a new blog feature?,Tarvitsetko uuden ominaisuuden blogiin?
+No,Ei
+Not Approved,Ei hyväksytty
+Other Grids (Blog Extra),Muut ruudukot (Blog Extra)
+Out of stock,Loppu varastosta
+Page,Sivu
+/page/N,/page/N
+?page=N,?page=N
+Pending,Odottaa
+Please enter valid email,Syötä kelvollinen sähköpostiosoite
+Please select post IDs,Valitse artikkelin tunnukset
+?p=N,?p=N
+Position,Sijainti
+Post Id,Artikkelin tunnus
+Posts (default),Artikkelit (oletus)
+Posts Links,Artikkelien linkit
+Posts loader,Artikkelien lataaja
+Posts & Subcategories Links,Artikkelien ja alakategorioiden linkit
+Publish Date (default),Julkaisupäivämäärä (oletus)
+Related Products,Aiheeseen liittyvät tuotteet
+Requested item doesn't exist,Pyydettyä kohdetta ei ole olemassa
+Right (Vertical),Oikealla (pystysuora)
+Search,Hae
+Select Post IDs ...,Valitse artikkelin tunnukset ...
+Share on %1,Jaa %1:ssä
+Short: mystore.com/{blog_route}/post-title/,Short: mystore.com/{blog_route}/post-title/
+Sign In,Kirjaudu sisään
+Slider (Blog Extra),Liukusäädin (Blog Extra)
+Something went wrong %1,Jokin meni pieleen %1
+Something went wrong while saving the file(s).,Jokin meni pieleen tiedostoa/tiedostoja tallennettaessa.
+Subcategories Links,Alakategorioiden linkit
+Submit,Lähetä
+Tag,Tagi
+This option is available in <strong>%1</strong> plan only.,Tämä vaihtoehto on saatavilla vain <strong>%1</strong> -paketissa.
+This option is available in <strong>Plus or Extra</strong> plans only.,Tämä vaihtoehto on saatavilla vain <strong>Plus tai Extra</strong> -paketeissa.
+Title,Otsikko
+Top (Horizontal),Ylhäällä (vaakasuora)
+Unable to remove item,Kohdetta ei voi poistaa
+Unable to save item,Kohdetta ei voi tallentaa
+URL key is already in use by another blog item.,URL-avain on jo käytössä toisella blogin kohteella.
+URL key is already in use by another tag item.,URL-avain on jo käytössä toisella tagilla.
+Use Magefan Blog Comments,Käytä Magefan Blog -kommentteja
+Views:,Katselukerrat:
+Year,Vuosi
+"Last updated:","Viimeksi päivitetty:"

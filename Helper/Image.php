@@ -5,11 +5,19 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Helper;
 
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\Io\File;
+use Magento\Framework\Image\Factory;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Blog image helper
@@ -43,16 +51,17 @@ class Image extends AbstractHelper
      * @var array
      */
     protected $_backgroundColor = [255, 255, 255];
+
     /**
-     * @var
+     * @var string
      */
     protected $_baseFile;
     /**
-     * @var
+     * @var string
      */
     protected $_newFile;
     /**
-     * @var \Magento\Framework\Image\Factory
+     * @var Factory
      */
     protected $_imageFactory;
     /**
@@ -60,32 +69,43 @@ class Image extends AbstractHelper
      */
     protected $_mediaDirectory;
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
+     * @var File
+     */
+    private $fileIo;
+
+    /**
      * Image constructor.
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \Magento\Framework\Image\Factory $imageFactory
-     * @param \Magento\Framework\Filesystem $filesystem
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @throws \Magento\Framework\Exception\FileSystemException
+     *
+     * @param Context $context
+     * @param Factory $imageFactory
+     * @param Filesystem $filesystem
+     * @param StoreManagerInterface $storeManager
+     * @param File $fileIo
+     * @throws FileSystemException
      */
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\Image\Factory $imageFactory,
-        \Magento\Framework\Filesystem $filesystem,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        Context $context,
+        Factory $imageFactory,
+        Filesystem $filesystem,
+        StoreManagerInterface $storeManager,
+        File $fileIo
     ) {
         $this->_imageFactory = $imageFactory;
         $this->_mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->_storeManager = $storeManager;
+        $this->fileIo = $fileIo;
         parent::__construct($context);
     }
 
     /**
-     * @param $baseFile
+     * Initialize image helper
+     *
+     * @param string $baseFile
      * @return $this
      */
     public function init($baseFile)
@@ -96,14 +116,17 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param $width
-     * @param null $height
+     * Resize image
+     *
+     * @param string $width
+     * @param null|int $height
+     * @param null|bool $keepFrame
      * @return $this
      */
-    public function resize($width, $height = null, $keepFrame = null)
+    public function resize(string $width, $height = null, $keepFrame = null)
     {
         if ($this->_baseFile) {
-            $pathinfo = pathinfo(($this->_baseFile));
+            $pathinfo = $this->fileIo->getPathInfo($this->_baseFile);
             if (isset($pathinfo) && isset($pathinfo['extension']) && $pathinfo['extension'] == 'webp') {
                 $this->_newFile = $this->_baseFile;
             } else {
@@ -127,9 +150,21 @@ class Image extends AbstractHelper
     }
 
     /**
+     * Get image width and height
+     *
      * @return array
      */
     public function getWidthAndHeigth(): array
+    {
+        return $this->getWidthAndHeight();
+    }
+
+    /**
+     * Get image width and height
+     *
+     * @return array
+     */
+    public function getWidthAndHeight(): array
     {
         $file = $this->_newFile ?: $this->_baseFile;
         if (!$file) {
@@ -137,8 +172,12 @@ class Image extends AbstractHelper
         }
 
         if ($this->fileExists($file)) {
-            $file = $this->_mediaDirectory->getAbsolutePath($file);
-            $imageSize = @getimagesize($file);
+            try {
+                $content = $this->_mediaDirectory->readFile($file);
+                $imageSize = getimagesizefromstring($content);// phpcs:ignore Magento2.Functions.DiscouragedFunction
+            } catch (\Exception $e) {
+                $imageSize = false;
+            }
             if ($imageSize) {
                 return [
                     'width' => (int)$imageSize[0],
@@ -151,8 +190,11 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param $width
-     * @param $height
+     * Resize base file
+     *
+     * @param string $width
+     * @param string|null $height
+     * @param bool $keepFrame
      * @return $this
      */
     protected function resizeBaseFile($width, $height, $keepFrame)
@@ -185,7 +227,9 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param $filename
+     * Check if file exists
+     *
+     * @param string $filename
      * @return bool
      */
     protected function fileExists($filename)
@@ -194,10 +238,12 @@ class Image extends AbstractHelper
     }
 
     /**
+     * Return image url
+     *
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
-    public function __toString()
+    public function __toString(): string
     {
         $url = "";
         if ($this->_baseFile) {

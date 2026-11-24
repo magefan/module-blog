@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Tag;
 
@@ -20,6 +21,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
 
     /**
      * Filter request params
+     *
      * @param  array $data
      * @return array
      */
@@ -47,8 +49,10 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
     }
 
     /**
-     * @param $model
-     * @param $request
+     * Before save action
+     *
+     * @param \Magento\Framework\DataObject $model
+     * @param \Magento\Framework\App\RequestInterface $request
      * @return void
      */
     protected function _beforeSave($model, $request)

@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Category;
 
@@ -44,6 +45,7 @@ class SubCategoryLinks extends \Magefan\Blog\Block\Category\AbstractCategory
 
     /**
      * Get subcategories
+     *
      * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
      */
     public function getSubCategories()
@@ -63,14 +65,14 @@ class SubCategoryLinks extends \Magefan\Blog\Block\Category\AbstractCategory
      *
      * @return bool
      */
-    protected function canDisplay()
+    protected function canDisplay(): bool
     {
         $displayMode = $this->getCategory()->getData('display_mode');
         return ($displayMode == CategoryDisplayMode::SUBCATEGORIES_LINKS
             || $displayMode == CategoryDisplayMode::POSTS_AND_SUBCATEGORIES_LINKS);
     }
 
-    /*
+    /**
      * Render block HTML
      *
      * @return string

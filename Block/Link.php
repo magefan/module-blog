@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block;
 
@@ -33,6 +34,8 @@ class Link extends \Magento\Framework\View\Element\Html\Link
     }
 
     /**
+     * Retrieve the base URL.
+     *
      * @return string
      */
     public function getHref()
@@ -41,6 +44,8 @@ class Link extends \Magento\Framework\View\Element\Html\Link
     }
 
     /**
+     * Retrieve the label from configuration.
+     *
      * @return string
      */
     public function getLabel()

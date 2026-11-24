@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block;
 
@@ -60,6 +61,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()
@@ -144,9 +146,11 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve blog title
+     *
+     * @param string $param
      * @return string
      */
-    protected function _getConfigValue($param)
+    protected function _getConfigValue(string $param)
     {
         return $this->_scopeConfig->getValue(
             'mfblog/index_page/'.$param,
@@ -194,7 +198,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    public function getPostTemplateType()
+    public function getPostTemplateType(): string
     {
         $template = (string)$this->_scopeConfig->getValue(
             'mfblog/index_page/template',
@@ -226,7 +230,7 @@ class Index extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve identities
-     * git add
+     *
      * @return array
      */
     public function getIdentities()

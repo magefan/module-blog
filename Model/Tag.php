@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
@@ -25,12 +26,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     /**
      * Tag Status
      */
-    const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED = 1;
 
     /**
      * blog cache tag
      */
-    const CACHE_TAG = 'mfb_t';
+    private const CACHE_TAG = 'mfblog_t';
 
     /**
      * Prefix of model events names
@@ -98,18 +99,21 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve true if tag is active
+     *
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->getIsActive() == self::STATUS_ENABLED);
     }
 
     /**
      * Retrieve if is visible on store
+     *
+     * @param mixed $storeId
      * @return bool
      */
-    public function isVisibleOnStore($storeId)
+    public function isVisibleOnStore($storeId): bool
     {
         return $this->getIsActive()
             && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
@@ -117,17 +121,19 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve model title
-     * @param  boolean $plural
+     *
+     * @param bool $plural
      * @return string
      */
-    public function getOwnTitle($plural = false)
+    public function getOwnTitle($plural = false): string
     {
         return $plural ? 'Tags' : 'Tag';
     }
 
     /**
      * Check if tag identifier exist for specific store
-     * return tag id if tag exists
+     *
+     * Return tag id if tag exists
      *
      * @param string $identifier
      * @param int $storeId
@@ -140,6 +146,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve catgegory url route path
+     *
      * @return string
      */
     public function getUrl()
@@ -149,6 +156,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve tag url
+     *
      * @return string
      */
     public function getTagUrl()
@@ -164,9 +172,10 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve meta title
+     *
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaTitle(): string
     {
         $title = $this->getData('meta_title');
         if (!$title) {
@@ -178,9 +187,10 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
 
     /**
      * Retrieve meta description
+     *
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
@@ -218,13 +228,14 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      *
      * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return (string)$this->getData('identifier');
     }
 
     /**
      * Retrieve controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -233,33 +244,24 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
-     * @deprecated use getDynamicData method in graphQL data provider
      * Return all additional data
+     *
      * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @deprecated use getDynamicData method in graphQL data provider
+     * @see getDynamicData() method in GraphQL data provider
      */
     public function getDynamicData()
     {
-        $data = $this->getData();
-
-        $keys = [
-            'meta_description',
-            'meta_title',
-            'tag_url',
-        ];
-
-        foreach ($keys as $key) {
-            $method = 'get' . str_replace(
-                '_',
-                '',
-                ucwords($key, '_')
-            );
-            $data[$key] = $this->$method();
-        }
-
-        return $data;
+        throw new \Magento\Framework\Exception\LocalizedException(__(
+            '\Magefan\Blog\Model\Tag::getDynamicData is retired. '
+                . 'Use \Magefan\BlogGraphQl\Model\Resolver\DataProvider\Tag::getDynamicData instead.'
+        ));
     }
 
     /**
+     * Retrieve short content extractor instance
+     *
      * @return ShortContentExtractorInterface
      */
     public function getShortContentExtractor()
@@ -273,7 +275,9 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
-     * @return array|mixed|null
+     * Retrieve tag image URL
+     *
+     * @return string|false
      */
     public function getTagImage()
     {

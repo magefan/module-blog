@@ -1,0 +1,369 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * @var \Magefan\Blog\Block\Post\PostList\AbstractList $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+
+<?php
+$_postCollection = $block->getPostCollection();
+
+if ($_postCollection->count() /* && $templateType*/) { ?>
+    <?php if ('blog' !== $block->getRequest()->getModuleName()) { ?>
+        <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_Blog::css/design_valor/style-widget.css') ?>
+
+    <?php } ?>
+    <?php
+
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+    $templateType = str_replace('block-', 'article-templates-', (string)$block->getTemplateType() ?: (string)$block->getPostTemplateType());
+
+    $style = null;
+
+    if ($templateType) {
+        preg_match('/templates-\d+/', $templateType, $matches);
+        $style = $matches[0] ?? '';
+    } else {
+        $templateType = 'article-grid';
+    }
+
+    $defaultWidths = [
+        'article-items' => 200,
+        'article-slider' => 200,
+        'sidebar-article-grid' => 200,
+        'sidebar-article-list' => 60,
+    ];
+
+    $width = (int)$block->getBackgroundImageWidth()
+            ?: ($defaultWidths[$templateType] ?? 1920);
+
+    $displayImage = $block->getDisplayImage() ?? true;
+    $displayBlockTitle = $block->getTitle() && (false !== stripos(get_class($block), '\widget\\'));
+
+    $displayCategoryInImageContainer = !in_array($templateType, [
+        'article-grid',
+        'article-templates-1-1', 'article-templates-1-2', 'article-templates-1-3',
+        'article-templates-2-1', 'article-templates-2-2', 'article-templates-2-3',
+        'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
+        'article-templates-3-1', 'article-templates-3-2', 'article-templates-3-3',
+        'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
+        'article-templates-4-1', 'article-templates-4-2', 'article-templates-4-3',
+        'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
+        'article-templates-5-2', 'article-templates-5-3', 'article-templates-5-4',
+        'article-items',
+        'article-slider',
+        'sidebar-article-grid', 'sidebar-article-list',
+        'article-default-list'
+    ]);
+
+    $displayInfoInImageContainer = in_array($templateType, [
+        'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
+        'article-templates-4-1', 'article-templates-4-2', 'article-templates-4-3',
+        'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6',
+        'article-templates-5-2', 'article-templates-5-3', 'article-templates-5-4'
+    ]);
+
+    $displayInfoAfterImageContainer = in_array($templateType, [
+        'article-grid', 'article-list',
+        'article-templates-1-1', 'article-templates-1-2', 'article-templates-1-3',
+        'article-templates-2-1', 'article-templates-2-2', 'article-templates-2-3',
+        'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
+        'article-templates-3-1', 'article-templates-3-2', 'article-templates-3-3',
+        'article-templates-3-4', 'article-templates-3-5', 'article-templates-3-6',
+        'article-templates-5-1',
+        'article-items',
+        'article-slider',
+        'sidebar-article-grid', 'sidebar-article-list',
+        'article-default-list'
+    ]);
+
+    $displayShortContent = !in_array($templateType, [
+        'article-templates-1-2', 'article-templates-1-3',
+        'article-templates-2-4', 'article-templates-2-5', 'article-templates-2-6',
+        'article-items',
+        'article-slider',
+        'sidebar-article-grid', 'sidebar-article-list',
+        'article-default-list'
+    ]);
+
+    $displayShortContentAfterImage = in_array($templateType, [
+        'article-templates-4-4', 'article-templates-4-5', 'article-templates-4-6'
+    ]);
+
+    $displayCategoryInInfo = !in_array($templateType, [
+        'article-templates-4-1', 'article-templates-4-2', 'article-templates-4-3',
+        'article-templates-5-2', 'article-templates-5-3',
+        'article-items',
+        'article-slider',
+        'sidebar-article-grid', 'sidebar-article-list',
+        'article-default-list'
+    ]);
+    ?>
+
+    <?php if ($displayBlockTitle) { ?>
+        <div class="widget block mf-blog-posts">
+        <div class="block-title title">
+            <strong><?= $escaper->escapeHtml($block->getTitle()) ?></strong>
+        </div>
+        <div class="block-content">
+    <?php } ?>
+
+    <div class="blog-articles <?= $escaper->escapeHtml($templateType) ?> <?php if (!$displayImage) { echo ' article-post__no-image'; } ?>">
+        <?php foreach ($_postCollection as $_post):
+            $entity = $_post
+            ?>
+            <article class="blog-article">
+                <div class="article-post">
+
+                    <?php /* Post Image Container */ ?>
+                    <?php if (('article-default-list' !== $templateType) && $displayImage): ?>
+                        <div class="article-post__image-container animation-type--zoom">
+                            <?php
+                            $preparedImg = $entity->getFeaturedListImg() ?: $entity->getFeaturedImg();
+                            if ($preparedImg) {
+                                $featuredImage = $imageHelper->init($preparedImg)->resize($width, null, false);
+                                $imageWidthAndHeight = $imageHelper->getWidthAndHeight();
+                                $addWH = !empty($imageWidthAndHeight);
+                                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                if (!$featuredImgAlt) {
+                                    $featuredImgAlt = $_post->getTitle();
+                                }
+                            } else {
+                                $featuredImage = $block->getViewFileUrl('Magefan_Blog::images/samples/' . rand(1, 8) . '.jpeg');
+                                $featuredImgAlt  = '';
+                                $imageWidthAndHeight = ['width' => 1880, 'height' => 1253];
+                                $addWH = true;
+                            }
+                            ?>
+
+                            <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>"
+                               class="article-post__image-wrapper mf-media mf-media--3x2 mf-media--transparent">
+                                <img loading="lazy" class="motion-reduce" src="<?=  $escaper->escapeHtml($featuredImage) ?>"
+                                     alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>"
+                                     <?= $addWH ? 'width="' . $imageWidthAndHeight['width'] . '" height="' . $imageWidthAndHeight['height'] . '"' : '' ?>
+                                >
+                            </a>
+
+                            <?php /* Post Category in Image Container */ ?>
+                            <?php if ($displayCategoryInImageContainer) { ?>
+                                <?php if ($categories = $entity->getParentCategories()) { ?>
+                                    <div class="article-post__category article-post__category-pos1">
+                                        <?php foreach ($categories as $category) { ?>
+                                            <a class="article-post__category-name" href="<?= $escaper->escapeUrl($category->getCategoryUrl()) ?>"
+                                               title="<?= $escaper->escapeHtml($category->getTitle()) ?>">
+                                                <?= $escaper->escapeHtml($category->getTitle()) ?>
+                                            </a>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                            <?php /* END Post Category in Image Container */ ?>
+
+                            <?php /* Post Info in Image Container */ ?>
+                            <?php /* Visible */ ?>
+                            <?php if ($displayInfoInImageContainer): ?>
+                                <div class="article-post__info">
+
+                                    <div class="article-post__title">
+                                        <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>">
+                                            <?= $escaper->escapeHtml($entity->getTitle()) ?>
+                                        </a>
+                                    </div>
+
+                                    <div class="article-post__data-wrap">
+                                        <?php if ($block->authorEnabled() && ($author = $entity->getAuthor())): ?>
+                                            <?php
+                                            $fullName = $author->getTitle();
+                                            $authorUrl = $author->getAuthorUrl();
+                                            $coAuthors = $_post->getRelatedCoauthors();
+                                            $coAuthorsCount = count($coAuthors);
+                                            ?>
+                                            <span class="article-post__author">
+                                    <a href="<?= $escaper->escapeUrl($authorUrl) ?>" title="<?= $escaper->escapeHtml($fullName) ?>">
+                                        <span><?= $escaper->escapeHtml($fullName) ?></span>
+                                    </a>
+                                        <?php if ($coAuthorsCount) { ?>
+                                            <?= $escaper->escapeHtml(__('and')) ?>
+                                            <?php $z = 0 ?>
+                                            <?php foreach ($coAuthors as $coAuthor) { ?>
+                                                <?php $z++; ?>
+                                                <?php if ($block->authorPageEnabled()) { ?>
+                                                    <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>"
+                                                       href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $escaper->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
+                                                <?php } else { ?>
+                                                    <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) { echo ', '; } ?>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+                                </span>
+                                        <?php endif ?>
+
+                                        <?php if ($_post->isPublishDateEnabled()) { ?>
+                                            <span class="article-post__data"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                                        <?php } ?>
+
+                                        <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+                                            <?php /* <i class="mf-blog-icon mfbi-reading-time"></i>*/ ?>
+                                            <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getReadingTime(). ' ' . __('min read'))  ?></span>
+                                        <?php } ?>
+
+                                        <?php if ($block->viewsCountEnabled()) { ?>
+                                            <?php if ($viewsCount = $_post->getViewsCount()) { ?>
+                                                <span class="article-post__count-comments"><?= $escaper->escapeHtml($viewsCount) ?></span>
+                                            <?php } ?>
+                                        <?php } ?>
+
+                                    </div>
+                                    <?php /*if (0 !== strpos($templateType, 'article-templates-4-')): */ ?>
+                                    <?php if ($categories = $entity->getParentCategories()): ?>
+                                        <div class="article-post__category article-post__category-pos2">
+                                            <?php foreach ($categories as $category): ?>
+                                                <a class="article-post__category-name" href="<?= $escaper->escapeHtml($category->getCategoryUrl()) ?>"
+                                                   title="<?= $escaper->escapeHtml($category->getTitle()) ?>"><?= $escaper->escapeHtml($category->getTitle()) ?></a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif ?>
+                                    <?php /* endif */ ?>
+                                </div>
+                            <?php endif ?>
+                            <?php /* END Post Info in Image Container */ ?>
+
+                        </div>
+                    <?php endif ?>
+                    <?php /* END Post Image Container */ ?>
+
+
+                    <?php /* Post Info */ ?>
+                    <?php if ($displayInfoAfterImageContainer): ?>
+                        <div class="article-post__info">
+                            <div class="article-post__header">
+                                <div class="article-post__title">
+                                    <a href="<?= $escaper->escapeUrl($entity->getPostUrl()) ?>" title="<?= $escaper->escapeHtml($entity->getTitle()) ?>">
+                                        <?= $escaper->escapeHtml($entity->getTitle()) ?>
+                                    </a>
+                                </div>
+
+                                <?php /* Not Visible */ ?>
+                                <?php if (!in_array($templateType, [
+                                    'article-items',
+                                    'article-slider',
+                                    'article-default-list'
+                                ])): ?>
+                                    <div class="article-post__data-wrap">
+                                        <?php if (!in_array($templateType, [
+                                                'sidebar-article-grid', 'sidebar-article-list'
+                                            ]) && $block->authorEnabled() && ($author = $entity->getAuthor())): ?>
+                                            <?php
+                                            $author = $entity->getAuthor();
+                                            $fullName = $author->getTitle();
+                                            $authorUrl = $author->getAuthorUrl();
+                                            $coAuthors = $_post->getRelatedCoauthors();
+                                            ?>
+                                            <?php if ('' !== $fullName): ?>
+                                                <span class="article-post__author">
+                                                    <a href="<?= $escaper->escapeUrl($authorUrl) ?>" title="<?= $escaper->escapeHtml($fullName) ?>">
+                                                        <span><?= $escaper->escapeHtml($fullName)?></span>
+                                                    </a>
+                                    <?php if (count($coAuthors)) { ?>
+                                        <?= $escaper->escapeHtml(__('and')) ?>
+                                        <?php $z = 0 ?>
+                                        <?php foreach ($coAuthors as $coAuthor) { ?>
+                                            <?php $z++; ?>
+                                            <?php if ($block->authorPageEnabled()) { ?>
+                                                <a title="<?= $escaper->escapeHtml($coAuthor->getTitle()) ?>" href="<?= $escaper->escapeUrl($coAuthor->getAuthorUrl()) ?>">
+                                                    <?= $escaper->escapeHtml($coAuthor->getTitle()) ?>
+                                                </a>
+                                                <?php if ($z != count($coAuthors)) { echo ', '; } ?>
+                                            <?php } else { ?>
+                                                <?= $escaper->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != count($coAuthors)) { echo ', '; } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </span>
+                                            <?php endif ?>
+                                        <?php endif ?>
+
+                                        <?php if ($_post->isPublishDateEnabled()) { ?>
+                                            <span class="article-post__data"><span class="divider">&nbsp;|&nbsp;</span> <?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                                        <?php } ?>
+
+                                        <?php /* Not Visible */ ?>
+                                        <?php if (!in_array($templateType, [
+                                            'sidebar-article-grid', 'sidebar-article-list',
+                                            'article-default-list'
+                                        ])): ?>
+
+                                            <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+                                                <?php /* <i class="mf-blog-icon mfbi-reading-time"></i>*/ ?>
+                                                <span class="article-post__reading-time"><span class="divider">&nbsp;|&nbsp;</span><?= $escaper->escapeHtml($_post->getReadingTime() . ' ' . __('min read')) ?></span>
+                                            <?php } ?>
+
+                                            <?php if ($postCommentsCount = count($entity->getComments())): ?>
+                                                <span class="article-post__count-comments"><?= $escaper->escapeHtml($postCommentsCount) ?></span>
+                                            <?php endif ?>
+                                        <?php endif ?>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+
+                            <?php /* Short Content */ ?>
+                            <?php if ($displayShortContent): ?>
+                                <div class="article-post__content">
+                                    <?= /*@noEscape*/ $entity->getShortFilteredContentWithoutImages() ?>
+                                </div>
+                            <?php endif ?>
+
+                            <?php /* Visible */ ?>
+                            <?php /* Post Category in Post Info */ ?>
+                            <?php if ($displayCategoryInInfo): ?>
+                                <?php if ($categories = $entity->getParentCategories()): ?>
+                                    <div class="article-post__footer">
+                                        <div class="article-post__category article-post__category-pos3">
+                                            <?php foreach ($categories as $category): ?>
+                                                <a class="article-post__category-name" href="<?= $escaper->escapeUrl($category->getCategoryUrl()) ?>"
+                                                   title="<?= $escaper->escapeHtml($category->getTitle()) ?>"><?= $escaper->escapeHtml($category->getTitle()) ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                    <?php /* END Post Category in Post Info */ ?>
+                                <?php endif ?>
+                            <?php endif ?>
+                        </div>
+                    <?php endif ?>
+                    <?php /* END Post Info */ ?>
+
+                    <?php /* Visible */ ?>
+                    <?php if ($displayShortContentAfterImage): ?>
+                        <div class="article-post__content">
+                            <?= /*@noEscape*/ $entity->getShortFilteredContentWithoutImages() ?>
+                        </div>
+                    <?php endif ?>
+                </div>
+            </article>
+
+        <?php endforeach; ?>
+    </div>
+
+    <?= $block->getToolbarHtml() ?>
+
+    <?php if ($style) { ?>
+        <?= /*@noEscape*/ $block->getStyleViewModel()->getStyle('Magefan_BlogExtra::css/design_valor/style-' . $style . '.css') ?>
+    <?php } ?>
+
+    <?php if ($displayBlockTitle) { ?>
+        </div>
+        </div>
+    <?php } ?>
+<?php } ?>

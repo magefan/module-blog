@@ -21,7 +21,11 @@ class SocialNetworks implements \Magento\Framework\Option\ArrayInterface
             ['value' => 'Facebook', 'label' => 'Facebook'],
             ['value' => 'Twitter', 'label' => 'X (Twitter)'],
             ['value' => 'Pinterest', 'label' => 'Pinterest'],
-            ['value' => 'LinkedIn', 'label' => 'LinkedIn']
+            ['value' => 'LinkedIn', 'label' => 'LinkedIn'],
+            ['value' => 'BlueSky', 'label' => 'BlueSky'],
+            ['value' => 'WhatsApp', 'label' => 'WhatsApp'],
+            ['value' => 'Email', 'label' => 'Email'],
+            ['value' => 'Copy', 'label' => 'Copy Link']
         ];
     }
 
@@ -30,7 +34,7 @@ class SocialNetworks implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach ($this->toOptionArray() as $item) {

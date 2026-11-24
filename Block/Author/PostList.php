@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Author;
 
@@ -95,6 +96,9 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     $this->escapeHtml($author->getTitle())
                 );
             }
+            if ($author->getIsPreviewMode()) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+            }
         }
 
         return parent::_prepareLayout();
@@ -105,7 +109,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
      *
      * @return string
      */
-    public function getPostTemplateType()
+    public function getPostTemplateType(): string
     {
         $template = (string)$this->_scopeConfig->getValue(
             'mfblog/author/template',
@@ -125,6 +129,7 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
 
     /**
      * Retrieve Toolbar Block
+     *
      * @return \Magefan\Blog\Block\Post\PostList\Toolbar
      */
     public function getToolbarBlock()

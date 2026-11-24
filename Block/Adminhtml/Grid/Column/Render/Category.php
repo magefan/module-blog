@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Grid\Column\Render;
 
@@ -25,7 +26,7 @@ class Category extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstra
 
     /**
      * @param \Magento\Backend\Block\Context $context
-     * @param \Magefan\Blog\Model\CategoryFactory $localeLists
+     * @param \Magefan\Blog\Model\CategoryFactory $categoryFactory
      * @param array $data
      */
     public function __construct(

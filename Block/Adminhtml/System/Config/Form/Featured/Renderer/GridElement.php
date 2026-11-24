@@ -40,6 +40,8 @@ class GridElement extends \Magento\Framework\Data\Form\Element\AbstractElement
     }
 
     /**
+     * Get element html
+     *
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
      */

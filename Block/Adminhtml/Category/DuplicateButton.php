@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Category;
 
@@ -14,6 +15,8 @@ namespace Magefan\Blog\Block\Adminhtml\Category;
 class DuplicateButton extends \Magefan\Community\Block\Adminhtml\Edit\DuplicateButton
 {
     /**
+     * Retrieves button data if the user is authorized to save
+     *
      * @return array|string
      */
     public function getButtonData()

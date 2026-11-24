@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml;
 
@@ -14,13 +15,11 @@ namespace Magefan\Blog\Controller\Adminhtml;
 class Post extends Actions
 {
     /**
-     * Form session key
      * @var string
      */
     protected $_formSessionKey  = 'blog_post_form_data';
 
     /**
-     * Allowed Key
      * @var string
      */
     protected $_allowedKey      = 'Magefan_Blog::post';

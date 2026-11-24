@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\Config\Source;
 
@@ -16,6 +17,8 @@ use Magento\Config\Model\Config\Source\Design\Robots;
 class TagRobots extends Robots
 {
     /**
+     * Returns an array of options with a default "Use config settings" option prepended.
+     *
      * @return array
      */
     public function toOptionArray()

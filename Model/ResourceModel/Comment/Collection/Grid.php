@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\ResourceModel\Comment\Collection;
 
@@ -32,9 +33,9 @@ class Grid extends Collection
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager,
-     * @param \Magento\Framework\DB\Adapter\AdapterInterface $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\DB\Adapter\AdapterInterface|null $connection
+     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null $resource
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
@@ -42,7 +43,7 @@ class Grid extends Collection
         \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        $connection = null,
+        ?\Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
@@ -50,7 +51,7 @@ class Grid extends Collection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _initSelect()
     {
@@ -61,6 +62,8 @@ class Grid extends Collection
                 'main_table.post_id = post.post_id',
                 ['title' => 'title']
             );
+        $this->addFilterToMap('creation_time', 'main_table.creation_time');
+        $this->addFilterToMap('update_time', 'main_table.update_time');
 
         return $this;
     }

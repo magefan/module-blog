@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
@@ -49,10 +51,12 @@ class PredispathFrontendBlogActionControllerObserver implements ObserverInterfac
     }
 
     /**
+     * Executes the observer logic for URL redirection based on configuration settings.
+     *
      * @param \Magento\Framework\Event\Observer $observer
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return void
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         $advancedPermalinkEnabled =  $this->scopeConfig->getValue(
             Config::XML_PATH_ADVANCED_PERMALINK_ENABLED,

@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml;
 
@@ -13,11 +14,12 @@ namespace Magefan\Blog\Controller\Adminhtml;
  */
 abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 {
-    /**
-     * Prepare images before object save
-     * @param $model
-     * @param array $fields
-     */
+     /**
+      * Prepare images before object save
+      *
+      * @param \Magento\Framework\DataObject $model
+      * @param array $fields
+      */
     protected function prepareImagesBeforeSave($model, array $fields)
     {
         $data = $model->getData();
@@ -36,7 +38,12 @@ abstract class Actions extends \Magefan\Community\Controller\Adminhtml\Actions
 
                         $model->setData($key, $image);
                     } else {
-                        if (isset($data[$key][0]['url']) && false !== strpos($data[$key][0]['url'], '/media/')) {
+                        if (isset($data[$key][0]['url'])
+                            && (
+                                false !== strpos($data[$key][0]['url'], '/media/')
+                                || false !== strpos($data[$key][0]['url'], '/.renditions/')
+                            )
+                        ) {
                             $url = $data[$key][0]['url'];
 
                             /**

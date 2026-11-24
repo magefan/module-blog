@@ -5,10 +5,13 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Ui\DataProvider\Category\Form;
 
 use Magefan\Blog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\App\RequestInterface;
 
 /**
  * Class DataProvider
@@ -31,11 +34,17 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     protected $loadedData;
 
     /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
      * @param CollectionFactory $categoryCollectionFactory
      * @param DataPersistorInterface $dataPersistor
+     * @param RequestInterface $request
      * @param array $meta
      * @param array $data
      */
@@ -45,11 +54,13 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $requestFieldName,
         CollectionFactory $categoryCollectionFactory,
         DataPersistorInterface $dataPersistor,
+        RequestInterface $request,
         array $meta = [],
         array $data = []
     ) {
         $this->collection = $categoryCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;
+        $this->request = $request;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->meta = $this->prepareMeta($this->meta);
     }
@@ -60,8 +71,22 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @param array $meta
      * @return array
      */
-    public function prepareMeta(array $meta)
+    public function prepareMeta(array $meta): array
     {
+        $parent = $this->request->getParam('parent');
+        if (null !== $parent) {
+            $parent = (int)$parent;
+            $meta['general']['children']['parent'] = [
+                'arguments' => [
+                    'data' => [
+                        'config' => [
+                            'default' => $parent
+                        ],
+                    ],
+                ]
+            ];
+        }
+
         return $meta;
     }
 
@@ -80,6 +105,9 @@ class CategoryDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         foreach ($items as $category) {
             $category = $category->load($category->getId()); //temporary fix
             $data = $category->getData();
+            unset($data['position']);
+            unset($data['path']);
+            unset($data['level']);
             /* Prepare Featured Image */
             $map = [
                 'category_img' => 'getCategoryImage',

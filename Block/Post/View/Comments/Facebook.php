@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View\Comments;
 
@@ -21,9 +22,11 @@ class Facebook extends \Magefan\Blog\Block\Post\View\Comments
     protected $commetType = CommetType::FACEBOOK;
 
     /**
+     * Constructs and returns the URL for loading the Facebook SDK JavaScript.
+     *
      * @return string
      */
-    public function getFbSdkJsUrl()
+    public function getFbSdkJsUrl(): string
     {
         return '//connect.facebook.net/'.
             $this->getLocaleCode() . '/sdk.js#xfbml=1&version=v3.3&appId=' .

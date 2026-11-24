@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Post\View;
 
@@ -17,6 +18,7 @@ class ViewsCount extends AbstractPost
 {
     /**
      * Retrieve counter controller url
+     *
      * @return string
      */
     public function getCounterUrl()

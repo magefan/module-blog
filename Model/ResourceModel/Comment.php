@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model\ResourceModel;
 
@@ -36,6 +37,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * Initialize resource model
+     *
      * Get tablename from config
      *
      * @return void
@@ -102,7 +104,13 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $result;
     }
 
-    public function updatePostCommentsCount($postId)
+    /**
+     * Update the comments count for a specific blog post
+     *
+     * @param int $postId
+     * @return void
+     */
+    public function updatePostCommentsCount($postId): void
     {
         $connection = $this->getConnection();
 

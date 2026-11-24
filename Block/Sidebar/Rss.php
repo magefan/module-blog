@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Sidebar;
 
@@ -45,7 +46,6 @@ class Rss extends \Magento\Framework\View\Element\Template
         }
         return parent::getUrl($route, $params);
     }
-
 
     /**
      * Retrieve blog url model

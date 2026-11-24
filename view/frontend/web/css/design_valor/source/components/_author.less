@@ -1,0 +1,129 @@
+// Post Author
+// _____________________________________________________________________________________________________________________
+
+.block-author {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-bottom: 40px;
+    .author {
+        color: var(--text-color);
+        padding: 40px 0 40px;
+        margin-bottom: 0;
+        border-bottom: 1px solid var(--border-color);
+        .block-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            @media (max-width: 640px) {
+                flex-direction: column;
+            }
+            .block-img {
+                min-width: 80px;
+                flex: 0 0 80px;
+                img {
+                    width: 80px;
+                    height: auto;
+                    border-radius: 50%;
+                    margin: 0;
+                }
+            }
+            .block-data {
+                flex: 1 1;
+                .author-info {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    gap: 16px;
+                }
+                .author-name {
+                    font-size: 20px;
+                    line-height: 16px;
+                    font-weight: 700;
+                    margin: 0;
+                    .author-link {
+                        display: inline-block;
+                        color: var(--primary-color);
+                        text-decoration: none;
+                        .transition;
+                        &:hover {
+                            color: var(--secondary-color);
+                            .transition;
+                        }
+                    }
+                    .status {
+                        color: #98A2B3;
+                        font-weight: 500;
+                        padding-left: 3px;
+                    }
+                }
+                .author-position {
+                    font-size: 16px;
+                    line-height: 16px;
+                    margin: 10px 0 0;
+                    font-weight: 600;
+                }
+                .author-content,
+                .author-short-content {
+                    width: 100%;
+                    //font-size: 16px;
+                    //line-height: 24px;
+                    font-size: var(--post-desc-font-size);
+                    line-height: var(--post-desc-line-height);
+                    color: var(--primary-color-alt);
+                    margin: 12px 0 0;
+                    p {
+                        margin: 0;
+                    }
+                }
+                // For Author Page Content (Magento)
+                .author-content > [data-content-type="row"] {
+                    margin-left: -8px;
+                    margin-right: -8px;
+                }
+            }
+        }
+        .social-icons {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            .icon {
+                width: 40px;
+                height: 40px;
+                padding: 10px !important;
+                border-radius: 6px;
+                background: #F0F1F3;
+                cursor: pointer;
+                box-sizing: border-box;
+                .transition;
+                &:hover {
+                    transform: translateY(-4px);
+                    .transition;
+                }
+                a {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    vertical-align: top;
+                }
+                img {
+                    width: 20px !important;
+                    height: 20px !important;
+                    margin: 0;
+                    border-radius: 0;
+                }
+            }
+        }
+        .block-content {
+            font-size: var(--post-desc-font-size);
+            line-height: var(--post-desc-line-height);
+            color: var(--primary-color-alt);
+            margin: 12px 0 0;
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.post-nextprev + .block-author {margin-top: -40px !important;}

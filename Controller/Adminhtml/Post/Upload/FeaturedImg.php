@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Controller\Adminhtml\Post\Upload;
 
@@ -16,8 +17,6 @@ use Magefan\Blog\Controller\Adminhtml\Upload\Image\Action;
 class FeaturedImg extends Action
 {
     /**
-     * File key
-     *
      * @var string
      */
     protected $_fileKey = 'featured_img';

@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\Comment;
 
@@ -17,6 +18,8 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 class ReplyButton extends GenericButton implements ButtonProviderInterface
 {
     /**
+     * Get button data
+     *
      * @return array
      */
     public function getButtonData()

@@ -3,6 +3,7 @@
  * Copyright © Magefan (support@magefan.com). All rights reserved.
  * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
@@ -10,15 +11,18 @@ class PermalinkSettingsMessage extends \Magefan\Community\Block\Adminhtml\System
 {
     /**
      * Return info block html
+     *
      * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
      * @return string
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element): string
     {
 
-        $html = '<div id="advencedNotification" style="display:none;padding:10px;background-color:#fffbbb;border:1px solid #ddd;margin-bottom:7px;">
-            ' . __('Blog Plus <b>Advanced Permalink Settings</b> are enabled.') . '
-        </div>';
+        $html =  '<div id="advencedNotification" '
+            . 'style="display:none;padding:10px;background-color:#fffbbb;'
+            . 'border:1px solid #ddd;margin-bottom:7px;">'
+            . __('Blog Plus <b>Advanced Permalink Settings</b> are enabled.')
+            . '</div>';
 
         $script = "
             require(['jquery', 'domReady!'], function($) {
@@ -34,7 +38,10 @@ class PermalinkSettingsMessage extends \Magefan\Community\Block\Adminhtml\System
                             $('#mfblog_permalink').find('.use-default input').each(function() {
                                 $(this).prop('disabled', false);
                                 if (!$(this).is(':checked')) {
-                                    $(this).parents('tr').find('.value').children('input,select').prop('disabled', false);
+                                    $(this).parents('tr')
+                                        .find('.value')
+                                        .children('input,select')
+                                        .prop('disabled', false);
                                 }
                             })
                             $('#advencedNotification').hide();

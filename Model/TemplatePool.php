@@ -26,17 +26,28 @@ class TemplatePool
     private $templates;
 
     /**
-     * TemplatePool constructor.
-     * @param array $templates
+     * @var Config
      */
-    public function __construct(array $templates)
-    {
+    private $config;
+
+    /**
+     * @param array $templates
+     * @param Config|null $config
+     */
+    public function __construct(
+        array $templates,
+        ?Config $config = null
+    ) {
         $this->templates = $templates;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->config = $config ?: $objectManager->get(\Magefan\Blog\Model\Config::class);
     }
 
     /**
      * Retrieve all templates for type
-     * @param $templateType
+     *
+     * @param string $templateType
      * @return array
      */
     public function getAll(string $templateType):array
@@ -46,6 +57,7 @@ class TemplatePool
 
     /**
      * Retrieve template
+     *
      * @param string $templateType
      * @param string $name
      * @return string
@@ -57,7 +69,14 @@ class TemplatePool
         ) {
             foreach ($this->templates[$templateType] as $item) {
                 if (isset($item['value']) && $item['value'] == $name) {
-                    return $item['template'];
+                    $dv = $this->config->getDesignVersion();
+
+                    if (!empty($item['template_' . $dv])) {
+                        return $item['template_' . $dv];
+                    }
+                    if (!empty($item['template'])) {
+                        return $item['template'];
+                    }
                 }
             }
         }
