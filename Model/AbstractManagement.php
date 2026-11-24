@@ -67,12 +67,18 @@ abstract class AbstractManagement implements ManagementInterface
         $fileIo = $objectManager->get(\Magento\Framework\Filesystem\Io\File::class);
 
         $pathInfo  = $fileIo->getPathInfo($fileName);
-        $safeName  = (string)($pathInfo['basename'] ?? '');
         $extension = strtolower((string)($pathInfo['extension'] ?? ''));
 
         if (!in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'], true)) {
             throw new LocalizedException(__('File type "%1" is not allowed.', $extension));
         }
+
+        /* Replace dots in the name to prevent double extensions like "shell.php.png" */
+        $name = str_replace('.', '_', (string)($pathInfo['filename'] ?? ''));
+        if ($name === '') {
+            $name = 'image';
+        }
+        $safeName = $name . '.' . $extension;
 
         $mediaDir = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $mediaDir->create($this->_imagePath);
