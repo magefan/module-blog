@@ -7,20 +7,18 @@
  */
 
 /**
- * @var \Magefan\Blog\Block\ViewsCount $block
+ * @var \Magefan\Blog\Block\Post\View\ViewsCount $block
  * @var \Magefan\Community\Api\SecureHtmlRendererInterface $mfSecureRenderer
  */
 ?>
 <?= $block->getLayout()->createBlock(\Magefan\Community\Block\JsScript::class)->setMethod('sendBeacon')->toHtml() ?>
 <?php $script = "
-    require(['domReady!'], function(){
-        setTimeout(function(){
-            MagefanJs.sendBeacon({
-                url: atob( '" . base64_encode($block->getCounterUrl()) . "'),
-                data: {}
-            });
-        }, 5000);
-    });
+    setTimeout(function(){
+        MagefanJs.sendBeacon({
+            url: atob( '" . base64_encode($block->getCounterUrl()) . "'),
+            data: {}
+        });
+    }, 5000);
 "; ?>
 <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
 
