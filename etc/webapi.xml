@@ -155,7 +155,7 @@
     <route url="/V1/blog/tag" method="POST">
         <service class="Magefan\Blog\Api\TagManagementInterface" method="create"/>
         <resources>
-            <resource ref="Magefan_Blog::tag"/>
+            <resource ref="Magefan_Blog::tag_save"/>
         </resources>
     </route>
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/tag/:id" \
@@ -221,7 +221,7 @@
     <route url="/V1/blog/comment" method="POST">
         <service class="Magefan\Blog\Api\CommentManagementInterface" method="create"/>
         <resources>
-            <resource ref="Magefan_Blog::comment"/>
+            <resource ref="Magefan_Blog::comment_save"/>
         </resources>
     </route>
     <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/blog/comment/:id" \
@@ -257,7 +257,7 @@
             <resource ref="anonymous" />
         </resources>
     </route>
-    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/tag/comment/:type/:term/:store_id/:page/:limit" -->
+    <!-- Example: curl "http://mystore.com/index.php/rest/V1/blog/comment/:type/:term/:store_id/:page/:limit" -->
     <route url="/V1/blog/comment/:type/:term/:store_id/:page/:limit" method="GET">
         <service class="Magefan\Blog\Api\CommentManagementInterface" method="getList"/>
         <resources>
